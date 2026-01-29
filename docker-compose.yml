@@ -15,7 +15,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U oceancyber"]
+      test: [ "CMD-SHELL", "pg_isready -U oceancyber" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -28,7 +28,7 @@ services:
     container_name: oceancyber-app
     restart: unless-stopped
     ports:
-      - "3001:3000"
+      - "3009:3000"
     environment:
       - NODE_ENV=production
       - DATABASE_URL=postgresql://oceancyber:oceancyber123@postgres:5432/oceancyber
