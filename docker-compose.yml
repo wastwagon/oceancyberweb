@@ -28,7 +28,7 @@ services:
     container_name: oceancyber-app
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "3001:3000"
     environment:
       - NODE_ENV=production
       - DATABASE_URL=postgresql://oceancyber:oceancyber123@postgres:5432/oceancyber
