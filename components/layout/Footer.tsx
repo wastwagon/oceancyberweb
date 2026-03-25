@@ -1,109 +1,217 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin, Waves } from "lucide-react";
+import Image from "next/image";
+import { 
+  Phone, 
+  Mail, 
+  MapPin, 
+  Facebook, 
+  Twitter, 
+  Instagram, 
+  Linkedin,
+  Shield,
+  Lock,
+  Globe,
+  Database,
+  Smartphone,
+  Code,
+  ShoppingBag,
+  Settings,
+  Network,
+  Heart,
+  Building2,
+  DatabaseBackup,
+  DatabaseZap
+} from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="border-t border-cyan-400/20 bg-gradient-to-b from-ocean-900 to-ocean-800">
-      <div className="container mx-auto px-6 md:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          {/* Company Info */}
-          <div>
+    <footer className="bg-[#0B1C2C] text-[#B8C1CC]">
+      <div className="container mx-auto px-6 md:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Column 1: Brand + Description */}
+          <div className="md:col-span-1">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-teal-400 flex items-center justify-center">
-                <Waves className="w-5 h-5 text-ocean-900" />
-              </div>
-              <span className="text-lg font-semibold text-cyan-100">OceanCyber</span>
+              <Image
+                src="/images/oceancyber logo.webp"
+                alt="OceanCyber Logo"
+                width={120}
+                height={37}
+                className="h-10 w-auto object-contain grayscale brightness-0 invert"
+              />
             </div>
-            <p className="text-sm text-cyan-200/70 mb-6 leading-relaxed font-light">
-              Ghana&apos;s premier technology solutions provider, transforming businesses through innovative digital solutions.
+            <p className="text-sm text-[#B8C1CC] mb-6 leading-relaxed">
+              Protecting your digital world with elite cybersecurity intelligence. World-class penetration testing, cloud security, and zero-trust infrastructure.
             </p>
+            
+            {/* Badges */}
+            <div className="flex flex-wrap gap-2 mb-6">
+              <span className="px-3 py-1 bg-[#1A2F40] border border-[#2A4A60] text-xs text-[#B8C1CC] rounded-full font-medium">
+                SOC 2 Certified
+              </span>
+              <span className="px-3 py-1 bg-[#1A2F40] border border-[#2A4A60] text-xs text-[#B8C1CC] rounded-full font-medium">
+                Zero Trust
+              </span>
+            </div>
+            
+            {/* Social Icons */}
+            <div className="flex space-x-3">
+              <a href="https://linkedin.com/company/oceancyber" className="w-10 h-10 rounded-full bg-[#1A2F40] border border-[#2A4A60] flex items-center justify-center hover:bg-[#00C2D1] hover:border-[#00C2D1] transition-colors" target="_blank" rel="noopener noreferrer">
+                <Linkedin className="w-4 h-4 text-[#B8C1CC]" />
+              </a>
+              <a href="https://twitter.com/oceancyber" className="w-10 h-10 rounded-full bg-[#1A2F40] border border-[#2A4A60] flex items-center justify-center hover:bg-[#00C2D1] hover:border-[#00C2D1] transition-colors" target="_blank" rel="noopener noreferrer">
+                <Twitter className="w-4 h-4 text-[#B8C1CC]" />
+              </a>
+              <a href="https://facebook.com/oceancyber" className="w-10 h-10 rounded-full bg-[#1A2F40] border border-[#2A4A60] flex items-center justify-center hover:bg-[#00C2D1] hover:border-[#00C2D1] transition-colors" target="_blank" rel="noopener noreferrer">
+                <Facebook className="w-4 h-4 text-[#B8C1CC]" />
+              </a>
+              <a href="https://instagram.com/oceancyber" className="w-10 h-10 rounded-full bg-[#1A2F40] border border-[#2A4A60] flex items-center justify-center hover:bg-[#00C2D1] hover:border-[#00C2D1] transition-colors" target="_blank" rel="noopener noreferrer">
+                <Instagram className="w-4 h-4 text-[#B8C1CC]" />
+              </a>
+            </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-semibold text-cyan-100 mb-6 text-sm uppercase tracking-wider">Quick Links</h4>
+          {/* Column 2: Services */}
+          <div className="md:col-span-1">
+            <h4 className="font-semibold text-white mb-6 text-sm uppercase tracking-wider">Services</h4>
             <ul className="space-y-3 text-sm">
-              <li>
-                <Link href="/services" className="text-cyan-200/70 hover:text-cyan-100 transition-colors font-light">
-                  Our Services
+              <li className="flex items-center space-x-2">
+                <Code className="w-4 h-4 text-[#00C2D1]" />
+                <Link href="/services/web-development" className="text-[#B8C1CC] hover:text-[#00C2D1] transition-colors">
+                  Web Design & Development
                 </Link>
               </li>
-              <li>
-                <Link href="/portfolio" className="text-cyan-200/70 hover:text-cyan-100 transition-colors font-light">
-                  Our Works
+              <li className="flex items-center space-x-2">
+                <Globe className="w-4 h-4 text-[#00C2D1]" />
+                <Link href="/services/seo" className="text-[#B8C1CC] hover:text-[#00C2D1] transition-colors">
+                  SEO & Digital Marketing
                 </Link>
               </li>
-              <li>
-                <Link href="/case-studies" className="text-cyan-200/70 hover:text-cyan-100 transition-colors font-light">
-                  Case Studies
+              <li className="flex items-center space-x-2">
+                <ShoppingBag className="w-4 h-4 text-[#00C2D1]" />
+                <Link href="/services/ecommerce" className="text-[#B8C1CC] hover:text-[#00C2D1] transition-colors">
+                  E-Commerce Solutions
                 </Link>
               </li>
-              <li>
-                <Link href="/contact" className="text-cyan-200/70 hover:text-cyan-100 transition-colors font-light">
-                  Contact Us
+              <li className="flex items-center space-x-2">
+                <Smartphone className="w-4 h-4 text-[#00C2D1]" />
+                <Link href="/services/mobile-apps" className="text-[#B8C1CC] hover:text-[#00C2D1] transition-colors">
+                  Mobile App Development
+                </Link>
+              </li>
+              <li className="flex items-center space-x-2">
+                <Settings className="w-4 h-4 text-[#00C2D1]" />
+                <Link href="/services/it-consulting" className="text-[#B8C1CC] hover:text-[#00C2D1] transition-colors">
+                  IT Consultancy
+                </Link>
+              </li>
+              <li className="flex items-center space-x-2">
+                <Network className="w-4 h-4 text-[#00C2D1]" />
+                <Link href="/services/networking" className="text-[#B8C1CC] hover:text-[#00C2D1] transition-colors">
+                  Computer Networking
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Services */}
-          <div>
-            <h4 className="font-semibold text-cyan-100 mb-6 text-sm uppercase tracking-wider">Services</h4>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <Link href="/services/web-development" className="text-cyan-200/70 hover:text-cyan-100 transition-colors font-light">
-                  Web Development
-                </Link>
-              </li>
-              <li>
-                <Link href="/services/mobile-apps" className="text-cyan-200/70 hover:text-cyan-100 transition-colors font-light">
-                  Mobile Apps
-                </Link>
-              </li>
-              <li>
-                <Link href="/services/it-consulting" className="text-cyan-200/70 hover:text-cyan-100 transition-colors font-light">
-                  IT Consulting
-                </Link>
-              </li>
-              <li>
-                <Link href="/services/cybersecurity" className="text-cyan-200/70 hover:text-cyan-100 transition-colors font-light">
-                  Cybersecurity
-                </Link>
-              </li>
-            </ul>
+          {/* Column 3: Industries & Technologies */}
+          <div className="md:col-span-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h4 className="font-semibold text-white mb-6 text-sm uppercase tracking-wider">Industries</h4>
+                <ul className="space-y-3 text-sm">
+                  <li className="flex items-center space-x-2">
+                    <Heart className="w-4 h-4 text-[#00C2D1]" />
+                    <span className="text-[#B8C1CC]">Healthcare Websites</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <Building2 className="w-4 h-4 text-[#00C2D1]" />
+                    <span className="text-[#B8C1CC]">Financial Services</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-white mb-6 text-sm uppercase tracking-wider">Technologies</h4>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-center space-x-2">
+                    <Database className="w-4 h-4 text-[#00C2D1]" />
+                    <span className="text-[#B8C1CC]">.Net</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <Code className="w-4 h-4 text-[#00C2D1]" />
+                    <span className="text-[#B8C1CC]">HTML5</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <DatabaseBackup className="w-4 h-4 text-[#00C2D1]" />
+                    <span className="text-[#B8C1CC]">Java</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <DatabaseZap className="w-4 h-4 text-[#00C2D1]" />
+                    <span className="text-[#B8C1CC]">Node.js</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <Database className="w-4 h-4 text-[#00C2D1]" />
+                    <span className="text-[#B8C1CC]">PHP</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <DatabaseBackup className="w-4 h-4 text-[#00C2D1]" />
+                    <span className="text-[#B8C1CC]">Python</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
 
-          {/* Contact Info */}
-          <div>
-            <h4 className="font-semibold text-cyan-100 mb-6 text-sm uppercase tracking-wider">Contact</h4>
-            <ul className="space-y-4 text-sm">
-              <li className="flex items-start space-x-3">
-                <MapPin className="w-4 h-4 mt-1 text-cyan-400 flex-shrink-0" />
-                <span className="text-cyan-200/70 font-light leading-relaxed">
-                  232 Nii Kwashiefio Avenue<br />
-                  Abofu – Achimota – Accra, Ghana
+          {/* Column 4: Contact */}
+          <div className="md:col-span-1">
+            <h4 className="font-semibold text-white mb-6 text-sm uppercase tracking-wider">Contact</h4>
+            <div className="space-y-4 mb-8">
+              <div className="flex items-start space-x-3">
+                <MapPin className="w-4 h-4 text-[#00C2D1] mt-0.5 flex-shrink-0" />
+                <span className="text-[#B8C1CC] text-sm leading-relaxed">
+                  232 Nii Kwashiefo Avenue<br />
+                  Accra, Ghana
                 </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <Phone className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                <a href="tel:+233242565695" className="text-cyan-200/70 hover:text-cyan-100 transition-colors font-light">
+              </div>
+              <div className="flex items-center space-x-3">
+                <Phone className="w-4 h-4 text-[#00C2D1] flex-shrink-0" />
+                <a href="tel:+233242565695" className="text-[#B8C1CC] hover:text-[#00C2D1] transition-colors text-sm">
                   +233 242 565 695
                 </a>
-              </li>
-              <li className="flex items-center space-x-3">
-                <Mail className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                <a href="mailto:info@oceancyber.net" className="text-cyan-200/70 hover:text-cyan-100 transition-colors font-light">
+              </div>
+              <div className="flex items-center space-x-3">
+                <Mail className="w-4 h-4 text-[#00C2D1] flex-shrink-0" />
+                <a href="mailto:info@oceancyber.net" className="text-[#B8C1CC] hover:text-[#00C2D1] transition-colors text-sm">
                   info@oceancyber.net
                 </a>
-              </li>
-            </ul>
+              </div>
+            </div>
+            
+            {/* Emergency Box */}
+            <div className="bg-[#2A0F14] border border-[#4A1F24] rounded-lg p-4">
+              <div className="text-center">
+                <div className="text-xs font-semibold text-[#FF6B6B] uppercase tracking-wider mb-1">
+                  24/7 SOC EMERGENCY
+                </div>
+                <div className="text-[#FF6B6B] font-mono text-sm">
+                  +233 242 565 695
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-cyan-400/20 text-center">
-          <p className="text-sm text-cyan-200/50 font-light">
-            &copy; {new Date().getFullYear()} OceanCyber - I.T Solutions Provider. All rights reserved.
-          </p>
+        {/* Bottom Bar */}
+        <div className="mt-12 pt-8 border-t border-[#2A4A60]">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-[#B8C1CC]">
+              &copy; 2026 OceanCyber. All rights reserved.
+            </p>
+            <div className="flex items-center space-x-6 text-sm text-[#B8C1CC]">
+              <Link href="/privacy" className="hover:text-[#00C2D1] transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-[#00C2D1] transition-colors">Terms of Service</Link>
+              <Link href="/cookies" className="hover:text-[#00C2D1] transition-colors">Cookie Policy</Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

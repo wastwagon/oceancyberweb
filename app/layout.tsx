@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
+ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
+import { ChatBot } from "@/components/ui/ChatBot";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -76,6 +78,8 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <ScrollToTop />
+        <ChatBot />
       </body>
     </html>
   );
