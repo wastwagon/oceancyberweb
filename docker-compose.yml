@@ -1,0 +1,158 @@
+# =============================================================================
+# OceanCyber — full stack (run from repo root)
+#
+#   docker compose up -d --build
+#
+# Services: PostgreSQL 16, Redis 7, NestJS backend (`backend` → host :4100 → container :4000), Next.js `web`
+# Internal URLs: postgres:5432, redis:6379, backend:4000 (web uses API_INTERNAL_URL for SSR)
+# Optional CMS (Directus): docker compose --profile cms up -d
+#
+# After first boot: app → http://localhost:${FRONTEND_PORT:-3020}
+# API health → http://localhost:${BACKEND_PORT:-4100}/api/v1/health
+# =============================================================================
+
+name: oceancyber
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: oceancyber-db
+    restart: unless-stopped
+    networks:
+      - oceancyber
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-oceancyber}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-oceancyber123}
+      POSTGRES_DB: ${POSTGRES_DB:-oceancyber}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-oceancyber} -d ${POSTGRES_DB:-oceancyber}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: oceancyber-redis
+    restart: unless-stopped
+    networks:
+      - oceancyber
+    command: redis-server --appendonly yes
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # NestJS backend — appears as "backend" in Docker Desktop; hostname `backend` on port 4000
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: oceancyber-backend
+    restart: unless-stopped
+    networks:
+      - oceancyber
+    environment:
+      NODE_ENV: production
+      BACKEND_PORT: "4000"
+      DATABASE_URL: postgresql://${POSTGRES_USER:-oceancyber}:${POSTGRES_PASSWORD:-oceancyber123}@postgres:5432/${POSTGRES_DB:-oceancyber}?schema=public
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
+      SESSION_SECRET: ${SESSION_SECRET:-change-session-secret}
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:${FRONTEND_PORT:-3020}}
+      CMS_BASE_URL: ${CMS_BASE_URL:-}
+      CMS_STATIC_TOKEN: ${CMS_STATIC_TOKEN:-}
+    ports:
+      - "${BACKEND_PORT:-4100}:4000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:4000/api/v1/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 8
+      start_period: 40s
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:${FRONTEND_PORT:-3020}}
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:${BACKEND_PORT:-4100}}
+        NEXT_PUBLIC_CMS_URL: ${NEXT_PUBLIC_CMS_URL:-}
+    container_name: oceancyber-web
+    restart: unless-stopped
+    networks:
+      - oceancyber
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://${POSTGRES_USER:-oceancyber}:${POSTGRES_PASSWORD:-oceancyber123}@postgres:5432/${POSTGRES_DB:-oceancyber}?schema=public
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:${FRONTEND_PORT:-3020}}
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:${BACKEND_PORT:-4100}}
+      # Server-side fetch to Nest — must match Docker service name `backend`
+      API_INTERNAL_URL: ${API_INTERNAL_URL:-http://backend:4000}
+      NEXT_PUBLIC_CMS_URL: ${NEXT_PUBLIC_CMS_URL:-}
+      CMS_INTERNAL_URL: ${CMS_INTERNAL_URL:-}
+    ports:
+      - "${FRONTEND_PORT:-3020}:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      backend:
+        condition: service_healthy
+
+  # Directus — headless CMS (optional). Requires CMS database (see docker/postgres/init).
+  cms:
+    profiles:
+      - cms
+    image: directus/directus:11
+    container_name: oceancyber-cms
+    restart: unless-stopped
+    networks:
+      - oceancyber
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "${CMS_PORT:-8055}:8055"
+    environment:
+      KEY: ${DIRECTUS_KEY:-255d861b-5ea1-5996-9aa3-922530ec40b1}
+      SECRET: ${DIRECTUS_SECRET:-6116487b-cda9-0942-295f-8054f7cacb30}
+      ADMIN_EMAIL: ${CMS_ADMIN_EMAIL:-admin@oceancyber.local}
+      ADMIN_PASSWORD: ${CMS_ADMIN_PASSWORD:-admin123}
+      DB_CLIENT: pg
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_DATABASE: oceancyber_cms
+      DB_USER: ${POSTGRES_USER:-oceancyber}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-oceancyber123}
+      CACHE_ENABLED: "true"
+      CACHE_STORE: redis
+      REDIS: redis://redis:6379
+      WEBSOCKETS_ENABLED: "true"
+      PUBLIC_URL: ${CMS_PUBLIC_URL:-http://localhost:${CMS_PORT:-8055}}
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  oceancyber:
+    driver: bridge

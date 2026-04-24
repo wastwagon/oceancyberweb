@@ -1,0 +1,39 @@
+# NestJS API — build from monorepo root (shared + Prisma)
+FROM node:20-alpine AS builder
+RUN apk add --no-cache libc6-compat openssl
+WORKDIR /app
+
+COPY package.json package-lock.json* ./
+COPY packages/shared ./packages/shared
+COPY backend ./backend
+COPY prisma ./prisma
+
+RUN npm ci
+RUN npm run build:shared
+RUN npx prisma generate --schema=./prisma/schema.prisma
+RUN npm run build:api
+
+FROM node:20-alpine AS runner
+RUN apk add --no-cache openssl curl
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nestjs
+
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/packages/shared/package.json ./packages/shared/package.json
+COPY --from=builder /app/packages/shared/dist ./packages/shared/dist
+COPY --from=builder /app/backend/dist ./backend/dist
+COPY --from=builder /app/backend/package.json ./backend/package.json
+COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/package.json ./package.json
+
+USER nestjs
+
+EXPOSE 4000
+
+ENV BACKEND_PORT=4000
+
+CMD ["sh", "-c", "npx prisma migrate deploy && node backend/dist/main.js"]

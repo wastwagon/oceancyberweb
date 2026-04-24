@@ -1,0 +1,50 @@
+# Infrastructure only (Postgres + Redis) when you run Next/Nest on the host with `npm run dev`.
+# For the full stack in Docker (API + web + DB + Redis), use: docker compose up -d --build
+name: oceancyber-dev
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: oceancyber-db-dev
+    restart: unless-stopped
+    networks:
+      - oceancyber-dev
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-oceancyber}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-oceancyber123}
+      POSTGRES_DB: ${POSTGRES_DB:-oceancyber}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-oceancyber} -d ${POSTGRES_DB:-oceancyber}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: oceancyber-redis-dev
+    restart: unless-stopped
+    networks:
+      - oceancyber-dev
+    command: redis-server --appendonly yes
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_dev_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_dev_data:
+  redis_dev_data:
+
+networks:
+  oceancyber-dev:
+    driver: bridge
