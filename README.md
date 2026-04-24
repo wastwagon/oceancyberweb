@@ -126,13 +126,17 @@ oceancyber-website/
 - `npm run prisma:migrate` - Run database migrations
 - `npm run prisma:studio` - Open Prisma Studio
 
-## 🌍 Deployment to Coolify
+## 🌍 Deployment to Coolify (VPS, full stack)
 
-1. Push your code to a Git repository
-2. Connect your repository to Coolify
-3. Coolify will automatically detect the Dockerfile
-4. Set environment variables in Coolify dashboard
-5. Deploy!
+This project is meant to run as **Docker Compose** (Postgres, Redis, Nest API, Next.js), not as a single Dockerfile only.
+
+1. Push the repo to Git.
+2. In Coolify: **New resource** → **Docker Compose** → select the repo and branch.
+3. Compose file: **`docker-compose.yml`** (repo root).
+4. Set **environment variables** (and build-time vars for `NEXT_PUBLIC_*`) as described in **[COOLIFY.md](./COOLIFY.md)**.
+5. Attach domains to **`web`** (port 3000) and **`backend`** (port 4000), then deploy / rebuild.
+
+See **[COOLIFY.md](./COOLIFY.md)** for the full checklist, URL wiring, and VPS hardening notes.
 
 ## 📝 Environment Variables
 

@@ -74,6 +74,8 @@ This starts **postgres**, **redis**, **oceancyber-backend** (NestJS), and **ocea
 - Site: `http://localhost:3020` (or your `FRONTEND_PORT`)
 - API health: `http://localhost:4100/api/v1/health` (or your `BACKEND_PORT`)
 
+**VPS / Coolify:** use the same `docker-compose.yml` as a **Docker Compose** resource in Coolify (not Dockerfile-only). Step-by-step variables, domains, and hardening: **[COOLIFY.md](./COOLIFY.md)**.
+
 ### Option B — Databases in Docker, apps on your machine
 
 ```bash

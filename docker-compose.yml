@@ -7,8 +7,8 @@
 # Internal URLs: postgres:5432, redis:6379, backend:4000 (web uses API_INTERNAL_URL for SSR)
 # Optional CMS (Directus): docker compose --profile cms up -d
 #
-# After first boot: app → http://localhost:${FRONTEND_PORT:-3020}
-# API health → http://localhost:${BACKEND_PORT:-4100}/api/v1/health
+# After first boot: app → http://localhost:3020 (set NEXT_PUBLIC_SITE_URL / CORS_ORIGIN if host or port differs)
+# API health → http://localhost:4100/api/v1/health. URL defaults are non-nested for Coolify env parsing.
 # =============================================================================
 
 name: oceancyber
@@ -68,7 +68,7 @@ services:
       REDIS_URL: redis://redis:6379
       JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
       SESSION_SECRET: ${SESSION_SECRET:-change-session-secret}
-      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:${FRONTEND_PORT:-3020}}
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3020}
       CMS_BASE_URL: ${CMS_BASE_URL:-}
       CMS_STATIC_TOKEN: ${CMS_STATIC_TOKEN:-}
     ports:
@@ -90,8 +90,8 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:${FRONTEND_PORT:-3020}}
-        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:${BACKEND_PORT:-4100}}
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3020}
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:4100}
         NEXT_PUBLIC_CMS_URL: ${NEXT_PUBLIC_CMS_URL:-}
     container_name: oceancyber-web
     restart: unless-stopped
@@ -100,8 +100,8 @@ services:
     environment:
       NODE_ENV: production
       DATABASE_URL: postgresql://${POSTGRES_USER:-oceancyber}:${POSTGRES_PASSWORD:-oceancyber123}@postgres:5432/${POSTGRES_DB:-oceancyber}?schema=public
-      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:${FRONTEND_PORT:-3020}}
-      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:${BACKEND_PORT:-4100}}
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3020}
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:4100}
       # Server-side fetch to Nest — must match Docker service name `backend`
       API_INTERNAL_URL: ${API_INTERNAL_URL:-http://backend:4000}
       NEXT_PUBLIC_CMS_URL: ${NEXT_PUBLIC_CMS_URL:-}
@@ -147,7 +147,7 @@ services:
       CACHE_STORE: redis
       REDIS: redis://redis:6379
       WEBSOCKETS_ENABLED: "true"
-      PUBLIC_URL: ${CMS_PUBLIC_URL:-http://localhost:${CMS_PORT:-8055}}
+      PUBLIC_URL: ${CMS_PUBLIC_URL:-http://localhost:8055}
 
 volumes:
   postgres_data:
