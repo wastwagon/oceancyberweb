@@ -58,12 +58,12 @@ Replace examples with your real domains.
 
 | Name                | Example            | Purpose                                                                                  |
 | ------------------- | ------------------ | ---------------------------------------------------------------------------------------- |
-| `POSTGRES_USER`     | `oceancyber`       | Superuser for the Postgres container (not `postgres` unless you change the image setup). |
+| `POSTGRES_USER`     | `postgres`         | Default matches Docker Hub image + most monitors (role `postgres` always exists). Override only if you know your volume was initialized with another user. |
 | `POSTGRES_PASSWORD` | long random string | DB password.                                                                             |
 | `POSTGRES_DB`       | `oceancyber`       | Main app database name.                                                                  |
 
 
-`DATABASE_URL` is built inside Compose from these values and the hostname `postgres`. **Do not** point the app at a random Postgres on the host with user `postgres` unless that user actually exists there (that mismatch causes auth errors).
+`DATABASE_URL` is built inside Compose from these values and the hostname `postgres`. Keep `POSTGRES_USER`, `POSTGRES_PASSWORD`, and `POSTGRES_DB` aligned with whatever initialized the data directory. If you reuse an **old volume** created with `POSTGRES_USER=oceancyber`, either keep that user in env or remove the volume once for a clean init with `postgres`.
 
 ### Secrets
 
@@ -142,8 +142,8 @@ By default, Postgres and Redis publish ports on the host. For a public VPS you s
 | Symptom                                                                       | Likely cause                                                                                                                        |
 | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | Coolify: `Invalid template` in `build-time.env`                               | Unescaped or nested `${...}` in env values; use plain URLs (see §3).                                                                |
-| `Failed to find Server Action` in dev                                         | Stale `.next` / multiple dev servers; clear `.next`, one `next dev`, hard-refresh browser.                                          |
-| Postgres: `password authentication failed` / `Role "postgres" does not exist` | `DATABASE_URL` or tooling using user `postgres` while the container uses `POSTGRES_USER` (default `oceancyber`). Align credentials. |
+| `Failed to find Server Action` (dev or after deploy)                         | Stale `.next`, multiple `next dev`, or browser cache: stop servers, remove `.next`, run a single dev instance, hard-refresh or clear site data for that origin. |
+| Postgres: `Role "postgres" does not exist`                                   | DB was initialized with a **custom** `POSTGRES_USER` (no `postgres` role). Match credentials to that user, or use default `postgres` and **recreate the volume** once if you can afford a fresh DB. |
 | CORS errors from browser                                                      | `CORS_ORIGIN` must exactly match the site origin (scheme + host, no path).                                                          |
 
 
