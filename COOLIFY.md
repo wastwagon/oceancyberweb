@@ -131,6 +131,7 @@ For host access during local development, use `docker/docker-compose.dev.yml` or
 | Postgres: `Role "postgres" does not exist`                                   | DB was initialized with a **custom** `POSTGRES_USER` (no `postgres` role). Match credentials to that user, or use default `postgres` and **recreate the volume** once if you can afford a fresh DB. |
 | Docker: `Bind for 0.0.0.0:6379 failed: port is already allocated`             | Another service on the host owns `6379` (often another Redis). Root compose no longer publishes Redis/Postgres—pull latest and redeploy. If you still map ports manually, pick a free host port or stop the conflicting container. |
 | CORS errors from browser                                                      | `CORS_ORIGIN` must exactly match the site origin (scheme + host, no path).                                                          |
+| Public site missing new homepage sections (promo strips, hero tools)         | **Git** on the server is behind: push your branch, redeploy, and **rebuild** the `web` service. Then purge **CDN** cache. Uncommitted local changes never reach Coolify. |
 
 
 For local Docker usage (not Coolify), see `SETUP.md` and `ports.env.example`.

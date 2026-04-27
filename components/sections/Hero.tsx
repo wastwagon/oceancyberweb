@@ -958,6 +958,7 @@ import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion
 import Link from "next/link";
 import { useRef } from "react";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
+import { HeroDomainBlock } from "@/components/sections/HeroDomainBlock";
 
 const GRID_SIZE = 64;
 
@@ -1036,7 +1037,7 @@ export function Hero() {
         className="container relative z-10 mx-auto px-6"
       >
         <motion.div
-          className="mx-auto w-full max-w-4xl text-center"
+          className="mx-auto w-full max-w-5xl text-center"
           initial="hidden"
           animate="visible"
           variants={heroText.container}
@@ -1082,7 +1083,17 @@ export function Hero() {
             >
               View Our Portfolio
             </Link>
+
+            <Link
+              href="/tools/project-cost"
+              className="inline-flex min-w-[240px] items-center justify-center rounded-xl border border-amber-400/40 bg-amber-500/10 px-8 py-4 font-bold text-amber-100 backdrop-blur-md transition hover:border-amber-300/50 hover:bg-amber-500/20"
+            >
+              Project cost calculator
+            </Link>
           </motion.div>
+
+          {/* Light “card” tools: domain search (full registration flow: /domains) */}
+          <HeroDomainBlock />
         </motion.div>
       </motion.div>
 

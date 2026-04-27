@@ -15,21 +15,19 @@ Your world-class website is now ready for development and deployment.
    - Responsive design utilities
    - Custom animations
 
-### 3. **Components Created**
-   - ✅ Header with mobile navigation
-   - ✅ Footer with contact info
-   - ✅ Hero section with animations
-   - ✅ Stats section
-   - ✅ Services showcase
-   - ✅ Portfolio grid
-   - ✅ Testimonials
-   - ✅ Contact section
-   - ✅ WhatsApp button (Ghana-specific)
+### 3. **Components & home page (`/`)**
+   - **Header** (dark, fixed) and **Footer**
+   - **Home sections (in order):** `Hero` → `MarketingLeadStrip` (“Why teams work with us”) → `Stats` → `ProjectCostPromo` (GHS project calculator promo) → `Services` → `Portfolio` → `Testimonials` → `Contact`
+   - **Hero** includes primary CTAs, a **Project cost calculator** link, and a **domain search** card (`HeroDomainBlock`); full domain flows live on **`/domains`**
+   - **Project cost tool** (full wizard): **`/tools/project-cost`**
+   - Other tools/pages: **Dashboard / wallet / billing** (signed-in), **admin** (role-gated API), **help center**, **hosting**, **case studies** — see `app/` routes
+   - **WhatsApp** and Ghana-specific contact patterns in layout/components
 
 ### 4. **Database & Backend**
-   - Prisma ORM configured
-   - PostgreSQL schema ready
-   - Models: Contact, Project, Testimonial
+   - **Prisma** + **PostgreSQL** — see `prisma/schema.prisma` (includes contacts, projects, **auth `User` with `role`**, **billing**: wallet ledger, renewals, `PaymentTransaction`, etc.)
+   - **NestJS API** under `backend/src/` — **auth**, **billing** (Paystack, wallet, renewals), **admin**, mail, health
+   - **Migrations** in `prisma/migrations/`; `docker compose` runs `prisma migrate deploy` on **web** and **backend** startup
+   - **Headless CMS (Directus)** is **not** in this stack anymore (removed to avoid env/ops confusion)
 
 ### 5. **Docker & full stack**
    - `docker-compose.yml` — PostgreSQL 16, Redis 7, NestJS API, Next.js (project name `oceancyber`)
@@ -74,6 +72,14 @@ This starts **postgres**, **redis**, **oceancyber-backend** (NestJS), and **ocea
 - API health: `http://localhost:4100/api/v1/health` (or your `BACKEND_PORT`)
 
 **VPS / Coolify:** use the same `docker-compose.yml` as a **Docker Compose** resource in Coolify (not Dockerfile-only). Step-by-step variables, domains, and hardening: **[COOLIFY.md](./COOLIFY.md)**.
+
+### Keeping “latest design” in sync
+
+| You want… | Do this |
+|-----------|---------|
+| **Latest UI on your Mac (Docker)** | From repo root: `docker compose up -d --build web` (rebuilds the Next image with your current files). Use **`http://localhost:3020`** unless you changed `FRONTEND_PORT`. Hard-refresh the browser. |
+| **Same UI on the public site (Coolify)** | 1) **Commit and push** to the branch Coolify deploys. 2) In Coolify, **Redeploy** the stack and use **rebuild** / clear build cache if the UI is stale. 3) Purge any **CDN** in front of the app. `NEXT_PUBLIC_*` values are baked in at **build** — change them in Coolify, then **rebuild `web`**. |
+| **Uncommitted work** | `git status` — if `app/` or `components/` show modified, those changes exist **only on your machine** until you commit and push. |
 
 ### Option B — Databases in Docker, apps on your machine
 
