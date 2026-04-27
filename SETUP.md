@@ -103,6 +103,12 @@ CORS_ORIGIN=http://localhost:3030
 
 Then run `npm run docker:up` again (rebuild if you changed build-time `NEXT_PUBLIC_*` args).
 
+### `ERR_CONNECTION_REFUSED` on localhost (Docker)
+
+- **Default site URL is `http://localhost:3020`**, not `3021` (see `FRONTEND_PORT` in `.env`). If you use another port, set `FRONTEND_PORT`, `NEXT_PUBLIC_SITE_URL`, and `CORS_ORIGIN` to the same port and run `docker compose up -d --build web`.
+- **Start Docker Desktop** (macOS/Windows) so the daemon is running, then from the repo root: `npm run docker:up` or `docker compose up -d --build`. Check `docker compose ps` — `oceancyber-web` should be `running`.
+- **Stale UI after code changes:** the `web` image bakes the Next.js build. Pull or edit code, then rebuild: `docker compose up -d --build web` (or rebuild the whole stack). `NEXT_PUBLIC_*` values require a rebuild, not just a container restart.
+
 ## 📝 Next Steps
 
 ### Immediate Tasks:
