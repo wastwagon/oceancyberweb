@@ -132,3 +132,6 @@ export const projects: Project[] = [
     results: "Enhanced member engagement and streamlined business operations"
   },
 ];
+
+/** Same dataset as `projects`; used when Prisma has no rows and by `prisma/seed.ts`. */
+export const fallbackPortfolioCaseStudies = projects;
