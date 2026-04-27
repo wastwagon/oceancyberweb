@@ -182,6 +182,7 @@ docker compose -f docker/docker-compose.hotreload.yml down
 docker compose up -d --build
 docker compose down
 ```
+Postgres and Redis are internal to this stack only (no `localhost` ports). For host access to DB/Redis (e.g. GUI clients), run `docker/docker-compose.dev.yml` or add a gitignored `docker-compose.override.yml` that maps ports.
 
 ## 📦 Deployment to Coolify
 

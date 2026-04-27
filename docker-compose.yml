@@ -4,7 +4,9 @@
 #   docker compose up -d --build
 #
 # Services: PostgreSQL 16, Redis 7, NestJS backend (`backend` → host :4100 → container :4000), Next.js `web`
-# Internal URLs: postgres:5432, redis:6379, backend:4000 (web uses API_INTERNAL_URL for SSR)
+# Internal URLs: postgres:5432, redis:6379, backend:4000 (web uses API_INTERNAL_URL for SSR).
+# Postgres and Redis are NOT published on the host (avoids Coolify/shared-host port clashes on 5432/6379).
+# For DB/Redis on localhost from your machine, use `docker/docker-compose.dev.yml` or a gitignored `docker-compose.override.yml`.
 # Optional CMS (Directus): docker compose --profile cms up -d
 #
 # After first boot: app → http://localhost:3020 (set NEXT_PUBLIC_SITE_URL / CORS_ORIGIN if host or port differs)
@@ -29,8 +31,6 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-oceancyber123}
       POSTGRES_DB: ${POSTGRES_DB:-oceancyber}
-    ports:
-      - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
@@ -47,8 +47,6 @@ services:
     networks:
       - oceancyber
     command: redis-server --appendonly yes
-    ports:
-      - "${REDIS_PORT:-6379}:6379"
     volumes:
       - redis_data:/data
     healthcheck:

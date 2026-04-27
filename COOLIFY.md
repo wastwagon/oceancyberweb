@@ -3,13 +3,13 @@
 This repo’s production stack is defined only in **`docker-compose.yml`** at the repository root. Other compose files under `docker/` are for local development (databases-only or hot reload)—do not point Coolify at those.
 
 
-| Service    | Role                        | Container port | Published (default) |
-| ---------- | --------------------------- | -------------- | ------------------- |
-| `postgres` | PostgreSQL 16               | 5432           | host `5432`         |
-| `redis`    | Redis 7                     | 6379           | host `6379`         |
-| `backend`  | NestJS API                  | 4000           | host `4100`         |
-| `web`      | Next.js (standalone)        | 3000           | host `3020`         |
-| `cms`      | Directus (optional profile) | 8055           | host `8055`         |
+| Service    | Role                        | Container port | Published (default)      |
+| ---------- | --------------------------- | -------------- | ------------------------ |
+| `postgres` | PostgreSQL 16               | 5432           | **not** (internal only)  |
+| `redis`    | Redis 7                     | 6379           | **not** (internal only)  |
+| `backend`  | NestJS API                  | 4000           | host `4100`              |
+| `web`      | Next.js (standalone)        | 3000           | host `3020`              |
+| `cms`      | Directus (optional profile) | 8055           | host `8055`              |
 
 
 Migrations run automatically on container start (`prisma migrate deploy` in both `web` and `backend` images).
@@ -89,7 +89,7 @@ Replace examples with your real domains.
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | `NEXT_PUBLIC_CMS_URL`                                          | Public Directus URL if you use CMS.                                                                          |
 | `CMS_BASE_URL`, `CMS_STATIC_TOKEN`                             | Backend integration with Directus.                                                                           |
-| `FRONTEND_PORT`, `BACKEND_PORT`, `POSTGRES_PORT`, `REDIS_PORT` | Host port mappings; defaults are fine behind Coolify’s proxy if you only expose `web` / `backend` via HTTPS. |
+| `FRONTEND_PORT`, `BACKEND_PORT` | Host port mappings for `web` and `backend` (Coolify’s proxy should point at these). `POSTGRES_PORT` / `REDIS_PORT` are not used by root `docker-compose.yml` (DB/Redis stay on the Compose network only). |
 
 
 **Do not** use nested shell-style defaults inside a single value in Coolify (e.g. `http://localhost:${PORT}`). Use one plain URL per variable.
@@ -119,11 +119,11 @@ Directus expects database `oceancyber_cms` (created by `docker/postgres/init` on
 
 ## 6. Security on a VPS
 
-By default, Postgres and Redis publish ports on the host. For a public VPS you should **not** expose `5432` / `6379` to the internet.
+The root `docker-compose.yml` **does not** publish Postgres or Redis on the host—they are reachable only inside the Compose network (`postgres:5432`, `redis:6379`). Apps still connect the same way; Coolify avoids conflicts with other stacks using host `6379`/`5432`.
 
-**Option A — Firewall:** Allow only `80`/`443` (and SSH) from the world; block `5432`/`6379` from WAN.
+Still use a firewall so only `80`/`443` (and SSH) are open to the WAN.
 
-**Option B — Compose override:** Add a `docker-compose.override.yml` (not committed, or a separate “production” compose in Coolify) that **removes** the `ports:` sections for `postgres` and `redis`. Containers on the same network still reach them as `postgres:5432` and `redis:6379`.
+For host access during local development, use `docker/docker-compose.dev.yml` or add a gitignored `docker-compose.override.yml` that maps DB/Redis ports only on your laptop.
 
 ---
 
@@ -144,6 +144,7 @@ By default, Postgres and Redis publish ports on the host. For a public VPS you s
 | Coolify: `Invalid template` in `build-time.env`                               | Unescaped or nested `${...}` in env values; use plain URLs (see §3).                                                                |
 | `Failed to find Server Action` (dev or after deploy)                         | Stale `.next`, multiple `next dev`, or browser cache: stop servers, remove `.next`, run a single dev instance, hard-refresh or clear site data for that origin. |
 | Postgres: `Role "postgres" does not exist`                                   | DB was initialized with a **custom** `POSTGRES_USER` (no `postgres` role). Match credentials to that user, or use default `postgres` and **recreate the volume** once if you can afford a fresh DB. |
+| Docker: `Bind for 0.0.0.0:6379 failed: port is already allocated`             | Another service on the host owns `6379` (often another Redis). Root compose no longer publishes Redis/Postgres—pull latest and redeploy. If you still map ports manually, pick a free host port or stop the conflicting container. |
 | CORS errors from browser                                                      | `CORS_ORIGIN` must exactly match the site origin (scheme + host, no path).                                                          |
 
 
