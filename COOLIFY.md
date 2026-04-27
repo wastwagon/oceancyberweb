@@ -9,7 +9,6 @@ This repo’s production stack is defined only in **`docker-compose.yml`** at th
 | `redis`    | Redis 7                     | 6379           | **not** (internal only)  |
 | `backend`  | NestJS API                  | 4000           | host `4100`              |
 | `web`      | Next.js (standalone)        | 3000           | host `3020`              |
-| `cms`      | Directus (optional profile) | 8055           | host `8055`              |
 
 
 Migrations run automatically on container start (`prisma migrate deploy` in both `web` and `backend` images).
@@ -87,8 +86,6 @@ Replace examples with your real domains.
 
 | Name                                                           | Purpose                                                                                                      |
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `NEXT_PUBLIC_CMS_URL`                                          | Public Directus URL if you use CMS.                                                                          |
-| `CMS_BASE_URL`, `CMS_STATIC_TOKEN`                             | Backend integration with Directus.                                                                           |
 | `FRONTEND_PORT`, `BACKEND_PORT` | Host port mappings for `web` and `backend` (Coolify’s proxy should point at these). `POSTGRES_PORT` / `REDIS_PORT` are not used by root `docker-compose.yml` (DB/Redis stay on the Compose network only). |
 
 
@@ -105,19 +102,7 @@ Then ensure `NEXT_PUBLIC_SITE_URL` and `NEXT_PUBLIC_API_URL` and `CORS_ORIGIN` m
 
 ---
 
-## 5. Optional: Directus (`cms` service)
-
-The `cms` service uses Compose **profile** `cms`. Coolify may not enable profiles by default. Options:
-
-- Add a separate Coolify Docker Compose resource that only runs Directus + shared DB (advanced), or  
-- Run Directus locally / elsewhere, or  
-- If your Coolify version supports “Compose profiles”, enable profile `cms`.
-
-Directus expects database `oceancyber_cms` (created by `docker/postgres/init` on first Postgres startup).
-
----
-
-## 6. Security on a VPS
+## 5. Security on a VPS
 
 The root `docker-compose.yml` **does not** publish Postgres or Redis on the host—they are reachable only inside the Compose network (`postgres:5432`, `redis:6379`). Apps still connect the same way; Coolify avoids conflicts with other stacks using host `6379`/`5432`.
 
@@ -127,7 +112,7 @@ For host access during local development, use `docker/docker-compose.dev.yml` or
 
 ---
 
-## 7. Deploy and verify
+## 6. Deploy and verify
 
 1. Deploy from Coolify (build + start).
 2. Open `NEXT_PUBLIC_SITE_URL` — site should load.
@@ -136,7 +121,7 @@ For host access during local development, use `docker/docker-compose.dev.yml` or
 
 ---
 
-## 8. Troubleshooting
+## 7. Troubleshooting
 
 
 | Symptom                                                                       | Likely cause                                                                                                                        |

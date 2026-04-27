@@ -34,8 +34,7 @@ Your world-class website is now ready for development and deployment.
 ### 5. **Docker & full stack**
    - `docker-compose.yml` — PostgreSQL 16, Redis 7, NestJS API, Next.js (project name `oceancyber`)
    - `docker/docker-compose.dev.yml` — Postgres + Redis only (run Next/API on the host)
-   - Optional **Directus CMS** (`--profile cms`): `npm run docker:cms`
-   - Helpers: `lib/cms/` (Directus REST), `scripts/docker-run.cjs` (used by `npm run docker:*`), `scripts/ensure-cms-database.sh`
+   - `scripts/docker-run.cjs` (used by `npm run docker:*`)
 
 ### 6. **SEO & Analytics**
    - next-seo configured
@@ -91,31 +90,6 @@ npm run dev:api
 ```
 
 Visit: http://localhost:3020
-
-### Optional — Directus CMS (headless)
-
-1. If Postgres was created **before** the CMS database script existed, run:
-
-   ```bash
-   npm run docker:cms:db
-   ```
-
-2. Start Directus:
-
-   ```bash
-   npm run docker:cms
-   ```
-
-3. Open `http://localhost:8055/admin`, sign in with `CMS_ADMIN_EMAIL` / `CMS_ADMIN_PASSWORD` from `.env`.
-
-4. Set `NEXT_PUBLIC_CMS_URL` and (in Docker) `CMS_INTERNAL_URL=http://cms:8055`, rebuild the web image if you change public env vars.
-
-**Architecture:** **Directus** is the CMS engine (its own API + admin). **NestJS** adds an optional **BFF** so the site can call `GET /api/v1/cms/items/:collection` instead of talking to Directus directly—`CMS_STATIC_TOKEN` stays on the server.
-
-- From Next (recommended when using the proxy): `lib/cms/via-api.ts` → `fetchCmsItemsViaApi('posts')`
-- Direct to Directus (public collections only, or token in env): `lib/cms/directus.ts`
-
-Set `CMS_BASE_URL` on the API (e.g. `http://cms:8055` in Docker, `http://localhost:8055` on the host) and `CMS_STATIC_TOKEN` if collections require auth.
 
 ### Docker: `address already in use` on the frontend port
 

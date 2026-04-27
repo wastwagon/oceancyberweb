@@ -13,11 +13,10 @@ const commands = {
   down: "docker compose down",
   ps: "docker compose ps",
   logs: "docker compose logs -f backend web",
-  cms: "docker compose --profile cms up -d",
 };
 
 if (!commands[cmd]) {
-  console.error("Usage: node scripts/docker-run.cjs <up|down|ps|logs|cms>");
+  console.error("Usage: node scripts/docker-run.cjs <up|down|ps|logs>");
   process.exit(1);
 }
 

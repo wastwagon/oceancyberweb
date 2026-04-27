@@ -49,7 +49,7 @@ export const PROJECT_FEATURES: ProjectFeature[] = [
   { id: "pay_stripe", label: "Stripe (cards)", description: "Checkout, webhooks, and receipts with Stripe", hours: 50, category: "commerce" },
   { id: "pay_paystack", label: "Paystack (cedis, MoMo, cards)", description: "Local checkout and webhooks with Paystack", hours: 40, category: "commerce" },
   { id: "subscription", label: "Subscriptions and billing", description: "Plans, renewals, and a simple customer portal", hours: 55, category: "commerce" },
-  { id: "cms", label: "Headless CMS", description: "Structured content, roles, and live preview", hours: 32, category: "content" },
+  { id: "structured-content", label: "Structured content layer", description: "Editorial workflows, roles, and preview", hours: 32, category: "content" },
   { id: "blog", label: "Blog or help center", description: "Articles with tags, search, or rich text", hours: 22, category: "content" },
   { id: "i18n", label: "More than one language", description: "Language switching and a workflow for translated copy", hours: 40, category: "content" },
   { id: "search", label: "Search and filters", description: "Search across listings, articles, or records", hours: 24, category: "data" },

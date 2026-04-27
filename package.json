@@ -22,8 +22,6 @@
     "docker:down": "node scripts/docker-run.cjs down",
     "docker:ps": "node scripts/docker-run.cjs ps",
     "docker:logs": "node scripts/docker-run.cjs logs",
-    "docker:cms": "node scripts/docker-run.cjs cms",
-    "docker:cms:db": "bash scripts/ensure-cms-database.sh",
     "postinstall": "npm run build:shared"
   },
   "dependencies": {

@@ -67,20 +67,6 @@ npm run dev
 
 In another terminal: `npm run dev:api` (NestJS on port 4100 by default).
 
-### 4. Optional — Directus CMS
-
-Only if the CMS database is missing:
-
-```bash
-npm run docker:cms:db
-```
-
-Start Directus (see SETUP.md):
-
-```bash
-npm run docker:cms
-```
-
 ## 🐳 Docker Commands
 
 | Command | What it does |
@@ -89,7 +75,6 @@ npm run docker:cms
 | `npm run docker:down` | Stop stack |
 | `npm run docker:ps` | List containers |
 | `npm run docker:logs` | Follow backend (NestJS) + Web logs |
-| `npm run docker:cms` | Add Directus CMS (`--profile cms`) |
 | `docker compose -f docker/docker-compose.dev.yml up -d` | Postgres + Redis only (local dev) |
 
 Do **not** run `npm run docker:up --build` — `--build` is already included, and npm may treat `--build` as its own flag. Use `npm run docker:up` only.
