@@ -59,7 +59,7 @@ Then open [http://localhost:3020](http://localhost:3020) (default `FRONTEND_PORT
 **Or: databases in Docker, apps on the host**
 
 ```bash
-docker compose -f docker-compose.dev.yml up -d
+docker compose -f docker/docker-compose.dev.yml up -d
 npm run prisma:generate
 npm run prisma:migrate
 npm run dev
@@ -90,7 +90,7 @@ npm run docker:cms
 | `npm run docker:ps` | List containers |
 | `npm run docker:logs` | Follow backend (NestJS) + Web logs |
 | `npm run docker:cms` | Add Directus CMS (`--profile cms`) |
-| `docker compose -f docker-compose.dev.yml up -d` | Postgres + Redis only (local dev) |
+| `docker compose -f docker/docker-compose.dev.yml up -d` | Postgres + Redis only (local dev) |
 
 Do **not** run `npm run docker:up --build` — `--build` is already included, and npm may treat `--build` as its own flag. Use `npm run docker:up` only.
 

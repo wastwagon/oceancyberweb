@@ -9,6 +9,9 @@
 #
 # After first boot: app → http://localhost:3020 (set NEXT_PUBLIC_SITE_URL / CORS_ORIGIN if host or port differs)
 # API health → http://localhost:4100/api/v1/health. URL defaults are non-nested for Coolify env parsing.
+#
+# Local-only stacks live under docker/ (`docker-compose.dev.yml`, `docker-compose.hotreload.yml`).
+# Deploy / Coolify: point only at this file (`docker-compose.yml`).
 # =============================================================================
 
 name: oceancyber

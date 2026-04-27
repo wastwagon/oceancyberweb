@@ -1,6 +1,6 @@
 # Coolify: full stack on a VPS (Docker Compose)
 
-This repo’s production stack is defined in `docker-compose.yml`:
+This repo’s production stack is defined only in **`docker-compose.yml`** at the repository root. Other compose files under `docker/` are for local development (databases-only or hot reload)—do not point Coolify at those.
 
 
 | Service    | Role                        | Container port | Published (default) |

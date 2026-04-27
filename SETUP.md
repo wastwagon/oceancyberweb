@@ -33,7 +33,7 @@ Your world-class website is now ready for development and deployment.
 
 ### 5. **Docker & full stack**
    - `docker-compose.yml` — PostgreSQL 16, Redis 7, NestJS API, Next.js (project name `oceancyber`)
-   - `docker-compose.dev.yml` — Postgres + Redis only (run Next/API on the host)
+   - `docker/docker-compose.dev.yml` — Postgres + Redis only (run Next/API on the host)
    - Optional **Directus CMS** (`--profile cms`): `npm run docker:cms`
    - Helpers: `lib/cms/` (Directus REST), `scripts/docker-run.cjs` (used by `npm run docker:*`), `scripts/ensure-cms-database.sh`
 
@@ -79,7 +79,7 @@ This starts **postgres**, **redis**, **oceancyber-backend** (NestJS), and **ocea
 ### Option B — Databases in Docker, apps on your machine
 
 ```bash
-docker compose -f docker-compose.dev.yml up -d
+docker compose -f docker/docker-compose.dev.yml up -d
 npm run prisma:migrate
 npm run dev
 ```
@@ -164,16 +164,23 @@ Then run `npm run docker:up` again (rebuild if you changed build-time `NEXT_PUBL
 
 ## 🐳 Docker Commands
 
-### Development (Database only)
+### Development (database only)
 ```bash
-docker-compose -f docker-compose.dev.yml up -d
-docker-compose -f docker-compose.dev.yml down
+docker compose -f docker/docker-compose.dev.yml up -d
+docker compose -f docker/docker-compose.dev.yml down
 ```
 
-### Production Build
+### Full stack + hot reload (Docker Desktop; optional)
+Uses bind mounts — not for Coolify/production. From repo root:
 ```bash
-docker-compose up -d
-docker-compose down
+docker compose -f docker/docker-compose.hotreload.yml up --build
+docker compose -f docker/docker-compose.hotreload.yml down
+```
+
+### Production-style full stack (same as VPS / Coolify)
+```bash
+docker compose up -d --build
+docker compose down
 ```
 
 ## 📦 Deployment to Coolify

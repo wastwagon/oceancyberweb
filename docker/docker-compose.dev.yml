@@ -1,5 +1,7 @@
 # Infrastructure only (Postgres + Redis) when you run Next/Nest on the host with `npm run dev`.
-# For the full stack in Docker (API + web + DB + Redis), use: docker compose up -d --build
+# For the full stack in Docker (API + web + DB + Redis), use from repo root: docker compose up -d --build
+#
+# Run (from repository root): docker compose -f docker/docker-compose.dev.yml up -d
 name: oceancyber-dev
 
 services:
@@ -17,7 +19,7 @@ services:
       - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - postgres_dev_data:/var/lib/postgresql/data
-      - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
+      - ../docker/postgres/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-oceancyber}"]
       interval: 10s
