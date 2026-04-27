@@ -115,7 +115,7 @@ For host access during local development, use `docker/docker-compose.dev.yml` or
 ## 6. Deploy and verify
 
 1. Deploy from Coolify (build + start).
-2. Open `NEXT_PUBLIC_SITE_URL` — site should load.
+2. Open `NEXT_PUBLIC_SITE_URL` — site should load. The root page sets **ISR** (`revalidate = 300` in `app/page.tsx`) so the homepage can refresh within minutes after a deploy instead of relying on long-lived edge cache alone.
 3. Check API: `https://api.yourdomain.com/api/v1/health` (or your chosen API host).
 4. If the UI calls the wrong API URL, fix `NEXT_PUBLIC_API_URL` and **rebuild** `web`.
 

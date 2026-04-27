@@ -5,6 +5,9 @@ import { Stats } from "@/components/sections/Stats";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Contact } from "@/components/sections/Contact";
 
+/** ISR: avoid serving a year-stale HTML shell from CDN/Next after deploys (see next/cache + s-maxage). */
+export const revalidate = 300;
+
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
