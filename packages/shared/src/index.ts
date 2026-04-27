@@ -18,6 +18,8 @@ export interface AuthTokens {
 export interface AuthUserPublic {
   id: string;
   email: string;
+  /** `"user"` until a `role` column exists on `User`; admin flows may override via JWT/profile. */
+  role: string;
 }
 
 export interface ApiErrorShape {

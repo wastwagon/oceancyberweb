@@ -3,8 +3,10 @@ import { ConfigService } from "@nestjs/config";
 import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
 import { PrismaService } from "../prisma/prisma.service";
+import type { AuthUserPublic } from "@oceancyber/shared";
 
-export type JwtPayload = { sub: string; email: string };
+/** Decoded JWT (may omit `role` on legacy tokens); `validate` loads the user from the DB. */
+export type JwtPayload = { sub: string; email?: string; role?: string };
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -19,14 +21,18 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: JwtPayload) {
+  async validate(payload: JwtPayload): Promise<AuthUserPublic> {
     const user = await this.prisma.user.findUnique({
       where: { id: payload.sub },
-      select: { id: true, email: true },
+      select: { id: true, email: true, role: true },
     });
     if (!user) {
       throw new UnauthorizedException();
     }
-    return user;
+    return {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    };
   }
 }

@@ -30,12 +30,18 @@ export class AuthService {
         email: dto.email.toLowerCase(),
         passwordHash,
       },
-      select: { id: true, email: true },
+      select: { id: true, email: true, role: true },
     });
 
+    const publicUser: AuthUserPublic = {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    };
+
     return {
-      user,
-      ...this.signTokens(user),
+      user: publicUser,
+      ...this.signTokens(publicUser),
     };
   }
 
@@ -52,16 +58,23 @@ export class AuthService {
       throw new UnauthorizedException("Invalid credentials");
     }
 
+    const publicUser: AuthUserPublic = {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    };
+
     return {
-      user: { id: user.id, email: user.email },
-      ...this.signTokens({ id: user.id, email: user.email }),
+      user: publicUser,
+      ...this.signTokens(publicUser),
     };
   }
 
-  private signTokens(user: { id: string; email: string }): AuthTokens {
+  private signTokens(user: AuthUserPublic): AuthTokens {
     const access_token = this.jwt.sign({
       sub: user.id,
       email: user.email,
+      role: user.role,
     });
     return {
       access_token,

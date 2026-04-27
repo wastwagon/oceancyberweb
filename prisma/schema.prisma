@@ -16,8 +16,15 @@ model Contact {
   email     String
   phone     String?
   message   String
+  source    String?
+  status    String   @default("new")
+  notes     String?
+  metadata  Json?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([source, createdAt])
+  @@index([status, createdAt])
 }
 
 model Project {
@@ -30,8 +37,12 @@ model Project {
   imageUrl    String?
   liveUrl     String?
   featured    Boolean  @default(false)
+  sortOrder   Int      @default(0)
+  details     Json?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@index([sortOrder, createdAt])
 }
 
 model Testimonial {
@@ -42,17 +53,100 @@ model Testimonial {
   content   String
   rating    Int      @default(5)
   featured  Boolean  @default(false)
+  initials  String?
+  sortOrder Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([sortOrder, createdAt])
 }
 
-/// API auth (NestJS JWT)
+/// API auth + wallet / billing (NestJS)
 model User {
-  id           String   @id @default(cuid())
-  email        String   @unique
-  passwordHash String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id                 String   @id @default(cuid())
+  email              String   @unique
+  passwordHash       String
+  role               String   @default("user")
+  fullName           String?
+  walletBalanceMinor BigInt   @default(0)
+  walletCurrency     String   @default("GHS")
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  renewals            UserRenewal[]
+  paymentTransactions PaymentTransaction[]
+  walletLedger        WalletLedger[]
 
   @@index([email])
+}
+
+model RenewalPlan {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  name            String
+  description     String?
+  interval        String
+  amountMinor     BigInt
+  currency        String   @default("GHS")
+  isActive        Boolean  @default(true)
+  gracePeriodDays Int      @default(7)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  renewals UserRenewal[]
+}
+
+model UserRenewal {
+  id                     String    @id @default(cuid())
+  userId                 String
+  user                   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  planId                 String
+  plan                   RenewalPlan @relation(fields: [planId], references: [id])
+  nextRenewalAt          DateTime
+  autoRenewUsingWallet   Boolean   @default(true)
+  externalRef            String?
+  metadata               Json?
+  status                 String    @default("active")
+  pausedAt               DateTime?
+  cancelledAt            DateTime?
+  graceEndsAt            DateTime?
+  consecutiveFailures    Int       @default(0)
+  lastChargeAttemptAt    DateTime?
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([nextRenewalAt])
+}
+
+model PaymentTransaction {
+  id                  String   @id @default(cuid())
+  userId              String
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type                String
+  status              String
+  amountMinor         BigInt
+  currency            String
+  provider            String
+  providerReference   String   @unique
+  metadata            Json?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model WalletLedger {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type        String
+  amountMinor BigInt
+  currency    String
+  reference   String
+  description String?
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
 }
