@@ -21,17 +21,34 @@ const TARGETS: FxCurrencyCode[] = [
 
 export const revalidate = 3600;
 
+const FALLBACK_RATES: Record<string, number> = { GHS: 1 };
+
+function fallbackFxResponse(reason: "build" | "upstream_failed" | "invalid_payload" | "fetch_failed") {
+  return NextResponse.json(
+    {
+      base: "GHS" as const,
+      date: null,
+      rates: FALLBACK_RATES,
+      source: "fallback",
+      reason,
+    },
+    { status: 200 },
+  );
+}
+
 export async function GET() {
+  // Avoid network-dependent failures/noise during static production build.
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    return fallbackFxResponse("build");
+  }
+
   try {
     const res = await fetch(UPSTREAM, {
       next: { revalidate: 3600 },
       headers: { Accept: "application/json" },
     });
     if (!res.ok) {
-      return NextResponse.json(
-        { error: "upstream_failed", status: res.status },
-        { status: 502 },
-      );
+      return fallbackFxResponse("upstream_failed");
     }
     const data = (await res.json()) as {
       date?: string;
@@ -39,7 +56,7 @@ export async function GET() {
     };
     const row = data.ghs;
     if (!row || typeof row !== "object") {
-      return NextResponse.json({ error: "invalid_payload" }, { status: 502 });
+      return fallbackFxResponse("invalid_payload");
     }
 
     const rates: Record<string, number> = { GHS: 1 };
@@ -66,6 +83,6 @@ export async function GET() {
       },
     );
   } catch {
-    return NextResponse.json({ error: "fetch_failed" }, { status: 502 });
+    return fallbackFxResponse("fetch_failed");
   }
 }

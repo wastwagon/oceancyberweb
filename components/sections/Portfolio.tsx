@@ -21,33 +21,16 @@ const MotionLink = motion(Link);
 
 function VolumetricBackground() {
   return (
-    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-black">
-      <div className="absolute left-1/2 top-0 flex h-full w-full -translate-x-1/2 justify-center gap-4 opacity-[0.38]">
-        {[...Array(5)].map((_, i) => (
-          <div
-            key={i}
-            className="h-[800px] w-1 bg-gradient-to-b from-[#143296]/45 via-ocean-600/12 to-transparent blur-[80px]"
-            style={{
-              transform: `rotate(${(i - 2) * 15}deg)`,
-              transformOrigin: "top center",
-            }}
-          />
-        ))}
-      </div>
-
+    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-gradient-to-b from-slate-50/95 via-white to-slate-100/90">
       <div
-        className="absolute left-1/2 top-[-20%] z-[1] aspect-video w-[120%] -translate-x-1/2 rounded-[100%]"
-        style={{
-          background:
-            "radial-gradient(ellipse at center, rgba(20, 50, 150, 0.32) 0%, rgba(0, 0, 50, 0.12) 42%, transparent 72%)",
-          filter: "blur(100px)",
-        }}
+        className="absolute left-1/2 top-[-10%] h-[min(70vh,560px)] w-[min(120vw,900px)] -translate-x-1/2 rounded-[100%] bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(2,106,255,0.12)_0%,transparent_70%)] blur-[90px]"
+        aria-hidden
       />
-
       <div
-        className="absolute inset-0 opacity-[0.12] mix-blend-overlay"
+        className="absolute inset-0 opacity-[0.07]"
         style={{
-          backgroundImage: "radial-gradient(#143296 0.5px, transparent 0.5px)",
+          backgroundImage:
+            "radial-gradient(rgba(2, 106, 255, 0.35) 0.5px, transparent 0.5px)",
           backgroundSize: "24px 24px",
         }}
       />
@@ -102,7 +85,7 @@ function TiltCard({
       >
         <MotionLink
           href={href}
-          className="group/card relative block h-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] shadow-xl shadow-black/40 backdrop-blur-xl outline-none transition-shadow hover:shadow-[#143296]/20 focus-visible:ring-2 focus-visible:ring-blue-400/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#00000a]"
+          className="group/card relative block h-full overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-lg shadow-slate-200/60 outline-none ring-1 ring-slate-200/40 transition-shadow hover:border-ocean-200/80 hover:shadow-slate-300/50 focus-visible:ring-2 focus-visible:ring-ocean-400/80 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50"
           whileTap={{ scale: 0.99 }}
         >
           <motion.div
@@ -132,7 +115,7 @@ function FeaturedShowcase({ project, index }: { project: Project; index: number 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10% 0px" }}
       transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-      className="relative overflow-hidden rounded-3xl border border-white/[0.12] bg-[#050814] shadow-2xl shadow-[#143296]/15"
+      className="relative overflow-hidden rounded-3xl border border-slate-200/90 bg-slate-900/5 shadow-2xl shadow-slate-300/40"
     >
       <Link
         href={`/portfolio/${project.slug}`}
@@ -154,8 +137,8 @@ function FeaturedShowcase({ project, index }: { project: Project; index: number 
         <div
           className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-[0.18] mix-blend-overlay`}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#00000a] via-[#00000a]/55 to-transparent md:via-[#00000a]/35" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#00000a]/90 via-transparent to-transparent md:from-[#00000a]/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/65 via-slate-900/35 to-transparent md:via-slate-900/22" />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/70 via-transparent to-transparent md:from-slate-900/55" />
 
         <div className="relative z-10 flex h-full min-h-[inherit] flex-col justify-end p-6 md:flex-row md:items-end md:justify-between md:p-10 lg:p-12">
           <div className="max-w-xl">
@@ -199,7 +182,7 @@ function FeaturedShowcase({ project, index }: { project: Project; index: number 
           </div>
 
           <motion.span
-            className="mt-8 inline-flex items-center gap-2 self-start rounded-full border border-[#143296cc]/60 bg-[#143296cc]/20 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition group-hover:border-blue-400/50 group-hover:bg-[#143296cc]/35 md:mt-0 md:self-end"
+            className="mt-8 inline-flex items-center gap-2 self-start rounded-full border border-ocean-300/80 bg-ocean-600/85 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition group-hover:border-ocean-200 group-hover:bg-ocean-700/90 md:mt-0 md:self-end"
             whileHover={{ x: 4 }}
             transition={{ type: "spring", stiffness: 400, damping: 22 }}
           >
@@ -251,16 +234,16 @@ function GridProjectCard({
           </div>
         </div>
 
-        <div className="space-y-3 p-5 md:p-6">
+        <div className="space-y-3 border-t border-slate-200/80 bg-white p-5 md:p-6">
           <div>
-            <h3 className="text-lg font-semibold text-white">{project.title}</h3>
-            <p className="text-xs text-ocean-400/90">{project.client}</p>
+            <h3 className="text-lg font-semibold text-slate-900">{project.title}</h3>
+            <p className="text-xs text-ocean-600">{project.client}</p>
           </div>
-          <p className="line-clamp-2 text-sm leading-relaxed text-slate-400">{project.description}</p>
+          <p className="line-clamp-2 text-sm leading-relaxed text-slate-600">{project.description}</p>
 
           {project.metrics && (
-            <div className="flex items-center gap-3 border-t border-white/5 pt-3">
-              <span className="bg-gradient-to-r from-blue-300 to-ocean-400 bg-clip-text text-xl font-bold text-transparent">
+            <div className="flex items-center gap-3 border-t border-slate-100 pt-3">
+              <span className="bg-gradient-to-r from-ocean-600 to-cyan-600 bg-clip-text text-xl font-bold text-transparent">
                 {project.metrics.increase}
               </span>
               <span className="text-[10px] font-medium uppercase tracking-wider text-slate-500">
@@ -273,19 +256,19 @@ function GridProjectCard({
             {project.tech.slice(0, 4).map((tech) => (
               <span
                 key={tech}
-                className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-medium text-slate-400"
+                className="rounded-md border border-slate-200/90 bg-slate-50/90 px-2 py-0.5 text-[10px] font-medium text-slate-600"
               >
                 {tech}
               </span>
             ))}
             {project.tech.length > 4 ? (
-              <span className="text-[10px] text-slate-600">+{project.tech.length - 4}</span>
+              <span className="text-[10px] text-slate-500">+{project.tech.length - 4}</span>
             ) : null}
           </div>
 
-          <div className="flex items-center justify-between border-t border-white/5 pt-3 text-xs font-semibold text-blue-200/90">
+          <div className="flex items-center justify-between border-t border-slate-100 pt-3 text-xs font-semibold text-ocean-700">
             <span>Open case study</span>
-            <span aria-hidden className="transition group-hover/card:translate-x-0.5">→</span>
+            <span aria-hidden className="transition-transform duration-200 group-hover/card:translate-x-0.5">→</span>
           </div>
         </div>
       </TiltCard>
@@ -313,14 +296,14 @@ export function Portfolio({ cases }: { cases?: PortfolioCaseStudy[] }) {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-12% 0px" }}
             transition={{ duration: 0.45 }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#143296cc]/50 bg-[#143296cc]/10 px-5 py-2.5 text-sm font-medium tracking-wide text-blue-200 backdrop-blur-xl"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-ocean-200 bg-ocean-50/95 px-5 py-2.5 text-sm font-medium tracking-wide text-ocean-800 shadow-sm"
           >
             Featured Projects
           </motion.span>
-          <h2 className="mb-6 text-5xl font-bold leading-tight tracking-tight text-white md:text-6xl lg:text-7xl">
+          <h2 className="mb-6 text-5xl font-bold leading-tight tracking-tight text-slate-900 md:text-6xl lg:text-7xl">
             Our Work
           </h2>
-          <p className="max-w-2xl text-xl font-light leading-relaxed text-slate-400">
+          <p className="max-w-2xl text-xl font-light leading-relaxed text-slate-600">
             Showcasing transformative digital solutions that drive real business results
           </p>
         </motion.div>
@@ -346,13 +329,13 @@ export function Portfolio({ cases }: { cases?: PortfolioCaseStudy[] }) {
           className="mx-auto mt-24 max-w-7xl text-center md:mt-28"
         >
           <div className="mx-auto max-w-2xl">
-            <h3 className="mb-4 text-3xl font-bold text-white md:text-4xl">
+            <h3 className="mb-4 text-3xl font-bold text-slate-900 md:text-4xl">
               Ready to see your project featured here?
             </h3>
-            <p className="mb-8 font-light text-slate-400">Let&apos;s create something amazing together</p>
+            <p className="mb-8 font-light text-slate-600">Let&apos;s create something amazing together</p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-[#143296cc] bg-gradient-to-t from-[#143296cc] to-[#00000a] px-8 py-4 font-semibold text-white shadow-lg shadow-[#143296cc]/25 transition-all duration-300 hover:brightness-110"
+              className="inline-flex items-center gap-2 rounded-full border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-8 py-4 font-semibold text-white shadow-lg shadow-ocean-600/25 transition-all duration-300 hover:brightness-110 active:scale-[0.98]"
             >
               Start Your Project
             </Link>

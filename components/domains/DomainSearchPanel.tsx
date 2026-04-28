@@ -4,23 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { Loader2, Search, ShieldCheck, Globe2, Sparkles } from "lucide-react";
 import { FxPrice } from "@/components/currency/FxPrice";
+import { HERO_TLD_PRICING } from "@/lib/domain-tld-pricing";
 import { cn } from "@/lib/utils";
 
 type CheckRow = { domain: string; available: boolean };
-
-/** Annual “from” prices in GHS (edit to match your registrar retail). */
-const HERO_TLD_PRICING: ReadonlyArray<{
-  tld: string;
-  priceAnnualGhs: number;
-  highlight?: boolean;
-}> = [
-  { tld: ".com", priceAnnualGhs: 120 },
-  { tld: ".net", priceAnnualGhs: 140 },
-  { tld: ".org", priceAnnualGhs: 99 },
-  { tld: ".io", priceAnnualGhs: 450 },
-  { tld: ".africa", priceAnnualGhs: 100, highlight: true },
-  { tld: ".info", priceAnnualGhs: 45 },
-];
 
 export function TldPriceChips() {
   return (

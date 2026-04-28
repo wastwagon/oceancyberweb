@@ -47,6 +47,12 @@ function mapPrismaProjectToCaseStudy(row: Project): PortfolioCaseStudy | null {
   };
 }
 
+function logPortfolioLoaderError(context: string, error: unknown) {
+  // Keep production/build logs clean when fallback content is expected.
+  if (process.env.NODE_ENV === "production") return;
+  console.error(context, error);
+}
+
 export const getPortfolioCaseStudies = unstable_cache(
   async (): Promise<PortfolioCaseStudy[]> => {
     try {
@@ -63,7 +69,7 @@ export const getPortfolioCaseStudies = unstable_cache(
         return mapped;
       }
     } catch (e) {
-      console.error("[getPortfolioCaseStudies]", e);
+      logPortfolioLoaderError("[getPortfolioCaseStudies]", e);
     }
     return fallbackPortfolioCaseStudies;
   },
@@ -83,7 +89,7 @@ export async function getPortfolioCaseStudyBySlug(
       }
     }
   } catch (e) {
-    console.error("[getPortfolioCaseStudyBySlug]", e);
+    logPortfolioLoaderError("[getPortfolioCaseStudyBySlug]", e);
   }
   return fallbackPortfolioCaseStudies.find((p) => p.slug === slug) ?? null;
 }

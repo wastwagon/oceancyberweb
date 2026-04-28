@@ -7,6 +7,7 @@ import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { ChatBot } from "@/components/ui/ChatBot";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
 import { WebVitals } from "@/components/analytics/WebVitals";
+import { AppProviders } from "@/components/providers/AppProviders";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -85,13 +86,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="min-h-screen bg-background font-sans antialiased">
-        <OrganizationJsonLd />
-        <WebVitals />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <ScrollToTop />
-        <ChatBot />
+        <AppProviders>
+          <OrganizationJsonLd />
+          <WebVitals />
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <ScrollToTop />
+          <ChatBot />
+        </AppProviders>
       </body>
     </html>
   );

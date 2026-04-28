@@ -6,24 +6,24 @@ import { fallbackTestimonialCards } from "@/lib/data/testimonials-fallback";
 import type { TestimonialCard } from "@/lib/types/testimonial-card";
 import { fadeUpProps, revealViewport, staggerDelay } from "@/lib/scroll-reveal";
 
-/** Background treatment aligned with Hero (`#00000a`, brand blue grid / glow). */
+/** Light premium: subtle grid + sky bloom (registrar / SaaS feel). */
 function TestimonialsAmbient() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
       <div
-        className="absolute inset-0 opacity-[0.18]"
+        className="absolute inset-0 opacity-[0.1]"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(20, 50, 150, 0.45) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(20, 50, 150, 0.45) 1px, transparent 1px)
+            linear-gradient(to right, rgba(2, 106, 255, 0.22) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(2, 106, 255, 0.18) 1px, transparent 1px)
           `,
           backgroundSize: "56px 56px",
           maskImage:
             "radial-gradient(ellipse 85% 65% at 50% 18%, black 12%, transparent 72%)",
         }}
       />
-      <div className="absolute left-1/2 top-0 h-[min(520px,70vh)] w-[min(92vw,800px)] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(20,50,150,0.28)_0%,transparent_68%)] blur-[100px]" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#00000a]" />
+      <div className="absolute left-1/2 top-0 h-[min(520px,70vh)] w-[min(92vw,800px)] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(2,106,255,0.1)_0%,transparent_68%)] blur-[100px]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-50/40 via-white/60 to-slate-100" />
     </div>
   );
 }
@@ -34,7 +34,7 @@ export function Testimonials({ cards }: { cards?: TestimonialCard[] }) {
   return (
     <section
       id="testimonials"
-      className="relative overflow-hidden bg-[#00000a] py-24 md:py-32"
+      className="relative overflow-hidden bg-gradient-to-b from-slate-100/90 via-slate-50 to-white py-24 md:py-32"
     >
       <TestimonialsAmbient />
 
@@ -44,24 +44,24 @@ export function Testimonials({ cards }: { cards?: TestimonialCard[] }) {
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={revealViewport}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#143296cc] bg-[#143296cc]/10 px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-blue-300 backdrop-blur-md"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-ocean-200 bg-ocean-50/95 px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-ocean-800 shadow-sm"
           >
             <span
-              className="h-2 w-2 animate-pulse rounded-full bg-blue-400 shadow-[0_0_10px_rgba(96,165,250,0.8)]"
+              className="h-2 w-2 animate-pulse rounded-full bg-ocean-500 shadow-sm"
               aria-hidden
             />
             Client stories
           </motion.span>
 
-          <h2 className="mx-auto mb-6 max-w-4xl text-balance text-center text-4xl font-bold leading-tight tracking-tight text-white md:text-6xl lg:text-7xl">
+          <h2 className="mx-auto mb-6 max-w-4xl text-balance text-center text-4xl font-bold leading-tight tracking-tight text-slate-900 md:text-6xl lg:text-7xl">
             What Our Clients Say
             <br />
-            <span className="bg-gradient-to-r from-blue-400 via-[#143296cc] to-blue-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-ocean-600 via-ocean-700 to-cyan-600 bg-clip-text text-transparent">
               About Our Work
             </span>
           </h2>
 
-          <p className="mx-auto max-w-2xl text-center text-lg font-light leading-relaxed text-slate-400 md:text-xl">
+          <p className="mx-auto max-w-2xl text-center text-lg font-light leading-relaxed text-slate-600 md:text-xl">
             98% satisfaction rate. Hear how we help businesses across Ghana
             build trust and grow online.
           </p>
@@ -75,7 +75,7 @@ export function Testimonials({ cards }: { cards?: TestimonialCard[] }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={revealViewport}
               transition={staggerDelay(index, 0.1)}
-              className={`group relative flex flex-col items-center rounded-[2.5rem] border border-white/10 bg-white/[0.04] p-10 backdrop-blur-md transition-all duration-500 hover:border-[#143296cc]/50 hover:bg-white/[0.06] hover:shadow-lg hover:shadow-[#143296cc]/10 ${
+              className={`group relative flex flex-col items-center rounded-[2.5rem] border border-slate-200/90 bg-white p-10 shadow-lg shadow-slate-200/40 ring-1 ring-slate-200/40 transition-all duration-500 hover:-translate-y-0.5 hover:border-ocean-200/80 hover:shadow-xl hover:shadow-slate-300/50 ${
                 index === 1 ? "md:mt-8" : ""
               }`}
             >
@@ -83,7 +83,7 @@ export function Testimonials({ cards }: { cards?: TestimonialCard[] }) {
                 {[...Array(5)].map((_, i) => (
                   <svg
                     key={i}
-                    className={`h-5 w-5 fill-current ${i < testimonial.rating ? "text-blue-400" : "text-slate-600"}`}
+                    className={`h-5 w-5 fill-current ${i < testimonial.rating ? "text-amber-400" : "text-slate-300"}`}
                     viewBox="0 0 20 20"
                     aria-hidden
                   >
@@ -92,21 +92,21 @@ export function Testimonials({ cards }: { cards?: TestimonialCard[] }) {
                 ))}
               </div>
 
-              <p className="mb-10 text-lg font-light italic leading-relaxed text-slate-300">
+              <p className="mb-10 text-lg font-light italic leading-relaxed text-slate-700">
                 &ldquo;{testimonial.content}&rdquo;
               </p>
 
               <div className="flex flex-col items-center">
-                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#143296cc] bg-gradient-to-br from-[#143296cc] to-ocean-600 text-xl font-bold text-white shadow-lg transition-transform duration-500 group-hover:scale-105">
+                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 border-ocean-200 bg-gradient-to-br from-ocean-600 to-ocean-800 text-xl font-bold text-white shadow-md transition-transform duration-500 group-hover:scale-105">
                   {testimonial.initials}
                 </div>
-                <div className="text-lg font-semibold text-white">
+                <div className="text-lg font-semibold text-slate-900">
                   {testimonial.name}
                 </div>
                 <div className="mt-1 text-sm font-medium uppercase tracking-widest text-slate-500">
                   {testimonial.role}
                 </div>
-                <div className="mt-0.5 text-sm text-slate-400">
+                <div className="mt-0.5 text-sm text-slate-600">
                   {testimonial.company}
                 </div>
               </div>
@@ -115,10 +115,10 @@ export function Testimonials({ cards }: { cards?: TestimonialCard[] }) {
         </div>
 
         <motion.div {...fadeUpProps} className="mt-16 md:mt-20">
-          <Link href="/contact">
+          <Link href="/contact" className="w-full sm:w-auto">
             <button
               type="button"
-              className="rounded-xl border-2 border-[#143296cc] bg-gradient-to-t from-[#143296cc] to-[#00000a] px-10 py-4 font-bold text-white shadow-lg shadow-[#143296cc]/20 transition-all hover:brightness-125 active:scale-95"
+              className="min-h-[48px] w-full rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-10 py-4 font-bold text-white shadow-lg shadow-ocean-600/25 transition-all hover:brightness-110 active:scale-[0.98] sm:w-auto"
             >
               Book an appointment
             </button>
@@ -126,10 +126,6 @@ export function Testimonials({ cards }: { cards?: TestimonialCard[] }) {
         </motion.div>
       </div>
 
-      <div
-        className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-[#00000a] via-transparent to-transparent"
-        aria-hidden
-      />
     </section>
   );
 }

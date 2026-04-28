@@ -146,22 +146,22 @@ const aboutHeroItem = {
 function PageAmbient() {
   return (
     <div
-      className="pointer-events-none absolute inset-0 opacity-[0.22]"
+      className="pointer-events-none absolute inset-0 opacity-[0.12]"
       aria-hidden
     >
       <div
         className="absolute inset-0"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(20, 50, 150, 0.45) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(20, 50, 150, 0.45) 1px, transparent 1px)
+            linear-gradient(to right, rgba(2, 106, 255, 0.2) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(2, 106, 255, 0.16) 1px, transparent 1px)
           `,
           backgroundSize: "56px 56px",
           maskImage:
             "radial-gradient(ellipse 95% 80% at 50% 0%, black 0%, transparent 75%)",
         }}
       />
-      <div className="absolute left-1/2 top-0 h-[min(520px,60vh)] w-[min(100%,900px)] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(20,50,150,0.28)_0%,transparent_72%)] blur-[90px]" />
+      <div className="absolute left-1/2 top-0 h-[min(520px,60vh)] w-[min(100%,900px)] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(2,106,255,0.1)_0%,transparent_72%)] blur-[90px]" />
     </div>
   );
 }
@@ -284,13 +284,13 @@ function AboutHeroAmbient() {
         />
       )}
 
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_96%_78%_at_50%_32%,transparent_38%,rgba(0,0,10,0.55)_100%)]" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#00000a]/35 via-transparent to-[#00000a]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_96%_78%_at_50%_32%,transparent_40%,rgba(241,245,249,0.72)_100%)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-50/85 via-transparent to-slate-100" />
     </div>
   );
 }
 
-/** Soft top / edge sheen so Mission + Vision reads like light on a dark surface */
+/** Soft top / edge sheen for Mission + Vision on light surfaces */
 function MissionVisionAmbient() {
   return (
     <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
@@ -304,7 +304,7 @@ function MissionVisionAmbient() {
           `,
         }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#00000a]/20 to-[#00000a]/65" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-100/35 to-slate-100/90" />
     </div>
   );
 }
@@ -327,7 +327,7 @@ function TeamSectionAmbient() {
         }}
       />
       <motion.div
-        className="absolute -right-[14%] top-[12%] h-[min(440px,50vh)] w-[min(460px,52vw)] rounded-full bg-[#143296cc]/[0.24] blur-[92px]"
+        className="absolute -right-[14%] top-[12%] h-[min(440px,50vh)] w-[min(460px,52vw)] rounded-full bg-ocean-500/[0.14] blur-[92px]"
         animate={{
           x: [0, -38, 20, 0],
           y: [0, -22, 26, 0],
@@ -357,8 +357,8 @@ function TeamSectionAmbient() {
         className="absolute inset-[-40%] opacity-[0.14]"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(20, 50, 150, 0.45) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(20, 50, 150, 0.45) 1px, transparent 1px)
+            linear-gradient(to right, rgba(2, 106, 255, 0.18) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(2, 106, 255, 0.14) 1px, transparent 1px)
           `,
           backgroundSize: "44px 44px",
           maskImage:
@@ -371,7 +371,7 @@ function TeamSectionAmbient() {
           ease: "linear",
         }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#00000a]/40 via-transparent to-[#00000a]/80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-transparent to-slate-100/92" />
     </div>
   );
 }
@@ -410,7 +410,7 @@ function JourneySectionAmbient() {
         }}
       />
       <motion.div
-        className="absolute -bottom-[30%] -right-[20%] h-[min(480px,55vh)] w-[min(560px,85vw)] rounded-full bg-[#143296cc]/[0.22] blur-[110px]"
+        className="absolute -bottom-[30%] -right-[20%] h-[min(480px,55vh)] w-[min(560px,85vw)] rounded-full bg-ocean-400/[0.14] blur-[110px]"
         animate={{
           opacity: [0.28, 0.48, 0.34, 0.42, 0.28],
           scale: [1, 1.12, 0.98, 1.06, 1],
@@ -422,19 +422,19 @@ function JourneySectionAmbient() {
           delay: 0.8,
         }}
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#00000a]/65 via-transparent to-[#00000a]/50" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#00000a]/35 via-transparent to-[#00000a]/88" />
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-100/45 via-transparent to-slate-100/40" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/35 via-transparent to-slate-100/92" />
     </div>
   );
 }
 
 export default function AboutPage() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#00000a] text-white">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-100 text-slate-900">
       <PageAmbient />
 
       {/* Hero - layered motion distinct from home Hero (circle grid wave) */}
-      <section className="relative z-10 overflow-hidden border-b border-white/[0.06] pb-20 pt-28 md:pb-28 md:pt-36">
+      <section className="relative z-10 overflow-hidden border-b border-slate-200/80 pb-20 pt-28 md:pb-28 md:pt-36">
         <AboutHeroAmbient />
         <div className="container relative z-10 mx-auto max-w-5xl px-6 text-center md:px-8">
           <motion.div
@@ -444,23 +444,23 @@ export default function AboutPage() {
           >
             <motion.span
               variants={aboutHeroItem}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#143296cc] bg-[#143296cc]/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-blue-300 will-change-transform"
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-ocean-600/30 bg-ocean-50 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-ocean-700 will-change-transform"
             >
               About OceanCyber
             </motion.span>
             <motion.h1
               variants={aboutHeroItem}
-              className="mx-auto max-w-4xl text-balance text-center text-4xl font-bold leading-[1.08] tracking-tight text-white md:text-6xl lg:text-7xl will-change-transform"
+              className="mx-auto max-w-4xl text-balance text-center text-4xl font-bold leading-[1.08] tracking-tight text-slate-900 md:text-6xl lg:text-7xl will-change-transform"
             >
               Building Africa&apos;s
               <br />
-              <span className="bg-gradient-to-r from-blue-400 via-[#143296cc] to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-ocean-500 via-ocean-600 to-ocean-500 bg-clip-text text-transparent">
                 digital backbone
               </span>
             </motion.h1>
             <motion.p
               variants={aboutHeroItem}
-              className="mx-auto mt-8 max-w-2xl text-pretty text-center text-lg font-light leading-relaxed text-slate-400 md:text-xl will-change-transform"
+              className="mx-auto mt-8 max-w-2xl text-pretty text-center text-lg font-light leading-relaxed text-slate-600 md:text-xl will-change-transform"
             >
               We design and secure the platforms businesses rely on, from
               first sketch to production-grade infrastructure, with a team
@@ -475,9 +475,9 @@ export default function AboutPage() {
             {stats.map((s) => (
               <div
                 key={s.label}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-5 text-center backdrop-blur-sm"
+                className="rounded-2xl border border-slate-200/90 bg-white px-4 py-5 text-center shadow-sm shadow-slate-200/50 backdrop-blur-sm"
               >
-                <div className="text-2xl font-bold tracking-tight text-white md:text-3xl">
+                <div className="text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
                   {s.value}
                 </div>
                 <div className="mt-1 text-[10px] font-semibold uppercase tracking-widest text-slate-500">
@@ -490,7 +490,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission + Vision */}
-      <section className="relative z-10 overflow-hidden border-b border-white/[0.06] py-20 md:py-28">
+      <section className="relative z-10 overflow-hidden border-b border-slate-200/80 py-20 md:py-28">
         <MissionVisionAmbient />
         <div className="container relative z-10 mx-auto max-w-6xl px-6 md:px-8">
           <div className="grid grid-cols-1 items-start gap-14 lg:grid-cols-12 lg:gap-16">
@@ -498,13 +498,13 @@ export default function AboutPage() {
               {...fadeFromLeft}
               className="lg:col-span-5"
             >
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-blue-400/90">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-ocean-600">
                 How we work
               </p>
-              <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
                 Mission &amp; principles
               </h2>
-              <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-400 md:text-base">
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-600 md:text-base">
                 Three commitments shape every roadmap, line of code, and
                 security review we ship for our partners.
               </p>
@@ -516,16 +516,16 @@ export default function AboutPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={revealViewport}
                     transition={staggerDelay(index, 0.07)}
-                    className="group flex gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors hover:border-[#143296cc]/40 hover:bg-white/[0.05]"
+                    className="group flex gap-4 rounded-2xl border border-slate-200/90 bg-white p-5 shadow-sm shadow-slate-200/50 transition-colors hover:border-ocean-200/90 hover:bg-slate-50/80"
                   >
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-[#143296cc]/15 text-blue-300 transition-colors group-hover:border-[#143296cc]/50">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-ocean-200/80 bg-ocean-50 text-ocean-700 transition-colors group-hover:border-ocean-300">
                       <pillar.Icon className="h-5 w-5" strokeWidth={1.75} />
                     </div>
                     <div>
-                      <h3 className="text-base font-semibold text-white">
+                      <h3 className="text-base font-semibold text-slate-900">
                         {pillar.title}
                       </h3>
-                      <p className="mt-1 text-sm leading-relaxed text-slate-400">
+                      <p className="mt-1 text-sm leading-relaxed text-slate-600">
                         {pillar.body}
                       </p>
                     </div>
@@ -538,13 +538,13 @@ export default function AboutPage() {
               {...fadeFromRight}
               className="lg:col-span-7"
             >
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-blue-400/90">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-ocean-600">
                 Where we&apos;re headed
               </p>
-              <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
                 Vision
               </h2>
-              <div className="mt-8 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] shadow-2xl shadow-black/40">
+              <div className="mt-8 overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-xl shadow-slate-300/25">
                 <div className="relative aspect-[16/10] w-full">
                   <Image
                     src="/images/Africa Trade Chamber.webp"
@@ -554,13 +554,13 @@ export default function AboutPage() {
                     sizes="(max-width: 1024px) 100vw, 60vw"
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#00000a] via-[#00000a]/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/65 via-slate-900/25 to-transparent" />
                 </div>
                 <div className="space-y-5 p-8 md:p-10">
-                  <h3 className="text-xl font-semibold tracking-tight text-white md:text-2xl">
+                  <h3 className="text-xl font-semibold tracking-tight text-slate-900 md:text-2xl">
                     Leading Africa&apos;s digital future
                   </h3>
-                  <p className="text-sm leading-relaxed text-slate-400 md:text-base">
+                  <p className="text-sm leading-relaxed text-slate-600 md:text-base">
                     We envision a continent where every business, from
                     startups to enterprises, can compete globally with secure,
                     beautiful, and reliable technology.
@@ -574,9 +574,9 @@ export default function AboutPage() {
                     ].map((line) => (
                       <li
                         key={line}
-                        className="flex items-center gap-2 text-xs text-slate-400 sm:text-sm"
+                        className="flex items-center gap-2 text-xs text-slate-600 sm:text-sm"
                       >
-                        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.7)]" />
+                        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-ocean-500 shadow-[0_0_8px_rgba(2,106,255,0.35)]" />
                         {line}
                       </li>
                     ))}
@@ -589,17 +589,17 @@ export default function AboutPage() {
       </section>
 
       {/* Team */}
-      <section className="relative z-10 overflow-hidden border-b border-white/[0.06] py-20 md:py-28">
+      <section className="relative z-10 overflow-hidden border-b border-slate-200/80 py-20 md:py-28">
         <TeamSectionAmbient />
         <div className="container relative z-10 mx-auto max-w-6xl px-6 md:px-8">
           <motion.div {...fadeUpProps} className="mx-auto mb-14 max-w-2xl text-center md:mb-16">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-blue-400/90">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-ocean-600">
               People
             </p>
-            <h2 className="text-3xl font-bold tracking-tight text-white md:text-5xl">
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-5xl">
               Leadership &amp; craft
             </h2>
-            <p className="mt-4 text-slate-400 md:text-lg">
+            <p className="mt-4 text-slate-600 md:text-lg">
               A multidisciplinary team blending strategy, engineering, and
               design, built for ambitious African brands.
             </p>
@@ -613,7 +613,7 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={staggerDelay(index, 0.08)}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition-all hover:border-[#143296cc]/45 hover:shadow-xl hover:shadow-[#143296cc]/10 md:flex-row md:items-stretch"
+                className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-sm shadow-slate-200/60 transition-all hover:border-ocean-200/90 hover:shadow-xl hover:shadow-ocean-900/5 md:flex-row md:items-stretch"
               >
                 {/* Visual - wide strip on mobile, left column on desktop */}
                 <div className="relative h-44 w-full shrink-0 overflow-hidden md:h-auto md:w-[42%] md:min-h-[260px]">
@@ -624,31 +624,31 @@ export default function AboutPage() {
                     className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                     sizes="(max-width: 1024px) 100vw, 38vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#00000a]/90 via-[#00000a]/20 to-transparent md:bg-gradient-to-r md:from-transparent md:via-[#00000a]/25 md:to-[#00000a]/85" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/55 via-slate-900/15 to-transparent md:bg-gradient-to-r md:from-transparent md:via-slate-900/20 md:to-slate-900/65" />
                 </div>
 
                 {/* Copy - role first, then name / bio; skills in a distinct footer band */}
                 <div className="flex min-w-0 flex-1 flex-col justify-between p-6 md:p-8 md:pl-7">
                   <div>
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-blue-400/95">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ocean-600">
                       {member.role}
                     </p>
-                    <h3 className="mt-2 text-xl font-bold tracking-tight text-white md:text-2xl">
+                    <h3 className="mt-2 text-xl font-bold tracking-tight text-slate-900 md:text-2xl">
                       {member.name}
                     </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-slate-400 md:text-[0.9375rem]">
+                    <p className="mt-3 text-sm leading-relaxed text-slate-600 md:text-[0.9375rem]">
                       {member.bio}
                     </p>
                   </div>
-                  <div className="mt-6 border-t border-white/[0.08] pt-5">
-                    <p className="mb-2.5 text-[10px] font-semibold uppercase tracking-widest text-slate-600">
+                  <div className="mt-6 border-t border-slate-200/90 pt-5">
+                    <p className="mb-2.5 text-[10px] font-semibold uppercase tracking-widest text-slate-500">
                       Focus areas
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {member.expertise.map((skill) => (
                         <span
                           key={skill}
-                          className="rounded-full border border-white/10 bg-white/[0.05] px-2.5 py-1 text-[11px] font-medium leading-none text-slate-300 transition-colors group-hover:border-white/15"
+                          className="rounded-full border border-slate-200/90 bg-slate-50 px-2.5 py-1 text-[11px] font-medium leading-none text-slate-700 transition-colors group-hover:border-ocean-200/80"
                         >
                           {skill}
                         </span>
@@ -663,17 +663,17 @@ export default function AboutPage() {
       </section>
 
       {/* Journey */}
-      <section className="relative z-10 overflow-hidden border-b border-white/[0.06] py-20 md:py-28">
+      <section className="relative z-10 overflow-hidden border-b border-slate-200/80 py-20 md:py-28">
         <JourneySectionAmbient />
         <div className="container relative z-10 mx-auto max-w-2xl px-6 md:max-w-3xl md:px-8">
           <motion.div {...fadeUpProps} className="mb-14 text-center md:mb-16">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-blue-400/90">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-ocean-600">
               Timeline
             </p>
-            <h2 className="text-3xl font-bold tracking-tight text-white md:text-5xl">
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-5xl">
               Our journey
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-slate-400 md:text-lg">
+            <p className="mx-auto mt-4 max-w-xl text-slate-600 md:text-lg">
               From a focused Accra studio to a regional partner: milestones
               that mark how we scale responsibility with growth.
             </p>
@@ -681,7 +681,7 @@ export default function AboutPage() {
 
           <div className="relative pl-2 md:pl-4">
             <div
-              className="absolute left-[15px] top-3 bottom-8 w-px bg-gradient-to-b from-blue-500/70 via-[#143296cc]/75 to-blue-400/15 md:left-[19px]"
+              className="absolute left-[15px] top-3 bottom-8 w-px bg-gradient-to-b from-ocean-500/80 via-ocean-600/70 to-ocean-400/20 md:left-[19px]"
               aria-hidden
             />
             <ol className="space-y-5">
@@ -695,22 +695,22 @@ export default function AboutPage() {
                   className="relative flex gap-4 pl-9 md:gap-5 md:pl-11"
                 >
                   <span
-                    className="absolute left-[15px] top-[1.35rem] z-[1] h-3.5 w-3.5 -translate-x-1/2 rounded-full border-2 border-[#00000a] bg-blue-400 shadow-[0_0_14px_rgba(96,165,250,0.55)] md:left-[19px] md:top-6"
+                    className="absolute left-[15px] top-[1.35rem] z-[1] h-3.5 w-3.5 -translate-x-1/2 rounded-full border-2 border-white bg-ocean-400 shadow-[0_0_14px_rgba(2,106,255,0.35)] md:left-[19px] md:top-6"
                     aria-hidden
                   />
-                  <div className="min-w-0 flex-1 rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors hover:border-[#143296cc]/35 md:p-6">
+                  <div className="min-w-0 flex-1 rounded-2xl border border-slate-200/90 bg-white p-5 shadow-sm shadow-slate-200/50 transition-colors hover:border-ocean-200/80 md:p-6">
                     <div className="flex flex-wrap items-baseline justify-between gap-2">
-                      <span className="font-mono text-xs font-semibold uppercase tracking-widest text-blue-300/90">
+                      <span className="font-mono text-xs font-semibold uppercase tracking-widest text-ocean-600">
                         {milestone.year}
                       </span>
                       <span className="text-[10px] font-semibold uppercase tracking-widest text-slate-600">
                         Milestone
                       </span>
                     </div>
-                    <h3 className="mt-2 text-lg font-semibold text-white md:text-xl">
+                    <h3 className="mt-2 text-lg font-semibold text-slate-900 md:text-xl">
                       {milestone.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-400">
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600">
                       {milestone.description}
                     </p>
                   </div>
@@ -722,22 +722,22 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="relative z-10 border-t border-white/[0.06] py-20 md:py-24">
+      <section className="relative z-10 border-t border-slate-200/80 py-20 md:py-24">
         <div className="container mx-auto max-w-3xl px-6 md:px-8">
           <motion.div
             {...fadeUpProps}
-            className="rounded-[2rem] border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-10 text-center shadow-2xl shadow-black/50 backdrop-blur-xl md:p-14"
+            className="rounded-[2rem] border border-slate-200/90 bg-gradient-to-b from-white to-slate-50/90 p-10 text-center shadow-xl shadow-slate-300/30 backdrop-blur-xl md:p-14"
           >
-            <h2 className="text-2xl font-bold text-center tracking-tight text-white md:text-4xl">
+            <h2 className="text-2xl font-bold text-center tracking-tight text-slate-900 md:text-4xl">
               Ready to work with us?
             </h2>
-            <p className="mx-auto mt-4 text-center max-w-lg text-sm leading-relaxed text-slate-400 md:text-base">
+            <p className="mx-auto mt-4 text-center max-w-lg text-sm leading-relaxed text-slate-600 md:text-base">
               Tell us about your product, security posture, or growth goals, and
               we&apos;ll respond with a clear path forward.
             </p>
             <Link
               href="/contact"
-              className="mt-8 inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[#143296cc] bg-gradient-to-t from-[#143296cc] to-[#00000a] px-8 py-4 text-sm font-bold text-white shadow-lg shadow-[#143296cc]/25 transition-all hover:brightness-110 active:scale-[0.98] md:text-base"
+              className="mt-8 inline-flex items-center justify-center gap-2 rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-8 py-4 text-sm font-bold text-white shadow-lg shadow-ocean-600/25 transition-all hover:brightness-110 active:scale-[0.98] md:text-base"
             >
               Start a conversation
               <ArrowRight className="h-4 w-4" />

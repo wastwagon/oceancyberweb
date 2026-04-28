@@ -5,6 +5,12 @@ import { prisma } from "@/lib/db";
 import type { TestimonialCard } from "@/lib/types/testimonial-card";
 import { fallbackTestimonialCards } from "./testimonials-fallback";
 
+function logTestimonialsLoaderError(error: unknown) {
+  // Keep production/build logs clean when fallback content is expected.
+  if (process.env.NODE_ENV === "production") return;
+  console.error("[getTestimonialCards]", error);
+}
+
 function initialsFromName(name: string): string {
   const p = name.trim().split(/\s+/).filter(Boolean);
   if (p.length === 0) {
@@ -48,7 +54,7 @@ export const getTestimonialCards = unstable_cache(
       }
       return rows.map(mapRow);
     } catch (e) {
-      console.error("[getTestimonialCards]", e);
+      logTestimonialsLoaderError(e);
       return fallbackTestimonialCards;
     }
   },

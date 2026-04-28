@@ -28,7 +28,8 @@ export function WhatsAppButton({
 
   const variantClasses = {
     default: "bg-[#25D366] text-white hover:bg-[#20BA5A] shadow-lg hover:shadow-xl",
-    outline: "border-2 border-cyan-400 text-cyan-300 hover:bg-cyan-400/10 hover:border-cyan-300",
+    outline:
+      "border-2 border-ocean-300 bg-white text-ocean-700 hover:border-ocean-400 hover:bg-ocean-50/60",
   };
 
   return (

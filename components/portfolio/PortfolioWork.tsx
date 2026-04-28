@@ -232,7 +232,7 @@ function FeaturedShowcase({
 
           <span className="mt-6 inline-flex items-center gap-2 self-start rounded-full border border-white/25 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition group-hover:border-ocean-300/50 group-hover:bg-ocean-600/40 md:mt-0 md:self-end">
             View case study
-            <span className="transition group-hover:translate-x-0.5" aria-hidden>→</span>
+            <span className="transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden>→</span>
           </span>
         </div>
       </Link>

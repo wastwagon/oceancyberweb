@@ -100,22 +100,22 @@ const categories = [
 function PageAmbient() {
   return (
     <div
-      className="pointer-events-none absolute inset-0 opacity-[0.2]"
+      className="pointer-events-none absolute inset-0 opacity-[0.12]"
       aria-hidden
     >
       <div
         className="absolute inset-0"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(20, 50, 150, 0.45) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(20, 50, 150, 0.45) 1px, transparent 1px)
+            linear-gradient(to right, rgba(2, 106, 255, 0.2) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(2, 106, 255, 0.16) 1px, transparent 1px)
           `,
           backgroundSize: "56px 56px",
           maskImage:
             "radial-gradient(ellipse 100% 70% at 50% 0%, black 0%, transparent 75%)",
         }}
       />
-      <div className="absolute left-1/2 top-0 h-[min(420px,50vh)] w-[min(100%,900px)] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(20,50,150,0.26)_0%,transparent_72%)] blur-[88px]" />
+      <div className="absolute left-1/2 top-0 h-[min(420px,50vh)] w-[min(100%,900px)] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(2,106,255,0.1)_0%,transparent_72%)] blur-[88px]" />
     </div>
   );
 }
@@ -138,11 +138,11 @@ export default function InsightsPage() {
   const heroMotion = getPageHeroMotionVariants(reduceMotion);
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#00000a] text-white">
+    <main className="relative min-h-screen overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-100 text-slate-900">
       <PageAmbient />
 
-      <section className="relative z-10 overflow-hidden border-b border-white/[0.06] pb-16 pt-28 md:pb-20 md:pt-36">
-        <HeroSectionMotionLayers />
+      <section className="relative z-10 overflow-hidden border-b border-slate-200/80 pb-16 pt-28 md:pb-20 md:pt-36">
+        <HeroSectionMotionLayers tone="light" />
         <div className="container relative z-10 mx-auto max-w-4xl px-6 text-center md:px-8">
           <motion.div
             initial="hidden"
@@ -151,24 +151,24 @@ export default function InsightsPage() {
           >
             <motion.span
               variants={heroMotion.item}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#143296cc] bg-[#143296cc]/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-blue-300"
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-ocean-200 bg-ocean-50/95 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-ocean-800 shadow-sm"
             >
-              <Newspaper className="h-3.5 w-3.5 text-blue-400" aria-hidden />
+              <Newspaper className="h-3.5 w-3.5 text-ocean-600" aria-hidden />
               Insights
             </motion.span>
             <motion.h1
               variants={heroMotion.item}
-              className="mx-auto max-w-4xl text-balance text-center text-4xl font-bold leading-[1.08] tracking-tight text-white md:text-5xl lg:text-6xl"
+              className="mx-auto max-w-4xl text-balance text-center text-4xl font-bold leading-[1.08] tracking-tight text-slate-900 md:text-5xl lg:text-6xl"
             >
               Thought
-              <span className="bg-gradient-to-r from-blue-400 via-[#143296cc] to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-ocean-600 via-ocean-700 to-cyan-600 bg-clip-text text-transparent">
                 {" "}
                 leadership
               </span>
             </motion.h1>
             <motion.p
               variants={heroMotion.item}
-              className="mx-auto mt-6 max-w-2xl text-pretty text-center text-base font-light leading-relaxed text-slate-400 md:text-lg"
+              className="mx-auto mt-6 max-w-2xl text-pretty text-center text-base font-light leading-relaxed text-slate-600 md:text-lg"
             >
               Perspectives on security, platforms, and digital transformation
               across Ghana and Africa, written for leaders who ship.
@@ -177,7 +177,7 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      <section className="relative z-10 border-b border-white/[0.06] py-10 md:py-12">
+      <section className="relative z-10 border-b border-slate-200/80 py-10 md:py-12">
         <div className="container mx-auto max-w-6xl px-6 md:px-8">
           <motion.div
             {...fadeUpSoft}
@@ -196,8 +196,8 @@ export default function InsightsPage() {
                   onClick={() => setCategory(cat)}
                   className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-all md:px-5 md:text-[11px] ${
                     active
-                      ? "border-[#143296cc] bg-[#143296cc]/20 text-white shadow-md shadow-[#143296cc]/15"
-                      : "border-white/10 bg-white/[0.03] text-slate-400 hover:border-white/20 hover:text-slate-200"
+                      ? "border-ocean-600 bg-ocean-50 text-ocean-900 shadow-sm shadow-slate-200/40"
+                      : "border-slate-200/90 bg-white text-slate-600 ring-1 ring-slate-200/40 hover:border-ocean-200 hover:text-slate-900"
                   }`}
                 >
                   {cat}
@@ -211,7 +211,7 @@ export default function InsightsPage() {
       <section className="relative z-10 py-16 md:py-20">
         <div className="container mx-auto max-w-6xl px-6 md:px-8">
           {filtered.length === 0 ? (
-            <p className="py-16 text-center text-slate-400">
+            <p className="py-16 text-center text-slate-600">
               No articles in this category yet. Try another filter.
             </p>
           ) : (
@@ -221,7 +221,7 @@ export default function InsightsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={{ duration: 0.55 }}
-                className="mb-10 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition-colors hover:border-[#143296cc]/40 md:mb-12"
+                className="mb-10 overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-sm ring-1 ring-slate-200/50 transition-colors hover:border-ocean-200/80 hover:shadow-md md:mb-12"
               >
                 <div className="flex flex-col md:flex-row md:items-stretch">
                   <div className="relative aspect-[16/10] w-full md:aspect-auto md:w-[48%] md:min-h-[280px]">
@@ -233,31 +233,31 @@ export default function InsightsPage() {
                       sizes="(max-width: 768px) 100vw, 45vw"
                       priority
                     />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#00000a]/90 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:via-[#00000a]/35 md:to-[#00000a]/90" />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:via-slate-900/2 md:to-slate-900/3" />
                     <div className="absolute left-4 top-4 flex flex-wrap gap-2">
-                      <span className="rounded-full border border-white/15 bg-black/45 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur-md">
+                      <span className="rounded-full border border-white/25 bg-slate-900/50 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur-md">
                         {featured.category}
                       </span>
-                      <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 font-mono text-[10px] text-slate-200 backdrop-blur-md">
+                      <span className="rounded-full border border-white/20 bg-white/20 px-3 py-1 font-mono text-[10px] text-slate-100 backdrop-blur-md">
                         Featured
                       </span>
                     </div>
                   </div>
-                  <div className="flex flex-1 flex-col justify-center p-6 md:p-10 lg:p-12">
+                  <div className="flex flex-1 flex-col justify-center border-t border-slate-100 p-6 md:border-t-0 md:border-l md:border-slate-200/60 md:p-10 lg:p-12">
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500">
                       <time dateTime={featured.date}>{featured.date}</time>
-                      <span className="text-slate-600">·</span>
+                      <span className="text-slate-400">·</span>
                       <span>{featured.readTime}</span>
                     </div>
-                    <h2 className="mt-3 text-2xl font-bold leading-tight tracking-tight text-white md:text-3xl lg:text-4xl">
+                    <h2 className="mt-3 text-2xl font-bold leading-tight tracking-tight text-slate-900 md:text-3xl lg:text-4xl">
                       {featured.title}
                     </h2>
-                    <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-400 md:text-base">
+                    <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-600 md:text-base">
                       {featured.excerpt}
                     </p>
                     <Link
                       href={contactHrefForTopic(featured.title)}
-                      className="mt-8 inline-flex w-fit items-center gap-2 rounded-xl border-2 border-[#143296cc] bg-gradient-to-t from-[#143296cc] to-[#00000a] px-5 py-3 text-sm font-bold text-white shadow-lg shadow-[#143296cc]/20 transition-all hover:brightness-110"
+                      className="mt-8 inline-flex w-fit items-center gap-2 rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-5 py-4 text-sm font-bold text-white shadow-lg shadow-ocean-600/25 transition-all hover:brightness-110 active:scale-[0.98]"
                     >
                       Discuss this topic
                       <ArrowRight className="h-4 w-4" aria-hidden />
@@ -274,7 +274,7 @@ export default function InsightsPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={revealViewport}
                     transition={staggerDelay(index, 0.06)}
-                    className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition-all hover:-translate-y-0.5 hover:border-[#143296cc]/40 hover:shadow-lg hover:shadow-[#143296cc]/10"
+                    className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-sm ring-1 ring-slate-200/50 transition-all hover:-translate-y-0.5 hover:border-ocean-200/80 hover:shadow-md"
                   >
                     <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden">
                       <Image
@@ -284,29 +284,29 @@ export default function InsightsPage() {
                         className="object-cover object-top transition-transform duration-700 ease-out hover:scale-[1.03]"
                         sizes="(max-width: 768px) 100vw, 33vw"
                       />
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#00000a]/80 via-transparent to-transparent" />
-                      <span className="absolute left-3 top-3 rounded-full border border-white/15 bg-black/45 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur-md">
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent" />
+                      <span className="absolute left-3 top-3 rounded-full border border-white/20 bg-slate-900/45 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur-md">
                         {post.category}
                       </span>
                     </div>
-                    <div className="flex flex-1 flex-col p-5 md:p-6">
+                    <div className="flex flex-1 flex-col border-t border-slate-100 p-5 md:p-6">
                       <div className="flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
                         <time dateTime={post.date}>{post.date}</time>
                         <span>·</span>
                         <span>{post.readTime}</span>
                       </div>
-                      <h2 className="mt-2 line-clamp-2 text-lg font-bold leading-snug tracking-tight text-white">
+                      <h2 className="mt-2 line-clamp-2 text-lg font-bold leading-snug tracking-tight text-slate-900">
                         {post.title}
                       </h2>
-                      <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-slate-400">
+                      <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-slate-600">
                         {post.excerpt}
                       </p>
                       <Link
                         href={contactHrefForTopic(post.title)}
-                        className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-300 transition-colors hover:text-blue-200"
+                        className="group mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-ocean-700 transition-colors hover:text-ocean-900"
                       >
                         Discuss this topic
-                        <ArrowRight className="h-4 w-4" aria-hidden />
+                        <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
                       </Link>
                     </div>
                   </motion.article>
@@ -317,16 +317,16 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      <section className="relative z-10 border-t border-white/[0.06] py-20 md:py-24">
+      <section className="relative z-10 border-t border-slate-200/80 py-20 md:py-24">
         <div className="container mx-auto max-w-3xl px-6 md:px-8">
           <motion.div
             {...fadeUpProps}
-            className="rounded-[2rem] border border-white/10 bg-gradient-to-b from-white/[0.07] to-white/[0.02] p-10 text-center shadow-2xl shadow-black/50 backdrop-blur-xl md:p-14 [&_h2]:text-center [&_p]:text-center"
+            className="rounded-[2rem] border border-slate-200/90 bg-gradient-to-b from-white to-slate-50/80 p-10 text-center shadow-xl shadow-slate-200/50 ring-1 ring-slate-200/50 backdrop-blur-sm md:p-14 [&_h2]:text-center [&_p]:text-center"
           >
-            <h2 className="text-2xl font-bold tracking-tight text-white md:text-3xl">
+            <h2 className="text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
               Editorial newsletter
             </h2>
-            <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-slate-400 md:text-base">
+            <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-slate-600 md:text-base">
               We&apos;re building a mailing list for long-form notes and release
               notes. Leave your email, and we&apos;ll only write when it&apos;s
               worth your time.
@@ -347,26 +347,21 @@ export default function InsightsPage() {
                 required
                 placeholder="you@company.com"
                 autoComplete="email"
-                className="min-h-[48px] flex-1 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-slate-600 focus:border-[#143296cc]/60 focus:outline-none focus:ring-2 focus:ring-[#143296cc]/30"
+                className="min-h-[48px] flex-1 rounded-xl border border-slate-200/90 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-ocean-500 focus:outline-none focus:ring-2 focus:ring-ocean-200"
               />
               <button
                 type="submit"
-                className="min-h-[48px] shrink-0 rounded-xl border-2 border-[#143296cc] bg-gradient-to-t from-[#143296cc] to-[#00000a] px-6 text-sm font-bold text-white shadow-lg shadow-[#143296cc]/20 transition-all hover:brightness-110"
+                className="min-h-[48px] shrink-0 rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-6 text-sm font-bold text-white shadow-lg shadow-ocean-600/25 transition-all hover:brightness-110 active:scale-[0.98]"
               >
                 Notify me
               </button>
             </form>
-            <p className="mt-4 text-xs text-slate-600">
+            <p className="mt-4 text-xs text-slate-500">
               No spam. Unsubscribe anytime, once the program is live.
             </p>
           </motion.div>
         </div>
       </section>
-
-      <div
-        className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-[#00000a] via-transparent to-transparent"
-        aria-hidden
-      />
     </main>
   );
 }

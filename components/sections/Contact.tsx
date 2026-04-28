@@ -61,24 +61,24 @@ const contactHeaderItem = {
   },
 };
 
-/** Matches Hero / Testimonials: `#00000a`, brand blue grid & glow (no purple). */
+/** Light premium: soft blue grid + bloom (matches Services / Testimonials). */
 function ContactAmbient() {
   return (
     <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
       <div
-        className="absolute inset-0 opacity-[0.2]"
+        className="absolute inset-0 opacity-[0.1]"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(20, 50, 150, 0.5) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(20, 50, 150, 0.5) 1px, transparent 1px)
+            linear-gradient(to right, rgba(2, 106, 255, 0.22) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(2, 106, 255, 0.18) 1px, transparent 1px)
           `,
           backgroundSize: "56px 56px",
           maskImage:
             "radial-gradient(ellipse 90% 70% at 50% 30%, black 18%, transparent 75%)",
         }}
       />
-      <div className="absolute left-1/2 top-0 h-[min(480px,65vh)] w-[min(92vw,760px)] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(20,50,150,0.3)_0%,transparent_70%)] blur-[90px]" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#00000a]" />
+      <div className="absolute left-1/2 top-0 h-[min(480px,65vh)] w-[min(92vw,760px)] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(2,106,255,0.1)_0%,transparent_70%)] blur-[90px]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-50/50 via-white/70 to-slate-100" />
     </div>
   );
 }
@@ -160,12 +160,12 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-[#00000a] py-20 md:py-28"
+      className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/95 to-slate-100/90 py-20 md:py-28"
     >
       <ContactAmbient />
       <div className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[min(420px,52vh)] overflow-hidden">
         <div className="relative h-full w-full">
-          <HeroSectionMotionLayers />
+          <HeroSectionMotionLayers tone="light" />
         </div>
       </div>
 
@@ -186,27 +186,27 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
         >
           <motion.span
             variants={contactHeaderItem}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#143296cc] bg-[#143296cc]/10 px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-blue-300 backdrop-blur-md will-change-transform"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-ocean-200 bg-ocean-50/95 px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-ocean-800 shadow-sm will-change-transform"
           >
             <span
-              className="flex h-2 w-2 animate-pulse rounded-full bg-blue-400 shadow-[0_0_10px_rgba(96,165,250,0.75)]"
+              className="flex h-2 w-2 animate-pulse rounded-full bg-ocean-500"
               aria-hidden
             />
             Get in touch
           </motion.span>
           <motion.h2
             variants={contactHeaderItem}
-            className="mx-auto mb-5 max-w-4xl text-balance text-center text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-6xl will-change-transform"
+            className="mx-auto mb-5 max-w-4xl text-balance text-center text-3xl font-bold tracking-tight text-slate-900 md:text-4xl lg:text-6xl will-change-transform"
           >
             Let&apos;s Build Something
             <br />
-            <span className="bg-gradient-to-r from-blue-400 via-[#143296cc] to-blue-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-ocean-600 via-ocean-700 to-cyan-600 bg-clip-text text-transparent">
               Amazing Together
             </span>
           </motion.h2>
           <motion.p
             variants={contactHeaderItem}
-            className="mx-auto max-w-2xl text-center text-base font-light leading-relaxed text-slate-400 md:text-lg will-change-transform"
+            className="mx-auto max-w-2xl text-center text-base font-light leading-relaxed text-slate-600 md:text-lg will-change-transform"
           >
             Ready to transform your digital presence? Reach out and let&apos;s
             turn your vision into a digital reality.
@@ -220,7 +220,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
             className="space-y-10"
           >
             <div>
-              <h3 className="mb-8 border-l-4 border-[#143296cc] pl-4 text-2xl font-bold text-white md:text-3xl">
+              <h3 className="mb-8 border-l-4 border-ocean-500 pl-4 text-2xl font-bold text-slate-900 md:text-3xl">
                 Contact Information
               </h3>
               <div className="space-y-6">
@@ -233,11 +233,11 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={revealViewport}
                       transition={staggerDelay(index, 0.08)}
-                      className="group flex items-start gap-5 rounded-2xl border border-white/10 bg-white/[0.04] p-3 backdrop-blur-sm transition-all duration-300 hover:border-[#143296cc]/45 hover:bg-white/[0.06]"
+                      className="group flex items-start gap-5 rounded-2xl border border-slate-200/90 bg-white p-3 shadow-sm ring-1 ring-slate-200/40 transition-all duration-300 hover:border-ocean-200/80 hover:shadow-md"
                     >
-                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 transition-all group-hover:border-[#143296cc]/50 group-hover:bg-[#143296cc]/15">
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 transition-all group-hover:border-ocean-200 group-hover:bg-ocean-50/50">
                         <Icon
-                          className="h-5 w-5 text-blue-400 transition-colors group-hover:text-blue-300"
+                          className="h-5 w-5 text-ocean-600 transition-colors group-hover:text-ocean-700"
                           aria-hidden
                         />
                       </div>
@@ -248,12 +248,12 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
                         {"link" in item && item.link ? (
                           <a
                             href={item.link}
-                            className="text-lg text-white transition-colors hover:text-blue-300"
+                            className="text-lg text-slate-800 transition-colors hover:text-ocean-700"
                           >
                             {item.content}
                           </a>
                         ) : (
-                          <div className="text-lg text-white">
+                          <div className="text-lg text-slate-800">
                             {item.content}
                           </div>
                         )}
@@ -270,12 +270,12 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
           <motion.div
             {...fadeFromRight}
             transition={{ ...fadeFromRight.transition, delay: 0.15 }}
-            className="rounded-[2.5rem] border border-white/10 bg-white/[0.03] p-6 shadow-2xl shadow-[#143296cc]/5 backdrop-blur-xl md:p-8 lg:mt-8"
+            className="rounded-[2.5rem] border border-slate-200/90 bg-white p-6 shadow-xl shadow-slate-200/50 ring-1 ring-slate-200/50 md:p-8 lg:mt-8"
           >
             <form className="space-y-6" onSubmit={handleSubmit} noValidate>
               {status === "success" ? (
                 <p
-                  className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-200"
+                  className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900"
                   role="status"
                 >
                   Thank you. Your message was sent. We&apos;ll get back to you soon.
@@ -283,7 +283,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
               ) : null}
               {status === "error" && errorMessage ? (
                 <p
-                  className="rounded-xl border border-red-500/35 bg-red-500/10 px-4 py-3 text-sm text-red-200"
+                  className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
                   role="alert"
                 >
                   {errorMessage}
@@ -292,7 +292,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div className="space-y-2">
                   <label
-                    className="ml-1 text-sm font-medium text-slate-400"
+                    className="ml-1 text-sm font-medium text-slate-600"
                     htmlFor="contact-name"
                   >
                     Name
@@ -306,12 +306,12 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
                     value={name}
                     onChange={(ev) => setName(ev.target.value)}
                     placeholder="Your name"
-                    className="w-full rounded-xl border border-white/10 bg-white/5 px-5 py-4 text-white placeholder:text-slate-600 transition-all focus:border-[#143296cc]/60 focus:outline-none focus:ring-2 focus:ring-[#143296cc]/35"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-5 py-4 text-slate-900 placeholder:text-slate-400 transition-all focus:border-ocean-500 focus:outline-none focus:ring-2 focus:ring-ocean-200"
                   />
                 </div>
                 <div className="space-y-2">
                   <label
-                    className="ml-1 text-sm font-medium text-slate-400"
+                    className="ml-1 text-sm font-medium text-slate-600"
                     htmlFor="contact-email"
                   >
                     Email
@@ -325,16 +325,16 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
                     value={email}
                     onChange={(ev) => setEmail(ev.target.value)}
                     placeholder="your@email.com"
-                    className="w-full rounded-xl border border-white/10 bg-white/5 px-5 py-4 text-white placeholder:text-slate-600 transition-all focus:border-[#143296cc]/60 focus:outline-none focus:ring-2 focus:ring-[#143296cc]/35"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-5 py-4 text-slate-900 placeholder:text-slate-400 transition-all focus:border-ocean-500 focus:outline-none focus:ring-2 focus:ring-ocean-200"
                   />
                 </div>
               </div>
               <div className="space-y-2">
                 <label
-                  className="ml-1 text-sm font-medium text-slate-400"
+                  className="ml-1 text-sm font-medium text-slate-600"
                   htmlFor="contact-phone"
                 >
-                  Phone <span className="font-normal text-slate-600">(optional)</span>
+                  Phone <span className="font-normal text-slate-500">(optional)</span>
                 </label>
                 <input
                   id="contact-phone"
@@ -344,12 +344,12 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
                   value={phone}
                   onChange={(ev) => setPhone(ev.target.value)}
                   placeholder="+233 XX XXX XXXX"
-                  className="w-full rounded-xl border border-white/10 bg-white/5 px-5 py-4 text-white placeholder:text-slate-600 transition-all focus:border-[#143296cc]/60 focus:outline-none focus:ring-2 focus:ring-[#143296cc]/35"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-5 py-4 text-slate-900 placeholder:text-slate-400 transition-all focus:border-ocean-500 focus:outline-none focus:ring-2 focus:ring-ocean-200"
                 />
               </div>
               <div className="space-y-2">
                 <label
-                  className="ml-1 text-sm font-medium text-slate-400"
+                  className="ml-1 text-sm font-medium text-slate-600"
                   htmlFor="contact-message"
                 >
                   Message
@@ -362,13 +362,13 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
                   value={message}
                   onChange={(ev) => setMessage(ev.target.value)}
                   placeholder="Tell us about your project..."
-                  className="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-5 py-4 text-white placeholder:text-slate-600 transition-all focus:border-[#143296cc]/60 focus:outline-none focus:ring-2 focus:ring-[#143296cc]/35"
+                  className="w-full resize-none rounded-xl border border-slate-200 bg-white px-5 py-4 text-slate-900 placeholder:text-slate-400 transition-all focus:border-ocean-500 focus:outline-none focus:ring-2 focus:ring-ocean-200"
                 />
               </div>
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full rounded-xl border-2 border-[#143296cc] bg-gradient-to-t from-[#143296cc] to-[#00000a] py-5 font-bold text-white shadow-lg shadow-[#143296cc]/25 transition-all hover:brightness-125 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+                className="min-h-[48px] w-full rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 py-4 font-bold text-white shadow-lg shadow-ocean-600/25 transition-all hover:brightness-110 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {status === "loading" ? "Sending…" : "Send Message"}
               </button>
@@ -377,10 +377,6 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
         </div>
       </div>
 
-      <div
-        className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-[#00000a] via-transparent to-transparent"
-        aria-hidden
-      />
     </section>
   );
 }
