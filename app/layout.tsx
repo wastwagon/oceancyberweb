@@ -90,7 +90,7 @@ export default function RootLayout({
           <OrganizationJsonLd />
           <WebVitals />
           <Header />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 pt-24 lg:pt-36">{children}</main>
           <Footer />
           <ScrollToTop />
           <ChatBot />

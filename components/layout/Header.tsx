@@ -22,6 +22,8 @@ import { HeaderRegistrarChips } from "@/components/layout/HeaderRegistrarChips";
 
 function MegaMenu({
   isOpen,
+  menuId,
+  triggerLabel,
   title,
   description,
   items,
@@ -29,6 +31,8 @@ function MegaMenu({
   onMouseLeave,
 }: {
   isOpen: boolean;
+  menuId: string;
+  triggerLabel: string;
   title: string;
   description: string;
   items: Array<{
@@ -50,6 +54,9 @@ function MegaMenu({
           exit={{ opacity: 0, y: 15, scale: 0.98 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
           className="absolute left-0 top-[calc(100%+6px)] z-[9999] w-[min(92vw,640px)] overflow-hidden rounded-xl border border-slate-200/90 bg-white shadow-[0_16px_48px_rgba(15,23,42,0.12)] backdrop-blur-md"
+          id={menuId}
+          role="region"
+          aria-label={`${triggerLabel} menu`}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
         >
@@ -186,16 +193,25 @@ export function Header() {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    const onEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpenDropdown(null);
+        setIsMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", onEscape);
+    return () => window.removeEventListener("keydown", onEscape);
+  }, []);
+
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/services", label: "Services", hasDropdown: true },
     { href: "/industries", label: "Industries", hasDropdown: true },
     { href: "/domains", label: "Domains" },
     { href: "/hosting", label: "Hosting" },
-    { href: "/insights", label: "Insight" },
+    { href: "/insights", label: "Resources", hasDropdown: true },
     { href: "/portfolio", label: "Portfolio" },
-    { href: "/case-studies", label: "Case Studies" },
-    { href: "/security-journey", label: "Security Journey" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
@@ -253,11 +269,40 @@ export function Header() {
         },
       ],
     },
+    resources: {
+      title: "Insights & Guidance",
+      description:
+        "Planning resources, real project stories, and security guidance.",
+      items: [
+        {
+          heading: "Insights",
+          description: "Strategy notes, platform updates, and practical guides.",
+          link: "/insights",
+        },
+        {
+          heading: "Case studies",
+          description: "Delivery outcomes across sectors in Ghana and beyond.",
+          link: "/case-studies",
+        },
+        {
+          heading: "Security journey",
+          description: "A practical path to strengthen your security posture.",
+          link: "/security-journey",
+        },
+        {
+          heading: "Help center",
+          description: "Answers to common questions about onboarding and support.",
+          link: "/help-center",
+        },
+      ],
+    },
   };
 
   const homeNav = navItems.find((i) => i.href === "/");
   const dropdownNav = navItems.filter((i) => i.hasDropdown);
   const flatNav = navItems.filter((i) => !i.hasDropdown && i.href !== "/");
+  const isItemActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50 flex flex-col items-center bg-white/95 px-3 pt-2 shadow-sm backdrop-blur-md sm:px-5 sm:pt-3 md:px-8">
@@ -290,6 +335,11 @@ export function Header() {
           </div>
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+            <WhatsAppButton
+              variant="default"
+              size="sm"
+              className="hidden h-8 min-h-0 rounded-full px-3 text-xs shadow-sm xl:inline-flex"
+            />
             {HEADER_SOCIAL_LINKS.map(({ Icon, href, label }) => (
               <a
                 key={label}
@@ -308,6 +358,7 @@ export function Header() {
 
       <div className={`w-full max-w-7xl transition-all duration-500 ${scrolled ? "mt-4" : "mt-0"}`}>
         <nav
+          aria-label="Primary"
           className={`relative flex h-[4.25rem] min-h-[4.25rem] items-center gap-2 border border-slate-200/90 px-3 backdrop-blur-md transition-all duration-500 sm:h-20 sm:min-h-[5rem] sm:gap-3 sm:px-6 ${
             scrolled
               ? "rounded-2xl bg-white/95 shadow-[0_20px_50px_rgba(15,23,42,0.1)]"
@@ -337,8 +388,21 @@ export function Header() {
                   <Link
                     href={item.href}
                     className={`flex h-10 items-center gap-1 whitespace-nowrap rounded-lg px-2.5 text-[12px] font-semibold leading-none transition-all duration-300 xl:px-3 xl:text-[13px] ${
-                      pathname === item.href ? "text-ocean-800" : "text-slate-600 hover:text-ocean-700"
+                      isItemActive(item.href)
+                        ? "text-ocean-800"
+                        : "text-slate-600 hover:text-ocean-700"
                     }`}
+                    aria-haspopup={item.hasDropdown ? "menu" : undefined}
+                    aria-expanded={
+                      item.hasDropdown
+                        ? openDropdown === item.label.toLowerCase()
+                        : undefined
+                    }
+                    aria-controls={
+                      item.hasDropdown
+                        ? `${item.label.toLowerCase()}-menu`
+                        : undefined
+                    }
                   >
                     {item.label}
                     {item.hasDropdown && (
@@ -348,7 +412,7 @@ export function Header() {
                     )}
                   </Link>
 
-                  {pathname === item.href && (
+                  {isItemActive(item.href) && (
                     <motion.div
                       layoutId="nav-line"
                       className="absolute bottom-1 left-2.5 right-2.5 h-0.5 bg-ocean-600 shadow-[0_0_12px_rgba(2,106,255,0.35)]"
@@ -358,6 +422,8 @@ export function Header() {
                   {item.hasDropdown && (
                     <MegaMenu
                       isOpen={openDropdown === item.label.toLowerCase()}
+                      menuId={`${item.label.toLowerCase()}-menu`}
+                      triggerLabel={item.label}
                       title={dropdownContent[item.label.toLowerCase() as keyof typeof dropdownContent]?.title || ""}
                       description={dropdownContent[item.label.toLowerCase() as keyof typeof dropdownContent]?.description || ""}
                       items={dropdownContent[item.label.toLowerCase() as keyof typeof dropdownContent]?.items || []}
@@ -378,11 +444,6 @@ export function Header() {
             >
               Contact
             </Link>
-            <WhatsAppButton
-              variant="default"
-              size="sm"
-              className="hidden h-10 min-h-[2.5rem] shrink-0 px-4 text-sm shadow-md md:inline-flex"
-            />
             <button
               type="button"
               className="inline-flex shrink-0 rounded-xl p-2.5 text-slate-800 hover:bg-slate-100 lg:hidden"

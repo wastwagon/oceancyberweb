@@ -1,31 +1,18 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
-import { useRef } from "react";
 import { HeroDomainBlock } from "@/components/sections/HeroDomainBlock";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
 
 const GRID_SIZE = 64;
 
 export function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
   const heroText = getPageHeroMotionVariants(reduceMotion);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-
   return (
-    <section
-      ref={containerRef}
-      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-b from-sky-50 via-white to-slate-50 pb-24 pt-[120px]"
-    >
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-b from-sky-50 via-white to-slate-50 pb-24 pt-10">
       <div
         className="pointer-events-none absolute inset-0 z-0 opacity-[0.35]"
         style={{
@@ -71,7 +58,7 @@ export function Hero() {
         <div className="absolute left-1/2 top-1/4 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-sky-200/50 blur-[150px]" />
       </div>
 
-      <motion.div style={{ y, opacity }} className="container relative z-10 mx-auto px-6">
+      <motion.div className="container relative z-10 mx-auto px-6">
         <motion.div
           className="mx-auto w-full max-w-5xl text-center"
           initial="hidden"
@@ -112,27 +99,12 @@ export function Hero() {
                 Book an appointment
               </button>
             </Link>
-
-            <Link
-              href="/portfolio"
-              className="inline-flex min-h-[48px] w-full min-w-[240px] items-center justify-center rounded-xl border-2 border-ocean-200 bg-white/95 px-8 py-4 font-bold text-slate-800 shadow-sm shadow-slate-200/40 backdrop-blur-md transition-all hover:border-ocean-300 hover:bg-ocean-50/40 active:scale-[0.98] sm:w-auto"
-            >
-              View Our Portfolio
-            </Link>
-
-            <Link
-              href="/tools/project-cost"
-              className="inline-flex min-h-[48px] w-full min-w-[240px] items-center justify-center rounded-xl border-2 border-amber-300/80 bg-amber-50 px-8 py-4 font-bold text-amber-900 shadow-sm backdrop-blur-md transition-all hover:border-amber-400 hover:bg-amber-100/90 active:scale-[0.98] sm:w-auto"
-            >
-              Project cost calculator
-            </Link>
           </motion.div>
 
           <HeroDomainBlock />
         </motion.div>
       </motion.div>
 
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-100/90 via-transparent to-transparent" />
     </section>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useMemo, useState } from "react";
 import { Check } from "lucide-react";
 import { FxPrice } from "@/components/currency/FxPrice";
 import { cn } from "@/lib/utils";
@@ -13,19 +14,58 @@ function planContactHref(pkg: HostingPackage) {
   return `/contact?${q.toString()}`;
 }
 
-function planCheckoutCode(pkg: HostingPackage) {
-  if (pkg.id === "launch") return "hosting-launch-monthly";
-  if (pkg.id === "grow") return "hosting-grow-monthly";
-  return "hosting-scale-monthly";
+function planCheckoutCodeByCycle(
+  pkg: HostingPackage,
+  billingCycle: "monthly" | "annual",
+) {
+  if (pkg.id === "launch") {
+    return billingCycle === "annual"
+      ? "hosting-launch-yearly"
+      : "hosting-launch-monthly";
+  }
+  if (pkg.id === "grow") {
+    return billingCycle === "annual"
+      ? "hosting-grow-yearly"
+      : "hosting-grow-monthly";
+  }
+  return billingCycle === "annual"
+    ? "hosting-scale-yearly"
+    : "hosting-scale-monthly";
 }
 
 export function HostingPackagesSection({
   className,
   id,
+  initialBillingCycle = "monthly",
 }: {
   className?: string;
   id?: string;
+  initialBillingCycle?: "monthly" | "annual";
 }) {
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">(
+    initialBillingCycle,
+  );
+
+  const pricing = useMemo(
+    () =>
+      HOSTING_PACKAGES.map((pkg) => {
+        const annualMonthlyEquivalent = Math.round(
+          pkg.priceMonthlyGhs * (1 - pkg.annualDiscountPct / 100),
+        );
+        const annualBilledTotal = annualMonthlyEquivalent * 12;
+        return { pkg, annualMonthlyEquivalent, annualBilledTotal };
+      }),
+    [],
+  );
+  const maxAnnualDiscount = useMemo(
+    () =>
+      HOSTING_PACKAGES.reduce(
+        (max, pkg) => Math.max(max, pkg.annualDiscountPct),
+        0,
+      ),
+    [],
+  );
+
   return (
     <section
       id={id}
@@ -45,10 +85,49 @@ export function HostingPackagesSection({
           currencies are indicative. Checkout runs in{" "}
           <strong className="text-slate-800">GHS via Paystack</strong>.
         </p>
+
+        <div className="mt-6 inline-flex items-center rounded-xl border border-slate-200 bg-white p-1">
+          <button
+            type="button"
+            onClick={() => setBillingCycle("monthly")}
+            aria-pressed={billingCycle === "monthly"}
+            className={cn(
+              "rounded-lg px-4 py-2 text-xs font-semibold transition-colors",
+              billingCycle === "monthly"
+                ? "bg-ocean-600 text-white"
+                : "text-slate-700 hover:bg-slate-50",
+            )}
+          >
+            Monthly
+          </button>
+          <button
+            type="button"
+            onClick={() => setBillingCycle("annual")}
+            aria-pressed={billingCycle === "annual"}
+            className={cn(
+              "rounded-lg px-4 py-2 text-xs font-semibold transition-colors",
+              billingCycle === "annual"
+                ? "bg-ocean-600 text-white"
+                : "text-slate-700 hover:bg-slate-50",
+            )}
+          >
+            Annual (save more)
+            <span className="ml-2 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-700">
+              Up to {maxAnnualDiscount}% off
+            </span>
+          </button>
+        </div>
       </div>
 
       <ul className="mt-12 grid gap-6 lg:grid-cols-3 lg:items-stretch">
-        {HOSTING_PACKAGES.map((pkg) => (
+        {billingCycle === "annual" ? (
+          <li className="lg:col-span-3">
+            <p className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-2 text-center text-sm font-medium text-emerald-800">
+              Annual billing is recommended for better value and lower effective monthly cost.
+            </p>
+          </li>
+        ) : null}
+        {pricing.map(({ pkg, annualMonthlyEquivalent, annualBilledTotal }) => (
           <li
             key={pkg.id}
             className={cn(
@@ -69,12 +148,35 @@ export function HostingPackagesSection({
             </div>
             <div className="mb-6">
               <FxPrice
-                amountGhs={pkg.priceMonthlyGhs}
+                amountGhs={
+                  billingCycle === "monthly"
+                    ? pkg.priceMonthlyGhs
+                    : annualMonthlyEquivalent
+                }
                 showFrom
                 suffix="/mo"
                 className="text-4xl font-extrabold tracking-tight text-slate-900 [&>span]:font-extrabold"
               />
-              <p className="mt-1 text-xs text-slate-500">{pkg.billingNote}</p>
+              {billingCycle === "annual" ? (
+                <div className="mt-1 space-y-1">
+                  <p className="text-xs text-slate-500">
+                    Billed yearly at{" "}
+                    <span className="font-semibold text-slate-700">
+                      GHS {annualBilledTotal.toLocaleString("en-GH")}
+                    </span>
+                    .
+                  </p>
+                  <p className="text-xs font-medium text-emerald-700">
+                    Save {pkg.annualDiscountPct}% vs monthly (
+                    <span className="line-through decoration-slate-400">
+                      GHS {(pkg.priceMonthlyGhs * 12).toLocaleString("en-GH")}
+                    </span>
+                    ).
+                  </p>
+                </div>
+              ) : (
+                <p className="mt-1 text-xs text-slate-500">{pkg.billingNote}</p>
+              )}
             </div>
             <p className="mb-4 text-xs font-medium uppercase tracking-wide text-slate-500">
               Includes
@@ -95,7 +197,13 @@ export function HostingPackagesSection({
               {pkg.idealFor}
             </p>
             <Link
-              href={`/checkout/renewal?plan=${encodeURIComponent(planCheckoutCode(pkg))}&label=${encodeURIComponent(pkg.name)}&ref=${encodeURIComponent(`HOST-${pkg.id.toUpperCase()}`)}`}
+              href={`/checkout/renewal?plan=${encodeURIComponent(
+                planCheckoutCodeByCycle(pkg, billingCycle),
+              )}&label=${encodeURIComponent(
+                `${pkg.name} (${billingCycle === "annual" ? "Annual" : "Monthly"})`,
+              )}&ref=${encodeURIComponent(
+                `HOST-${pkg.id.toUpperCase()}-${billingCycle === "annual" ? "YEARLY" : "MONTHLY"}`,
+              )}`}
               className={cn(
                 "mt-auto inline-flex min-h-[48px] w-full items-center justify-center rounded-xl px-4 text-sm font-bold transition",
                 pkg.popular
@@ -103,7 +211,7 @@ export function HostingPackagesSection({
                   : "border border-slate-200 bg-slate-50 text-slate-900 hover:border-ocean-200 hover:bg-white",
               )}
             >
-              Start checkout
+              Start {billingCycle === "annual" ? "annual" : "monthly"} checkout
             </Link>
             <Link
               href={planContactHref(pkg)}

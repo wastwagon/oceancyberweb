@@ -10,7 +10,14 @@ export const metadata: Metadata = {
     "cPanel hosting in Ghana cedis on our Namecheap reseller + WHM stack—optional currency preview, Paystack checkout in GHS, local support from Accra.",
 };
 
-export default function HostingPage() {
+export default function HostingPage({
+  searchParams,
+}: {
+  searchParams?: { billing?: string };
+}) {
+  const initialBillingCycle =
+    searchParams?.billing?.toLowerCase() === "annual" ? "annual" : "monthly";
+
   return (
     <div className="bg-slate-50 text-slate-900">
       <section className="border-b border-slate-200 bg-gradient-to-b from-white via-slate-50 to-slate-50">
@@ -31,6 +38,10 @@ export default function HostingPage() {
             <strong className="text-slate-800">Ghana cedis</strong> with optional
             currency preview. Card and mobile-money checkout is handled in{" "}
             <strong className="text-slate-800">GHS via Paystack</strong>.
+          </p>
+          <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-500">
+            Pricing is benchmarked for the Ghana market against major global hosts,
+            while keeping local onboarding and support.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link
@@ -64,7 +75,7 @@ export default function HostingPage() {
               {
                 icon: Wrench,
                 title: "cPanel you already know",
-                body: "File manager, MySQL, email, SSL, and domains—familiar tools with our team on standby for DNS and migrations.",
+                body: "File manager, MySQL, email, SSL, cron jobs, and DNS zones—with support for migrations and account cleanup.",
               },
               {
                 icon: Shield,
@@ -87,7 +98,37 @@ export default function HostingPage() {
         </div>
       </section>
 
-      <HostingPackagesSection id="packages" />
+      <HostingPackagesSection
+        id="packages"
+        initialBillingCycle={initialBillingCycle}
+      />
+
+      <section className="border-t border-slate-200 bg-slate-50 py-12 md:py-16">
+        <div className="container mx-auto max-w-6xl px-4 md:px-6">
+          <h2 className="text-center text-xl font-bold text-slate-900 md:text-2xl">
+            Included hosting operations features
+          </h2>
+          <ul className="mt-8 grid gap-4 text-sm text-slate-700 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              "WHM account provisioning and quota management",
+              "cPanel account isolation and site-level ownership",
+              "Domain + DNS assistance for launch and migrations",
+              "SSL issuance and renewal support",
+              "Daily/weekly backups by plan with assisted restore",
+              "PHP and database tuning guidance",
+              "Email setup support (SPF, DKIM, routing checks)",
+              "Performance and uptime health checks",
+            ].map((item) => (
+              <li
+                key={item}
+                className="rounded-xl border border-slate-200 bg-white px-4 py-3"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       <section className="border-t border-slate-200 bg-white py-16 md:py-20">
         <div className="container mx-auto max-w-5xl px-4 md:px-6">

@@ -62,6 +62,24 @@ export class BillingService {
       interval: "monthly",
       amountMinor: 32900n,
     },
+    "hosting-launch-yearly": {
+      name: "Hosting Launch (Yearly)",
+      description: "Launch hosting package annual renewal",
+      interval: "yearly",
+      amountMinor: 70800n,
+    },
+    "hosting-grow-yearly": {
+      name: "Hosting Grow (Yearly)",
+      description: "Grow hosting package annual renewal",
+      interval: "yearly",
+      amountMinor: 127200n,
+    },
+    "hosting-scale-yearly": {
+      name: "Hosting Scale (Yearly)",
+      description: "Scale hosting package annual renewal",
+      interval: "yearly",
+      amountMinor: 238800n,
+    },
     "domain-standard-yearly": {
       name: "Domain Renewal (Yearly)",
       description: "Standard yearly domain renewal",

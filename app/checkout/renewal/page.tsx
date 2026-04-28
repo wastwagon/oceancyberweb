@@ -15,6 +15,9 @@ const PLAN_LABELS: Record<string, string> = {
   "hosting-launch-monthly": "Hosting Launch",
   "hosting-grow-monthly": "Hosting Grow",
   "hosting-scale-monthly": "Hosting Scale",
+  "hosting-launch-yearly": "Hosting Launch (Annual)",
+  "hosting-grow-yearly": "Hosting Grow (Annual)",
+  "hosting-scale-yearly": "Hosting Scale (Annual)",
   "domain-standard-yearly": "Domain Renewal",
 };
 
@@ -24,6 +27,9 @@ const PLAN_PRICES: Record<string, { amount: string; every: "month" | "year" }> =
   "hosting-launch-monthly": { amount: "79.00", every: "month" },
   "hosting-grow-monthly": { amount: "149.00", every: "month" },
   "hosting-scale-monthly": { amount: "329.00", every: "month" },
+  "hosting-launch-yearly": { amount: "708.00", every: "year" },
+  "hosting-grow-yearly": { amount: "1272.00", every: "year" },
+  "hosting-scale-yearly": { amount: "2388.00", every: "year" },
   "domain-standard-yearly": { amount: "120.00", every: "year" },
 };
 

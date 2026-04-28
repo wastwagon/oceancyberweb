@@ -9,6 +9,8 @@ export type HostingPackage = {
   tagline: string;
   /** Monthly price in GHS (source of truth). */
   priceMonthlyGhs: number;
+  /** Percentage discount applied when billed annually. */
+  annualDiscountPct: number;
   /** Short note under price */
   billingNote: string;
   popular?: boolean;
@@ -20,57 +22,60 @@ export const HOSTING_PACKAGES: readonly HostingPackage[] = [
   {
     id: "launch",
     name: "Launch",
-    tagline: "One strong site, everything managed",
-    priceMonthlyGhs: 79,
-    billingNote: "Billed in GHS · annual & bundle discounts on request",
+    tagline: "Starter hosting for one serious business site",
+    priceMonthlyGhs: 69,
+    annualDiscountPct: 15,
+    billingNote: "GHS monthly · discounts available on annual billing",
     features: [
       "1 cPanel account (isolated on WHM)",
-      "20 GB NVMe SSD storage",
+      "25 GB SSD storage",
       "Unmetered bandwidth (fair use)",
       "Free Let’s Encrypt SSL",
-      "10 professional email mailboxes",
+      "15 professional email mailboxes",
       "Softaculous one-click apps",
-      "Weekly backups (retain & restore on request)",
+      "Weekly backups (restore support included)",
       "cPanel: files, DBs, DNS, email",
     ],
-    idealFor: "SME sites, landing pages, and single-brand projects",
+    idealFor: "SME websites, portfolios, and single-brand projects",
   },
   {
     id: "grow",
     name: "Grow",
-    tagline: "More sites, more headroom",
-    priceMonthlyGhs: 149,
-    billingNote: "Billed in GHS · Paystack cards & mobile money where enabled",
+    tagline: "Multi-site hosting with stronger limits and support",
+    priceMonthlyGhs: 129,
+    annualDiscountPct: 18,
+    billingNote: "GHS monthly · Paystack card & mobile money supported",
     popular: true,
     features: [
       "Up to 5 cPanel accounts (WHM subaccounts)",
-      "80 GB NVMe SSD pooled",
+      "100 GB SSD pooled",
       "Unmetered bandwidth (fair use)",
       "Free SSL for every site",
-      "50 email mailboxes (shared across accounts)",
+      "60 email mailboxes (shared across accounts)",
       "Staging-friendly (extra DBs on request)",
       "Daily backups + priority restore",
-      "Priority support during business hours",
+      "Priority support + migration help",
     ],
-    idealFor: "Growing businesses, e-commerce, and multi-site owners",
+    idealFor: "Growing teams, e-commerce stores, and multi-site owners",
   },
   {
     id: "scale",
     name: "Scale",
-    tagline: "Agency-style capacity & SLAs",
-    priceMonthlyGhs: 329,
-    billingNote: "Custom quotes for large tenants · invoices in GHS",
+    tagline: "Agency-grade pool with enterprise style operations",
+    priceMonthlyGhs: 249,
+    annualDiscountPct: 20,
+    billingNote: "GHS monthly · custom WHM pools and invoice billing available",
     features: [
       "10+ cPanel accounts (we size WHM for you)",
-      "200 GB+ NVMe (pool upgrades available)",
+      "250 GB+ SSD pool (upgradeable)",
       "Dedicated IP option (where available)",
       "White-label cPanel branding (optional)",
       "Unlimited email (fair use policy applies)",
-      "Imunify360 / Malware protection (where licensed)",
+      "Malware hardening and advanced protection options",
       "SLA & named technical contact",
       "Migration assistance from other hosts",
     ],
-    idealFor: "Agencies, schools, and orgs with many properties",
+    idealFor: "Agencies, schools, SaaS teams, and organizations with many sites",
   },
 ] as const;
 
@@ -81,7 +86,7 @@ export const HOSTING_TRUST_POINTS: readonly { title: string; body: string }[] = 
   },
   {
     title: "Namecheap-backed stack",
-    body: "Your hosting sits on the same class of infrastructure you expect from a global registrar, with local support in Accra.",
+    body: "Your hosting runs on our Namecheap reseller + WHM stack with local support in Accra and pricing tuned for Ghana businesses.",
   },
   {
     title: "Domains + hosting together",
