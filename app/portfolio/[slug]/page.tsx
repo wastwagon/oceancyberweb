@@ -3,7 +3,12 @@ import {
   DetailIntroMotion,
   DetailPageHeroAmbient,
 } from "@/components/layout/DetailPageMotion";
-import { projects } from "@/lib/data/projects";
+import { projects as buildTimeFallbackProjects } from "@/lib/data/projects";
+import { getPortfolioCaseStudyBySlug } from "@/lib/data/portfolio-loader";
+import { prisma } from "@/lib/db";
+
+/** Always resolve case study from DB / fallback so admin edits show without per-path static rebuild. */
+export const dynamic = "force-dynamic";
 
 interface PortfolioDetailPageProps {
   params: {
@@ -12,10 +17,8 @@ interface PortfolioDetailPageProps {
 }
 
 export default async function PortfolioDetailPage({ params }: PortfolioDetailPageProps) {
-  // Find project by slug
-  const project = projects.find(p => p.slug === params.slug);
+  const project = await getPortfolioCaseStudyBySlug(params.slug);
 
-  // If project not found, return 404
   if (!project) {
     notFound();
   }
@@ -216,21 +219,27 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPag
   );
 }
 
-// Generate static paths for better performance
+/** Pre-render known slugs at build; other slugs resolve at runtime (`dynamicParams` default). */
 export async function generateStaticParams() {
-  return projects.map(project => ({
-    slug: project.slug
-  }));
+  try {
+    const rows = await prisma.project.findMany({ select: { slug: true } });
+    const slugs = new Set(rows.map((r) => r.slug));
+    for (const p of buildTimeFallbackProjects) {
+      slugs.add(p.slug);
+    }
+    return [...slugs].map((slug) => ({ slug }));
+  } catch {
+    return buildTimeFallbackProjects.map((project) => ({ slug: project.slug }));
+  }
 }
 
-// Export metadata for SEO
 export async function generateMetadata({ params }: PortfolioDetailPageProps) {
-  const project = projects.find(p => p.slug === params.slug);
+  const project = await getPortfolioCaseStudyBySlug(params.slug);
 
   if (!project) {
     return {
-      title: 'Project Not Found',
-      description: 'The requested project could not be found.'
+      title: "Project Not Found",
+      description: "The requested project could not be found.",
     };
   }
 

@@ -71,6 +71,9 @@ services:
       JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
       SESSION_SECRET: ${SESSION_SECRET:-change-session-secret}
       CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3020}
+      # Optional: Next.js on-demand revalidation after /admin/content edits (same secret on `web`)
+      REVALIDATE_SECRET: ${REVALIDATE_SECRET:-}
+      NEXT_REVALIDATE_URL: ${NEXT_REVALIDATE_URL:-http://web:3000}
     ports:
       - "${BACKEND_PORT:-4100}:4000"
     depends_on:
@@ -103,6 +106,8 @@ services:
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:4100}
       # Server-side fetch to Nest — must match Docker service name `backend`
       API_INTERNAL_URL: ${API_INTERNAL_URL:-http://backend:4000}
+      # Must match backend REVALIDATE_SECRET when set (admin → POST /api/revalidate)
+      REVALIDATE_SECRET: ${REVALIDATE_SECRET:-}
     ports:
       - "${FRONTEND_PORT:-3020}:3000"
     depends_on:

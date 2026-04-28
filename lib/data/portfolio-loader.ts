@@ -51,7 +51,7 @@ export const getPortfolioCaseStudies = unstable_cache(
   async (): Promise<PortfolioCaseStudy[]> => {
     try {
       const rows = await prisma.project.findMany({
-        orderBy: [{ sortOrder: "asc" }, { createdAt: "asc" }],
+        orderBy: [{ featured: "desc" }, { sortOrder: "asc" }, { createdAt: "asc" }],
       });
       if (rows.length === 0) {
         return fallbackPortfolioCaseStudies;

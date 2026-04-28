@@ -395,3 +395,126 @@ export async function openTransactionInvoiceHtml(transactionId: string) {
   window.open(url, "_blank", "noopener,noreferrer");
   setTimeout(() => URL.revokeObjectURL(url), 60_000);
 }
+
+/** Admin: marketing portfolio rows (`Project` model). */
+export type AdminSiteProjectRow = {
+  id: string;
+  title: string;
+  slug: string;
+  category: string;
+  description: string;
+  techStack: string[];
+  imageUrl: string | null;
+  featured: boolean;
+  sortOrder: number;
+  details: unknown;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export async function getAdminSiteProjects() {
+  return authRequest<AdminSiteProjectRow[]>("/api/v1/admin/site-projects");
+}
+
+export async function createAdminSiteProject(body: {
+  title: string;
+  slug: string;
+  category: string;
+  description: string;
+  techStack: string[];
+  imageUrl?: string | null;
+  featured?: boolean;
+  sortOrder?: number;
+  details?: Record<string, unknown>;
+}) {
+  return authRequest<AdminSiteProjectRow>("/api/v1/admin/site-projects", {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+}
+
+export async function patchAdminSiteProject(
+  id: string,
+  body: Partial<{
+    title: string;
+    slug: string;
+    category: string;
+    description: string;
+    techStack: string[];
+    imageUrl: string | null;
+    featured: boolean;
+    sortOrder: number;
+    details: Record<string, unknown>;
+  }>,
+) {
+  return authRequest<AdminSiteProjectRow>(`/api/v1/admin/site-projects/${encodeURIComponent(id)}`, {
+    method: "PATCH",
+    body: JSON.stringify(body),
+  });
+}
+
+export async function deleteAdminSiteProject(id: string) {
+  return authRequest<{ ok: boolean }>(`/api/v1/admin/site-projects/${encodeURIComponent(id)}`, {
+    method: "DELETE",
+  });
+}
+
+/** Admin: testimonial quotes (`Testimonial` model). */
+export type AdminSiteTestimonialRow = {
+  id: string;
+  name: string;
+  company: string;
+  role: string;
+  content: string;
+  rating: number;
+  featured: boolean;
+  initials: string | null;
+  sortOrder: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export async function getAdminSiteTestimonials() {
+  return authRequest<AdminSiteTestimonialRow[]>("/api/v1/admin/site-testimonials");
+}
+
+export async function createAdminSiteTestimonial(body: {
+  name: string;
+  company: string;
+  role: string;
+  content: string;
+  rating?: number;
+  featured?: boolean;
+  initials?: string | null;
+  sortOrder?: number;
+}) {
+  return authRequest<AdminSiteTestimonialRow>("/api/v1/admin/site-testimonials", {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+}
+
+export async function patchAdminSiteTestimonial(
+  id: string,
+  body: Partial<{
+    name: string;
+    company: string;
+    role: string;
+    content: string;
+    rating: number;
+    featured: boolean;
+    initials: string | null;
+    sortOrder: number;
+  }>,
+) {
+  return authRequest<AdminSiteTestimonialRow>(`/api/v1/admin/site-testimonials/${encodeURIComponent(id)}`, {
+    method: "PATCH",
+    body: JSON.stringify(body),
+  });
+}
+
+export async function deleteAdminSiteTestimonial(id: string) {
+  return authRequest<{ ok: boolean }>(`/api/v1/admin/site-testimonials/${encodeURIComponent(id)}`, {
+    method: "DELETE",
+  });
+}

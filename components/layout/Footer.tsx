@@ -46,7 +46,7 @@ function FooterLink({
   return (
     <Link
       href={href}
-      className="inline-flex text-sm text-slate-400 transition-colors hover:text-blue-200"
+      className="inline-flex text-sm text-slate-600 transition-colors hover:text-ocean-700"
     >
       {children}
     </Link>
@@ -57,24 +57,24 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden border-t border-white/[0.08] bg-[#00000a] text-slate-400">
+    <footer className="relative overflow-hidden border-t border-slate-200 bg-slate-50 text-slate-600">
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.35]"
+        className="pointer-events-none absolute inset-0 opacity-[0.4]"
         aria-hidden
       >
         <div
           className="absolute inset-0"
           style={{
             backgroundImage: `
-              linear-gradient(to right, rgba(20, 50, 150, 0.12) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(20, 50, 150, 0.08) 1px, transparent 1px)
+              linear-gradient(to right, rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(59, 130, 246, 0.08) 1px, transparent 1px)
             `,
             backgroundSize: "48px 48px",
             maskImage:
               "radial-gradient(ellipse 90% 80% at 50% 100%, black 0%, transparent 72%)",
           }}
         />
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#143296cc]/40 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-ocean-300/50 to-transparent" />
       </div>
 
       <div className="container relative z-10 mx-auto px-6 md:px-8">
@@ -83,25 +83,25 @@ export function Footer() {
           <div className="flex flex-col md:col-span-2 lg:col-span-4">
             <Link
               href="/"
-              className="mb-6 inline-flex w-fit items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 transition-colors hover:border-[#143296cc]/45 hover:bg-white/[0.05]"
+              className="mb-6 inline-flex w-fit items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm transition-colors hover:border-ocean-200"
             >
               <Image
                 src="/images/oceancyber logo.webp"
                 alt="OceanCyber"
                 width={160}
                 height={48}
-                className="h-9 w-auto object-contain brightness-0 invert md:h-10"
+                className="h-9 w-auto object-contain md:h-10"
               />
             </Link>
-            <p className="max-w-sm text-pretty text-sm leading-relaxed text-slate-400 md:text-[0.9375rem]">
+            <p className="max-w-sm text-pretty text-sm leading-relaxed text-slate-600 md:text-[0.9375rem]">
               ICT solutions provider: web, mobile, commerce, and security-aware
               delivery for teams across Ghana and Africa.
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
-              <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-slate-300">
+              <span className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-slate-600">
                 SOC-aligned delivery
               </span>
-              <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-slate-300">
+              <span className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-slate-600">
                 Zero-trust mindset
               </span>
             </div>
@@ -118,7 +118,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-slate-400 transition-all hover:border-[#143296cc]/50 hover:bg-[#143296cc]/15 hover:text-blue-200"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 transition-all hover:border-ocean-300 hover:bg-ocean-50 hover:text-ocean-700"
                 >
                   <Icon className="h-4 w-4" />
                 </a>
@@ -128,7 +128,7 @@ export function Footer() {
 
           {/* Services */}
           <div className="md:col-span-1 lg:col-span-2">
-            <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-blue-400/90">
+            <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-ocean-600">
               Services
             </p>
             <ul className="space-y-3.5">
@@ -142,7 +142,7 @@ export function Footer() {
 
           {/* Explore */}
           <div className="md:max-lg:col-span-1 lg:col-span-2">
-            <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-blue-400/90">
+            <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-ocean-600">
               Explore
             </p>
             <ul className="space-y-3.5">
@@ -156,7 +156,7 @@ export function Footer() {
 
           {/* Industries */}
           <div className="md:col-span-1 lg:col-span-2">
-            <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-blue-400/90">
+            <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-ocean-600">
               Industries
             </p>
             <ul className="space-y-3.5">
@@ -170,48 +170,48 @@ export function Footer() {
 
           {/* Contact + CTA */}
           <div className="md:col-span-1 lg:col-span-2">
-            <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-blue-400/90">
+            <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-ocean-600">
               Contact
             </p>
             <div className="space-y-4 text-sm">
               <div className="flex gap-3">
                 <MapPin
-                  className="mt-0.5 h-4 w-4 shrink-0 text-blue-400/90"
+                  className="mt-0.5 h-4 w-4 shrink-0 text-ocean-600"
                   aria-hidden
                 />
-                <span className="leading-relaxed text-slate-400">
+                <span className="leading-relaxed text-slate-600">
                   232 Nii Kwashiefo Avenue
                   <br />
                   Accra, Ghana
                 </span>
               </div>
               <div className="flex items-center gap-3">
-                <Phone className="h-4 w-4 shrink-0 text-blue-400/90" aria-hidden />
+                <Phone className="h-4 w-4 shrink-0 text-ocean-600" aria-hidden />
                 <a
                   href="tel:+233242565695"
-                  className="text-slate-300 transition-colors hover:text-blue-200"
+                  className="text-slate-700 transition-colors hover:text-ocean-700"
                 >
                   +233 242 565 695
                 </a>
               </div>
               <div className="flex items-center gap-3">
-                <Mail className="h-4 w-4 shrink-0 text-blue-400/90" aria-hidden />
+                <Mail className="h-4 w-4 shrink-0 text-ocean-600" aria-hidden />
                 <a
                   href="mailto:info@oceancyber.net"
-                  className="text-slate-300 transition-colors hover:text-blue-200"
+                  className="text-slate-700 transition-colors hover:text-ocean-700"
                 >
                   info@oceancyber.net
                 </a>
               </div>
             </div>
 
-            <div className="mt-8 rounded-2xl border border-red-500/20 bg-red-950/25 p-4 text-center">
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-red-300/95">
+            <div className="mt-8 rounded-2xl border border-red-200 bg-red-50/90 p-4 text-center">
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-red-700">
                 24/7 security line
               </p>
               <a
                 href="tel:+233242565695"
-                className="mt-1 inline-block font-mono text-sm font-medium text-red-200/95 transition-colors hover:text-red-100"
+                className="mt-1 inline-block font-mono text-sm font-medium text-red-800 transition-colors hover:text-red-900"
               >
                 +233 242 565 695
               </a>
@@ -219,7 +219,7 @@ export function Footer() {
 
             <Link
               href="/contact"
-              className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl border-2 border-[#143296cc] bg-gradient-to-t from-[#143296cc] to-[#00000a] px-5 py-3 text-sm font-bold text-white shadow-lg shadow-[#143296cc]/20 transition-all hover:brightness-110 sm:w-auto"
+              className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-ocean-600/20 transition-all hover:brightness-110 sm:w-auto"
             >
               Start a project
               <ArrowRight className="h-4 w-4" aria-hidden />
@@ -227,7 +227,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-6 border-t border-white/[0.08] py-8 md:flex-row md:items-center md:justify-between md:py-10">
+        <div className="flex flex-col gap-6 border-t border-slate-200 py-8 md:flex-row md:items-center md:justify-between md:py-10">
           <p className="text-center text-xs text-slate-500 md:text-left md:text-sm">
             © {year} OceanCyber. All rights reserved.
           </p>
@@ -237,19 +237,19 @@ export function Footer() {
           >
             <Link
               href="/privacy"
-              className="transition-colors hover:text-blue-200"
+              className="transition-colors hover:text-ocean-700"
             >
               Privacy
             </Link>
             <Link
               href="/terms"
-              className="transition-colors hover:text-blue-200"
+              className="transition-colors hover:text-ocean-700"
             >
               Terms
             </Link>
             <Link
               href="/cookies"
-              className="transition-colors hover:text-blue-200"
+              className="transition-colors hover:text-ocean-700"
             >
               Cookies
             </Link>

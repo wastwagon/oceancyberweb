@@ -11,10 +11,11 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { type MouseEvent, useRef } from "react";
-import { projects } from "@/lib/data/projects";
+import { projects as staticProjects } from "@/lib/data/projects";
+import type { PortfolioCaseStudy } from "@/lib/types/portfolio-case-study";
 import { fadeUpProps, fadeUpSoft, staggerDelay } from "@/lib/scroll-reveal";
 
-type Project = (typeof projects)[number];
+type Project = PortfolioCaseStudy;
 
 const MotionLink = motion(Link);
 
@@ -292,7 +293,8 @@ function GridProjectCard({
   );
 }
 
-export function Portfolio() {
+export function Portfolio({ cases }: { cases?: PortfolioCaseStudy[] }) {
+  const projects = cases && cases.length > 0 ? cases : staticProjects;
   const [featured, ...rest] = projects;
 
   const wideAt = (i: number) => i === 2 || i === rest.length - 1;

@@ -311,6 +311,12 @@ export default function AdminPage() {
             <p className="mt-1 text-sm text-slate-600">{email}</p>
           </div>
           <div className="flex flex-wrap gap-2">
+            <Link
+              href="/admin/content"
+              className="rounded-xl border border-ocean-200 bg-ocean-50 px-4 py-2 text-sm font-semibold text-ocean-900 hover:bg-ocean-100"
+            >
+              Site content
+            </Link>
             <button
               type="button"
               onClick={() => {

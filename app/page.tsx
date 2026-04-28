@@ -6,11 +6,18 @@ import { Portfolio } from "@/components/sections/Portfolio";
 import { Stats } from "@/components/sections/Stats";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Contact } from "@/components/sections/Contact";
+import { getPortfolioCaseStudies } from "@/lib/data/portfolio-loader";
+import { getTestimonialCards } from "@/lib/data/testimonials-loader";
 
 /** ISR: avoid serving a year-stale HTML shell from CDN/Next after deploys (see next/cache + s-maxage). */
 export const revalidate = 300;
 
-export default function Home() {
+export default async function Home() {
+  const [portfolioCases, testimonialCards] = await Promise.all([
+    getPortfolioCaseStudies(),
+    getTestimonialCards(),
+  ]);
+
   return (
     <div className="flex flex-col min-h-screen">
       <Hero />
@@ -18,8 +25,8 @@ export default function Home() {
       <Stats />
       <ProjectCostPromo />
       <Services />
-      <Portfolio />
-      <Testimonials />
+      <Portfolio cases={portfolioCases} />
+      <Testimonials cards={testimonialCards} />
       <Contact />
     </div>
   );

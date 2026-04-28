@@ -1,10 +1,146 @@
-import { Injectable } from "@nestjs/common";
-import type { Prisma } from "@prisma/client";
+import { BadRequestException, Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { Prisma } from "@prisma/client";
 import { PrismaService } from "../prisma/prisma.service";
+import type { CreateSiteProjectDto, UpdateSiteProjectDto } from "./dto/site-project.dto";
+import type { CreateSiteTestimonialDto, UpdateSiteTestimonialDto } from "./dto/site-testimonial.dto";
 
 @Injectable()
 export class AdminService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly config: ConfigService,
+  ) {}
+
+  async listSiteProjects() {
+    return this.prisma.project.findMany({
+      orderBy: [{ featured: "desc" }, { sortOrder: "asc" }, { createdAt: "asc" }],
+    });
+  }
+
+  async createSiteProject(dto: CreateSiteProjectDto) {
+    try {
+      const row = await this.prisma.project.create({
+        data: {
+          title: dto.title,
+          slug: dto.slug.trim().toLowerCase(),
+          category: dto.category,
+          description: dto.description,
+          techStack: dto.techStack,
+          imageUrl: dto.imageUrl ?? null,
+          featured: dto.featured ?? false,
+          sortOrder: dto.sortOrder ?? 0,
+          details:
+            dto.details !== undefined ? (dto.details as Prisma.InputJsonValue) : undefined,
+        },
+      });
+      void this.bumpNextCache(["portfolio"]);
+      return row;
+    } catch (e) {
+      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2002") {
+        throw new BadRequestException("That slug is already used by another project.");
+      }
+      throw e;
+    }
+  }
+
+  async updateSiteProject(id: string, dto: UpdateSiteProjectDto) {
+    const data: Prisma.ProjectUpdateInput = {};
+    if (dto.title !== undefined) data.title = dto.title;
+    if (dto.slug !== undefined) data.slug = dto.slug.trim().toLowerCase();
+    if (dto.category !== undefined) data.category = dto.category;
+    if (dto.description !== undefined) data.description = dto.description;
+    if (dto.techStack !== undefined) data.techStack = dto.techStack;
+    if (dto.imageUrl !== undefined) data.imageUrl = dto.imageUrl;
+    if (dto.featured !== undefined) data.featured = dto.featured;
+    if (dto.sortOrder !== undefined) data.sortOrder = dto.sortOrder;
+    if (dto.details !== undefined) {
+      data.details =
+        dto.details === null ? Prisma.JsonNull : (dto.details as Prisma.InputJsonValue);
+    }
+    try {
+      const row = await this.prisma.project.update({ where: { id }, data });
+      void this.bumpNextCache(["portfolio"]);
+      return row;
+    } catch (e) {
+      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2002") {
+        throw new BadRequestException("That slug is already used by another project.");
+      }
+      throw e;
+    }
+  }
+
+  async deleteSiteProject(id: string) {
+    await this.prisma.project.delete({ where: { id } });
+    void this.bumpNextCache(["portfolio"]);
+    return { ok: true as const };
+  }
+
+  async listSiteTestimonials() {
+    return this.prisma.testimonial.findMany({
+      orderBy: [{ sortOrder: "asc" }, { createdAt: "asc" }],
+    });
+  }
+
+  async createSiteTestimonial(dto: CreateSiteTestimonialDto) {
+    const row = await this.prisma.testimonial.create({
+      data: {
+        name: dto.name,
+        company: dto.company,
+        role: dto.role,
+        content: dto.content,
+        rating: dto.rating ?? 5,
+        featured: dto.featured ?? false,
+        initials: dto.initials ?? null,
+        sortOrder: dto.sortOrder ?? 0,
+      },
+    });
+    void this.bumpNextCache(["testimonials"]);
+    return row;
+  }
+
+  async updateSiteTestimonial(id: string, dto: UpdateSiteTestimonialDto) {
+    const data: Prisma.TestimonialUpdateInput = {};
+    if (dto.name !== undefined) data.name = dto.name;
+    if (dto.company !== undefined) data.company = dto.company;
+    if (dto.role !== undefined) data.role = dto.role;
+    if (dto.content !== undefined) data.content = dto.content;
+    if (dto.rating !== undefined) data.rating = dto.rating;
+    if (dto.featured !== undefined) data.featured = dto.featured;
+    if (dto.initials !== undefined) data.initials = dto.initials;
+    if (dto.sortOrder !== undefined) data.sortOrder = dto.sortOrder;
+    const row = await this.prisma.testimonial.update({ where: { id }, data });
+    void this.bumpNextCache(["testimonials"]);
+    return row;
+  }
+
+  async deleteSiteTestimonial(id: string) {
+    await this.prisma.testimonial.delete({ where: { id } });
+    void this.bumpNextCache(["testimonials"]);
+    return { ok: true as const };
+  }
+
+  /** Fire-and-forget: bust Next.js Data Cache + ISR after admin content edits. */
+  private bumpNextCache(tags: string[]): void {
+    const base = this.config.get<string>("NEXT_REVALIDATE_URL")?.trim().replace(/\/$/, "");
+    const secret = this.config.get<string>("REVALIDATE_SECRET")?.trim();
+    if (!base || !secret) {
+      return;
+    }
+    void fetch(`${base}/api/revalidate`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${secret}`,
+      },
+      body: JSON.stringify({
+        tags,
+        paths: ["/", "/portfolio"],
+      }),
+    }).catch((err: unknown) => {
+      console.warn("[AdminService] Next revalidate failed", err);
+    });
+  }
 
   private buildContactWhere(filters: {
     status?: string;

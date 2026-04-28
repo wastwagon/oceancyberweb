@@ -2,37 +2,9 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { fallbackTestimonialCards } from "@/lib/data/testimonials-fallback";
+import type { TestimonialCard } from "@/lib/types/testimonial-card";
 import { fadeUpProps, revealViewport, staggerDelay } from "@/lib/scroll-reveal";
-
-const testimonials = [
-  {
-    name: "John Mensah",
-    company: "Fitch Attorneys",
-    role: "Managing Partner",
-    content:
-      "OceanCyber transformed our online presence completely. The new website has significantly increased our client inquiries and improved our professional image.",
-    rating: 5,
-    initials: "JM",
-  },
-  {
-    name: "Sarah Adjei",
-    company: "Bravia Residency",
-    role: "Marketing Director",
-    content:
-      "Working with OceanCyber was a game-changer. Their attention to detail and understanding of our business needs exceeded our expectations.",
-    rating: 5,
-    initials: "SA",
-  },
-  {
-    name: "Kwame Asante",
-    company: "Euroworld Projects",
-    role: "CEO",
-    content:
-      "The team at OceanCyber delivered exactly what they promised. Our website now reflects the quality of our construction projects perfectly.",
-    rating: 5,
-    initials: "KA",
-  },
-];
 
 /** Background treatment aligned with Hero (`#00000a`, brand blue grid / glow). */
 function TestimonialsAmbient() {
@@ -56,7 +28,9 @@ function TestimonialsAmbient() {
   );
 }
 
-export function Testimonials() {
+export function Testimonials({ cards }: { cards?: TestimonialCard[] }) {
+  const testimonials = cards && cards.length > 0 ? cards : fallbackTestimonialCards;
+
   return (
     <section
       id="testimonials"
@@ -96,7 +70,7 @@ export function Testimonials() {
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-8 md:grid-cols-3">
           {testimonials.map((testimonial, index) => (
             <motion.div
-              key={testimonial.name}
+              key={testimonial.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={revealViewport}
@@ -109,7 +83,7 @@ export function Testimonials() {
                 {[...Array(5)].map((_, i) => (
                   <svg
                     key={i}
-                    className="h-5 w-5 fill-current text-blue-400"
+                    className={`h-5 w-5 fill-current ${i < testimonial.rating ? "text-blue-400" : "text-slate-600"}`}
                     viewBox="0 0 20 20"
                     aria-hidden
                   >

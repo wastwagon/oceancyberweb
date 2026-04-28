@@ -2,14 +2,24 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
+  Post,
   Query,
   Res,
   UseGuards,
 } from "@nestjs/common";
 import type { Response } from "express";
+import {
+  CreateSiteProjectDto,
+  UpdateSiteProjectDto,
+} from "./dto/site-project.dto";
+import {
+  CreateSiteTestimonialDto,
+  UpdateSiteTestimonialDto,
+} from "./dto/site-testimonial.dto";
 import { UpdateContactDto } from "./dto/update-contact.dto";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { AdminGuard } from "./admin.guard";
@@ -112,5 +122,47 @@ export class AdminController {
       status: body.status,
       notes: body.notes,
     });
+  }
+
+  /** Portfolio case studies shown on /portfolio (Prisma `Project`). */
+  @Get("site-projects")
+  listSiteProjects() {
+    return this.admin.listSiteProjects();
+  }
+
+  @Post("site-projects")
+  createSiteProject(@Body() body: CreateSiteProjectDto) {
+    return this.admin.createSiteProject(body);
+  }
+
+  @Patch("site-projects/:id")
+  updateSiteProject(@Param("id") id: string, @Body() body: UpdateSiteProjectDto) {
+    return this.admin.updateSiteProject(id, body);
+  }
+
+  @Delete("site-projects/:id")
+  deleteSiteProject(@Param("id") id: string) {
+    return this.admin.deleteSiteProject(id);
+  }
+
+  /** Homepage testimonial quotes (Prisma `Testimonial`, `featured` drives homepage block). */
+  @Get("site-testimonials")
+  listSiteTestimonials() {
+    return this.admin.listSiteTestimonials();
+  }
+
+  @Post("site-testimonials")
+  createSiteTestimonial(@Body() body: CreateSiteTestimonialDto) {
+    return this.admin.createSiteTestimonial(body);
+  }
+
+  @Patch("site-testimonials/:id")
+  updateSiteTestimonial(@Param("id") id: string, @Body() body: UpdateSiteTestimonialDto) {
+    return this.admin.updateSiteTestimonial(id, body);
+  }
+
+  @Delete("site-testimonials/:id")
+  deleteSiteTestimonial(@Param("id") id: string) {
+    return this.admin.deleteSiteTestimonial(id);
   }
 }

@@ -978,15 +978,15 @@ export function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#00000a] pt-[120px] pb-24"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-b from-sky-50 via-white to-slate-50 pt-[120px] pb-24"
     >
-      {/* 1. Base Static Grid - Subtle and dark */}
-      <div 
-        className="pointer-events-none absolute inset-0 z-0 opacity-20"
+      {/* 1. Base Static Grid - subtle on light */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.35]"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(20, 50, 150, 0.5) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(20, 50, 150, 0.5) 1px, transparent 1px)
+            linear-gradient(to right, rgba(59, 130, 246, 0.22) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(59, 130, 246, 0.18) 1px, transparent 1px)
           `,
           backgroundSize: `${GRID_SIZE}px ${GRID_SIZE}px`,
           maskImage: "radial-gradient(circle at center, black 40%, transparent 90%)",
@@ -1012,23 +1012,21 @@ export function Hero() {
               ease: "easeInOut",
             }}
             style={{
-              // This is the bright "Revealed" grid
               backgroundImage: `
-                linear-gradient(to right, #143296 1px, transparent 1px),
-                linear-gradient(to bottom, #143296 1px, transparent 1px)
+                linear-gradient(to right, rgba(2, 106, 255, 0.45) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(2, 106, 255, 0.4) 1px, transparent 1px)
               `,
               backgroundSize: `${GRID_SIZE}px ${GRID_SIZE}px`,
             }}
           >
-            {/* Adding an extra inner glow to the wave itself */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(20,50,150,0.15)_0%,transparent_70%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(2,106,255,0.12)_0%,transparent_70%)]" />
           </motion.div>
         </div>
       )}
 
-      {/* 3. Ambient Glows */}
+      {/* 3. Ambient glow (soft, light-surface friendly) */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#00003280] blur-[150px] rounded-full" />
+        <div className="absolute left-1/2 top-1/4 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-sky-200/50 blur-[150px]" />
       </div>
 
       {/* Content Layer */}
@@ -1044,24 +1042,24 @@ export function Hero() {
         >
           <motion.span
             variants={heroText.item}
-            className="mb-8 inline-block rounded-full border border-[#143296cc] bg-[#143296cc]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-blue-300 backdrop-blur-md"
+            className="mb-8 inline-block rounded-full border border-ocean-200 bg-ocean-50/90 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-ocean-800 backdrop-blur-md"
           >
             ICT solutions provider · Ghana
           </motion.span>
 
           <motion.h1
             variants={heroText.item}
-            className="mb-6 text-balance text-center text-5xl font-bold leading-[1.1] tracking-tight text-white md:text-7xl"
+            className="mb-6 text-balance text-center text-5xl font-bold leading-[1.1] tracking-tight text-slate-900 md:text-7xl"
           >
             Website & Mobile App <br />
-            <span className="bg-gradient-to-r from-blue-400 via-[#143296cc] to-blue-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-ocean-600 via-ocean-700 to-cyan-600 bg-clip-text text-transparent">
               Development
             </span>
           </motion.h1>
 
           <motion.p
             variants={heroText.item}
-            className="mx-auto mt-6 max-w-2xl text-pretty text-center text-lg leading-relaxed text-slate-400 md:text-xl"
+            className="mx-auto mt-6 max-w-2xl text-pretty text-center text-lg leading-relaxed text-slate-600 md:text-xl"
           >
             We design and build websites and mobile apps with modern design and
             scalable technology to help your business thrive.
@@ -1072,21 +1070,21 @@ export function Hero() {
             className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
             <Link href="/contact">
-              <button className="min-w-[240px] rounded-xl border-2 border-[#143296cc] bg-gradient-to-t from-[#143296cc] to-[#00000a] px-8 py-4 font-bold text-white shadow-lg shadow-[#143296cc]/20 transition-all hover:brightness-125 active:scale-95">
+              <button className="min-w-[240px] rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-8 py-4 font-bold text-white shadow-lg shadow-ocean-600/25 transition-all hover:brightness-110 active:scale-95">
                 Book an appointment
               </button>
             </Link>
 
             <Link
               href="/portfolio"
-              className="inline-flex min-w-[240px] items-center justify-center rounded-xl border border-white/10 bg-white/5 px-8 py-4 font-bold text-white backdrop-blur-md transition hover:bg-white/10"
+              className="inline-flex min-w-[240px] items-center justify-center rounded-xl border border-slate-200 bg-white/90 px-8 py-4 font-bold text-slate-800 shadow-sm backdrop-blur-md transition hover:border-ocean-200 hover:bg-slate-50"
             >
               View Our Portfolio
             </Link>
 
             <Link
               href="/tools/project-cost"
-              className="inline-flex min-w-[240px] items-center justify-center rounded-xl border border-amber-400/40 bg-amber-500/10 px-8 py-4 font-bold text-amber-100 backdrop-blur-md transition hover:border-amber-300/50 hover:bg-amber-500/20"
+              className="inline-flex min-w-[240px] items-center justify-center rounded-xl border border-amber-300/80 bg-amber-50 px-8 py-4 font-bold text-amber-900 shadow-sm backdrop-blur-md transition hover:border-amber-400 hover:bg-amber-100/90"
             >
               Project cost calculator
             </Link>
@@ -1097,8 +1095,8 @@ export function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Final Vignette */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#00000a] via-transparent to-transparent" />
+      {/* Final vignette: blend into next section */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-100/90 via-transparent to-transparent" />
     </section>
   );
 }

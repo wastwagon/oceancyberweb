@@ -476,15 +476,15 @@ function MegaMenu({
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 15, scale: 0.98 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
-          className="absolute top-[calc(100%+6px)] left-0 z-[9999] w-[min(92vw,640px)] overflow-hidden rounded-xl border border-white/10 bg-[#0a1030]/95 shadow-[0_16px_40px_rgba(0,0,0,0.45)] backdrop-blur-2xl"
+          className="absolute top-[calc(100%+6px)] left-0 z-[9999] w-[min(92vw,640px)] overflow-hidden rounded-xl border border-slate-200/90 bg-white shadow-[0_16px_48px_rgba(15,23,42,0.12)] backdrop-blur-md"
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
         >
           <div className="max-h-[min(70vh,520px)] overflow-y-auto p-4 sm:p-5">
             {/* Header - compact */}
-            <div className="mb-3 border-b border-white/5 pb-3">
-              <h3 className="text-base font-bold text-white sm:text-lg">{title}</h3>
-              <p className="mt-1 text-xs leading-snug text-slate-400 sm:text-sm">{description}</p>
+            <div className="mb-3 border-b border-slate-200 pb-3">
+              <h3 className="text-base font-bold text-slate-900 sm:text-lg">{title}</h3>
+              <p className="mt-1 text-xs leading-snug text-slate-600 sm:text-sm">{description}</p>
             </div>
 
             {/* 2-column grid: balanced rows for 4 items (2×2), still stacks on mobile */}
@@ -495,17 +495,17 @@ function MegaMenu({
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2, delay: index * 0.04 }}
-                  className="group relative rounded-lg border border-transparent p-3 transition-all duration-200 hover:border-white/10 hover:bg-white/5"
+                  className="group relative rounded-lg border border-transparent p-3 transition-all duration-200 hover:border-slate-200 hover:bg-slate-50"
                 >
-                  <h4 className="text-sm font-semibold text-white group-hover:text-cyan-400 sm:text-[15px]">
+                  <h4 className="text-sm font-semibold text-slate-900 group-hover:text-ocean-600 sm:text-[15px]">
                     {item.heading}
                   </h4>
-                  <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed text-slate-400 sm:text-xs">
+                  <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed text-slate-600 sm:text-xs">
                     {item.description}
                   </p>
                   <Link
                     href={item.link}
-                    className="mt-2 inline-flex items-center text-[10px] font-bold uppercase tracking-wider text-cyan-400 hover:text-white"
+                    className="mt-2 inline-flex items-center text-[10px] font-bold uppercase tracking-wider text-ocean-600 hover:text-ocean-800"
                   >
                     Learn more
                     <span className="ml-1.5 inline-block">→</span>
@@ -539,15 +539,15 @@ function MobileAccordion({
   onClose: () => void;
 }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03]">
+    <div className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50/80">
       <button
         type="button"
-        className="flex w-full items-center justify-between px-4 py-3.5 text-left text-sm font-semibold text-white sm:py-4"
+        className="flex w-full items-center justify-between px-4 py-3.5 text-left text-sm font-semibold text-slate-900 sm:py-4"
         onClick={onToggle}
         aria-expanded={isOpen}
       >
         <span className="flex items-center gap-2">
-          <span className="h-1.5 w-1.5 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.6)]" aria-hidden />
+          <span className="h-1.5 w-1.5 rounded-full bg-ocean-500" aria-hidden />
           {title}
         </span>
         <ChevronDown
@@ -561,18 +561,18 @@ function MobileAccordion({
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-            className="border-t border-white/[0.06]"
+            className="border-t border-slate-200"
           >
             <div className="space-y-2 px-3 pb-3 pt-2 sm:grid sm:grid-cols-2 sm:gap-2 sm:space-y-0 sm:px-3 sm:pb-4">
               {items.map((item, index) => (
                 <Link
                   key={index}
                   href={item.link}
-                  className="block rounded-xl border border-white/[0.06] bg-[#050814]/80 p-3 transition-colors hover:border-[#143296cc]/40 hover:bg-white/[0.05]"
+                  className="block rounded-xl border border-slate-200 bg-white p-3 transition-colors hover:border-ocean-300 hover:bg-slate-50"
                   onClick={onClose}
                 >
-                  <h4 className="mb-0.5 text-sm font-bold text-white">{item.heading}</h4>
-                  <p className="line-clamp-2 text-[11px] leading-snug text-slate-400">{item.description}</p>
+                  <h4 className="mb-0.5 text-sm font-bold text-slate-900">{item.heading}</h4>
+                  <p className="line-clamp-2 text-[11px] leading-snug text-slate-600">{item.description}</p>
                 </Link>
               ))}
             </div>
@@ -672,25 +672,25 @@ export function Header() {
   const flatNav = navItems.filter((i) => !i.hasDropdown && i.href !== "/");
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center bg-[#00000a] px-3 pt-2 sm:px-5 sm:pt-3 md:px-8">
+    <header className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center bg-white/95 px-3 pt-2 shadow-sm sm:px-5 sm:pt-3 md:px-8 backdrop-blur-md">
       {/* Top contact bar: desktop only (lg+); on mobile/tablet this lives inside the menu drawer */}
       <div
         className={`hidden w-full max-w-7xl overflow-hidden transition-all duration-500 lg:block ${scrolled ? "h-0 translate-y-[-100%] opacity-0" : "h-10 translate-y-0 opacity-100"}`}
       >
-        <div className="flex h-full items-center justify-between gap-4 rounded-t-2xl border-x border-t border-white/10 bg-[#0a1030]/40 px-5 backdrop-blur-md">
-          <div className="flex min-w-0 flex-wrap items-center gap-x-5 gap-y-1 text-[10px] font-bold uppercase tracking-widest text-slate-300">
+        <div className="flex h-full items-center justify-between gap-4 rounded-t-2xl border-x border-t border-slate-200/90 bg-slate-50/90 px-5 backdrop-blur-md">
+          <div className="flex min-w-0 flex-wrap items-center gap-x-5 gap-y-1 text-[10px] font-bold uppercase tracking-widest text-slate-600">
             <a
               href="tel:+233242565695"
-              className="flex min-w-0 items-center gap-2 text-slate-200 transition-colors hover:text-white"
+              className="flex min-w-0 items-center gap-2 text-slate-700 transition-colors hover:text-ocean-700"
             >
-              <Phone className="h-3 w-3 shrink-0 text-blue-200/90" aria-hidden />
+              <Phone className="h-3 w-3 shrink-0 text-ocean-600" aria-hidden />
               <span className="truncate">+233 242 565 695</span>
             </a>
             <a
               href="mailto:info@oceancyber.net"
-              className="flex min-w-0 items-center gap-2 text-slate-200 transition-colors hover:text-white"
+              className="flex min-w-0 items-center gap-2 text-slate-700 transition-colors hover:text-ocean-700"
             >
-              <Mail className="h-3 w-3 shrink-0 text-blue-200/90" aria-hidden />
+              <Mail className="h-3 w-3 shrink-0 text-ocean-600" aria-hidden />
               <span className="truncate">info@oceancyber.net</span>
             </a>
             <span className="hidden text-slate-500 lg:inline">
@@ -704,7 +704,7 @@ export function Header() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-400 transition-colors hover:text-white"
+                className="text-slate-500 transition-colors hover:text-ocean-600"
                 aria-label={label}
               >
                 <Icon size={14} />
@@ -716,10 +716,10 @@ export function Header() {
 
       {/* Main Navigation Bar */}
       <div className={`w-full max-w-7xl transition-all duration-500 ${scrolled ? "mt-4" : "mt-0"}`}>
-        <nav className={`relative flex h-[4.25rem] min-h-[4.25rem] items-center gap-2 border border-white/10 px-3 backdrop-blur-2xl transition-all duration-500 sm:h-20 sm:min-h-[5rem] sm:gap-3 sm:px-6 ${
+        <nav className={`relative flex h-[4.25rem] min-h-[4.25rem] items-center gap-2 border border-slate-200/90 px-3 backdrop-blur-md transition-all duration-500 sm:h-20 sm:min-h-[5rem] sm:gap-3 sm:px-6 ${
           scrolled
-            ? "rounded-2xl bg-[#070c26]/90 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-            : "max-lg:rounded-2xl max-lg:bg-[#070c26]/90 lg:rounded-b-2xl lg:bg-[#070c26]/60"
+            ? "rounded-2xl bg-white/95 shadow-[0_20px_50px_rgba(15,23,42,0.1)]"
+            : "max-lg:rounded-2xl max-lg:bg-white/95 lg:rounded-b-2xl lg:bg-white/80"
         }`}>
             {/* Logo */}
             <Link href="/" className="relative z-10 shrink-0">
@@ -728,7 +728,7 @@ export function Header() {
                 alt="OceanCyber"
                 width={200}
                 height={60}
-                className="h-9 w-auto object-contain brightness-0 invert sm:h-10"
+                className="h-9 w-auto object-contain sm:h-10"
                 priority
               />
             </Link>
@@ -746,17 +746,17 @@ export function Header() {
                   <Link
                     href={item.href}
                     className={`flex h-10 items-center gap-1 whitespace-nowrap rounded-lg px-2.5 text-[12px] font-semibold leading-none transition-all duration-300 xl:px-3 xl:text-[13px] ${
-                      pathname === item.href ? 'text-white' : 'text-slate-400 hover:text-white'
+                      pathname === item.href ? "text-ocean-800" : "text-slate-600 hover:text-ocean-700"
                     }`}
                   >
                     {item.label}
-                    {item.hasDropdown && <ChevronDown className={`h-3 w-3 shrink-0 transition-transform ${openDropdown === item.label.toLowerCase() ? 'rotate-180' : ''}`} />}
+                    {item.hasDropdown && <ChevronDown className={`h-3 w-3 shrink-0 transition-transform ${openDropdown === item.label.toLowerCase() ? "rotate-180" : ""}`} />}
                   </Link>
                   
                   {pathname === item.href && (
                     <motion.div
                       layoutId="nav-line"
-                      className="absolute bottom-1 left-2.5 right-2.5 h-0.5 bg-white shadow-[0_0_12px_rgba(255,255,255,0.45)]"
+                      className="absolute bottom-1 left-2.5 right-2.5 h-0.5 bg-ocean-600 shadow-[0_0_12px_rgba(2,106,255,0.35)]"
                     />
                   )}
 
@@ -779,7 +779,7 @@ export function Header() {
             <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-3">
               <Link
                 href="/contact"
-                className="hidden rounded-xl border border-white/15 px-3 py-2 text-xs font-semibold text-slate-200 transition-colors hover:border-[#143296cc]/50 hover:bg-white/[0.04] sm:inline-flex lg:hidden"
+                className="hidden rounded-xl border border-slate-200 bg-slate-50/80 px-3 py-2 text-xs font-semibold text-slate-800 transition-colors hover:border-ocean-300 hover:bg-ocean-50/80 sm:inline-flex lg:hidden"
               >
                 Contact
               </Link>
@@ -790,7 +790,7 @@ export function Header() {
               />
               <button
                 type="button"
-                className="inline-flex shrink-0 rounded-xl p-2.5 text-white hover:bg-white/5 lg:hidden"
+                className="inline-flex shrink-0 rounded-xl p-2.5 text-slate-800 hover:bg-slate-100 lg:hidden"
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isMenuOpen}
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -811,7 +811,7 @@ export function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-[40] bg-[#00000a]/70 backdrop-blur-[2px] lg:hidden"
+              className="fixed inset-0 z-[40] bg-slate-900/40 backdrop-blur-[2px] lg:hidden"
               aria-label="Close menu"
               onClick={() => setIsMenuOpen(false)}
             />
@@ -823,19 +823,19 @@ export function Header() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 30, stiffness: 360 }}
-              className="fixed inset-x-0 bottom-0 z-[50] flex max-h-[min(90dvh,calc(100dvh-5.25rem))] flex-col rounded-t-3xl border border-white/10 border-b-0 bg-[#050814] shadow-[0_-20px_60px_rgba(0,0,0,0.55)] sm:inset-x-auto sm:bottom-6 sm:left-auto sm:right-4 sm:top-20 sm:max-h-[min(calc(100dvh-6.5rem),680px)] sm:w-[min(22rem,calc(100vw-1.5rem))] sm:rounded-3xl sm:border-b sm:border-white/10 md:right-6 md:top-24 lg:hidden"
+              className="fixed inset-x-0 bottom-0 z-[50] flex max-h-[min(90dvh,calc(100dvh-5.25rem))] flex-col rounded-t-3xl border border-slate-200 border-b-0 bg-white shadow-[0_-20px_60px_rgba(15,23,42,0.12)] sm:inset-x-auto sm:bottom-6 sm:left-auto sm:right-4 sm:top-20 sm:max-h-[min(calc(100dvh-6.5rem),680px)] sm:w-[min(22rem,calc(100vw-1.5rem))] sm:rounded-3xl sm:border-b sm:border-slate-200 md:right-6 md:top-24 lg:hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex shrink-0 items-center justify-between gap-3 border-b border-white/[0.07] px-4 py-3 sm:rounded-t-3xl sm:px-5 sm:py-4">
+              <div className="flex shrink-0 items-center justify-between gap-3 border-b border-slate-200 px-4 py-3 sm:rounded-t-3xl sm:px-5 sm:py-4">
                 <div>
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-blue-400/90">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-ocean-600">
                     Navigate
                   </p>
-                  <p className="text-sm font-semibold text-white">OceanCyber</p>
+                  <p className="text-sm font-semibold text-slate-900">OceanCyber</p>
                 </div>
                 <button
                   type="button"
-                  className="rounded-xl border border-white/10 p-2 text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
+                  className="rounded-xl border border-slate-200 p-2 text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
                   aria-label="Close menu"
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -849,8 +849,8 @@ export function Header() {
                     href={homeNav.href}
                     className={`mb-4 flex items-center justify-between rounded-2xl border px-4 py-3.5 text-sm font-bold transition-colors sm:py-4 ${
                       pathname === homeNav.href
-                        ? "border-[#143296cc]/50 bg-[#143296cc]/15 text-white"
-                        : "border-white/[0.08] bg-white/[0.04] text-slate-100 hover:border-[#143296cc]/35"
+                        ? "border-ocean-300 bg-ocean-50 text-ocean-900"
+                        : "border-slate-200 bg-slate-50/80 text-slate-800 hover:border-ocean-200"
                     }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -895,8 +895,8 @@ export function Header() {
                       href={item.href}
                       className={`rounded-2xl border px-4 py-3.5 text-sm font-semibold transition-colors ${
                         pathname === item.href
-                          ? "border-white/20 bg-white/[0.08] text-white"
-                          : "border-white/[0.06] bg-white/[0.02] text-slate-200 hover:border-[#143296cc]/40 hover:bg-white/[0.05]"
+                          ? "border-ocean-200 bg-ocean-50/80 text-ocean-900"
+                          : "border-slate-200 bg-slate-50/50 text-slate-800 hover:border-ocean-200 hover:bg-slate-50"
                       }`}
                       onClick={() => setIsMenuOpen(false)}
                     >
@@ -906,26 +906,26 @@ export function Header() {
                 </div>
               </div>
 
-              <div className="shrink-0 space-y-2 border-t border-white/[0.07] bg-[#070c26] px-4 py-4 sm:rounded-b-3xl sm:px-5">
+              <div className="shrink-0 space-y-2 border-t border-slate-200 bg-slate-50/90 px-4 py-4 sm:rounded-b-3xl sm:px-5">
                 <WhatsAppButton variant="default" size="md" className="w-full" />
                 <Link
                   href="/contact"
-                  className="flex w-full items-center justify-center rounded-xl border border-white/15 py-3 text-sm font-semibold text-white transition-colors hover:border-[#143296cc]/50 hover:bg-[#143296cc]/10"
+                  className="flex w-full items-center justify-center rounded-xl border border-slate-200 py-3 text-sm font-semibold text-slate-800 transition-colors hover:border-ocean-300 hover:bg-ocean-50/60"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Contact form
                 </Link>
-                <div className="border-t border-white/[0.08] pt-4">
+                <div className="border-t border-slate-200 pt-4">
                   <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
                     Reach us
                   </p>
-                  <div className="flex flex-col gap-2.5 text-[11px] font-bold uppercase tracking-widest text-white">
+                  <div className="flex flex-col gap-2.5 text-[11px] font-bold uppercase tracking-widest text-slate-800">
                     <a
                       href="tel:+233242565695"
                       className="flex items-center gap-2.5 transition-opacity hover:opacity-90"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      <Phone className="h-3.5 w-3.5 shrink-0 text-blue-200/90" aria-hidden />
+                      <Phone className="h-3.5 w-3.5 shrink-0 text-ocean-600" aria-hidden />
                       <span>+233 242 565 695</span>
                     </a>
                     <a
@@ -933,7 +933,7 @@ export function Header() {
                       className="flex items-center gap-2.5 break-all transition-opacity hover:opacity-90"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      <Mail className="h-3.5 w-3.5 shrink-0 text-blue-200/90" aria-hidden />
+                      <Mail className="h-3.5 w-3.5 shrink-0 text-ocean-600" aria-hidden />
                       <span>info@oceancyber.net</span>
                     </a>
                   </div>
@@ -944,7 +944,7 @@ export function Header() {
                         href={href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-slate-500 transition-colors hover:text-slate-300"
+                        className="text-slate-500 transition-colors hover:text-ocean-600"
                         aria-label={label}
                       >
                         <Icon size={16} strokeWidth={1.75} />

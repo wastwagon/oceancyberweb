@@ -16,7 +16,7 @@ Your world-class website is now ready for development and deployment.
    - Custom animations
 
 ### 3. **Components & home page (`/`)**
-   - **Header** (dark, fixed) and **Footer**
+   - **Header** (light bar, fixed) and **Footer**
    - **Home sections (in order):** `Hero` → `MarketingLeadStrip` (“Why teams work with us”) → `Stats` → `ProjectCostPromo` (GHS project calculator promo) → `Services` → `Portfolio` → `Testimonials` → `Contact`
    - **Hero** includes primary CTAs, a **Project cost calculator** link, and a **domain search** card (`HeroDomainBlock`); full domain flows live on **`/domains`**
    - **Project cost tool** (full wizard): **`/tools/project-cost`**
@@ -26,6 +26,7 @@ Your world-class website is now ready for development and deployment.
 ### 4. **Database & Backend**
    - **Prisma** + **PostgreSQL** — see `prisma/schema.prisma` (includes contacts, projects, **auth `User` with `role`**, **billing**: wallet ledger, renewals, `PaymentTransaction`, etc.)
    - **NestJS API** under `backend/src/` — **auth**, **billing** (Paystack, wallet, renewals), **admin**, mail, health
+   - **Marketing content in DB:** portfolio rows (`Project`) and homepage quotes (`Testimonial`) load on the public site from Postgres (with JSON fallbacks if tables are empty). Admins can manage them at **`/admin/content`** (requires admin JWT + `ADMIN_EMAILS`), instead of only Prisma Studio.
    - **Migrations** in `prisma/migrations/`; `docker compose` runs `prisma migrate deploy` on **web** and **backend** startup
    - **Headless CMS (Directus)** is **not** in this stack anymore (removed to avoid env/ops confusion)
 
@@ -80,6 +81,7 @@ This starts **postgres**, **redis**, **oceancyber-backend** (NestJS), and **ocea
 | **Latest UI on your Mac (Docker)** | From repo root: `docker compose up -d --build web` (rebuilds the Next image with your current files). Use **`http://localhost:3020`** unless you changed `FRONTEND_PORT`. Hard-refresh the browser. |
 | **Same UI on the public site (Coolify)** | 1) **Commit and push** to the branch Coolify deploys. 2) In Coolify, **Redeploy** the stack and use **rebuild** / clear build cache if the UI is stale. 3) Purge any **CDN** in front of the app. `NEXT_PUBLIC_*` values are baked in at **build** — change them in Coolify, then **rebuild `web`**. |
 | **Uncommitted work** | `git status` — if `app/` or `components/` show modified, those changes exist **only on your machine** until you commit and push. |
+| **Commits not on GitHub** | `git log origin/main..HEAD` — if this lists commits, run **`git push`** so Coolify (and teammates) see them. |
 
 ### Option B — Databases in Docker, apps on your machine
 
