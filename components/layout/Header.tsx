@@ -18,7 +18,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { WhatsAppButton } from "@/components/ghana-specific/WhatsAppButton";
 import { usePathname } from "next/navigation";
 import { CurrencySelector } from "@/components/currency/CurrencySelector";
-import { HeaderRegistrarChips } from "@/components/layout/HeaderRegistrarChips";
 
 function MegaMenu({
   isOpen,
@@ -330,10 +329,6 @@ export function Header() {
             </span>
           </div>
 
-          <div className="hidden min-w-0 max-w-[min(100%,20rem)] flex-1 items-center justify-center px-1 xl:flex xl:max-w-none 2xl:px-2">
-            <HeaderRegistrarChips className="max-w-full" />
-          </div>
-
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
             <WhatsAppButton
               variant="default"
@@ -557,11 +552,7 @@ export function Header() {
                 </div>
               </div>
 
-              <div className="shrink-0 space-y-3 border-t border-slate-200 bg-gradient-to-b from-slate-50/80 to-white px-4 py-4 sm:px-5">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500">
-                  Domains in Ghana cedis
-                </p>
-                <HeaderRegistrarChips dense className="rounded-xl border border-slate-200/80 bg-white/60 p-3" />
+              <div className="shrink-0 border-t border-slate-200 bg-gradient-to-b from-slate-50/80 to-white px-4 py-4 sm:px-5">
                 <CurrencySelector className="max-w-full sm:max-w-xs" compact={false} />
               </div>
 
