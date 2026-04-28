@@ -12,7 +12,7 @@ const bodySchema = z.object({
 });
 
 export async function POST(req: Request) {
-  const limited = rateLimitPublicApi(req, "domains-check");
+  const limited = await rateLimitPublicApi(req, "domains-check");
   if (limited) {
     return limited;
   }

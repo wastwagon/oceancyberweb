@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { getLocalChatReply } from "@/lib/chat-reply";
+import { rateLimitPublicApi } from "@/lib/rate-limit";
 
 const messageSchema = z.object({
   role: z.enum(["user", "assistant"]),
@@ -60,6 +61,11 @@ async function fetchOpenAIReply(
 }
 
 export async function POST(request: Request) {
+  const limited = await rateLimitPublicApi(request, "chat");
+  if (limited) {
+    return limited;
+  }
+
   let json: unknown;
   try {
     json = await request.json();

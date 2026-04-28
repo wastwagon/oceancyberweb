@@ -11,6 +11,7 @@ interface Service {
   features: string[];
   size: "featured" | "medium" | "small";
   highlight?: string;
+  href?: string;
 }
 
 const services: Service[] = [
@@ -20,48 +21,56 @@ const services: Service[] = [
     features: ["Next.js", "TypeScript", "Performance"],
     size: "featured",
     highlight: "Full-Stack Excellence",
+    href: "/services/web-development",
   },
   {
     title: "Mobile Apps",
     description: "Native and cross-platform applications that deliver exceptional user experiences.",
     features: ["React Native", "Flutter"],
     size: "medium",
+    href: "/services/mobile-apps",
   },
   {
     title: "E-Commerce",
     description: "Scalable online stores with seamless checkout and payment integrations.",
     features: ["Shopify", "WooCommerce"],
     size: "medium",
+    href: "/services/ecommerce",
   },
   {
     title: "SEO & Marketing",
     description: "Data-driven strategies that increase visibility and drive qualified traffic to your business.",
     features: ["Local SEO", "Content"],
     size: "small",
+    href: "/services",
   },
   {
     title: "Cybersecurity",
     description: "Comprehensive security solutions to protect your business from digital threats.",
     features: ["Audits", "Protection"],
     size: "small",
+    href: "/services/cybersecurity",
   },
   {
     title: "Cloud Solutions",
     description: "Scalable infrastructure and cloud migration services for modern businesses.",
     features: ["AWS", "Azure"],
     size: "small",
+    href: "/services",
   },
   {
     title: "Networking",
     description: "Robust network infrastructure ensuring reliable and secure connectivity.",
     features: ["Design", "Support"],
     size: "small",
+    href: "/services",
   },
   {
     title: "Custom Software",
     description: "Tailored solutions that automate processes and drive operational efficiency.",
     features: ["APIs", "Integration"],
     size: "medium",
+    href: "/services",
   },
 ];
 
@@ -157,7 +166,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         </div>
 
         <Link
-          href={`/services/${service.title.toLowerCase().replace(/\s+/g, "-")}`}
+          href={service.href ?? "/services"}
           className="inline-flex items-center gap-1.5 text-xs font-bold text-ocean-700 transition-colors group-hover:text-ocean-900 md:text-sm"
         >
           {isFeatured ? "Start Your Journey" : "Learn More"}

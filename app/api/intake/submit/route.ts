@@ -26,7 +26,7 @@ const intakeBodySchema = z.object({
 });
 
 export async function POST(request: Request) {
-  const limited = rateLimitPublicApi(request, "intake-submit");
+  const limited = await rateLimitPublicApi(request, "intake-submit");
   if (limited) {
     return limited;
   }

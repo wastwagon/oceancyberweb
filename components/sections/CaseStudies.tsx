@@ -174,7 +174,6 @@ export function CaseStudies() {
                       fill
                       className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                       sizes="(max-width: 768px) 100vw, 38vw"
-                      priority={index < 2}
                     />
                     <div
                       className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${study.gradient} opacity-[0.12]`}

@@ -17,7 +17,7 @@ const bodySchema = z.object({
 });
 
 export async function POST(request: Request) {
-  const limited = rateLimitPublicApi(request, "help-center-feedback");
+  const limited = await rateLimitPublicApi(request, "help-center-feedback");
   if (limited) return limited;
 
   let json: unknown;

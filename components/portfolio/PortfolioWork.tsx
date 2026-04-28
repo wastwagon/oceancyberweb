@@ -185,7 +185,6 @@ function FeaturedShowcase({
             alt={project.title}
             fill
             className="object-cover transition duration-700 group-hover:scale-105"
-            priority={index === 0}
             sizes="(max-width: 768px) 100vw, 100vw"
           />
         </motion.div>
@@ -260,7 +259,6 @@ function GridProjectCard({
           alt={project.title}
           fill
           className="object-cover transition duration-700 group-hover/card:scale-110"
-          priority={index < 2}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent" />
@@ -413,7 +411,6 @@ function HomeVerticalImageSlide({
               alt=""
               fill
               className="object-contain object-center p-1 transition duration-300 ease-out group-hover/vslide:opacity-[0.97]"
-              priority={index < 2}
               sizes="(max-width: 640px) 92vw, (max-width: 1280px) 45vw, 520px"
             />
           </div>

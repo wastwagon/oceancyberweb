@@ -34,7 +34,7 @@ const leadBody = z.object({
 });
 
 export async function POST(request: Request) {
-  const limited = rateLimitPublicApi(request, "project-calculator");
+  const limited = await rateLimitPublicApi(request, "project-calculator");
   if (limited) {
     return limited;
   }

@@ -77,6 +77,20 @@ export const getPortfolioCaseStudies = unstable_cache(
   { revalidate: 300, tags: ["portfolio"] },
 );
 
+export async function getPortfolioSlugs(): Promise<string[]> {
+  try {
+    const rows = await prisma.project.findMany({ select: { slug: true } });
+    const slugs = new Set(rows.map((row) => row.slug));
+    for (const project of fallbackPortfolioCaseStudies) {
+      slugs.add(project.slug);
+    }
+    return [...slugs];
+  } catch (e) {
+    logPortfolioLoaderError("[getPortfolioSlugs]", e);
+    return fallbackPortfolioCaseStudies.map((project) => project.slug);
+  }
+}
+
 export async function getPortfolioCaseStudyBySlug(
   slug: string,
 ): Promise<PortfolioCaseStudy | null> {

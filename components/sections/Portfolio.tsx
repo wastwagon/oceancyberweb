@@ -130,7 +130,6 @@ function FeaturedShowcase({ project, index }: { project: Project; index: number 
             alt={project.title}
             fill
             className="object-cover opacity-95 transition duration-700 group-hover:opacity-100"
-            priority={index === 0}
             sizes="(max-width: 768px) 100vw, 100vw"
           />
         </motion.div>
@@ -220,7 +219,6 @@ function GridProjectCard({
             alt={project.title}
             fill
             className="object-cover opacity-90 transition duration-500 group-hover/card:scale-105"
-            priority={index < 2}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
