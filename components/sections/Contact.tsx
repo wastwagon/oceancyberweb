@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Mail, MapPin, Phone } from "lucide-react";
+import Link from "next/link";
 import {
   Suspense,
   useCallback,
@@ -265,6 +266,12 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
             </div>
 
             <WhatsAppButton variant="default" size="lg" className="h-14 w-full" />
+            <Link
+              href="/services/website-to-mobile-app"
+              className="flex min-h-[56px] w-full items-center justify-center rounded-xl border border-ocean-300 bg-white px-4 text-sm font-semibold text-ocean-800 shadow-sm transition-colors hover:border-ocean-400 hover:bg-ocean-50/50"
+            >
+              Convert existing website to mobile app
+            </Link>
           </motion.div>
 
           <motion.div

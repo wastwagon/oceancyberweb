@@ -33,6 +33,20 @@ export default function DomainsPage() {
             checkout, and transfers are handled with you directly—we never expose API
             keys in the browser.
           </p>
+          <div className="mx-auto mt-8 grid max-w-3xl gap-3 sm:grid-cols-3">
+            {[
+              "Server-side Namecheap checks",
+              "Transparent GHS-first pricing",
+              "SSL + hosting add-ons available",
+            ].map((item) => (
+              <div
+                key={item}
+                className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-center text-xs font-semibold text-slate-700 shadow-sm"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -56,7 +70,7 @@ export default function DomainsPage() {
           </p>
           <Link
             href="/hosting"
-            className="mt-4 inline-flex min-h-[44px] items-center justify-center rounded-xl bg-ocean-600 px-6 text-sm font-bold text-white transition hover:bg-ocean-700"
+            className="mt-4 inline-flex min-h-[44px] items-center justify-center rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-6 text-sm font-bold text-white shadow-sm shadow-ocean-600/20 transition hover:brightness-110"
           >
             View hosting packages
           </Link>
@@ -80,9 +94,15 @@ export default function DomainsPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-ocean-600 px-8 text-sm font-bold text-white shadow-md transition hover:bg-ocean-700"
+            className="inline-flex min-h-[48px] items-center justify-center rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-8 text-sm font-bold text-white shadow-md shadow-ocean-600/20 transition hover:brightness-110"
           >
             Talk to sales
+          </Link>
+          <Link
+            href="/services/website-to-mobile-app"
+            className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-ocean-300 bg-ocean-50 px-6 text-sm font-semibold text-ocean-800 transition hover:border-ocean-400 hover:bg-ocean-100/70"
+          >
+            Convert website to mobile app
           </Link>
         </div>
       </section>

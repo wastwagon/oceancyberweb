@@ -231,6 +231,11 @@ export function Header() {
           link: "/services/mobile-apps",
         },
         {
+          heading: "Website to App Conversion",
+          description: "Bring your website and get a scoped mobile app conversion quote.",
+          link: "/services/website-to-mobile-app",
+        },
+        {
           heading: "E-Commerce",
           description: "Scalable online stores with seamless checkout and payment.",
           link: "/services/ecommerce",
@@ -330,6 +335,7 @@ export function Header() {
           </div>
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+            <CurrencySelector compact className="hidden lg:flex" />
             <WhatsAppButton
               variant="default"
               size="sm"
@@ -432,7 +438,26 @@ export function Header() {
           </div>
 
           <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2.5">
-            <CurrencySelector compact className="hidden min-[400px]:flex" />
+            <div className="hidden items-center gap-1.5 lg:flex">
+              <Link
+                href="/signin"
+                className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition-colors hover:border-ocean-300 hover:text-ocean-700"
+              >
+                Sign in
+              </Link>
+              <Link
+                href="/signup"
+                className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition-colors hover:border-ocean-300 hover:text-ocean-700"
+              >
+                Create account
+              </Link>
+              <Link
+                href="/get-started"
+                className="rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-3 py-2 text-xs font-bold text-white shadow-sm shadow-ocean-600/20 transition-all hover:brightness-110"
+              >
+                Get started
+              </Link>
+            </div>
             <Link
               href="/contact"
               className="hidden rounded-xl border border-slate-200 bg-slate-50/80 px-3 py-2 text-xs font-semibold text-slate-800 transition-colors hover:border-ocean-300 hover:bg-ocean-50/80 sm:inline-flex lg:hidden"
@@ -558,6 +583,29 @@ export function Header() {
 
               <div className="shrink-0 space-y-2 border-t border-slate-200 bg-slate-50/90 px-4 py-4 sm:rounded-b-3xl sm:px-5">
                 <WhatsAppButton variant="default" size="md" className="w-full" />
+                <div className="grid grid-cols-2 gap-2">
+                  <Link
+                    href="/signin"
+                    className="flex min-h-[44px] items-center justify-center rounded-xl border border-slate-200 bg-white text-sm font-semibold text-slate-800 transition-colors hover:border-ocean-300 hover:bg-ocean-50/60"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Sign in
+                  </Link>
+                  <Link
+                    href="/signup"
+                    className="flex min-h-[44px] items-center justify-center rounded-xl border border-slate-200 bg-white text-sm font-semibold text-slate-800 transition-colors hover:border-ocean-300 hover:bg-ocean-50/60"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Create account
+                  </Link>
+                </div>
+                <Link
+                  href="/get-started"
+                  className="flex w-full items-center justify-center rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 py-3 text-sm font-bold text-white shadow-sm shadow-ocean-600/25 transition-all hover:brightness-110"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Get started
+                </Link>
                 <Link
                   href="/contact"
                   className="flex w-full items-center justify-center rounded-xl border border-slate-200 py-3 text-sm font-semibold text-slate-800 transition-colors hover:border-ocean-300 hover:bg-ocean-50/60"

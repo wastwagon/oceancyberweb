@@ -46,7 +46,7 @@ export default function HostingPage({
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="#packages"
-              className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-ocean-600 px-6 text-sm font-bold text-white shadow-md transition hover:bg-ocean-700"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-6 text-sm font-bold text-white shadow-md shadow-ocean-600/20 transition hover:brightness-110"
             >
               Compare packages
             </Link>
@@ -103,6 +103,46 @@ export default function HostingPage({
         initialBillingCycle={initialBillingCycle}
       />
 
+      <section className="border-t border-slate-200 bg-white py-12 md:py-16">
+        <div className="container mx-auto max-w-6xl px-4 md:px-6">
+          <h2 className="text-center text-xl font-bold text-slate-900 md:text-2xl">
+            Quick package comparison
+          </h2>
+          <div className="mt-6 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <table className="min-w-full text-left text-sm">
+              <thead className="bg-slate-50 text-slate-700">
+                <tr>
+                  <th className="px-4 py-3 font-semibold">Feature</th>
+                  <th className="px-4 py-3 font-semibold">Launch</th>
+                  <th className="px-4 py-3 font-semibold">Grow</th>
+                  <th className="px-4 py-3 font-semibold">Scale</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 text-slate-600">
+                <tr>
+                  <td className="px-4 py-3 font-medium text-slate-800">Best for</td>
+                  <td className="px-4 py-3">New business sites</td>
+                  <td className="px-4 py-3">Growing traffic stores</td>
+                  <td className="px-4 py-3">High-demand workloads</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-3 font-medium text-slate-800">Billing options</td>
+                  <td className="px-4 py-3">Monthly / Annual</td>
+                  <td className="px-4 py-3">Monthly / Annual</td>
+                  <td className="px-4 py-3">Monthly / Annual</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-3 font-medium text-slate-800">Onboarding support</td>
+                  <td className="px-4 py-3">Included</td>
+                  <td className="px-4 py-3">Included</td>
+                  <td className="px-4 py-3">Priority onboarding</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       <section className="border-t border-slate-200 bg-slate-50 py-12 md:py-16">
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <h2 className="text-center text-xl font-bold text-slate-900 md:text-2xl">
@@ -157,7 +197,7 @@ export default function HostingPage({
         </p>
         <Link
           href="/contact?topic=cPanel%20%2F%20WHM%20hosting%20advice"
-          className="mt-6 inline-flex min-h-[48px] items-center justify-center rounded-xl bg-ocean-600 px-8 text-sm font-bold text-white shadow-md transition hover:bg-ocean-700"
+          className="mt-6 inline-flex min-h-[48px] items-center justify-center rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-8 text-sm font-bold text-white shadow-md shadow-ocean-600/20 transition hover:brightness-110"
         >
           Talk to the team
         </Link>

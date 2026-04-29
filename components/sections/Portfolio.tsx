@@ -10,6 +10,11 @@ import { fadeUpProps, staggerDelay } from "@/lib/scroll-reveal";
 type Project = PortfolioCaseStudy;
 
 function ProjectRow({ project, index }: { project: Project; index: number }) {
+  const isLarge = index === 0;
+  const accent =
+    index % 2 === 0
+      ? "from-ocean-50 via-white to-cyan-50/70"
+      : "from-violet-50/60 via-white to-sky-50/60";
   return (
     <motion.div
       initial={{ opacity: 0, y: 18 }}
@@ -19,9 +24,16 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
     >
       <Link
         href={`/portfolio/${project.slug}`}
-        className="group grid gap-0 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-ocean-200 hover:shadow-md md:grid-cols-[1.15fr,1fr]"
+        className={`group relative grid gap-0 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-ocean-200 hover:shadow-md ${
+          isLarge ? "lg:grid-cols-[1.2fr,1fr]" : "md:grid-cols-[1.15fr,1fr]"
+        }`}
       >
-        <div className="relative min-h-[210px] overflow-hidden sm:min-h-[240px] md:min-h-[280px]">
+        <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${accent} opacity-70`} />
+        <div
+          className={`relative overflow-hidden ${
+            isLarge ? "min-h-[230px] sm:min-h-[280px] lg:min-h-[330px]" : "min-h-[210px] sm:min-h-[240px] md:min-h-[280px]"
+          }`}
+        >
           <Image
             src={project.image}
             alt={project.title}
@@ -29,12 +41,15 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
             className="object-cover transition duration-500 group-hover:scale-[1.03]"
             sizes="(max-width: 768px) 100vw, 60vw"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-transparent" />
         </div>
-        <div className="flex flex-col justify-center space-y-2.5 p-5 sm:space-y-3 sm:p-6 md:p-8">
+        <div className={`relative z-10 flex flex-col justify-center space-y-2.5 p-5 sm:space-y-3 sm:p-6 ${isLarge ? "lg:p-10" : "md:p-8"}`}>
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
             {project.category} · {project.year}
           </p>
-          <h3 className="text-lg font-bold tracking-tight text-slate-900 sm:text-xl md:text-2xl">{project.title}</h3>
+          <h3 className={`font-bold tracking-tight text-slate-900 ${isLarge ? "text-xl sm:text-2xl lg:text-3xl" : "text-lg sm:text-xl md:text-2xl"}`}>
+            {project.title}
+          </h3>
           <p className="text-sm text-slate-600">{project.client}</p>
           <p className="line-clamp-3 text-sm leading-relaxed text-slate-600 sm:line-clamp-none">{project.description}</p>
           {project.metrics ? (
@@ -55,7 +70,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
 export function Portfolio({ cases }: { cases?: PortfolioCaseStudy[] }) {
   const projects = cases && cases.length > 0 ? cases : staticProjects;
   const [featured, ...rest] = projects;
-  const conciseProjects = rest.slice(0, 2);
+  const conciseProjects = rest.slice(0, 4);
 
   return (
     <section
@@ -128,7 +143,7 @@ export function Portfolio({ cases }: { cases?: PortfolioCaseStudy[] }) {
         ) : null}
 
         {conciseProjects.length > 0 ? (
-          <div className="mx-auto mt-7 grid max-w-6xl gap-4 sm:mt-8 sm:gap-5 md:mt-10">
+          <div className="mx-auto mt-7 grid max-w-6xl gap-4 sm:mt-8 sm:gap-5 md:mt-10 lg:grid-cols-2">
             {conciseProjects.map((project, index) => (
               <ProjectRow key={project.slug} project={project} index={index} />
             ))}

@@ -42,6 +42,14 @@ const LEAD_FILTER_PRESETS = [
     q: "",
     dateRange: "all",
   },
+  {
+    id: "website-to-app",
+    label: "Website to app quote",
+    status: "all",
+    source: "website_to_app_quote",
+    q: "",
+    dateRange: "all",
+  },
 ] as const;
 
 const HELP_ARTICLE_LABELS: Record<string, string> = {
@@ -79,6 +87,19 @@ function projectCalcMidGhs(metadata: unknown): number | null {
   if (typeof n === "number" && Number.isFinite(n) && n > 0) {
     return Math.round(n);
   }
+  return null;
+}
+
+function websiteToAppBudgetSuggestion(metadata: unknown): number | null {
+  if (metadata == null || typeof metadata !== "object" || !("budgetBand" in metadata)) {
+    return null;
+  }
+  const band = (metadata as { budgetBand?: unknown }).budgetBand;
+  if (typeof band !== "string") return null;
+  if (band.includes("60,000+")) return 60000;
+  if (band.includes("30,000 - 60,000")) return 45000;
+  if (band.includes("15,000 - 30,000")) return 22500;
+  if (band.includes("Below GHS 15,000")) return 12000;
   return null;
 }
 
@@ -345,6 +366,7 @@ export default function AdminPage() {
     if (s === "proposal_request") return "Proposal request";
     if (s === "help_center_feedback") return "Help center feedback";
     if (s === "namecheap_unified_checkout") return "Namecheap unified checkout";
+    if (s === "website_to_app_quote") return "Website to app quote";
     if (s == null || s === "") return "—";
     return s;
   };
@@ -1072,6 +1094,7 @@ export default function AdminPage() {
                 <option value="proposal_request">Proposal request</option>
                 <option value="help_center_feedback">Help center feedback</option>
                 <option value="namecheap_unified_checkout">Namecheap unified checkout</option>
+                <option value="website_to_app_quote">Website to app quote</option>
               </select>
             </label>
             <label className="text-xs font-semibold text-slate-600">
@@ -1174,6 +1197,10 @@ export default function AdminPage() {
                 {(contacts ?? []).map((c) => {
                   const ghs = c.source === "project_calculator" ? projectCalcMidGhsLabel(c.metadata) : null;
                   const midGhs = c.source === "project_calculator" ? projectCalcMidGhs(c.metadata) : null;
+                  const websiteToAppSuggestedGhs =
+                    c.source === "website_to_app_quote"
+                      ? websiteToAppBudgetSuggestion(c.metadata)
+                      : null;
                   const linkedProjectId = linkedProjectIdFromNotes(c.notes);
                   const unifiedRef =
                     c.source === "namecheap_unified_checkout"
@@ -1276,19 +1303,25 @@ export default function AdminPage() {
                             </div>
                           </div>
                         ) : null}
-                        {c.source === "project_calculator" ? (
+                        {c.source === "project_calculator" || c.source === "website_to_app_quote" ? (
                           <div className="mt-2">
                             <button
                               type="button"
                               disabled={projectBusy || convertingLeadId === c.id}
                               onClick={async () => {
-                                const defaultTitle = `${c.name || "Client"} project`;
+                                const defaultTitle =
+                                  c.source === "website_to_app_quote"
+                                    ? `${c.name || "Client"} website-to-app project`
+                                    : `${c.name || "Client"} project`;
                                 const title = window
                                   .prompt("Project title", defaultTitle)
                                   ?.trim();
                                 if (!title) return;
 
-                                const suggested = midGhs ?? 0;
+                                const suggested =
+                                  c.source === "website_to_app_quote"
+                                    ? (websiteToAppSuggestedGhs ?? 0)
+                                    : (midGhs ?? 0);
                                 const amountRaw = window
                                   .prompt(
                                     "Total project amount (GHS)",
@@ -1311,7 +1344,10 @@ export default function AdminPage() {
                                   const created = await createAdminClientProject({
                                     userEmail: c.email,
                                     title,
-                                    description: `Created from project calculator lead ${c.id}.`,
+                                    description:
+                                      c.source === "website_to_app_quote"
+                                        ? `Created from website-to-app quote lead ${c.id}.`
+                                        : `Created from project calculator lead ${c.id}.`,
                                     totalAmountGhs,
                                     kickoffPercent: 30,
                                     buildPercent: 30,
@@ -1323,7 +1359,10 @@ export default function AdminPage() {
                                   await patchAdminContact(c.id, { notes: mergedNotes });
                                   setToast({
                                     kind: "success",
-                                    text: "Lead converted to client project (30/30/40).",
+                                    text:
+                                      c.source === "website_to_app_quote"
+                                        ? "Website-to-app lead converted to client project (30/30/40)."
+                                        : "Lead converted to client project (30/30/40).",
                                   });
                                   await load();
                                 } catch (x) {
@@ -1338,7 +1377,9 @@ export default function AdminPage() {
                               }}
                               className="rounded-md border border-ocean-300 bg-white px-2 py-1 text-[11px] font-semibold text-ocean-800 hover:border-ocean-400 disabled:opacity-60"
                             >
-                              {convertingLeadId === c.id ? "Converting..." : "Convert to project"}
+                              {convertingLeadId === c.id
+                                ? "Converting..."
+                                : "Convert to project"}
                             </button>
                           </div>
                         ) : null}

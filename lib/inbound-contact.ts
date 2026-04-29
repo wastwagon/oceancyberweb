@@ -8,6 +8,7 @@ export const CONTACT_SOURCE = {
   intakeWizard: "intake_wizard",
   proposalRequest: "proposal_request",
   helpCenterFeedback: "help_center_feedback",
+  websiteToAppQuote: "website_to_app_quote",
 } as const;
 
 /** `Contact.status` for triage (admin + reporting). */
@@ -80,4 +81,20 @@ export type HelpCenterFeedbackMetadata = {
   helpful: boolean;
   issue: string | null;
   query: string | null;
+};
+
+export const WEBSITE_TO_APP_QUOTE_METADATA_VERSION = 1 as const;
+
+/** Stored in `Contact.metadata` for `website_to_app_quote` rows. */
+export type WebsiteToAppQuoteMetadata = {
+  v: typeof WEBSITE_TO_APP_QUOTE_METADATA_VERSION;
+  websiteUrl: string;
+  currentStack: string | null;
+  desiredPlatforms: Array<"ios" | "android" | "both">;
+  needsAuth: boolean;
+  needsPayments: boolean;
+  needsPushNotifications: boolean;
+  timelineBand: string;
+  budgetBand: string;
+  notes: string | null;
 };

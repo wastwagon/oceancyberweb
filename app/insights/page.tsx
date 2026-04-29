@@ -208,6 +208,35 @@ export default function InsightsPage() {
         </div>
       </section>
 
+      <section className="relative z-10 border-b border-slate-200/70 bg-white/70 py-8 md:py-10">
+        <div className="container mx-auto max-w-6xl px-6 md:px-8">
+          <div className="grid gap-3 md:grid-cols-3">
+            {[
+              {
+                title: "Security & resilience",
+                body: "Threat posture, incident readiness, and practical controls for teams shipping fast.",
+              },
+              {
+                title: "Platform decisions",
+                body: "Architecture patterns, stack trade-offs, and execution sequencing that reduces rework.",
+              },
+              {
+                title: "Growth systems",
+                body: "How product, commerce, and automation choices influence conversion and retention.",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm ring-1 ring-slate-200/50"
+              >
+                <p className="text-sm font-bold text-slate-900">{item.title}</p>
+                <p className="mt-1 text-xs leading-relaxed text-slate-600">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="relative z-10 py-16 md:py-20">
         <div className="container mx-auto max-w-6xl px-6 md:px-8">
           {filtered.length === 0 ? (
@@ -359,6 +388,12 @@ export default function InsightsPage() {
             <p className="mt-4 text-xs text-slate-500">
               No spam. Unsubscribe anytime, once the program is live.
             </p>
+            <Link
+              href="/services/website-to-mobile-app"
+              className="mt-4 inline-flex min-h-[42px] items-center justify-center rounded-xl border border-ocean-300 bg-ocean-50 px-5 text-xs font-semibold uppercase tracking-[0.12em] text-ocean-800 transition hover:border-ocean-400 hover:bg-ocean-100/70"
+            >
+              Convert existing website to app
+            </Link>
           </motion.div>
         </div>
       </section>

@@ -11,6 +11,7 @@ function sourceLabel(source: string | null) {
   if (source === "intake_wizard") return "Interactive intake";
   if (source === "proposal_request") return "Proposal request";
   if (source === "namecheap_unified_checkout") return "Namecheap unified checkout";
+  if (source === "website_to_app_quote") return "Website to app quote";
   return source || "General";
 }
 
@@ -51,20 +52,34 @@ export default function ClientRequestsPage() {
   }, []);
 
   return (
-    <main className="bg-slate-50 px-4 py-10 md:py-14">
+    <main className="bg-gradient-to-b from-slate-50 via-white to-slate-100 px-4 py-10 md:py-14">
       <div className="mx-auto w-full max-w-5xl space-y-6">
-        <header className="flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-ocean-600">Dashboard</p>
-            <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">Project requests</h1>
-            <p className="mt-1 text-sm text-slate-600">{email || "Signed-in user"}</p>
+        <header className="rounded-3xl border border-slate-200/90 bg-white p-5 shadow-sm ring-1 ring-slate-200/60 md:p-7">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-ocean-600">Dashboard</p>
+              <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">Project requests</h1>
+              <p className="mt-1 text-sm text-slate-600">{email || "Signed-in user"}</p>
+              <p className="mt-2 max-w-2xl text-sm text-slate-600">
+                Track submissions across intake, proposal requests, Namecheap checkout, and website-to-app quotes.
+              </p>
+            </div>
+            <div className="rounded-xl border border-ocean-200 bg-ocean-50 px-3 py-2 text-xs font-semibold text-ocean-800">
+              Lead status overview
+            </div>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="mt-4 flex flex-wrap gap-2">
             <Link
               href="/dashboard"
               className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-400"
             >
               Back to billing
+            </Link>
+            <Link
+              href="/services/website-to-mobile-app"
+              className="rounded-xl border border-ocean-300 bg-ocean-50 px-4 py-2 text-sm font-semibold text-ocean-800 hover:border-ocean-400"
+            >
+              Website to app quote
             </Link>
             <button
               type="button"

@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import {
   ArrowRight,
-  Blocks,
   Cloud,
   Globe,
   Lock,
@@ -15,6 +14,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { revealViewport, staggerDelay } from "@/lib/scroll-reveal";
+import { cn } from "@/lib/utils";
 
 interface Service {
   title: string;
@@ -75,16 +75,23 @@ const services: Service[] = [
     href: "/services",
   },
   {
-    title: "Custom Software",
-    description: "Tailored solutions that automate processes and drive operational efficiency.",
-    features: ["APIs", "Integration"],
-    icon: Blocks,
-    href: "/services",
+    title: "Website to App Conversion",
+    description: "Bring your existing website and convert it into a mobile app with a scoped, milestone-based delivery plan.",
+    features: ["iOS/Android", "UX mapping", "Quote-first"],
+    icon: Smartphone,
+    href: "/services/website-to-mobile-app",
   },
 ];
 
 function ServiceCard({ service, index }: { service: Service; index: number }) {
   const Icon = service.icon;
+  const isFeatured = index === 0 || index === 3;
+  const tone =
+    index % 3 === 0
+      ? "from-ocean-50 via-cyan-50/70 to-white"
+      : index % 3 === 1
+        ? "from-emerald-50/70 via-white to-ocean-50/40"
+        : "from-violet-50/60 via-white to-sky-50/70";
 
   return (
     <motion.div
@@ -92,27 +99,44 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={revealViewport}
       transition={staggerDelay(index, 0.06)}
-      className="group h-full rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-ocean-200 hover:shadow-md sm:p-5 md:p-6"
+      className={cn(
+        "group relative h-full overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-ocean-200 hover:shadow-md sm:p-5 md:p-6",
+        isFeatured && "md:col-span-2",
+      )}
     >
+      <div
+        className={cn(
+          "pointer-events-none absolute inset-0 bg-gradient-to-br opacity-60 transition-opacity duration-300 group-hover:opacity-80",
+          tone,
+        )}
+      />
+      <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-ocean-100/70 blur-2xl" />
       <div className="flex h-full flex-col">
-        <div className="mb-4 flex items-center justify-between">
-          <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-ocean-50 text-ocean-700 ring-1 ring-ocean-100">
+        <div className="relative z-10 mb-4 flex items-center justify-between">
+          <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ocean-200/70 bg-white/80 text-ocean-700 ring-1 ring-ocean-100 backdrop-blur-sm">
             <Icon className="h-5 w-5" aria-hidden />
           </span>
           <span className="text-xs font-semibold text-slate-400">
             {String(index + 1).padStart(2, "0")}
           </span>
         </div>
-        <h3 className="text-base font-bold text-slate-900 sm:text-lg">{service.title}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-slate-600">
+        <h3
+          className={cn(
+            "relative z-10 font-bold text-slate-900",
+            isFeatured ? "text-xl sm:text-2xl" : "text-base sm:text-lg",
+          )}
+        >
+          {service.title}
+        </h3>
+        <p className="relative z-10 mt-2 text-sm leading-relaxed text-slate-600">
           {service.description}
         </p>
 
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="relative z-10 mt-4 flex flex-wrap gap-2">
           {service.features.map((feature) => (
             <span
               key={feature}
-              className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-medium text-slate-600"
+              className="rounded-full border border-slate-200/80 bg-white/85 px-2.5 py-1 text-[11px] font-medium text-slate-600 backdrop-blur-sm"
             >
               {feature}
             </span>
@@ -121,7 +145,10 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
 
         <Link
           href={service.href ?? "/services"}
-          className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-ocean-700 transition-colors hover:text-ocean-800"
+          className={cn(
+            "relative z-10 mt-5 inline-flex items-center gap-1.5 font-semibold text-ocean-700 transition-colors hover:text-ocean-800",
+            isFeatured ? "text-sm" : "text-sm",
+          )}
         >
           Explore service
           <ArrowRight className="h-4 w-4" aria-hidden />
@@ -167,6 +194,12 @@ function ServicesRail() {
         >
           All services
         </Link>
+        <Link
+          href="/services/website-to-mobile-app"
+          className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-ocean-300 bg-ocean-50/80 px-5 text-sm font-semibold text-ocean-800 transition hover:border-ocean-400 hover:bg-ocean-100/70"
+        >
+          Website to app quote
+        </Link>
       </div>
     </motion.aside>
   );
@@ -205,7 +238,7 @@ export function Services() {
         <div className="grid gap-6 lg:grid-cols-[0.95fr,1.55fr]">
           <ServicesRail />
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
             {services.map((service, index) => (
               <ServiceCard key={service.title} service={service} index={index} />
             ))}

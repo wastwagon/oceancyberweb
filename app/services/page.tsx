@@ -46,6 +46,18 @@ const services: ServiceCard[] = [
     href: "/services/mobile-apps",
   },
   {
+    title: "Website to mobile app conversion",
+    description:
+      "Bring your existing website and we convert it into an iOS/Android-ready app with a structured quote and migration roadmap.",
+    image: "/images/EGP Ghana.webp",
+    services: [
+      "Website architecture audit",
+      "Mobile UX conversion plan",
+      "Scoped quote with milestones",
+    ],
+    href: "/services/website-to-mobile-app",
+  },
+  {
     title: "E-commerce",
     description:
       "Checkout trust, catalog accuracy, and operations tooling, from launch campaigns to steady-state ops.",
