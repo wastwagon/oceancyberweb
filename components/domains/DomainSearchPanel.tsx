@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Loader2, Search, ShieldCheck, Globe2, Sparkles } from "lucide-react";
 import { FxPrice } from "@/components/currency/FxPrice";
+import { useCart } from "@/components/commerce/CartProvider";
 import { HERO_TLD_PRICING } from "@/lib/domain-tld-pricing";
 import { cn } from "@/lib/utils";
 
@@ -60,6 +61,7 @@ export function DomainSearchPanel({
   variant = "default",
   className,
 }: DomainSearchPanelProps) {
+  const { addItem } = useCart();
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -90,6 +92,39 @@ export function DomainSearchPanel({
     } finally {
       setLoading(false);
     }
+  }
+
+  function addDomainToCart(domain: string) {
+    addItem({
+      id: `domain-${domain}-${Date.now()}`,
+      kind: "domain",
+      label: domain,
+      planCode: "domain-standard-yearly",
+      priceGhs: 120,
+      interval: "year",
+      reference: `DOMAIN-${domain}`,
+      addons: [
+        {
+          id: "privacy",
+          label: "Domain privacy (Withheld for Privacy)",
+          priceGhs: 0,
+          selected: true,
+          required: true,
+        },
+        {
+          id: "ssl-positivessl",
+          label: "PositiveSSL (recommended)",
+          priceGhs: 45,
+          selected: false,
+        },
+        {
+          id: "premium-dns",
+          label: "Premium DNS",
+          priceGhs: 35,
+          selected: false,
+        },
+      ],
+    });
   }
 
   return (
@@ -198,13 +233,20 @@ export function DomainSearchPanel({
                       )}&ref=${encodeURIComponent(`DOMAIN-${r.domain}`)}`}
                       className="rounded-lg bg-ocean-600 px-4 py-2 text-xs font-bold text-white transition hover:bg-ocean-700"
                     >
-                      Start checkout
+                      Quick checkout
                     </Link>
-                    <Link
-                      href={`/contact?subject=${encodeURIComponent(`Domain: ${r.domain}`)}`}
+                    <button
+                      type="button"
+                      onClick={() => addDomainToCart(r.domain)}
                       className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-300"
                     >
-                      Talk to sales
+                      Add to cart
+                    </button>
+                    <Link
+                      href="/checkout/cart"
+                      className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-300"
+                    >
+                      View cart
                     </Link>
                   </div>
                 ) : null}

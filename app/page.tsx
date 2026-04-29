@@ -2,6 +2,7 @@ import { Hero } from "@/components/sections/Hero";
 import { MarketingLeadStrip } from "@/components/sections/MarketingLeadStrip";
 import { ProjectCostPromo } from "@/components/sections/ProjectCostPromo";
 import { Services } from "@/components/sections/Services";
+import { HostingHighlight } from "@/components/sections/HostingHighlight";
 import { Portfolio } from "@/components/sections/Portfolio";
 import { Stats } from "@/components/sections/Stats";
 import { Testimonials } from "@/components/sections/Testimonials";
@@ -25,6 +26,7 @@ export default async function Home() {
       <Stats />
       <ProjectCostPromo />
       <Services />
+      <HostingHighlight />
       <Portfolio cases={portfolioCases} />
       <Testimonials cards={testimonialCards} />
       <Contact />

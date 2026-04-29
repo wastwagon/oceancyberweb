@@ -10,7 +10,14 @@ function sourceLabel(source: string | null) {
   if (source === "chat") return "Chat";
   if (source === "intake_wizard") return "Interactive intake";
   if (source === "proposal_request") return "Proposal request";
+  if (source === "namecheap_unified_checkout") return "Namecheap unified checkout";
   return source || "General";
+}
+
+function unifiedCheckoutRef(metadata: unknown): string | null {
+  if (!metadata || typeof metadata !== "object") return null;
+  const maybe = (metadata as { checkoutRef?: unknown }).checkoutRef;
+  return typeof maybe === "string" && maybe.trim() ? maybe : null;
 }
 
 function statusBadge(status: string) {
@@ -129,6 +136,14 @@ export default function ClientRequestsPage() {
                         <td className="max-w-xl py-3 pr-4 text-slate-700">
                           {r.message.slice(0, 180)}
                           {r.message.length > 180 ? "..." : ""}
+                          {r.source === "namecheap_unified_checkout" ? (
+                            <p className="mt-1 text-xs text-slate-500">
+                              Ref:{" "}
+                              <span className="font-mono">
+                                {unifiedCheckoutRef(r.metadata) || "N/A"}
+                              </span>
+                            </p>
+                          ) : null}
                         </td>
                       </tr>
                     ))

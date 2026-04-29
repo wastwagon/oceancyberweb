@@ -9,7 +9,7 @@ import { fadeUpProps, staggerDelay } from "@/lib/scroll-reveal";
 
 type Project = PortfolioCaseStudy;
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+function ProjectRow({ project, index }: { project: Project; index: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 18 }}
@@ -19,25 +19,33 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     >
       <Link
         href={`/portfolio/${project.slug}`}
-        className="group block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-ocean-200 hover:shadow-md"
+        className="group grid gap-0 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-ocean-200 hover:shadow-md md:grid-cols-[1.15fr,1fr]"
       >
-        <div className="relative aspect-[16/10] overflow-hidden">
+        <div className="relative min-h-[210px] overflow-hidden sm:min-h-[240px] md:min-h-[280px]">
           <Image
             src={project.image}
             alt={project.title}
             fill
             className="object-cover transition duration-500 group-hover:scale-[1.03]"
-            sizes="(max-width: 768px) 100vw, 50vw"
+            sizes="(max-width: 768px) 100vw, 60vw"
           />
         </div>
-        <div className="space-y-2 p-5">
+        <div className="flex flex-col justify-center space-y-2.5 p-5 sm:space-y-3 sm:p-6 md:p-8">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
             {project.category} · {project.year}
           </p>
-          <h3 className="text-lg font-bold tracking-tight text-slate-900">{project.title}</h3>
+          <h3 className="text-lg font-bold tracking-tight text-slate-900 sm:text-xl md:text-2xl">{project.title}</h3>
           <p className="text-sm text-slate-600">{project.client}</p>
-          <p className="line-clamp-2 text-sm leading-relaxed text-slate-600">{project.description}</p>
-          <p className="pt-1 text-sm font-semibold text-ocean-700">View project →</p>
+          <p className="line-clamp-3 text-sm leading-relaxed text-slate-600 sm:line-clamp-none">{project.description}</p>
+          {project.metrics ? (
+            <p className="text-sm font-semibold text-slate-800">
+              Outcome:{" "}
+              <span className="text-ocean-700">
+                {project.metrics.increase} {project.metrics.metric}
+              </span>
+            </p>
+          ) : null}
+          <p className="pt-1 text-sm font-semibold text-ocean-700">View case study →</p>
         </div>
       </Link>
     </motion.div>
@@ -47,29 +55,29 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 export function Portfolio({ cases }: { cases?: PortfolioCaseStudy[] }) {
   const projects = cases && cases.length > 0 ? cases : staticProjects;
   const [featured, ...rest] = projects;
-  const conciseProjects = rest.slice(0, 3);
+  const conciseProjects = rest.slice(0, 2);
 
   return (
     <section
       id="portfolio"
-      className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50 to-white pb-20 pt-24 md:pb-24 md:pt-28"
+      className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50 to-white pb-20 pt-20 md:pb-24 md:pt-28"
     >
-      <div className="container relative z-10 mx-auto px-6 md:px-8">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 md:px-8">
         <motion.div {...fadeUpProps} className="mx-auto max-w-6xl text-center">
           <motion.span
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-12% 0px" }}
             transition={{ duration: 0.45 }}
-            className="mb-5 inline-flex items-center rounded-full border border-ocean-200 bg-ocean-50/95 px-5 py-2.5 text-sm font-medium tracking-wide text-ocean-800 shadow-sm"
+            className="mb-5 inline-flex items-center rounded-full border border-ocean-200 bg-ocean-50/95 px-4 py-2 text-xs font-medium tracking-wide text-ocean-800 shadow-sm sm:px-5 sm:py-2.5 sm:text-sm"
           >
-            Selected Work
+            Recent Case Studies
           </motion.span>
-          <h2 className="mb-5 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl lg:text-6xl">
-            Portfolio that proves outcomes
+          <h2 className="mb-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl md:mb-5 md:text-5xl lg:text-6xl">
+            Work presented like top agency portfolios
           </h2>
-          <p className="mx-auto max-w-2xl text-base leading-relaxed text-slate-600 md:text-lg">
-            Inspired by top global studio patterns: fewer, stronger case studies with clear context and easy next steps.
+          <p className="mx-auto max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base md:text-lg">
+            Curated to highlight business impact first: one flagship case, then concise project stories with clear outcomes.
           </p>
         </motion.div>
 
@@ -79,9 +87,9 @@ export function Portfolio({ cases }: { cases?: PortfolioCaseStudy[] }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10% 0px" }}
             transition={{ duration: 0.55 }}
-            className="mx-auto mt-12 grid max-w-6xl overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm md:grid-cols-2"
+            className="mx-auto mt-10 grid max-w-6xl overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm md:mt-12 md:grid-cols-2"
           >
-            <div className="relative min-h-[280px] md:min-h-[430px]">
+            <div className="relative min-h-[230px] sm:min-h-[280px] md:min-h-[430px]">
               <Image
                 src={featured.image}
                 alt={featured.title}
@@ -90,17 +98,25 @@ export function Portfolio({ cases }: { cases?: PortfolioCaseStudy[] }) {
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
-            <div className="flex flex-col justify-center p-6 md:p-10 lg:p-12">
+            <div className="flex flex-col justify-center p-5 sm:p-6 md:p-10 lg:p-12">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-ocean-700">
                 Featured case
               </p>
-              <h3 className="mt-3 text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
+              <h3 className="mt-2.5 text-xl font-bold tracking-tight text-slate-900 sm:text-2xl md:mt-3 md:text-3xl">
                 {featured.title}
               </h3>
               <p className="mt-1 text-sm text-slate-600">{featured.client}</p>
               <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-slate-600 md:line-clamp-2 md:text-base">
                 {featured.description}
               </p>
+              {featured.metrics ? (
+                <p className="mt-3 text-sm font-semibold text-slate-800">
+                  Outcome:{" "}
+                  <span className="text-ocean-700">
+                    {featured.metrics.increase} {featured.metrics.metric}
+                  </span>
+                </p>
+              ) : null}
               <Link
                 href={`/portfolio/${featured.slug}`}
                 className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-ocean-700"
@@ -112,9 +128,9 @@ export function Portfolio({ cases }: { cases?: PortfolioCaseStudy[] }) {
         ) : null}
 
         {conciseProjects.length > 0 ? (
-          <div className="mx-auto mt-8 grid max-w-6xl gap-6 md:mt-10 md:grid-cols-2">
+          <div className="mx-auto mt-7 grid max-w-6xl gap-4 sm:mt-8 sm:gap-5 md:mt-10">
             {conciseProjects.map((project, index) => (
-              <ProjectCard key={project.slug} project={project} index={index} />
+              <ProjectRow key={project.slug} project={project} index={index} />
             ))}
           </div>
         ) : null}
@@ -122,14 +138,14 @@ export function Portfolio({ cases }: { cases?: PortfolioCaseStudy[] }) {
         <motion.div
           {...fadeUpProps}
           transition={{ ...fadeUpProps.transition, delay: 0.12 }}
-          className="mx-auto mt-14 max-w-6xl text-center md:mt-16"
+          className="mx-auto mt-12 max-w-6xl text-center md:mt-16"
         >
           <div className="mx-auto max-w-2xl">
-            <h3 className="mb-3 text-2xl font-bold text-slate-900 md:text-3xl">
+            <h3 className="mb-3 text-xl font-bold text-slate-900 sm:text-2xl md:text-3xl">
               Want a portfolio-worthy project?
             </h3>
-            <p className="mb-6 text-slate-600">Tell us your goals and we&apos;ll recommend the best engagement path.</p>
-            <div className="flex flex-wrap items-center justify-center gap-3">
+            <p className="mb-5 text-sm text-slate-600 sm:mb-6 sm:text-base">Tell us your goals and we&apos;ll recommend the best engagement path.</p>
+            <div className="grid w-full max-w-md grid-cols-1 gap-2.5 sm:flex sm:max-w-none sm:flex-wrap sm:items-center sm:justify-center sm:gap-3">
               <Link
                 href="/contact"
                 className="inline-flex min-h-[48px] items-center justify-center rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-7 py-3 text-sm font-bold text-white shadow-md shadow-ocean-600/20 transition hover:brightness-110 active:scale-[0.98]"

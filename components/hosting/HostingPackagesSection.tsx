@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Check } from "lucide-react";
+import { useCart } from "@/components/commerce/CartProvider";
 import { FxPrice } from "@/components/currency/FxPrice";
 import { cn } from "@/lib/utils";
 import { HOSTING_PACKAGES, type HostingPackage } from "@/lib/hosting-packages";
@@ -42,6 +43,7 @@ export function HostingPackagesSection({
   id?: string;
   initialBillingCycle?: "monthly" | "annual";
 }) {
+  const { addItem } = useCart();
   const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">(
     initialBillingCycle,
   );
@@ -212,6 +214,46 @@ export function HostingPackagesSection({
               )}
             >
               Start {billingCycle === "annual" ? "annual" : "monthly"} checkout
+            </Link>
+            <button
+              type="button"
+              onClick={() =>
+                addItem({
+                  id: `hosting-${pkg.id}-${billingCycle}-${Date.now()}`,
+                  kind: "hosting",
+                  label: `${pkg.name} (${billingCycle === "annual" ? "Annual" : "Monthly"})`,
+                  planCode: planCheckoutCodeByCycle(pkg, billingCycle),
+                  priceGhs:
+                    billingCycle === "monthly"
+                      ? pkg.priceMonthlyGhs
+                      : annualMonthlyEquivalent * 12,
+                  interval: billingCycle === "monthly" ? "month" : "year",
+                  reference: `HOST-${pkg.id.toUpperCase()}-${billingCycle.toUpperCase()}`,
+                  addons: [
+                    {
+                      id: "ssl-basic",
+                      label: "PositiveSSL (1 domain)",
+                      priceGhs: 45,
+                      selected: false,
+                    },
+                    {
+                      id: "daily-backup-plus",
+                      label: "Backup Plus",
+                      priceGhs: 30,
+                      selected: false,
+                    },
+                  ],
+                })
+              }
+              className="mt-2 inline-flex min-h-[40px] w-full items-center justify-center rounded-lg border border-slate-200 bg-white px-4 text-xs font-semibold text-slate-700 transition hover:border-slate-300"
+            >
+              Add to cart
+            </button>
+            <Link
+              href="/checkout/cart"
+              className="mt-2 inline-flex min-h-[40px] w-full items-center justify-center rounded-lg border border-slate-200 bg-white px-4 text-xs font-semibold text-slate-700 transition hover:border-slate-300"
+            >
+              View cart
             </Link>
             <Link
               href={planContactHref(pkg)}
