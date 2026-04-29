@@ -92,6 +92,35 @@ function extractAttr(xml: string, tag: string, attr: string): string | undefined
   return m?.[1];
 }
 
+function normalizeNamecheapPhone(phone: string): string {
+  const raw = phone.trim();
+  if (!raw) return raw;
+
+  if (raw.startsWith("+") && raw.includes(".")) {
+    return raw;
+  }
+
+  const compact = raw.replace(/[^\d+]/g, "");
+  if (!compact.startsWith("+")) {
+    return raw;
+  }
+
+  const digits = compact.slice(1);
+  if (digits.length < 7) {
+    return raw;
+  }
+
+  // Namecheap expects +<country code>.<number>; default split uses 1-3 digit country codes.
+  const ccLength = digits.length > 11 ? 3 : digits.length > 10 ? 2 : 1;
+  const countryCode = digits.slice(0, ccLength);
+  const localNumber = digits.slice(ccLength);
+  if (!localNumber) {
+    return raw;
+  }
+
+  return `+${countryCode}.${localNumber}`;
+}
+
 function addContactParams(prefix: string, contact: NamecheapAddress): URLSearchParams {
   const p = new URLSearchParams();
   p.set(`${prefix}FirstName`, contact.firstName);
@@ -101,7 +130,7 @@ function addContactParams(prefix: string, contact: NamecheapAddress): URLSearchP
   p.set(`${prefix}StateProvince`, contact.stateProvince);
   p.set(`${prefix}PostalCode`, contact.postalCode);
   p.set(`${prefix}Country`, contact.country);
-  p.set(`${prefix}Phone`, contact.phone);
+  p.set(`${prefix}Phone`, normalizeNamecheapPhone(contact.phone));
   p.set(`${prefix}EmailAddress`, contact.emailAddress);
   p.set(`${prefix}OrganizationName`, contact.organizationName || "");
   return p;
