@@ -76,8 +76,88 @@ model User {
   renewals            UserRenewal[]
   paymentTransactions PaymentTransaction[]
   walletLedger        WalletLedger[]
+  projects            ClientProject[]
 
   @@index([email])
+}
+
+model ClientProject {
+  id               String   @id @default(cuid())
+  userId           String
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title            String
+  description      String?
+  status           String   @default("planning")
+  totalAmountMinor BigInt
+  currency         String   @default("GHS")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  milestones ProjectMilestone[]
+  invoices   ProjectInvoice[]
+  activities ProjectActivity[]
+
+  @@index([userId, createdAt])
+  @@index([status, createdAt])
+}
+
+model ProjectMilestone {
+  id          String   @id @default(cuid())
+  projectId   String
+  project     ClientProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  code        String
+  title       String
+  orderIndex  Int
+  percentage  Int
+  amountMinor BigInt
+  status      String   @default("locked")
+  unlockedAt  DateTime?
+  paidAt      DateTime?
+  dueAt       DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  invoice ProjectInvoice?
+
+  @@unique([projectId, code])
+  @@unique([projectId, orderIndex])
+  @@index([projectId, status])
+}
+
+model ProjectInvoice {
+  id                   String   @id @default(cuid())
+  projectId            String
+  project              ClientProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  milestoneId          String?  @unique
+  milestone            ProjectMilestone? @relation(fields: [milestoneId], references: [id], onDelete: SetNull)
+  invoiceNumber        String   @unique
+  title                String
+  amountMinor          BigInt
+  currency             String   @default("GHS")
+  status               String   @default("draft")
+  dueAt                DateTime?
+  issuedAt             DateTime?
+  paidAt               DateTime?
+  paystackReference    String?  @unique
+  paymentTransactionId String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@index([projectId, status, createdAt])
+}
+
+model ProjectActivity {
+  id        String   @id @default(cuid())
+  projectId String
+  project   ClientProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  actorType String
+  actorId   String?
+  action    String
+  note      String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  @@index([projectId, createdAt])
 }
 
 model RenewalPlan {

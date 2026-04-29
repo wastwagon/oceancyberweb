@@ -110,6 +110,12 @@ export default function DashboardPage() {
               Requests
             </Link>
             <Link
+              href="/dashboard/projects"
+              className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-400"
+            >
+              Projects
+            </Link>
+            <Link
               href="/dashboard/statements"
               className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-400"
             >

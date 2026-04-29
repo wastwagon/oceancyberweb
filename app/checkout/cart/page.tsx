@@ -10,6 +10,22 @@ function intervalLabel(interval: "month" | "year") {
   return interval === "month" ? "/mo" : "/yr";
 }
 
+function isValidEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function isValidCountryCode(country: string) {
+  return /^[A-Z]{2}$/.test(country.trim().toUpperCase());
+}
+
+function isValidPostalCode(postalCode: string) {
+  return /^[a-zA-Z0-9\-\s]{2,20}$/.test(postalCode.trim());
+}
+
+function isValidPhone(phone: string) {
+  return /^\+[0-9().\-\s]{7,20}$/.test(phone.trim());
+}
+
 export default function CheckoutCartPage() {
   const { items, removeItem, toggleAddon, clearCart, totalGhs } = useCart();
   const [domainContact, setDomainContact] = useState({
@@ -62,27 +78,43 @@ export default function CheckoutCartPage() {
     setDomainContact((prev) => ({ ...prev, [key]: value }));
   }
 
-  function domainContactIsComplete() {
-    return Boolean(
-      domainContact.firstName.trim() &&
-        domainContact.lastName.trim() &&
-        domainContact.address1.trim() &&
-        domainContact.city.trim() &&
-        domainContact.stateProvince.trim() &&
-        domainContact.postalCode.trim() &&
-        domainContact.country.trim() &&
-        domainContact.phone.trim() &&
-        domainContact.emailAddress.trim(),
-    );
+  function validateDomainContact(): string | null {
+    if (
+      !domainContact.firstName.trim() ||
+      !domainContact.lastName.trim() ||
+      !domainContact.address1.trim() ||
+      !domainContact.city.trim() ||
+      !domainContact.stateProvince.trim() ||
+      !domainContact.postalCode.trim() ||
+      !domainContact.country.trim() ||
+      !domainContact.phone.trim() ||
+      !domainContact.emailAddress.trim()
+    ) {
+      return "Please complete all registrant contact fields for domain checkout.";
+    }
+    if (!isValidEmail(domainContact.emailAddress)) {
+      return "Use a valid registrant email address.";
+    }
+    if (!isValidCountryCode(domainContact.country)) {
+      return "Country must be a 2-letter code (for example, GH).";
+    }
+    if (!isValidPostalCode(domainContact.postalCode)) {
+      return "Postal code may only contain letters, numbers, spaces, and hyphens.";
+    }
+    if (!isValidPhone(domainContact.phone)) {
+      return "Phone must start with + and include country code (for example, +233201234567).";
+    }
+    return null;
   }
 
   async function checkoutAllNow() {
     if (items.length === 0) return;
-    if (hasDomainItems && !domainContactIsComplete()) {
-      setSubmitError(
-        "Please complete all registrant contact fields for domain checkout.",
-      );
-      return;
+    if (hasDomainItems) {
+      const validationError = validateDomainContact();
+      if (validationError) {
+        setSubmitError(validationError);
+        return;
+      }
     }
     setSubmitting(true);
     setSubmitError(null);
@@ -113,7 +145,7 @@ export default function CheckoutCartPage() {
                 city: domainContact.city.trim(),
                 stateProvince: domainContact.stateProvince.trim(),
                 postalCode: domainContact.postalCode.trim(),
-                country: domainContact.country.trim(),
+                country: domainContact.country.trim().toUpperCase(),
                 phone: domainContact.phone.trim(),
                 emailAddress: domainContact.emailAddress.trim(),
                 organizationName:

@@ -24,17 +24,31 @@ const cartItemSchema = z.object({
   addons: z.array(addonSchema).default([]),
 });
 
+const phoneSchema = z
+  .string()
+  .trim()
+  .regex(/^\+[0-9().\-\s]{7,20}$/, "Phone must start with + and include country code.");
+
 const contactSchema = z.object({
-  firstName: z.string().min(1),
-  lastName: z.string().min(1),
-  address1: z.string().min(1),
-  city: z.string().min(1),
-  stateProvince: z.string().min(1),
-  postalCode: z.string().min(1),
-  country: z.string().min(2),
-  phone: z.string().min(1),
+  firstName: z.string().trim().min(1).max(60),
+  lastName: z.string().trim().min(1).max(60),
+  address1: z.string().trim().min(1).max(120),
+  city: z.string().trim().min(1).max(80),
+  stateProvince: z.string().trim().min(1).max(80),
+  postalCode: z
+    .string()
+    .trim()
+    .min(2)
+    .max(20)
+    .regex(/^[a-zA-Z0-9\-\s]+$/, "Postal code can only include letters, numbers, spaces, and hyphens."),
+  country: z
+    .string()
+    .trim()
+    .toUpperCase()
+    .regex(/^[A-Z]{2}$/, "Country must be a 2-letter ISO code (e.g. GH)."),
+  phone: phoneSchema,
   emailAddress: z.string().email(),
-  organizationName: z.string().optional(),
+  organizationName: z.string().trim().max(120).optional(),
 });
 
 const bodySchema = z.object({
@@ -100,8 +114,11 @@ export async function POST(req: Request) {
 
   const parsed = bodySchema.safeParse(body);
   if (!parsed.success) {
+    const message =
+      parsed.error.issues[0]?.message ||
+      "Provide { items, domainContact? } with valid cart data.";
     return NextResponse.json(
-      { error: "Provide { items, domainContact? } with valid cart data." },
+      { error: message },
       { status: 400 },
     );
   }

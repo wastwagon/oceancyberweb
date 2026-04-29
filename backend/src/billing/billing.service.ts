@@ -660,6 +660,78 @@ export class BillingService {
         return;
       }
 
+      if (locked.type === "project_invoice") {
+        const invoiceId = String(oldMeta.invoiceId ?? "");
+        const projectId = String(oldMeta.projectId ?? "");
+        if (!invoiceId || !projectId) {
+          throw new BadRequestException("Missing project invoice metadata");
+        }
+
+        const invoice = await prisma.projectInvoice.findFirst({
+          where: {
+            id: invoiceId,
+            projectId,
+            project: { userId: locked.userId },
+          },
+          include: { milestone: true },
+        });
+        if (!invoice) {
+          throw new BadRequestException("Linked project invoice not found");
+        }
+
+        const now = new Date();
+        baseMeta.projectId = projectId;
+        baseMeta.invoiceId = invoiceId;
+        await prisma.paymentTransaction.update({
+          where: { id: locked.id },
+          data: { status: "success", metadata: baseMeta as Prisma.InputJsonValue },
+        });
+        await prisma.projectInvoice.update({
+          where: { id: invoice.id },
+          data: {
+            status: "paid",
+            paidAt: now,
+            paymentTransactionId: locked.id,
+          },
+        });
+
+        if (invoice.milestoneId) {
+          await prisma.projectMilestone.update({
+            where: { id: invoice.milestoneId },
+            data: { status: "paid", paidAt: now },
+          });
+          const nextMilestone = await prisma.projectMilestone.findFirst({
+            where: {
+              projectId,
+              orderIndex: { gt: invoice.milestone?.orderIndex ?? 0 },
+              status: "locked",
+            },
+            orderBy: { orderIndex: "asc" },
+          });
+          if (nextMilestone) {
+            await prisma.projectMilestone.update({
+              where: { id: nextMilestone.id },
+              data: { status: "unlocked", unlockedAt: now },
+            });
+            await prisma.projectInvoice.updateMany({
+              where: { milestoneId: nextMilestone.id, status: "draft" },
+              data: { status: "issued", issuedAt: now },
+            });
+          }
+        }
+        await prisma.projectActivity.create({
+          data: {
+            projectId,
+            actorType: "system",
+            actorId: locked.userId,
+            action: "invoice_paid",
+            note: `Invoice ${invoice.invoiceNumber} marked paid via Paystack.`,
+            metadata: { paymentTransactionId: locked.id },
+          },
+        });
+        return;
+      }
+
       await prisma.paymentTransaction.update({
         where: { id: locked.id },
         data: { status: "success", metadata: baseMeta as Prisma.InputJsonValue },
@@ -696,6 +768,13 @@ export class BillingService {
         row.user.email,
         "Subscription payment received",
         `Your payment of GHS ${amount} for ${item} was successful. Reference: ${row.providerReference}. You can manage renewals in your dashboard.`,
+      );
+    } else if (row.type === "project_invoice") {
+      const invoiceNumber = String(m.invoiceNumber || "project invoice");
+      await this.mail.send(
+        row.user.email,
+        "Project milestone payment received",
+        `Your payment of GHS ${amount} for ${invoiceNumber} was successful. Reference: ${row.providerReference}. Check your dashboard for updated milestone status.`,
       );
     }
   }

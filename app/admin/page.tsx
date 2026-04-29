@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import {
+  addAdminClientProjectActivity,
   clearAccessToken,
+  createAdminClientProject,
   getAdminContactPresetCounts,
   getAdminContacts,
   type AdminContactRow,
@@ -12,7 +14,10 @@ import {
   getAdminTransactions,
   getAdminUsers,
   getProfile,
+  listAdminClientProjects,
   patchAdminContact,
+  unlockAdminClientProjectMilestone,
+  updateAdminClientProjectStatus,
   downloadAdminContactsCsv,
   getAdminHelpCenterFeedbackSummary,
 } from "@/lib/auth-client";
@@ -47,6 +52,14 @@ const HELP_ARTICLE_LABELS: Record<string, string> = {
   "secure-launch": "Security checks before website launch",
 };
 
+const PROJECT_ACTIVITY_CATEGORIES = [
+  { id: "general", label: "General" },
+  { id: "client_feedback", label: "Client feedback" },
+  { id: "dev_update", label: "Dev update" },
+  { id: "blocker", label: "Blocker" },
+  { id: "approval", label: "Approval" },
+] as const;
+
 function projectCalcMidGhsLabel(metadata: unknown): string | null {
   if (metadata == null || typeof metadata !== "object" || !("totalMidGhs" in metadata)) {
     return null;
@@ -58,9 +71,46 @@ function projectCalcMidGhsLabel(metadata: unknown): string | null {
   return null;
 }
 
+function projectCalcMidGhs(metadata: unknown): number | null {
+  if (metadata == null || typeof metadata !== "object" || !("totalMidGhs" in metadata)) {
+    return null;
+  }
+  const n = (metadata as { totalMidGhs?: unknown }).totalMidGhs;
+  if (typeof n === "number" && Number.isFinite(n) && n > 0) {
+    return Math.round(n);
+  }
+  return null;
+}
+
 function truncate(s: string, n: number) {
   const t = s.replace(/\s+/g, " ").trim();
   return t.length <= n ? t : `${t.slice(0, n)}…`;
+}
+
+function linkedProjectIdFromNotes(notes: string | null): string | null {
+  if (!notes) return null;
+  const m = /Linked project:\s*([a-z0-9]+)/i.exec(notes);
+  return m?.[1] ?? null;
+}
+
+function activityCategory(activity: { metadata?: { category?: string } }): string {
+  const raw = activity.metadata?.category;
+  return typeof raw === "string" && raw.trim() ? raw : "general";
+}
+
+function projectHasOpenBlocker(
+  activities: Array<{ note?: string | null; metadata?: { category?: string }; createdAt: string }> | undefined,
+): boolean {
+  if (!activities || activities.length === 0) return false;
+  const sorted = [...activities].sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  );
+  for (const a of sorted) {
+    const note = (a.note || "").toLowerCase();
+    if (note.startsWith("blocker resolved:")) return false;
+    if (activityCategory(a) === "blocker") return true;
+  }
+  return false;
 }
 
 function checkoutRef(metadata: unknown): string | null {
@@ -271,6 +321,21 @@ export default function AdminPage() {
   const [email, setEmail] = useState("");
   const [retryingRef, setRetryingRef] = useState<string | null>(null);
   const [activeOrderChainRef, setActiveOrderChainRef] = useState<string | null>(null);
+  const [adminProjects, setAdminProjects] = useState<
+    Awaited<ReturnType<typeof listAdminClientProjects>> | null
+  >(null);
+  const [projectForm, setProjectForm] = useState({
+    userEmail: "",
+    title: "",
+    description: "",
+    totalAmountGhs: "",
+  });
+  const [projectBusy, setProjectBusy] = useState(false);
+  const [convertingLeadId, setConvertingLeadId] = useState<string | null>(null);
+  const [projectSearch, setProjectSearch] = useState("");
+  const [projectActivityDraft, setProjectActivityDraft] = useState<Record<string, string>>({});
+  const [projectActivityCategoryDraft, setProjectActivityCategoryDraft] = useState<Record<string, string>>({});
+  const [projectActivityFilter, setProjectActivityFilter] = useState<Record<string, string>>({});
 
   const sourceLabel = (s: string | null) => {
     if (s === "contact_form") return "Contact form";
@@ -284,6 +349,9 @@ export default function AdminPage() {
     return s;
   };
 
+  const normalizedProjectSearch = projectSearch.trim().toLowerCase();
+  const blockedProjects = (adminProjects ?? []).filter((p) => projectHasOpenBlocker(p.activities));
+
   const load = useCallback(async () => {
     setErr(null);
     setLeadLoading(true);
@@ -295,7 +363,7 @@ export default function AdminPage() {
     }
     setEmail(p.email);
     try {
-      const [a, b, c, d, e, f, g, h] = await Promise.all([
+      const [a, b, c, d, e, f, g, h, i] = await Promise.all([
         getAdminSummary(),
         getAdminUsers(40),
         getAdminTransactions(50),
@@ -310,6 +378,7 @@ export default function AdminPage() {
         getAdminHelpCenterFeedbackSummary({ dateRange: leadDateRange }),
         getAdminHelpCenterFeedbackSummary({ dateRange: "7d" }),
         getAdminHelpCenterFeedbackSummary({ dateRange: "30d" }),
+        listAdminClientProjects(),
       ]);
       setSummary(a);
       setUsers(b);
@@ -319,6 +388,7 @@ export default function AdminPage() {
       setHelpFeedback(f);
       setHelpFeedback7d(g);
       setHelpFeedback30d(h);
+      setAdminProjects(i);
       const counts = await getAdminContactPresetCounts({
         q: leadSearchDebounced,
         dateRange: leadDateRange,
@@ -522,6 +592,390 @@ export default function AdminPage() {
           </>
         ) : null}
 
+        <section id="admin-client-projects" className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="text-lg font-bold text-slate-900">Client projects (30/30/40)</h2>
+          <p className="mt-1 text-sm text-slate-600">
+            Create project milestones from accepted estimates, then unlock build/launch stages as delivery progresses.
+          </p>
+          <form
+            className="mt-3 grid gap-2 sm:grid-cols-4"
+            onSubmit={async (e) => {
+              e.preventDefault();
+              try {
+                setProjectBusy(true);
+                setErr(null);
+                await createAdminClientProject({
+                  userEmail: projectForm.userEmail.trim(),
+                  title: projectForm.title.trim(),
+                  description: projectForm.description.trim() || undefined,
+                  totalAmountGhs: Number(projectForm.totalAmountGhs),
+                  kickoffPercent: 30,
+                  buildPercent: 30,
+                  launchPercent: 40,
+                });
+                setProjectForm({ userEmail: "", title: "", description: "", totalAmountGhs: "" });
+                setToast({ kind: "success", text: "Project created with 30/30/40 milestones." });
+                await load();
+              } catch (x) {
+                const m = x instanceof Error ? x.message : "Could not create project";
+                setErr(m);
+                setToast({ kind: "error", text: m });
+              } finally {
+                setProjectBusy(false);
+              }
+            }}
+          >
+            <input
+              value={projectForm.userEmail}
+              onChange={(e) => setProjectForm((p) => ({ ...p, userEmail: e.target.value }))}
+              placeholder="Client email"
+              type="email"
+              required
+              className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900"
+            />
+            <input
+              value={projectForm.title}
+              onChange={(e) => setProjectForm((p) => ({ ...p, title: e.target.value }))}
+              placeholder="Project title"
+              required
+              className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900"
+            />
+            <input
+              value={projectForm.totalAmountGhs}
+              onChange={(e) => setProjectForm((p) => ({ ...p, totalAmountGhs: e.target.value }))}
+              placeholder="Total (GHS)"
+              type="number"
+              min={100}
+              required
+              className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900"
+            />
+            <button
+              type="submit"
+              disabled={projectBusy}
+              className="rounded-lg bg-ocean-600 px-3 py-2 text-sm font-semibold text-white hover:bg-ocean-700 disabled:opacity-60"
+            >
+              {projectBusy ? "Creating..." : "Create project"}
+            </button>
+            <input
+              value={projectForm.description}
+              onChange={(e) => setProjectForm((p) => ({ ...p, description: e.target.value }))}
+              placeholder="Optional description"
+              className="sm:col-span-4 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900"
+            />
+          </form>
+
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <input
+              value={projectSearch}
+              onChange={(e) => setProjectSearch(e.target.value)}
+              placeholder="Filter by project ID, title, or email"
+              className="w-full max-w-md rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900"
+            />
+            {projectSearch ? (
+              <button
+                type="button"
+                onClick={() => setProjectSearch("")}
+                className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 hover:border-slate-400"
+              >
+                Clear filter
+              </button>
+            ) : null}
+          </div>
+
+          <div className="mt-4 space-y-3">
+            {blockedProjects.length > 0 ? (
+              <div className="rounded-xl border border-rose-200 bg-rose-50 p-3">
+                <p className="text-xs font-bold uppercase tracking-wider text-rose-800">
+                  Blocked projects ({blockedProjects.length})
+                </p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {blockedProjects.map((p) => (
+                    <button
+                      key={`blocked-${p.id}`}
+                      type="button"
+                      onClick={() => {
+                        setProjectSearch(p.id);
+                        const target = document.getElementById(`project-card-${p.id}`);
+                        target?.scrollIntoView({ behavior: "smooth", block: "start" });
+                      }}
+                      className="rounded-lg border border-rose-300 bg-white px-2 py-1 text-xs font-semibold text-rose-900 hover:border-rose-400"
+                    >
+                      {p.title}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+            {(adminProjects ?? [])
+              .filter((p) => {
+                if (!normalizedProjectSearch) return true;
+                return (
+                  p.id.toLowerCase().includes(normalizedProjectSearch) ||
+                  p.title.toLowerCase().includes(normalizedProjectSearch) ||
+                  p.user.email.toLowerCase().includes(normalizedProjectSearch)
+                );
+              })
+              .map((p) => (
+              <div
+                id={`project-card-${p.id}`}
+                key={p.id}
+                className={`rounded-xl p-3 ${
+                  projectHasOpenBlocker(p.activities)
+                    ? "border border-rose-300 bg-rose-50/40"
+                    : "border border-slate-200 bg-slate-50"
+                }`}
+              >
+                <div className="flex flex-wrap items-start justify-between gap-2">
+                  <div>
+                    <p className="text-sm font-bold text-slate-900">{p.title}</p>
+                    <p className="text-xs text-slate-600">
+                      {p.user.email} · ₵{(Number(p.totalAmountMinor) / 100).toFixed(2)}
+                    </p>
+                    <p className="mt-0.5 text-[11px] font-mono text-slate-500">{p.id}</p>
+                  </div>
+                  <select
+                    value={p.status}
+                    className="rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs font-semibold text-slate-800"
+                    onChange={async (e) => {
+                      try {
+                        setProjectBusy(true);
+                        await updateAdminClientProjectStatus(p.id, { status: e.target.value });
+                        setToast({ kind: "success", text: "Project status updated." });
+                        await load();
+                      } catch (x) {
+                        const m = x instanceof Error ? x.message : "Could not update status";
+                        setErr(m);
+                        setToast({ kind: "error", text: m });
+                      } finally {
+                        setProjectBusy(false);
+                      }
+                    }}
+                  >
+                    {["planning", "active", "in_review", "ready_for_launch", "launched", "on_hold", "cancelled"].map(
+                      (s) => (
+                        <option key={s} value={s}>
+                          {s}
+                        </option>
+                      ),
+                    )}
+                  </select>
+                </div>
+                {projectHasOpenBlocker(p.activities) ? (
+                  <div className="mt-2">
+                    <button
+                      type="button"
+                      disabled={projectBusy}
+                      onClick={async () => {
+                        const details =
+                          window.prompt("Resolution note", "Issue resolved and work resumed.")?.trim() ||
+                          "Issue resolved and work resumed.";
+                        try {
+                          setProjectBusy(true);
+                          await addAdminClientProjectActivity(
+                            p.id,
+                            `Blocker resolved: ${details}`,
+                            "approval",
+                          );
+                          setToast({ kind: "success", text: "Blocker marked as resolved." });
+                          await load();
+                        } catch (x) {
+                          const msg = x instanceof Error ? x.message : "Could not resolve blocker";
+                          setErr(msg);
+                          setToast({ kind: "error", text: msg });
+                        } finally {
+                          setProjectBusy(false);
+                        }
+                      }}
+                      className="rounded-md border border-emerald-300 bg-white px-2.5 py-1 text-xs font-semibold text-emerald-800 hover:border-emerald-400 disabled:opacity-60"
+                    >
+                      Resolve blocker
+                    </button>
+                  </div>
+                ) : (
+                  <div className="mt-2">
+                    <button
+                      type="button"
+                      disabled={projectBusy}
+                      onClick={async () => {
+                        const details =
+                          window.prompt("Blocker details", "Regression detected during QA/UAT.")?.trim() ||
+                          "Regression detected during QA/UAT.";
+                        try {
+                          setProjectBusy(true);
+                          await addAdminClientProjectActivity(p.id, details, "blocker");
+                          setToast({ kind: "success", text: "Blocker reopened." });
+                          await load();
+                        } catch (x) {
+                          const msg = x instanceof Error ? x.message : "Could not reopen blocker";
+                          setErr(msg);
+                          setToast({ kind: "error", text: msg });
+                        } finally {
+                          setProjectBusy(false);
+                        }
+                      }}
+                      className="rounded-md border border-rose-300 bg-white px-2.5 py-1 text-xs font-semibold text-rose-800 hover:border-rose-400 disabled:opacity-60"
+                    >
+                      Re-open blocker
+                    </button>
+                  </div>
+                )}
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {p.milestones.map((m) => (
+                    <div key={m.id} className="rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-xs">
+                      <p className="font-semibold text-slate-800">
+                        {m.title} ({m.percentage}%)
+                      </p>
+                      <p className="text-slate-600">Status: {m.status}</p>
+                      {m.status === "locked" ? (
+                        <button
+                          type="button"
+                          disabled={projectBusy}
+                          onClick={async () => {
+                            try {
+                              setProjectBusy(true);
+                              await unlockAdminClientProjectMilestone(p.id, m.id);
+                              setToast({ kind: "success", text: `${m.title} unlocked.` });
+                              await load();
+                            } catch (x) {
+                              const msg =
+                                x instanceof Error ? x.message : "Could not unlock milestone";
+                              setErr(msg);
+                              setToast({ kind: "error", text: msg });
+                            } finally {
+                              setProjectBusy(false);
+                            }
+                          }}
+                          className="mt-1 rounded-md border border-slate-300 bg-white px-2 py-0.5 font-semibold text-slate-700 hover:border-slate-400 disabled:opacity-60"
+                        >
+                          Unlock
+                        </button>
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-2 flex flex-wrap items-center gap-2">
+                  <select
+                    value={projectActivityCategoryDraft[p.id] || "general"}
+                    onChange={(e) =>
+                      setProjectActivityCategoryDraft((prev) => ({
+                        ...prev,
+                        [p.id]: e.target.value,
+                      }))
+                    }
+                    className="rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-xs text-slate-800"
+                  >
+                    {PROJECT_ACTIVITY_CATEGORIES.map((cat) => (
+                      <option key={cat.id} value={cat.id}>
+                        {cat.label}
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    value={projectActivityDraft[p.id] || ""}
+                    onChange={(e) =>
+                      setProjectActivityDraft((prev) => ({ ...prev, [p.id]: e.target.value }))
+                    }
+                    placeholder="Add project note (e.g. Awaiting client content)"
+                    className="w-full max-w-md rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs text-slate-900"
+                  />
+                  <button
+                    type="button"
+                    disabled={projectBusy || !(projectActivityDraft[p.id] || "").trim()}
+                    onClick={async () => {
+                      const note = (projectActivityDraft[p.id] || "").trim();
+                      if (!note) return;
+                      const category = projectActivityCategoryDraft[p.id] || "general";
+                      try {
+                        setProjectBusy(true);
+                        await addAdminClientProjectActivity(
+                          p.id,
+                          note,
+                          category as "general" | "client_feedback" | "dev_update" | "blocker" | "approval",
+                        );
+                        setProjectActivityDraft((prev) => ({ ...prev, [p.id]: "" }));
+                        setToast({ kind: "success", text: "Project note added." });
+                        await load();
+                      } catch (x) {
+                        const msg = x instanceof Error ? x.message : "Could not add project note";
+                        setErr(msg);
+                        setToast({ kind: "error", text: msg });
+                      } finally {
+                        setProjectBusy(false);
+                      }
+                    }}
+                    className="rounded-md border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:border-slate-400 disabled:opacity-60"
+                  >
+                    Add note
+                  </button>
+                </div>
+                <div className="mt-3 rounded-lg border border-slate-200 bg-white p-2">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                      Recent activity
+                    </p>
+                    <select
+                      value={projectActivityFilter[p.id] || "all"}
+                      onChange={(e) =>
+                        setProjectActivityFilter((prev) => ({ ...prev, [p.id]: e.target.value }))
+                      }
+                      className="rounded-md border border-slate-200 bg-white px-2 py-1 text-[11px] text-slate-700"
+                    >
+                      <option value="all">All categories</option>
+                      {PROJECT_ACTIVITY_CATEGORIES.map((cat) => (
+                        <option key={cat.id} value={cat.id}>
+                          {cat.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  {p.activities && p.activities.length > 0 ? (
+                    <ul className="mt-1 space-y-1.5">
+                      {p.activities
+                        .filter((a) => {
+                          const active = projectActivityFilter[p.id] || "all";
+                          if (active === "all") return true;
+                          const cat = activityCategory(a);
+                          return cat === active;
+                        })
+                        .map((a) => (
+                        <li key={a.id} className="rounded-md border border-slate-100 bg-slate-50 px-2 py-1.5 text-[11px]">
+                          <p className="font-semibold text-slate-700">
+                            {a.action.replace(/_/g, " ")} ·{" "}
+                            <span className="text-slate-500">{a.actorType}</span>
+                          </p>
+                          <p className="mt-0.5">
+                            <span className="rounded-full border border-slate-200 bg-white px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-600">
+                              {a.metadata && typeof a.metadata === "object" && "category" in a.metadata
+                                ? activityCategory(a).replace(/_/g, " ")
+                                : "general"}
+                            </span>
+                          </p>
+                          {a.note ? <p className="text-slate-600">{a.note}</p> : null}
+                          <p className="text-slate-500">{new Date(a.createdAt).toLocaleString()}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="mt-1 text-[11px] text-slate-500">No activity events yet.</p>
+                  )}
+                </div>
+              </div>
+            ))}
+            {(adminProjects ?? []).length === 0 ? (
+              <p className="text-sm text-slate-500">No client projects created yet.</p>
+            ) : normalizedProjectSearch &&
+              (adminProjects ?? []).filter((p) => {
+                return (
+                  p.id.toLowerCase().includes(normalizedProjectSearch) ||
+                  p.title.toLowerCase().includes(normalizedProjectSearch) ||
+                  p.user.email.toLowerCase().includes(normalizedProjectSearch)
+                );
+              }).length === 0 ? (
+              <p className="text-sm text-slate-500">No projects match this filter.</p>
+            ) : null}
+          </div>
+        </section>
+
         <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <h2 className="text-lg font-bold text-slate-900">Inbound (website)</h2>
           <p className="mt-1 text-sm text-slate-600">
@@ -719,6 +1173,8 @@ export default function AdminPage() {
               <tbody>
                 {(contacts ?? []).map((c) => {
                   const ghs = c.source === "project_calculator" ? projectCalcMidGhsLabel(c.metadata) : null;
+                  const midGhs = c.source === "project_calculator" ? projectCalcMidGhs(c.metadata) : null;
+                  const linkedProjectId = linkedProjectIdFromNotes(c.notes);
                   const unifiedRef =
                     c.source === "namecheap_unified_checkout"
                       ? checkoutRef(c.metadata)
@@ -783,6 +1239,109 @@ export default function AdminPage() {
                       >
                         {ghs ? <span className="mr-2 font-semibold text-slate-900">{ghs}</span> : null}
                         {truncate(c.message, 160)}
+                        {linkedProjectId ? (
+                          <div className="mt-1 space-y-1">
+                            <p className="text-[11px] text-slate-500">
+                              Linked project:{" "}
+                              <span className="rounded-full border border-emerald-200 bg-emerald-50 px-1.5 py-0.5 font-mono text-emerald-800">
+                                {linkedProjectId}
+                              </span>
+                            </p>
+                            <div className="flex flex-wrap gap-1">
+                              <button
+                                type="button"
+                                onClick={async () => {
+                                  try {
+                                    await navigator.clipboard.writeText(linkedProjectId);
+                                    setToast({ kind: "success", text: "Project ID copied." });
+                                  } catch {
+                                    setToast({ kind: "error", text: "Could not copy project ID." });
+                                  }
+                                }}
+                                className="rounded-md border border-slate-300 bg-white px-2 py-0.5 text-[11px] font-semibold text-slate-700 hover:border-slate-400"
+                              >
+                                Copy ID
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setProjectSearch(linkedProjectId);
+                                  const target = document.getElementById("admin-client-projects");
+                                  target?.scrollIntoView({ behavior: "smooth", block: "start" });
+                                }}
+                                className="rounded-md border border-slate-300 bg-white px-2 py-0.5 text-[11px] font-semibold text-slate-700 hover:border-slate-400"
+                              >
+                                Find in projects
+                              </button>
+                            </div>
+                          </div>
+                        ) : null}
+                        {c.source === "project_calculator" ? (
+                          <div className="mt-2">
+                            <button
+                              type="button"
+                              disabled={projectBusy || convertingLeadId === c.id}
+                              onClick={async () => {
+                                const defaultTitle = `${c.name || "Client"} project`;
+                                const title = window
+                                  .prompt("Project title", defaultTitle)
+                                  ?.trim();
+                                if (!title) return;
+
+                                const suggested = midGhs ?? 0;
+                                const amountRaw = window
+                                  .prompt(
+                                    "Total project amount (GHS)",
+                                    suggested > 0 ? String(suggested) : "",
+                                  )
+                                  ?.trim();
+                                if (!amountRaw) return;
+                                const totalAmountGhs = Number(amountRaw);
+                                if (!Number.isFinite(totalAmountGhs) || totalAmountGhs < 100) {
+                                  setToast({
+                                    kind: "error",
+                                    text: "Enter a valid project amount in GHS (minimum 100).",
+                                  });
+                                  return;
+                                }
+
+                                try {
+                                  setConvertingLeadId(c.id);
+                                  setProjectBusy(true);
+                                  const created = await createAdminClientProject({
+                                    userEmail: c.email,
+                                    title,
+                                    description: `Created from project calculator lead ${c.id}.`,
+                                    totalAmountGhs,
+                                    kickoffPercent: 30,
+                                    buildPercent: 30,
+                                    launchPercent: 40,
+                                  });
+                                  const baseNote = c.notes?.trim();
+                                  const linkNote = `Linked project: ${created.id}`;
+                                  const mergedNotes = baseNote ? `${baseNote}\n${linkNote}` : linkNote;
+                                  await patchAdminContact(c.id, { notes: mergedNotes });
+                                  setToast({
+                                    kind: "success",
+                                    text: "Lead converted to client project (30/30/40).",
+                                  });
+                                  await load();
+                                } catch (x) {
+                                  const m =
+                                    x instanceof Error ? x.message : "Could not convert lead to project";
+                                  setErr(m);
+                                  setToast({ kind: "error", text: m });
+                                } finally {
+                                  setConvertingLeadId(null);
+                                  setProjectBusy(false);
+                                }
+                              }}
+                              className="rounded-md border border-ocean-300 bg-white px-2 py-1 text-[11px] font-semibold text-ocean-800 hover:border-ocean-400 disabled:opacity-60"
+                            >
+                              {convertingLeadId === c.id ? "Converting..." : "Convert to project"}
+                            </button>
+                          </div>
+                        ) : null}
                         {unifiedRef ? (
                           <p className="mt-1 text-[11px] text-slate-500">
                             Ref: <span className="font-mono">{unifiedRef}</span>

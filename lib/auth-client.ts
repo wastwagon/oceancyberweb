@@ -54,6 +54,55 @@ export type BillingRenewalPlan = {
   currency: string;
 };
 
+export type ClientProjectMilestone = {
+  id: string;
+  code: string;
+  title: string;
+  orderIndex: number;
+  percentage: number;
+  amountMinor: string;
+  status: string;
+  unlockedAt: string | null;
+  paidAt: string | null;
+  dueAt: string | null;
+};
+
+export type ClientProjectInvoice = {
+  id: string;
+  invoiceNumber: string;
+  title: string;
+  amountMinor: string;
+  currency: string;
+  status: string;
+  dueAt: string | null;
+  issuedAt: string | null;
+  paidAt: string | null;
+  milestoneId: string | null;
+  paystackReference: string | null;
+};
+
+export type ClientProjectRow = {
+  id: string;
+  title: string;
+  description: string | null;
+  status: string;
+  totalAmountMinor: string;
+  currency: string;
+  createdAt: string;
+  updatedAt: string;
+  milestones: ClientProjectMilestone[];
+  invoices: ClientProjectInvoice[];
+  activities?: Array<{
+    id: string;
+    actorType: string;
+    actorId: string | null;
+    action: string;
+    note: string | null;
+    metadata?: { category?: string };
+    createdAt: string;
+  }>;
+};
+
 export function getAccessToken(): string | null {
   if (typeof window === "undefined") return null;
   return localStorage.getItem(TOKEN_KEY);
@@ -280,6 +329,85 @@ export async function getBillingDashboard() {
     recentTransactions: BillingTransaction[];
     recentLedger: BillingLedgerEntry[];
   }>("/api/v1/billing/dashboard");
+}
+
+export async function listMyProjects() {
+  return authRequest<ClientProjectRow[]>("/api/v1/projects");
+}
+
+export async function initializeProjectInvoicePayment(projectId: string, invoiceId: string) {
+  return authRequest<{ authorizationUrl: string; reference: string; amountMinor: string }>(
+    `/api/v1/projects/${encodeURIComponent(projectId)}/invoices/${encodeURIComponent(
+      invoiceId,
+    )}/pay/initialize`,
+    {
+      method: "POST",
+    },
+  );
+}
+
+export async function createAdminClientProject(body: {
+  userEmail: string;
+  title: string;
+  description?: string;
+  totalAmountGhs: number;
+  kickoffPercent?: number;
+  buildPercent?: number;
+  launchPercent?: number;
+}) {
+  return authRequest<ClientProjectRow>("/api/v1/projects/admin/create", {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+}
+
+export async function updateAdminClientProjectStatus(projectId: string, body: { status: string; note?: string }) {
+  return authRequest<ClientProjectRow>(`/api/v1/projects/admin/${encodeURIComponent(projectId)}/status`, {
+    method: "PATCH",
+    body: JSON.stringify(body),
+  });
+}
+
+export async function unlockAdminClientProjectMilestone(
+  projectId: string,
+  milestoneId: string,
+  note?: string,
+) {
+  return authRequest<ClientProjectMilestone>(
+    `/api/v1/projects/admin/${encodeURIComponent(projectId)}/milestones/${encodeURIComponent(
+      milestoneId,
+    )}/unlock`,
+    {
+      method: "POST",
+      body: JSON.stringify(note ? { note } : {}),
+    },
+  );
+}
+
+export async function listAdminClientProjects() {
+  return authRequest<Array<ClientProjectRow & { user: { id: string; email: string; fullName: string | null } }>>(
+    "/api/v1/projects/admin",
+  );
+}
+
+export async function addAdminClientProjectActivity(
+  projectId: string,
+  note: string,
+  category: "general" | "client_feedback" | "dev_update" | "blocker" | "approval" = "general",
+) {
+  return authRequest<{
+    id: string;
+    projectId: string;
+    actorType: string;
+    actorId: string | null;
+    action: string;
+    note: string | null;
+    metadata?: { category?: string };
+    createdAt: string;
+  }>(`/api/v1/projects/admin/${encodeURIComponent(projectId)}/activity`, {
+    method: "POST",
+    body: JSON.stringify({ note, category }),
+  });
 }
 
 export async function getWalletLedger() {

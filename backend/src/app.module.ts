@@ -9,6 +9,7 @@ import { BillingModule } from "./billing/billing.module";
 import { HealthModule } from "./health/health.module";
 import { MailModule } from "./mail/mail.module";
 import { PrismaModule } from "./prisma/prisma.module";
+import { ProjectsModule } from "./projects/projects.module";
 import { RedisModule } from "./redis/redis.module";
 
 @Module({
@@ -28,6 +29,7 @@ import { RedisModule } from "./redis/redis.module";
     HealthModule,
     AuthModule,
     BillingModule,
+    ProjectsModule,
     AdminModule,
   ],
   providers: [
