@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
 /**
- * Hides OceanCyber chrome on `/` where the Webflow “Start-Up Agencyy” template is embedded as the homepage.
+ * Hides the default site header/footer/chat on `/` when the marketing homepage renders its own shell (startup-agency layout).
  */
 export function ConditionalChrome({
   header,
@@ -24,7 +24,11 @@ export function ConditionalChrome({
 
   if (hideChrome) {
     return (
-      <main className="flex w-full min-h-0 flex-1 flex-col">{children}</main>
+      <>
+        <main className="flex w-full min-h-0 flex-1 flex-col">{children}</main>
+        {scrollToTop}
+        {chatBot}
+      </>
     );
   }
 

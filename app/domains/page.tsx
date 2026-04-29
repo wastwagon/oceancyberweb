@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DomainSearchPanel, RegistrarValueProps } from "@/components/domains/DomainSearchPanel";
+import { withCanonical } from "@/lib/seo/canonical";
 
-export const metadata: Metadata = {
-  title: "Domains & SSL",
-  description:
-    "Search domain availability powered by Namecheap. SSL and hosting bundles with OceanCyber professional setup.",
-};
+export const metadata: Metadata = withCanonical(
+  {
+    title: "Domains & SSL",
+    description:
+      "Search domain availability powered by Namecheap. SSL and hosting bundles with OceanCyber professional setup.",
+  },
+  "/domains",
+);
 
 export default function DomainsPage() {
   return (

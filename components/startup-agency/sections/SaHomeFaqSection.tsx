@@ -1,9 +1,14 @@
+import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
 import { StartupAgencyFaq } from "@/components/startup-agency/StartupAgencyFaq";
 
 export function SaHomeFaqSection() {
   return (
-    <section className="border-b border-sa-border py-16 md:py-24">
+    <section
+      id="faq"
+      className="scroll-mt-28 border-b border-sa-border py-16 md:scroll-mt-32 md:py-24"
+    >
+      <FaqPageJsonLd />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
         <SaReveal className="mb-10 text-center">
           <span className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-sa-primary">

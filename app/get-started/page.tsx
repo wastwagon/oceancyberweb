@@ -2,12 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Smartphone } from "lucide-react";
 import { InteractiveIntakeWizard } from "@/components/intake/InteractiveIntakeWizard";
+import { withCanonical } from "@/lib/seo/canonical";
 
-export const metadata: Metadata = {
-  title: "Interactive intake and booking",
-  description:
-    "Tell us what you need, your budget, and your timeline, then request a discovery call or quote in one guided flow.",
-};
+export const metadata: Metadata = withCanonical(
+  {
+    title: "Interactive intake and booking",
+    description:
+      "Tell us what you need, your budget, and your timeline, then request a discovery call or quote in one guided flow.",
+  },
+  "/get-started",
+);
 
 export default function GetStartedPage() {
   return (

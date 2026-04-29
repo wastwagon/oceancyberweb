@@ -3,12 +3,16 @@ import Link from "next/link";
 import { Server, Shield, Wrench } from "lucide-react";
 import { HostingPackagesSection } from "@/components/hosting/HostingPackagesSection";
 import { HOSTING_TRUST_POINTS } from "@/lib/hosting-packages";
+import { withCanonical } from "@/lib/seo/canonical";
 
-export const metadata: Metadata = {
-  title: "cPanel & WHM hosting",
-  description:
-    "cPanel hosting in Ghana cedis on our Namecheap reseller + WHM stack—optional currency preview, Paystack checkout in GHS, local support from Accra.",
-};
+export const metadata: Metadata = withCanonical(
+  {
+    title: "cPanel & WHM hosting",
+    description:
+      "cPanel hosting in Ghana cedis on our Namecheap reseller + WHM stack—optional currency preview, Paystack checkout in GHS, local support from Accra.",
+  },
+  "/hosting",
+);
 
 export default function HostingPage({
   searchParams,

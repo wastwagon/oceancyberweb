@@ -9,7 +9,15 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/"],
+      disallow: [
+        "/api/",
+        "/admin",
+        "/checkout",
+        "/dashboard",
+        "/ocean-legacy",
+        "/signin",
+        "/signup",
+      ],
     },
     sitemap: `${base}/sitemap.xml`,
   };

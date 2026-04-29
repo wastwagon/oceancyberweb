@@ -54,5 +54,8 @@ export async function generateMetadata({ params }: CaseStudyDetailPageProps) {
   return {
     title: `${study.title} - Case Study`,
     description: study.description,
+    alternates: {
+      canonical: `/case-studies/${params.slug}`,
+    },
   };
 }

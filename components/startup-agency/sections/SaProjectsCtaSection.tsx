@@ -3,7 +3,10 @@ import { SaReveal } from "@/components/startup-agency/SaReveal";
 
 export function SaProjectsCtaSection() {
   return (
-    <section className="border-b border-sa-border py-16 md:py-20">
+    <section
+      id="projects"
+      className="scroll-mt-28 border-b border-sa-border py-16 md:scroll-mt-32 md:py-20"
+    >
       <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 md:px-8">
         <SaReveal>
           <h2 className="font-heading text-3xl font-bold text-white md:text-4xl">Projects</h2>

@@ -7,6 +7,7 @@ import { ConditionalChrome } from "@/components/layout/ConditionalChrome";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { ChatBot } from "@/components/ui/ChatBot";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
+import { WebSiteJsonLd } from "@/components/seo/WebSiteJsonLd";
 import { WebVitals } from "@/components/analytics/WebVitals";
 import { AppProviders } from "@/components/providers/AppProviders";
 
@@ -38,9 +39,6 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "https://oceancyber.net",
   ),
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     type: "website",
     locale: "en_GH",
@@ -97,6 +95,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-background font-sans antialiased">
         <AppProviders>
           <OrganizationJsonLd />
+          <WebSiteJsonLd />
           <WebVitals />
           <ConditionalChrome
             header={<Header />}

@@ -6,7 +6,7 @@ import { faqItems } from "@/lib/startup-agency/content";
 import { cn } from "@/lib/utils";
 
 export function StartupAgencyFaq() {
-  const [open, setOpen] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(null);
 
   return (
     <div className="mx-auto max-w-3xl space-y-3">

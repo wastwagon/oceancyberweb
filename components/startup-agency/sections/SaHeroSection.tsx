@@ -5,7 +5,11 @@ import { heroServiceSlides } from "@/lib/startup-agency/content";
 
 export function SaHeroSection() {
   return (
-    <section className="relative overflow-hidden" aria-label="Featured services">
+    <section
+      id="hero"
+      className="relative scroll-mt-28 overflow-hidden md:scroll-mt-32"
+      aria-label="Featured services"
+    >
         <div
           className="flex snap-x snap-mandatory gap-0 overflow-x-auto scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           role="region"

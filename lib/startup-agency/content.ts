@@ -1,11 +1,16 @@
 /** Marketing homepage content — structure aligned with Start-Up Agencyy; copy tailored for OceanCyber. */
 
-export const startupNav = [
+/** Primary bar: Home routes to `/`; other items scroll to section anchors on `/`. */
+export type StartupNavLink =
+  | { readonly label: "Home"; readonly href: "/" }
+  | { readonly label: string; readonly sectionId: string };
+
+export const startupNav: StartupNavLink[] = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Portfolio", href: "/portfolio" },
-] as const;
+  { label: "About", sectionId: "about" },
+  { label: "Services", sectionId: "services" },
+  { label: "Portfolio", sectionId: "projects" },
+];
 
 export const startupMegaLinks = [
   { label: "Home", href: "/" },
@@ -22,40 +27,42 @@ export const heroServiceSlides = [
   {
     title: "Web development",
     href: "/services/web-development",
-    imageAlt: "Abstract creative workspace lighting",
+    imageAlt: "Developer workspace with laptop and code editor",
     image:
-      "https://cdn.prod.website-files.com/671bb27afadc3644f7152787/671bc68412886bf9dc3e191b_pexels-a-darmel-7710085.jpg",
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&q=80",
   },
   {
     title: "Mobile apps",
     href: "/services/mobile-apps",
-    imageAlt: "Urban architecture at dusk",
+    imageAlt: "Hands holding a smartphone in use outdoors",
     image:
-      "https://cdn.prod.website-files.com/671bb27afadc3644f7152787/671bc7ddf062852e34593530_pexels-bertellifotografia-2608519.jpg",
+      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1920&q=80",
   },
   {
     title: "Cybersecurity",
     href: "/services/cybersecurity",
-    imageAlt: "Abstract creative workspace lighting",
+    imageAlt: "Abstract digital security network visualization",
     image:
-      "https://cdn.prod.website-files.com/671bb27afadc3644f7152787/671bc68412886bf9dc3e191b_pexels-a-darmel-7710085.jpg",
+      "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1920&q=80",
   },
   {
     title: "E‑commerce",
     href: "/services/ecommerce",
-    imageAlt: "Urban architecture at dusk",
+    imageAlt: "Retail checkout and shopping context",
     image:
-      "https://cdn.prod.website-files.com/671bb27afadc3644f7152787/671bc7ddf062852e34593530_pexels-bertellifotografia-2608519.jpg",
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1920&q=80",
   },
 ] as const;
 
 export const marqueeTags = [
+  "Web · Mobile · Cloud",
+  "Accra · Ghana · Regional",
+  "Ship with clarity",
+  "Security‑minded delivery",
   "Design studio",
-  "Web agency",
   "ICT partner",
-  "Design studio",
-  "Web agency",
-  "ICT partner",
+  "Web · Mobile · Cloud",
+  "Proof over promises",
 ] as const;
 
 export const serviceCards = [
@@ -118,7 +125,14 @@ export const processSteps = [
   },
 ] as const;
 
-export const techStack = ["Next.js", "React", "TypeScript", "Webflow", "AWS", "Paystack"] as const;
+export const techStack = [
+  "Next.js",
+  "React",
+  "TypeScript",
+  "Tailwind CSS",
+  "AWS",
+  "Paystack",
+] as const;
 
 export const projectChips = [
   "Portfolio for creative studio",
@@ -134,18 +148,21 @@ export const testimonials = [
       "Clear communication, disciplined delivery, and a team that actually ships. Our launch landed on time.",
     name: "Sarah Mensah",
     role: "Operations Director",
+    initials: "SM",
   },
   {
     quote:
       "They translated messy requirements into a clean product roadmap — rare in this market.",
     name: "James Osei",
     role: "Founder",
+    initials: "JO",
   },
   {
     quote:
       "Security and performance were treated as first‑class, not an afterthought.",
     name: "Ama Boateng",
     role: "IT Lead",
+    initials: "AB",
   },
 ] as const;
 

@@ -51,5 +51,8 @@ export async function generateMetadata({ params }: PortfolioDetailPageProps) {
   return {
     title: `${project.title} - Portfolio`,
     description: project.description,
+    alternates: {
+      canonical: `/portfolio/${params.slug}`,
+    },
   };
 }

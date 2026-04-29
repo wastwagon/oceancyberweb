@@ -1,5 +1,16 @@
+import type { Metadata } from "next";
 import { Portfolio } from "@/components/sections/Portfolio";
 import { getPortfolioCaseStudies } from "@/lib/data/portfolio-loader";
+import { withCanonical } from "@/lib/seo/canonical";
+
+export const metadata = withCanonical(
+  {
+    title: "Portfolio",
+    description:
+      "Featured OceanCyber projects — scope, stack choices, and measurable outcomes.",
+  },
+  "/portfolio",
+);
 
 export default async function PortfolioPage() {
   const cases = await getPortfolioCaseStudies();

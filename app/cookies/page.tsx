@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import { withCanonical } from "@/lib/seo/canonical";
 
-export const metadata: Metadata = {
-  title: "Cookie Policy",
-  description: "How OceanCyber uses cookies and related technologies.",
-};
+export const metadata: Metadata = withCanonical(
+  {
+    title: "Cookie Policy",
+    description: "How OceanCyber uses cookies and related technologies.",
+  },
+  "/cookies",
+);
 
 export default function CookiesPage() {
   return (

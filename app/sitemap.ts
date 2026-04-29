@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getPortfolioSlugs } from "@/lib/data/portfolio-loader";
 import { insightArticlePath, insightPosts } from "@/lib/insights/content";
 
 const base =
@@ -8,32 +9,67 @@ const base =
 const routes = [
   "",
   "/about",
-  "/contact",
-  "/portfolio",
   "/case-studies",
+  "/contact",
+  "/cookies",
+  "/domains",
+  "/get-started",
+  "/help-center",
+  "/hosting",
   "/insights",
+  "/portfolio",
+  "/privacy",
   "/security-journey",
   "/services",
-  "/services/web-development",
-  "/services/mobile-apps",
-  "/services/ecommerce",
   "/services/cybersecurity",
+  "/services/ecommerce",
+  "/services/mobile-apps",
+  "/services/web-development",
+  "/services/website-to-mobile-app",
+  "/terms",
+  "/tools/project-cost",
+  "/tools/proposal",
   "/industries",
-  "/industries/healthcare",
-  "/industries/financial-services",
-  "/industries/retail",
   "/industries/education",
+  "/industries/financial-services",
+  "/industries/healthcare",
+  "/industries/retail",
 ];
 
 const insightRoutes = insightPosts.map((p) => insightArticlePath(p.slug));
 
-export default function sitemap(): MetadataRoute.Sitemap {
+/** Align with portfolio revalidation so sitemap picks up new projects without redeploy. */
+export const revalidate = 300;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+  const highIntent = new Set([
+    "/get-started",
+    "/tools/project-cost",
+    "/contact",
+    "/hosting",
+    "/domains",
+  ]);
+
+  const legalPaths = new Set(["/privacy", "/terms", "/cookies"]);
+
   const staticEntries: MetadataRoute.Sitemap = routes.map((path) => ({
     url: `${base}${path}`,
     lastModified: now,
-    changeFrequency: path === "" ? "weekly" : "monthly",
-    priority: path === "" ? 1 : 0.7,
+    changeFrequency:
+      path === ""
+        ? "weekly"
+        : legalPaths.has(path)
+          ? "yearly"
+          : "monthly",
+    priority:
+      path === ""
+        ? 1
+        : highIntent.has(path)
+          ? 0.75
+          : legalPaths.has(path)
+            ? 0.35
+            : 0.7,
   }));
 
   const insightEntries: MetadataRoute.Sitemap = insightRoutes.map((path) => ({
@@ -43,5 +79,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.65,
   }));
 
-  return [...staticEntries, ...insightEntries];
+  const slugs = await getPortfolioSlugs();
+  const projectEntries: MetadataRoute.Sitemap = slugs.flatMap((slug) => [
+    {
+      url: `${base}/portfolio/${slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    },
+    {
+      url: `${base}/case-studies/${slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.55,
+    },
+  ]);
+
+  return [...staticEntries, ...insightEntries, ...projectEntries];
 }

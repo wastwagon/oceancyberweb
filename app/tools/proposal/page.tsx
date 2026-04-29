@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import { ProposalRequestForm } from "@/components/proposal/ProposalRequestForm";
+import { withCanonical } from "@/lib/seo/canonical";
 
-export const metadata: Metadata = {
-  title: "Formal proposal request",
-  description:
-    "Request a structured project proposal with scope, timeline, and budget alignment in one clear form.",
-};
+export const metadata: Metadata = withCanonical(
+  {
+    title: "Formal proposal request",
+    description:
+      "Request a structured project proposal with scope, timeline, and budget alignment in one clear form.",
+  },
+  "/tools/proposal",
+);
 
 export default function ProposalRequestPage({
   searchParams,

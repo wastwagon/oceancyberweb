@@ -3,7 +3,10 @@ import { projectChips, techStack } from "@/lib/startup-agency/content";
 
 export function SaTechSection() {
   return (
-    <section className="border-b border-sa-border py-14 md:py-20">
+    <section
+      id="tech"
+      className="scroll-mt-28 border-b border-sa-border py-14 md:scroll-mt-32 md:py-20"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
         <SaReveal className="mb-8 text-center">
           <span className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-sa-primary">

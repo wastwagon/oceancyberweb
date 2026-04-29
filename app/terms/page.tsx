@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import { withCanonical } from "@/lib/seo/canonical";
 
-export const metadata: Metadata = {
-  title: "Terms of Service",
-  description: "Terms governing the use of OceanCyber services and website.",
-};
+export const metadata: Metadata = withCanonical(
+  {
+    title: "Terms of Service",
+    description: "Terms governing the use of OceanCyber services and website.",
+  },
+  "/terms",
+);
 
 export default function TermsPage() {
   return (

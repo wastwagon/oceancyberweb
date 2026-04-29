@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import { withCanonical } from "@/lib/seo/canonical";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description: "How OceanCyber collects, uses, and protects your information.",
-};
+export const metadata: Metadata = withCanonical(
+  {
+    title: "Privacy Policy",
+    description: "How OceanCyber collects, uses, and protects your information.",
+  },
+  "/privacy",
+);
 
 export default function PrivacyPage() {
   return (

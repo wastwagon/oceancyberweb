@@ -3,7 +3,10 @@ import { processSteps } from "@/lib/startup-agency/content";
 
 export function SaProcessSection() {
   return (
-    <section className="border-b border-sa-border py-16 md:py-24">
+    <section
+      id="process"
+      className="scroll-mt-28 border-b border-sa-border py-16 md:scroll-mt-32 md:py-24"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
         <SaReveal className="mb-12 max-w-3xl">
           <span className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-sa-primary">

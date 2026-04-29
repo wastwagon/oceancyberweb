@@ -5,7 +5,7 @@ import { blogTeasers } from "@/lib/startup-agency/content";
 
 export function SaInsightsTeaserSection() {
   return (
-    <section className="py-16 md:py-24">
+    <section id="insights" className="scroll-mt-28 py-16 md:scroll-mt-32 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
         <SaReveal className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>

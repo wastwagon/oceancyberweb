@@ -4,7 +4,10 @@ import { pricingPlans } from "@/lib/startup-agency/content";
 
 export function SaPricingSection() {
   return (
-    <section className="border-b border-sa-border py-16 md:py-24">
+    <section
+      id="pricing"
+      className="scroll-mt-28 border-b border-sa-border py-16 md:scroll-mt-32 md:py-24"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
         <SaReveal className="mb-12 text-center">
           <span className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-sa-primary">
@@ -14,8 +17,15 @@ export function SaPricingSection() {
             Starting points
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sa-muted">
-            Indicative tiers — final quotes follow discovery. Use our calculator for a GHS range.
+            Indicative tiers in USD — final quotes follow discovery. For Ghana cedi bands and scope,
+            use the project calculator below.
           </p>
+          <Link
+            href="/tools/project-cost"
+            className="mt-5 inline-flex items-center gap-1 font-heading text-sm font-semibold uppercase tracking-wide text-sa-primary underline-offset-4 hover:underline"
+          >
+            Open project calculator (GHS)
+          </Link>
         </SaReveal>
         <div className="grid gap-6 md:grid-cols-3">
           {pricingPlans.map((plan, i) => (

@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import { ProjectCostWizard } from "@/components/project-calculator/ProjectCostWizard";
 import { PrintEstimatorClass } from "@/components/project-calculator/PrintEstimatorClass";
+import { withCanonical } from "@/lib/seo/canonical";
 
-export const metadata: Metadata = {
-  title: "Project cost calculator",
-  description:
-    "Estimate web and app work in Ghana cedis. Add optional extra work such as creating a Google Business Profile and download a proforma PDF.",
-};
+export const metadata: Metadata = withCanonical(
+  {
+    title: "Project cost calculator",
+    description:
+      "Estimate web and app work in Ghana cedis. Add optional extra work such as creating a Google Business Profile and download a proforma PDF.",
+  },
+  "/tools/project-cost",
+);
 
 export default function ProjectCostPage() {
   return (

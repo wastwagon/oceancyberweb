@@ -1,11 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
 
-const footerLinks = [
+const footerCompany = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Portfolio", href: "/portfolio" },
   { label: "Contact", href: "/contact" },
+] as const;
+
+const footerExplore = [
+  { label: "Services", href: "/services" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Insights", href: "/insights" },
+  { label: "Project calculator", href: "/tools/project-cost" },
+  { label: "Get started", href: "/get-started" },
 ] as const;
 
 export function StartupAgencyFooter() {
@@ -29,13 +36,30 @@ export function StartupAgencyFooter() {
               © {new Date().getFullYear()} OceanCyber · Accra, Ghana
             </p>
           </div>
-          <div className="flex flex-wrap gap-10">
+          <div className="flex flex-wrap gap-10 md:gap-14">
             <div>
               <p className="mb-3 font-heading text-xs font-semibold uppercase tracking-[0.2em] text-sa-primary">
-                Links
+                Company
               </p>
               <ul className="space-y-2">
-                {footerLinks.map((l) => (
+                {footerCompany.map((l) => (
+                  <li key={l.href}>
+                    <Link
+                      href={l.href}
+                      className="text-sm text-sa-muted transition hover:text-white"
+                    >
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="mb-3 font-heading text-xs font-semibold uppercase tracking-[0.2em] text-sa-primary">
+                Explore
+              </p>
+              <ul className="space-y-2">
+                {footerExplore.map((l) => (
                   <li key={l.href}>
                     <Link
                       href={l.href}

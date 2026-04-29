@@ -2,7 +2,10 @@ import { SaReveal } from "@/components/startup-agency/SaReveal";
 
 export function SaAboutSection() {
   return (
-    <section className="border-b border-sa-border py-16 md:py-24">
+    <section
+      id="about"
+      className="scroll-mt-28 border-b border-sa-border py-16 md:scroll-mt-32 md:py-24"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
         <SaReveal>
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">

@@ -4,7 +4,10 @@ import { testimonials } from "@/lib/startup-agency/content";
 
 export function SaTestimonialsSection() {
   return (
-    <section className="border-b border-sa-border py-16 md:py-24">
+    <section
+      id="testimonials"
+      className="scroll-mt-28 border-b border-sa-border py-16 md:scroll-mt-32 md:py-24"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
         <SaReveal className="mb-10 text-center">
           <span className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-sa-primary">
@@ -26,8 +29,18 @@ export function SaTestimonialsSection() {
                 ))}
               </div>
               <p className="text-base italic leading-relaxed text-white/90">&ldquo;{t.quote}&rdquo;</p>
-              <p className="mt-6 font-heading font-semibold text-white">{t.name}</p>
-              <p className="text-sm text-sa-muted">{t.role}</p>
+              <div className="mt-6 flex items-center gap-3">
+                <span
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-sa-border bg-gradient-to-br from-sa-primary/25 to-black font-heading text-sm font-bold text-sa-primary"
+                  aria-hidden
+                >
+                  {t.initials}
+                </span>
+                <div>
+                  <p className="font-heading font-semibold text-white">{t.name}</p>
+                  <p className="text-sm text-sa-muted">{t.role}</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>

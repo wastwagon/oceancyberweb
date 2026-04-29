@@ -1,5 +1,16 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import { InsightsPageClient } from "@/components/insights/InsightsPageClient";
+import { withCanonical } from "@/lib/seo/canonical";
+
+export const metadata = withCanonical(
+  {
+    title: "Insights",
+    description:
+      "Thought leadership on security, platforms, and digital transformation — Ghana and Africa.",
+  },
+  "/insights",
+);
 
 function InsightsLoadingFallback() {
   return (
