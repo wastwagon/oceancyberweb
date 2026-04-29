@@ -127,6 +127,27 @@ See **[COOLIFY.md](./COOLIFY.md)** for the full checklist, URL wiring, and VPS h
 
 See `.env.example` for all required environment variables.
 
+## Namecheap Local Test Flow
+
+1. Set Namecheap server env vars in `.env`:
+   - `NAMECHEAP_API_USER`
+   - `NAMECHEAP_API_KEY`
+   - `NAMECHEAP_CLIENT_IP`
+   - `NAMECHEAP_USE_SANDBOX=true` for safe testing first
+2. Ensure your `NAMECHEAP_CLIENT_IP` is allowlisted in Namecheap API Access.
+3. Restart app/API after env changes.
+4. Run health check:
+   - `GET /api/namecheap/health`
+5. Test domain search from UI (`/domains`) or API:
+   - `POST /api/namecheap/domains/check` with `{ "query": "yourbrand" }`
+6. Test registration and SSL via unified checkout:
+   - Add domain to cart
+   - Open `/checkout/cart`
+   - Provide domain registrant contact
+   - Click `Checkout all now`
+7. Verify operational logs in admin:
+   - `Admin -> Namecheap orders` (includes retry actions and chain tracking)
+
 ## 🤝 Contributing
 
 This is a private project for OceanCyber.
