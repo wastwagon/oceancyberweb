@@ -207,18 +207,30 @@ export function Header() {
     { href: "/", label: "Home" },
     { href: "/services", label: "Services", hasDropdown: true },
     { href: "/industries", label: "Industries", hasDropdown: true },
-    { href: "/domains", label: "Domains" },
-    { href: "/hosting", label: "Hosting" },
-    { href: "/insights", label: "Resources", hasDropdown: true },
-    { href: "/portfolio", label: "Portfolio" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
+    {
+      href: "/domains",
+      label: "Infrastructure",
+      hasDropdown: true,
+      activeMatch: ["/domains", "/hosting"],
+    },
+    {
+      href: "/insights",
+      label: "Resources",
+      hasDropdown: true,
+      activeMatch: ["/insights", "/case-studies", "/security-journey", "/help-center"],
+    },
+    {
+      href: "/about",
+      label: "Company",
+      hasDropdown: true,
+      activeMatch: ["/about", "/portfolio", "/contact"],
+    },
   ];
 
   const dropdownContent = {
     services: {
       title: "Our services",
-      description: "Comprehensive digital solutions tailored to your business needs",
+      description: "Build, secure, and scale digital products with one delivery partner.",
       items: [
         {
           heading: "Web Development",
@@ -234,7 +246,7 @@ export function Header() {
         },
         {
           heading: "Website to App Conversion",
-          description: "Bring your website and get a scoped mobile app conversion quote.",
+          description: "Convert your existing website into a scoped mobile app build.",
           link: "/services/website-to-mobile-app",
         },
         {
@@ -251,8 +263,8 @@ export function Header() {
       ],
     },
     industries: {
-      title: "Industries We Serve",
-      description: "Empowering diverse industries across Ghana and Africa.",
+      title: "Industries we serve",
+      description: "Proven delivery patterns for regulated and growth-focused sectors.",
       items: [
         {
           heading: "Financial Services",
@@ -278,9 +290,9 @@ export function Header() {
       ],
     },
     resources: {
-      title: "Insights & Guidance",
+      title: "Insights and guidance",
       description:
-        "Planning resources, real project stories, and security guidance.",
+        "Planning playbooks, delivery stories, and practical security guidance.",
       items: [
         {
           heading: "Insights",
@@ -304,13 +316,55 @@ export function Header() {
         },
       ],
     },
+    infrastructure: {
+      title: "Infrastructure",
+      description:
+        "Domains, SSL, and hosting foundations for reliable digital operations.",
+      items: [
+        {
+          heading: "Domains & SSL",
+          description: "Search domain availability and add SSL with secure checkout.",
+          link: "/domains",
+        },
+        {
+          heading: "Hosting",
+          description: "Launch cPanel and WHM hosting plans with local support.",
+          link: "/hosting",
+        },
+      ],
+    },
+    company: {
+      title: "Company",
+      description: "See our work, learn about our team, and contact us directly.",
+      items: [
+        {
+          heading: "About",
+          description: "Our mission, team, and operating principles.",
+          link: "/about",
+        },
+        {
+          heading: "Portfolio",
+          description: "Delivery examples across sectors and product types.",
+          link: "/portfolio",
+        },
+        {
+          heading: "Contact",
+          description: "Talk to our team about your project or requirements.",
+          link: "/contact",
+        },
+      ],
+    },
   };
 
   const homeNav = navItems.find((i) => i.href === "/");
   const dropdownNav = navItems.filter((i) => i.hasDropdown);
   const flatNav = navItems.filter((i) => !i.hasDropdown && i.href !== "/");
-  const isItemActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+  const isItemActive = (item: { href: string; activeMatch?: string[] }) => {
+    const candidates = item.activeMatch ?? [item.href];
+    return candidates.some((href) =>
+      href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`),
+    );
+  };
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50 flex flex-col items-center bg-white/95 px-3 pt-2 shadow-sm backdrop-blur-md sm:px-5 sm:pt-3 md:px-8">
@@ -393,7 +447,7 @@ export function Header() {
                   <Link
                     href={item.href}
                     className={`flex h-10 items-center gap-1 whitespace-nowrap rounded-lg px-2.5 text-[12px] font-semibold leading-none transition-all duration-300 xl:px-3 xl:text-[13px] ${
-                      isItemActive(item.href)
+                      isItemActive(item)
                         ? "text-ocean-800"
                         : "text-slate-600 hover:text-ocean-700"
                     }`}
@@ -417,7 +471,7 @@ export function Header() {
                     )}
                   </Link>
 
-                  {isItemActive(item.href) && (
+                  {isItemActive(item) && (
                     <motion.div
                       layoutId="nav-line"
                       className="absolute bottom-1 left-2.5 right-2.5 h-0.5 bg-ocean-600 shadow-[0_0_12px_rgba(2,106,255,0.35)]"
@@ -560,25 +614,29 @@ export function Header() {
                   ))}
                 </div>
 
-                <p className="mb-2 mt-6 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-                  Pages
-                </p>
-                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-2.5">
-                  {flatNav.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className={`rounded-2xl border px-4 py-3.5 text-sm font-semibold transition-colors ${
-                        pathname === item.href
-                          ? "border-ocean-200 bg-ocean-50/80 text-ocean-900"
-                          : "border-slate-200 bg-slate-50/50 text-slate-800 hover:border-ocean-200 hover:bg-slate-50"
-                      }`}
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
+                {flatNav.length > 0 ? (
+                  <>
+                    <p className="mb-2 mt-6 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                      Pages
+                    </p>
+                    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-2.5">
+                      {flatNav.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className={`rounded-2xl border px-4 py-3.5 text-sm font-semibold transition-colors ${
+                            pathname === item.href
+                              ? "border-ocean-200 bg-ocean-50/80 text-ocean-900"
+                              : "border-slate-200 bg-slate-50/50 text-slate-800 hover:border-ocean-200 hover:bg-slate-50"
+                          }`}
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </>
+                ) : null}
               </div>
 
               <div className="shrink-0 border-t border-slate-200 bg-gradient-to-b from-slate-50/80 to-white px-4 py-4 sm:px-5">

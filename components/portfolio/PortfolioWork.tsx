@@ -5,7 +5,6 @@ import {
   useMotionTemplate,
   useMotionValue,
   useReducedMotion,
-  useScroll,
   useSpring,
   useTransform,
 } from "framer-motion";
@@ -115,7 +114,7 @@ function TiltCard({
       >
         <MotionLink
           href={href}
-          className="group/card relative block h-full overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-md outline-none ring-0 transition-all duration-300 hover:-translate-y-1 hover:border-ocean-200/80 hover:shadow-2xl hover:shadow-slate-200/60 focus-visible:ring-2 focus-visible:ring-ocean-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+          className="group/card relative block h-full overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-sm outline-none ring-0 transition-all duration-300 hover:-translate-y-0.5 hover:border-ocean-200/80 hover:shadow-md focus-visible:ring-2 focus-visible:ring-ocean-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
           whileTap={{ scale: 0.99 }}
         >
           <motion.div
@@ -148,111 +147,37 @@ function StarRow({ n }: { n: number }) {
   );
 }
 
-function FeaturedShowcase({
-  project,
-  index,
-}: {
-  project: PortfolioCaseStudy;
-  index: number;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const imageY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.04, 1, 1.02]);
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-8% 0px" }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative overflow-hidden rounded-3xl border border-slate-200/80 bg-slate-900/5 shadow-2xl shadow-slate-300/40 ring-1 ring-slate-200/60"
-    >
-      <Link
-        href={`/portfolio/${project.slug}`}
-        className="relative block min-h-[300px] md:min-h-[400px] lg:min-h-[440px]"
-      >
-        <motion.div
-          className="absolute inset-0 will-change-transform"
-          style={{ y: imageY, scale }}
-        >
-          <Image
-            src={project.image}
-            alt={project.title}
-            fill
-            className="object-cover transition duration-700 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, 100vw"
-          />
-        </motion.div>
-        <div
-          className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20 mix-blend-overlay`}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-900/50 to-slate-900/10 md:via-slate-900/35" />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/25 to-transparent" />
-
-        <div className="relative z-10 flex h-full min-h-[inherit] flex-col justify-end p-6 md:flex-row md:items-end md:justify-between md:p-10 lg:p-12">
-          <div className="max-w-2xl">
-            <div className="mb-3 flex flex-wrap items-center gap-2">
-              <span className="rounded-full border border-white/20 bg-ocean-600/90 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-sm backdrop-blur-sm">
-                Featured
-              </span>
-              <span className="rounded-full border border-white/15 bg-black/50 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
-                {project.category}
-              </span>
-              <span className="rounded-full border border-white/15 bg-black/40 px-3 py-1 text-xs text-slate-200 backdrop-blur-sm">
-                {project.year}
-              </span>
-              <StarRow n={project.rating} />
-            </div>
-            <h3 className="text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
-              {project.title}
-            </h3>
-            <p className="mt-1 text-sm font-medium text-ocean-200/95 md:text-base">
-              {project.client}
-            </p>
-            <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-slate-200/90 md:line-clamp-3 md:text-base">
-              {project.description}
-            </p>
-            {project.metrics ? (
-              <div className="mt-5 inline-flex items-baseline gap-2 rounded-xl border border-white/10 bg-ocean-950/40 px-4 py-3 backdrop-blur-md">
-                <span className="bg-gradient-to-r from-amber-200 to-ocean-200 bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
-                  {project.metrics.increase}
-                </span>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-300">
-                  {project.metrics.metric}
-                </span>
-              </div>
-            ) : null}
-          </div>
-
-          <span className="mt-6 inline-flex items-center gap-2 self-start rounded-full border border-white/25 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition group-hover:border-ocean-300/50 group-hover:bg-ocean-600/40 md:mt-0 md:self-end">
-            View case study
-            <span className="transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden>→</span>
-          </span>
-        </div>
-      </Link>
-    </motion.div>
-  );
-}
-
 function GridProjectCard({
   project,
   index,
-  wide,
 }: {
   project: PortfolioCaseStudy;
   index: number;
-  wide: boolean;
 }) {
+  const accentPalette = [
+    {
+      glow: "from-cyan-300/35 via-ocean-300/15 to-transparent",
+      dot: "bg-cyan-300/70",
+      ring: "border-cyan-200/50",
+    },
+    {
+      glow: "from-violet-300/30 via-indigo-300/15 to-transparent",
+      dot: "bg-violet-300/70",
+      ring: "border-violet-200/50",
+    },
+    {
+      glow: "from-emerald-300/30 via-teal-300/15 to-transparent",
+      dot: "bg-emerald-300/70",
+      ring: "border-emerald-200/50",
+    },
+  ] as const;
+  const accent = accentPalette[index % accentPalette.length];
+
   const body = (
     <>
-      <div className="relative aspect-[16/10] min-h-[10.5rem] w-full overflow-hidden md:min-h-[12rem]">
+      <div className="relative aspect-[16/10] min-h-[10.5rem] w-full overflow-hidden rounded-t-2xl md:min-h-[12rem]">
         <div
-          className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-30`}
+          className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-25`}
         />
         <Image
           src={project.image}
@@ -262,6 +187,17 @@ function GridProjectCard({
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent" />
+        <div
+          className={cn(
+            "pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-gradient-to-br blur-2xl",
+            accent.glow,
+          )}
+        />
+        <div className="pointer-events-none absolute bottom-3 right-3 flex items-center gap-1.5">
+          <span className={cn("h-2 w-2 rounded-full", accent.dot)} />
+          <span className={cn("h-4 w-4 rounded-full border", accent.ring)} />
+          <span className={cn("h-2.5 w-2.5 rounded-full", accent.dot)} />
+        </div>
         <div className="absolute left-3 right-3 top-3 flex items-start justify-between gap-2">
           <div className="flex flex-wrap gap-1.5">
             <span className="rounded-full border border-white/20 bg-black/60 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-ocean-100 backdrop-blur-md">
@@ -275,20 +211,20 @@ function GridProjectCard({
         </div>
       </div>
 
-      <div className="space-y-3.5 p-5 md:p-6">
+      <div className="space-y-3 p-4 sm:space-y-3.5 sm:p-5 md:p-6">
         <div>
-          <h3 className="text-lg font-bold tracking-tight text-slate-900 md:text-xl">
+          <h3 className="text-base font-bold tracking-tight text-slate-900 sm:text-lg md:text-xl">
             {project.title}
           </h3>
-          <p className="mt-0.5 text-xs font-medium text-ocean-600">{project.client}</p>
+          <p className="mt-0.5 text-[11px] font-medium text-ocean-600 sm:text-xs">{project.client}</p>
         </div>
-        <p className="line-clamp-2 text-sm leading-relaxed text-slate-600">
+        <p className="line-clamp-3 text-sm leading-relaxed text-slate-600 sm:line-clamp-2">
           {project.description}
         </p>
 
         {project.metrics ? (
           <div className="flex items-baseline gap-2 border-t border-slate-100/80 pt-3">
-            <span className="bg-gradient-to-r from-ocean-600 to-cyan-600 bg-clip-text text-2xl font-extrabold text-transparent">
+            <span className="bg-gradient-to-r from-ocean-600 to-cyan-600 bg-clip-text text-xl font-extrabold text-transparent sm:text-2xl">
               {project.metrics.increase}
             </span>
             <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
@@ -301,7 +237,7 @@ function GridProjectCard({
           {project.tech.slice(0, 4).map((tech) => (
             <span
               key={tech}
-              className="rounded-md border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] font-medium text-slate-700"
+              className="rounded-md border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] font-medium text-slate-700 sm:px-2.5"
             >
               {tech}
             </span>
@@ -315,18 +251,14 @@ function GridProjectCard({
 
         <div className="flex items-center justify-between border-t border-slate-100 pt-3.5 text-xs font-bold text-ocean-600">
           <span>Open case study</span>
-          <span aria-hidden className="text-base transition group-hover/card:translate-x-1">→</span>
+          <span aria-hidden className="text-base transition-transform duration-200 group-hover/card:translate-x-1">→</span>
         </div>
       </div>
     </>
   );
 
   return (
-    <motion.div
-      className={wide ? "md:col-span-2" : ""}
-      {...fadeUpSoft}
-      transition={staggerDelay(index, 0.07)}
-    >
+    <motion.div {...fadeUpSoft} transition={staggerDelay(index, 0.07)}>
       <TiltCard href={`/portfolio/${project.slug}`} className="h-full">
         {body}
       </TiltCard>
@@ -629,8 +561,6 @@ function PortfolioHomeVerticalSplit({ projects }: { projects: PortfolioCaseStudy
   );
 }
 
-const wideAt = (i: number, total: number) => i === 2 || (total > 3 && i === total - 1);
-
 export function PortfolioWork({
   mode = "home",
   className,
@@ -650,13 +580,7 @@ export function PortfolioWork({
     return projects.filter((p) => p.category === category);
   }, [isPage, category, projects]);
 
-  const isFullCatalog = !isPage || category === "All";
-  const [hero, ...others] = list;
-  const restCount = others.length;
   const singleFiltered = Boolean(isPage && category !== "All" && list.length === 1);
-  const showBigHero = isPage && isFullCatalog && !singleFiltered && Boolean(hero);
-  const showGridRest = isPage && isFullCatalog && !singleFiltered && restCount > 0;
-  const showFilteredGrid = isPage && !isFullCatalog && !singleFiltered && list.length > 0;
 
   return (
     <section
@@ -712,38 +636,18 @@ export function PortfolioWork({
               <PortfolioHomeVerticalSplit projects={list} />
             ) : singleFiltered && list[0] ? (
               <div className="mx-auto max-w-2xl">
-                <GridProjectCard project={list[0]} index={0} wide={false} />
+                <GridProjectCard project={list[0]} index={0} />
               </div>
             ) : (
-              <>
-                {showBigHero && hero ? (
-                  <FeaturedShowcase project={hero} index={0} />
-                ) : null}
-                {showGridRest ? (
-                  <div className="grid auto-rows-auto gap-5 md:grid-cols-2 md:gap-7 lg:gap-8">
-                    {others.map((project, i) => (
-                      <GridProjectCard
-                        key={project.slug}
-                        project={project}
-                        index={i}
-                        wide={restCount >= 2 && wideAt(i, restCount)}
-                      />
-                    ))}
-                  </div>
-                ) : null}
-                {showFilteredGrid ? (
-                  <div className="grid auto-rows-auto gap-5 md:grid-cols-2 md:gap-7 lg:gap-8">
-                    {list.map((project, i) => (
-                      <GridProjectCard
-                        key={project.slug}
-                        project={project}
-                        index={i}
-                        wide={list.length >= 3 && wideAt(i, list.length)}
-                      />
-                    ))}
-                  </div>
-                ) : null}
-              </>
+              <div className="grid auto-rows-auto gap-4 sm:gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8">
+                {list.map((project, i) => (
+                  <GridProjectCard
+                    key={project.slug}
+                    project={project}
+                    index={i}
+                  />
+                ))}
+              </div>
             )}
           </div>
         ) : null}
@@ -773,14 +677,14 @@ export function PortfolioWork({
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/contact?topic=Project%20from%20portfolio%20page"
-                className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-ocean-600 px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-ocean-600/25 transition hover:bg-ocean-700"
+                className="inline-flex min-h-[48px] items-center justify-center rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-7 py-3 text-sm font-bold text-white shadow-md shadow-ocean-600/20 transition hover:brightness-110 active:scale-[0.98]"
               >
                 Talk to our team
               </Link>
               {isPage ? null : (
                 <Link
                   href="/portfolio"
-                  className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-800 transition hover:border-ocean-200"
+                  className="inline-flex min-h-[48px] items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400"
                 >
                   Full portfolio
                 </Link>
