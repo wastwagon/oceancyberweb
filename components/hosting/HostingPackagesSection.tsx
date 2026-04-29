@@ -259,7 +259,7 @@ export function HostingPackagesSection({
               href={planContactHref(pkg)}
               className="mt-2 inline-flex min-h-[40px] w-full items-center justify-center rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-800"
             >
-              Talk to sales instead
+              Talk to our team
             </Link>
           </li>
         ))}

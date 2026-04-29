@@ -217,17 +217,19 @@ export function Header() {
 
   const dropdownContent = {
     services: {
-      title: "Our Services",
+      title: "Our services",
       description: "Comprehensive digital solutions tailored to your business needs",
       items: [
         {
           heading: "Web Development",
-          description: "Modern, performant websites built with cutting-edge technologies.",
+          description:
+            "Modern, high-performance websites built with proven technologies.",
           link: "/services/web-development",
         },
         {
-          heading: "Mobile Apps",
-          description: "Native and cross-platform applications deliver exceptional experiences.",
+          heading: "Mobile apps",
+          description:
+            "Native and cross-platform applications designed for reliable user experiences.",
           link: "/services/mobile-apps",
         },
         {
@@ -236,8 +238,9 @@ export function Header() {
           link: "/services/website-to-mobile-app",
         },
         {
-          heading: "E-Commerce",
-          description: "Scalable online stores with seamless checkout and payment.",
+          heading: "E-commerce",
+          description:
+            "Scalable online stores with dependable checkout and payment flows.",
           link: "/services/ecommerce",
         },
         {
@@ -263,7 +266,8 @@ export function Header() {
         },
         {
           heading: "Education",
-          description: "Innovative e-learning platforms transforming learning.",
+          description:
+            "Practical e-learning platforms that improve delivery and outcomes.",
           link: "/industries/education",
         },
         {

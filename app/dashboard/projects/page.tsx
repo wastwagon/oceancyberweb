@@ -92,7 +92,7 @@ export default function DashboardProjectsPage() {
               href="/services/website-to-mobile-app"
               className="rounded-xl border border-ocean-300 bg-ocean-50 px-4 py-2 text-sm font-semibold text-ocean-800 hover:border-ocean-400"
             >
-              Website to app quote
+              Website-to-Mobile App Conversion Quote
             </Link>
             <button
               type="button"

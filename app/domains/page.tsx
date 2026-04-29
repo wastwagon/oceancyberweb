@@ -20,8 +20,8 @@ export default function DomainsPage() {
             Find your name on the web
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-slate-600">
-            Light, high-trust layout inspired by leading registrars—white surfaces,
-            crisp typography, and a single primary action color for search and CTAs.
+            Search domain availability quickly, compare options clearly, and secure
+            SSL and hosting add-ons with confidence.
           </p>
 
           <div className="mx-auto mt-12 max-w-3xl">
@@ -96,13 +96,13 @@ export default function DomainsPage() {
             href="/contact"
             className="inline-flex min-h-[48px] items-center justify-center rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-8 text-sm font-bold text-white shadow-md shadow-ocean-600/20 transition hover:brightness-110"
           >
-            Talk to sales
+            Talk to our team
           </Link>
           <Link
             href="/services/website-to-mobile-app"
             className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-ocean-300 bg-ocean-50 px-6 text-sm font-semibold text-ocean-800 transition hover:border-ocean-400 hover:bg-ocean-100/70"
           >
-            Convert website to mobile app
+            Convert your website into a mobile app
           </Link>
         </div>
       </section>

@@ -23,7 +23,7 @@ const teamMembers = [
     name: "Marcus Owusu",
     role: "Founder & CEO",
     image: "/images/EGP Ghana.webp",
-    bio: "Technology visionary with 15+ years of experience in digital transformation and cybersecurity solutions across Africa.",
+    bio: "Technology leader with 15+ years of experience in product delivery and cybersecurity programs across Africa.",
     expertise: [
       "Strategic Leadership",
       "Digital Transformation",
@@ -35,7 +35,7 @@ const teamMembers = [
     name: "Sarah Mensah",
     role: "CTO & Lead Architect",
     image: "/images/Fitch Advisory.webp",
-    bio: "Software architect specializing in scalable cloud solutions and cutting-edge technologies for enterprise applications.",
+    bio: "Software architect focused on scalable cloud systems and maintainable enterprise application architecture.",
     expertise: ["Cloud Architecture", "DevOps", "AI/ML", "System Design"],
   },
   {
@@ -558,7 +558,7 @@ export default function AboutPage() {
                 </div>
                 <div className="space-y-5 p-8 md:p-10">
                   <h3 className="text-xl font-semibold tracking-tight text-slate-900 md:text-2xl">
-                    Leading Africa&apos;s digital future
+                    Building Africa&apos;s digital future
                   </h3>
                   <p className="text-sm leading-relaxed text-slate-600 md:text-base">
                     We envision a continent where every business, from
@@ -567,7 +567,7 @@ export default function AboutPage() {
                   </p>
                   <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                     {[
-                      "100+ African businesses transformed",
+                      "100+ African businesses supported",
                       "99.9% client satisfaction focus",
                       "15+ countries served",
                       "24/7 security operations mindset",
@@ -739,7 +739,7 @@ export default function AboutPage() {
               href="/contact"
               className="mt-8 inline-flex items-center justify-center gap-2 rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-8 py-4 text-sm font-bold text-white shadow-lg shadow-ocean-600/25 transition-all hover:brightness-110 active:scale-[0.98] md:text-base"
             >
-              Start a conversation
+              Talk to our team
               <ArrowRight className="h-4 w-4" />
             </Link>
           </motion.div>

@@ -32,7 +32,7 @@ export function PortfolioPageHero({
           From fintech and e-commerce to events and professional services—each
           build is designed for performance, security, and growth. Every project
           is delivered with local partnership from Accra, with a global
-          product-bar standard.
+          product-grade standard.
         </p>
 
         <ul className="mt-8 flex flex-wrap items-center justify-center gap-3 md:mt-10 md:gap-4">

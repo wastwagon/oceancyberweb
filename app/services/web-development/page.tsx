@@ -12,8 +12,8 @@ const content: ServicePageContent = {
   heroSuffix: "",
   heroHighlightTone: "white",
   heroDescription:
-    "Fast, accessible marketing sites and serious product web: performance budgets, SEO foundations, and maintainable systems your team can extend.",
-  heroCtaLabel: "Start a project",
+    "Fast, accessible marketing sites and robust web products, with performance budgets, SEO foundations, and maintainable systems your team can extend.",
+  heroCtaLabel: "Talk to our team",
   heroCtaHref: "/contact",
   pills: ["Next.js", "Performance", "Design systems"],
   focusEyebrow: "Product surfaces",

@@ -182,7 +182,7 @@ export function Footer() {
                   aria-hidden
                 />
                 <span className="leading-relaxed text-slate-600">
-                  232 Nii Kwashiefo Avenue
+                  232 Nii Kwashiefio Avenue
                   <br />
                   Accra, Ghana
                 </span>
@@ -223,7 +223,7 @@ export function Footer() {
               href="/contact"
               className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-5 py-4 text-sm font-bold text-white shadow-lg shadow-ocean-600/25 transition-all hover:brightness-110 active:scale-[0.98] sm:w-auto"
             >
-              Start a project
+              Talk to our team
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </div>

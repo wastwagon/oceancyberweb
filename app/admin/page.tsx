@@ -44,7 +44,7 @@ const LEAD_FILTER_PRESETS = [
   },
   {
     id: "website-to-app",
-    label: "Website to app quote",
+    label: "Website-to-Mobile App Conversion Quote",
     status: "all",
     source: "website_to_app_quote",
     q: "",
@@ -366,7 +366,7 @@ export default function AdminPage() {
     if (s === "proposal_request") return "Proposal request";
     if (s === "help_center_feedback") return "Help center feedback";
     if (s === "namecheap_unified_checkout") return "Namecheap unified checkout";
-    if (s === "website_to_app_quote") return "Website to app quote";
+    if (s === "website_to_app_quote") return "Website-to-Mobile App Conversion Quote";
     if (s == null || s === "") return "—";
     return s;
   };
@@ -1094,7 +1094,7 @@ export default function AdminPage() {
                 <option value="proposal_request">Proposal request</option>
                 <option value="help_center_feedback">Help center feedback</option>
                 <option value="namecheap_unified_checkout">Namecheap unified checkout</option>
-                <option value="website_to_app_quote">Website to app quote</option>
+                <option value="website_to_app_quote">Website-to-Mobile App Conversion Quote</option>
               </select>
             </label>
             <label className="text-xs font-semibold text-slate-600">

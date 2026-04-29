@@ -283,7 +283,7 @@ export function InteractiveIntakeWizard() {
                 onChange={(e) => setHasExistingSite(e.target.checked)}
                 className="mt-0.5 h-4 w-4"
               />
-              We already have a website/app and need improvement or migration.
+              We already have a website or app and need improvement or migration.
             </label>
           </motion.div>
         )}

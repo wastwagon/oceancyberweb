@@ -80,7 +80,7 @@ export default function HostingPage({
               {
                 icon: Shield,
                 title: "Security & SSL",
-                body: "Let’s Encrypt and hardening best practices. Optional advanced protection on higher tiers where licensed.",
+                body: "Let's Encrypt and hardening best practices. Optional advanced protection on higher tiers where licensed.",
               },
             ].map(({ icon: Icon, title, body }) => (
               <li
@@ -199,7 +199,7 @@ export default function HostingPage({
           href="/contact?topic=cPanel%20%2F%20WHM%20hosting%20advice"
           className="mt-6 inline-flex min-h-[48px] items-center justify-center rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-8 text-sm font-bold text-white shadow-md shadow-ocean-600/20 transition hover:brightness-110"
         >
-          Talk to the team
+          Talk to our team
         </Link>
       </section>
     </div>

@@ -13,10 +13,11 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: {
-    default: "OceanCyber - Ghana's Premier Tech Partner | Web & Mobile App Development",
+    default: "OceanCyber | Web & Mobile App Development in Ghana",
     template: "%s | OceanCyber",
   },
-  description: "Ghana's leading technology solutions provider. We deliver cutting-edge web design, mobile app development, IT consulting, and digital transformation services across 12+ industries.",
+  description:
+    "Web and mobile app development partner in Ghana. We design, build, and secure digital products for teams across multiple industries.",
   keywords: [
     "web development Ghana",
     "mobile app development Accra",
@@ -39,8 +40,9 @@ export const metadata: Metadata = {
     locale: "en_GH",
     url: "https://oceancyber.net",
     siteName: "OceanCyber",
-    title: "OceanCyber - Ghana's Premier Tech Partner",
-    description: "Transforming Ghana's digital future with cutting-edge technology solutions",
+    title: "OceanCyber | Web & Mobile App Development in Ghana",
+    description:
+      "We help teams in Ghana design, build, and secure digital products with clear delivery and local support.",
     images: [
       {
         url: "/images/og-image.jpg",
@@ -52,8 +54,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "OceanCyber - Ghana's Premier Tech Partner",
-    description: "Transforming Ghana's digital future with cutting-edge technology solutions",
+    title: "OceanCyber | Web & Mobile App Development in Ghana",
+    description:
+      "We help teams in Ghana design, build, and secure digital products with clear delivery and local support.",
     images: ["/images/og-image.jpg"],
   },
   robots: {

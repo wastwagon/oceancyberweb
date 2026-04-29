@@ -288,7 +288,7 @@ export default function InsightsPage() {
                       href={contactHrefForTopic(featured.title)}
                       className="mt-8 inline-flex w-fit items-center gap-2 rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-5 py-4 text-sm font-bold text-white shadow-lg shadow-ocean-600/25 transition-all hover:brightness-110 active:scale-[0.98]"
                     >
-                      Discuss this topic
+                      Talk to our team
                       <ArrowRight className="h-4 w-4" aria-hidden />
                     </Link>
                   </div>
@@ -334,7 +334,7 @@ export default function InsightsPage() {
                         href={contactHrefForTopic(post.title)}
                         className="group mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-ocean-700 transition-colors hover:text-ocean-900"
                       >
-                        Discuss this topic
+                        Talk to our team
                         <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
                       </Link>
                     </div>
@@ -392,7 +392,7 @@ export default function InsightsPage() {
               href="/services/website-to-mobile-app"
               className="mt-4 inline-flex min-h-[42px] items-center justify-center rounded-xl border border-ocean-300 bg-ocean-50 px-5 text-xs font-semibold uppercase tracking-[0.12em] text-ocean-800 transition hover:border-ocean-400 hover:bg-ocean-100/70"
             >
-              Convert existing website to app
+              Convert your website into a mobile app
             </Link>
           </motion.div>
         </div>

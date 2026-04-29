@@ -118,7 +118,7 @@ export function HostingHighlight() {
               href="/contact?topic=Hosting%20consultation"
               className="inline-flex min-h-[46px] items-center justify-center rounded-xl border border-slate-300 bg-white px-5 text-sm font-semibold text-slate-700 transition hover:border-slate-400"
             >
-              Talk to hosting team
+              Talk to our team
             </Link>
           </div>
         </motion.div>

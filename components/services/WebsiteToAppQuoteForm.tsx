@@ -179,7 +179,7 @@ export function WebsiteToAppQuoteForm() {
             checked={form.needsAuth}
             onChange={(e) => setForm((s) => ({ ...s, needsAuth: e.target.checked }))}
           />
-          Login/Auth
+          User authentication
         </label>
         <label className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700">
           <input

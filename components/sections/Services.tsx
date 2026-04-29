@@ -27,21 +27,24 @@ interface Service {
 const services: Service[] = [
   {
     title: "Web Development",
-    description: "Modern, performant websites built with cutting-edge technologies and best practices that drive results.",
+    description:
+      "Modern, high-performance websites built with proven technologies and measurable delivery standards.",
     features: ["Next.js", "TypeScript", "Performance"],
     icon: Globe,
     href: "/services/web-development",
   },
   {
-    title: "Mobile Apps",
-    description: "Native and cross-platform applications that deliver exceptional user experiences.",
+    title: "Mobile apps",
+    description:
+      "Native and cross-platform apps built for reliable performance and clear user journeys.",
     features: ["React Native", "Flutter"],
     icon: Smartphone,
     href: "/services/mobile-apps",
   },
   {
-    title: "E-Commerce",
-    description: "Scalable online stores with seamless checkout and payment integrations.",
+    title: "E-commerce",
+    description:
+      "Scalable online stores with dependable checkout flows and payment integrations.",
     features: ["Shopify", "WooCommerce"],
     icon: ShoppingBag,
     href: "/services/ecommerce",
@@ -186,7 +189,7 @@ function ServicesRail() {
           href="/contact"
           className="inline-flex min-h-[46px] items-center justify-center rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-5 text-sm font-bold text-white shadow-md shadow-ocean-600/20 transition hover:brightness-110 active:scale-[0.98]"
         >
-          Book a consultation
+          Talk to our team
         </Link>
         <Link
           href="/services"
@@ -198,7 +201,7 @@ function ServicesRail() {
           href="/services/website-to-mobile-app"
           className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-ocean-300 bg-ocean-50/80 px-5 text-sm font-semibold text-ocean-800 transition hover:border-ocean-400 hover:bg-ocean-100/70"
         >
-          Website to app quote
+          Website-to-Mobile App Conversion Quote
         </Link>
       </div>
     </motion.aside>
@@ -222,7 +225,7 @@ export function Services() {
       <div className="container relative z-10 mx-auto px-4 sm:px-6 md:px-8">
         <header className="mx-auto mb-10 max-w-6xl text-center md:mb-14">
           <p className="mb-5 inline-flex items-center rounded-full border border-ocean-200 bg-ocean-50/95 px-4 py-2 text-xs font-medium tracking-wide text-ocean-800 shadow-sm sm:px-5 sm:py-2.5 sm:text-sm">
-            Our Services
+            Our services
           </p>
           <h3 className="mx-auto mb-4 max-w-4xl text-balance text-center text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl md:mb-5 md:text-5xl lg:text-6xl">
             Premium service architecture{" "}

@@ -96,7 +96,7 @@ export function Hero() {
           >
             <Link href="/contact" className="w-full sm:w-auto">
               <button className="min-h-[48px] w-full min-w-[240px] rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-8 py-4 font-bold text-white shadow-lg shadow-ocean-600/25 transition-all hover:brightness-110 active:scale-[0.98]">
-                Book an appointment
+                Talk to our team
               </button>
             </Link>
           </motion.div>

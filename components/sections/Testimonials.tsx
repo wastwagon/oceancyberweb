@@ -54,10 +54,10 @@ export function Testimonials({ cards }: { cards?: TestimonialCard[] }) {
           </motion.span>
 
           <h2 className="mx-auto mb-6 max-w-4xl text-balance text-center text-4xl font-bold leading-tight tracking-tight text-slate-900 md:text-6xl lg:text-7xl">
-            What Our Clients Say
+            What our clients say
             <br />
             <span className="bg-gradient-to-r from-ocean-600 via-ocean-700 to-cyan-600 bg-clip-text text-transparent">
-              About Our Work
+              about our work
             </span>
           </h2>
 
@@ -120,7 +120,7 @@ export function Testimonials({ cards }: { cards?: TestimonialCard[] }) {
               type="button"
               className="min-h-[48px] w-full rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-10 py-4 font-bold text-white shadow-lg shadow-ocean-600/25 transition-all hover:brightness-110 active:scale-[0.98] sm:w-auto"
             >
-              Book an appointment
+              Talk to our team
             </button>
           </Link>
         </motion.div>

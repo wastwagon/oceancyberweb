@@ -11,7 +11,7 @@ function sourceLabel(source: string | null) {
   if (source === "intake_wizard") return "Interactive intake";
   if (source === "proposal_request") return "Proposal request";
   if (source === "namecheap_unified_checkout") return "Namecheap unified checkout";
-  if (source === "website_to_app_quote") return "Website to app quote";
+  if (source === "website_to_app_quote") return "Website-to-Mobile App Conversion Quote";
   return source || "General";
 }
 
@@ -79,7 +79,7 @@ export default function ClientRequestsPage() {
               href="/services/website-to-mobile-app"
               className="rounded-xl border border-ocean-300 bg-ocean-50 px-4 py-2 text-sm font-semibold text-ocean-800 hover:border-ocean-400"
             >
-              Website to app quote
+              Website-to-Mobile App Conversion Quote
             </Link>
             <button
               type="button"

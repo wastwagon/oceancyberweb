@@ -763,7 +763,7 @@ export function PortfolioWork({
             )}
           >
             <h3 className="text-xl font-extrabold text-slate-900 md:text-2xl">
-              {isPage ? "Ready to ship your product?" : "Start a conversation"}
+              {isPage ? "Ready to ship your product?" : "Talk to our team"}
             </h3>
             <p className="mt-2 text-sm text-slate-600 md:text-base">
               {isPage
@@ -775,7 +775,7 @@ export function PortfolioWork({
                 href="/contact?topic=Project%20from%20portfolio%20page"
                 className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-ocean-600 px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-ocean-600/25 transition hover:bg-ocean-700"
               >
-                Start a project
+                Talk to our team
               </Link>
               {isPage ? null : (
                 <Link

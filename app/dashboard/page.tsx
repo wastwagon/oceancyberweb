@@ -133,7 +133,7 @@ export default function DashboardPage() {
               href="/services/website-to-mobile-app"
               className="rounded-xl border border-ocean-300 bg-ocean-50 px-4 py-2 text-sm font-semibold text-ocean-800 hover:border-ocean-400"
             >
-              Website to app quote
+              Website-to-Mobile App Conversion Quote
             </Link>
             <button
               type="button"
@@ -204,7 +204,7 @@ export default function DashboardPage() {
                   href="/services/website-to-mobile-app"
                   className="inline-flex min-h-[42px] items-center rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-4 text-sm font-bold text-white transition hover:brightness-110"
                 >
-                  Start conversion request
+                  Request conversion quote
                 </Link>
               </div>
             </section>

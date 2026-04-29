@@ -24,7 +24,7 @@ const services: ServiceCard[] = [
   {
     title: "Web development",
     description:
-      "Modern, performant sites and product web: SEO, accessibility, and speed budgets baked in from day one.",
+      "Modern, high-performance websites and web products, with SEO, accessibility, and speed budgets built in from day one.",
       image: "/images/Fitch Advisory.webp",
     services: [
       "Marketing and brand experiences",
@@ -48,7 +48,7 @@ const services: ServiceCard[] = [
   {
     title: "Website to mobile app conversion",
     description:
-      "Bring your existing website and we convert it into an iOS/Android-ready app with a structured quote and migration roadmap.",
+      "Bring your existing website, and we will convert it into an iOS- and Android-ready app with a structured quote and migration roadmap.",
     image: "/images/EGP Ghana.webp",
     services: [
       "Website architecture audit",

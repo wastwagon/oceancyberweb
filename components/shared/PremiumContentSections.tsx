@@ -97,7 +97,7 @@ export function PremiumFinalCtaSection({
               href="/contact"
               className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-8 py-4 text-sm font-bold text-white shadow-lg shadow-ocean-600/25 transition-all hover:brightness-110 active:scale-[0.98] sm:w-auto md:text-base"
             >
-              Start a conversation
+              Talk to our team
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
             <Link
