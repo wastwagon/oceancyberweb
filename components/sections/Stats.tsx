@@ -34,7 +34,7 @@ function StatsVeinLightning() {
   ];
 
   return (
-    <div className="pointer-events-none absolute inset-0 z-[1] overflow-hidden opacity-50" aria-hidden>
+    <div className="pointer-events-none absolute inset-0 z-[1] overflow-hidden opacity-[0.22]" aria-hidden>
       <svg
         className="absolute inset-0 h-full min-h-[420px] w-full"
         viewBox="0 0 1200 700"
@@ -107,12 +107,12 @@ export function Stats() {
         <div className="mb-12 max-w-2xl md:mb-16">
           <motion.div {...fadeFromLeft}>
             <span className="mb-4 block text-xs font-bold uppercase tracking-[0.2em] text-ocean-600">
-              Numbers that speak
+              At a glance
             </span>
-            <h2 className="mb-6 text-4xl font-bold leading-tight text-slate-900 md:text-6xl">
-              Our track record of <br />
+            <h2 className="mb-6 text-3xl font-bold leading-tight text-slate-900 md:text-4xl lg:text-5xl">
+              Experience you can measure —{" "}
               <span className="bg-gradient-to-r from-ocean-600 via-ocean-700 to-cyan-600 bg-clip-text text-transparent">
-                excellence.
+                delivery you can trust
               </span>
             </h2>
           </motion.div>
@@ -124,7 +124,7 @@ export function Stats() {
               key={stat.label}
               {...fadeUpSoft}
               transition={staggerDelay(index, 0.1)}
-              className="group relative flex min-h-0 flex-col justify-between overflow-hidden rounded-xl border border-slate-200/90 bg-white/95 p-5 shadow-sm ring-1 ring-slate-200/50 backdrop-blur-sm transition-all duration-500 hover:border-ocean-200/80 hover:shadow-md md:min-h-[140px] md:p-6"
+              className="group relative flex min-h-0 flex-col justify-between overflow-hidden rounded-xl border border-slate-200/90 bg-white/95 p-5 shadow-sm ring-1 ring-slate-200/50 backdrop-blur-sm transition-colors duration-300 hover:border-ocean-200/80 hover:shadow-md md:min-h-[140px] md:p-6"
             >
               <div className="absolute -inset-px bg-gradient-to-br from-ocean-500/[0.07] via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 

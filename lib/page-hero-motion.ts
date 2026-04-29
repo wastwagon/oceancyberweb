@@ -32,11 +32,11 @@ export function getPageHeroMotionVariants(
       },
     },
     item: {
-      hidden: { opacity: 0, y: 22 },
+      hidden: { opacity: 0, y: 12 },
       visible: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.56, ease },
+        transition: { duration: 0.45, ease },
       },
     },
   };

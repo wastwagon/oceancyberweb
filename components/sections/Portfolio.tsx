@@ -24,7 +24,7 @@ function CardClipart() {
 function PortfolioCard({ project, index }: { project: Project; index: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 18 }}
+      initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-8% 0px" }}
       transition={staggerDelay(index, 0.06)}
@@ -96,10 +96,11 @@ export function Portfolio({ cases }: { cases?: PortfolioCaseStudy[] }) {
             Portfolio
           </motion.span>
           <h2 className="mb-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl md:mb-5 md:text-5xl lg:text-6xl">
-            Selected work with measurable outcomes
+            Case studies with measurable outcomes
           </h2>
           <p className="mx-auto max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base md:text-lg">
-            Browse delivery snapshots across sectors, each presented with practical goals and results.
+            Explore recent delivery work across industries, with goals, execution
+            details, and outcomes.
           </p>
         </motion.div>
 
@@ -118,9 +119,12 @@ export function Portfolio({ cases }: { cases?: PortfolioCaseStudy[] }) {
         >
           <div className="mx-auto max-w-2xl">
             <h3 className="mb-3 text-xl font-bold text-slate-900 sm:text-2xl md:text-3xl">
-              Want a portfolio-worthy project?
+              Planning your next digital product?
             </h3>
-            <p className="mb-5 text-sm text-slate-600 sm:mb-6 sm:text-base">Tell us your goals and we&apos;ll recommend the best engagement path.</p>
+            <p className="mb-5 text-sm text-slate-600 sm:mb-6 sm:text-base">
+              Share your goals and we&apos;ll recommend the right engagement model
+              and rollout path.
+            </p>
             <div className="grid w-full max-w-md grid-cols-1 gap-2.5 sm:flex sm:max-w-none sm:flex-wrap sm:items-center sm:justify-center sm:gap-3">
               <Link
                 href="/contact"

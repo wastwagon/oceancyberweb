@@ -1,39 +1,15 @@
-import { Hero } from "@/components/sections/Hero";
-import { MarketingLeadStrip } from "@/components/sections/MarketingLeadStrip";
-import { ProjectCostPromo } from "@/components/sections/ProjectCostPromo";
-import { ServiceIllustrationStrip } from "@/components/sections/ServiceIllustrationStrip";
-import { Services } from "@/components/sections/Services";
-import { WebsiteToAppHighlight } from "@/components/sections/WebsiteToAppHighlight";
-import { HostingHighlight } from "@/components/sections/HostingHighlight";
-import { Portfolio } from "@/components/sections/Portfolio";
-import { Stats } from "@/components/sections/Stats";
-import { Testimonials } from "@/components/sections/Testimonials";
-import { Contact } from "@/components/sections/Contact";
-import { getPortfolioCaseStudies } from "@/lib/data/portfolio-loader";
-import { getTestimonialCards } from "@/lib/data/testimonials-loader";
+import type { Metadata } from "next";
+import { StartupAgencyHome } from "@/components/startup-agency/StartupAgencyHome";
 
 /** ISR: avoid serving a year-stale HTML shell from CDN/Next after deploys (see next/cache + s-maxage). */
 export const revalidate = 300;
 
-export default async function Home() {
-  const [portfolioCases, testimonialCards] = await Promise.all([
-    getPortfolioCaseStudies(),
-    getTestimonialCards(),
-  ]);
+export const metadata: Metadata = {
+  title: "OceanCyber | Web & Mobile App Development in Ghana",
+  description:
+    "Web and mobile app development partner in Ghana. Modern delivery, clear milestones, and local support — homepage styled in the Start-Up Agency visual language.",
+};
 
-  return (
-    <div className="flex flex-col min-h-screen">
-      <Hero />
-      <MarketingLeadStrip />
-      <Stats />
-      <ProjectCostPromo />
-      <ServiceIllustrationStrip />
-      <Services />
-      <WebsiteToAppHighlight />
-      <HostingHighlight />
-      <Portfolio cases={portfolioCases} />
-      <Testimonials cards={testimonialCards} />
-      <Contact />
-    </div>
-  );
+export default function Home() {
+  return <StartupAgencyHome />;
 }

@@ -73,7 +73,7 @@ export function HostingHighlight() {
             return (
               <motion.article
                 key={item.title}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={staggerDelay(index, 0.08)}
@@ -90,7 +90,7 @@ export function HostingHighlight() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={revealViewport}
           transition={{ duration: 0.45 }}

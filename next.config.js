@@ -6,6 +6,8 @@ const nextConfig = {
     remotePatterns: [
       { protocol: "http", hostname: "localhost", pathname: "/**" },
       { protocol: "https", hostname: "oceancyber.net", pathname: "/**" },
+      { protocol: "https", hostname: "cdn.prod.website-files.com", pathname: "/**" },
+      { protocol: "https", hostname: "d3e54v103j8qbb.cloudfront.net", pathname: "/**" },
     ],
     formats: ["image/avif", "image/webp"],
   },

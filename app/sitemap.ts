@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { insightArticlePath, insightPosts } from "@/lib/insights/content";
 
 const base =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
@@ -24,12 +25,23 @@ const routes = [
   "/industries/education",
 ];
 
+const insightRoutes = insightPosts.map((p) => insightArticlePath(p.slug));
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  return routes.map((path) => ({
+  const staticEntries: MetadataRoute.Sitemap = routes.map((path) => ({
     url: `${base}${path}`,
     lastModified: now,
     changeFrequency: path === "" ? "weekly" : "monthly",
     priority: path === "" ? 1 : 0.7,
   }));
+
+  const insightEntries: MetadataRoute.Sitemap = insightRoutes.map((path) => ({
+    url: `${base}${path}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.65,
+  }));
+
+  return [...staticEntries, ...insightEntries];
 }

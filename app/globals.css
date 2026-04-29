@@ -804,13 +804,13 @@
 .stats-vein-flow {
   fill: none;
   stroke: url(#stats-vein-stroke-grad);
-  stroke-width: 1.85;
+  stroke-width: 1.55;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-dasharray: 22 240;
   stroke-dashoffset: 0;
-  animation: stats-vein-pulse 5.5s linear infinite;
-  filter: drop-shadow(0 0 5px rgba(96, 165, 250, 0.5));
+  animation: stats-vein-pulse 7s linear infinite;
+  filter: drop-shadow(0 0 3px rgba(96, 165, 250, 0.28));
 }
 
 .stats-vein-flow--slow {
@@ -863,6 +863,30 @@
   opacity: 0.2;
 }
 
+/* Dark marketing homepage (`StartupAgencyHome`): keyboard focus visible on lime */
+[data-marketing-surface="startup-agency"] :is(a, button, input, textarea, select):focus-visible {
+  outline: 2px solid #bbf340;
+  outline-offset: 3px;
+}
+
+.skip-link-startup {
+  position: absolute;
+  left: 1rem;
+  top: -120px;
+  z-index: 200;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  background-color: #bbf340;
+  color: #000000;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.skip-link-startup:focus {
+  top: 5rem;
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-beam,
   .hero-center-glow,
@@ -878,5 +902,9 @@
   .stats-vein-flow {
     stroke-dashoffset: 0 !important;
     opacity: 0.35 !important;
+  }
+
+  .animate-sa-marquee {
+    animation: none !important;
   }
 }

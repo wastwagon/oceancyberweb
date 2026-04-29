@@ -45,9 +45,20 @@ const config: Config = {
           400: "#26c6da",
           500: "#00bcd4",
         },
+        /** Start-Up Agencyy–style marketing tokens (Webflow :root parity) */
+        sa: {
+          bg: "#000000",
+          surface: "#131317",
+          primary: "#bbf340",
+          heading: "#ffffff",
+          muted: "#e9e9e9",
+          border: "#414141",
+          "border-light": "#e3e3e3",
+        },
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        heading: ["var(--font-heading)", "Oswald", "sans-serif"],
       },
       animation: {
         "fade-in": "fadeIn 0.5s ease-in-out",
@@ -55,6 +66,7 @@ const config: Config = {
         "slide-in": "slideIn 0.5s ease-out",
         "wave": "wave 3s ease-in-out infinite",
         "float": "float 6s ease-in-out infinite",
+        "sa-marquee": "sa-marquee 32s linear infinite",
       },
       keyframes: {
         fadeIn: {
@@ -76,6 +88,10 @@ const config: Config = {
         float: {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-30px)" },
+        },
+        "sa-marquee": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
         },
       },
     },

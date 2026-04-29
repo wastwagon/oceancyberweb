@@ -21,16 +21,16 @@ const items = [
 export function MarketingLeadStrip() {
   return (
     <section
-      className="border-y border-slate-200/80 bg-gradient-to-b from-slate-50/95 to-white py-10 md:py-12"
+      className="border-y border-slate-200/80 bg-gradient-to-b from-slate-50/95 to-white py-12 md:py-16"
       aria-label="Why choose OceanCyber"
     >
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8">
         <div className="mx-auto mb-8 max-w-2xl text-center md:mb-10">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-ocean-600">
             Why teams work with us
           </p>
-          <h2 className="mt-2 text-balance text-2xl font-bold text-slate-900 md:text-3xl">
-            One partner for domains, apps, and the story you show the world
+          <h2 className="mt-2 text-balance text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
+            One partner from domains and hosting to apps and launch
           </h2>
         </div>
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

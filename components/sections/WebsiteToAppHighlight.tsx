@@ -3,9 +3,9 @@ import { ArrowRight, Smartphone } from "lucide-react";
 
 export function WebsiteToAppHighlight() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/70 to-white py-10 md:py-14">
-      <div className="container mx-auto max-w-6xl px-6 md:px-8">
-        <div className="rounded-3xl border border-slate-200/90 bg-white p-6 shadow-lg shadow-slate-200/50 ring-1 ring-slate-200/60 md:p-8">
+    <section className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/70 to-white py-16 md:py-20">
+      <div className="container mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
+        <div className="rounded-3xl border border-slate-200/90 bg-white p-6 shadow-sm shadow-slate-200/40 ring-1 ring-slate-200/50 md:p-8">
           <div className="grid items-center gap-6 md:grid-cols-[1.15fr_0.85fr]">
             <div>
               <p className="inline-flex items-center gap-2 rounded-full border border-ocean-200 bg-ocean-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-ocean-800">

@@ -170,7 +170,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
         </div>
       </div>
 
-      <div className="container relative z-10 mx-auto max-w-6xl px-6 md:px-8">
+      <div className="container relative z-10 mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
         <Suspense fallback={null}>
           <TopicFromUrl onTopic={applyTopicFromUrl} />
         </Suspense>
@@ -189,28 +189,25 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
             variants={contactHeaderItem}
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-ocean-200 bg-ocean-50/95 px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-ocean-800 shadow-sm will-change-transform"
           >
-            <span
-              className="flex h-2 w-2 animate-pulse rounded-full bg-ocean-500"
-              aria-hidden
-            />
-            Get in touch
+            <span className="flex h-2 w-2 rounded-full bg-ocean-500" aria-hidden />
+            Contact
           </motion.span>
           <motion.h2
             variants={contactHeaderItem}
-            className="mx-auto mb-5 max-w-4xl text-balance text-center text-3xl font-bold tracking-tight text-slate-900 md:text-4xl lg:text-6xl will-change-transform"
+            className="mx-auto mb-5 max-w-4xl text-balance text-center text-3xl font-bold tracking-tight text-slate-900 md:text-4xl lg:text-5xl will-change-transform"
           >
-            Let&apos;s Build Something
+            Start a conversation
             <br />
             <span className="bg-gradient-to-r from-ocean-600 via-ocean-700 to-cyan-600 bg-clip-text text-transparent">
-              Amazing Together
+              about your next release
             </span>
           </motion.h2>
           <motion.p
             variants={contactHeaderItem}
-            className="mx-auto max-w-2xl text-center text-base font-light leading-relaxed text-slate-600 md:text-lg will-change-transform"
+            className="mx-auto max-w-2xl text-center text-base font-normal leading-relaxed text-slate-600 md:text-lg will-change-transform"
           >
-            Ready to transform your digital presence? Reach out and let&apos;s
-            turn your vision into a digital reality.
+            Share your goals, timeline, and constraints — we respond with clear next
+            steps and a sensible engagement path.
           </motion.p>
         </motion.div>
 

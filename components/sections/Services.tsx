@@ -122,7 +122,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={revealViewport}
       transition={staggerDelay(index, 0.06)}
@@ -197,13 +197,14 @@ export function Services() {
             Our services
           </p>
           <h3 className="mx-auto mb-4 max-w-4xl text-balance text-center text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl md:mb-5 md:text-5xl lg:text-6xl">
-            Premium service architecture{" "}
+            Services designed for{" "}
             <span className="bg-gradient-to-r from-ocean-600 via-ocean-700 to-cyan-600 bg-clip-text text-transparent">
-              for scale-ready brands
+              real business outcomes
             </span>
           </h3>
           <p className="mx-auto max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base md:text-lg">
-            Designed for your market and audience: focused service clarity, stronger trust cues, and direct conversion paths.
+            Choose the capability you need, and we will match it with a practical
+            scope, timeline, and delivery plan your team can trust.
           </p>
         </header>
 
@@ -218,7 +219,7 @@ export function Services() {
             href="/services/website-to-mobile-app"
             className="inline-flex min-h-[48px] items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400"
           >
-            Website-to-Mobile App Conversion Quote
+            Get app conversion quote
           </Link>
         </div>
 

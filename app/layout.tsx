@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Oswald } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { ConditionalChrome } from "@/components/layout/ConditionalChrome";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { ChatBot } from "@/components/ui/ChatBot";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
@@ -10,6 +11,11 @@ import { WebVitals } from "@/components/analytics/WebVitals";
 import { AppProviders } from "@/components/providers/AppProviders";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const oswald = Oswald({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: {
@@ -87,16 +93,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} ${oswald.variable}`}>
       <body className="min-h-screen bg-background font-sans antialiased">
         <AppProviders>
           <OrganizationJsonLd />
           <WebVitals />
-          <Header />
-          <main className="flex-1 pt-24 lg:pt-36">{children}</main>
-          <Footer />
-          <ScrollToTop />
-          <ChatBot />
+          <ConditionalChrome
+            header={<Header />}
+            footer={<Footer />}
+            scrollToTop={<ScrollToTop />}
+            chatBot={<ChatBot />}
+          >
+            {children}
+          </ConditionalChrome>
         </AppProviders>
       </body>
     </html>

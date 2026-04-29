@@ -10,7 +10,7 @@ export function ProjectCostPromo() {
       className="relative border-y border-slate-200/80 bg-gradient-to-r from-ocean-50/95 via-white to-cyan-50/60"
       aria-labelledby="project-cost-promo-heading"
     >
-      <div className="container mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+      <div className="container mx-auto max-w-6xl px-4 py-14 sm:px-6 md:py-16">
         <div className="flex flex-col gap-8 rounded-3xl border border-ocean-200/50 bg-white/90 p-6 shadow-sm shadow-slate-200/40 md:flex-row md:items-center md:justify-between md:p-10">
           <div className="flex min-w-0 flex-1 flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
             <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-ocean-500 to-ocean-700 text-white shadow-md shadow-ocean-600/20">

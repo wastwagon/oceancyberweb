@@ -34,36 +34,33 @@ export function Testimonials({ cards }: { cards?: TestimonialCard[] }) {
   return (
     <section
       id="testimonials"
-      className="relative overflow-hidden bg-gradient-to-b from-slate-100/90 via-slate-50 to-white py-24 md:py-32"
+      className="relative overflow-hidden bg-gradient-to-b from-slate-100/90 via-slate-50 to-white py-20 md:py-28"
     >
       <TestimonialsAmbient />
 
-      <div className="container relative z-10 mx-auto px-6 text-center md:px-8">
-        <motion.div {...fadeUpProps} className="mx-auto mb-16 max-w-4xl md:mb-20">
+      <div className="container relative z-10 mx-auto px-4 text-center sm:px-6 md:px-8">
+        <motion.div {...fadeUpProps} className="mx-auto mb-12 max-w-4xl md:mb-16">
           <motion.span
-            initial={{ opacity: 0, scale: 0.96 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 6 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={revealViewport}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-ocean-200 bg-ocean-50/95 px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-ocean-800 shadow-sm"
+            transition={{ duration: 0.4 }}
+            className="mb-5 inline-flex items-center gap-2 rounded-full border border-ocean-200 bg-ocean-50/95 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-ocean-800 shadow-sm sm:px-5 sm:py-2.5 sm:text-sm"
           >
-            <span
-              className="h-2 w-2 animate-pulse rounded-full bg-ocean-500 shadow-sm"
-              aria-hidden
-            />
-            Client stories
+            <span className="h-2 w-2 rounded-full bg-ocean-500 shadow-sm" aria-hidden />
+            Client feedback
           </motion.span>
 
-          <h2 className="mx-auto mb-6 max-w-4xl text-balance text-center text-4xl font-bold leading-tight tracking-tight text-slate-900 md:text-6xl lg:text-7xl">
-            What our clients say
+          <h2 className="mx-auto mb-5 max-w-4xl text-balance text-center text-3xl font-bold leading-tight tracking-tight text-slate-900 md:text-4xl lg:text-5xl">
+            Trusted by teams across Ghana
             <br />
             <span className="bg-gradient-to-r from-ocean-600 via-ocean-700 to-cyan-600 bg-clip-text text-transparent">
-              about our work
+              for delivery and support
             </span>
           </h2>
 
-          <p className="mx-auto max-w-2xl text-center text-lg font-light leading-relaxed text-slate-600 md:text-xl">
-            98% satisfaction rate. Hear how we help businesses across Ghana
-            build trust and grow online.
+          <p className="mx-auto max-w-2xl text-center text-base font-normal leading-relaxed text-slate-600 md:text-lg">
+            Real outcomes from organizations we partner with long term — not one-off launches.
           </p>
         </motion.div>
 
@@ -71,12 +68,12 @@ export function Testimonials({ cards }: { cards?: TestimonialCard[] }) {
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={revealViewport}
-              transition={staggerDelay(index, 0.1)}
-              className={`group relative flex flex-col items-center rounded-[2.5rem] border border-slate-200/90 bg-white p-10 shadow-lg shadow-slate-200/40 ring-1 ring-slate-200/40 transition-all duration-500 hover:-translate-y-0.5 hover:border-ocean-200/80 hover:shadow-xl hover:shadow-slate-300/50 ${
-                index === 1 ? "md:mt-8" : ""
+              transition={staggerDelay(index, 0.08)}
+              className={`group relative flex flex-col items-center rounded-2xl border border-slate-200/90 bg-white p-8 shadow-md shadow-slate-200/35 ring-1 ring-slate-200/40 transition-colors duration-300 hover:border-ocean-200/70 hover:shadow-lg md:p-9 ${
+                index === 1 ? "md:mt-6" : ""
               }`}
             >
               <div className="mb-8 flex gap-1">
@@ -92,12 +89,12 @@ export function Testimonials({ cards }: { cards?: TestimonialCard[] }) {
                 ))}
               </div>
 
-              <p className="mb-10 text-lg font-light italic leading-relaxed text-slate-700">
+              <p className="mb-8 text-base font-normal italic leading-relaxed text-slate-700 md:text-lg">
                 &ldquo;{testimonial.content}&rdquo;
               </p>
 
               <div className="flex flex-col items-center">
-                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 border-ocean-200 bg-gradient-to-br from-ocean-600 to-ocean-800 text-xl font-bold text-white shadow-md transition-transform duration-500 group-hover:scale-105">
+                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full border-2 border-ocean-200 bg-gradient-to-br from-ocean-600 to-ocean-800 text-lg font-bold text-white shadow-sm transition-transform duration-300 group-hover:scale-[1.02]">
                   {testimonial.initials}
                 </div>
                 <div className="text-lg font-semibold text-slate-900">

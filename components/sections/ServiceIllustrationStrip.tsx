@@ -78,7 +78,7 @@ const items = [
 
 export function ServiceIllustrationStrip() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white to-slate-50/80 py-12 md:py-16">
+    <section className="relative overflow-hidden bg-gradient-to-b from-white to-slate-50/80 py-16 md:py-20">
       <div className="container relative z-10 mx-auto px-4 sm:px-6 md:px-8">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((item, index) => {
@@ -86,7 +86,7 @@ export function ServiceIllustrationStrip() {
             return (
               <motion.article
                 key={item.title}
-                initial={{ opacity: 0, y: 14 }}
+                initial={{ opacity: 0, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={staggerDelay(index, 0.06)}
