@@ -29,12 +29,10 @@ function parseStartupPrimary(items: DbMenuItem[]): StartupNavLink[] {
     const meta = asObject(item.metadata);
     const sectionId = typeof meta?.sectionId === "string" ? meta.sectionId : undefined;
     if (sectionId) {
-      parsed.push({ label: item.heading, sectionId });
+      parsed.push({ label: item.heading, href: `#${sectionId}` });
       continue;
     }
-    if (item.href === "/" && item.heading === "Home") {
-      parsed.push({ label: "Home", href: "/" });
-    }
+    parsed.push({ label: item.heading, href: item.href });
   }
   return parsed;
 }

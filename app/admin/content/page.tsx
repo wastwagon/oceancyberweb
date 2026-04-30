@@ -230,12 +230,13 @@ function buildDefaultNavigationMenus(): AdminNavMenu[] {
     description: "Primary in-page startup navigation",
     isActive: true,
     items: defaultNavigationConfig.startupPrimaryNav.map((item, index) => {
+      const anyItem = item as any;
       const metadata =
-        "sectionId" in item && item.sectionId ? { sectionId: item.sectionId } : {};
+        anyItem.sectionId ? { sectionId: anyItem.sectionId } : {};
       return {
         ...createEmptyNavItem(index * 10),
         heading: item.label,
-        href: "href" in item ? item.href : `#${item.sectionId}`,
+        href: anyItem.href || `#${anyItem.sectionId}`,
         metadata,
         metadataInput: JSON.stringify(metadata, null, 2),
       };
