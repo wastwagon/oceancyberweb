@@ -6,23 +6,19 @@ export function SaPricingSection() {
   return (
     <section
       id="pricing"
-      className="scroll-mt-28 border-b border-sa-border py-16 md:scroll-mt-32 md:py-24"
+      className="sa-section scroll-mt-28 border-b border-sa-border md:scroll-mt-32"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+      <div className="sa-container">
         <SaReveal className="mb-12 text-center">
-          <span className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-sa-primary">
-            Pricing
-          </span>
-          <h2 className="mt-3 font-heading text-3xl font-bold text-white md:text-4xl">
-            Starting points
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-sa-muted">
+          <span className="sa-eyebrow">Pricing</span>
+          <h2 className="sa-title mt-3 md:text-4xl">Starting points</h2>
+          <p className="sa-subtitle mx-auto">
             Indicative tiers in USD — final quotes follow discovery. For Ghana cedi bands and scope,
             use the project calculator below.
           </p>
           <Link
             href="/tools/project-cost"
-            className="mt-5 inline-flex items-center gap-1 font-heading text-sm font-semibold uppercase tracking-wide text-sa-primary underline-offset-4 hover:underline"
+            className="mt-5 inline-flex items-center gap-1 font-heading text-xs font-semibold uppercase tracking-[0.14em] text-sa-primary underline-offset-4 hover:underline"
           >
             Open project calculator (GHS)
           </Link>
@@ -31,10 +27,10 @@ export function SaPricingSection() {
           {pricingPlans.map((plan, i) => (
             <SaReveal key={plan.name} delay={i * 0.06}>
               <div
-                className={`relative flex h-full flex-col rounded-2xl border p-8 ${
+                className={`relative flex h-full flex-col rounded-2xl border p-7 md:p-8 ${
                   plan.featured
                     ? "border-sa-primary bg-sa-surface shadow-xl shadow-sa-primary/10"
-                    : "border-sa-border bg-sa-surface/50"
+                    : "sa-card"
                 }`}
               >
                 {plan.featured ? (
@@ -55,7 +51,7 @@ export function SaPricingSection() {
                 </ul>
                 <Link
                   href="/contact"
-                  className="mt-8 inline-flex min-h-[44px] items-center justify-center rounded-full border border-sa-border px-6 font-heading text-sm font-semibold uppercase tracking-wide text-white transition hover:border-sa-primary hover:text-sa-primary"
+                  className="mt-8 inline-flex min-h-[44px] items-center justify-center rounded-full border border-sa-border px-6 font-heading text-sm font-semibold uppercase tracking-[0.14em] text-white transition duration-300 hover:border-sa-primary hover:text-sa-primary"
                 >
                   Let&apos;s talk
                 </Link>

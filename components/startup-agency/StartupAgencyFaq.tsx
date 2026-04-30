@@ -9,17 +9,17 @@ export function StartupAgencyFaq() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <div className="mx-auto max-w-3xl space-y-3">
+    <div className="mx-auto max-w-3xl space-y-3.5">
       {faqItems.map((item, i) => {
         const isOpen = open === i;
         return (
           <div
             key={item.q}
-            className="overflow-hidden rounded-xl border border-sa-border bg-sa-surface/80"
+            className="overflow-hidden rounded-2xl border border-sa-border bg-sa-surface/80"
           >
             <button
               type="button"
-              className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left font-heading text-base font-semibold text-white md:text-lg"
+              className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left font-heading text-base font-semibold tracking-[-0.01em] text-white md:text-lg"
               aria-expanded={isOpen}
               onClick={() => setOpen(isOpen ? null : i)}
             >

@@ -7,17 +7,13 @@ export function SaServicesSection() {
   return (
     <section
       id="services"
-      className="scroll-mt-28 border-b border-sa-border py-16 md:scroll-mt-32 md:py-24"
+      className="sa-section scroll-mt-28 border-b border-sa-border md:scroll-mt-32"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+      <div className="sa-container">
         <SaReveal className="mb-12 text-center">
-          <span className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-sa-primary">
-            Services
-          </span>
-          <h2 className="mt-3 font-heading text-3xl font-bold text-white md:text-4xl lg:text-5xl">
-            What we deliver
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-sa-muted">
+          <span className="sa-eyebrow">Services</span>
+          <h2 className="sa-title mt-3">What we deliver</h2>
+          <p className="sa-subtitle mx-auto">
             Focused capabilities with clear handoffs — pick a lane and we&apos;ll scope the rest.
           </p>
         </SaReveal>
@@ -26,11 +22,11 @@ export function SaServicesSection() {
             <SaReveal key={s.title} delay={i * 0.05}>
               <Link
                 href={s.href}
-                className="group flex h-full flex-col rounded-2xl border border-sa-border bg-sa-surface/50 p-6 transition hover:border-sa-primary/60 hover:shadow-lg hover:shadow-sa-primary/5"
+                className="sa-card group flex h-full flex-col p-6 md:p-7 hover:shadow-lg hover:shadow-sa-primary/5"
               >
                 <h3 className="font-heading text-xl font-semibold text-white">{s.title}</h3>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-sa-muted">{s.desc}</p>
-                <span className="mt-4 inline-flex items-center gap-1 font-heading text-xs font-bold uppercase tracking-wide text-sa-primary">
+                <span className="mt-5 inline-flex items-center gap-1 font-heading text-xs font-bold uppercase tracking-[0.14em] text-sa-primary">
                   View service
                   <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
                 </span>

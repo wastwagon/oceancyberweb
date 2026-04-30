@@ -15,6 +15,9 @@ export const startupNav: StartupNavLink[] = [
 export const startupMegaLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
+  { label: "Team", href: "/team" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Projects", href: "/projects" },
   { label: "Project calculator", href: "/tools/project-cost" },
   { label: "Contact", href: "/contact" },
   { label: "Services", href: "/services" },

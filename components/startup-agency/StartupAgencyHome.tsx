@@ -17,7 +17,7 @@ import { SaTestimonialsSection } from "@/components/startup-agency/sections/SaTe
 export function StartupAgencyHome() {
   return (
     <div
-      className="relative min-h-screen bg-sa-bg text-sa-muted antialiased"
+      className="sa-shell relative min-h-screen bg-sa-bg text-sa-muted antialiased"
       data-marketing-surface="startup-agency"
     >
       <a href="#startup-main-content" className="skip-link-startup">

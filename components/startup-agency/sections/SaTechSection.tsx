@@ -5,29 +5,25 @@ export function SaTechSection() {
   return (
     <section
       id="tech"
-      className="scroll-mt-28 border-b border-sa-border py-14 md:scroll-mt-32 md:py-20"
+      className="sa-section scroll-mt-28 border-b border-sa-border md:scroll-mt-32"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+      <div className="sa-container">
         <SaReveal className="mb-8 text-center">
-          <span className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-sa-primary">
-            Tech
-          </span>
-          <h2 className="mt-3 font-heading text-2xl font-bold text-white md:text-3xl">
-            Stack we ship with
-          </h2>
+          <span className="sa-eyebrow">Tech</span>
+          <h2 className="sa-title mt-3 md:text-3xl">Stack we ship with</h2>
         </SaReveal>
         <div className="mb-10 flex flex-wrap justify-center gap-3">
           {techStack.map((t) => (
             <span
               key={t}
-              className="rounded-full border border-sa-border bg-sa-surface px-4 py-2 font-heading text-sm font-medium text-white"
+              className="rounded-full border border-sa-border bg-sa-surface px-4 py-2 font-heading text-sm font-medium text-white transition duration-300 hover:border-sa-primary/40"
             >
               {t}
             </span>
           ))}
         </div>
         <div
-          className="overflow-hidden rounded-2xl border border-sa-border bg-sa-surface/40 py-4"
+          className="sa-card overflow-hidden py-4"
           aria-hidden="true"
         >
           <div className="flex w-max animate-sa-marquee gap-6 px-4 font-heading text-sm font-medium text-sa-muted md:gap-10 md:text-base">

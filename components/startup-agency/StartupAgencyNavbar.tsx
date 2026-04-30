@@ -13,7 +13,7 @@ import {
 import { cn } from "@/lib/utils";
 
 const navLinkClass =
-  "group relative px-3 py-2 font-heading text-sm font-medium uppercase tracking-wide text-white transition hover:text-sa-primary";
+  "group relative inline-flex min-h-[42px] items-center px-3 py-2 font-heading text-[13px] font-medium uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary";
 
 function NavItem({
   item,
@@ -85,18 +85,15 @@ export function StartupAgencyNavbar() {
   }, [mobileOpen]);
 
   return (
-    <header
-      className="fixed left-0 right-0 top-2 z-[100] px-3 sm:px-4 md:top-3 md:px-6"
-      role="banner"
-    >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-2xl border border-sa-border bg-black/75 px-4 py-3 shadow-lg shadow-black/40 backdrop-blur-md md:px-6">
+    <header className="fixed left-0 right-0 top-3 z-[100] px-3 sm:px-4 md:px-6" role="banner">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-[18px] border border-sa-border bg-black/80 px-4 py-3 shadow-[0_18px_48px_rgba(0,0,0,0.45)] backdrop-blur-md md:px-6">
         <Link href="/" className="relative z-10 flex shrink-0 items-center gap-2">
           <Image
             src="/images/oceancyber logo.webp"
             alt="OceanCyber"
             width={140}
             height={42}
-            className="h-8 w-auto object-contain brightness-0 invert"
+            className="h-7 w-auto object-contain brightness-0 invert md:h-8"
             priority
           />
         </Link>
@@ -116,7 +113,7 @@ export function StartupAgencyNavbar() {
           >
             <button
               type="button"
-              className="flex items-center gap-1 px-3 py-2 font-heading text-sm font-medium uppercase tracking-wide text-white transition hover:text-sa-primary"
+              className="inline-flex min-h-[42px] items-center gap-1 px-3 py-2 font-heading text-[13px] font-medium uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary"
               aria-expanded={megaOpen}
               aria-haspopup="true"
               aria-controls="startup-mega-panel"
@@ -131,9 +128,9 @@ export function StartupAgencyNavbar() {
                 id="startup-mega-panel"
                 role="menu"
                 aria-labelledby="startup-mega-trigger"
-                className="absolute left-1/2 top-full z-[120] mt-2 w-[min(92vw,520px)] -translate-x-1/2 rounded-xl border border-sa-border bg-sa-surface/95 p-5 shadow-2xl backdrop-blur-md"
+                className="absolute left-1/2 top-full z-[120] mt-3 w-[min(92vw,560px)] -translate-x-1/2 rounded-2xl border border-sa-border bg-sa-surface/95 p-5 shadow-2xl backdrop-blur-md"
               >
-                <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-sa-muted">
+                  <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-sa-muted">
                   Navigate
                 </p>
                 <div className="grid grid-cols-2 gap-2">
@@ -142,7 +139,7 @@ export function StartupAgencyNavbar() {
                       key={link.href}
                       href={link.href}
                       role="menuitem"
-                      className="rounded-lg border border-transparent px-3 py-2 text-sm text-sa-muted transition hover:border-sa-border hover:bg-black/40 hover:text-white"
+                      className="rounded-xl border border-transparent px-3 py-2.5 text-sm text-sa-muted transition duration-300 hover:border-sa-border hover:bg-black/40 hover:text-white"
                       onClick={() => setMegaOpen(false)}
                     >
                       {link.label}
@@ -157,7 +154,7 @@ export function StartupAgencyNavbar() {
         <div className="flex items-center gap-2">
           <button
             type="button"
-            className="rounded-lg border border-sa-border p-2 text-white transition hover:border-sa-primary hover:text-sa-primary"
+            className="rounded-xl border border-sa-border p-2.5 text-white transition duration-300 hover:border-sa-primary hover:text-sa-primary"
             aria-expanded={searchOpen}
             aria-controls="startup-search-panel"
             aria-label={searchOpen ? "Close search" : "Search insights"}
@@ -167,20 +164,20 @@ export function StartupAgencyNavbar() {
           </button>
           <Link
             href="/get-started"
-            className="hidden rounded-lg border border-sa-border px-3 py-2 font-heading text-xs font-semibold uppercase tracking-wide text-white transition hover:border-sa-primary hover:text-sa-primary sm:inline-flex"
+            className="hidden min-h-[42px] items-center rounded-xl border border-sa-border px-3.5 py-2.5 font-heading text-[11px] font-semibold uppercase tracking-[0.14em] text-white transition duration-300 hover:border-sa-primary hover:text-sa-primary sm:inline-flex"
           >
             Get started
           </Link>
           <Link
             href="/contact"
-            className="hidden min-h-[40px] items-center rounded-full border-2 border-sa-primary bg-sa-primary px-4 font-heading text-xs font-bold uppercase tracking-wide text-sa-bg transition hover:bg-transparent hover:text-sa-primary md:inline-flex"
+            className="hidden min-h-[42px] items-center rounded-full border-2 border-sa-primary bg-sa-primary px-5 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-sa-bg transition duration-300 hover:bg-transparent hover:text-sa-primary md:inline-flex"
           >
             Contact
           </Link>
 
           <button
             type="button"
-            className="inline-flex rounded-lg border border-sa-border p-2 text-white lg:hidden"
+            className="inline-flex rounded-xl border border-sa-border p-2.5 text-white lg:hidden"
             aria-expanded={mobileOpen}
             aria-controls="startup-mobile-nav"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}

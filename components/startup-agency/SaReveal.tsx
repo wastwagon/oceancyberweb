@@ -22,10 +22,10 @@ export function SaReveal({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 22 }}
+      initial={{ opacity: 0, y: 26 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-12% 0px" }}
-      transition={{ duration: 0.5, ease, delay }}
+      transition={{ duration: 0.62, ease, delay }}
       className={className}
     >
       {children}

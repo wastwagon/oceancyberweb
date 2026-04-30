@@ -4,20 +4,20 @@ export function SaCtaStripSection() {
   return (
     <section
       id="contact-cta"
-      className="scroll-mt-28 border-b border-sa-border py-16 md:scroll-mt-32 md:py-20"
+      className="sa-section scroll-mt-28 border-b border-sa-border md:scroll-mt-32"
     >
-      <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-4 text-center sm:px-6 md:flex-row md:justify-between md:text-left md:px-8">
+      <div className="sa-container flex flex-col items-center gap-6 text-center md:flex-row md:justify-between md:text-left">
         <div>
-          <h3 className="font-heading text-2xl font-bold text-white md:text-3xl">
+          <h3 className="font-heading text-2xl font-bold tracking-tight text-white md:text-3xl">
             Need a fast response?
           </h3>
-          <p className="mt-2 max-w-xl text-sa-muted">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-sa-muted md:text-base">
             Email or WhatsApp us — we route emergencies to the right lead the same day when possible.
           </p>
         </div>
         <Link
           href="/contact"
-          className="inline-flex min-h-[48px] shrink-0 items-center justify-center rounded-full border-2 border-white px-8 font-heading text-sm font-bold uppercase tracking-wide text-white transition hover:bg-white hover:text-sa-bg"
+          className="sa-btn-outline shrink-0"
         >
           Contact
         </Link>
