@@ -3,70 +3,31 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { ChevronDown, Menu, Search, X } from "lucide-react";
 import {
-  type StartupNavLink,
+  type HeaderNavItem,
+  type HeaderDropdownKey,
 } from "@/lib/navigation/menu";
 import { useNavigationConfig } from "@/lib/navigation/useNavigationConfig";
 import { cn } from "@/lib/utils";
 
 const navLinkClass =
-  "group relative inline-flex min-h-[42px] items-center px-3 py-2 font-heading text-[13px] font-medium uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary";
-
-function NavItem({
-  item,
-  onNavigate,
-  className,
-}: {
-  item: StartupNavLink;
-  onNavigate?: () => void;
-  /** Extra classes (e.g. mobile drawer block layout). */
-  className?: string;
-}) {
-  const pathname = usePathname();
-  const merged = cn(navLinkClass, className);
-  const underline = (
-    <span className="absolute bottom-1 left-3 right-3 h-px origin-left scale-x-0 bg-sa-primary transition group-hover:scale-x-100" />
-  );
-
-  if ("href" in item) {
-    return (
-      <Link href={item.href} className={merged} onClick={onNavigate}>
-        {item.label}
-        {underline}
-      </Link>
-    );
-  }
-
-  const { sectionId, label } = item;
-  if (pathname === "/") {
-    return (
-      <a href={`#${sectionId}`} className={merged} onClick={onNavigate}>
-        {label}
-        {underline}
-      </a>
-    );
-  }
-
-  return (
-    <Link href={`/#${sectionId}`} className={merged} onClick={onNavigate}>
-      {label}
-      {underline}
-    </Link>
-  );
-}
+  "group relative inline-flex min-h-[42px] items-center gap-1 px-3 py-2 font-heading text-[13px] font-medium uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary";
 
 export function StartupAgencyNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [megaOpen, setMegaOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const { startupPrimaryNav, startupPagesMenu } = useNavigationConfig();
+  const [activeDropdown, setActiveDropdown] = useState<HeaderDropdownKey | null>(null);
+  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  
+  const { mainHeaderNav, mainHeaderDropdownContent } = useNavigationConfig();
+  const pathname = usePathname();
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setMegaOpen(false);
+        setActiveDropdown(null);
         setSearchOpen(false);
         setMobileOpen(false);
       }
@@ -84,9 +45,21 @@ export function StartupAgencyNavbar() {
     };
   }, [mobileOpen]);
 
+  const handleMouseEnter = (key?: HeaderDropdownKey) => {
+    if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
+    if (key) setActiveDropdown(key);
+    else setActiveDropdown(null);
+  };
+
+  const handleMouseLeave = () => {
+    hideTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 150);
+  };
+
   return (
     <header className="fixed left-0 right-0 top-3 z-[100] px-3 sm:px-4 md:px-6" role="banner">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-[18px] border border-sa-border bg-black/80 px-4 py-3 shadow-[0_18px_48px_rgba(0,0,0,0.45)] backdrop-blur-md md:px-6">
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-3 rounded-[18px] border border-sa-border bg-black/80 px-4 py-3 shadow-[0_18px_48px_rgba(0,0,0,0.45)] backdrop-blur-md md:px-6">
         <Link href="/" className="relative z-10 flex shrink-0 items-center gap-2">
           <Image
             src="/images/oceancyber logo.webp"
@@ -98,66 +71,84 @@ export function StartupAgencyNavbar() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
-          {startupPrimaryNav.map((item) => (
-            <NavItem
-              key={"href" in item ? item.href : item.sectionId}
-              item={item}
-            />
-          ))}
+        <nav className="hidden flex-1 items-center justify-center gap-2 lg:flex" aria-label="Primary">
+          {mainHeaderNav.map((item) => {
+            const isActive =
+              pathname === item.href ||
+              (item.href !== "/" && pathname.startsWith(item.href)) ||
+              (item.activeMatch && item.activeMatch.some((match) => pathname.startsWith(match)));
 
-          <div
-            className="relative"
-            onMouseEnter={() => setMegaOpen(true)}
-            onMouseLeave={() => setMegaOpen(false)}
-          >
-            <button
-              type="button"
-              className="inline-flex min-h-[42px] items-center gap-1 px-3 py-2 font-heading text-[13px] font-medium uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary"
-              aria-expanded={megaOpen}
-              aria-haspopup="true"
-              aria-controls="startup-mega-panel"
-              id="startup-mega-trigger"
-              onClick={() => setMegaOpen((v) => !v)}
-            >
-              Pages
-              <ChevronDown className={cn("h-4 w-4 transition", megaOpen && "rotate-180")} />
-            </button>
-            {megaOpen ? (
+            const isDropdownOpen = activeDropdown === item.dropdownKey;
+
+            return (
               <div
-                id="startup-mega-panel"
-                role="menu"
-                aria-labelledby="startup-mega-trigger"
-                className="absolute left-1/2 top-full z-[120] mt-3 w-[min(92vw,560px)] -translate-x-1/2 rounded-2xl border border-sa-border bg-sa-surface/95 p-5 shadow-2xl backdrop-blur-md"
+                key={item.href}
+                className="relative"
+                onMouseEnter={() => handleMouseEnter(item.dropdownKey)}
+                onMouseLeave={handleMouseLeave}
               >
-                  <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-sa-muted">
-                  Navigate
-                </p>
-                <div className="grid grid-cols-2 gap-2">
-                  {startupPagesMenu.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      role="menuitem"
-                      className="rounded-xl border border-transparent px-3 py-2.5 text-sm text-sa-muted transition duration-300 hover:border-sa-border hover:bg-black/40 hover:text-white"
-                      onClick={() => setMegaOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
+                <Link
+                  href={item.href}
+                  className={navLinkClass}
+                  aria-expanded={item.dropdownKey ? isDropdownOpen : undefined}
+                >
+                  <span className={isActive ? "text-sa-primary" : ""}>{item.label}</span>
+                  {item.dropdownKey && (
+                    <ChevronDown className={cn("h-4 w-4 transition-transform", isDropdownOpen && "rotate-180")} />
+                  )}
+                  <span
+                    className={`absolute bottom-1 left-3 right-3 h-px origin-left transition bg-sa-primary ${
+                      isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                    }`}
+                  />
+                </Link>
+
+                {/* Desktop Mega Dropdown */}
+                {item.dropdownKey && activeDropdown === item.dropdownKey && mainHeaderDropdownContent[item.dropdownKey] && (
+                  <div
+                    className="absolute left-1/2 top-[calc(100%+12px)] z-[120] w-[640px] -translate-x-1/2 rounded-2xl border border-sa-border bg-[#131317]/95 p-6 shadow-[0_24px_54px_rgba(0,0,0,0.6)] backdrop-blur-xl"
+                    role="menu"
+                  >
+                    <div className="grid grid-cols-1 gap-8 md:grid-cols-12">
+                      <div className="md:col-span-4">
+                        <h3 className="font-heading text-lg font-bold text-white">
+                          {mainHeaderDropdownContent[item.dropdownKey].title}
+                        </h3>
+                        <p className="mt-2 text-sm leading-relaxed text-sa-muted">
+                          {mainHeaderDropdownContent[item.dropdownKey].description}
+                        </p>
+                      </div>
+                      <div className="grid grid-cols-1 gap-4 md:col-span-8 md:grid-cols-2">
+                        {mainHeaderDropdownContent[item.dropdownKey].items.map((subItem) => (
+                          <Link
+                            key={subItem.link}
+                            href={subItem.link}
+                            className="group/link block rounded-xl border border-transparent p-3 transition-colors hover:border-sa-border hover:bg-black/40"
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            <p className="font-heading text-sm font-semibold text-white transition-colors group-hover/link:text-sa-primary">
+                              {subItem.heading}
+                            </p>
+                            <p className="mt-1 text-xs text-sa-muted">
+                              {subItem.description}
+                            </p>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
-            ) : null}
-          </div>
+            );
+          })}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 z-10">
           <button
             type="button"
             className="rounded-xl border border-sa-border p-2.5 text-white transition duration-300 hover:border-sa-primary hover:text-sa-primary"
             aria-expanded={searchOpen}
-            aria-controls="startup-search-panel"
-            aria-label={searchOpen ? "Close search" : "Search insights"}
+            aria-label="Toggle search"
             onClick={() => setSearchOpen((v) => !v)}
           >
             <Search className="h-5 w-5" />
@@ -179,8 +170,6 @@ export function StartupAgencyNavbar() {
             type="button"
             className="inline-flex rounded-xl border border-sa-border p-2.5 text-white lg:hidden"
             aria-expanded={mobileOpen}
-            aria-controls="startup-mobile-nav"
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
             onClick={() => setMobileOpen((v) => !v)}
           >
             {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -188,90 +177,55 @@ export function StartupAgencyNavbar() {
         </div>
       </div>
 
+      {/* Search Panel */}
       {searchOpen ? (
-        <div
-          id="startup-search-panel"
-          className="mx-auto mt-2 max-w-xl px-3 sm:px-4"
-        >
-          <form
-            action="/insights"
-            className="flex overflow-hidden rounded-xl border border-sa-border bg-sa-surface shadow-lg"
-            method="get"
-            role="search"
-          >
-            <label htmlFor="startup-nav-search" className="sr-only">
-              Search insights
-            </label>
+        <div className="mx-auto mt-2 max-w-xl px-3 sm:px-4">
+          <form action="/insights" className="flex overflow-hidden rounded-xl border border-sa-border bg-sa-surface shadow-lg" method="get">
             <input
-              id="startup-nav-search"
               type="search"
               name="q"
               placeholder="Search insights…"
               className="min-h-[48px] flex-1 bg-transparent px-4 text-sm text-white placeholder:text-sa-muted/70 focus:outline-none"
             />
-            <button
-              type="submit"
-              className="bg-sa-primary px-4 font-heading text-sm font-semibold uppercase tracking-[0.14em] text-sa-bg"
-            >
+            <button type="submit" className="bg-sa-primary px-4 font-heading text-sm font-semibold uppercase tracking-[0.14em] text-sa-bg">
               Go
             </button>
           </form>
         </div>
       ) : null}
 
+      {/* Mobile Drawer */}
       <div
-        id="startup-mobile-nav"
         hidden={!mobileOpen}
-        className="mx-auto mt-3 max-w-7xl rounded-2xl border border-sa-border bg-sa-surface/98 p-4 shadow-xl lg:hidden"
+        className="mx-auto mt-3 max-w-7xl overflow-y-auto max-h-[85vh] rounded-2xl border border-sa-border bg-[#131317]/95 p-4 shadow-xl lg:hidden"
       >
-        <form
-          action="/insights"
-          method="get"
-          className="mb-4 flex overflow-hidden rounded-xl border border-sa-border bg-black/30"
-          role="search"
-          onSubmit={() => setMobileOpen(false)}
-        >
-          <label htmlFor="startup-mobile-search" className="sr-only">
-            Search insights
-          </label>
-          <input
-            id="startup-mobile-search"
-            name="q"
-            type="search"
-            placeholder="Search insights…"
-            className="min-h-[44px] flex-1 bg-transparent px-3 text-sm text-white placeholder:text-sa-muted/70 focus:outline-none"
-          />
-          <button
-            type="submit"
-            className="bg-sa-primary px-3 font-heading text-xs font-semibold uppercase tracking-[0.14em] text-sa-bg"
-          >
-            Go
-          </button>
-        </form>
-
         <div className="flex flex-col gap-1">
-          {startupPrimaryNav.map((item) => (
-            <NavItem
-              key={"href" in item ? item.href : item.sectionId}
-              item={item}
-              className="block w-full rounded-lg px-3 py-3"
-              onNavigate={() => setMobileOpen(false)}
-            />
+          {mainHeaderNav.map((item) => (
+            <div key={item.href} className="border-b border-sa-border/50 py-2 last:border-0">
+              <Link
+                href={item.href}
+                className="block w-full py-2 px-3 font-heading text-sm font-semibold uppercase tracking-widest text-white hover:text-sa-primary"
+                onClick={() => setMobileOpen(false)}
+              >
+                {item.label}
+              </Link>
+              {item.dropdownKey && mainHeaderDropdownContent[item.dropdownKey] && (
+                <div className="mt-2 flex flex-col gap-2 pl-6">
+                  {mainHeaderDropdownContent[item.dropdownKey].items.map((subItem) => (
+                    <Link
+                      key={subItem.link}
+                      href={subItem.link}
+                      className="block py-1.5 text-sm text-sa-muted hover:text-sa-primary"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {subItem.heading}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
-          <p className="mt-2 px-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-sa-muted">
-            Pages
-          </p>
-          {startupPagesMenu.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="rounded-lg px-3 py-2 text-sm text-sa-muted"
-              onClick={() => setMobileOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <div className="mt-4 flex flex-col gap-2 border-t border-sa-border pt-4">
+          <div className="mt-6 flex flex-col gap-3">
             <Link
               href="/get-started"
               className="rounded-lg border border-sa-border px-3 py-3 text-center font-heading text-sm font-semibold uppercase tracking-[0.14em] text-white"

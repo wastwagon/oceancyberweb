@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Oswald } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { StartupAgencyNavbar } from "@/components/startup-agency/StartupAgencyNavbar";
+import { StartupAgencyFooter } from "@/components/startup-agency/StartupAgencyFooter";
 import { ConditionalChrome } from "@/components/layout/ConditionalChrome";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { ChatBot } from "@/components/ui/ChatBot";
@@ -92,14 +92,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${oswald.variable}`}>
-      <body className="min-h-screen bg-background font-sans antialiased">
+      <body className="sa-shell min-h-screen font-sans antialiased">
         <AppProviders>
           <OrganizationJsonLd />
           <WebSiteJsonLd />
           <WebVitals />
           <ConditionalChrome
-            header={<Header />}
-            footer={<Footer />}
+            header={<StartupAgencyNavbar />}
+            footer={<StartupAgencyFooter />}
             scrollToTop={<ScrollToTop />}
             chatBot={<ChatBot />}
           >

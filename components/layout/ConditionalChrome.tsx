@@ -25,6 +25,7 @@ export function ConditionalChrome({
   if (hideChrome) {
     return (
       <>
+        {header}
         <main className="flex w-full min-h-0 flex-1 flex-col">{children}</main>
         {scrollToTop}
         {chatBot}

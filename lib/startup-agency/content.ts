@@ -47,31 +47,37 @@ export const serviceCards = [
     title: "Web development",
     desc: "Modern, high‑performance websites with measurable delivery standards.",
     href: "/services/web-development",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
   },
   {
     title: "Mobile apps",
     desc: "Native and cross‑platform apps built for reliable performance.",
     href: "/services/mobile-apps",
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80",
   },
   {
     title: "E‑commerce",
     desc: "Scalable stores with dependable checkout and payments.",
     href: "/services/ecommerce",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
   },
   {
     title: "SEO & growth",
     desc: "Visibility and conversion paths tuned for your market.",
     href: "/services",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
   },
   {
     title: "Cybersecurity",
     desc: "Audits, hardening, and practical protection for your operations.",
     href: "/services/cybersecurity",
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
   },
   {
     title: "Cloud & hosting",
     desc: "Domains, SSL, and hosting foundations with local support.",
     href: "/hosting",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
   },
 ] as const;
 

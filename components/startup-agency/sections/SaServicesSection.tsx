@@ -1,5 +1,7 @@
+"use client";
+
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
 import { serviceCards } from "@/lib/startup-agency/content";
 
@@ -9,47 +11,36 @@ export function SaServicesSection() {
       id="services"
       className="sa-section scroll-mt-28 border-b border-sa-border md:scroll-mt-32"
     >
-      <div className="sa-container">
-        <SaReveal className="mb-12 text-center">
-          <span className="sa-eyebrow">Services</span>
-          <h2 className="sa-title mt-3">What we deliver</h2>
-          <p className="sa-subtitle mx-auto">
-            Focused capabilities with clear handoffs — pick a lane and we&apos;ll scope the rest.
-          </p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-2.5">
-            <Link
-              href="/domains"
-              className="rounded-full border border-sa-border px-4 py-2 font-heading text-[11px] font-semibold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:border-sa-primary hover:text-sa-primary"
-            >
-              Domains &amp; SSL
-            </Link>
-            <Link
-              href="/hosting"
-              className="rounded-full border border-sa-border px-4 py-2 font-heading text-[11px] font-semibold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:border-sa-primary hover:text-sa-primary"
-            >
-              Hosting
-            </Link>
-            <Link
-              href="/checkout/cart"
-              className="rounded-full border border-sa-border px-4 py-2 font-heading text-[11px] font-semibold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:border-sa-primary hover:text-sa-primary"
-            >
-              Checkout
-            </Link>
+      <div className="sa-container text-center">
+        <SaReveal className="mb-16">
+          <div className="inline-flex items-center gap-2 mb-4">
+            <span className="text-sa-primary">★ ★ ★ ★ ★</span>
+            <span className="sa-eyebrow">5.0 Based on delivery reviews</span>
           </div>
+          <h2 className="sa-title uppercase font-heading text-4xl sm:text-5xl lg:text-6xl text-white font-bold">
+            View Our Services
+          </h2>
         </SaReveal>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {serviceCards.map((s, i) => (
-            <SaReveal key={s.title} delay={i * 0.05}>
-              <Link
-                href={s.href}
-                className="sa-card group flex h-full flex-col p-6 md:p-7 hover:shadow-lg hover:shadow-sa-primary/5"
-              >
-                <h3 className="font-heading text-xl font-semibold text-white">{s.title}</h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-sa-muted">{s.desc}</p>
-                <span className="mt-5 inline-flex items-center gap-1 font-heading text-xs font-bold uppercase tracking-[0.14em] text-sa-primary">
-                  View service
-                  <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-                </span>
+            <SaReveal key={s.title} delay={i * 0.1}>
+              <Link href={s.href} className="group block text-left">
+                <div className="relative mb-6 aspect-video w-full overflow-hidden rounded-2xl border border-sa-border bg-sa-surface">
+                  <Image
+                    src={s.image}
+                    alt={s.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
+                <h3 className="font-heading text-xl font-bold uppercase tracking-wide text-white transition-colors duration-300 group-hover:text-sa-primary sm:text-2xl">
+                  {s.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-sa-muted sm:text-base">
+                  {s.desc}
+                </p>
               </Link>
             </SaReveal>
           ))}

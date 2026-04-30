@@ -1,12 +1,10 @@
-export type StartupNavLink =
-  | { readonly label: "Home"; readonly href: "/" }
-  | { readonly label: string; readonly sectionId: string };
+export type StartupNavLink = { readonly label: string; readonly href: string };
 
 export const startupPrimaryNav: StartupNavLink[] = [
   { label: "Home", href: "/" },
-  { label: "About", sectionId: "about" },
-  { label: "Services", sectionId: "services" },
-  { label: "Portfolio", sectionId: "projects" },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Portfolio", href: "/portfolio" },
 ];
 
 export const startupPagesMenu = [

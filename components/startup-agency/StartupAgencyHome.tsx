@@ -25,7 +25,6 @@ export function StartupAgencyHome() {
         Skip to content
       </a>
       <StartupAgencyProgressBar />
-      <StartupAgencyNavbar />
 
       <main id="startup-main-content" className="pb-24 pt-24 md:pb-0 md:pt-28" tabIndex={-1}>
         <h1 className="sr-only">
@@ -46,7 +45,6 @@ export function StartupAgencyHome() {
         <SaInsightsTeaserSection />
       </main>
 
-      <StartupAgencyFooter />
       <StartupAgencyMobileQuickBar />
     </div>
   );
