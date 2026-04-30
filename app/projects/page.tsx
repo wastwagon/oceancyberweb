@@ -20,7 +20,7 @@ export default async function ProjectsPage() {
       <section className="border-b border-sa-border bg-black pt-28 md:pt-32">
         <div className="sa-container max-w-5xl pb-12 text-center md:pb-16">
           <p className="sa-eyebrow">Projects</p>
-          <h1 className="mt-4 font-heading text-balance text-4xl font-bold tracking-[-0.02em] text-white md:text-5xl">
+          <h1 className="sa-title mt-4 text-balance">
             Delivery snapshots from real engagements
           </h1>
           <p className="sa-subtitle mx-auto max-w-3xl">

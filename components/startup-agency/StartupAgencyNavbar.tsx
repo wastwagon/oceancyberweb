@@ -211,7 +211,7 @@ export function StartupAgencyNavbar() {
             />
             <button
               type="submit"
-              className="bg-sa-primary px-4 font-heading text-sm font-semibold uppercase tracking-wide text-sa-bg"
+              className="bg-sa-primary px-4 font-heading text-sm font-semibold uppercase tracking-[0.14em] text-sa-bg"
             >
               Go
             </button>
@@ -243,7 +243,7 @@ export function StartupAgencyNavbar() {
           />
           <button
             type="submit"
-            className="bg-sa-primary px-3 font-heading text-xs font-semibold uppercase text-sa-bg"
+            className="bg-sa-primary px-3 font-heading text-xs font-semibold uppercase tracking-[0.14em] text-sa-bg"
           >
             Go
           </button>
@@ -274,14 +274,14 @@ export function StartupAgencyNavbar() {
           <div className="mt-4 flex flex-col gap-2 border-t border-sa-border pt-4">
             <Link
               href="/get-started"
-              className="rounded-lg border border-sa-border px-3 py-3 text-center font-heading text-sm font-semibold uppercase tracking-wide text-white"
+              className="rounded-lg border border-sa-border px-3 py-3 text-center font-heading text-sm font-semibold uppercase tracking-[0.14em] text-white"
               onClick={() => setMobileOpen(false)}
             >
               Get started
             </Link>
             <Link
               href="/contact"
-              className="rounded-lg border-2 border-sa-primary bg-sa-primary py-3 text-center font-heading text-sm font-bold uppercase tracking-wide text-sa-bg"
+              className="rounded-lg border-2 border-sa-primary bg-sa-primary py-3 text-center font-heading text-sm font-bold uppercase tracking-[0.14em] text-sa-bg"
               onClick={() => setMobileOpen(false)}
             >
               Contact

@@ -4,11 +4,14 @@ import Image from "next/image";
 const footerCompany = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
+  { label: "Team", href: "/team" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
 const footerExplore = [
   { label: "Services", href: "/services" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Projects", href: "/projects" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Insights", href: "/insights" },
   { label: "Project calculator", href: "/tools/project-cost" },

@@ -45,7 +45,7 @@ export default function TeamPage() {
       <section className="border-b border-sa-border pb-12">
         <div className="sa-container max-w-5xl text-center">
           <p className="sa-eyebrow">Team</p>
-          <h1 className="mt-4 font-heading text-balance text-4xl font-bold tracking-[-0.02em] text-white md:text-5xl">
+          <h1 className="sa-title mt-4 text-balance">
             Leadership and specialists focused on outcomes
           </h1>
           <p className="sa-subtitle mx-auto max-w-3xl">
@@ -55,14 +55,11 @@ export default function TeamPage() {
         </div>
       </section>
 
-      <section className="py-14 md:py-20">
+      <section className="sa-section">
         <div className="sa-container max-w-6xl">
           <div className="grid gap-6 md:grid-cols-2">
             {team.map((member) => (
-              <article
-                key={member.name}
-                className="sa-card overflow-hidden"
-              >
+              <article key={member.name} className="sa-card overflow-hidden">
                 <div className="relative h-52 w-full">
                   <Image
                     src={member.image}
@@ -86,7 +83,7 @@ export default function TeamPage() {
           <div className="mt-10 text-center">
             <Link
               href="/contact"
-              className="inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-sa-primary bg-sa-primary px-8 font-heading text-sm font-bold uppercase tracking-[0.14em] text-sa-bg transition duration-300 hover:bg-transparent hover:text-sa-primary"
+              className="sa-btn-primary"
             >
               Work with our team
             </Link>
