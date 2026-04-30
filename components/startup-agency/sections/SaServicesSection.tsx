@@ -16,6 +16,26 @@ export function SaServicesSection() {
           <p className="sa-subtitle mx-auto">
             Focused capabilities with clear handoffs — pick a lane and we&apos;ll scope the rest.
           </p>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2.5">
+            <Link
+              href="/domains"
+              className="rounded-full border border-sa-border px-4 py-2 font-heading text-[11px] font-semibold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:border-sa-primary hover:text-sa-primary"
+            >
+              Domains &amp; SSL
+            </Link>
+            <Link
+              href="/hosting"
+              className="rounded-full border border-sa-border px-4 py-2 font-heading text-[11px] font-semibold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:border-sa-primary hover:text-sa-primary"
+            >
+              Hosting
+            </Link>
+            <Link
+              href="/checkout/cart"
+              className="rounded-full border border-sa-border px-4 py-2 font-heading text-[11px] font-semibold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:border-sa-primary hover:text-sa-primary"
+            >
+              Checkout
+            </Link>
+          </div>
         </SaReveal>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {serviceCards.map((s, i) => (

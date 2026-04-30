@@ -6,10 +6,9 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ChevronDown, Menu, Search, X } from "lucide-react";
 import {
-  startupMegaLinks,
-  startupNav,
   type StartupNavLink,
-} from "@/lib/startup-agency/content";
+} from "@/lib/navigation/menu";
+import { useNavigationConfig } from "@/lib/navigation/useNavigationConfig";
 import { cn } from "@/lib/utils";
 
 const navLinkClass =
@@ -62,6 +61,7 @@ export function StartupAgencyNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const { startupPrimaryNav, startupPagesMenu } = useNavigationConfig();
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -99,7 +99,7 @@ export function StartupAgencyNavbar() {
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
-          {startupNav.map((item) => (
+          {startupPrimaryNav.map((item) => (
             <NavItem
               key={"href" in item ? item.href : item.sectionId}
               item={item}
@@ -134,7 +134,7 @@ export function StartupAgencyNavbar() {
                   Navigate
                 </p>
                 <div className="grid grid-cols-2 gap-2">
-                  {startupMegaLinks.map((link) => (
+                  {startupPagesMenu.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
@@ -250,7 +250,7 @@ export function StartupAgencyNavbar() {
         </form>
 
         <div className="flex flex-col gap-1">
-          {startupNav.map((item) => (
+          {startupPrimaryNav.map((item) => (
             <NavItem
               key={"href" in item ? item.href : item.sectionId}
               item={item}
@@ -261,7 +261,7 @@ export function StartupAgencyNavbar() {
           <p className="mt-2 px-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-sa-muted">
             Pages
           </p>
-          {startupMegaLinks.map((link) => (
+          {startupPagesMenu.map((link) => (
             <Link
               key={link.href}
               href={link.href}

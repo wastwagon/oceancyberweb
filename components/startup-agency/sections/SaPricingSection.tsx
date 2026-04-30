@@ -13,8 +13,8 @@ export function SaPricingSection() {
           <span className="sa-eyebrow">Pricing</span>
           <h2 className="sa-title mt-3 md:text-4xl">Starting points</h2>
           <p className="sa-subtitle mx-auto">
-            Indicative tiers in USD — final quotes follow discovery. For Ghana cedi bands and scope,
-            use the project calculator below.
+            Indicative tiers in GHS (base currency). Final quotes follow discovery. Use the project
+            calculator below and optional currency converter for planning views.
           </p>
           <Link
             href="/tools/project-cost"

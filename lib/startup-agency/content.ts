@@ -1,31 +1,5 @@
 /** Marketing homepage content — structure aligned with Start-Up Agencyy; copy tailored for OceanCyber. */
 
-/** Primary bar: Home routes to `/`; other items scroll to section anchors on `/`. */
-export type StartupNavLink =
-  | { readonly label: "Home"; readonly href: "/" }
-  | { readonly label: string; readonly sectionId: string };
-
-export const startupNav: StartupNavLink[] = [
-  { label: "Home", href: "/" },
-  { label: "About", sectionId: "about" },
-  { label: "Services", sectionId: "services" },
-  { label: "Portfolio", sectionId: "projects" },
-];
-
-export const startupMegaLinks = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Team", href: "/team" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Projects", href: "/projects" },
-  { label: "Project calculator", href: "/tools/project-cost" },
-  { label: "Contact", href: "/contact" },
-  { label: "Services", href: "/services" },
-  { label: "Insights", href: "/insights" },
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "Get started", href: "/get-started" },
-] as const;
-
 export const heroServiceSlides = [
   {
     title: "Web development",
@@ -172,7 +146,7 @@ export const testimonials = [
 export const pricingPlans = [
   {
     name: "Startup",
-    price: "From $500",
+    price: "From GHS 6,000",
     desc: "Perfect for validation and first releases.",
     featured: false,
     features: [
@@ -184,7 +158,7 @@ export const pricingPlans = [
   },
   {
     name: "Professional",
-    price: "From $1,200",
+    price: "From GHS 14,500",
     desc: "For teams scaling product and marketing.",
     featured: true,
     features: [
@@ -196,7 +170,7 @@ export const pricingPlans = [
   },
   {
     name: "Enterprise",
-    price: "From $2,500",
+    price: "From GHS 30,000",
     desc: "Security‑aware and multi‑stakeholder delivery.",
     featured: false,
     features: [

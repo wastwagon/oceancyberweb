@@ -16,6 +16,349 @@ import {
   type AdminSiteProjectRow,
   type AdminSiteTestimonialRow,
 } from "@/lib/auth-client";
+import { defaultNavigationConfig } from "@/lib/navigation/menu";
+
+type AdminNavItem = {
+  id?: string;
+  sortOrder: number;
+  heading: string;
+  description: string | null;
+  href: string;
+  metadata: unknown;
+  metadataInput: string;
+  isActive: boolean;
+};
+
+type AdminNavMenu = {
+  key: string;
+  label: string;
+  description: string | null;
+  isActive: boolean;
+  items: AdminNavItem[];
+};
+
+function createEmptyNavItem(sortOrder = 0): AdminNavItem {
+  return {
+    sortOrder,
+    heading: "",
+    description: null,
+    href: "",
+    metadata: {},
+    metadataInput: "{}",
+    isActive: true,
+  };
+}
+
+function createEmptyNavMenu(): AdminNavMenu {
+  return {
+    key: "",
+    label: "",
+    description: null,
+    isActive: true,
+    items: [createEmptyNavItem(0)],
+  };
+}
+
+function buildMenuPreset(kind: string): AdminNavMenu {
+  if (kind === "startup-primary") {
+    return {
+      key: "startup-primary",
+      label: "Startup primary",
+      description: "Primary in-page startup navigation",
+      isActive: true,
+      items: [
+        { ...createEmptyNavItem(0), heading: "Home", href: "/", metadataInput: "{}" },
+        { ...createEmptyNavItem(10), heading: "About", href: "#about", metadataInput: '{"sectionId":"about"}' },
+        {
+          ...createEmptyNavItem(20),
+          heading: "Services",
+          href: "#services",
+          metadataInput: '{"sectionId":"services"}',
+        },
+        {
+          ...createEmptyNavItem(30),
+          heading: "Portfolio",
+          href: "#projects",
+          metadataInput: '{"sectionId":"projects"}',
+        },
+      ],
+    };
+  }
+  if (kind === "startup-pages") {
+    return {
+      key: "startup-pages",
+      label: "Startup pages",
+      description: "Pages dropdown for startup navbar",
+      isActive: true,
+      items: [
+        { ...createEmptyNavItem(0), heading: "Home", href: "/" },
+        { ...createEmptyNavItem(10), heading: "About", href: "/about" },
+        { ...createEmptyNavItem(20), heading: "Team", href: "/team" },
+        { ...createEmptyNavItem(30), heading: "Pricing", href: "/pricing" },
+        { ...createEmptyNavItem(40), heading: "Projects", href: "/projects" },
+      ],
+    };
+  }
+  if (kind === "main-header") {
+    return {
+      key: "main-header",
+      label: "Main header",
+      description: "Primary global header links",
+      isActive: true,
+      items: [
+        { ...createEmptyNavItem(0), heading: "Home", href: "/", metadataInput: "{}" },
+        {
+          ...createEmptyNavItem(10),
+          heading: "Services",
+          href: "/services",
+          metadataInput: '{"dropdownKey":"services"}',
+        },
+        {
+          ...createEmptyNavItem(20),
+          heading: "Industries",
+          href: "/industries",
+          metadataInput: '{"dropdownKey":"industries"}',
+        },
+        {
+          ...createEmptyNavItem(30),
+          heading: "Infrastructure",
+          href: "/domains",
+          metadataInput: '{"dropdownKey":"infrastructure","activeMatch":["/domains","/hosting"]}',
+        },
+      ],
+    };
+  }
+  if (kind.startsWith("main-dropdown-")) {
+    const suffix = kind.replace("main-dropdown-", "");
+    const shared = {
+      key: kind,
+      label: suffix.charAt(0).toUpperCase() + suffix.slice(1),
+      description: `${suffix} mega-menu content`,
+      isActive: true,
+    };
+    if (suffix === "industries") {
+      return {
+        ...shared,
+        items: [
+          {
+            ...createEmptyNavItem(0),
+            heading: "Financial Services",
+            href: "/industries/financial-services",
+            description: "Secure banking solutions and fintech innovations.",
+          },
+          {
+            ...createEmptyNavItem(10),
+            heading: "Healthcare",
+            href: "/industries/healthcare",
+            description: "HIPAA-compliant healthcare technology solutions.",
+          },
+        ],
+      };
+    }
+    if (suffix === "infrastructure") {
+      return {
+        ...shared,
+        items: [
+          {
+            ...createEmptyNavItem(0),
+            heading: "Domains & SSL",
+            href: "/domains",
+            description: "Search domain availability and add SSL with secure checkout.",
+          },
+          {
+            ...createEmptyNavItem(10),
+            heading: "Hosting",
+            href: "/hosting",
+            description: "Launch cPanel and WHM hosting plans with local support.",
+          },
+        ],
+      };
+    }
+    if (suffix === "resources") {
+      return {
+        ...shared,
+        items: [
+          {
+            ...createEmptyNavItem(0),
+            heading: "Insights",
+            href: "/insights",
+            description: "Strategy notes, platform updates, and practical guides.",
+          },
+          {
+            ...createEmptyNavItem(10),
+            heading: "Case studies",
+            href: "/case-studies",
+            description: "Delivery outcomes across sectors in Ghana and beyond.",
+          },
+        ],
+      };
+    }
+    if (suffix === "company") {
+      return {
+        ...shared,
+        items: [
+          {
+            ...createEmptyNavItem(0),
+            heading: "About",
+            href: "/about",
+            description: "Our mission, team, and operating principles.",
+          },
+          {
+            ...createEmptyNavItem(10),
+            heading: "Portfolio",
+            href: "/portfolio",
+            description: "Delivery examples across sectors and product types.",
+          },
+        ],
+      };
+    }
+    return {
+      ...shared,
+      items: [
+        { ...createEmptyNavItem(0), heading: "Item one", href: "/", description: "Menu description" },
+        { ...createEmptyNavItem(10), heading: "Item two", href: "/", description: "Menu description" },
+      ],
+    };
+  }
+  return createEmptyNavMenu();
+}
+
+function buildDefaultNavigationMenus(): AdminNavMenu[] {
+  const startupPrimary: AdminNavMenu = {
+    key: "startup-primary",
+    label: "Startup primary",
+    description: "Primary in-page startup navigation",
+    isActive: true,
+    items: defaultNavigationConfig.startupPrimaryNav.map((item, index) => {
+      const metadata =
+        "sectionId" in item && item.sectionId ? { sectionId: item.sectionId } : {};
+      return {
+        ...createEmptyNavItem(index * 10),
+        heading: item.label,
+        href: "href" in item ? item.href : `#${item.sectionId}`,
+        metadata,
+        metadataInput: JSON.stringify(metadata, null, 2),
+      };
+    }),
+  };
+
+  const startupPages: AdminNavMenu = {
+    key: "startup-pages",
+    label: "Startup pages",
+    description: "Pages dropdown for startup navbar",
+    isActive: true,
+    items: defaultNavigationConfig.startupPagesMenu.map((item, index) => ({
+      ...createEmptyNavItem(index * 10),
+      heading: item.label,
+      href: item.href,
+    })),
+  };
+
+  const mainHeader: AdminNavMenu = {
+    key: "main-header",
+    label: "Main header",
+    description: "Primary global header links",
+    isActive: true,
+    items: defaultNavigationConfig.mainHeaderNav.map((item, index) => {
+      const metadata: Record<string, unknown> = {};
+      if (item.dropdownKey) metadata.dropdownKey = item.dropdownKey;
+      if (item.activeMatch?.length) metadata.activeMatch = item.activeMatch;
+      return {
+        ...createEmptyNavItem(index * 10),
+        heading: item.label,
+        href: item.href,
+        metadata,
+        metadataInput: JSON.stringify(metadata, null, 2),
+      };
+    }),
+  };
+
+  const dropdownMenus: AdminNavMenu[] = Object.entries(defaultNavigationConfig.mainHeaderDropdownContent).map(
+    ([key, dropdown]) => ({
+      key: `main-dropdown-${key}`,
+      label: dropdown.title,
+      description: dropdown.description,
+      isActive: true,
+      items: dropdown.items.map((item, index) => ({
+        ...createEmptyNavItem(index * 10),
+        heading: item.heading,
+        description: item.description,
+        href: item.link,
+      })),
+    }),
+  );
+
+  return [startupPrimary, startupPages, mainHeader, ...dropdownMenus];
+}
+
+async function getAdminNavigation(apiKey: string) {
+  const res = await fetch("/api/admin/navigation", {
+    headers: apiKey ? { "x-admin-key": apiKey } : {},
+    cache: "no-store",
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new Error(data?.error || "Failed to load navigation");
+  }
+  const menus = ((data?.menus as AdminNavMenu[]) || []).map((menu) => ({
+    ...menu,
+    items: menu.items.map((item) => ({
+      ...item,
+      metadataInput: JSON.stringify(item.metadata ?? {}, null, 2),
+    })),
+  }));
+  return menus;
+}
+
+async function putAdminNavigation(menus: AdminNavMenu[], apiKey: string) {
+  const duplicateKeys = new Set<string>();
+  for (const menu of menus) {
+    const normalized = menu.key.trim().toLowerCase();
+    if (!normalized) {
+      throw new Error("Each menu must include a key.");
+    }
+    if (duplicateKeys.has(normalized)) {
+      throw new Error(`Duplicate menu key detected: ${menu.key}`);
+    }
+    duplicateKeys.add(normalized);
+  }
+
+  const payloadMenus = menus.map((menu, menuIndex) => ({
+    ...menu,
+    items: menu.items.map((item, itemIndex) => {
+      let parsedMetadata: unknown = {};
+      const raw = item.metadataInput.trim();
+      if (raw.length > 0) {
+        try {
+          parsedMetadata = JSON.parse(raw) as unknown;
+        } catch {
+          throw new Error(`Invalid metadata JSON in menu ${menu.key || menuIndex + 1}, item ${itemIndex + 1}.`);
+        }
+      }
+      return {
+        id: item.id,
+        sortOrder: item.sortOrder,
+        heading: item.heading,
+        description: item.description,
+        href: item.href,
+        metadata: parsedMetadata,
+        isActive: item.isActive,
+      };
+    }),
+  }));
+  const res = await fetch("/api/admin/navigation", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      ...(apiKey ? { "x-admin-key": apiKey } : {}),
+    },
+    body: JSON.stringify({ menus: payloadMenus }),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new Error(data?.error || "Failed to save navigation");
+  }
+}
 
 function techJoin(tech: string[]) {
   return tech.join(", ");
@@ -36,6 +379,10 @@ export default function AdminContentPage() {
 
   const [projects, setProjects] = useState<AdminSiteProjectRow[]>([]);
   const [quotes, setQuotes] = useState<AdminSiteTestimonialRow[]>([]);
+  const [menus, setMenus] = useState<AdminNavMenu[]>([]);
+  const [adminApiKey, setAdminApiKey] = useState("");
+  const [navLoading, setNavLoading] = useState(false);
+  const [navSaving, setNavSaving] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const [newProj, setNewProj] = useState({
@@ -66,15 +413,22 @@ export default function AdminContentPage() {
 
   const load = useCallback(async () => {
     setLoading(true);
+    setNavLoading(true);
     setErr(null);
     try {
       const [p, q] = await Promise.all([getAdminSiteProjects(), getAdminSiteTestimonials()]);
       setProjects(p);
       setQuotes(q);
+      const storedKey =
+        typeof window !== "undefined" ? localStorage.getItem("oceancyber_admin_api_key") || "" : "";
+      setAdminApiKey(storedKey);
+      const navRows = await getAdminNavigation(storedKey);
+      setMenus(navRows);
     } catch (e: unknown) {
       setErr(e instanceof Error ? e.message : "Could not load content");
     } finally {
       setLoading(false);
+      setNavLoading(false);
     }
   }, []);
 
@@ -170,6 +524,54 @@ export default function AdminContentPage() {
         </header>
 
         {err ? <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">{err}</div> : null}
+
+        {/* Team media handoff */}
+        <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 className="text-lg font-bold text-slate-900">Team headshot handoff</h2>
+          <p className="mt-1 text-sm text-slate-600">
+            Team cards on <code className="rounded bg-slate-100 px-1">/team</code> now use branded
+            monogram placeholders. Use this checklist to replace with real headshots.
+          </p>
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50/80 p-4">
+              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                Recommended asset spec
+              </p>
+              <ul className="mt-3 space-y-2 text-sm text-slate-700">
+                <li>Upload 1200x1200 or larger square portraits</li>
+                <li>Prefer neutral dark background for startup-theme consistency</li>
+                <li>Compress to WebP and keep each file under ~250KB</li>
+                <li>
+                  Save in <code className="rounded bg-slate-100 px-1">/public/images/team</code>
+                </li>
+              </ul>
+            </div>
+            <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50/80 p-4">
+              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                Suggested filenames
+              </p>
+              <ul className="mt-3 space-y-2 text-sm text-slate-700">
+                <li>
+                  <code className="rounded bg-slate-100 px-1">marcus-owusu.webp</code>
+                </li>
+                <li>
+                  <code className="rounded bg-slate-100 px-1">sarah-mensah.webp</code>
+                </li>
+                <li>
+                  <code className="rounded bg-slate-100 px-1">kwame-nkrumah.webp</code>
+                </li>
+                <li>
+                  <code className="rounded bg-slate-100 px-1">ama-serwaa.webp</code>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <p className="mt-4 text-xs text-slate-500">
+            After assets are uploaded, update team image paths in{" "}
+            <code className="rounded bg-slate-100 px-1">lib/data/team.ts</code>{" "}
+            (<code className="rounded bg-slate-100 px-1">teamMembers[].imageUrl</code>).
+          </p>
+        </section>
 
         {/* Projects */}
         <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -540,6 +942,462 @@ export default function AdminContentPage() {
               ))}
             </ul>
           ) : null}
+        </section>
+
+        {/* Navigation */}
+        <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 className="text-lg font-bold text-slate-900">Navigation menus</h2>
+          <p className="mt-1 text-sm text-slate-600">
+            Manage header/menu groups from the database-backed navigation config.
+          </p>
+
+          <div className="mt-4 grid gap-3 sm:grid-cols-[1fr_auto_auto] sm:items-end">
+            <label className="text-xs text-slate-600">
+              Admin API key
+              <input
+                className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-2 text-sm"
+                type="password"
+                placeholder="x-admin-key (required in production)"
+                value={adminApiKey}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  setAdminApiKey(v);
+                  if (typeof window !== "undefined") {
+                    localStorage.setItem("oceancyber_admin_api_key", v);
+                  }
+                }}
+              />
+            </label>
+            <button
+              type="button"
+              className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800"
+              onClick={async () => {
+                setNavLoading(true);
+                try {
+                  const navRows = await getAdminNavigation(adminApiKey);
+                  setMenus(navRows);
+                  setToast("Navigation loaded.");
+                  setErr(null);
+                } catch (e: unknown) {
+                  setErr(e instanceof Error ? e.message : "Load failed");
+                } finally {
+                  setNavLoading(false);
+                }
+              }}
+            >
+              {navLoading ? "Loading…" : "Reload navigation"}
+            </button>
+            <button
+              type="button"
+              disabled={navSaving || navLoading}
+              className="rounded-lg bg-ocean-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
+              onClick={async () => {
+                setNavSaving(true);
+                try {
+                  await putAdminNavigation(menus, adminApiKey);
+                  setToast("Navigation saved.");
+                  setErr(null);
+                } catch (e: unknown) {
+                  setErr(e instanceof Error ? e.message : "Save failed");
+                } finally {
+                  setNavSaving(false);
+                }
+              }}
+            >
+              {navSaving ? "Saving…" : "Save navigation"}
+            </button>
+          </div>
+
+          <div className="mt-6 space-y-4">
+            <div className="flex flex-wrap justify-end gap-2">
+              <button
+                type="button"
+                className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800"
+                onClick={() => setMenus((prev) => [...prev, buildMenuPreset("startup-primary")])}
+              >
+                Add startup-primary preset
+              </button>
+              <button
+                type="button"
+                className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800"
+                onClick={() => setMenus((prev) => [...prev, buildMenuPreset("startup-pages")])}
+              >
+                Add startup-pages preset
+              </button>
+              <button
+                type="button"
+                className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800"
+                onClick={() => setMenus((prev) => [...prev, buildMenuPreset("main-header")])}
+              >
+                Add main-header preset
+              </button>
+              <button
+                type="button"
+                className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800"
+                onClick={() => setMenus((prev) => [...prev, buildMenuPreset("main-dropdown-services")])}
+              >
+                Add services dropdown preset
+              </button>
+              <button
+                type="button"
+                className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800"
+                onClick={() => setMenus((prev) => [...prev, buildMenuPreset("main-dropdown-industries")])}
+              >
+                Add industries dropdown preset
+              </button>
+              <button
+                type="button"
+                className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800"
+                onClick={() => setMenus((prev) => [...prev, buildMenuPreset("main-dropdown-infrastructure")])}
+              >
+                Add infrastructure dropdown preset
+              </button>
+              <button
+                type="button"
+                className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800"
+                onClick={() => setMenus((prev) => [...prev, buildMenuPreset("main-dropdown-resources")])}
+              >
+                Add resources dropdown preset
+              </button>
+              <button
+                type="button"
+                className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800"
+                onClick={() => setMenus((prev) => [...prev, buildMenuPreset("main-dropdown-company")])}
+              >
+                Add company dropdown preset
+              </button>
+              <button
+                type="button"
+                className="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-900"
+                onClick={() => {
+                  if (!confirm("Reset menu editor to default navigation config? Unsaved edits will be lost.")) return;
+                  setMenus(buildDefaultNavigationMenus());
+                  setToast("Editor reset to defaults. Save navigation to persist.");
+                  setErr(null);
+                }}
+              >
+                Reset to defaults
+              </button>
+              <button
+                type="button"
+                className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800"
+                onClick={() => setMenus((prev) => [...prev, createEmptyNavMenu()])}
+              >
+                Add menu
+              </button>
+            </div>
+            {menus.map((menu, menuIndex) => (
+              <div key={menu.key} className="rounded-xl border border-slate-200 bg-slate-50/80 p-4">
+                <div className="grid gap-3 sm:grid-cols-4">
+                  <label className="text-xs text-slate-600">
+                    Menu key
+                    <input
+                      className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                      value={menu.key}
+                      onChange={(e) =>
+                        setMenus((prev) =>
+                          prev.map((m, i) => (i === menuIndex ? { ...m, key: e.target.value } : m)),
+                        )
+                      }
+                    />
+                  </label>
+                  <label className="text-xs text-slate-600">
+                    Label
+                    <input
+                      className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                      value={menu.label}
+                      onChange={(e) =>
+                        setMenus((prev) =>
+                          prev.map((m, i) => (i === menuIndex ? { ...m, label: e.target.value } : m)),
+                        )
+                      }
+                    />
+                  </label>
+                  <label className="text-xs text-slate-600">
+                    Description
+                    <input
+                      className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                      value={menu.description ?? ""}
+                      onChange={(e) =>
+                        setMenus((prev) =>
+                          prev.map((m, i) =>
+                            i === menuIndex ? { ...m, description: e.target.value || null } : m,
+                          ),
+                        )
+                      }
+                    />
+                  </label>
+                  <label className="flex items-center gap-2 self-end text-xs text-slate-700">
+                    <input
+                      type="checkbox"
+                      checked={menu.isActive}
+                      onChange={(e) =>
+                        setMenus((prev) =>
+                          prev.map((m, i) => (i === menuIndex ? { ...m, isActive: e.target.checked } : m)),
+                        )
+                      }
+                    />
+                    Active
+                  </label>
+                </div>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    className="rounded-md border border-slate-300 bg-white px-2.5 py-1 text-xs font-semibold text-slate-700 disabled:opacity-50"
+                    disabled={menuIndex === 0}
+                    onClick={() =>
+                      setMenus((prev) => {
+                        if (menuIndex === 0) return prev;
+                        const next = [...prev];
+                        [next[menuIndex - 1], next[menuIndex]] = [next[menuIndex], next[menuIndex - 1]];
+                        return next;
+                      })
+                    }
+                  >
+                    Move up
+                  </button>
+                  <button
+                    type="button"
+                    className="rounded-md border border-slate-300 bg-white px-2.5 py-1 text-xs font-semibold text-slate-700 disabled:opacity-50"
+                    disabled={menuIndex === menus.length - 1}
+                    onClick={() =>
+                      setMenus((prev) => {
+                        if (menuIndex >= prev.length - 1) return prev;
+                        const next = [...prev];
+                        [next[menuIndex + 1], next[menuIndex]] = [next[menuIndex], next[menuIndex + 1]];
+                        return next;
+                      })
+                    }
+                  >
+                    Move down
+                  </button>
+                  <button
+                    type="button"
+                    className="rounded-md border border-red-200 bg-white px-2.5 py-1 text-xs font-semibold text-red-700"
+                    onClick={() =>
+                      setMenus((prev) => prev.filter((_, i) => i !== menuIndex))
+                    }
+                  >
+                    Delete menu
+                  </button>
+                  <button
+                    type="button"
+                    className="rounded-md border border-slate-300 bg-white px-2.5 py-1 text-xs font-semibold text-slate-700"
+                    onClick={() =>
+                      setMenus((prev) =>
+                        prev.map((m, i) =>
+                          i === menuIndex
+                            ? {
+                                ...m,
+                                items: [
+                                  ...m.items,
+                                  createEmptyNavItem(
+                                    m.items.length > 0
+                                      ? (m.items[m.items.length - 1]?.sortOrder ?? 0) + 10
+                                      : 0,
+                                  ),
+                                ],
+                              }
+                            : m,
+                        ),
+                      )
+                    }
+                  >
+                    Add item
+                  </button>
+                </div>
+                <div className="mt-3 space-y-2">
+                  {menu.items.map((item, itemIndex) => (
+                    <div key={`${menu.key}-${itemIndex}`} className="grid gap-2 sm:grid-cols-4">
+                      <input
+                        className="rounded-lg border border-slate-200 px-2 py-1.5 text-xs"
+                        placeholder="Heading"
+                        value={item.heading}
+                        onChange={(e) =>
+                          setMenus((prev) =>
+                            prev.map((m, i) =>
+                              i === menuIndex
+                                ? {
+                                    ...m,
+                                    items: m.items.map((it, j) =>
+                                      j === itemIndex ? { ...it, heading: e.target.value } : it,
+                                    ),
+                                  }
+                                : m,
+                            ),
+                          )
+                        }
+                      />
+                      <input
+                        className="rounded-lg border border-slate-200 px-2 py-1.5 text-xs"
+                        placeholder="Href"
+                        value={item.href}
+                        onChange={(e) =>
+                          setMenus((prev) =>
+                            prev.map((m, i) =>
+                              i === menuIndex
+                                ? {
+                                    ...m,
+                                    items: m.items.map((it, j) =>
+                                      j === itemIndex ? { ...it, href: e.target.value } : it,
+                                    ),
+                                  }
+                                : m,
+                            ),
+                          )
+                        }
+                      />
+                      <input
+                        className="rounded-lg border border-slate-200 px-2 py-1.5 text-xs"
+                        placeholder="Description"
+                        value={item.description ?? ""}
+                        onChange={(e) =>
+                          setMenus((prev) =>
+                            prev.map((m, i) =>
+                              i === menuIndex
+                                ? {
+                                    ...m,
+                                    items: m.items.map((it, j) =>
+                                      j === itemIndex
+                                        ? { ...it, description: e.target.value || null }
+                                        : it,
+                                    ),
+                                  }
+                                : m,
+                            ),
+                          )
+                        }
+                      />
+                      <input
+                        className="rounded-lg border border-slate-200 px-2 py-1.5 text-xs"
+                        placeholder="Sort order"
+                        value={String(item.sortOrder)}
+                        onChange={(e) =>
+                          setMenus((prev) =>
+                            prev.map((m, i) =>
+                              i === menuIndex
+                                ? {
+                                    ...m,
+                                    items: m.items.map((it, j) =>
+                                      j === itemIndex
+                                        ? { ...it, sortOrder: Number.parseInt(e.target.value, 10) || 0 }
+                                        : it,
+                                    ),
+                                  }
+                                : m,
+                            ),
+                          )
+                        }
+                      />
+                      <textarea
+                        className="rounded-lg border border-slate-200 px-2 py-1.5 font-mono text-[11px]"
+                        rows={3}
+                        placeholder='{"dropdownKey":"services","activeMatch":["/services"]}'
+                        value={item.metadataInput}
+                        onChange={(e) =>
+                          setMenus((prev) =>
+                            prev.map((m, i) =>
+                              i === menuIndex
+                                ? {
+                                    ...m,
+                                    items: m.items.map((it, j) =>
+                                      j === itemIndex ? { ...it, metadataInput: e.target.value } : it,
+                                    ),
+                                  }
+                                : m,
+                            ),
+                          )
+                        }
+                      />
+                      <div className="flex items-center gap-2">
+                        <label className="flex items-center gap-1 text-xs text-slate-700">
+                          <input
+                            type="checkbox"
+                            checked={item.isActive}
+                            onChange={(e) =>
+                              setMenus((prev) =>
+                                prev.map((m, i) =>
+                                  i === menuIndex
+                                    ? {
+                                        ...m,
+                                        items: m.items.map((it, j) =>
+                                          j === itemIndex ? { ...it, isActive: e.target.checked } : it,
+                                        ),
+                                      }
+                                    : m,
+                                ),
+                              )
+                            }
+                          />
+                          Active
+                        </label>
+                        <button
+                          type="button"
+                          className="rounded border border-slate-300 bg-white px-2 py-1 text-[11px] font-semibold text-slate-700 disabled:opacity-50"
+                          disabled={itemIndex === 0}
+                          onClick={() =>
+                            setMenus((prev) =>
+                              prev.map((m, i) => {
+                                if (i !== menuIndex || itemIndex === 0) return m;
+                                const items = [...m.items];
+                                [items[itemIndex - 1], items[itemIndex]] = [items[itemIndex], items[itemIndex - 1]];
+                                return {
+                                  ...m,
+                                  items: items.map((it, idx) => ({ ...it, sortOrder: idx * 10 })),
+                                };
+                              }),
+                            )
+                          }
+                        >
+                          Up
+                        </button>
+                        <button
+                          type="button"
+                          className="rounded border border-slate-300 bg-white px-2 py-1 text-[11px] font-semibold text-slate-700 disabled:opacity-50"
+                          disabled={itemIndex === menu.items.length - 1}
+                          onClick={() =>
+                            setMenus((prev) =>
+                              prev.map((m, i) => {
+                                if (i !== menuIndex || itemIndex >= m.items.length - 1) return m;
+                                const items = [...m.items];
+                                [items[itemIndex + 1], items[itemIndex]] = [items[itemIndex], items[itemIndex + 1]];
+                                return {
+                                  ...m,
+                                  items: items.map((it, idx) => ({ ...it, sortOrder: idx * 10 })),
+                                };
+                              }),
+                            )
+                          }
+                        >
+                          Down
+                        </button>
+                        <button
+                          type="button"
+                          className="rounded border border-red-200 bg-white px-2 py-1 text-[11px] font-semibold text-red-700"
+                          onClick={() =>
+                            setMenus((prev) =>
+                              prev.map((m, i) =>
+                                i === menuIndex
+                                  ? {
+                                      ...m,
+                                      items: m.items
+                                        .filter((_, j) => j !== itemIndex)
+                                        .map((it, idx) => ({ ...it, sortOrder: idx * 10 })),
+                                    }
+                                  : m,
+                              ),
+                            )
+                          }
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
       </div>
     </main>

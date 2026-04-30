@@ -8,6 +8,11 @@
 # Postgres and Redis are NOT published on the host (avoids Coolify/shared-host port clashes on 5432/6379).
 # For DB/Redis on localhost from your machine, use `docker/docker-compose.dev.yml` or a gitignored `docker-compose.override.yml`.
 #
+# Optional: make the Next.js `web` container use Postgres on the host (same DB as `npm run dev` when you
+# map dev Postgres to e.g. 55432). Set in `.env`:
+#   WEB_DATABASE_URL=postgresql://USER:PASS@host.docker.internal:55432/oceancyber?schema=public
+# The `backend` service still uses the in-stack `postgres` service unless you change it separately.
+#
 # After first boot: app → http://localhost:3020 (set NEXT_PUBLIC_SITE_URL / CORS_ORIGIN if host or port differs)
 # API health → http://localhost:4100/api/v1/health. URL defaults are non-nested for Coolify env parsing.
 #
@@ -97,11 +102,15 @@ services:
         NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:4100}
     container_name: oceancyber-web
     restart: unless-stopped
+    # Reach host-mapped Postgres from inside the container (e.g. dev DB on 55432). Linux: host-gateway.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks:
       - oceancyber
     environment:
       NODE_ENV: production
-      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-oceancyber123}@postgres:5432/${POSTGRES_DB:-oceancyber}?schema=public
+      # Default: in-stack `postgres`. Override with `WEB_DATABASE_URL` to use host Postgres (local dev sync).
+      DATABASE_URL: ${WEB_DATABASE_URL:-postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-oceancyber123}@postgres:5432/${POSTGRES_DB:-oceancyber}?schema=public}
       NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3020}
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:4100}
       # Server-side fetch to Nest — must match Docker service name `backend`

@@ -14,12 +14,23 @@ export function SaProjectsCtaSection() {
           <p className="sa-subtitle mx-auto">
             See case studies with goals, execution notes, and measurable outcomes.
           </p>
-          <Link
-            href="/projects"
-            className="sa-btn-primary mt-8"
-          >
-            View projects
-          </Link>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Link href="/projects" className="sa-btn-primary">
+              View projects
+            </Link>
+            <Link
+              href="/domains"
+              className="sa-btn-outline min-h-[48px] px-6 text-xs"
+            >
+              Domains &amp; SSL
+            </Link>
+            <Link
+              href="/hosting"
+              className="sa-btn-outline min-h-[48px] px-6 text-xs"
+            >
+              Hosting
+            </Link>
+          </div>
         </SaReveal>
       </div>
     </section>

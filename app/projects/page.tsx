@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Portfolio } from "@/components/sections/Portfolio";
+import { SaProjectsPageGrid } from "@/components/startup-agency/SaProjectsPageGrid";
+import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
 import { getPortfolioCaseStudies } from "@/lib/data/portfolio-loader";
 import { withCanonical } from "@/lib/seo/canonical";
 
@@ -16,7 +17,7 @@ export default async function ProjectsPage() {
   const cases = await getPortfolioCaseStudies();
 
   return (
-    <main className="sa-shell min-h-screen text-white">
+    <main className="sa-shell min-h-screen pb-24 text-white md:pb-0">
       <section className="border-b border-sa-border bg-black pt-28 md:pt-32">
         <div className="sa-container max-w-5xl pb-12 text-center md:pb-16">
           <p className="sa-eyebrow">Projects</p>
@@ -29,9 +30,8 @@ export default async function ProjectsPage() {
           </p>
         </div>
       </section>
-      <div className="[&_.bg-gradient-to-b]:!bg-black [&_.from-slate-50]:!from-black [&_.to-slate-100]:!to-black [&_.text-slate-900]:!text-white [&_.text-slate-600]:!text-sa-muted [&_.border-slate-200\\/80]:!border-sa-border [&_.border-slate-200\\/90]:!border-sa-border [&_.bg-white]:!bg-sa-surface/50">
-        <Portfolio cases={cases} />
-      </div>
+      <SaProjectsPageGrid cases={cases} />
+      <StartupAgencyMobileQuickBar />
     </main>
   );
 }

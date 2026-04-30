@@ -230,3 +230,34 @@ model WalletLedger {
 
   @@index([userId])
 }
+
+/// Configurable site navigation (header/startup menus)
+model NavigationMenu {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  label       String
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  items NavigationMenuItem[]
+
+  @@index([isActive])
+}
+
+model NavigationMenuItem {
+  id          String   @id @default(cuid())
+  menuId      String
+  menu        NavigationMenu @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  sortOrder   Int      @default(0)
+  heading     String
+  description String?
+  href        String
+  metadata    Json?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([menuId, isActive, sortOrder])
+}

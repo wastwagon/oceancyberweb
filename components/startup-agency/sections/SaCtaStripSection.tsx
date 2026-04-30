@@ -14,6 +14,26 @@ export function SaCtaStripSection() {
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-sa-muted md:text-base">
             Email or WhatsApp us — we route emergencies to the right lead the same day when possible.
           </p>
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2 md:justify-start">
+            <Link
+              href="/domains"
+              className="rounded-full border border-sa-border px-3 py-1.5 font-heading text-[10px] font-semibold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:border-sa-primary hover:text-sa-primary"
+            >
+              Domain search
+            </Link>
+            <Link
+              href="/hosting"
+              className="rounded-full border border-sa-border px-3 py-1.5 font-heading text-[10px] font-semibold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:border-sa-primary hover:text-sa-primary"
+            >
+              Hosting plans
+            </Link>
+            <Link
+              href="/checkout/cart"
+              className="rounded-full border border-sa-border px-3 py-1.5 font-heading text-[10px] font-semibold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:border-sa-primary hover:text-sa-primary"
+            >
+              Checkout cart
+            </Link>
+          </div>
         </div>
         <Link
           href="/contact"

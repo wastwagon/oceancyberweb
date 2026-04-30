@@ -18,6 +18,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { WhatsAppButton } from "@/components/ghana-specific/WhatsAppButton";
 import { usePathname } from "next/navigation";
 import { CurrencySelector } from "@/components/currency/CurrencySelector";
+import { useNavigationConfig } from "@/lib/navigation/useNavigationConfig";
 
 function MegaMenu({
   isOpen,
@@ -203,162 +204,12 @@ export function Header() {
     return () => window.removeEventListener("keydown", onEscape);
   }, []);
 
-  const navItems = [
-    { href: "/", label: "Home" },
-    { href: "/services", label: "Services", hasDropdown: true },
-    { href: "/industries", label: "Industries", hasDropdown: true },
-    {
-      href: "/domains",
-      label: "Infrastructure",
-      hasDropdown: true,
-      activeMatch: ["/domains", "/hosting"],
-    },
-    {
-      href: "/insights",
-      label: "Resources",
-      hasDropdown: true,
-      activeMatch: ["/insights", "/case-studies", "/security-journey", "/help-center"],
-    },
-    {
-      href: "/about",
-      label: "Company",
-      hasDropdown: true,
-      activeMatch: ["/about", "/portfolio", "/contact"],
-    },
-  ];
-
-  const dropdownContent = {
-    services: {
-      title: "Our services",
-      description: "Build, secure, and scale digital products with one delivery partner.",
-      items: [
-        {
-          heading: "Web Development",
-          description:
-            "Modern, high-performance websites built with proven technologies.",
-          link: "/services/web-development",
-        },
-        {
-          heading: "Mobile apps",
-          description:
-            "Native and cross-platform applications designed for reliable user experiences.",
-          link: "/services/mobile-apps",
-        },
-        {
-          heading: "Website to App Conversion",
-          description: "Convert your existing website into a scoped mobile app build.",
-          link: "/services/website-to-mobile-app",
-        },
-        {
-          heading: "E-commerce",
-          description:
-            "Scalable online stores with dependable checkout and payment flows.",
-          link: "/services/ecommerce",
-        },
-        {
-          heading: "Cybersecurity",
-          description: "Comprehensive security solutions to protect your business.",
-          link: "/services/cybersecurity",
-        },
-      ],
-    },
-    industries: {
-      title: "Industries we serve",
-      description: "Proven delivery patterns for regulated and growth-focused sectors.",
-      items: [
-        {
-          heading: "Financial Services",
-          description: "Secure banking solutions and fintech innovations.",
-          link: "/industries/financial-services",
-        },
-        {
-          heading: "Healthcare",
-          description: "HIPAA-compliant healthcare technology solutions.",
-          link: "/industries/healthcare",
-        },
-        {
-          heading: "Education",
-          description:
-            "Practical e-learning platforms that improve delivery and outcomes.",
-          link: "/industries/education",
-        },
-        {
-          heading: "Retail & E-commerce",
-          description: "Retail technology to boost online sales and engagement.",
-          link: "/industries/retail",
-        },
-      ],
-    },
-    resources: {
-      title: "Insights and guidance",
-      description:
-        "Planning playbooks, delivery stories, and practical security guidance.",
-      items: [
-        {
-          heading: "Insights",
-          description: "Strategy notes, platform updates, and practical guides.",
-          link: "/insights",
-        },
-        {
-          heading: "Case studies",
-          description: "Delivery outcomes across sectors in Ghana and beyond.",
-          link: "/case-studies",
-        },
-        {
-          heading: "Security journey",
-          description: "A practical path to strengthen your security posture.",
-          link: "/security-journey",
-        },
-        {
-          heading: "Help center",
-          description: "Answers to common questions about onboarding and support.",
-          link: "/help-center",
-        },
-      ],
-    },
-    infrastructure: {
-      title: "Infrastructure",
-      description:
-        "Domains, SSL, and hosting foundations for reliable digital operations.",
-      items: [
-        {
-          heading: "Domains & SSL",
-          description: "Search domain availability and add SSL with secure checkout.",
-          link: "/domains",
-        },
-        {
-          heading: "Hosting",
-          description: "Launch cPanel and WHM hosting plans with local support.",
-          link: "/hosting",
-        },
-      ],
-    },
-    company: {
-      title: "Company",
-      description: "See our work, learn about our team, and contact us directly.",
-      items: [
-        {
-          heading: "About",
-          description: "Our mission, team, and operating principles.",
-          link: "/about",
-        },
-        {
-          heading: "Portfolio",
-          description: "Delivery examples across sectors and product types.",
-          link: "/portfolio",
-        },
-        {
-          heading: "Contact",
-          description: "Talk to our team about your project or requirements.",
-          link: "/contact",
-        },
-      ],
-    },
-  };
+  const { mainHeaderNav: navItems, mainHeaderDropdownContent: dropdownContent } =
+    useNavigationConfig();
 
   const homeNav = navItems.find((i) => i.href === "/");
-  const dropdownNav = navItems.filter((i) => i.hasDropdown);
-  const flatNav = navItems.filter((i) => !i.hasDropdown && i.href !== "/");
+  const dropdownNav = navItems.filter((i) => Boolean(i.dropdownKey));
+  const flatNav = navItems.filter((i) => !i.dropdownKey && i.href !== "/");
   const isItemActive = (item: { href: string; activeMatch?: string[] }) => {
     const candidates = item.activeMatch ?? [item.href];
     return candidates.some((href) =>
@@ -441,7 +292,7 @@ export function Header() {
                 <div
                   key={item.href}
                   className="relative flex shrink-0 items-stretch"
-                  onMouseEnter={() => item.hasDropdown && setOpenDropdown(item.label.toLowerCase())}
+                  onMouseEnter={() => item.dropdownKey && setOpenDropdown(item.dropdownKey)}
                   onMouseLeave={() => setOpenDropdown(null)}
                 >
                   <Link
@@ -451,22 +302,22 @@ export function Header() {
                         ? "text-ocean-800"
                         : "text-slate-600 hover:text-ocean-700"
                     }`}
-                    aria-haspopup={item.hasDropdown ? "menu" : undefined}
+                    aria-haspopup={item.dropdownKey ? "menu" : undefined}
                     aria-expanded={
-                      item.hasDropdown
-                        ? openDropdown === item.label.toLowerCase()
+                      item.dropdownKey
+                        ? openDropdown === item.dropdownKey
                         : undefined
                     }
                     aria-controls={
-                      item.hasDropdown
-                        ? `${item.label.toLowerCase()}-menu`
+                      item.dropdownKey
+                        ? `${item.dropdownKey}-menu`
                         : undefined
                     }
                   >
                     {item.label}
-                    {item.hasDropdown && (
+                    {item.dropdownKey && (
                       <ChevronDown
-                        className={`h-3 w-3 shrink-0 transition-transform ${openDropdown === item.label.toLowerCase() ? "rotate-180" : ""}`}
+                        className={`h-3 w-3 shrink-0 transition-transform ${openDropdown === item.dropdownKey ? "rotate-180" : ""}`}
                       />
                     )}
                   </Link>
@@ -478,15 +329,15 @@ export function Header() {
                     />
                   )}
 
-                  {item.hasDropdown && (
+                  {item.dropdownKey && (
                     <MegaMenu
-                      isOpen={openDropdown === item.label.toLowerCase()}
-                      menuId={`${item.label.toLowerCase()}-menu`}
+                      isOpen={openDropdown === item.dropdownKey}
+                      menuId={`${item.dropdownKey}-menu`}
                       triggerLabel={item.label}
-                      title={dropdownContent[item.label.toLowerCase() as keyof typeof dropdownContent]?.title || ""}
-                      description={dropdownContent[item.label.toLowerCase() as keyof typeof dropdownContent]?.description || ""}
-                      items={dropdownContent[item.label.toLowerCase() as keyof typeof dropdownContent]?.items || []}
-                      onMouseEnter={() => setOpenDropdown(item.label.toLowerCase())}
+                      title={dropdownContent[item.dropdownKey]?.title || ""}
+                      description={dropdownContent[item.dropdownKey]?.description || ""}
+                      items={dropdownContent[item.dropdownKey]?.items || []}
+                      onMouseEnter={() => setOpenDropdown(item.dropdownKey!)}
                       onMouseLeave={() => setOpenDropdown(null)}
                     />
                   )}
@@ -600,13 +451,13 @@ export function Header() {
                     <MobileAccordion
                       key={item.href}
                       title={item.label}
-                      items={dropdownContent[item.label.toLowerCase() as keyof typeof dropdownContent]?.items || []}
-                      isOpen={openDropdown === item.label.toLowerCase()}
+                      items={dropdownContent[item.dropdownKey!]?.items || []}
+                      isOpen={openDropdown === item.dropdownKey}
                       onToggle={() =>
                         setOpenDropdown(
-                          openDropdown === item.label.toLowerCase()
+                          openDropdown === item.dropdownKey
                             ? null
-                            : item.label.toLowerCase()
+                            : item.dropdownKey!
                         )
                       }
                       onClose={() => setIsMenuOpen(false)}

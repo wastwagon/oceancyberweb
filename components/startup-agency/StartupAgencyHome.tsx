@@ -1,4 +1,5 @@
 import { StartupAgencyFooter } from "@/components/startup-agency/StartupAgencyFooter";
+import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
 import { StartupAgencyNavbar } from "@/components/startup-agency/StartupAgencyNavbar";
 import { StartupAgencyProgressBar } from "@/components/startup-agency/StartupAgencyProgressBar";
 import { SaAboutSection } from "@/components/startup-agency/sections/SaAboutSection";
@@ -26,7 +27,7 @@ export function StartupAgencyHome() {
       <StartupAgencyProgressBar />
       <StartupAgencyNavbar />
 
-      <main id="startup-main-content" className="pt-24 md:pt-28" tabIndex={-1}>
+      <main id="startup-main-content" className="pb-24 pt-24 md:pb-0 md:pt-28" tabIndex={-1}>
         <h1 className="sr-only">
           OceanCyber — Web and mobile app development in Ghana
         </h1>
@@ -46,6 +47,7 @@ export function StartupAgencyHome() {
       </main>
 
       <StartupAgencyFooter />
+      <StartupAgencyMobileQuickBar />
     </div>
   );
 }
