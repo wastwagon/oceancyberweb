@@ -2,6 +2,8 @@
 
 This repo’s production stack is defined only in **`docker-compose.yml`** at the repository root. Other compose files under `docker/` are for local development (databases-only or hot reload)—do not point Coolify at those.
 
+Coolify’s build-time env merge may scan **all** `docker-compose*.yml` (and similar) under the repo. Those files must not use bash-style default substitution in values—same rules as the root compose file.
+
 
 | Service    | Role                        | Container port | Published (default)      |
 | ---------- | --------------------------- | -------------- | ------------------------ |
@@ -126,7 +128,7 @@ For host access during local development, use `docker/docker-compose.dev.yml` or
 
 | Symptom                                                                       | Likely cause                                                                                                                        |
 | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Coolify: `Invalid template` / `postgresql://${POSTGRES_USER:-...`              | Coolify’s env merge rejects Bash-style `${VAR:-default}` in values merged into build-time env. Root `docker-compose.yml` uses only `${VAR}` (no `:-`). Ensure variables are set in the Coolify UI. |
+| Coolify: `Invalid template` / strings starting with `postgresql://` and bash defaults | Often an env value in the Coolify UI **or** another compose YAML in the repo still uses bash default syntax. Remove those patterns; use plain `${VAR}` and set variables in Coolify. Nested compose under `docker/` is aligned with the root file for this reason. |
 | `Failed to find Server Action` (dev or after deploy)                         | Stale `.next`, multiple `next dev`, or browser cache: stop servers, remove `.next`, run a single dev instance, hard-refresh or clear site data for that origin. |
 | Postgres: `Role "postgres" does not exist`                                   | DB was initialized with a **custom** `POSTGRES_USER` (no `postgres` role). Match credentials to that user, or use default `postgres` and **recreate the volume** once if you can afford a fresh DB. |
 | Docker: `Bind for 0.0.0.0:6379 failed: port is already allocated`             | Another service on the host owns `6379` (often another Redis). Root compose no longer publishes Redis/Postgres—pull latest and redeploy. If you still map ports manually, pick a free host port or stop the conflicting container. |
