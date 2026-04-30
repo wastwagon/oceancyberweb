@@ -1,0 +1,9 @@
+# Copy to `docker-compose.override.yml` (keep gitignored) for laptop-only overrides.
+# Example: Next.js container uses Postgres on the host while backend still uses the compose `postgres` service.
+#
+#   cp docker-compose.override.example.yml docker-compose.override.yml
+#
+services:
+  web:
+    environment:
+      DATABASE_URL: postgresql://postgres:oceancyber123@host.docker.internal:55432/oceancyber?schema=public

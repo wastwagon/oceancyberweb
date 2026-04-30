@@ -8,10 +8,8 @@
 # Postgres and Redis are NOT published on the host (avoids Coolify/shared-host port clashes on 5432/6379).
 # For DB/Redis on localhost from your machine, use `docker/docker-compose.dev.yml` or a gitignored `docker-compose.override.yml`.
 #
-# Optional: make the Next.js `web` container use Postgres on the host (same DB as `npm run dev` when you
-# map dev Postgres to e.g. 55432). Set in `.env`:
-#   WEB_DATABASE_URL=postgresql://USER:PASS@host.docker.internal:55432/oceancyber?schema=public
-# The `backend` service still uses the in-stack `postgres` service unless you change it separately.
+# Optional: point the `web` container at host-mapped Postgres (e.g. dev on port 55432). Use a gitignored
+# `docker-compose.override.yml` — see `docker-compose.override.example.yml`. Backend stays on in-stack `postgres` unless you override it too.
 #
 # After first boot: app → http://localhost:3020 (set NEXT_PUBLIC_SITE_URL / CORS_ORIGIN if host or port differs)
 # API health → http://localhost:4100/api/v1/health. URL defaults are non-nested for Coolify env parsing.
@@ -32,14 +30,16 @@ services:
     networks:
       - oceancyber
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-oceancyber123}
-      POSTGRES_DB: ${POSTGRES_DB:-oceancyber}
+      # No `VAR:-default` — Coolify build-time env parsing rejects `:-`. Set these in Coolify / `.env`.
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-oceancyber}"]
+      # Runtime shell expands `$POSTGRES_*` (`$$` → `$` in Compose — no `:-`).
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -74,14 +74,14 @@ services:
       # Build URL from POSTGRES_* (no `:-defaults` in the string — Coolify env templates choke on those).
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=public
       REDIS_URL: redis://redis:6379
-      JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
-      SESSION_SECRET: ${SESSION_SECRET:-change-session-secret}
-      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3020}
+      JWT_SECRET: ${JWT_SECRET}
+      SESSION_SECRET: ${SESSION_SECRET}
+      CORS_ORIGIN: ${CORS_ORIGIN}
       # Optional: Next.js on-demand revalidation after /admin/content edits (same secret on `web`)
-      REVALIDATE_SECRET: ${REVALIDATE_SECRET:-}
-      NEXT_REVALIDATE_URL: ${NEXT_REVALIDATE_URL:-http://web:3000}
+      REVALIDATE_SECRET: ${REVALIDATE_SECRET}
+      NEXT_REVALIDATE_URL: ${NEXT_REVALIDATE_URL}
     ports:
-      - "${BACKEND_PORT:-4100}:4000"
+      - "${BACKEND_PORT}:4000"
     depends_on:
       postgres:
         condition: service_healthy
@@ -99,8 +99,8 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3020}
-        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:4100}
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
     container_name: oceancyber-web
     restart: unless-stopped
     # Reach host-mapped Postgres from inside the container (e.g. dev DB on 55432). Linux: host-gateway.
@@ -110,17 +110,16 @@ services:
       - oceancyber
     environment:
       NODE_ENV: production
-      # Default: in-stack `postgres`. Set WEB_DATABASE_URL for host-mapped Postgres (local dev only).
-      # Do not nest ${POSTGRES_*:-} inside the default — Coolify's env parser rejects it.
-      DATABASE_URL: ${WEB_DATABASE_URL:-postgresql://postgres:oceancyber123@postgres:5432/oceancyber?schema=public}
-      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3020}
-      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:4100}
+      # In-stack Postgres (same as backend). For host-mapped DB in local dev, use `docker-compose.override.yml`.
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=public
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
       # Server-side fetch to Nest — must match Docker service name `backend`
-      API_INTERNAL_URL: ${API_INTERNAL_URL:-http://backend:4000}
+      API_INTERNAL_URL: ${API_INTERNAL_URL}
       # Must match backend REVALIDATE_SECRET when set (admin → POST /api/revalidate)
-      REVALIDATE_SECRET: ${REVALIDATE_SECRET:-}
+      REVALIDATE_SECRET: ${REVALIDATE_SECRET}
     ports:
-      - "${FRONTEND_PORT:-3020}:3000"
+      - "${FRONTEND_PORT}:3000"
     depends_on:
       postgres:
         condition: service_healthy
