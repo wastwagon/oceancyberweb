@@ -15,6 +15,8 @@ import { computeProjectPricing, formatGhs, type PricingResult } from "@/lib/proj
 import { downloadProformaPdf } from "@/lib/project-calculator/generate-proforma-pdf";
 import type { ComplexityId, DesignId, PlatformId } from "@/lib/project-calculator/config";
 import { cn } from "@/lib/utils";
+import { getApiBaseUrl } from "@/lib/api-config";
+
 
 const leadSchema = z.object({
   name: z.string().min(2, "Enter at least 2 characters"),
@@ -91,7 +93,7 @@ export function ProjectCostWizard() {
   const goNext = () => setStep((s) => Math.min(STEPS.length - 1, s + 1));
 
   const postLeadToServer = async (event: "proforma_download" | "print_summary") => {
-    const res = await fetch("/api/project-calculator/lead", {
+    const res = await fetch(`${getApiBaseUrl()}/calculator/lead`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

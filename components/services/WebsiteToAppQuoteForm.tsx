@@ -1,6 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { getApiBaseUrl } from "@/lib/api-config";
+
 
 type FormState = {
   name: string;
@@ -55,7 +57,7 @@ export function WebsiteToAppQuoteForm() {
     setIsSubmitting(true);
     setStatus(null);
     try {
-      const res = await fetch("/api/services/website-to-app-quote", {
+      const res = await fetch(`${getApiBaseUrl()}/contact/website-to-app`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(form),

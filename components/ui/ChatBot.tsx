@@ -2,6 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Bot, Send, MessageSquare, X, Minimize2, Maximize2 } from "lucide-react";
+import { getApiBaseUrl } from "@/lib/api-config";
+
 
 interface Message {
   id: string;
@@ -58,7 +60,7 @@ export function ChatBot() {
     };
 
     try {
-      const res = await fetch("/api/chat", {
+      const res = await fetch(`${getApiBaseUrl()}/api/v1/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

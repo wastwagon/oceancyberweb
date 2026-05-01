@@ -11,6 +11,12 @@ import { MailModule } from "./mail/mail.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { ProjectsModule } from "./projects/projects.module";
 import { RedisModule } from "./redis/redis.module";
+import { ContactModule } from "./contact/contact.module";
+import { CalculatorModule } from "./calculator/calculator.module";
+import { NavigationModule } from "./navigation/navigation.module";
+import { FxModule } from "./fx/fx.module";
+import { DomainsModule } from "./domains/domains.module";
+import { ChatModule } from "./chat/chat.module";
 
 @Module({
   imports: [
@@ -31,6 +37,12 @@ import { RedisModule } from "./redis/redis.module";
     BillingModule,
     ProjectsModule,
     AdminModule,
+    ContactModule,
+    CalculatorModule,
+    NavigationModule,
+    FxModule,
+    DomainsModule,
+    ChatModule,
   ],
   providers: [
     {

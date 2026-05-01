@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { getApiBaseUrl } from "@/lib/api-config";
+
 
 type HelpArticle = {
   id: string;
@@ -121,7 +123,7 @@ export default function HelpCenterPage() {
   async function sendFeedback(articleId: string, helpful: boolean) {
     try {
       setFeedbackState((prev) => ({ ...prev, [articleId]: "idle" }));
-      const res = await fetch("/api/help-center/feedback", {
+      const res = await fetch(`${getApiBaseUrl()}/api/v1/contact/feedback`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

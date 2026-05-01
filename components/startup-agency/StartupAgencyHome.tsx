@@ -10,7 +10,7 @@ import { SaInsightsTeaserSection } from "@/components/startup-agency/sections/Sa
 import { SaMarqueeSection } from "@/components/startup-agency/sections/SaMarqueeSection";
 import { SaPricingSection } from "@/components/startup-agency/sections/SaPricingSection";
 import { SaProcessSection } from "@/components/startup-agency/sections/SaProcessSection";
-import { SaProjectsCtaSection } from "@/components/startup-agency/sections/SaProjectsCtaSection";
+import { SaPortfolioGallerySection } from "@/components/startup-agency/sections/SaPortfolioGallerySection";
 import { SaServicesSection } from "@/components/startup-agency/sections/SaServicesSection";
 import { SaTechSection } from "@/components/startup-agency/sections/SaTechSection";
 import { SaTestimonialsSection } from "@/components/startup-agency/sections/SaTestimonialsSection";
@@ -37,7 +37,7 @@ export function StartupAgencyHome() {
         <SaServicesSection />
         <SaProcessSection />
         <SaTechSection />
-        <SaProjectsCtaSection />
+        <SaPortfolioGallerySection />
         <SaTestimonialsSection />
         <SaPricingSection />
         <SaHomeFaqSection />

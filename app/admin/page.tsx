@@ -21,6 +21,7 @@ import {
   downloadAdminContactsCsv,
   getAdminHelpCenterFeedbackSummary,
 } from "@/lib/auth-client";
+import { getApiBaseUrl } from "@/lib/api-config";
 
 const LEAD_FILTER_PRESETS = [
   { id: "all", label: "All leads", status: "all", source: "all", q: "", dateRange: "all" },
@@ -1536,7 +1537,7 @@ export default function AdminPage() {
                                   if (!ok) return;
                                   try {
                                     setRetryingRef(targetRef);
-                                    const res = await fetch("/api/namecheap/checkout/unified", {
+                                    const res = await fetch(`${getApiBaseUrl()}/api/v1/domains/checkout`, {
                                       method: "POST",
                                       headers: { "Content-Type": "application/json" },
                                       body: JSON.stringify({

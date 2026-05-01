@@ -12,6 +12,8 @@ import {
   type FormEvent,
 } from "react";
 import { useSearchParams } from "next/navigation";
+import { getApiBaseUrl } from "@/lib/api-config";
+
 import { HeroSectionMotionLayers } from "@/components/layout/HeroSectionMotionLayers";
 import { WhatsAppButton } from "@/components/ghana-specific/WhatsAppButton";
 import {
@@ -111,7 +113,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
     setStatus("loading");
     setErrorMessage(null);
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(`${getApiBaseUrl()}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -119,6 +121,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
           email: email.trim(),
           phone: phone.trim(),
           message: message.trim(),
+          source: "web-contact-form",
         }),
       });
       const data = (await res.json().catch(() => ({}))) as { error?: string };

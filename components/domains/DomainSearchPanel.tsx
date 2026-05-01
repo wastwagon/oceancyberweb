@@ -7,6 +7,8 @@ import { FxPrice } from "@/components/currency/FxPrice";
 import { useCart } from "@/components/commerce/CartProvider";
 import { HERO_TLD_PRICING } from "@/lib/domain-tld-pricing";
 import { cn } from "@/lib/utils";
+import { getApiBaseUrl } from "@/lib/api-config";
+
 
 type CheckRow = { domain: string; available: boolean };
 
@@ -73,7 +75,7 @@ export function DomainSearchPanel({
     setRows(null);
     setLoading(true);
     try {
-      const res = await fetch("/api/namecheap/domains/check", {
+      const res = await fetch(`${getApiBaseUrl()}/domains/check`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query }),

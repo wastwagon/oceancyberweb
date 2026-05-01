@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { getApiBaseUrl } from "@/lib/api-config";
 
 type MeetingType = "discovery_call" | "proposal_walkthrough" | "asynchronous_quote";
 type ContactMethod = "email" | "phone" | "whatsapp";
@@ -71,7 +72,7 @@ export function InteractiveIntakeWizard() {
     setStatus("loading");
     setErrorMessage(null);
     try {
-      const res = await fetch("/api/intake/submit", {
+      const res = await fetch(`${getApiBaseUrl()}/contact/intake`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

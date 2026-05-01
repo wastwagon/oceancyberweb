@@ -3,6 +3,8 @@
 import { useState, type FormEvent } from "react";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { getApiBaseUrl } from "@/lib/api-config";
+
 
 const PROJECT_TYPES = [
   { id: "website", label: "Website" },
@@ -66,7 +68,7 @@ export function ProposalRequestForm({ initialTopic }: ProposalRequestFormProps) 
     setStatus("loading");
     setErrorMessage(null);
     try {
-      const res = await fetch("/api/proposal/request", {
+      const res = await fetch(`${getApiBaseUrl()}/contact/proposal`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

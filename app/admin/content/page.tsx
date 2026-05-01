@@ -10,6 +10,8 @@ import {
   deleteAdminSiteTestimonial,
   getAdminSiteProjects,
   getAdminSiteTestimonials,
+  getAdminNavigation,
+  putAdminNavigation,
   getProfile,
   patchAdminSiteProject,
   patchAdminSiteTestimonial,
@@ -292,74 +294,6 @@ function buildDefaultNavigationMenus(): AdminNavMenu[] {
   return [startupPrimary, startupPages, mainHeader, ...dropdownMenus];
 }
 
-async function getAdminNavigation(apiKey: string) {
-  const res = await fetch("/api/admin/navigation", {
-    headers: apiKey ? { "x-admin-key": apiKey } : {},
-    cache: "no-store",
-  });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) {
-    throw new Error(data?.error || "Failed to load navigation");
-  }
-  const menus = ((data?.menus as AdminNavMenu[]) || []).map((menu) => ({
-    ...menu,
-    items: menu.items.map((item) => ({
-      ...item,
-      metadataInput: JSON.stringify(item.metadata ?? {}, null, 2),
-    })),
-  }));
-  return menus;
-}
-
-async function putAdminNavigation(menus: AdminNavMenu[], apiKey: string) {
-  const duplicateKeys = new Set<string>();
-  for (const menu of menus) {
-    const normalized = menu.key.trim().toLowerCase();
-    if (!normalized) {
-      throw new Error("Each menu must include a key.");
-    }
-    if (duplicateKeys.has(normalized)) {
-      throw new Error(`Duplicate menu key detected: ${menu.key}`);
-    }
-    duplicateKeys.add(normalized);
-  }
-
-  const payloadMenus = menus.map((menu, menuIndex) => ({
-    ...menu,
-    items: menu.items.map((item, itemIndex) => {
-      let parsedMetadata: unknown = {};
-      const raw = item.metadataInput.trim();
-      if (raw.length > 0) {
-        try {
-          parsedMetadata = JSON.parse(raw) as unknown;
-        } catch {
-          throw new Error(`Invalid metadata JSON in menu ${menu.key || menuIndex + 1}, item ${itemIndex + 1}.`);
-        }
-      }
-      return {
-        id: item.id,
-        sortOrder: item.sortOrder,
-        heading: item.heading,
-        description: item.description,
-        href: item.href,
-        metadata: parsedMetadata,
-        isActive: item.isActive,
-      };
-    }),
-  }));
-  const res = await fetch("/api/admin/navigation", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      ...(apiKey ? { "x-admin-key": apiKey } : {}),
-    },
-    body: JSON.stringify({ menus: payloadMenus }),
-  });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) {
-    throw new Error(data?.error || "Failed to save navigation");
-  }
-}
 
 function techJoin(tech: string[]) {
   return tech.join(", ");
@@ -423,8 +357,15 @@ export default function AdminContentPage() {
       const storedKey =
         typeof window !== "undefined" ? localStorage.getItem("oceancyber_admin_api_key") || "" : "";
       setAdminApiKey(storedKey);
-      const navRows = await getAdminNavigation(storedKey);
-      setMenus(navRows);
+      const navRows = await getAdminNavigation();
+      const formattedMenus = (navRows.menus || []).map((menu: any) => ({
+        ...menu,
+        items: (menu.items || []).map((item: any) => ({
+          ...item,
+          metadataInput: JSON.stringify(item.metadata ?? {}, null, 2),
+        })),
+      }));
+      setMenus(formattedMenus);
     } catch (e: unknown) {
       setErr(e instanceof Error ? e.message : "Could not load content");
     } finally {
@@ -975,8 +916,15 @@ export default function AdminContentPage() {
               onClick={async () => {
                 setNavLoading(true);
                 try {
-                  const navRows = await getAdminNavigation(adminApiKey);
-                  setMenus(navRows);
+                  const navRows = await getAdminNavigation();
+                  const formattedMenus = (navRows.menus || []).map((menu: any) => ({
+                    ...menu,
+                    items: (menu.items || []).map((item: any) => ({
+                      ...item,
+                      metadataInput: JSON.stringify(item.metadata ?? {}, null, 2),
+                    })),
+                  }));
+                  setMenus(formattedMenus);
                   setToast("Navigation loaded.");
                   setErr(null);
                 } catch (e: unknown) {
@@ -995,8 +943,32 @@ export default function AdminContentPage() {
               onClick={async () => {
                 setNavSaving(true);
                 try {
-                  await putAdminNavigation(menus, adminApiKey);
+                  const payloadMenus = menus.map((menu, menuIndex) => ({
+                    ...menu,
+                    items: menu.items.map((item, itemIndex) => {
+                      let parsedMetadata: unknown = {};
+                      const raw = item.metadataInput.trim();
+                      if (raw.length > 0) {
+                        try {
+                          parsedMetadata = JSON.parse(raw) as unknown;
+                        } catch {
+                          throw new Error(`Invalid metadata JSON in menu ${menu.key || menuIndex + 1}, item ${itemIndex + 1}.`);
+                        }
+                      }
+                      return {
+                        id: item.id,
+                        sortOrder: item.sortOrder,
+                        heading: item.heading,
+                        description: item.description,
+                        href: item.href,
+                        metadata: parsedMetadata,
+                        isActive: item.isActive,
+                      };
+                    }),
+                  }));
+                  await putAdminNavigation(payloadMenus);
                   setToast("Navigation saved.");
+                  await load();
                   setErr(null);
                 } catch (e: unknown) {
                   setErr(e instanceof Error ? e.message : "Save failed");

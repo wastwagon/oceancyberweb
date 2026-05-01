@@ -646,3 +646,14 @@ export async function deleteAdminSiteTestimonial(id: string) {
     method: "DELETE",
   });
 }
+
+export async function getAdminNavigation() {
+  return authRequest<{ menus: any[] }>("/api/v1/navigation/admin");
+}
+
+export async function putAdminNavigation(menus: any[]) {
+  return authRequest<{ ok: boolean }>("/api/v1/navigation/admin", {
+    method: "PUT",
+    body: JSON.stringify({ menus }),
+  });
+}

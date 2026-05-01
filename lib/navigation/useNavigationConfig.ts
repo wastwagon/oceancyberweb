@@ -5,6 +5,7 @@ import {
   defaultNavigationConfig,
   type NavigationConfig,
 } from "@/lib/navigation/menu";
+import { getApiBaseUrl } from "@/lib/api-config";
 
 export function useNavigationConfig(): NavigationConfig {
   const [config, setConfig] = useState<NavigationConfig>(defaultNavigationConfig);
@@ -14,7 +15,7 @@ export function useNavigationConfig(): NavigationConfig {
 
     async function load() {
       try {
-        const res = await fetch("/api/navigation", { cache: "no-store" });
+        const res = await fetch(`${getApiBaseUrl()}/api/v1/navigation`, { cache: "no-store" });
         if (!res.ok) return;
         const json = (await res.json()) as NavigationConfig;
         if (active) setConfig(json);

@@ -5,6 +5,8 @@ import { useMemo, useState } from "react";
 import { Trash2 } from "lucide-react";
 import { FxPrice } from "@/components/currency/FxPrice";
 import { useCart } from "@/components/commerce/CartProvider";
+import { getApiBaseUrl } from "@/lib/api-config";
+
 
 function intervalLabel(interval: "month" | "year") {
   return interval === "month" ? "/mo" : "/yr";
@@ -121,7 +123,7 @@ export default function CheckoutCartPage() {
     setCheckoutRef(null);
     setSubmitResults([]);
     try {
-      const res = await fetch("/api/namecheap/checkout/unified", {
+      const res = await fetch(`${getApiBaseUrl()}/api/v1/domains/checkout`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

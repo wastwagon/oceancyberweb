@@ -12,6 +12,7 @@ import type { FxCurrencyCode } from "@/lib/fx-currencies";
 import { FX_CURRENCY_CODES } from "@/lib/fx-currencies";
 import type { FxRatesMap } from "@/lib/format-fx";
 import { formatGhsAsCurrency } from "@/lib/format-fx";
+import { getApiBaseUrl } from "@/lib/api-config";
 
 const STORAGE_KEY = "oceancyber_fx_currency";
 
@@ -68,7 +69,7 @@ export function FxProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     let cancelled = false;
     setStatus((s) => (s === "idle" ? "loading" : s));
-    fetch("/api/fx/rates")
+    fetch(`${getApiBaseUrl()}/fx/rates`)
       .then(async (res) => {
         if (!res.ok) throw new Error(String(res.status));
         return res.json() as Promise<FxResponse>;
