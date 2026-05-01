@@ -22,7 +22,7 @@ const teamMembers = [
   {
     name: "Marcus Owusu",
     role: "Founder & CEO",
-    image: "/images/EGP Ghana.webp",
+    image: "/images/team/marcus.png",
     bio: "Technology leader with 15+ years of experience in product delivery and cybersecurity programs across Africa.",
     expertise: [
       "Strategic Leadership",
@@ -34,14 +34,14 @@ const teamMembers = [
   {
     name: "Sarah Mensah",
     role: "CTO & Lead Architect",
-    image: "/images/Fitch Advisory.webp",
+    image: "/images/team/sarah.png",
     bio: "Software architect focused on scalable cloud systems and maintainable enterprise application architecture.",
     expertise: ["Cloud Architecture", "DevOps", "AI/ML", "System Design"],
   },
   {
     name: "Kwame Nkrumah",
     role: "Head of Security",
-    image: "/images/Juelle Hair.webp",
+    image: "/images/team/kwame.png",
     bio: "Certified cybersecurity expert dedicated to protecting businesses from evolving digital threats.",
     expertise: [
       "Security Auditing",
@@ -53,7 +53,7 @@ const teamMembers = [
   {
     name: "Ama Serwaa",
     role: "Creative Director",
-    image: "/images/Tour World Tourism.webp",
+    image: "/images/team/ama.png",
     bio: "Award-winning designer passionate about creating user experiences that blend beauty with functionality.",
     expertise: ["UI/UX Design", "Brand Identity", "Digital Marketing", "User Research"],
   },

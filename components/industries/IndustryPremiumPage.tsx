@@ -8,6 +8,7 @@ import {
   PremiumFinalCtaSection,
   PremiumStoriesGridSection,
 } from "@/components/shared/PremiumContentSections";
+import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
 import { fadeUpProps, revealViewport, staggerDelay } from "@/lib/scroll-reveal";
 
@@ -76,16 +77,13 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
   const highlightTone = content.heroHighlightTone ?? "gradient";
   const highlightClassName =
     highlightTone === "white"
-      ? "text-slate-900"
-      : "bg-gradient-to-r from-ocean-600 via-ocean-700 to-cyan-600 bg-clip-text text-transparent";
+      ? "text-white"
+      : "text-sa-primary";
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-100 text-slate-900">
-      <PageAmbient />
-
-      <section className="relative z-10 overflow-hidden border-b border-slate-200/80 pb-16 pt-28 md:pb-20 md:pt-36">
-        <HeroSectionMotionLayers tone="light" />
-        <div className="container relative z-10 mx-auto max-w-4xl px-6 text-center md:px-8">
+    <main className="sa-shell relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
+      <section className="sa-section relative z-10 overflow-hidden border-b border-sa-border pt-28 md:pt-36">
+        <div className="sa-container relative z-10 text-center">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -93,14 +91,14 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
           >
             <motion.span
               variants={heroMotion.item}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-ocean-200 bg-ocean-50/95 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-ocean-800 shadow-sm"
+              className="sa-eyebrow mb-6 inline-flex items-center gap-2"
             >
-              <Building2 className="h-3.5 w-3.5 text-ocean-600" aria-hidden />
+              <Building2 className="h-3.5 w-3.5" aria-hidden />
               {content.heroEyebrow}
             </motion.span>
             <motion.h1
               variants={heroMotion.item}
-              className="mx-auto max-w-4xl text-balance text-center text-4xl font-bold leading-[1.1] tracking-tight text-slate-900 md:text-5xl lg:text-6xl"
+              className="sa-title mx-auto max-w-4xl text-balance"
             >
               {content.heroPrefix}
               <span className={highlightClassName}>{content.heroHighlight}</span>
@@ -108,7 +106,7 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
             </motion.h1>
             <motion.p
               variants={heroMotion.item}
-              className="mx-auto mt-6 max-w-2xl text-pretty text-center text-base font-light leading-relaxed text-slate-600 md:text-lg"
+              className="sa-subtitle mx-auto mt-6"
             >
               {content.heroDescription}
             </motion.p>
@@ -119,7 +117,7 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
               {content.pills.map((pill) => (
                 <span
                   key={pill}
-                  className="rounded-full border border-slate-200/90 bg-white px-4 py-2 text-xs font-medium text-slate-700"
+                  className="rounded-full border border-sa-border bg-sa-surface px-4 py-2 text-xs font-medium text-sa-muted"
                 >
                   {pill}
                 </span>
@@ -129,16 +127,16 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
         </div>
       </section>
 
-      <section className="relative z-10 border-b border-slate-200/80 py-20 md:py-24">
-        <div className="container mx-auto max-w-6xl px-6 md:px-8">
+      <section className="sa-section relative z-10 border-b border-sa-border">
+        <div className="sa-container">
           <motion.div {...fadeUpProps} className="mx-auto mb-12 max-w-2xl text-center md:mb-14">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-ocean-600">
+            <p className="sa-eyebrow">
               {content.solutionsEyebrow}
             </p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
+            <h2 className="sa-title mt-4">
               {content.solutionsTitle}
             </h2>
-            <p className="mt-3 text-slate-600 md:text-base">
+            <p className="sa-subtitle mx-auto">
               {content.solutionsSubtitle}
             </p>
           </motion.div>
@@ -150,12 +148,12 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={staggerDelay(index, 0.06)}
-                className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm ring-1 ring-slate-200/50 transition-colors hover:border-ocean-200/80 hover:shadow-md md:p-7"
+                className="sa-card p-6 md:p-7"
               >
-                <h3 className="text-base font-semibold text-slate-900 md:text-lg">
+                <h3 className="font-heading text-lg font-bold text-white md:text-xl">
                   {service.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <p className="mt-3 text-sm leading-relaxed text-sa-muted/80">
                   {service.description}
                 </p>
               </motion.div>
@@ -164,16 +162,16 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
         </div>
       </section>
 
-      <section className="relative z-10 border-b border-slate-200/80 py-20 md:py-24">
-        <div className="container mx-auto max-w-6xl px-6 md:px-8">
+      <section className="sa-section relative z-10 border-b border-sa-border">
+        <div className="sa-container">
           <motion.div {...fadeUpProps} className="mx-auto mb-12 max-w-2xl text-center md:mb-14">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-ocean-600">
+            <p className="sa-eyebrow">
               {content.capabilitiesEyebrow}
             </p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
+            <h2 className="sa-title mt-4">
               {content.capabilitiesTitle}
             </h2>
-            <p className="mt-3 text-slate-600 md:text-base">
+            <p className="sa-subtitle mx-auto">
               {content.capabilitiesSubtitle}
             </p>
           </motion.div>
@@ -185,10 +183,10 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={staggerDelay(index, 0.05)}
-                className="flex flex-col rounded-xl border border-slate-200/90 bg-slate-50/80 px-5 py-4 transition-colors hover:border-ocean-200/70"
+                className="sa-card px-5 py-4"
               >
-                <span className="text-sm font-semibold text-slate-900">{tech.title}</span>
-                <span className="mt-1 text-xs leading-relaxed text-slate-600">
+                <span className="font-heading text-sm font-semibold text-white">{tech.title}</span>
+                <span className="mt-1 block text-xs leading-relaxed text-sa-muted/70">
                   {tech.description}
                 </span>
               </motion.div>
@@ -208,6 +206,8 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
         title={content.ctaTitle}
         description={content.ctaDescription}
       />
+
+      <StartupAgencyMobileQuickBar />
     </main>
   );
 }

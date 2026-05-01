@@ -277,7 +277,7 @@ export function Header() {
         >
           <Link href="/" className="relative z-10 shrink-0">
             <Image
-              src="/images/oceancyber logo.webp"
+              src="/images/oceancyber-logo.webp"
               alt="OceanCyber"
               width={200}
               height={60}

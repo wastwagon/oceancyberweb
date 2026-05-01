@@ -21,15 +21,15 @@ export function WhatsAppButton({
   const whatsappLink = formatWhatsAppLink(phoneNumber, message);
 
   const sizeClasses = {
-    sm: "px-3 py-1.5 text-sm",
-    md: "px-4 py-2 text-base",
-    lg: "px-6 py-3 text-lg",
+    sm: "px-4 py-2 text-sm",
+    md: "px-6 py-3 text-base",
+    lg: "px-8 py-4 text-lg",
   };
 
   const variantClasses = {
-    default: "bg-[#25D366] text-white hover:bg-[#20BA5A] shadow-lg hover:shadow-xl",
+    default: "bg-sa-primary text-sa-bg hover:bg-sa-primary/90 shadow-lg shadow-sa-primary/20",
     outline:
-      "border-2 border-ocean-300 bg-white text-ocean-700 hover:border-ocean-400 hover:bg-ocean-50/60",
+      "border-2 border-sa-primary/50 bg-transparent text-sa-primary hover:border-sa-primary hover:bg-sa-primary/10",
   };
 
   return (
@@ -38,14 +38,14 @@ export function WhatsAppButton({
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-semibold transition-all duration-300",
+        "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-heading font-bold uppercase tracking-widest transition-all duration-300 active:scale-95",
         sizeClasses[size],
         variantClasses[variant],
         className
       )}
     >
-      <MessageCircle className="w-5 h-5" />
-      WhatsApp Us
+      <MessageCircle className="w-5 h-5 animate-pulse" />
+      <span>WhatsApp Us</span>
     </a>
   );
 }

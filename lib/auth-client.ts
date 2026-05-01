@@ -657,3 +657,16 @@ export async function putAdminNavigation(menus: any[]) {
     body: JSON.stringify({ menus }),
   });
 }
+
+/** Public Content (Marketing) */
+export async function getPublicProjects() {
+  const res = await fetch(`${getApiBaseUrl()}/api/v1/public-content/projects`);
+  if (!res.ok) return [];
+  return (await res.json()) as AdminSiteProjectRow[];
+}
+
+export async function getPublicTestimonials() {
+  const res = await fetch(`${getApiBaseUrl()}/api/v1/public-content/testimonials`);
+  if (!res.ok) return [];
+  return (await res.json()) as AdminSiteTestimonialRow[];
+}

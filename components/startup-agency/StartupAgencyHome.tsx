@@ -45,6 +45,7 @@ export function StartupAgencyHome() {
         <SaInsightsTeaserSection />
       </main>
 
+      <StartupAgencyFooter />
       <StartupAgencyMobileQuickBar />
     </div>
   );

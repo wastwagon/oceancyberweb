@@ -17,6 +17,7 @@ import { NavigationModule } from "./navigation/navigation.module";
 import { FxModule } from "./fx/fx.module";
 import { DomainsModule } from "./domains/domains.module";
 import { ChatModule } from "./chat/chat.module";
+import { PublicContentModule } from "./public-content/public-content.module";
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { ChatModule } from "./chat/chat.module";
     FxModule,
     DomainsModule,
     ChatModule,
+    PublicContentModule,
   ],
   providers: [
     {

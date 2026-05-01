@@ -85,7 +85,7 @@ export const PROFORMA_COMPANY = {
 } as const;
 
 /** Logo in `public/images/…` (same as site header). PDF generator encodes the URI for fetch. */
-export const PROFORMA_LOGO_PATH = "/images/oceancyber logo.webp";
+export const PROFORMA_LOGO_PATH = "/images/oceancyber-logo.webp";
 
 export const ESTIMATE_VARIANCE = 0.1;
 

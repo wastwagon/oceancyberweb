@@ -62,7 +62,7 @@ export function StartupAgencyNavbar() {
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-3 rounded-[18px] border border-sa-border bg-black/80 px-4 py-3 shadow-[0_18px_48px_rgba(0,0,0,0.45)] backdrop-blur-md md:px-6">
         <Link href="/" className="relative z-10 flex shrink-0 items-center gap-2">
           <Image
-            src="/images/oceancyber logo.webp"
+            src="/images/oceancyber-logo.webp"
             alt="OceanCyber"
             width={140}
             height={42}

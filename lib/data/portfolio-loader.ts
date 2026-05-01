@@ -19,7 +19,7 @@ function mapPrismaProjectToCaseStudy(row: Project): PortfolioCaseStudy | null {
       category: row.category,
       description: row.description,
       tech: [...row.techStack],
-      image: v1.image || row.imageUrl || "/images/oceancyber logo.webp",
+      image: v1.image || row.imageUrl || "/images/oceancyber-logo.webp",
       gradient: v1.gradient,
       year: v1.year,
       client: v1.client,
