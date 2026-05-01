@@ -1,20 +1,6 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { CheckoutRequestDto } from "./dto/checkout.dto";
-
-interface DomainCheckResult {
-  domain: string;
-  available: boolean;
-}
-
-interface CheckoutResult {
-  kind: string;
-  label: string;
-  status: string;
-  orderId?: string;
-  certificateId?: string;
-  message: string;
-}
+import { CheckoutRequestDto, DomainCheckResult, CheckoutResult } from "./dto/checkout.dto";
 
 @Injectable()
 export class DomainsService {

@@ -9,6 +9,20 @@ import {
 } from "class-validator";
 import { Type } from "class-transformer";
 
+export interface DomainCheckResult {
+  domain: string;
+  available: boolean;
+}
+
+export interface CheckoutResult {
+  kind: string;
+  label: string;
+  status: string;
+  orderId?: string;
+  certificateId?: string;
+  message: string;
+}
+
 export class DomainContactDto {
   @IsEmail()
   @IsOptional()

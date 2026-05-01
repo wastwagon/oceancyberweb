@@ -1,6 +1,6 @@
 # NestJS API — build from monorepo root (shared + Prisma)
-FROM node:20-alpine AS builder
-RUN apk add --no-cache libc6-compat openssl
+FROM node:20-bookworm-slim AS builder
+RUN apt-get update && apt-get install -y openssl ca-certificates && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
@@ -13,14 +13,13 @@ RUN npm run build:shared
 RUN npx prisma generate --schema=./prisma/schema.prisma
 RUN npm run build:api
 
-FROM node:20-alpine AS runner
-RUN apk add --no-cache openssl curl
+FROM node:20-bookworm-slim AS runner
+RUN apt-get update && apt-get install -y openssl ca-certificates curl && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 ENV NODE_ENV=production
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nestjs
+RUN groupadd --system --gid 1001 nodejs && useradd --system --uid 1001 --gid nodejs nestjs
 
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/packages/shared/package.json ./packages/shared/package.json
@@ -29,6 +28,8 @@ COPY --from=builder /app/backend/dist ./backend/dist
 COPY --from=builder /app/backend/package.json ./backend/package.json
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/package.json ./package.json
+
+RUN chown -R nestjs:nodejs /app
 
 USER nestjs
 
