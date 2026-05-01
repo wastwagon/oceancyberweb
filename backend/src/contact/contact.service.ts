@@ -1,6 +1,11 @@
 import { Injectable, Logger } from "@nestjs/common";
+import { ContactSource } from "@oceancyber/shared";
 import { PrismaService } from "../prisma/prisma.service";
 import { CreateContactDto } from "./dto/create-contact.dto";
+import { CreateIntakeDto } from "./dto/create-intake.dto";
+import { CreateProposalRequestDto } from "./dto/create-proposal-request.dto";
+import { CreateWebsiteToAppQuoteDto } from "./dto/create-website-to-app-quote.dto";
+import { CreateFeedbackDto } from "./dto/create-feedback.dto";
 import { MailService } from "../mail/mail.service";
 import { ConfigService } from "@nestjs/config";
 
@@ -15,13 +20,13 @@ export class ContactService {
   ) {}
 
   async create(dto: CreateContactDto) {
-    const contact = await this.prisma.contact.create({
+    await this.prisma.contact.create({
       data: {
         name: dto.name,
         email: dto.email,
         phone: dto.phone || null,
         message: dto.message,
-        source: dto.source || "web-contact-form",
+        source: dto.source || ContactSource.WEB_CONTACT_FORM,
       },
     });
 
@@ -40,7 +45,7 @@ export class ContactService {
     return { ok: true };
   }
 
-  async createIntake(dto: any) {
+  async createIntake(dto: CreateIntakeDto) {
     const metadata = {
       v: 1,
       company: dto.company || null,
@@ -75,15 +80,17 @@ export class ContactService {
         email: dto.email,
         phone: dto.phone || null,
         message,
-        source: "intake_wizard",
-        metadata: metadata as any,
+        source: ContactSource.INTAKE_WIZARD,
+        metadata: metadata as import("@prisma/client").Prisma.InputJsonValue,
         status: "new",
       },
     });
 
     this.logger.log(`New intake submission from ${dto.email}`);
 
-    const adminEmail = this.config.get<string>("INTAKE_NOTIFICATION_EMAIL") || this.config.get<string>("CONTACT_NOTIFICATION_EMAIL");
+    const adminEmail =
+      this.config.get<string>("INTAKE_NOTIFICATION_EMAIL") ||
+      this.config.get<string>("CONTACT_NOTIFICATION_EMAIL");
     if (adminEmail && this.mail.isEnabled()) {
       await this.mail.send(
         adminEmail,
@@ -95,7 +102,7 @@ export class ContactService {
     return { ok: true };
   }
 
-  async createProposalRequest(dto: any) {
+  async createProposalRequest(dto: CreateProposalRequestDto) {
     const metadata = {
       v: 1,
       company: dto.company || null,
@@ -130,8 +137,8 @@ export class ContactService {
         email: dto.email,
         phone: dto.phone || null,
         message,
-        source: "proposal_request",
-        metadata: metadata as any,
+        source: ContactSource.PROPOSAL_REQUEST,
+        metadata: metadata as import("@prisma/client").Prisma.InputJsonValue,
         status: "new",
       },
     });
@@ -150,7 +157,7 @@ export class ContactService {
     return { ok: true };
   }
 
-  async createWebsiteToAppQuote(dto: any) {
+  async createWebsiteToAppQuote(dto: CreateWebsiteToAppQuoteDto) {
     const metadata = {
       v: 1,
       websiteUrl: dto.websiteUrl,
@@ -186,8 +193,8 @@ export class ContactService {
         email: dto.email,
         phone: dto.phone || null,
         message,
-        source: "website_to_app_quote",
-        metadata: metadata as any,
+        source: ContactSource.WEBSITE_TO_APP_QUOTE,
+        metadata: metadata as import("@prisma/client").Prisma.InputJsonValue,
         status: "new",
       },
     });
@@ -206,7 +213,7 @@ export class ContactService {
     return { ok: true };
   }
 
-  async createFeedback(dto: any) {
+  async createFeedback(dto: CreateFeedbackDto) {
     const metadata = {
       v: 1,
       articleId: dto.articleId,
@@ -225,8 +232,8 @@ export class ContactService {
         email: "help-center-feedback@oceancyber.local",
         phone: null,
         message,
-        source: "help_center_feedback",
-        metadata: metadata as any,
+        source: ContactSource.HELP_CENTER_FEEDBACK,
+        metadata: metadata as import("@prisma/client").Prisma.InputJsonValue,
         status: "new",
       },
     });

@@ -1,4 +1,14 @@
-import { IsArray, IsBoolean, IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, IsUrl } from "class-validator";
+import {
+  IsArray,
+  IsBoolean,
+  IsEmail,
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MaxLength,
+  IsUrl,
+} from "class-validator";
 
 export class CreateWebsiteToAppQuoteDto {
   @IsString()

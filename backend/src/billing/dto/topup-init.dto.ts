@@ -6,4 +6,3 @@ export class TopupInitDto {
   @Min(1)
   amountGhs!: number;
 }
-

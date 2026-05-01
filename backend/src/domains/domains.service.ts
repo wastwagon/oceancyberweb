@@ -1,5 +1,20 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import { CheckoutRequestDto } from "./dto/checkout.dto";
+
+interface DomainCheckResult {
+  domain: string;
+  available: boolean;
+}
+
+interface CheckoutResult {
+  kind: string;
+  label: string;
+  status: string;
+  orderId?: string;
+  certificateId?: string;
+  message: string;
+}
 
 @Injectable()
 export class DomainsService {
@@ -12,7 +27,8 @@ export class DomainsService {
     const apiKey = this.config.get<string>("NAMECHEAP_API_KEY");
     const userName = this.config.get<string>("NAMECHEAP_USER_NAME") || apiUser;
     const clientIp = this.config.get<string>("NAMECHEAP_CLIENT_IP");
-    const useSandbox = this.config.get<boolean>("NAMECHEAP_USE_SANDBOX") ?? true;
+    const useSandbox =
+      this.config.get<boolean>("NAMECHEAP_USE_SANDBOX") ?? true;
 
     if (!apiUser || !apiKey || !clientIp) return null;
 
@@ -41,10 +57,12 @@ export class DomainsService {
     });
 
     try {
-      const res = await fetch(`${this.getBaseUrl(cfg.useSandbox)}?${params.toString()}`);
+      const res = await fetch(
+        `${this.getBaseUrl(cfg.useSandbox)}?${params.toString()}`,
+      );
       const xml = await res.text();
       // Simple XML parsing for domain check results
-      const results: any[] = [];
+      const results: DomainCheckResult[] = [];
       const re = /<DomainCheckResult\b([^/>\n]+)\s*\/?>/gi;
       let m;
       while ((m = re.exec(xml)) !== null) {
@@ -66,11 +84,14 @@ export class DomainsService {
   }
 
   // Unified checkout logic
-  async processCheckout(data: any) {
-    this.logger.log(`Processing unified checkout for ${data.domainContact?.emailAddress || "unknown"}`);
-    
-    const results: any[] = [];
-    const checkoutRef = "UC-" + Math.random().toString(36).slice(2, 9).toUpperCase();
+  async processCheckout(data: CheckoutRequestDto) {
+    this.logger.log(
+      `Processing unified checkout for ${data.domainContact?.emailAddress || "unknown"}`,
+    );
+
+    const results: CheckoutResult[] = [];
+    const checkoutRef =
+      "UC-" + Math.random().toString(36).slice(2, 9).toUpperCase();
 
     for (const item of data.items) {
       if (item.kind === "domain") {
@@ -79,29 +100,33 @@ export class DomainsService {
           kind: "domain",
           label: item.label,
           status: "success",
-          orderId: "NC-D-" + Math.random().toString(36).slice(2, 7).toUpperCase(),
-          message: "Domain registered successfully via sandbox."
+          orderId:
+            "NC-D-" + Math.random().toString(36).slice(2, 7).toUpperCase(),
+          message: "Domain registered successfully via sandbox.",
         });
       } else if (item.kind === "ssl") {
         results.push({
           kind: "ssl",
           label: item.label,
           status: "success",
-          certificateId: "NC-S-" + Math.random().toString(36).slice(2, 7).toUpperCase(),
-          message: "SSL certificate provisioned."
+          certificateId:
+            "NC-S-" + Math.random().toString(36).slice(2, 7).toUpperCase(),
+          message: "SSL certificate provisioned.",
         });
       } else {
         results.push({
           kind: item.kind,
           label: item.label,
           status: "success",
-          message: "Service record created."
+          message: "Service record created.",
         });
       }
     }
 
     // In a real scenario, we'd save this to a 'Transaction' or 'Order' table
-    this.logger.log(`Checkout ${checkoutRef} completed with ${results.length} items`);
+    this.logger.log(
+      `Checkout ${checkoutRef} completed with ${results.length} items`,
+    );
 
     return { ok: true, checkoutRef, results };
   }

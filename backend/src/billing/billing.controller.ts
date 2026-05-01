@@ -46,7 +46,10 @@ export class BillingController {
   @Get("requests")
   requests(@Req() req: RequestWithUser, @Query("take") takeRaw?: string) {
     const take = Number(takeRaw ?? 50);
-    return this.billing.listClientRequests(req.user, Number.isFinite(take) ? take : 50);
+    return this.billing.listClientRequests(
+      req.user,
+      Number.isFinite(take) ? take : 50,
+    );
   }
 
   @UseGuards(JwtAuthGuard)
@@ -95,11 +98,17 @@ export class BillingController {
 
   @UseGuards(JwtAuthGuard)
   @Get("payment/status")
-  paymentStatus(@Req() req: RequestWithUser, @Query("reference") reference: string | undefined) {
+  paymentStatus(
+    @Req() req: RequestWithUser,
+    @Query("reference") reference: string | undefined,
+  ) {
     if (!reference?.trim()) {
       throw new BadRequestException("query parameter 'reference' is required");
     }
-    return this.billing.getPaymentStatusByProviderReference(req.user, reference.trim());
+    return this.billing.getPaymentStatusByProviderReference(
+      req.user,
+      reference.trim(),
+    );
   }
 
   @UseGuards(JwtAuthGuard)
@@ -146,7 +155,9 @@ export class BillingController {
   ) {
     const raw = req.rawBody;
     if (!raw || !Buffer.isBuffer(raw)) {
-      throw new BadRequestException("Missing raw body for webhook verification");
+      throw new BadRequestException(
+        "Missing raw body for webhook verification",
+      );
     }
     this.billing.verifyPaystackSignature(raw, signature);
     let payload: unknown;

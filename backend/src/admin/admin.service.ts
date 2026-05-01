@@ -2,8 +2,14 @@ import { BadRequestException, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { Prisma } from "@prisma/client";
 import { PrismaService } from "../prisma/prisma.service";
-import type { CreateSiteProjectDto, UpdateSiteProjectDto } from "./dto/site-project.dto";
-import type { CreateSiteTestimonialDto, UpdateSiteTestimonialDto } from "./dto/site-testimonial.dto";
+import type {
+  CreateSiteProjectDto,
+  UpdateSiteProjectDto,
+} from "./dto/site-project.dto";
+import type {
+  CreateSiteTestimonialDto,
+  UpdateSiteTestimonialDto,
+} from "./dto/site-testimonial.dto";
 
 @Injectable()
 export class AdminService {
@@ -14,7 +20,11 @@ export class AdminService {
 
   async listSiteProjects() {
     return this.prisma.project.findMany({
-      orderBy: [{ featured: "desc" }, { sortOrder: "asc" }, { createdAt: "asc" }],
+      orderBy: [
+        { featured: "desc" },
+        { sortOrder: "asc" },
+        { createdAt: "asc" },
+      ],
     });
   }
 
@@ -31,14 +41,21 @@ export class AdminService {
           featured: dto.featured ?? false,
           sortOrder: dto.sortOrder ?? 0,
           details:
-            dto.details !== undefined ? (dto.details as Prisma.InputJsonValue) : undefined,
+            dto.details !== undefined
+              ? (dto.details as Prisma.InputJsonValue)
+              : undefined,
         },
       });
       void this.bumpNextCache(["portfolio"]);
       return row;
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2002") {
-        throw new BadRequestException("That slug is already used by another project.");
+      if (
+        e instanceof Prisma.PrismaClientKnownRequestError &&
+        e.code === "P2002"
+      ) {
+        throw new BadRequestException(
+          "That slug is already used by another project.",
+        );
       }
       throw e;
     }
@@ -56,15 +73,22 @@ export class AdminService {
     if (dto.sortOrder !== undefined) data.sortOrder = dto.sortOrder;
     if (dto.details !== undefined) {
       data.details =
-        dto.details === null ? Prisma.JsonNull : (dto.details as Prisma.InputJsonValue);
+        dto.details === null
+          ? Prisma.JsonNull
+          : (dto.details as Prisma.InputJsonValue);
     }
     try {
       const row = await this.prisma.project.update({ where: { id }, data });
       void this.bumpNextCache(["portfolio"]);
       return row;
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2002") {
-        throw new BadRequestException("That slug is already used by another project.");
+      if (
+        e instanceof Prisma.PrismaClientKnownRequestError &&
+        e.code === "P2002"
+      ) {
+        throw new BadRequestException(
+          "That slug is already used by another project.",
+        );
       }
       throw e;
     }
@@ -122,7 +146,10 @@ export class AdminService {
 
   /** Fire-and-forget: bust Next.js Data Cache + ISR after admin content edits. */
   private bumpNextCache(tags: string[]): void {
-    const base = this.config.get<string>("NEXT_REVALIDATE_URL")?.trim().replace(/\/$/, "");
+    const base = this.config
+      .get<string>("NEXT_REVALIDATE_URL")
+      ?.trim()
+      .replace(/\/$/, "");
     const secret = this.config.get<string>("REVALIDATE_SECRET")?.trim();
     if (!base || !secret) {
       return;
@@ -174,23 +201,33 @@ export class AdminService {
   async getSummary() {
     const dayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
     const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-    const [userCount, renewalGroups, pastDue, suspended, tx24h, pendingTx, contacts7d, contactsProjectCalc7d] =
-      await Promise.all([
-        this.prisma.user.count(),
-        this.prisma.userRenewal.groupBy({
-          by: ["status"],
-          _count: { _all: true },
-        }),
-        this.prisma.userRenewal.count({ where: { status: "past_due" } }),
-        this.prisma.userRenewal.count({ where: { status: "suspended" } }),
-        this.prisma.paymentTransaction.count({ where: { createdAt: { gte: dayAgo } } }),
-        this.prisma.paymentTransaction.count({ where: { status: "pending" } }),
-        this.prisma.contact.count({ where: { createdAt: { gte: weekAgo } } }),
-        this.prisma.contact.count({
-          // must match `CONTACT_SOURCE.projectCalculator` in Next (lib/inbound-contact.ts)
-          where: { source: "project_calculator", createdAt: { gte: weekAgo } },
-        }),
-      ]);
+    const [
+      userCount,
+      renewalGroups,
+      pastDue,
+      suspended,
+      tx24h,
+      pendingTx,
+      contacts7d,
+      contactsProjectCalc7d,
+    ] = await Promise.all([
+      this.prisma.user.count(),
+      this.prisma.userRenewal.groupBy({
+        by: ["status"],
+        _count: { _all: true },
+      }),
+      this.prisma.userRenewal.count({ where: { status: "past_due" } }),
+      this.prisma.userRenewal.count({ where: { status: "suspended" } }),
+      this.prisma.paymentTransaction.count({
+        where: { createdAt: { gte: dayAgo } },
+      }),
+      this.prisma.paymentTransaction.count({ where: { status: "pending" } }),
+      this.prisma.contact.count({ where: { createdAt: { gte: weekAgo } } }),
+      this.prisma.contact.count({
+        // must match `CONTACT_SOURCE.projectCalculator` in Next (lib/inbound-contact.ts)
+        where: { source: "project_calculator", createdAt: { gte: weekAgo } },
+      }),
+    ]);
     return {
       userCount,
       renewalsByStatus: Object.fromEntries(
@@ -394,7 +431,9 @@ export class AdminService {
     const [all, newOnly, projectCalc, chat] = await Promise.all([
       this.prisma.contact.count({ where: { ...base } }),
       this.prisma.contact.count({ where: { ...base, status: "new" } }),
-      this.prisma.contact.count({ where: { ...base, source: "project_calculator" } }),
+      this.prisma.contact.count({
+        where: { ...base, source: "project_calculator" },
+      }),
       this.prisma.contact.count({ where: { ...base, source: "chat" } }),
     ]);
     return {
@@ -426,12 +465,18 @@ export class AdminService {
       orderBy: { createdAt: "desc" },
     });
 
-    const byArticle = new Map<string, { articleId: string; yes: number; no: number }>();
+    const byArticle = new Map<
+      string,
+      { articleId: string; yes: number; no: number }
+    >();
     for (const row of rows) {
       const m = row.metadata;
       if (!m || typeof m !== "object") continue;
       const obj = m as { articleId?: unknown; helpful?: unknown };
-      const articleId = typeof obj.articleId === "string" && obj.articleId.trim() ? obj.articleId.trim() : "unknown";
+      const articleId =
+        typeof obj.articleId === "string" && obj.articleId.trim()
+          ? obj.articleId.trim()
+          : "unknown";
       const helpful = obj.helpful === true;
       const agg = byArticle.get(articleId) ?? { articleId, yes: 0, no: 0 };
       if (helpful) agg.yes += 1;
@@ -454,10 +499,7 @@ export class AdminService {
     };
   }
 
-  async updateContact(
-    id: string,
-    data: { status?: string; notes?: string },
-  ) {
+  async updateContact(id: string, data: { status?: string; notes?: string }) {
     const patch: { status?: string; notes?: string } = {};
     if (data.status != null) {
       patch.status = data.status;

@@ -3,13 +3,26 @@ import { Injectable, Logger } from "@nestjs/common";
 const UPSTREAM = "https://latest.currency-api.pages.dev/v1/currencies/ghs.json";
 const TARGETS = ["GHS", "NGN", "ZAR", "KES", "XOF", "USD", "EUR", "GBP"];
 
+export interface FxRatesCache {
+  base: string;
+  date: string | null;
+  rates: Record<string, number>;
+  source: string;
+  reason?: string;
+}
+
+export interface FxUpstreamResponse {
+  date: string;
+  ghs: Record<string, number>;
+}
+
 @Injectable()
 export class FxService {
   private readonly logger = new Logger(FxService.name);
-  private cachedRates: any = null;
+  private cachedRates: FxRatesCache | null = null;
   private lastFetch: number = 0;
 
-  async getRates() {
+  async getRates(): Promise<FxRatesCache> {
     const now = Date.now();
     if (this.cachedRates && now - this.lastFetch < 3600000) {
       return this.cachedRates;
@@ -19,8 +32,8 @@ export class FxService {
       // In a real project, use @nestjs/axios or plain fetch
       const res = await fetch(UPSTREAM);
       if (!res.ok) throw new Error("Upstream failed");
-      
-      const data = (await res.json()) as any;
+
+      const data = (await res.json()) as FxUpstreamResponse;
       const row = data.ghs;
       if (!row) throw new Error("Invalid payload");
 

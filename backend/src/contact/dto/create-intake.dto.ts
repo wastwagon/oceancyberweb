@@ -1,4 +1,13 @@
-import { IsArray, IsBoolean, IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength } from "class-validator";
+import {
+  IsArray,
+  IsBoolean,
+  IsEmail,
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MaxLength,
+} from "class-validator";
 
 export class CreateIntakeDto {
   @IsString()
@@ -48,7 +57,10 @@ export class CreateIntakeDto {
   contactMethod!: "email" | "phone" | "whatsapp";
 
   @IsEnum(["discovery_call", "proposal_walkthrough", "asynchronous_quote"])
-  meetingType!: "discovery_call" | "proposal_walkthrough" | "asynchronous_quote";
+  meetingType!:
+    | "discovery_call"
+    | "proposal_walkthrough"
+    | "asynchronous_quote";
 
   @IsString()
   @IsOptional()

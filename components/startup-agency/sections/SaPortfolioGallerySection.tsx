@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
-import { projects } from "@/lib/data/projects";
+import { projects, Project } from "@/lib/data/projects";
 
 export function SaPortfolioGallerySection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -60,13 +60,13 @@ export function SaPortfolioGallerySection() {
   );
 }
 
-function PortfolioCard({ project, index, isHighlight }: { project: any; index: number; isHighlight?: boolean }) {
+function PortfolioCard({ project, index, isHighlight }: { project: Project; index: number; isHighlight?: boolean }) {
   return (
     <SaReveal
       delay={index * 0.05}
       className={`group relative overflow-hidden border-sa-border rounded-md h-64 hover:border-green-500 transition-colors ${isHighlight ? "bg-sa-primary" : ""}`}
     >
-      <Link href={project.website || "#"} target="_blank" rel="noopener noreferrer" className="block h-full w-full">
+      <Link href={"#"} target="_blank" rel="noopener noreferrer" className="block h-full w-full">
         <Image
           src={project.image}
           alt={project.title}

@@ -10,7 +10,8 @@ export class MailService {
   private fromAddress: string | null = null;
 
   constructor(private readonly config: ConfigService) {
-    this.fromAddress = (this.config.get<string>("SMTP_FROM") || "").trim() || null;
+    this.fromAddress =
+      (this.config.get<string>("SMTP_FROM") || "").trim() || null;
     const smtpUrl = (this.config.get<string>("SMTP_URL") || "").trim();
     if (!this.fromAddress) {
       this.logger.log("Outgoing email disabled (set SMTP_FROM to enable).");
@@ -25,19 +26,24 @@ export class MailService {
       }
       const host = (this.config.get<string>("SMTP_HOST") || "").trim();
       if (!host) {
-        this.logger.warn("SMTP_FROM is set but neither SMTP_URL nor SMTP_HOST is configured. Email disabled.");
+        this.logger.warn(
+          "SMTP_FROM is set but neither SMTP_URL nor SMTP_HOST is configured. Email disabled.",
+        );
         this.fromAddress = null;
         return;
       }
       const port = Number(this.config.get<string>("SMTP_PORT") || 587);
-      const secure = this.config.get<string>("SMTP_SECURE") === "true" || port === 465;
+      const secure =
+        this.config.get<string>("SMTP_SECURE") === "true" || port === 465;
       this.transporter = createTransport({
         host,
         port,
         secure,
         auth: {
-          user: (this.config.get<string>("SMTP_USER") || "").trim() || undefined,
-          pass: (this.config.get<string>("SMTP_PASS") || "").trim() || undefined,
+          user:
+            (this.config.get<string>("SMTP_USER") || "").trim() || undefined,
+          pass:
+            (this.config.get<string>("SMTP_PASS") || "").trim() || undefined,
         },
       });
       this.logger.log(`Mail transport: ${host}:${port}`);
@@ -60,7 +66,11 @@ export class MailService {
     text: string,
     html?: string,
   ): Promise<void> {
-    if (!this.isEnabled() || this.transporter === null || this.fromAddress === null) {
+    if (
+      !this.isEnabled() ||
+      this.transporter === null ||
+      this.fromAddress === null
+    ) {
       return;
     }
     try {
@@ -72,7 +82,9 @@ export class MailService {
         html: html ?? text.replace(/\n/g, "<br>"),
       });
     } catch (e) {
-      this.logger.error(`Failed to send mail to ${to}: ${e instanceof Error ? e.message : e}`);
+      this.logger.error(
+        `Failed to send mail to ${to}: ${e instanceof Error ? e.message : e}`,
+      );
     }
   }
 }

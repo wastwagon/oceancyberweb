@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Patch, Post, Req, UseGuards } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Req,
+  UseGuards,
+} from "@nestjs/common";
 import type { Request } from "express";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { AdminGuard } from "../admin/admin.guard";
@@ -6,7 +15,9 @@ import { CreateClientProjectDto } from "./dto/create-client-project.dto";
 import { UpdateClientProjectStatusDto } from "./dto/update-client-project-status.dto";
 import { ProjectsService } from "./projects.service";
 
-type RequestWithUser = Request & { user: { id: string; email: string; role: string } };
+type RequestWithUser = Request & {
+  user: { id: string; email: string; role: string };
+};
 
 @Controller({ path: "projects", version: "1" })
 export class ProjectsController {
@@ -25,7 +36,11 @@ export class ProjectsController {
     @Param("projectId") projectId: string,
     @Param("invoiceId") invoiceId: string,
   ) {
-    return this.projects.initializeInvoicePayment(req.user, projectId, invoiceId);
+    return this.projects.initializeInvoicePayment(
+      req.user,
+      projectId,
+      invoiceId,
+    );
   }
 
   @UseGuards(JwtAuthGuard, AdminGuard)

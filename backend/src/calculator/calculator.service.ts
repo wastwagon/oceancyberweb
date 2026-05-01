@@ -51,10 +51,18 @@ const PROJECT_FEATURES = [
 ];
 
 const TIMELINE_OPTIONS = [
-  { value: "under-4w", label: "ASAP (under 4 weeks)", rushLabourMultiplier: 1.28 },
+  {
+    value: "under-4w",
+    label: "ASAP (under 4 weeks)",
+    rushLabourMultiplier: 1.28,
+  },
   { value: "1-3m", label: "1–3 months", rushLabourMultiplier: 1.0 },
   { value: "3-6m", label: "3–6 months", rushLabourMultiplier: 0.96 },
-  { value: "6m-plus", label: "6+ months / flexible", rushLabourMultiplier: 0.92 },
+  {
+    value: "6m-plus",
+    label: "6+ months / flexible",
+    rushLabourMultiplier: 0.92,
+  },
 ];
 
 @Injectable()
@@ -72,7 +80,9 @@ export class CalculatorService {
 
     const platform = PLATFORM_OPTIONS.find((p) => p.id === dto.platformId);
     const design = DESIGN_OPTIONS.find((d) => d.id === dto.designId);
-    const complexity = COMPLEXITY_OPTIONS.find((c) => c.id === dto.complexityId);
+    const complexity = COMPLEXITY_OPTIONS.find(
+      (c) => c.id === dto.complexityId,
+    );
     const timeline = TIMELINE_OPTIONS.find((t) => t.value === dto.timeline);
 
     const lineSummary = dto.featureIds.length
@@ -93,7 +103,8 @@ export class CalculatorService {
       totalHours: pricing.totalHours,
     };
 
-    const message = `Project cost calculator — ${dto.event || "lead"}\n\n` +
+    const message =
+      `Project cost calculator — ${dto.event || "lead"}\n\n` +
       `Name: ${dto.name}\n` +
       `Email: ${dto.email}\n` +
       `Target timeline: ${timeline?.label || dto.timeline}\n` +
@@ -103,7 +114,9 @@ export class CalculatorService {
       `${lineSummary}\n` +
       `\nEstimate (GHS, indicative): ${Math.round(pricing.rangeLowGhs).toLocaleString("en-GH")} – ${Math.round(
         pricing.rangeHighGhs,
-      ).toLocaleString("en-GH")} (mid ~ ${Math.round(pricing.totalMidGhs).toLocaleString("en-GH")})`;
+      ).toLocaleString(
+        "en-GH",
+      )} (mid ~ ${Math.round(pricing.totalMidGhs).toLocaleString("en-GH")})`;
 
     await this.prisma.contact.create({
       data: {
@@ -112,7 +125,7 @@ export class CalculatorService {
         phone: null,
         message,
         source: "project_calculator",
-        metadata: metadata as any,
+        metadata: metadata as import("@prisma/client").Prisma.InputJsonValue,
         status: "new",
       },
     });
@@ -132,9 +145,11 @@ export class CalculatorService {
   }
 
   private computePricing(dto: CreateCalculatorLeadDto) {
-    const complexity = COMPLEXITY_OPTIONS.find((c) => c.id === dto.complexityId);
+    const complexity = COMPLEXITY_OPTIONS.find(
+      (c) => c.id === dto.complexityId,
+    );
     const mult = complexity?.multiplier ?? 1;
-    
+
     const timeline = TIMELINE_OPTIONS.find((t) => t.value === dto.timeline);
     const rush = timeline?.rushLabourMultiplier ?? 1;
 
@@ -143,7 +158,7 @@ export class CalculatorService {
 
     const baseHours = (platform?.baseHours || 0) + (design?.addHours || 0);
     let featureHours = 0;
-    
+
     for (const fId of dto.featureIds) {
       const f = PROJECT_FEATURES.find((feat) => feat.id === fId);
       if (f) featureHours += f.hours;
@@ -151,7 +166,7 @@ export class CalculatorService {
 
     const totalHours = baseHours + featureHours;
     const totalMidGhs = totalHours * HOURLY_RATE_GHS * mult * rush;
-    
+
     return {
       totalHours,
       totalMidGhs,

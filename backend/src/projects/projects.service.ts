@@ -36,8 +36,14 @@ export class ProjectsService {
     return rows.map((row) => ({
       ...row,
       totalAmountMinor: row.totalAmountMinor.toString(),
-      milestones: row.milestones.map((m) => ({ ...m, amountMinor: m.amountMinor.toString() })),
-      invoices: row.invoices.map((i) => ({ ...i, amountMinor: i.amountMinor.toString() })),
+      milestones: row.milestones.map((m) => ({
+        ...m,
+        amountMinor: m.amountMinor.toString(),
+      })),
+      invoices: row.invoices.map((i) => ({
+        ...i,
+        amountMinor: i.amountMinor.toString(),
+      })),
     }));
   }
 
@@ -55,8 +61,14 @@ export class ProjectsService {
     return rows.map((row) => ({
       ...row,
       totalAmountMinor: row.totalAmountMinor.toString(),
-      milestones: row.milestones.map((m) => ({ ...m, amountMinor: m.amountMinor.toString() })),
-      invoices: row.invoices.map((i) => ({ ...i, amountMinor: i.amountMinor.toString() })),
+      milestones: row.milestones.map((m) => ({
+        ...m,
+        amountMinor: m.amountMinor.toString(),
+      })),
+      invoices: row.invoices.map((i) => ({
+        ...i,
+        amountMinor: i.amountMinor.toString(),
+      })),
     }));
   }
 
@@ -74,14 +86,18 @@ export class ProjectsService {
       select: { id: true, email: true },
     });
     if (!user) {
-      throw new NotFoundException("No user account found for that email. Ask client to sign up first.");
+      throw new NotFoundException(
+        "No user account found for that email. Ask client to sign up first.",
+      );
     }
 
     const kickoffPercent = input.kickoffPercent ?? 30;
     const buildPercent = input.buildPercent ?? 30;
     const launchPercent = input.launchPercent ?? 40;
     if (kickoffPercent + buildPercent + launchPercent !== 100) {
-      throw new BadRequestException("Milestone percentages must add up to 100.");
+      throw new BadRequestException(
+        "Milestone percentages must add up to 100.",
+      );
     }
 
     const totalMinor = BigInt(Math.round(input.totalAmountGhs * 100));
@@ -237,7 +253,10 @@ export class ProjectsService {
     return updated;
   }
 
-  async addProjectActivity(projectId: string, input: { actorId?: string; note: string }) {
+  async addProjectActivity(
+    projectId: string,
+    input: { actorId?: string; note: string },
+  ) {
     const project = await this.prisma.clientProject.findUnique({
       where: { id: projectId },
       select: { id: true },
@@ -253,12 +272,17 @@ export class ProjectsService {
         actorId: input.actorId || null,
         action: "manual_note",
         note,
-        metadata: { category: "general" },
+        metadata: {
+          category: "general",
+        } as import("@prisma/client").Prisma.InputJsonValue,
       },
     });
   }
 
-  async addProjectActivityWithCategory(projectId: string, input: { actorId?: string; note: string; category: string }) {
+  async addProjectActivityWithCategory(
+    projectId: string,
+    input: { actorId?: string; note: string; category: string },
+  ) {
     const project = await this.prisma.clientProject.findUnique({
       where: { id: projectId },
       select: { id: true },
@@ -266,7 +290,13 @@ export class ProjectsService {
     if (!project) throw new NotFoundException("Project not found.");
     const note = input.note.trim();
     if (!note) throw new BadRequestException("Activity note is required.");
-    const allowed = new Set(["general", "client_feedback", "dev_update", "blocker", "approval"]);
+    const allowed = new Set([
+      "general",
+      "client_feedback",
+      "dev_update",
+      "blocker",
+      "approval",
+    ]);
     const category = input.category.trim();
     if (!allowed.has(category)) {
       throw new BadRequestException("Invalid activity category.");
@@ -279,12 +309,18 @@ export class ProjectsService {
         actorId: input.actorId || null,
         action: "manual_note",
         note,
-        metadata: { category },
+        metadata: {
+          category,
+        } as import("@prisma/client").Prisma.InputJsonValue,
       },
     });
   }
 
-  async initializeInvoicePayment(user: SafeUser, projectId: string, invoiceId: string) {
+  async initializeInvoicePayment(
+    user: SafeUser,
+    projectId: string,
+    invoiceId: string,
+  ) {
     const invoice = await this.prisma.projectInvoice.findFirst({
       where: { id: invoiceId, projectId, project: { userId: user.id } },
       include: { project: true, milestone: true },
@@ -298,12 +334,16 @@ export class ProjectsService {
         where: { providerReference: invoice.paystackReference },
       });
       if (existing && existing.status === "pending") {
-        throw new BadRequestException("This invoice already has a pending payment link.");
+        throw new BadRequestException(
+          "This invoice already has a pending payment link.",
+        );
       }
     }
 
     const paystackSecret = this.config.get<string>("PAYSTACK_SECRET_KEY");
-    const frontendBase = this.config.get<string>("NEXT_PUBLIC_SITE_URL") || "http://localhost:3020";
+    const frontendBase =
+      this.config.get<string>("NEXT_PUBLIC_SITE_URL") ||
+      "http://localhost:3020";
     if (!paystackSecret) {
       throw new BadRequestException("PAYSTACK_SECRET_KEY is not configured");
     }
@@ -344,7 +384,9 @@ export class ProjectsService {
       data?: { authorization_url: string; reference: string };
     };
     if (!res.ok || !data.status || !data.data?.authorization_url) {
-      throw new InternalServerErrorException(data.message || "Could not initialize project invoice payment");
+      throw new InternalServerErrorException(
+        data.message || "Could not initialize project invoice payment",
+      );
     }
 
     await this.prisma.$transaction(async (db) => {
@@ -362,7 +404,7 @@ export class ProjectsService {
             projectTitle: invoice.project.title,
             invoiceNumber: invoice.invoiceNumber,
             callbackUrl,
-          },
+          } as import("@prisma/client").Prisma.InputJsonValue,
         },
       });
       await db.projectInvoice.update({

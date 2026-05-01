@@ -36,7 +36,12 @@ export class BillingService {
   private readonly logger = new Logger(BillingService.name);
   private readonly planPresets: Record<
     string,
-    { name: string; description: string; interval: "monthly" | "yearly"; amountMinor: bigint }
+    {
+      name: string;
+      description: string;
+      interval: "monthly" | "yearly";
+      amountMinor: bigint;
+    }
   > = {
     "hosting-basic-monthly": {
       name: "Hosting Basic (Monthly)",
@@ -94,17 +99,26 @@ export class BillingService {
     private readonly mail: MailService,
   ) {}
 
-  verifyPaystackSignature(rawBody: Buffer, signature: string | undefined): void {
+  verifyPaystackSignature(
+    rawBody: Buffer,
+    signature: string | undefined,
+  ): void {
     const skip =
       this.config.get<string>("PAYSTACK_WEBHOOK_SKIP_VERIFY") === "true" ||
       this.config.get<string>("NODE_ENV") === "test";
     if (skip) {
-      this.logger.warn("Paystack webhook signature verification skipped (dev/test only)");
+      this.logger.warn(
+        "Paystack webhook signature verification skipped (dev/test only)",
+      );
       return;
     }
     const secret = this.config.get<string>("PAYSTACK_SECRET_KEY");
-    if (!secret) throw new InternalServerErrorException("PAYSTACK_SECRET_KEY is not configured");
-    if (!signature) throw new UnauthorizedException("Missing Paystack signature");
+    if (!secret)
+      throw new InternalServerErrorException(
+        "PAYSTACK_SECRET_KEY is not configured",
+      );
+    if (!signature)
+      throw new UnauthorizedException("Missing Paystack signature");
 
     const expected = createHmac("sha512", secret).update(rawBody).digest("hex");
     const a = Buffer.from(expected, "utf8");
@@ -175,7 +189,9 @@ export class BillingService {
     });
     if (!tx) throw new NotFoundException("Transaction not found");
     if (tx.status !== "success") {
-      throw new BadRequestException("Receipt is only available for successful transactions");
+      throw new BadRequestException(
+        "Receipt is only available for successful transactions",
+      );
     }
     const m = (tx.metadata as Record<string, unknown> | null) ?? {};
     const productLine =
@@ -205,7 +221,9 @@ export class BillingService {
     });
     if (!tx) throw new NotFoundException("Transaction not found");
     if (tx.status !== "success") {
-      throw new BadRequestException("Invoice is only available for successful transactions");
+      throw new BadRequestException(
+        "Invoice is only available for successful transactions",
+      );
     }
     const m = (tx.metadata as Record<string, unknown> | null) ?? {};
     const lineLabel = escHtml(
@@ -277,7 +295,10 @@ export class BillingService {
       },
     });
     if (dbPlans.length > 0) {
-      return dbPlans.map((p) => ({ ...p, amountMinor: p.amountMinor.toString() }));
+      return dbPlans.map((p) => ({
+        ...p,
+        amountMinor: p.amountMinor.toString(),
+      }));
     }
 
     return Object.entries(this.planPresets).map(([code, preset]) => ({
@@ -293,7 +314,11 @@ export class BillingService {
   private async createRenewalWithTx(
     db: Prisma.TransactionClient,
     userId: string,
-    input: { planCode: string; autoRenewUsingWallet?: boolean; externalRef?: string },
+    input: {
+      planCode: string;
+      autoRenewUsingWallet?: boolean;
+      externalRef?: string;
+    },
   ) {
     let plan = await db.renewalPlan.findUnique({
       where: { code: input.planCode },
@@ -311,7 +336,8 @@ export class BillingService {
         },
       });
     }
-    if (!plan || !plan.isActive) throw new BadRequestException("Invalid or inactive plan");
+    if (!plan || !plan.isActive)
+      throw new BadRequestException("Invalid or inactive plan");
 
     const nextRenewalAt = new Date();
     if (plan.interval === "monthly") {
@@ -329,7 +355,9 @@ export class BillingService {
         nextRenewalAt,
         autoRenewUsingWallet: input.autoRenewUsingWallet ?? true,
         externalRef: input.externalRef?.trim() || null,
-        metadata: input.externalRef ? { source: "linked_order", externalRef: input.externalRef } : undefined,
+        metadata: input.externalRef
+          ? { source: "linked_order", externalRef: input.externalRef }
+          : undefined,
       },
       include: { plan: true },
     });
@@ -344,7 +372,11 @@ export class BillingService {
 
   async createRenewal(
     user: SafeUser,
-    input: { planCode: string; autoRenewUsingWallet?: boolean; externalRef?: string },
+    input: {
+      planCode: string;
+      autoRenewUsingWallet?: boolean;
+      externalRef?: string;
+    },
   ) {
     return this.createRenewalWithTx(
       this.prisma as unknown as Prisma.TransactionClient,
@@ -358,7 +390,8 @@ export class BillingService {
       where: { id: renewalId, userId: user.id },
     });
     if (!renewal) throw new NotFoundException("Renewal not found");
-    if (renewal.status === "cancelled") throw new BadRequestException("Renewal is cancelled");
+    if (renewal.status === "cancelled")
+      throw new BadRequestException("Renewal is cancelled");
     return this.prisma.userRenewal.update({
       where: { id: renewalId },
       data: { status: "paused", pausedAt: new Date() },
@@ -371,7 +404,8 @@ export class BillingService {
       where: { id: renewalId, userId: user.id },
     });
     if (!renewal) throw new NotFoundException("Renewal not found");
-    if (renewal.status === "cancelled") throw new BadRequestException("Renewal is cancelled");
+    if (renewal.status === "cancelled")
+      throw new BadRequestException("Renewal is cancelled");
     const now = new Date();
     const backToPastDue = renewal.graceEndsAt && renewal.graceEndsAt > now;
     return this.prisma.userRenewal.update({
@@ -400,10 +434,13 @@ export class BillingService {
 
   async initializeTopup(user: SafeUser, amountGhs: number) {
     const amountMinor = BigInt(Math.round(amountGhs * 100));
-    if (amountMinor <= 0n) throw new BadRequestException("Amount must be at least 1 GHS");
+    if (amountMinor <= 0n)
+      throw new BadRequestException("Amount must be at least 1 GHS");
 
     const paystackSecret = this.config.get<string>("PAYSTACK_SECRET_KEY");
-    const frontendBase = this.config.get<string>("NEXT_PUBLIC_SITE_URL") || "http://localhost:3020";
+    const frontendBase =
+      this.config.get<string>("NEXT_PUBLIC_SITE_URL") ||
+      "http://localhost:3020";
     if (!paystackSecret) {
       throw new BadRequestException("PAYSTACK_SECRET_KEY is not configured");
     }
@@ -433,7 +470,9 @@ export class BillingService {
       data?: { authorization_url: string; reference: string };
     };
     if (!res.ok || !data.status || !data.data?.authorization_url) {
-      throw new InternalServerErrorException(data.message || "Could not initialize payment");
+      throw new InternalServerErrorException(
+        data.message || "Could not initialize payment",
+      );
     }
 
     await this.prisma.paymentTransaction.create({
@@ -479,13 +518,16 @@ export class BillingService {
         },
       });
     }
-    if (!plan || !plan.isActive) throw new BadRequestException("Invalid or inactive plan");
+    if (!plan || !plan.isActive)
+      throw new BadRequestException("Invalid or inactive plan");
 
     const amountMinor = plan.amountMinor;
     if (amountMinor <= 0n) throw new BadRequestException("Invalid plan amount");
 
     const paystackSecret = this.config.get<string>("PAYSTACK_SECRET_KEY");
-    const frontendBase = this.config.get<string>("NEXT_PUBLIC_SITE_URL") || "http://localhost:3020";
+    const frontendBase =
+      this.config.get<string>("NEXT_PUBLIC_SITE_URL") ||
+      "http://localhost:3020";
     if (!paystackSecret) {
       throw new BadRequestException("PAYSTACK_SECRET_KEY is not configured");
     }
@@ -493,7 +535,8 @@ export class BillingService {
     const reference = `PAY-${user.id.slice(0, 8)}-${Date.now()}`;
     const returnQs = new URLSearchParams();
     returnQs.set("plan", input.planCode);
-    if (input.externalRef?.trim()) returnQs.set("ref", input.externalRef.trim());
+    if (input.externalRef?.trim())
+      returnQs.set("ref", input.externalRef.trim());
     returnQs.set("paid", "1");
     const callbackUrl = `${frontendBase.replace(/\/$/, "")}/checkout/renewal?${returnQs.toString()}`;
 
@@ -523,7 +566,9 @@ export class BillingService {
       data?: { authorization_url: string; reference: string };
     };
     if (!res.ok || !data.status || !data.data?.authorization_url) {
-      throw new InternalServerErrorException(data.message || "Could not initialize payment");
+      throw new InternalServerErrorException(
+        data.message || "Could not initialize payment",
+      );
     }
 
     await this.prisma.paymentTransaction.create({
@@ -550,7 +595,10 @@ export class BillingService {
     };
   }
 
-  async getPaymentStatusByProviderReference(user: SafeUser, providerReference: string) {
+  async getPaymentStatusByProviderReference(
+    user: SafeUser,
+    providerReference: string,
+  ) {
     const row = await this.prisma.paymentTransaction.findFirst({
       where: { userId: user.id, providerReference },
     });
@@ -590,14 +638,17 @@ export class BillingService {
     }
 
     const meta = tx.metadata;
-    const flatMeta = meta && typeof meta === "object" ? (meta as Record<string, unknown>) : {};
+    const flatMeta =
+      meta && typeof meta === "object" ? (meta as Record<string, unknown>) : {};
     const userIdFromProvider = flatMeta.userId as string | undefined;
     if (userIdFromProvider && userIdFromProvider !== dbTx.userId) {
       throw new BadRequestException("User mismatch");
     }
 
     await this.prisma.$transaction(async (prisma) => {
-      const locked = await prisma.paymentTransaction.findUnique({ where: { id: dbTx.id } });
+      const locked = await prisma.paymentTransaction.findUnique({
+        where: { id: dbTx.id },
+      });
       if (!locked || locked.status === "success") return;
 
       const oldMeta = (locked.metadata as Record<string, unknown> | null) ?? {};
@@ -615,7 +666,10 @@ export class BillingService {
       if (locked.type === "wallet_topup") {
         await prisma.paymentTransaction.update({
           where: { id: locked.id },
-          data: { status: "success", metadata: baseMeta as Prisma.InputJsonValue },
+          data: {
+            status: "success",
+            metadata: baseMeta as Prisma.InputJsonValue,
+          },
         });
         await prisma.user.update({
           where: { id: locked.userId },
@@ -655,7 +709,10 @@ export class BillingService {
         baseMeta.renewalPlanName = created.plan.name;
         await prisma.paymentTransaction.update({
           where: { id: locked.id },
-          data: { status: "success", metadata: baseMeta as Prisma.InputJsonValue },
+          data: {
+            status: "success",
+            metadata: baseMeta as Prisma.InputJsonValue,
+          },
         });
         return;
       }
@@ -684,7 +741,10 @@ export class BillingService {
         baseMeta.invoiceId = invoiceId;
         await prisma.paymentTransaction.update({
           where: { id: locked.id },
-          data: { status: "success", metadata: baseMeta as Prisma.InputJsonValue },
+          data: {
+            status: "success",
+            metadata: baseMeta as Prisma.InputJsonValue,
+          },
         });
         await prisma.projectInvoice.update({
           where: { id: invoice.id },
@@ -734,7 +794,10 @@ export class BillingService {
 
       await prisma.paymentTransaction.update({
         where: { id: locked.id },
-        data: { status: "success", metadata: baseMeta as Prisma.InputJsonValue },
+        data: {
+          status: "success",
+          metadata: baseMeta as Prisma.InputJsonValue,
+        },
       });
     });
 
@@ -782,8 +845,14 @@ export class BillingService {
   private async notifyWalletRenewalCharged(renewalId: string, userId: string) {
     if (!this.mail.isEnabled()) return;
     const [user, ren] = await Promise.all([
-      this.prisma.user.findUnique({ where: { id: userId }, select: { email: true } }),
-      this.prisma.userRenewal.findUnique({ where: { id: renewalId }, include: { plan: true } }),
+      this.prisma.user.findUnique({
+        where: { id: userId },
+        select: { email: true },
+      }),
+      this.prisma.userRenewal.findUnique({
+        where: { id: renewalId },
+        include: { plan: true },
+      }),
     ]);
     if (!user?.email || !ren) return;
     const amount = (Number(ren.plan.amountMinor) / 100).toFixed(2);
@@ -807,7 +876,9 @@ export class BillingService {
    */
   async attemptWalletChargeRenewal(
     renewalId: string,
-    opts: { forceRetry?: boolean; triggeredBy: "user" | "cron" } = { triggeredBy: "cron" },
+    opts: { forceRetry?: boolean; triggeredBy: "user" | "cron" } = {
+      triggeredBy: "cron",
+    },
   ) {
     const now = new Date();
     const renewal = await this.prisma.userRenewal.findUnique({
@@ -815,7 +886,8 @@ export class BillingService {
       include: { plan: true, user: true },
     });
     if (!renewal) return { ok: false as const, code: "not_found" as const };
-    if (renewal.cancelledAt) return { ok: false as const, code: "cancelled" as const };
+    if (renewal.cancelledAt)
+      return { ok: false as const, code: "cancelled" as const };
     if (renewal.status === "paused" || renewal.pausedAt) {
       return { ok: false as const, code: "paused" as const };
     }
@@ -873,7 +945,10 @@ export class BillingService {
       return { ok: false as const, code: "insufficient_balance" as const };
     }
 
-    const nextRenewalAt = this.computeNextRenewalDate(renewal.nextRenewalAt, renewal.plan.interval);
+    const nextRenewalAt = this.computeNextRenewalDate(
+      renewal.nextRenewalAt,
+      renewal.plan.interval,
+    );
 
     await this.prisma.$transaction(async (prisma) => {
       await prisma.user.update({
@@ -913,7 +988,12 @@ export class BillingService {
       });
     });
 
-    return { ok: true as const, renewalId, nextRenewalAt, userId: renewal.userId };
+    return {
+      ok: true as const,
+      renewalId,
+      nextRenewalAt,
+      userId: renewal.userId,
+    };
   }
 
   async chargeRenewalFromWallet(user: SafeUser, renewalId: string) {
@@ -936,13 +1016,17 @@ export class BillingService {
         not_found: "Renewal not found",
         retry_later: "Please try again later",
       };
-      throw new BadRequestException(msg[result.code] || "Could not charge renewal");
-    }
-    void this.notifyWalletRenewalCharged(result.renewalId, result.userId).catch((e) => {
-      this.logger.error(
-        `notifyWalletRenewalCharged: ${e instanceof Error ? e.message : String(e)}`,
+      throw new BadRequestException(
+        msg[result.code] || "Could not charge renewal",
       );
-    });
+    }
+    void this.notifyWalletRenewalCharged(result.renewalId, result.userId).catch(
+      (e) => {
+        this.logger.error(
+          `notifyWalletRenewalCharged: ${e instanceof Error ? e.message : String(e)}`,
+        );
+      },
+    );
     return result;
   }
 
@@ -980,17 +1064,24 @@ export class BillingService {
 
     for (const row of due) {
       try {
-        const r = await this.attemptWalletChargeRenewal(row.id, { triggeredBy: "cron" });
+        const r = await this.attemptWalletChargeRenewal(row.id, {
+          triggeredBy: "cron",
+        });
         if (r.ok) {
           this.logger.log(`Auto-charged renewal ${row.id}`);
-          void this.notifyWalletRenewalCharged(r.renewalId, r.userId).catch((e) => {
-            this.logger.error(
-              `notify after cron: ${e instanceof Error ? e.message : String(e)}`,
-            );
-          });
+          void this.notifyWalletRenewalCharged(r.renewalId, r.userId).catch(
+            (e) => {
+              this.logger.error(
+                `notify after cron: ${e instanceof Error ? e.message : String(e)}`,
+              );
+            },
+          );
         }
       } catch (e) {
-        this.logger.error(`Auto-charge failed for ${row.id}`, e instanceof Error ? e.stack : e);
+        this.logger.error(
+          `Auto-charge failed for ${row.id}`,
+          e instanceof Error ? e.stack : e,
+        );
       }
     }
   }

@@ -1,5 +1,6 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import { ChatMessageDto, ChatRole } from "./dto/chat.dto";
 
 const SYSTEM_PROMPT = `You are the site assistant for OceanCyber, an ICT company in Accra, Ghana. You help visitors with:
 web development, mobile apps, e-commerce, and cybersecurity / delivery.
@@ -16,9 +17,11 @@ export class ChatService {
 
   constructor(private readonly config: ConfigService) {}
 
-  async getReply(messages: any[]) {
+  async getReply(messages: ChatMessageDto[]) {
     const apiKey = this.config.get<string>("OPENAI_API_KEY")?.trim();
-    const lastUser = [...messages].reverse().find((m) => m.role === "user");
+    const lastUser = [...messages]
+      .reverse()
+      .find((m) => m.role === ChatRole.USER);
 
     if (apiKey) {
       try {
@@ -29,10 +32,13 @@ export class ChatService {
       }
     }
 
-    return { reply: this.getLocalChatReply(lastUser?.content || ""), source: "local" };
+    return {
+      reply: this.getLocalChatReply(lastUser?.content || ""),
+      source: "local",
+    };
   }
 
-  private async fetchOpenAIReply(messages: any[], apiKey: string) {
+  private async fetchOpenAIReply(messages: ChatMessageDto[], apiKey: string) {
     const model = this.config.get<string>("OPENAI_CHAT_MODEL") ?? "gpt-4o-mini";
     const res = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -44,7 +50,9 @@ export class ChatService {
         model,
         messages: [
           { role: "system", content: SYSTEM_PROMPT },
-          ...messages.slice(-14).map((m) => ({ role: m.role, content: m.content })),
+          ...messages
+            .slice(-14)
+            .map((m) => ({ role: m.role, content: m.content })),
         ],
         max_tokens: 450,
         temperature: 0.55,

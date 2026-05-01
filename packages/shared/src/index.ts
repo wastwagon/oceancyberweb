@@ -27,3 +27,11 @@ export interface ApiErrorShape {
   message: string | string[];
   error?: string;
 }
+
+export enum ContactSource {
+  WEB_CONTACT_FORM = "web-contact-form",
+  INTAKE_WIZARD = "intake_wizard",
+  PROPOSAL_REQUEST = "proposal_request",
+  WEBSITE_TO_APP_QUOTE = "website_to_app_quote",
+  HELP_CENTER_FEEDBACK = "help_center_feedback",
+}

@@ -65,7 +65,9 @@ export function SaTestimonialsSection() {
   );
 }
 
-function TestimonialCard({ t }: { t: any }) {
+type TestimonialType = typeof testimonials[number];
+
+function TestimonialCard({ t }: { t: TestimonialType }) {
   return (
     <div className="sa-card flex flex-col justify-between p-6 transition-all duration-500 hover:border-sa-primary/50 lg:p-8">
       <div>

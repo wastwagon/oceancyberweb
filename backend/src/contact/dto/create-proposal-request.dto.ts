@@ -1,4 +1,13 @@
-import { IsArray, IsBoolean, IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength } from "class-validator";
+import {
+  IsArray,
+  IsBoolean,
+  IsEmail,
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MaxLength,
+} from "class-validator";
 
 export class CreateProposalRequestDto {
   @IsString()
@@ -21,8 +30,21 @@ export class CreateProposalRequestDto {
   @MaxLength(200)
   company?: string;
 
-  @IsEnum(["website", "mobile_app", "ecommerce", "security", "support", "other"])
-  projectType!: "website" | "mobile_app" | "ecommerce" | "security" | "support" | "other";
+  @IsEnum([
+    "website",
+    "mobile_app",
+    "ecommerce",
+    "security",
+    "support",
+    "other",
+  ])
+  projectType!:
+    | "website"
+    | "mobile_app"
+    | "ecommerce"
+    | "security"
+    | "support"
+    | "other";
 
   @IsString()
   @IsNotEmpty()
