@@ -162,7 +162,7 @@ export function ProjectCostWizard() {
   };
 
   return (
-    <div className="pb-32 print:pb-0">
+    <div className="pb-32 print:pb-0 sa-card p-6">
       {/* Progress */}
       <div className="print:hidden mb-8 flex flex-wrap items-center justify-center gap-1 sm:gap-2">
         {STEPS.map((label, i) => (
@@ -173,10 +173,10 @@ export function ProjectCostWizard() {
               className={cn(
                 "flex h-8 min-w-[2rem] items-center justify-center rounded-full text-xs font-bold transition sm:h-9 sm:min-w-[2.25rem] sm:text-sm",
                 i === step
-                  ? "bg-ocean-600 text-white"
+                  ? "bg-sa-primary text-sa-bg"
                   : i < step
-                    ? "bg-ocean-100 text-ocean-800"
-                    : "bg-slate-200 text-slate-500",
+                    ? "bg-sa-primary/20 text-sa-primary"
+                    : "bg-sa-surface border border-sa-border text-sa-muted/50",
               )}
               disabled={i > step}
             >
@@ -184,13 +184,13 @@ export function ProjectCostWizard() {
             </button>
             <span
               className={cn(
-                "ml-1.5 hidden text-xs font-medium sm:ml-2 sm:inline",
-                i === step ? "text-ocean-800" : "text-slate-500",
+                "ml-1.5 hidden text-xs font-medium uppercase tracking-widest sm:ml-2 sm:inline",
+                i === step ? "text-sa-primary" : "text-sa-muted/50",
               )}
             >
               {label}
             </span>
-            {i < STEPS.length - 1 && <span className="mx-0.5 text-slate-300 sm:mx-1">/</span>}
+            {i < STEPS.length - 1 && <span className="mx-0.5 text-sa-border sm:mx-1">/</span>}
           </div>
         ))}
       </div>
@@ -204,8 +204,8 @@ export function ProjectCostWizard() {
             exit={{ opacity: 0, y: -8 }}
             className="space-y-4"
           >
-            <h2 className="text-lg font-bold text-slate-900 sm:text-xl">What are we building?</h2>
-            <p className="text-sm text-slate-600">Pick the primary delivery surface. Hours include typical integration work.</p>
+            <h2 className="font-heading text-lg font-bold text-white sm:text-xl">What are we building?</h2>
+            <p className="text-sm text-sa-muted/80">Pick the primary delivery surface. Hours include typical integration work.</p>
             <div className="grid gap-3 sm:grid-cols-2">
               {PLATFORM_OPTIONS.map((p) => (
                 <button
@@ -215,14 +215,14 @@ export function ProjectCostWizard() {
                   className={cn(
                     "rounded-2xl border-2 p-4 text-left transition",
                     platformId === p.id
-                      ? "border-ocean-500 bg-ocean-50 shadow-sm"
-                      : "border-slate-200 bg-white hover:border-slate-300",
+                      ? "border-sa-primary bg-sa-primary/10 shadow-sm"
+                      : "border-sa-border bg-sa-surface hover:border-sa-primary/50",
                   )}
                 >
-                  <p className="font-bold text-slate-900">{p.label}</p>
-                  <p className="mt-1 text-sm text-slate-600">{p.description}</p>
+                  <p className="font-bold text-white">{p.label}</p>
+                  <p className="mt-1 text-sm text-sa-muted/80">{p.description}</p>
                   {p.baseHours > 0 && (
-                    <p className="mt-2 text-xs font-semibold text-ocean-700">+{p.baseHours}h base</p>
+                    <p className="mt-2 text-xs font-semibold text-sa-primary">+{p.baseHours}h base</p>
                   )}
                 </button>
               ))}
@@ -238,8 +238,8 @@ export function ProjectCostWizard() {
             exit={{ opacity: 0, y: -8 }}
             className="space-y-4"
           >
-            <h2 className="text-lg font-bold text-slate-900 sm:text-xl">Design depth</h2>
-            <p className="text-sm text-slate-600">More custom UI and systems work increases build hours (transparent add-ons).</p>
+            <h2 className="font-heading text-lg font-bold text-white sm:text-xl">Design depth</h2>
+            <p className="text-sm text-sa-muted/80">More custom UI and systems work increases build hours (transparent add-ons).</p>
             <div className="grid gap-3 sm:grid-cols-3">
               {DESIGN_OPTIONS.map((d) => (
                 <button
@@ -249,13 +249,13 @@ export function ProjectCostWizard() {
                   className={cn(
                     "rounded-2xl border-2 p-4 text-left transition",
                     designId === d.id
-                      ? "border-ocean-500 bg-ocean-50 shadow-sm"
-                      : "border-slate-200 bg-white hover:border-slate-300",
+                      ? "border-sa-primary bg-sa-primary/10 shadow-sm"
+                      : "border-sa-border bg-sa-surface hover:border-sa-primary/50",
                   )}
                 >
-                  <p className="font-bold text-slate-900">{d.label}</p>
-                  <p className="mt-1 text-sm text-slate-600">{d.description}</p>
-                  {d.addHours > 0 && <p className="mt-2 text-xs font-semibold text-ocean-700">+{d.addHours}h</p>}
+                  <p className="font-bold text-white">{d.label}</p>
+                  <p className="mt-1 text-sm text-sa-muted/80">{d.description}</p>
+                  {d.addHours > 0 && <p className="mt-2 text-xs font-semibold text-sa-primary">+{d.addHours}h</p>}
                 </button>
               ))}
             </div>
@@ -270,21 +270,21 @@ export function ProjectCostWizard() {
             exit={{ opacity: 0, y: -8 }}
             className="space-y-5"
           >
-            <h2 className="text-lg font-bold text-slate-900 sm:text-xl">Features and extra work</h2>
-            <p className="text-sm text-slate-600">
+            <h2 className="font-heading text-lg font-bold text-white sm:text-xl">Features and extra work</h2>
+            <p className="text-sm text-sa-muted/80">
               Turn on only what you need. Each item adds estimated hours, which changes your price. For example, you
               can add &ldquo;create their Google Business Profile&rdquo; under Local and marketing add-ons.
             </p>
 
             <div className="max-w-md">
-              <label htmlFor="complexity" className="text-sm font-semibold text-slate-800">
+              <label htmlFor="complexity" className="text-sm font-medium text-sa-muted/80 ml-1">
                 Project complexity
               </label>
               <select
                 id="complexity"
                 value={complexityId}
                 onChange={(e) => setComplexityId(e.target.value as ComplexityId)}
-                className="mt-1.5 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-900 focus:border-ocean-400 focus:outline-none focus:ring-2 focus:ring-ocean-200"
+                className="mt-1.5 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm font-medium text-white focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary [&>option]:bg-sa-surface [&>option]:text-white"
               >
                 {COMPLEXITY_OPTIONS.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -298,7 +298,7 @@ export function ProjectCostWizard() {
               .sort((a, b) => getCategoryOrder(a[0]) - getCategoryOrder(b[0]))
               .map(([cat, feats]) => (
                 <div key={cat}>
-                  <h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">
+                  <h3 className="mb-2 text-[10px] font-bold uppercase tracking-widest text-sa-muted/50 ml-1">
                     {CATEGORY_LABEL[cat] ?? cat}
                   </h3>
                   <div className="space-y-2">
@@ -309,19 +309,19 @@ export function ProjectCostWizard() {
                           key={f.id}
                           className={cn(
                             "flex cursor-pointer items-start gap-3 rounded-2xl border-2 p-3 transition sm:p-4",
-                            on ? "border-ocean-400 bg-ocean-50/50" : "border-slate-200 bg-white hover:border-slate-300",
+                            on ? "border-sa-primary bg-sa-primary/10" : "border-sa-border bg-sa-surface hover:border-sa-primary/50",
                           )}
                         >
                           <input
                             type="checkbox"
-                            className="mt-1 h-4 w-4 rounded border-slate-300 text-ocean-600 focus:ring-ocean-500"
+                            className="mt-1 h-4 w-4 rounded border-sa-border accent-sa-primary text-sa-primary"
                             checked={on}
                             onChange={() => toggleFeature(f.id)}
                           />
                           <span className="min-w-0 flex-1">
-                            <span className="font-semibold text-slate-900">{f.label}</span>
-                            <span className="ml-2 text-sm font-bold text-ocean-700">+{f.hours}h</span>
-                            <span className="mt-0.5 block text-sm text-slate-600">{f.description}</span>
+                            <span className="font-semibold text-white">{f.label}</span>
+                            <span className="ml-2 text-sm font-bold text-sa-primary">+{f.hours}h</span>
+                            <span className="mt-0.5 block text-sm text-sa-muted/80">{f.description}</span>
                           </span>
                         </label>
                       );
@@ -340,17 +340,17 @@ export function ProjectCostWizard() {
             exit={{ opacity: 0, y: -8 }}
             className="space-y-6"
           >
-            <h2 className="text-lg font-bold text-slate-900 sm:text-xl">Your estimate &amp; proforma</h2>
-            <p className="text-sm text-slate-600">
+            <h2 className="font-heading text-lg font-bold text-white sm:text-xl">Your estimate &amp; proforma</h2>
+            <p className="text-sm text-sa-muted/80">
               Share your contact details to unlock the itemized breakdown, print a one-page summary, and download a
               branded proforma.{" "}
-              <span className="font-medium text-slate-800">All figures are in GHS; Paystack (cards, MoMo) is available for deposits when you contract with us.</span>{" "}
-              <span className="text-slate-500">Indicative only, not a binding quote.</span>
+              <span className="font-medium text-white">All figures are in GHS; Paystack (cards, MoMo) is available for deposits when you contract with us.</span>{" "}
+              <span className="text-sa-muted/50">Indicative only, not a binding quote.</span>
             </p>
 
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
-                <label htmlFor="c-name" className="text-sm font-semibold text-slate-800">
+                <label htmlFor="c-name" className="text-sm font-medium text-sa-muted/80 ml-1">
                   Name
                 </label>
                 <input
@@ -358,13 +358,13 @@ export function ProjectCostWizard() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   onBlur={() => setLeadTouched(true)}
-                  className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm"
+                  className="mt-1.5 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm text-white placeholder:text-sa-muted/50 focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary"
                   autoComplete="name"
                   placeholder="Your name"
                 />
               </div>
               <div>
-                <label htmlFor="c-email" className="text-sm font-semibold text-slate-800">
+                <label htmlFor="c-email" className="text-sm font-medium text-sa-muted/80 ml-1">
                   Work email
                 </label>
                 <input
@@ -373,14 +373,14 @@ export function ProjectCostWizard() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   onBlur={() => setLeadTouched(true)}
-                  className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm"
+                  className="mt-1.5 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm text-white placeholder:text-sa-muted/50 focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary"
                   autoComplete="email"
                   placeholder="you@company.com"
                 />
               </div>
             </div>
             <div className="max-w-md">
-              <label htmlFor="c-timeline" className="text-sm font-semibold text-slate-800">
+              <label htmlFor="c-timeline" className="text-sm font-medium text-sa-muted/80 ml-1">
                 Target timeline
               </label>
               <select
@@ -390,7 +390,7 @@ export function ProjectCostWizard() {
                   setTimeline(e.target.value);
                   setLeadTouched(true);
                 }}
-                className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm"
+                className="mt-1.5 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm text-white focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary [&>option]:bg-sa-surface [&>option]:text-white"
               >
                 <option value="">Select…</option>
                 {TIMELINE_OPTIONS.map((t) => (
@@ -403,49 +403,49 @@ export function ProjectCostWizard() {
                   </option>
                 ))}
               </select>
-              <p className="mt-1.5 text-xs text-slate-500">
-                Timeline applies a <span className="font-medium text-slate-700">rush or flexibility factor</span> to
+              <p className="mt-2 ml-1 text-[11px] text-sa-muted/60">
+                Timeline applies a <span className="font-medium text-sa-muted/90">rush or flexibility factor</span> to
                 labour, after complexity, matching common agency calculators.
               </p>
             </div>
 
             {leadTouched && !leadParsed.success && (
-              <p className="text-sm text-red-600">
+              <p className="text-sm text-red-400 border border-red-500/50 bg-red-500/10 px-4 py-3 rounded-xl">
                 {leadParsed.error.issues.map((e) => e.message).join(" · ")}
               </p>
             )}
 
             {isLeadValid && (
               <>
-                <div id="estimator-line-items" className="overflow-hidden rounded-2xl border border-slate-200">
+                <div id="estimator-line-items" className="overflow-hidden rounded-2xl border border-sa-border bg-sa-surface">
                   <table className="w-full text-left text-sm">
-                    <thead className="bg-slate-100 text-slate-700">
+                    <thead className="bg-black/40 text-sa-muted/80 border-b border-sa-border">
                       <tr>
-                        <th className="px-4 py-2 font-bold">Item</th>
-                        <th className="w-20 px-2 py-2 text-center font-bold">Hrs</th>
-                        <th className="w-28 px-2 py-2 text-right font-bold">GHS</th>
+                        <th className="px-4 py-3 font-bold">Item</th>
+                        <th className="w-20 px-2 py-3 text-center font-bold">Hrs</th>
+                        <th className="w-28 px-4 py-3 text-right font-bold">GHS</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="divide-y divide-sa-border">
                       {pricing.lineItems.map((row) => (
-                        <tr key={row.id} className="border-t border-slate-100">
-                          <td className="px-4 py-2.5 text-slate-800">{row.label}</td>
-                          <td className="px-2 text-center text-slate-600">{row.hours}</td>
-                          <td className="px-2 text-right font-medium text-slate-900">{formatGhs(row.amountGhs)}</td>
+                        <tr key={row.id}>
+                          <td className="px-4 py-3 text-white">{row.label}</td>
+                          <td className="px-2 py-3 text-center text-sa-muted/80">{row.hours}</td>
+                          <td className="px-4 py-3 text-right font-medium text-white">{formatGhs(row.amountGhs)}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
-                <p className="text-xs text-slate-500 print:hidden">
+                <p className="text-[11px] text-sa-muted/60 ml-1 print:hidden">
                   Tip: add contingency for content, sign-off, and post-launch work in a formal SOW.
                 </p>
-                <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center print:hidden">
+                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center print:hidden">
                   <button
                     type="button"
                     disabled={printLoading}
                     onClick={() => void handlePrint()}
-                    className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-xl border-2 border-slate-200 bg-white py-3 text-sm font-bold text-slate-800 transition hover:border-ocean-300 hover:bg-slate-50 disabled:opacity-60 sm:min-w-[10rem] sm:max-w-xs"
+                    className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-xl border-2 border-sa-border bg-transparent py-3 text-sm font-bold text-white transition hover:border-sa-primary disabled:opacity-50 sm:min-w-[10rem] sm:max-w-xs"
                   >
                     {printLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Printer className="h-4 w-4" />}
                     Print summary
@@ -454,9 +454,9 @@ export function ProjectCostWizard() {
                     type="button"
                     disabled={pdfLoading}
                     onClick={() => void handleDownloadPdf()}
-                    className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-xl bg-ocean-600 py-3 text-sm font-bold text-white shadow-md transition hover:bg-ocean-700 disabled:opacity-60 sm:min-w-[12rem] sm:max-w-xs"
+                    className="sa-btn-primary flex-1 min-h-[48px] justify-center sm:min-w-[12rem] sm:max-w-xs"
                   >
-                    {pdfLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <FileDown className="h-4 w-4" />}
+                    {pdfLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <FileDown className="mr-2 h-4 w-4" />}
                     Download proforma (PDF)
                   </button>
                 </div>
@@ -466,12 +466,12 @@ export function ProjectCostWizard() {
         )}
       </AnimatePresence>
 
-      <div className="print:hidden mt-10 flex flex-wrap items-center justify-between gap-3">
+      <div className="print:hidden mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-sa-border pt-6">
         <button
           type="button"
           onClick={goBack}
           disabled={step === 0}
-          className="inline-flex min-h-[44px] items-center gap-1 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 disabled:opacity-40"
+          className="inline-flex min-h-[44px] items-center gap-1 rounded-xl border border-sa-border px-5 py-2.5 text-sm font-semibold text-white transition hover:border-sa-primary disabled:opacity-40"
         >
           <ChevronLeft className="h-4 w-4" />
           Back
@@ -480,10 +480,10 @@ export function ProjectCostWizard() {
           <button
             type="button"
             onClick={goNext}
-            className="inline-flex min-h-[44px] items-center gap-1 rounded-xl bg-ocean-600 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-ocean-700"
+            className="sa-btn-primary min-h-[44px] px-6"
           >
             Next
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="ml-1 h-4 w-4" />
           </button>
         )}
       </div>
@@ -508,28 +508,28 @@ function RunningTotal({
 }) {
   return (
     <div
-      className="print:hidden fixed bottom-0 left-0 right-0 z-40 border-t border-slate-200 bg-white/95 px-3 py-3 shadow-[0_-4px_24px_rgba(0,0,0,0.08)] backdrop-blur-md sm:px-6"
+      className="print:hidden fixed bottom-0 left-0 right-0 z-40 border-t border-sa-border bg-sa-surface/90 px-4 py-4 shadow-[0_-4px_24px_rgba(0,0,0,0.4)] backdrop-blur-md sm:px-6"
     >
-      <div className="mx-auto flex max-w-4xl flex-col gap-1.5 sm:flex-row sm:items-end sm:justify-between">
-        <div className="flex items-center gap-2 text-slate-700">
-          <Calculator className="h-4 w-4 shrink-0 text-ocean-600" />
-          <span className="text-sm font-bold">Running total</span>
-          <span className="text-xs text-slate-500">
+      <div className="mx-auto flex max-w-4xl flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex items-center gap-2 text-sa-muted/80">
+          <Calculator className="h-4 w-4 shrink-0 text-sa-primary" />
+          <span className="text-sm font-bold text-white">Running total</span>
+          <span className="text-xs text-sa-muted/60">
             {step < 3 ? `Step ${step + 1}/4` : "Summary"} · {featureCount} feature{featureCount === 1 ? "" : "s"}
           </span>
         </div>
         <div className="text-right sm:text-left">
           {onSummaryStep && !leadReady && (
-            <p className="mb-1 text-[11px] text-amber-800 sm:max-w-sm sm:ml-auto sm:text-right">
+            <p className="mb-1.5 text-[11px] text-sa-primary sm:max-w-sm sm:ml-auto sm:text-right">
               Add your name, email, and timeline to unlock the line item table and proforma download.
             </p>
           )}
           <div>
-            <p className="text-sm font-bold text-slate-900 sm:text-right">
+            <p className="text-sm font-bold text-white sm:text-right">
               Range: {formatGhs(pricing.rangeLowGhs)} – {formatGhs(pricing.rangeHighGhs)}
-              <span className="ml-1.5 font-normal text-slate-500">(mid {formatGhs(pricing.totalMidGhs)})</span>
+              <span className="ml-1.5 font-normal text-sa-muted/60">(mid {formatGhs(pricing.totalMidGhs)})</span>
             </p>
-            <p className="text-[11px] text-slate-500 sm:text-right">
+            <p className="text-[11px] text-sa-muted/60 sm:text-right mt-1">
               {pricing.totalHours}h total · {formatGhs(pricing.hourlyRateGhs)}/h ×{pricing.complexityMultiplier} complex · ×
               {pricing.rushLabourMultiplier} timeline · ±10% band
             </p>

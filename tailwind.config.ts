@@ -66,7 +66,8 @@ const config: Config = {
         "slide-in": "slideIn 0.5s ease-out",
         "wave": "wave 3s ease-in-out infinite",
         "float": "float 6s ease-in-out infinite",
-        "sa-marquee": "sa-marquee 32s linear infinite",
+        "sa-marquee": "sa-marquee 45s linear infinite",
+        "sa-marquee-reverse": "sa-marquee-reverse 45s linear infinite",
       },
       keyframes: {
         fadeIn: {
@@ -92,6 +93,10 @@ const config: Config = {
         "sa-marquee": {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
+        },
+        "sa-marquee-reverse": {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0)" },
         },
       },
     },

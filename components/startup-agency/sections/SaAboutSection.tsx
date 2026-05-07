@@ -15,12 +15,12 @@ export function SaAboutSection() {
               <span className="sa-eyebrow">Our Agency</span>
             </div>
             <h2 className="sa-title text-4xl md:text-5xl lg:text-6xl">
-              Crafting reliable digital products for modern teams
+              Accelerating digital growth with disciplined engineering
             </h2>
             <p className="sa-subtitle mt-8 text-lg leading-relaxed md:text-xl">
-              At the intersection of vision and execution, we bring disciplined delivery,
-              transparent communication, and engineering practices that scale — from first
-              launch to long‑term support.
+              We don&apos;t just build websites; we engineer digital foundations that scale.
+              OceanCyber brings together strategic vision and technical precision to deliver
+              products that drive measurable business value across Ghana and the region.
             </p>
 
             <div className="mt-12 grid gap-6 sm:grid-cols-2">

@@ -8,6 +8,7 @@ import { FxPrice } from "@/components/currency/FxPrice";
 import { useCart } from "@/components/commerce/CartProvider";
 import { getApiBaseUrl } from "@/lib/api-config";
 import { fadeUpProps, revealViewport, staggerDelay } from "@/lib/scroll-reveal";
+import { cn } from "@/lib/utils";
 
 function intervalLabel(interval: "month" | "year") {
   return interval === "month" ? "/mo" : "/yr";
@@ -465,7 +466,5 @@ export default function CheckoutCartPage() {
         </div>
       </section>
     </main>
-  );
-}
   );
 }

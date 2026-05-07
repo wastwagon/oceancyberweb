@@ -105,19 +105,19 @@ export function InteractiveIntakeWizard() {
 
   if (status === "success") {
     return (
-      <div className="rounded-3xl border border-emerald-200 bg-emerald-50/80 p-6 sm:p-8">
+      <div className="sa-card border-sa-primary/50 bg-sa-primary/10 p-6 sm:p-8">
         <div className="flex items-start gap-3">
-          <CheckCircle2 className="mt-0.5 h-6 w-6 text-emerald-600" />
+          <CheckCircle2 className="mt-0.5 h-6 w-6 text-sa-primary" />
           <div>
-            <h2 className="text-xl font-bold text-emerald-900">Request received</h2>
-            <p className="mt-2 text-sm text-emerald-900/90">
+            <h2 className="text-xl font-bold text-white">Request received</h2>
+            <p className="mt-2 text-sm text-sa-muted">
               Thanks. We saved your intake and will respond with next steps. If you asked for a call, we will confirm
               your slot by {contactMethod === "email" ? "email" : contactMethod}.
             </p>
             <div className="mt-4">
               <Link
                 href="/tools/proposal"
-                className="inline-flex items-center rounded-lg border border-emerald-300 bg-white px-3 py-2 text-sm font-semibold text-emerald-900 hover:bg-emerald-100"
+                className="sa-btn-primary min-h-[40px] px-3 py-2 text-sm"
               >
                 Continue to formal proposal request
               </Link>
@@ -129,18 +129,18 @@ export function InteractiveIntakeWizard() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+    <form onSubmit={onSubmit} className="sa-card p-4 sm:p-6">
       <ol className="mb-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
         {STEPS.map((label, idx) => (
           <li
             key={label}
             className={cn(
-              "rounded-xl border px-3 py-2 text-xs font-semibold",
+              "rounded-xl border px-3 py-2 font-heading text-[10px] font-semibold uppercase tracking-widest",
               idx === step
-                ? "border-ocean-500 bg-ocean-50 text-ocean-800"
+                ? "border-sa-primary bg-sa-primary/10 text-sa-primary"
                 : idx < step
-                  ? "border-emerald-300 bg-emerald-50 text-emerald-700"
-                  : "border-slate-200 bg-slate-50 text-slate-500",
+                  ? "border-sa-primary/50 bg-sa-primary/5 text-sa-primary/80"
+                  : "border-sa-border bg-sa-surface text-sa-muted/50",
             )}
           >
             {idx + 1}. {label}
@@ -158,39 +158,39 @@ export function InteractiveIntakeWizard() {
             className="grid gap-4 sm:grid-cols-2"
           >
             <div>
-              <label className="text-sm font-semibold text-slate-800">Name</label>
+              <label className="text-sm font-medium text-sa-muted/80 ml-1">Name</label>
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm"
+                className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm"
                 placeholder="Your full name"
               />
             </div>
             <div>
-              <label className="text-sm font-semibold text-slate-800">Work email</label>
+              <label className="text-sm font-medium text-sa-muted/80 ml-1">Work email</label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm"
+                className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm"
                 placeholder="you@company.com"
               />
             </div>
             <div>
-              <label className="text-sm font-semibold text-slate-800">Phone (optional)</label>
+              <label className="text-sm font-medium text-sa-muted/80 ml-1">Phone (optional)</label>
               <input
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm"
+                className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm"
                 placeholder="+233..."
               />
             </div>
             <div>
-              <label className="text-sm font-semibold text-slate-800">Company (optional)</label>
+              <label className="text-sm font-medium text-sa-muted/80 ml-1">Company (optional)</label>
               <input
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm"
+                className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm"
                 placeholder="Company name"
               />
             </div>
@@ -206,7 +206,7 @@ export function InteractiveIntakeWizard() {
             className="space-y-4"
           >
             <div>
-              <p className="text-sm font-semibold text-slate-800">What do you need?</p>
+              <p className="text-sm font-medium text-sa-muted/80 ml-1">What do you need?</p>
               <div className="mt-2 grid gap-2 sm:grid-cols-2">
                 {SERVICE_OPTIONS.map((opt) => {
                   const on = serviceNeeds.has(opt);
@@ -216,10 +216,10 @@ export function InteractiveIntakeWizard() {
                       key={opt}
                       onClick={() => toggleService(opt)}
                       className={cn(
-                        "rounded-xl border px-3 py-2 text-left text-sm",
+                        "rounded-xl border px-4 py-3 text-left text-sm transition-all",
                         on
-                          ? "border-ocean-500 bg-ocean-50 text-ocean-900"
-                          : "border-slate-200 bg-white text-slate-700",
+                          ? "border-sa-primary bg-sa-primary/10 text-sa-primary"
+                          : "border-sa-border bg-sa-surface text-sa-muted hover:border-sa-primary/50",
                       )}
                     >
                       {opt}
@@ -229,12 +229,12 @@ export function InteractiveIntakeWizard() {
               </div>
             </div>
             <div>
-              <label className="text-sm font-semibold text-slate-800">Main goals</label>
+              <label className="text-sm font-medium text-sa-muted/80 ml-1">Main goals</label>
               <textarea
                 value={goals}
                 onChange={(e) => setGoals(e.target.value)}
                 rows={4}
-                className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm"
+                className="mt-1 w-full resize-none rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm"
                 placeholder="Example: Increase qualified leads, launch online payments, and let customers book without calling."
               />
             </div>
@@ -250,11 +250,11 @@ export function InteractiveIntakeWizard() {
             className="grid gap-4 sm:grid-cols-2"
           >
             <div>
-              <label className="text-sm font-semibold text-slate-800">Budget range</label>
+              <label className="text-sm font-medium text-sa-muted/80 ml-1">Budget range</label>
               <select
                 value={budgetBand}
                 onChange={(e) => setBudgetBand(e.target.value as (typeof BUDGET_OPTIONS)[number])}
-                className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm"
+                className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm [&>option]:bg-sa-surface [&>option]:text-white"
               >
                 {BUDGET_OPTIONS.map((b) => (
                   <option key={b} value={b}>
@@ -264,11 +264,11 @@ export function InteractiveIntakeWizard() {
               </select>
             </div>
             <div>
-              <label className="text-sm font-semibold text-slate-800">Target timeline</label>
+              <label className="text-sm font-medium text-sa-muted/80 ml-1">Target timeline</label>
               <select
                 value={timelineBand}
                 onChange={(e) => setTimelineBand(e.target.value as (typeof TIMELINE_OPTIONS)[number])}
-                className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm"
+                className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm [&>option]:bg-sa-surface [&>option]:text-white"
               >
                 {TIMELINE_OPTIONS.map((t) => (
                   <option key={t} value={t}>
@@ -277,12 +277,12 @@ export function InteractiveIntakeWizard() {
                 ))}
               </select>
             </div>
-            <label className="sm:col-span-2 flex items-start gap-2 rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
+            <label className="sm:col-span-2 flex items-start gap-3 rounded-xl border border-sa-border bg-sa-surface p-4 text-sm text-sa-muted">
               <input
                 type="checkbox"
                 checked={hasExistingSite}
                 onChange={(e) => setHasExistingSite(e.target.checked)}
-                className="mt-0.5 h-4 w-4"
+                className="mt-0.5 h-4 w-4 accent-sa-primary"
               />
               We already have a website or app and need improvement or migration.
             </label>
@@ -299,11 +299,11 @@ export function InteractiveIntakeWizard() {
           >
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
-                <label className="text-sm font-semibold text-slate-800">Preferred contact</label>
+                <label className="text-sm font-medium text-sa-muted/80 ml-1">Preferred contact</label>
                 <select
                   value={contactMethod}
                   onChange={(e) => setContactMethod(e.target.value as ContactMethod)}
-                  className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm"
+                  className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm [&>option]:bg-sa-surface [&>option]:text-white"
                 >
                   <option value="email">Email</option>
                   <option value="phone">Phone</option>
@@ -311,11 +311,11 @@ export function InteractiveIntakeWizard() {
                 </select>
               </div>
               <div>
-                <label className="text-sm font-semibold text-slate-800">Next step</label>
+                <label className="text-sm font-medium text-sa-muted/80 ml-1">Next step</label>
                 <select
                   value={meetingType}
                   onChange={(e) => setMeetingType(e.target.value as MeetingType)}
-                  className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm"
+                  className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm [&>option]:bg-sa-surface [&>option]:text-white"
                 >
                   <option value="discovery_call">Discovery call</option>
                   <option value="proposal_walkthrough">Proposal walkthrough</option>
@@ -324,23 +324,23 @@ export function InteractiveIntakeWizard() {
               </div>
             </div>
             <div>
-              <label className="text-sm font-semibold text-slate-800">Preferred date/time (optional)</label>
+              <label className="text-sm font-medium text-sa-muted/80 ml-1">Preferred date/time (optional)</label>
               <input
                 type="datetime-local"
                 value={preferredDate}
                 onChange={(e) => setPreferredDate(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm"
+                className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm"
               />
             </div>
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
-              <p>
-                <span className="font-semibold">Scope:</span> {Array.from(serviceNeeds).join(", ") || "—"}
+            <div className="rounded-xl border border-sa-border bg-sa-surface p-4 text-sm text-sa-muted/80">
+              <p className="mb-1">
+                <span className="font-semibold text-white">Scope:</span> {Array.from(serviceNeeds).join(", ") || "—"}
+              </p>
+              <p className="mb-1">
+                <span className="font-semibold text-white">Budget:</span> {budgetBand}
               </p>
               <p>
-                <span className="font-semibold">Budget:</span> {budgetBand}
-              </p>
-              <p>
-                <span className="font-semibold">Timeline:</span> {timelineBand}
+                <span className="font-semibold text-white">Timeline:</span> {timelineBand}
               </p>
             </div>
           </motion.div>
@@ -348,17 +348,17 @@ export function InteractiveIntakeWizard() {
       </AnimatePresence>
 
       {status === "error" && errorMessage ? (
-        <p className="mt-4 rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700">
+        <p className="mt-4 rounded-xl border border-red-500/50 bg-red-500/10 px-4 py-3 text-sm text-red-400" role="alert">
           {errorMessage}
         </p>
       ) : null}
 
-      <div className="mt-6 flex items-center justify-between gap-2">
+      <div className="mt-8 flex items-center justify-between gap-2 border-t border-sa-border pt-6">
         <button
           type="button"
           onClick={goBack}
           disabled={step === 0 || status === "loading"}
-          className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 disabled:opacity-50"
+          className="inline-flex items-center gap-2 rounded-full border border-sa-border bg-transparent px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-sa-primary disabled:opacity-50"
         >
           <ArrowLeft className="h-4 w-4" /> Back
         </button>
@@ -368,19 +368,19 @@ export function InteractiveIntakeWizard() {
             type="button"
             onClick={goNext}
             disabled={!canNext || status === "loading"}
-            className="inline-flex items-center gap-2 rounded-xl bg-ocean-600 px-4 py-2 text-sm font-bold text-white disabled:opacity-50"
+            className="sa-btn-primary min-h-[44px] px-6 text-sm disabled:opacity-50"
           >
-            Next <ArrowRight className="h-4 w-4" />
+            Next <ArrowRight className="ml-2 h-4 w-4" />
           </button>
         ) : (
           <button
             type="submit"
             disabled={status === "loading"}
-            className="inline-flex items-center gap-2 rounded-xl bg-ocean-600 px-4 py-2 text-sm font-bold text-white disabled:opacity-50"
+            className="sa-btn-primary min-h-[44px] px-6 text-sm disabled:opacity-50"
           >
             {status === "loading" ? (
               <>
-                <Loader2 className="h-4 w-4 animate-spin" />
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Submitting...
               </>
             ) : (

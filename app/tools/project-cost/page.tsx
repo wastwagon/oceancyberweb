@@ -14,23 +14,23 @@ export const metadata: Metadata = withCanonical(
 
 export default function ProjectCostPage() {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 print:bg-white print:text-black">
+    <div className="relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted pt-28 md:pt-32 print:bg-white print:text-black">
       <PrintEstimatorClass />
-      <section className="border-b border-slate-200 bg-gradient-to-b from-white via-slate-50/80 to-slate-50">
-        <div className="container mx-auto max-w-3xl px-4 pb-6 pt-28 md:px-6 md:pb-8 md:pt-32">
-          <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-ocean-600">Tools</p>
-          <h1 className="mt-3 text-center text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
+      <section className="sa-section relative z-10 overflow-hidden border-b border-sa-border">
+        <div className="sa-container max-w-3xl pb-6 md:pb-8">
+          <p className="sa-eyebrow mb-3 text-center block">Tools</p>
+          <h1 className="sa-title mt-3 text-center md:text-4xl">
             Project cost calculator
           </h1>
-          <p className="mx-auto mt-3 max-w-2xl text-center text-base text-slate-600">
+          <p className="sa-subtitle mx-auto mt-4 text-center">
             We use clear hour estimates, then adjust for platform, design, and how urgent you need it. The total is
-            a <span className="font-semibold text-slate-800">rough guide, not a contract</span> (we show a band of
+            a <span className="font-semibold text-white">rough guide, not a contract</span> (we show a band of
             about plus or minus 10% in cedis). You can download a proforma when you are ready to share the numbers.
           </p>
         </div>
       </section>
 
-      <div className="container mx-auto max-w-3xl px-4 py-8 md:px-6 md:py-10">
+      <div className="sa-container relative z-10 max-w-3xl py-8 md:py-10">
         <ProjectCostWizard />
       </div>
     </div>

@@ -28,9 +28,12 @@ export function SaPortfolioGallerySection() {
               category: p.category,
               image: p.imageUrl || "/images/placeholder-project.png",
               slug: p.slug,
-              link: p.slug.startsWith("http") ? p.slug : `/portfolio/${p.slug}`,
               description: p.description,
               tech: p.techStack,
+              gradient: "from-sa-primary to-sa-bg",
+              year: new Date().getFullYear().toString(),
+              client: "OceanCyber",
+              rating: 5,
             }))
           );
         }
@@ -108,7 +111,7 @@ function PortfolioCard({
         isHighlight ? "ring-1 ring-inset ring-sa-primary/20" : ""
       }`}
     >
-      <Link href={project.link || "#"} target="_blank" rel="noopener noreferrer" className="block h-full w-full">
+      <Link href={project.slug.startsWith("http") ? project.slug : `/portfolio/${project.slug}`} target="_blank" rel="noopener noreferrer" className="block h-full w-full">
         <Image
           src={project.image}
           alt={project.title}

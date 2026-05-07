@@ -2,28 +2,28 @@
 
 export const heroServiceSlides = [
   {
-    title: "Web development",
+    title: "Bespoke Web Platforms",
     href: "/services/web-development",
     imageAlt: "Developer workspace with laptop and code editor",
     image:
       "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&q=80",
   },
   {
-    title: "Mobile apps",
+    title: "Native Mobile Apps",
     href: "/services/mobile-apps",
     imageAlt: "Hands holding a smartphone in use outdoors",
     image:
       "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1920&q=80",
   },
   {
-    title: "Cybersecurity",
+    title: "Zero‑Trust Security",
     href: "/services/cybersecurity",
     imageAlt: "Abstract digital security network visualization",
     image:
       "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1920&q=80",
   },
   {
-    title: "E‑commerce",
+    title: "Enterprise Cloud",
     href: "/services/ecommerce",
     imageAlt: "Retail checkout and shopping context",
     image:
@@ -32,50 +32,52 @@ export const heroServiceSlides = [
 ] as const;
 
 export const marqueeTags = [
-  "Web · Mobile · Cloud",
-  "Accra · Ghana · Regional",
-  "Ship with clarity",
-  "Security‑minded delivery",
-  "Design studio",
-  "ICT partner",
-  "Web · Mobile · Cloud",
-  "Proof over promises",
+  "Premium Web Development",
+  "High‑Performance Mobile Apps",
+  "Enterprise Cloud Solutions",
+  "Zero‑Trust Cybersecurity",
+  "Built for Africa · Built for Scale",
+  "Disciplined Product Delivery",
+  "Premium UI/UX Design",
+  "Managed IT Infrastructure",
+  "Web · Mobile · Cloud · Security",
+  "Accra · Ghana · Regional Support",
 ] as const;
 
 export const serviceCards = [
   {
-    title: "Web development",
-    desc: "Modern, high‑performance websites with measurable delivery standards.",
+    title: "Bespoke Web Development",
+    desc: "Accelerating your growth with high‑performance, conversion‑optimised web platforms built on modern stacks.",
     href: "/services/web-development",
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
   },
   {
-    title: "Mobile apps",
-    desc: "Native and cross‑platform apps built for reliable performance.",
+    title: "Custom Mobile Solutions",
+    desc: "Seamless iOS and Android experiences designed to engage users and scale effortlessly with your business.",
     href: "/services/mobile-apps",
     image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80",
   },
   {
-    title: "E‑commerce",
-    desc: "Scalable stores with dependable checkout and payments.",
+    title: "E‑commerce Engineering",
+    desc: "Powering regional commerce with secure, high‑availability storefronts and integrated payment ecosystems.",
     href: "/services/ecommerce",
     image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
   },
   {
-    title: "SEO & growth",
-    desc: "Visibility and conversion paths tuned for your market.",
+    title: "SEO & Brand Growth",
+    desc: "Dominating search results and driving organic traffic through data‑led content strategies and technical SEO.",
     href: "/services",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
   },
   {
-    title: "Cybersecurity",
-    desc: "Audits, hardening, and practical protection for your operations.",
+    title: "Zero‑Trust Cybersecurity",
+    desc: "Hardening your digital assets with enterprise‑grade security audits, penetration testing, and compliance monitoring.",
     href: "/services/cybersecurity",
     image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
   },
   {
-    title: "Cloud & hosting",
-    desc: "Domains, SSL, and hosting foundations with local support.",
+    title: "Infrastructure & Cloud",
+    desc: "Reliable cloud foundations and managed hosting with localized support for mission‑critical digital services.",
     href: "/hosting",
     image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
   },
@@ -84,27 +86,27 @@ export const serviceCards = [
 export const processSteps = [
   {
     step: 1,
-    title: "Discovery & strategy",
-    body: "We align on goals, users, constraints, and a realistic roadmap.",
-    bullets: ["Stakeholder workshop", "Technical discovery", "Scope & milestones"],
+    title: "Strategic Discovery",
+    body: "We dive deep into your business goals to map out a technical blueprint that prioritizes ROI and user experience.",
+    bullets: ["Stakeholder Alignment", "Competitor Analysis", "Technical Roadmap"],
   },
   {
     step: 2,
-    title: "Design & build",
-    body: "Iterative UI and engineering with weekly checkpoints and demos.",
-    bullets: ["UX & UI system", "Implementation", "QA & performance"],
+    title: "Agile Development",
+    body: "Iterative sprints with weekly demos ensure transparency and allow for rapid pivots based on real‑world feedback.",
+    bullets: ["UI/UX Prototyping", "Scalable Engineering", "Continuous Integration"],
   },
   {
     step: 3,
-    title: "Review & launch",
-    body: "Hardening, documentation, and go‑live runbooks your team can trust.",
-    bullets: ["Security review", "Launch checklist", "Monitoring"],
+    title: "Security Hardening",
+    body: "Before go‑live, we perform rigorous security audits and performance stress tests to ensure a bulletproof launch.",
+    bullets: ["Penetration Testing", "Load Balancing", "Launch Monitoring"],
   },
   {
     step: 4,
-    title: "Support & iterate",
-    body: "Post‑launch improvements, analytics, and ongoing partnership.",
-    bullets: ["SLAs where needed", "Roadmap reviews", "Training"],
+    title: "Growth & Optimization",
+    body: "Launch is just the beginning. We provide ongoing support and data insights to continuously refine your product.",
+    bullets: ["Post‑Launch Support", "Analytics Review", "Future Scaling"],
   },
 ] as const;
 
@@ -118,11 +120,11 @@ export const techStack = [
 ] as const;
 
 export const projectChips = [
-  "Portfolio for creative studio",
-  "Mobile app UX refresh",
-  "Secure customer portal",
-  "E‑commerce launch",
-  "SEO uplift programme",
+  "Custom ERP for Logistics",
+  "FinTech Mobile Wallet",
+  "Healthcare Portal Hardening",
+  "E‑commerce Platform Rebuild",
+  "Government Digital Strategy",
 ] as const;
 
 export const testimonials = [
@@ -221,27 +223,27 @@ export const faqItems = [
 
 export const blogTeasers = [
   {
-    title: "Digital Transformation: A Ghanaian Perspective",
-    date: "March 10, 2024",
-    href: "/insights/digital-transformation-ghana",
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80",
-    category: "Strategy",
-    author: "James Osei",
-  },
-  {
-    title: "The Future of Cybersecurity in Africa",
-    date: "March 15, 2024",
-    href: "/insights/future-cybersecurity-africa",
+    title: "Cyber Resilience in the West African Digital Economy",
+    date: "April 24, 2024",
+    href: "/insights/cyber-resilience-ghana",
     image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
     category: "Security",
     author: "Ama Boateng",
   },
   {
-    title: "E-commerce Growth in Emerging Markets",
-    date: "February 28, 2024",
-    href: "/insights/ecommerce-emerging-markets",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-    category: "E-commerce",
+    title: "Scaling Mobile Products for the Next Billion Users",
+    date: "April 18, 2024",
+    href: "/insights/scaling-mobile-products",
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80",
+    category: "Product",
+    author: "James Osei",
+  },
+  {
+    title: "The Shift to Serverless: Modern Cloud Architectures",
+    date: "April 10, 2024",
+    href: "/insights/serverless-cloud-ghana",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
+    category: "Infrastructure",
     author: "Sarah Mensah",
   },
 ] as const;

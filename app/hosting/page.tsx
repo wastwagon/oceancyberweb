@@ -3,6 +3,8 @@ import { Server, Shield, Wrench, Check } from "lucide-react";
 import { HostingPackagesSection } from "@/components/hosting/HostingPackagesSection";
 import { HOSTING_TRUST_POINTS } from "@/lib/hosting-packages";
 import { withCanonical } from "@/lib/seo/canonical";
+import type { Metadata } from "next";
+import Link from "next/link";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
 import {
   fadeFromLeft,
@@ -222,7 +224,5 @@ export default function HostingPage({
       </section>
       <StartupAgencyMobileQuickBar />
     </main>
-  );
-}
   );
 }

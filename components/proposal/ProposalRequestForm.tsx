@@ -5,7 +5,6 @@ import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getApiBaseUrl } from "@/lib/api-config";
 
-
 const PROJECT_TYPES = [
   { id: "website", label: "Website" },
   { id: "mobile_app", label: "Mobile app" },
@@ -101,9 +100,9 @@ export function ProposalRequestForm({ initialTopic }: ProposalRequestFormProps) 
 
   if (status === "success") {
     return (
-      <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-sm text-emerald-900">
-        <p className="text-base font-bold">Proposal request received</p>
-        <p className="mt-2">
+      <div className="sa-card border-sa-primary/50 bg-sa-primary/10 p-6 text-sm text-white">
+        <p className="text-base font-bold text-white">Proposal request received</p>
+        <p className="mt-2 text-sa-muted/80">
           We will review your requirements and send a formal proposal plan. If you requested a walkthrough, we will
           suggest meeting slots.
         </p>
@@ -112,30 +111,30 @@ export function ProposalRequestForm({ initialTopic }: ProposalRequestFormProps) 
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:p-6">
+    <form onSubmit={onSubmit} className="sa-card space-y-5 p-5 md:p-6">
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label className="text-sm font-semibold text-slate-800">Name</label>
-          <input value={name} onChange={(e) => setName(e.target.value)} className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm" placeholder="Your full name" />
+          <label className="text-sm font-medium text-sa-muted/80 ml-1">Name</label>
+          <input value={name} onChange={(e) => setName(e.target.value)} className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm" placeholder="Your full name" />
         </div>
         <div>
-          <label className="text-sm font-semibold text-slate-800">Work email</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm" placeholder="you@company.com" />
+          <label className="text-sm font-medium text-sa-muted/80 ml-1">Work email</label>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm" placeholder="you@company.com" />
         </div>
         <div>
-          <label className="text-sm font-semibold text-slate-800">Phone (optional)</label>
-          <input value={phone} onChange={(e) => setPhone(e.target.value)} className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm" placeholder="+233..." />
+          <label className="text-sm font-medium text-sa-muted/80 ml-1">Phone (optional)</label>
+          <input value={phone} onChange={(e) => setPhone(e.target.value)} className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm" placeholder="+233..." />
         </div>
         <div>
-          <label className="text-sm font-semibold text-slate-800">Company (optional)</label>
-          <input value={company} onChange={(e) => setCompany(e.target.value)} className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm" placeholder="Company name" />
+          <label className="text-sm font-medium text-sa-muted/80 ml-1">Company (optional)</label>
+          <input value={company} onChange={(e) => setCompany(e.target.value)} className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm" placeholder="Company name" />
         </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label className="text-sm font-semibold text-slate-800">Project type</label>
-          <select value={projectType} onChange={(e) => setProjectType(e.target.value as (typeof PROJECT_TYPES)[number]["id"])} className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm">
+          <label className="text-sm font-medium text-sa-muted/80 ml-1">Project type</label>
+          <select value={projectType} onChange={(e) => setProjectType(e.target.value as (typeof PROJECT_TYPES)[number]["id"])} className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm [&>option]:bg-sa-surface [&>option]:text-white">
             {PROJECT_TYPES.map((pt) => (
               <option key={pt.id} value={pt.id}>
                 {pt.label}
@@ -144,23 +143,23 @@ export function ProposalRequestForm({ initialTopic }: ProposalRequestFormProps) 
           </select>
         </div>
         <div>
-          <label className="text-sm font-semibold text-slate-800">Decision deadline (optional)</label>
-          <input type="date" value={decisionDeadline} onChange={(e) => setDecisionDeadline(e.target.value)} className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm" />
+          <label className="text-sm font-medium text-sa-muted/80 ml-1">Decision deadline (optional)</label>
+          <input type="date" value={decisionDeadline} onChange={(e) => setDecisionDeadline(e.target.value)} className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm" />
         </div>
       </div>
 
       <div>
-        <label className="text-sm font-semibold text-slate-800">Current situation and objectives</label>
-        <textarea value={currentSituation} onChange={(e) => setCurrentSituation(e.target.value)} rows={4} className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm" placeholder="Explain your current setup, pain points, and what the proposal should solve." />
+        <label className="text-sm font-medium text-sa-muted/80 ml-1">Current situation and objectives</label>
+        <textarea value={currentSituation} onChange={(e) => setCurrentSituation(e.target.value)} rows={4} className="mt-1 w-full resize-none rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm" placeholder="Explain your current setup, pain points, and what the proposal should solve." />
       </div>
 
       <div>
-        <p className="text-sm font-semibold text-slate-800">What should the proposal include?</p>
+        <p className="text-sm font-medium text-sa-muted/80 ml-1">What should the proposal include?</p>
         <div className="mt-2 grid gap-2 sm:grid-cols-2">
           {SCOPE_OPTIONS.map((item) => {
             const on = requiredScope.has(item);
             return (
-              <button type="button" key={item} onClick={() => toggleScope(item)} className={cn("rounded-xl border px-3 py-2 text-left text-sm", on ? "border-ocean-500 bg-ocean-50 text-ocean-900" : "border-slate-200 bg-white text-slate-700")}>
+              <button type="button" key={item} onClick={() => toggleScope(item)} className={cn("rounded-xl border px-4 py-3 text-left text-sm transition-all", on ? "border-sa-primary bg-sa-primary/10 text-sa-primary" : "border-sa-border bg-sa-surface text-sa-muted hover:border-sa-primary/50")}>
                 {item}
               </button>
             );
@@ -170,8 +169,8 @@ export function ProposalRequestForm({ initialTopic }: ProposalRequestFormProps) 
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label className="text-sm font-semibold text-slate-800">Budget range</label>
-          <select value={budgetBand} onChange={(e) => setBudgetBand(e.target.value as (typeof BUDGET_OPTIONS)[number])} className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm">
+          <label className="text-sm font-medium text-sa-muted/80 ml-1">Budget range</label>
+          <select value={budgetBand} onChange={(e) => setBudgetBand(e.target.value as (typeof BUDGET_OPTIONS)[number])} className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm [&>option]:bg-sa-surface [&>option]:text-white">
             {BUDGET_OPTIONS.map((b) => (
               <option key={b} value={b}>
                 {b}
@@ -180,8 +179,8 @@ export function ProposalRequestForm({ initialTopic }: ProposalRequestFormProps) 
           </select>
         </div>
         <div>
-          <label className="text-sm font-semibold text-slate-800">Target timeline</label>
-          <select value={timelineBand} onChange={(e) => setTimelineBand(e.target.value as (typeof TIMELINE_OPTIONS)[number])} className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm">
+          <label className="text-sm font-medium text-sa-muted/80 ml-1">Target timeline</label>
+          <select value={timelineBand} onChange={(e) => setTimelineBand(e.target.value as (typeof TIMELINE_OPTIONS)[number])} className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm [&>option]:bg-sa-surface [&>option]:text-white">
             {TIMELINE_OPTIONS.map((t) => (
               <option key={t} value={t}>
                 {t}
@@ -192,30 +191,32 @@ export function ProposalRequestForm({ initialTopic }: ProposalRequestFormProps) 
       </div>
 
       <div className="grid gap-2 sm:grid-cols-2">
-        <label className="flex items-start gap-2 rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
-          <input type="checkbox" checked={needsNda} onChange={(e) => setNeedsNda(e.target.checked)} className="mt-0.5 h-4 w-4" />
+        <label className="flex items-start gap-3 rounded-xl border border-sa-border bg-sa-surface p-4 text-sm text-sa-muted">
+          <input type="checkbox" checked={needsNda} onChange={(e) => setNeedsNda(e.target.checked)} className="mt-0.5 h-4 w-4 accent-sa-primary" />
           We need an NDA before sharing more details.
         </label>
-        <label className="flex items-start gap-2 rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
-          <input type="checkbox" checked={wantsProposalWalkthrough} onChange={(e) => setWantsProposalWalkthrough(e.target.checked)} className="mt-0.5 h-4 w-4" />
+        <label className="flex items-start gap-3 rounded-xl border border-sa-border bg-sa-surface p-4 text-sm text-sa-muted">
+          <input type="checkbox" checked={wantsProposalWalkthrough} onChange={(e) => setWantsProposalWalkthrough(e.target.checked)} className="mt-0.5 h-4 w-4 accent-sa-primary" />
           We want a proposal walkthrough call.
         </label>
       </div>
 
       {status === "error" && errorMessage ? (
-        <p className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700">{errorMessage}</p>
+        <p className="rounded-xl border border-red-500/50 bg-red-500/10 px-4 py-3 text-sm text-red-400">{errorMessage}</p>
       ) : null}
 
-      <button type="submit" disabled={!isValid || status === "loading"} className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-ocean-600 px-5 py-2.5 text-sm font-bold text-white disabled:opacity-50">
-        {status === "loading" ? (
-          <>
-            <Loader2 className="h-4 w-4 animate-spin" />
-            Submitting...
-          </>
-        ) : (
-          "Request formal proposal"
-        )}
-      </button>
+      <div className="pt-2">
+        <button type="submit" disabled={!isValid || status === "loading"} className="sa-btn-primary w-full sm:w-auto min-h-[44px] px-8 disabled:opacity-50">
+          {status === "loading" ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Submitting...
+            </>
+          ) : (
+            "Request formal proposal"
+          )}
+        </button>
+      </div>
     </form>
   );
 }
