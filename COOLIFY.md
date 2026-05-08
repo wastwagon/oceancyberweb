@@ -71,8 +71,8 @@ Replace examples with your real domains.
 
 | Name             | Purpose                   |
 | ---------------- | ------------------------- |
-| `JWT_SECRET`     | JWT signing for the API.  |
-| `SESSION_SECRET` | Session / cookie signing. |
+| `JWT_SECRET`     | JWT signing for the API — **same value must be set on `web`** (middleware + `/api/auth/*`). |
+| `SESSION_SECRET` | Session / cookie signing (Nest/redis session store). |
 
 
 ### Internal API URL (usually leave default)
@@ -88,6 +88,7 @@ Replace examples with your real domains.
 
 | Name                                                           | Purpose                                                                                                      |
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `OPENAI_API_KEY`, `OPENAI_CHAT_MODEL`                           | Passed to the **`backend`** service only: enables LLM replies for `POST /api/v1/chat` instead of the local fallback. Same vars as root `.env.example`. |
 | `FRONTEND_PORT`, `BACKEND_PORT` | Host port mappings for `web` and `backend` (Coolify’s proxy should point at these). `POSTGRES_PORT` / `REDIS_PORT` are not used by root `docker-compose.yml` (DB/Redis stay on the Compose network only). |
 
 
@@ -109,6 +110,8 @@ Then ensure `NEXT_PUBLIC_SITE_URL` and `NEXT_PUBLIC_API_URL` and `CORS_ORIGIN` m
 The root `docker-compose.yml` **does not** publish Postgres or Redis on the host—they are reachable only inside the Compose network (`postgres:5432`, `redis:6379`). Apps still connect the same way; Coolify avoids conflicts with other stacks using host `6379`/`5432`.
 
 Still use a firewall so only `80`/`443` (and SSH) are open to the WAN.
+
+The **`backend`** container sets Express **`trust proxy`** from `TRUST_PROXY` / `TRUST_PROXY_HOPS` (see root `.env.example`) so **`req.ip`** and the global throttler reflect the browser (via `X-Forwarded-For`) rather than the upstream proxy only.
 
 For host access during local development, use `docker/docker-compose.dev.yml` or add a gitignored `docker-compose.override.yml` that maps DB/Redis ports only on your laptop.
 

@@ -70,6 +70,8 @@ services:
       - oceancyber
     environment:
       NODE_ENV: production
+      TRUST_PROXY: ${TRUST_PROXY:-}
+      TRUST_PROXY_HOPS: ${TRUST_PROXY_HOPS:-1}
       BACKEND_PORT: "4000"
       # Build URL from POSTGRES_* only (plain substitution for Coolify merge).
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=public
@@ -80,6 +82,9 @@ services:
       # Optional: Next.js on-demand revalidation after /admin/content edits (same secret on `web`)
       REVALIDATE_SECRET: ${REVALIDATE_SECRET}
       NEXT_REVALIDATE_URL: ${NEXT_REVALIDATE_URL}
+      # Optional: site chat uses OpenAI when set (`backend/src/chat/chat.service.ts`); omit in prod if unused
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_CHAT_MODEL: ${OPENAI_CHAT_MODEL:-gpt-4o-mini}
     ports:
       - "${BACKEND_PORT}:4000"
     depends_on:
@@ -118,6 +123,8 @@ services:
       API_INTERNAL_URL: ${API_INTERNAL_URL}
       # Must match backend REVALIDATE_SECRET when set (admin → POST /api/revalidate)
       REVALIDATE_SECRET: ${REVALIDATE_SECRET}
+      # Same secret as Nest — Next.js middleware + /api/auth/* verify the JWT stored in HttpOnly cookie
+      JWT_SECRET: ${JWT_SECRET}
     ports:
       - "${FRONTEND_PORT}:3000"
     depends_on:

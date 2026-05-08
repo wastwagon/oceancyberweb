@@ -11,7 +11,7 @@ import {
 } from "@/lib/navigation/menu";
 import { useNavigationConfig } from "@/lib/navigation/useNavigationConfig";
 import { cn } from "@/lib/utils";
-import { getAccessToken } from "@/lib/auth-client";
+import { checkBrowserSession } from "@/lib/auth-client";
 
 const navLinkClass =
   "group relative inline-flex min-h-[42px] items-center gap-1 px-3 py-2 font-heading text-[13px] font-medium uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary";
@@ -27,7 +27,14 @@ export function StartupAgencyNavbar() {
   const pathname = usePathname();
 
   useEffect(() => {
-    setIsLoggedIn(!!getAccessToken());
+    let cancelled = false;
+    void (async () => {
+      const ok = await checkBrowserSession();
+      if (!cancelled) setIsLoggedIn(ok);
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, [pathname]);
 
   useEffect(() => {

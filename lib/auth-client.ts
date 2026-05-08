@@ -1,8 +1,7 @@
 "use client";
 
 import { getApiBaseUrl } from "@/lib/api-config";
-
-const TOKEN_KEY = "oceancyber_access_token";
+import { nestBrowserProxyPath } from "@/lib/auth/nest-browser-proxy-path";
 
 export type AuthUser = { id: string; email: string; role: string; isAdmin?: boolean };
 
@@ -103,29 +102,57 @@ export type ClientProjectRow = {
   }>;
 };
 
-export function getAccessToken(): string | null {
-  if (typeof window === "undefined") return null;
-  return localStorage.getItem(TOKEN_KEY);
+export { nestBrowserProxyPath };
+
+function resolveAuthRequestUrl(path: string): string {
+  if (typeof window !== "undefined" && path.startsWith("/api/v1/")) {
+    return nestBrowserProxyPath(path);
+  }
+  return `${getApiBaseUrl()}${path}`;
 }
 
-export function setAccessToken(token: string) {
-  if (typeof window === "undefined") return;
-  localStorage.setItem(TOKEN_KEY, token);
-}
-
+/** Clear legacy localStorage token if present (older deployments). */
 export function clearAccessToken() {
   if (typeof window === "undefined") return;
-  localStorage.removeItem(TOKEN_KEY);
+  try {
+    localStorage.removeItem("oceancyber_access_token");
+  } catch {
+    /* ignore */
+  }
+}
+
+/** True when HttpOnly session cookie is accepted by the server (no JWT exposed to JS). */
+export async function checkBrowserSession(): Promise<boolean> {
+  try {
+    const res = await fetch("/api/auth/session", { credentials: "same-origin" });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+/** Clears httpOnly session cookie (Next) and Bearer storage; redirects to sign-in. */
+export async function signOut() {
+  try {
+    await fetch("/api/auth/logout", { method: "POST", credentials: "same-origin" });
+  } catch {
+    /* network / optional */
+  }
+  clearAccessToken();
+  if (typeof window !== "undefined") {
+    window.location.href = "/signin";
+  }
 }
 
 async function authRequest<T>(path: string, init?: RequestInit): Promise<T> {
-  const token = getAccessToken();
-  const res = await fetch(`${getApiBaseUrl()}${path}`, {
+  const url = resolveAuthRequestUrl(path);
+  const useNestProxy = typeof window !== "undefined" && url.startsWith("/api/nest/");
+  const res = await fetch(url, {
     ...init,
+    credentials: useNestProxy ? "include" : "same-origin",
     headers: {
       "Content-Type": "application/json",
-      ...(init?.headers || {}),
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...(init?.headers ?? {}),
     },
   });
 
@@ -137,21 +164,45 @@ async function authRequest<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export async function signIn(email: string, password: string) {
-  const data = await authRequest<{ access_token: string; user: AuthUser }>("/api/v1/auth/login", {
+  const res = await fetch("/api/auth/login", {
     method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "same-origin",
     body: JSON.stringify({ email, password }),
   });
-  setAccessToken(data.access_token);
-  return data.user;
+  const data = (await res.json().catch(() => ({}))) as {
+    user?: AuthUser;
+    message?: string;
+    error?: string;
+  };
+  if (!res.ok) {
+    throw new Error(data.message || data.error || "Sign-in failed");
+  }
+  if (!data.user?.email) {
+    throw new Error("Missing user from sign-in response");
+  }
+  return data.user as AuthUser;
 }
 
 export async function signUp(email: string, password: string, fullName?: string) {
-  const data = await authRequest<{ access_token: string; user: AuthUser }>("/api/v1/auth/register", {
+  const res = await fetch("/api/auth/register", {
     method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "same-origin",
     body: JSON.stringify({ email, password, fullName }),
   });
-  setAccessToken(data.access_token);
-  return data.user;
+  const data = (await res.json().catch(() => ({}))) as {
+    user?: AuthUser;
+    message?: string;
+    error?: string;
+  };
+  if (!res.ok) {
+    throw new Error(data.message || data.error || "Sign-up failed");
+  }
+  if (!data.user?.email) {
+    throw new Error("Missing user from sign-up response");
+  }
+  return data.user as AuthUser;
 }
 
 export async function getProfile() {
@@ -273,7 +324,6 @@ export async function downloadAdminContactsCsv(filters?: {
   dateRange?: string;
   sort?: string;
 }) {
-  const token = getAccessToken();
   const p = new URLSearchParams();
   p.set("take", String(filters?.take ?? 1000));
   if (filters?.status && filters.status !== "all") p.set("status", filters.status);
@@ -281,8 +331,9 @@ export async function downloadAdminContactsCsv(filters?: {
   if (filters?.q && filters.q.trim().length > 0) p.set("q", filters.q.trim());
   if (filters?.dateRange && filters.dateRange !== "all") p.set("dateRange", filters.dateRange);
   if (filters?.sort && filters.sort !== "created_desc") p.set("sort", filters.sort);
-  const res = await fetch(`${getApiBaseUrl()}/api/v1/admin/contacts/export.csv?${p.toString()}`, {
-    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  const path = `/api/v1/admin/contacts/export.csv?${p.toString()}`;
+  const res = await fetch(nestBrowserProxyPath(path), {
+    credentials: "include",
   });
   if (!res.ok) {
     const data = await res.json().catch(() => ({}));
@@ -484,12 +535,11 @@ export async function cancelRenewal(renewalId: string) {
 }
 
 export async function downloadTransactionReceipt(transactionId: string) {
-  const token = getAccessToken();
   const res = await fetch(
-    `${getApiBaseUrl()}/api/v1/billing/transactions/${encodeURIComponent(transactionId)}/receipt`,
-    {
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
-    },
+    nestBrowserProxyPath(
+      `/api/v1/billing/transactions/${encodeURIComponent(transactionId)}/receipt`,
+    ),
+    { credentials: "include" },
   );
   if (!res.ok) {
     const data = await res.json().catch(() => ({}));
@@ -506,12 +556,11 @@ export async function downloadTransactionReceipt(transactionId: string) {
 }
 
 export async function openTransactionInvoiceHtml(transactionId: string) {
-  const token = getAccessToken();
   const res = await fetch(
-    `${getApiBaseUrl()}/api/v1/billing/transactions/${encodeURIComponent(transactionId)}/invoice`,
-    {
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
-    },
+    nestBrowserProxyPath(
+      `/api/v1/billing/transactions/${encodeURIComponent(transactionId)}/invoice`,
+    ),
+    { credentials: "include" },
   );
   if (!res.ok) {
     const data = await res.json().catch(() => ({}));

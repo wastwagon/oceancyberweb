@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import {
-  clearAccessToken,
+  signOut,
   createAdminSiteProject,
   createAdminSiteTestimonial,
   deleteAdminSiteProject,
@@ -455,8 +455,7 @@ export default function AdminContentPage() {
             <button
               type="button"
               onClick={() => {
-                clearAccessToken();
-                window.location.href = "/signin";
+                void signOut();
               }}
               className="rounded-xl border border-sa-border bg-sa-surface px-4 py-2 text-sm font-semibold text-white"
             >

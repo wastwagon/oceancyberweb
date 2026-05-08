@@ -9,13 +9,13 @@ import {
   BillingTransaction,
   cancelRenewal,
   chargeRenewal,
-  clearAccessToken,
   createRenewal,
   getBillingDashboard,
   getProfile,
   listRenewalPlans,
   pauseRenewal,
   resumeRenewal,
+  signOut,
 } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 
@@ -138,10 +138,7 @@ export default function DashboardPage() {
             </Link>
             <button
               type="button"
-              onClick={() => {
-                clearAccessToken();
-                window.location.href = "/signin";
-              }}
+              onClick={() => void signOut()}
               className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-rose-500/30 bg-rose-500/10 px-5 text-[10px] font-bold uppercase tracking-widest text-rose-400 transition-colors hover:border-rose-500 hover:text-white"
             >
               Sign out

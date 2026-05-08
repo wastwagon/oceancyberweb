@@ -6,8 +6,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { CreditCard, CheckCircle2, AlertCircle, Clock, ArrowRight, Wallet } from "lucide-react";
 import {
+  checkBrowserSession,
   createRenewal,
-  getAccessToken,
   getPaymentStatus,
   initializeProductCheckout,
 } from "@/lib/auth-client";
@@ -43,7 +43,7 @@ function RenewalCheckoutContent() {
   const [payBusy, setPayBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [payState, setPayState] = useState<"idle" | "verifying" | "paid" | "stale" | "failed">("idle");
-  const token = getAccessToken();
+  const [hasSession, setHasSession] = useState(false);
 
   const planCode = (params.get("plan") || "").trim();
   const externalRef = (params.get("ref") || "").trim();
@@ -54,6 +54,17 @@ function RenewalCheckoutContent() {
   const displayLabel = label || PLAN_LABELS[planCode] || "Selected product";
   const price = PLAN_PRICES[planCode];
 
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      const ok = await checkBrowserSession();
+      if (!cancelled) setHasSession(ok);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const nextTarget = useMemo(() => {
     const q = new URLSearchParams();
     if (planCode) q.set("plan", planCode);
@@ -63,7 +74,7 @@ function RenewalCheckoutContent() {
   }, [planCode, externalRef, label]);
 
   useEffect(() => {
-    if (!token || !paystackRef) return;
+    if (!hasSession || !paystackRef) return;
 
     setPayState("verifying");
     let attempts = 0;
@@ -91,7 +102,7 @@ function RenewalCheckoutContent() {
     }, 2500);
 
     return () => clearInterval(id);
-  }, [token, paystackRef]);
+  }, [hasSession, paystackRef]);
 
   async function onAddSubscriptionOnly() {
     if (!knownPlan) {
@@ -211,7 +222,7 @@ function RenewalCheckoutContent() {
             </div>
           </div>
 
-          {!token ? (
+          {!hasSession ? (
             <div className="mt-10 p-6 rounded-2xl border border-sa-primary/20 bg-sa-primary/5 text-center">
               <p className="text-sm font-bold text-white">Action Required</p>
               <p className="mt-2 text-xs text-sa-muted/70">Sign in to complete your purchase securely.</p>

@@ -19,7 +19,7 @@ Ghana's premier technology solutions provider website built with Next.js 14+, Ty
 - **Animations**: Framer Motion
 - **Forms**: React Hook Form + Zod
 - **Database**: PostgreSQL + Prisma ORM
-- **SEO**: next-seo, next-sitemap
+- **SEO**: next-seo, `app/sitemap.ts` (dynamic sitemap + portfolio slugs)
 - **Deployment**: Docker + Coolify
 
 ## 📦 Prerequisites

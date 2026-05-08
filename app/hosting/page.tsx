@@ -4,6 +4,7 @@ import { HostingPackagesSection } from "@/components/hosting/HostingPackagesSect
 import { HOSTING_TRUST_POINTS } from "@/lib/hosting-packages";
 import { withCanonical } from "@/lib/seo/canonical";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
 import {
@@ -181,10 +182,12 @@ export default function HostingPage({
 
             <motion.div {...fadeFromRight} className="sa-card overflow-hidden !rounded-3xl">
               <div className="relative aspect-square md:aspect-video lg:aspect-square">
-                <img
+                <Image
                   src="/images/oceancyber-setup.webp"
                   alt="OceanCyber hosting setup"
-                  className="h-full w-full object-cover grayscale opacity-60"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover grayscale opacity-60"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-sa-bg via-transparent to-transparent" />
                 <div className="absolute bottom-8 left-8 right-8">

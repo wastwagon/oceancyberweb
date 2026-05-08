@@ -1,6 +1,19 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { CheckoutRequestDto, DomainCheckResult, CheckoutResult, DomainContactDto } from "./dto/checkout.dto";
+import {
+  CheckoutRequestDto,
+  DomainCheckResult,
+  CheckoutResult,
+  DomainContactDto,
+} from "./dto/checkout.dto";
+
+type NamecheapApiConfig = {
+  apiUser: string;
+  apiKey: string;
+  userName: string;
+  clientIp: string;
+  useSandbox: boolean;
+};
 
 @Injectable()
 export class DomainsService {
@@ -83,13 +96,21 @@ export class DomainsService {
     for (const item of data.items) {
       if (item.kind === "domain") {
         if (cfg && data.domainContact) {
-          const res = await this.registerDomain(item.label, data.domainContact, cfg);
+          const res = await this.registerDomain(
+            item.label,
+            data.domainContact,
+            cfg,
+          );
           results.push({
             kind: "domain",
             label: item.label,
             status: res.ok ? "success" : "failed",
             orderId: res.orderId,
-            message: res.message || (res.ok ? "Domain registered successfully." : "Registration failed."),
+            message:
+              res.message ||
+              (res.ok
+                ? "Domain registered successfully."
+                : "Registration failed."),
           });
         } else {
           // Fallback to mock if not configured
@@ -97,7 +118,8 @@ export class DomainsService {
             kind: "domain",
             label: item.label,
             status: "success",
-            orderId: "MOCK-D-" + Math.random().toString(36).slice(2, 7).toUpperCase(),
+            orderId:
+              "MOCK-D-" + Math.random().toString(36).slice(2, 7).toUpperCase(),
             message: "Domain registered successfully (MOCK).",
           });
         }
@@ -109,14 +131,17 @@ export class DomainsService {
             label: item.label,
             status: res.ok ? "success" : "failed",
             certificateId: res.certificateId,
-            message: res.message || (res.ok ? "SSL provisioned." : "SSL provisioning failed."),
+            message:
+              res.message ||
+              (res.ok ? "SSL provisioned." : "SSL provisioning failed."),
           });
         } else {
           results.push({
             kind: "ssl",
             label: item.label,
             status: "success",
-            certificateId: "MOCK-S-" + Math.random().toString(36).slice(2, 7).toUpperCase(),
+            certificateId:
+              "MOCK-S-" + Math.random().toString(36).slice(2, 7).toUpperCase(),
             message: "SSL certificate provisioned (MOCK).",
           });
         }
@@ -137,7 +162,11 @@ export class DomainsService {
     return { ok: true, checkoutRef, results };
   }
 
-  private async registerDomain(domain: string, contact: DomainContactDto, cfg: any) {
+  private async registerDomain(
+    domain: string,
+    contact: DomainContactDto,
+    cfg: NamecheapApiConfig,
+  ) {
     const params = new URLSearchParams({
       ApiUser: cfg.apiUser,
       ApiKey: cfg.apiKey,
@@ -166,9 +195,11 @@ export class DomainsService {
     }
 
     try {
-      const res = await fetch(`${this.getBaseUrl(cfg.useSandbox)}?${params.toString()}`);
+      const res = await fetch(
+        `${this.getBaseUrl(cfg.useSandbox)}?${params.toString()}`,
+      );
       const xml = await res.text();
-      
+
       const successMatch = /IsSuccess="true"/i.test(xml);
       if (successMatch) {
         const orderIdMatch = /OrderID="([^"]*)"/i.exec(xml);
@@ -183,7 +214,7 @@ export class DomainsService {
     }
   }
 
-  private async createSsl(domain: string, cfg: any) {
+  private async createSsl(domain: string, cfg: NamecheapApiConfig) {
     // Basic PositiveSSL creation
     const params = new URLSearchParams({
       ApiUser: cfg.apiUser,
@@ -196,9 +227,11 @@ export class DomainsService {
     });
 
     try {
-      const res = await fetch(`${this.getBaseUrl(cfg.useSandbox)}?${params.toString()}`);
+      const res = await fetch(
+        `${this.getBaseUrl(cfg.useSandbox)}?${params.toString()}`,
+      );
       const xml = await res.text();
-      
+
       const successMatch = /IsSuccess="true"/i.test(xml);
       if (successMatch) {
         const certIdMatch = /CertificateID="([^"]*)"/i.exec(xml);

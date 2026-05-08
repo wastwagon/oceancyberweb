@@ -111,7 +111,7 @@ function TestimonialColumn({
             className="sa-card group/card flex flex-col justify-between p-8 transition-all hover:border-sa-primary/40 hover:bg-sa-surface/50"
           >
             <p className="text-base leading-relaxed text-sa-muted/90 italic">
-              "{t.quote}"
+              {`${String.fromCharCode(8220)}${t.quote}${String.fromCharCode(8221)}`}
             </p>
             <div className="mt-8 flex items-center gap-4">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sa-primary font-heading text-sm font-bold text-black">

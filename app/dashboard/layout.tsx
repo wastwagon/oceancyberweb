@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { RequireClientSession } from "@/components/auth/RequireClientSession";
 import { appShellNoIndexMetadata } from "@/lib/seo/canonical";
 
 export const metadata: Metadata = {
@@ -15,5 +16,5 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return <RequireClientSession>{children}</RequireClientSession>;
 }

@@ -180,6 +180,58 @@ Postgres and Redis are internal to this stack only (no `localhost` ports). For h
 4. Set environment variables in Coolify dashboard
 5. Deploy!
 
+## Phased hardening
+
+1. **CI** — `.github/workflows/ci.yml` runs `npm test`, Next.js + Nest linters, and production builds on push/PR (uses a Postgres service for `next build` + Prisma).
+2. **Private surfaces** — `/dashboard` and `/admin`: root `middleware.ts` verifies the HttpOnly JWT cookie (`JWT_SECRET` on **both** `web` and `backend`). Authenticated browser calls use `/api/nest/v1/*` (Next proxies to Nest with `Authorization` from the cookie — no JWT in `localStorage`). Sign-in/register use `/api/auth/*` (response body does not include the token). `GET /api/auth/session` is a cheap `{ ok: true }` probe for UI only.
+3. **OpenAI (site chat)** — Set `OPENAI_API_KEY` in root `.env`. Full Docker stack maps it into the `backend` container; without it, chat falls back to rule-based replies in `backend/src/chat/chat.service.ts`.
+4. **Secrets hygiene** — Never commit real keys; rotate any key that was shared in chat, email, or tickets.
+5. **Reverse proxy IP** — Nest `backend` honors `TRUST_PROXY*` (see `.env.example`) so throttling and logs see end-user IPs behind Coolify/nginx.
+6. **Lint + LCP** — Prefer `next/image` for large in-app photos (e.g. `/hosting`).
+7. **E2E** — `npm run test:e2e` runs Playwright smoke tests (`e2e/`), also executed in GitHub Actions after `next build` (starts `npm run start` automatically).
+
+---
+
+## Comprehensive engineering roadmap (next phases)
+
+Work through these in order for a production-grade rollout; skip items your threat model does not need.
+
+### Phase A — Verification & QA
+| Step | Task |
+|------|------|
+| A1 | Expand Playwright flows: signed-in dashboard smoke (seed test user + API up), `/checkout/cart` happy path. |
+| A2 | Add Nest integration tests (Jest/Supertest) for `billing` webhooks + `auth` with test DB. |
+| A3 | Optional: Lighthouse CI budget for home + `/services` on deploy. |
+
+### Phase B — Security
+| Step | Task |
+|------|------|
+| B1 | `npm audit` triage (`npm audit:all`); patch high/critical with lockfile review. |
+| B2 | Confirm Paystack webhook signature verification is **on** in production (`billing.service`); no dev-only skips. |
+| B3 | CSP tightening (Helmet + Next `headers`) once third-party scripts are enumerated. |
+| B4 | Optional: CSRF double-submit for cookie-authenticated POSTs if you add cross-site embeds. |
+
+### Phase C — Observability
+| Step | Task |
+|------|------|
+| C1 | Structured logging (pino/winston) on Nest with request id; redact secrets. |
+| C2 | Sentry (or OpenTelemetry) on `web` + `backend`; source maps upload in CI. |
+| C3 | Uptime checks on `/` and `/api/v1/health`. |
+
+### Phase D — Content & growth
+| Step | Task |
+|------|------|
+| D1 | Replace placeholder/monogram imagery via `/admin/content`. |
+| D2 | Namecheap production cutover checklist (IP allowlist, sandbox flag, live pricing). |
+| D3 | GA4 events for calculator, contact submit, checkout start (`NEXT_PUBLIC_GA_ID`). |
+| D4 | i18n only if you need bilingual UI (route segments + copy inventory). |
+
+### Phase E — Platform (optional)
+| Step | Task |
+|------|------|
+| E1 | Shorter-lived access JWT + opaque refresh rotation (Redis or DB). |
+| E2 | Horizontal `web` replicas + sticky sessions if you move off single container. |
+
 ## 🎨 Customization
 
 ### Colors

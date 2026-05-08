@@ -160,7 +160,9 @@ export function CaseStudyDetailView({
 
               {project.testimonial ? (
                 <div className="sa-card relative p-8 md:p-12">
-                  <span className="absolute -top-4 left-8 text-6xl font-serif text-sa-primary/20">"</span>
+                  <span className="absolute -top-4 left-8 text-6xl font-serif text-sa-primary/20">
+                    {String.fromCharCode(8220)}
+                  </span>
                   <div className="relative z-10">
                     <p className="text-xl italic leading-relaxed text-white/90">
                       {project.testimonial}
