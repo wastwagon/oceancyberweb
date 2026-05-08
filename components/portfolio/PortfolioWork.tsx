@@ -27,38 +27,7 @@ import { fadeUpProps, fadeUpSoft, staggerDelay } from "@/lib/scroll-reveal";
 const MotionLink = motion(Link);
 
 function VolumetricBackground() {
-  return (
-    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-100">
-      <div className="absolute left-1/2 top-0 flex h-full w-full -translate-x-1/2 justify-center gap-6 opacity-[0.3]">
-        {[...Array(5)].map((_, i) => (
-          <div
-            key={i}
-            className="h-[720px] w-1 bg-gradient-to-b from-ocean-300/50 via-ocean-200/20 to-transparent blur-[70px]"
-            style={{
-              transform: `rotate(${(i - 2) * 12}deg)`,
-              transformOrigin: "top center",
-            }}
-          />
-        ))}
-      </div>
-      <div
-        className="absolute left-1/2 top-[-12%] z-[1] aspect-video w-[110%] -translate-x-1/2 rounded-[100%]"
-        style={{
-          background:
-            "radial-gradient(ellipse at center, rgba(0, 102, 204, 0.1) 0%, transparent 70%)",
-          filter: "blur(80px)",
-        }}
-      />
-      <div
-        className="absolute inset-0 opacity-[0.35]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(148, 163, 184, 0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(148, 163, 184, 0.3) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
-    </div>
-  );
+  return null;
 }
 
 const springConfig = { stiffness: 280, damping: 28, mass: 0.6 };
@@ -85,7 +54,7 @@ function TiltCard({
   );
   const glareX = useSpring(useTransform(mx, [-0.5, 0.5], [20, 80]), springConfig);
   const glareY = useSpring(useTransform(my, [-0.5, 0.5], [20, 80]), springConfig);
-  const glare = useMotionTemplate`radial-gradient(520px circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.2), transparent 55%)`;
+  const glare = useMotionTemplate`radial-gradient(520px circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.06), transparent 55%)`;
 
   function onMove(e: MouseEvent<HTMLDivElement>) {
     const el = ref.current;
@@ -114,11 +83,11 @@ function TiltCard({
       >
         <MotionLink
           href={href}
-          className="group/card relative block h-full overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-sm outline-none ring-0 transition-all duration-300 hover:-translate-y-0.5 hover:border-ocean-200/80 hover:shadow-md focus-visible:ring-2 focus-visible:ring-ocean-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+          className="group/card relative block h-full overflow-hidden rounded-3xl border border-sa-border bg-sa-surface transition-colors hover:border-sa-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sa-primary"
           whileTap={{ scale: 0.99 }}
         >
           <motion.div
-            className="pointer-events-none absolute inset-0 z-[2] mix-blend-soft-light"
+            className="pointer-events-none absolute inset-0 z-[2] mix-blend-screen"
             style={{ background: glare }}
           />
           <div className="relative z-[1]">{children}</div>
@@ -135,10 +104,10 @@ function StarRow({ n }: { n: number }) {
         <Star
           key={i}
           className={cn(
-            "h-3.5 w-3.5",
+            "h-3 w-3",
             i < n
-              ? "fill-amber-400 text-amber-400"
-              : "fill-slate-200 text-slate-200",
+              ? "fill-sa-primary text-sa-primary"
+              : "fill-sa-border text-sa-border",
           )}
           aria-hidden
         />
@@ -154,56 +123,24 @@ function GridProjectCard({
   project: PortfolioCaseStudy;
   index: number;
 }) {
-  const accentPalette = [
-    {
-      glow: "from-cyan-300/35 via-ocean-300/15 to-transparent",
-      dot: "bg-cyan-300/70",
-      ring: "border-cyan-200/50",
-    },
-    {
-      glow: "from-violet-300/30 via-indigo-300/15 to-transparent",
-      dot: "bg-violet-300/70",
-      ring: "border-violet-200/50",
-    },
-    {
-      glow: "from-emerald-300/30 via-teal-300/15 to-transparent",
-      dot: "bg-emerald-300/70",
-      ring: "border-emerald-200/50",
-    },
-  ] as const;
-  const accent = accentPalette[index % accentPalette.length];
-
   const body = (
     <>
-      <div className="relative aspect-[16/10] min-h-[10.5rem] w-full overflow-hidden rounded-t-2xl md:min-h-[12rem]">
-        <div
-          className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-25`}
-        />
+      <div className="relative aspect-[16/10] min-h-[10.5rem] w-full overflow-hidden rounded-t-3xl md:min-h-[12rem] border-b border-sa-border">
         <Image
           src={project.image}
           alt={project.title}
           fill
-          className="object-cover transition duration-700 group-hover/card:scale-110"
+          className="object-cover grayscale transition duration-700 group-hover/card:scale-110 group-hover/card:grayscale-0"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent" />
-        <div
-          className={cn(
-            "pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-gradient-to-br blur-2xl",
-            accent.glow,
-          )}
-        />
-        <div className="pointer-events-none absolute bottom-3 right-3 flex items-center gap-1.5">
-          <span className={cn("h-2 w-2 rounded-full", accent.dot)} />
-          <span className={cn("h-4 w-4 rounded-full border", accent.ring)} />
-          <span className={cn("h-2.5 w-2.5 rounded-full", accent.dot)} />
-        </div>
-        <div className="absolute left-3 right-3 top-3 flex items-start justify-between gap-2">
-          <div className="flex flex-wrap gap-1.5">
-            <span className="rounded-full border border-white/20 bg-black/60 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-ocean-100 backdrop-blur-md">
+        <div className="absolute inset-0 bg-gradient-to-t from-sa-surface via-transparent to-transparent opacity-80" />
+        
+        <div className="absolute left-4 right-4 top-4 flex items-start justify-between gap-2">
+          <div className="flex flex-wrap gap-2">
+            <span className="rounded-full border border-sa-primary/20 bg-sa-bg/80 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-sa-primary backdrop-blur-md">
               {project.category}
             </span>
-            <span className="rounded-full border border-white/20 bg-black/50 px-2.5 py-0.5 text-[10px] font-semibold text-slate-100 backdrop-blur-sm">
+            <span className="rounded-full border border-white/10 bg-sa-bg/80 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white backdrop-blur-md">
               {project.year}
             </span>
           </div>
@@ -211,47 +148,47 @@ function GridProjectCard({
         </div>
       </div>
 
-      <div className="space-y-3 p-4 sm:space-y-3.5 sm:p-5 md:p-6">
+      <div className="p-6 md:p-8">
         <div>
-          <h3 className="text-base font-bold tracking-tight text-slate-900 sm:text-lg md:text-xl">
+          <h3 className="font-heading text-lg font-bold text-white md:text-xl">
             {project.title}
           </h3>
-          <p className="mt-0.5 text-[11px] font-medium text-ocean-600 sm:text-xs">{project.client}</p>
+          <p className="mt-1 text-[10px] font-bold uppercase tracking-widest text-sa-primary">{project.client}</p>
         </div>
-        <p className="line-clamp-3 text-sm leading-relaxed text-slate-600 sm:line-clamp-2">
+        <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-sa-muted/80">
           {project.description}
         </p>
 
         {project.metrics ? (
-          <div className="flex items-baseline gap-2 border-t border-slate-100/80 pt-3">
-            <span className="bg-gradient-to-r from-ocean-600 to-cyan-600 bg-clip-text text-xl font-extrabold text-transparent sm:text-2xl">
+          <div className="mt-6 flex items-baseline gap-2 border-t border-sa-border pt-4">
+            <span className="font-heading text-xl font-bold text-white sm:text-2xl">
               {project.metrics.increase}
             </span>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">
               {project.metrics.metric}
             </span>
           </div>
         ) : null}
 
-        <div className="flex flex-wrap gap-1.5 pt-0.5">
-          {project.tech.slice(0, 4).map((tech) => (
+        <div className="mt-6 flex flex-wrap gap-2">
+          {project.tech.slice(0, 3).map((tech) => (
             <span
               key={tech}
-              className="rounded-md border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] font-medium text-slate-700 sm:px-2.5"
+              className="rounded-full border border-sa-border bg-sa-bg px-3 py-1 text-[10px] font-bold tracking-widest text-sa-muted uppercase"
             >
               {tech}
             </span>
           ))}
-          {project.tech.length > 4 ? (
-            <span className="self-center text-[10px] text-slate-500">
-              +{project.tech.length - 4}
+          {project.tech.length > 3 ? (
+            <span className="self-center text-[10px] font-bold text-sa-muted/50 uppercase">
+              +{project.tech.length - 3}
             </span>
           ) : null}
         </div>
 
-        <div className="flex items-center justify-between border-t border-slate-100 pt-3.5 text-xs font-bold text-ocean-600">
+        <div className="mt-6 flex items-center justify-between border-t border-sa-border pt-4 text-[10px] font-bold uppercase tracking-widest text-sa-primary">
           <span>Open case study</span>
-          <span aria-hidden className="text-base transition-transform duration-200 group-hover/card:translate-x-1">→</span>
+          <span aria-hidden className="text-base transition-transform duration-300 group-hover/card:translate-x-2">→</span>
         </div>
       </div>
     </>
@@ -277,7 +214,7 @@ function CategoryFilter({
 }) {
   return (
     <div
-      className="mb-8 flex flex-wrap items-center justify-center gap-2 md:mb-10 md:justify-start"
+      className="mb-8 flex flex-wrap items-center gap-2 md:mb-12"
       role="tablist"
       aria-label="Filter by industry"
     >
@@ -287,10 +224,10 @@ function CategoryFilter({
         aria-selected={value === "All"}
         onClick={() => onChange("All")}
         className={cn(
-          "rounded-full px-4 py-2 text-xs font-bold transition md:text-sm",
+          "rounded-full border px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-colors",
           value === "All"
-            ? "bg-ocean-600 text-white shadow-md shadow-ocean-600/25"
-            : "bg-white text-slate-600 ring-1 ring-slate-200 hover:ring-ocean-200",
+            ? "border-sa-primary bg-sa-primary/20 text-sa-primary"
+            : "border-sa-border bg-sa-surface text-sa-muted hover:border-sa-primary/50 hover:text-white"
         )}
       >
         All work
@@ -303,10 +240,10 @@ function CategoryFilter({
           aria-selected={value === c}
           onClick={() => onChange(c)}
           className={cn(
-            "max-w-full truncate rounded-full px-3.5 py-2 text-xs font-semibold transition md:px-4 md:text-sm",
+            "max-w-full truncate rounded-full border px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-colors",
             value === c
-              ? "bg-ocean-600 text-white shadow-md shadow-ocean-600/25"
-              : "bg-white text-slate-600 ring-1 ring-slate-200 hover:ring-ocean-200",
+              ? "border-sa-primary bg-sa-primary/20 text-sa-primary"
+              : "border-sa-border bg-sa-surface text-sa-muted hover:border-sa-primary/50 hover:text-white"
           )}
         >
           {c}
@@ -318,7 +255,6 @@ function CategoryFilter({
 
 const HOME_VERTICAL_AUTOPLAY_MS = 9000;
 
-/** Landscape frame — full image visible (letterboxed), compact spacing. */
 function HomeVerticalImageSlide({
   project,
   index,
@@ -329,20 +265,20 @@ function HomeVerticalImageSlide({
   return (
     <div
       data-slide
-      className="snap-start snap-always flex shrink-0 justify-center pb-2.5 last:pb-0 sm:pb-3 lg:pb-3.5"
+      className="snap-start snap-always flex shrink-0 justify-center pb-6 sm:pb-8 lg:pb-10"
     >
       <Link
         href={`/portfolio/${project.slug}`}
-        className="group/vslide relative block w-full max-w-full outline-none focus-visible:rounded-xl focus-visible:ring-2 focus-visible:ring-ocean-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 sm:max-w-[min(100%,26rem)] lg:max-w-[min(100%,30rem)] xl:max-w-[min(100%,34rem)]"
+        className="group/vslide relative block w-full max-w-full outline-none focus-visible:ring-2 focus-visible:ring-sa-primary focus-visible:ring-offset-2 focus-visible:ring-offset-sa-bg sm:max-w-[min(100%,30rem)] lg:max-w-[min(100%,34rem)] xl:max-w-[min(100%,38rem)]"
         aria-label={`${project.title} — view case study`}
       >
-        <div className="rounded-xl border border-slate-200/80 bg-white p-1 shadow-sm transition duration-200 hover:border-ocean-200/70 hover:shadow-md sm:p-1.5">
-          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-slate-100 ring-1 ring-inset ring-slate-200/60">
+        <div className="rounded-3xl border border-sa-border bg-sa-surface p-2 sm:p-3 transition-colors hover:border-sa-primary/50">
+          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-sa-bg border border-sa-border">
             <Image
               src={project.image}
               alt=""
               fill
-              className="object-contain object-center p-1 transition duration-300 ease-out group-hover/vslide:opacity-[0.97]"
+              className="object-cover object-center grayscale transition duration-700 ease-out group-hover/vslide:scale-105 group-hover/vslide:grayscale-0"
               sizes="(max-width: 640px) 92vw, (max-width: 1280px) 45vw, 520px"
             />
           </div>
@@ -352,10 +288,6 @@ function HomeVerticalImageSlide({
   );
 }
 
-/**
- * Home portfolio: sticky editorial column (left) + vertical snap-scroll of large imagery (right).
- * Active project on the left updates from scroll position.
- */
 function PortfolioHomeVerticalSplit({ projects }: { projects: PortfolioCaseStudy[] }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
@@ -436,7 +368,7 @@ function PortfolioHomeVerticalSplit({ projects }: { projects: PortfolioCaseStudy
 
   return (
     <div
-      className="group/vsplit min-h-0 w-full"
+      className="group/vsplit min-h-0 w-full mt-10 md:mt-16"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
@@ -449,29 +381,29 @@ function PortfolioHomeVerticalSplit({ projects }: { projects: PortfolioCaseStudy
       aria-roledescription="carousel"
       aria-label="Client projects"
     >
-      <div className="grid min-h-0 gap-8 lg:grid-cols-12 lg:items-start lg:gap-x-6 lg:gap-y-0 xl:gap-x-8">
-        <aside className="flex min-h-0 flex-col justify-between gap-6 lg:col-span-4 lg:sticky lg:top-20 lg:self-start xl:col-span-4">
+      <div className="grid min-h-0 gap-12 lg:grid-cols-12 lg:items-start lg:gap-x-12 lg:gap-y-0">
+        <aside className="flex min-h-0 flex-col justify-between gap-10 lg:col-span-4 lg:sticky lg:top-32 lg:self-start xl:col-span-5">
           <div>
-            <div className="mb-3 flex items-center gap-3">
+            <div className="mb-4 flex items-center gap-4">
               <div
-                className="h-px w-8 shrink-0 bg-gradient-to-r from-ocean-500 to-transparent"
+                className="h-px w-12 shrink-0 bg-sa-primary/50"
                 aria-hidden
               />
-              <p className="text-[9px] font-semibold uppercase tracking-[0.32em] text-slate-400">
+              <p className="sa-eyebrow">
                 Studio portfolio
               </p>
             </div>
-            <h2 className="max-w-[12ch] text-balance text-3xl font-light leading-[1.08] tracking-tight text-slate-500 sm:text-4xl lg:text-[2.15rem] xl:text-[2.5rem]">
+            <h2 className="sa-title !text-left text-4xl lg:text-5xl">
               Selected
               <br />
-              <span className="font-semibold text-slate-900">work</span>
+              <span className="text-sa-primary">work</span>
             </h2>
-            <p className="mt-4 max-w-[17rem] text-xs leading-relaxed text-slate-600 sm:text-[13px]">
+            <p className="mt-6 text-sm leading-relaxed text-sa-muted/80">
               Scroll for projects—each frame shows the full preview. Open a case for scope and outcomes.
             </p>
           </div>
 
-          <div className="flex flex-col gap-6 border-t border-slate-200/80 pt-6">
+          <div className="flex flex-col gap-8 border-t border-sa-border pt-8">
             <motion.div
               key={active.slug}
               initial={reduceMotion ? undefined : { opacity: 0.35, y: 8 }}
@@ -479,80 +411,71 @@ function PortfolioHomeVerticalSplit({ projects }: { projects: PortfolioCaseStudy
               transition={{ duration: reduceMotion ? 0 : 0.32, ease: [0.22, 1, 0.36, 1] }}
               className="min-w-0"
             >
-              <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-slate-400">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">
                 {active.category}
-                <span className="mx-1.5 font-normal text-slate-300">·</span>
+                <span className="mx-2 font-normal text-sa-border">·</span>
                 {active.year}
               </p>
-              <h3 className="mt-2 text-pretty text-lg font-semibold leading-snug tracking-tight text-slate-900 sm:text-xl">
+              <h3 className="mt-3 font-heading text-2xl font-bold text-white">
                 {active.title}
               </h3>
-              <p className="mt-1 text-xs text-slate-500 sm:text-sm">{active.client}</p>
+              <p className="mt-2 text-sm text-sa-muted">{active.client}</p>
               <Link
                 href={`/portfolio/${active.slug}`}
-                className="mt-4 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-ocean-600 transition hover:gap-2.5"
+                className="mt-6 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-sa-primary transition-all hover:text-white"
               >
                 Case study
-                <span aria-hidden className="text-sm font-light">
+                <span aria-hidden className="text-base leading-none">
                   →
                 </span>
               </Link>
             </motion.div>
 
             {n > 1 ? (
-              <div className="flex flex-wrap items-end justify-between gap-4">
+              <div className="flex flex-wrap items-center justify-between gap-4 mt-4">
                 <p
-                  className="font-mono text-xs tabular-nums tracking-tight text-slate-400"
+                  className="font-mono text-sm tabular-nums tracking-wider text-sa-muted"
                   aria-live="polite"
                   aria-atomic="true"
                 >
-                  <span className="text-2xl font-medium tracking-tighter text-slate-900">
+                  <span className="text-2xl font-bold text-white">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <span className="mx-1.5 align-middle text-base text-slate-300">/</span>
-                  <span className="align-middle text-slate-500">{String(n).padStart(2, "0")}</span>
+                  <span className="mx-2 text-sa-border">/</span>
+                  <span>{String(n).padStart(2, "0")}</span>
                 </p>
-                <div className="flex flex-col gap-1.5">
+                <div className="flex gap-2">
                   <button
                     type="button"
                     aria-label="Previous project"
                     onClick={() => scrollTo((index - 1 + n) % n)}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200/90 bg-white text-slate-600 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-sa-border bg-sa-surface text-sa-muted transition-colors hover:border-sa-primary hover:text-white"
                   >
-                    <ChevronUp className="h-4 w-4" strokeWidth={1.5} />
+                    <ChevronUp className="h-5 w-5" strokeWidth={1.5} />
                   </button>
                   <button
                     type="button"
                     aria-label="Next project"
                     onClick={() => scrollTo((index + 1) % n)}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200/90 bg-white text-slate-600 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-sa-border bg-sa-surface text-sa-muted transition-colors hover:border-sa-primary hover:text-white"
                   >
-                    <ChevronDown className="h-4 w-4" strokeWidth={1.5} />
+                    <ChevronDown className="h-5 w-5" strokeWidth={1.5} />
                   </button>
                 </div>
               </div>
             ) : null}
-
-            <Link
-              href="/portfolio"
-              className="text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-400 transition hover:text-slate-900"
-            >
-              Full index →
-            </Link>
           </div>
         </aside>
 
-        <div className="min-h-0 lg:col-span-8 lg:border-l lg:border-slate-200/50 lg:pl-6 xl:col-span-8 xl:pl-8">
-          <div className="rounded-xl border border-slate-200/80 bg-white/80 p-1 shadow-sm ring-1 ring-slate-900/[0.03] sm:p-1.5">
-            <div
-              ref={scrollerRef}
-              className="max-h-[min(44svh,400px)] touch-pan-y snap-y snap-mandatory overflow-y-auto scroll-smooth overscroll-y-contain [-webkit-overflow-scrolling:touch] [scrollbar-color:rgba(148,163,184,0.35)_transparent] [scrollbar-width:thin] sm:max-h-[min(48svh,440px)] lg:max-h-[min(52svh,480px)]"
-            >
-              <div className="flex flex-col items-stretch py-0.5">
-                {projects.map((project, i) => (
-                  <HomeVerticalImageSlide key={project.slug} project={project} index={i} />
-                ))}
-              </div>
+        <div className="min-h-0 lg:col-span-8 lg:border-l lg:border-sa-border lg:pl-10 xl:col-span-7">
+          <div
+            ref={scrollerRef}
+            className="max-h-[min(50svh,450px)] touch-pan-y snap-y snap-mandatory overflow-y-auto scroll-smooth overscroll-y-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:max-h-[min(55svh,500px)] lg:max-h-[min(65svh,650px)]"
+          >
+            <div className="flex flex-col items-stretch">
+              {projects.map((project, i) => (
+                <HomeVerticalImageSlide key={project.slug} project={project} index={i} />
+              ))}
             </div>
           </div>
         </div>
@@ -585,25 +508,16 @@ export function PortfolioWork({
   return (
     <section
       className={cn(
-        "relative",
-        isPage
-          ? "overflow-hidden bg-gradient-to-b from-slate-100/80 to-slate-50 pb-20 pt-2 md:pb-28"
-          : "overflow-x-hidden overflow-y-visible pb-16 pt-20 md:pb-20 md:pt-24",
+        "sa-section relative z-10",
+        isPage ? "" : "pt-24 pb-20 md:pt-32 md:pb-28",
         className,
       )}
     >
-      {isPage ? null : <VolumetricBackground />}
-
-      <div
-        className={cn(
-          "relative z-10 mx-auto",
-          isPage ? "px-4 md:px-6" : "w-full max-w-[min(100rem,100%)] px-4 sm:px-5 lg:px-8 xl:px-10",
-        )}
-      >
+      <div className={cn("sa-container", isPage ? "" : "max-w-7xl")}>
         {isPage ? (
-          <div className="mb-2 max-w-2xl">
-            <h2 className="text-2xl font-bold text-slate-900 md:text-3xl">Browse projects</h2>
-            <p className="mt-1.5 text-sm text-slate-600 md:text-base">
+          <div className="mb-12">
+            <h2 className="sa-title !text-left mt-0">Browse projects</h2>
+            <p className="sa-subtitle !text-left mt-4 mb-10 max-w-2xl">
               Use filters to focus on a sector, or open any card for the full case write-up.
             </p>
             <CategoryFilter
@@ -612,12 +526,12 @@ export function PortfolioWork({
               categories={projectCategories}
             />
             {list.length === 0 ? (
-              <p className="rounded-2xl border border-dashed border-slate-300 bg-white/60 px-4 py-8 text-center text-slate-500">
+              <p className="rounded-3xl border border-sa-border border-dashed p-10 text-center text-sm text-sa-muted">
                 No projects in this category yet.
                 <button
                   type="button"
                   onClick={() => setCategory("All")}
-                  className="mt-2 block w-full text-ocean-600 font-semibold underline"
+                  className="mt-4 block w-full font-bold text-sa-primary underline"
                 >
                   Show all
                 </button>
@@ -627,19 +541,15 @@ export function PortfolioWork({
         ) : null}
 
         {list.length > 0 ? (
-          <div
-            className={cn(
-              isPage ? "mx-auto mt-4 max-w-7xl space-y-8 md:space-y-10" : "mt-6 w-full md:mt-7",
-            )}
-          >
+          <div className={cn("w-full", isPage ? "mt-4" : "mt-0")}>
             {!isPage ? (
               <PortfolioHomeVerticalSplit projects={list} />
             ) : singleFiltered && list[0] ? (
-              <div className="mx-auto max-w-2xl">
+              <div className="mx-auto max-w-3xl">
                 <GridProjectCard project={list[0]} index={0} />
               </div>
             ) : (
-              <div className="grid auto-rows-auto gap-4 sm:gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8">
+              <div className="grid auto-rows-auto gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {list.map((project, i) => (
                   <GridProjectCard
                     key={project.slug}
@@ -655,36 +565,28 @@ export function PortfolioWork({
         <motion.div
           {...fadeUpProps}
           transition={{ ...fadeUpProps.transition, delay: 0.1 }}
-          className={cn(
-            "mx-auto max-w-7xl",
-            isPage ? "mt-20 text-center" : "mt-10 text-center md:mt-12",
-          )}
+          className="mt-24 text-center max-w-4xl mx-auto"
         >
-          <div
-            className={cn(
-              "mx-auto max-w-2xl rounded-3xl border border-slate-200/80 bg-gradient-to-b from-white to-slate-50/90 shadow-lg shadow-slate-200/50",
-              isPage ? "p-8 md:p-10" : "p-6 md:p-8",
-            )}
-          >
-            <h3 className="text-xl font-extrabold text-slate-900 md:text-2xl">
+          <div className="sa-card p-10 md:p-16">
+            <h3 className="sa-title">
               {isPage ? "Ready to ship your product?" : "Talk to our team"}
             </h3>
-            <p className="mt-2 text-sm text-slate-600 md:text-base">
+            <p className="sa-subtitle mx-auto mt-6">
               {isPage
-                ? "Tell us about goals, users, and timeline. We will respond with a focused proposal — billing in cedis, payments via Paystack when you are ready to proceed."
-                : "Tell us what you’re building—we’ll follow up with next steps."}
+                ? "Tell us about goals, users, and timeline. We will respond with a focused proposal."
+                : "Tell us what you're building—we'll follow up with next steps."}
             </p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
               <Link
-                href="/contact?topic=Project%20from%20portfolio%20page"
-                className="inline-flex min-h-[48px] items-center justify-center rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-7 py-3 text-sm font-bold text-white shadow-md shadow-ocean-600/20 transition hover:brightness-110 active:scale-[0.98]"
+                href="/contact?topic=Project%20from%20portfolio"
+                className="sa-btn-primary"
               >
                 Talk to our team
               </Link>
               {isPage ? null : (
                 <Link
                   href="/portfolio"
-                  className="inline-flex min-h-[48px] items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400"
+                  className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-sa-border px-8 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition hover:border-sa-primary hover:text-white"
                 >
                   Full portfolio
                 </Link>

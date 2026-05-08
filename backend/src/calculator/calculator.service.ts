@@ -48,6 +48,13 @@ const PROJECT_FEATURES = [
   { id: "analytics", label: "Product analytics", hours: 16 },
   { id: "seo", label: "Technical SEO", hours: 20 },
   { id: "reporting", label: "Reports and exports", hours: 32 },
+  { id: "gmb_setup", label: "Google Business Profile", hours: 16 },
+  { id: "local_listings", label: "Local directory listings", hours: 20 },
+  { id: "review_requests", label: "Customer review requests", hours: 14 },
+  { id: "social_setup", label: "Social media profile setup", hours: 12 },
+  { id: "local_landing", label: "Local service landing pages", hours: 20 },
+  { id: "workspace_email", label: "Business email on domain", hours: 12 },
+  { id: "workshop", label: "Handover and training", hours: 8 },
 ];
 
 const TIMELINE_OPTIONS = [

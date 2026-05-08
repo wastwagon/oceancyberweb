@@ -14,6 +14,7 @@ import {
   staggerDelay,
 } from "@/lib/scroll-reveal";
 import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
+import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 
 export const metadata: Metadata = withCanonical(
   {
@@ -36,6 +37,7 @@ export default function HostingPage({
 
   return (
     <main className="sa-shell relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
+      <SaPageAmbient />
       {/* Hero */}
       <section className="sa-section relative z-10 overflow-hidden border-b border-sa-border pt-28 md:pt-36">
         <div className="sa-container relative z-10 text-center">

@@ -22,6 +22,7 @@ import {
   revealViewport,
   staggerDelay,
 } from "@/lib/scroll-reveal";
+import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 
 const contactItems = [
   {
@@ -65,7 +66,7 @@ const contactHeaderItem = {
 };
 
 function ContactAmbient() {
-  return null;
+  return <SaPageAmbient />;
 }
 
 export type ContactProps = {

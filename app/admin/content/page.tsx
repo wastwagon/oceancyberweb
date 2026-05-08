@@ -400,19 +400,19 @@ export default function AdminContentPage() {
 
   if (allowed === null) {
     return (
-      <main className="min-h-screen bg-slate-50 px-4 py-16">
-        <p className="text-slate-600">Loading…</p>
+      <main className="min-h-screen bg-sa-bg px-4 py-16">
+        <p className="text-sa-muted/80">Loading…</p>
       </main>
     );
   }
 
   if (allowed === false) {
     return (
-      <main className="min-h-screen bg-slate-50 px-4 py-16">
-        <div className="mx-auto max-w-md rounded-2xl border border-slate-200 bg-white p-6">
-          <h1 className="text-lg font-bold text-slate-900">Not authorized</h1>
-          <p className="mt-2 text-sm text-slate-600">{err || "Admin only."}</p>
-          <Link href="/signin" className="mt-4 inline-flex rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold">
+      <main className="min-h-screen bg-sa-bg px-4 py-16">
+        <div className="mx-auto max-w-md rounded-2xl border border-sa-border bg-sa-surface p-6">
+          <h1 className="text-lg font-bold text-white">Not authorized</h1>
+          <p className="mt-2 text-sm text-sa-muted/80">{err || "Admin only."}</p>
+          <Link href="/signin" className="mt-4 inline-flex rounded-xl border border-sa-border px-4 py-2 text-sm font-semibold">
             Sign in
           </Link>
         </div>
@@ -421,7 +421,7 @@ export default function AdminContentPage() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-50 px-4 py-10 md:py-14">
+    <main className="min-h-screen bg-sa-bg px-4 py-10 md:py-14">
       <div className="mx-auto max-w-5xl space-y-10">
         {toast ? (
           <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-800">{toast}</div>
@@ -429,26 +429,26 @@ export default function AdminContentPage() {
 
         <header className="flex flex-wrap items-end justify-between gap-3">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-ocean-600">Marketing content</p>
-            <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">Portfolio & testimonials</h1>
-            <p className="mt-1 text-sm text-slate-600">{email}</p>
-            <p className="mt-2 max-w-xl text-xs text-slate-500">
-              Edits save to PostgreSQL. Set <code className="rounded bg-slate-100 px-1">REVALIDATE_SECRET</code> on both{" "}
-              <code className="rounded bg-slate-100 px-1">web</code> and <code className="rounded bg-slate-100 px-1">backend</code>{" "}
-              (see <code className="rounded bg-slate-100 px-1">.env.example</code>) so the API can refresh the homepage cache immediately; otherwise allow up to the ISR window (~5 minutes).
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-sa-primary">Marketing content</p>
+            <h1 className="text-2xl font-bold text-white md:text-3xl">Portfolio & testimonials</h1>
+            <p className="mt-1 text-sm text-sa-muted/80">{email}</p>
+            <p className="mt-2 max-w-xl text-xs text-sa-muted/60">
+              Edits save to PostgreSQL. Set <code className="rounded bg-sa-surface px-1">REVALIDATE_SECRET</code> on both{" "}
+              <code className="rounded bg-sa-surface px-1">web</code> and <code className="rounded bg-sa-surface px-1">backend</code>{" "}
+              (see <code className="rounded bg-sa-surface px-1">.env.example</code>) so the API can refresh the homepage cache immediately; otherwise allow up to the ISR window (~5 minutes).
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
             <button
               type="button"
               onClick={() => void load()}
-              className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800"
+              className="rounded-xl border border-sa-border bg-sa-surface px-4 py-2 text-sm font-semibold text-white"
             >
               Reload
             </button>
             <Link
               href="/admin"
-              className="rounded-xl border border-ocean-200 bg-ocean-50 px-4 py-2 text-sm font-semibold text-ocean-900"
+              className="rounded-xl border border-sa-primary/20 bg-sa-primary/10 px-4 py-2 text-sm font-semibold text-white"
             >
               Admin overview
             </Link>
@@ -458,7 +458,7 @@ export default function AdminContentPage() {
                 clearAccessToken();
                 window.location.href = "/signin";
               }}
-              className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800"
+              className="rounded-xl border border-sa-border bg-sa-surface px-4 py-2 text-sm font-semibold text-white"
             >
               Sign out
             </button>
@@ -468,135 +468,135 @@ export default function AdminContentPage() {
         {err ? <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">{err}</div> : null}
 
         {/* Team media handoff */}
-        <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 className="text-lg font-bold text-slate-900">Team headshot handoff</h2>
-          <p className="mt-1 text-sm text-slate-600">
-            Team cards on <code className="rounded bg-slate-100 px-1">/team</code> now use branded
+        <section className="rounded-2xl border border-sa-border bg-sa-surface p-6 ">
+          <h2 className="text-lg font-bold text-white">Team headshot handoff</h2>
+          <p className="mt-1 text-sm text-sa-muted/80">
+            Team cards on <code className="rounded bg-sa-surface px-1">/team</code> now use branded
             monogram placeholders. Use this checklist to replace with real headshots.
           </p>
           <div className="mt-5 grid gap-4 md:grid-cols-2">
-            <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50/80 p-4">
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <div className="rounded-xl border border-dashed border-sa-border bg-sa-bg/80 p-4">
+              <p className="text-xs font-semibold uppercase tracking-wider text-sa-muted/60">
                 Recommended asset spec
               </p>
-              <ul className="mt-3 space-y-2 text-sm text-slate-700">
+              <ul className="mt-3 space-y-2 text-sm text-sa-muted">
                 <li>Upload 1200x1200 or larger square portraits</li>
                 <li>Prefer neutral dark background for startup-theme consistency</li>
                 <li>Compress to WebP and keep each file under ~250KB</li>
                 <li>
-                  Save in <code className="rounded bg-slate-100 px-1">/public/images/team</code>
+                  Save in <code className="rounded bg-sa-surface px-1">/public/images/team</code>
                 </li>
               </ul>
             </div>
-            <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50/80 p-4">
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <div className="rounded-xl border border-dashed border-sa-border bg-sa-bg/80 p-4">
+              <p className="text-xs font-semibold uppercase tracking-wider text-sa-muted/60">
                 Suggested filenames
               </p>
-              <ul className="mt-3 space-y-2 text-sm text-slate-700">
+              <ul className="mt-3 space-y-2 text-sm text-sa-muted">
                 <li>
-                  <code className="rounded bg-slate-100 px-1">marcus-owusu.webp</code>
+                  <code className="rounded bg-sa-surface px-1">marcus-owusu.webp</code>
                 </li>
                 <li>
-                  <code className="rounded bg-slate-100 px-1">sarah-mensah.webp</code>
+                  <code className="rounded bg-sa-surface px-1">sarah-mensah.webp</code>
                 </li>
                 <li>
-                  <code className="rounded bg-slate-100 px-1">kwame-nkrumah.webp</code>
+                  <code className="rounded bg-sa-surface px-1">kwame-nkrumah.webp</code>
                 </li>
                 <li>
-                  <code className="rounded bg-slate-100 px-1">ama-serwaa.webp</code>
+                  <code className="rounded bg-sa-surface px-1">ama-serwaa.webp</code>
                 </li>
               </ul>
             </div>
           </div>
-          <p className="mt-4 text-xs text-slate-500">
+          <p className="mt-4 text-xs text-sa-muted/60">
             After assets are uploaded, update team image paths in{" "}
-            <code className="rounded bg-slate-100 px-1">lib/data/team.ts</code>{" "}
-            (<code className="rounded bg-slate-100 px-1">teamMembers[].imageUrl</code>).
+            <code className="rounded bg-sa-surface px-1">lib/data/team.ts</code>{" "}
+            (<code className="rounded bg-sa-surface px-1">teamMembers[].imageUrl</code>).
           </p>
         </section>
 
         {/* Projects */}
-        <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 className="text-lg font-bold text-slate-900">Portfolio projects</h2>
-          <p className="mt-1 text-sm text-slate-600">
-            Powers <code className="rounded bg-slate-100 px-1">/portfolio</code>. Rich detail JSON is optional (
-            <code className="rounded bg-slate-100 px-1">details.v === 1</code>).
+        <section className="rounded-2xl border border-sa-border bg-sa-surface p-6 ">
+          <h2 className="text-lg font-bold text-white">Portfolio projects</h2>
+          <p className="mt-1 text-sm text-sa-muted/80">
+            Powers <code className="rounded bg-sa-surface px-1">/portfolio</code>. Rich detail JSON is optional (
+            <code className="rounded bg-sa-surface px-1">details.v === 1</code>).
           </p>
 
-          <div className="mt-6 space-y-3 rounded-xl border border-dashed border-slate-200 bg-slate-50/80 p-4">
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Add project</p>
+          <div className="mt-6 space-y-3 rounded-xl border border-dashed border-sa-border bg-sa-bg/80 p-4">
+            <p className="text-xs font-semibold uppercase tracking-wider text-sa-muted/60">Add project</p>
             <div className="grid gap-3 sm:grid-cols-2">
-              <label className="text-xs text-slate-600">
+              <label className="text-xs text-sa-muted/80">
                 Title
                 <input
-                  className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                  className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
                   value={newProj.title}
                   onChange={(e) => setNewProj((s) => ({ ...s, title: e.target.value }))}
                 />
               </label>
-              <label className="text-xs text-slate-600">
+              <label className="text-xs text-sa-muted/80">
                 Slug (URL)
                 <input
-                  className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                  className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
                   placeholder="my-case-study"
                   value={newProj.slug}
                   onChange={(e) => setNewProj((s) => ({ ...s, slug: e.target.value }))}
                 />
               </label>
-              <label className="text-xs text-slate-600">
+              <label className="text-xs text-sa-muted/80">
                 Category
                 <input
-                  className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                  className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
                   value={newProj.category}
                   onChange={(e) => setNewProj((s) => ({ ...s, category: e.target.value }))}
                 />
               </label>
-              <label className="text-xs text-slate-600">
+              <label className="text-xs text-sa-muted/80">
                 Sort order
                 <input
-                  className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                  className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
                   value={newProj.sortOrder}
                   onChange={(e) => setNewProj((s) => ({ ...s, sortOrder: e.target.value }))}
                 />
               </label>
             </div>
-            <label className="block text-xs text-slate-600">
+            <label className="block text-xs text-sa-muted/80">
               Short description
               <textarea
-                className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
                 rows={2}
                 value={newProj.description}
                 onChange={(e) => setNewProj((s) => ({ ...s, description: e.target.value }))}
               />
             </label>
-            <label className="block text-xs text-slate-600">
+            <label className="block text-xs text-sa-muted/80">
               Tech stack (comma-separated)
               <input
-                className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
                 placeholder="Next.js, PostgreSQL"
                 value={newProj.tech}
                 onChange={(e) => setNewProj((s) => ({ ...s, tech: e.target.value }))}
               />
             </label>
-            <label className="block text-xs text-slate-600">
+            <label className="block text-xs text-sa-muted/80">
               Image URL (optional)
               <input
-                className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
                 value={newProj.imageUrl}
                 onChange={(e) => setNewProj((s) => ({ ...s, imageUrl: e.target.value }))}
               />
             </label>
-            <label className="block text-xs text-slate-600">
+            <label className="block text-xs text-sa-muted/80">
               Details JSON (optional)
               <textarea
-                className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 font-mono text-xs"
+                className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 font-mono text-xs"
                 rows={4}
                 placeholder='{"v":1,"image":"/images/..."}'
                 value={newProj.detailsJson}
                 onChange={(e) => setNewProj((s) => ({ ...s, detailsJson: e.target.value }))}
               />
             </label>
-            <label className="flex items-center gap-2 text-sm text-slate-700">
+            <label className="flex items-center gap-2 text-sm text-sa-muted">
               <input
                 type="checkbox"
                 checked={newProj.featured}
@@ -606,7 +606,7 @@ export default function AdminContentPage() {
             </label>
             <button
               type="button"
-              className="rounded-lg bg-ocean-600 px-4 py-2 text-sm font-semibold text-white hover:bg-ocean-700"
+              className="rounded-lg bg-sa-primary px-4 py-2 text-sm font-semibold text-white hover:bg-sa-primary/80"
               onClick={async () => {
                 let details: Record<string, unknown> | undefined;
                 if (newProj.detailsJson.trim()) {
@@ -653,9 +653,9 @@ export default function AdminContentPage() {
           </div>
 
           {loading ? (
-            <p className="mt-6 text-sm text-slate-600">Loading projects…</p>
+            <p className="mt-6 text-sm text-sa-muted/80">Loading projects…</p>
           ) : (
-            <ul className="mt-6 divide-y divide-slate-100">
+            <ul className="mt-6 divide-y divide-sa-border">
               {projects.map((row) => (
                 <li key={row.id} className="py-4">
                   {editProj?.id === row.id ? (
@@ -672,8 +672,8 @@ export default function AdminContentPage() {
                   ) : (
                     <div className="flex flex-wrap items-start justify-between gap-3">
                       <div>
-                        <p className="font-semibold text-slate-900">{row.title}</p>
-                        <p className="text-xs text-slate-500">
+                        <p className="font-semibold text-white">{row.title}</p>
+                        <p className="text-xs text-sa-muted/60">
                           /portfolio/{row.slug} · order {row.sortOrder}
                           {row.featured ? " · featured" : ""}
                         </p>
@@ -681,7 +681,7 @@ export default function AdminContentPage() {
                       <div className="flex gap-2">
                         <button
                           type="button"
-                          className="rounded-lg border border-slate-200 px-3 py-1 text-xs font-semibold text-slate-800"
+                          className="rounded-lg border border-sa-border px-3 py-1 text-xs font-semibold text-white"
                           onClick={() => setEditProj(row)}
                         >
                           Edit
@@ -713,75 +713,75 @@ export default function AdminContentPage() {
         </section>
 
         {/* Testimonials */}
-        <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 className="text-lg font-bold text-slate-900">Testimonials</h2>
-          <p className="mt-1 text-sm text-slate-600">
+        <section className="rounded-2xl border border-sa-border bg-sa-surface p-6 ">
+          <h2 className="text-lg font-bold text-white">Testimonials</h2>
+          <p className="mt-1 text-sm text-sa-muted/80">
             Homepage pulls <strong>featured</strong> quotes first. Tune sort order for display sequence.
           </p>
 
-          <div className="mt-6 space-y-3 rounded-xl border border-dashed border-slate-200 bg-slate-50/80 p-4">
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Add testimonial</p>
+          <div className="mt-6 space-y-3 rounded-xl border border-dashed border-sa-border bg-sa-bg/80 p-4">
+            <p className="text-xs font-semibold uppercase tracking-wider text-sa-muted/60">Add testimonial</p>
             <div className="grid gap-3 sm:grid-cols-2">
-              <label className="text-xs text-slate-600">
+              <label className="text-xs text-sa-muted/80">
                 Name
                 <input
-                  className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                  className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
                   value={newQuote.name}
                   onChange={(e) => setNewQuote((s) => ({ ...s, name: e.target.value }))}
                 />
               </label>
-              <label className="text-xs text-slate-600">
+              <label className="text-xs text-sa-muted/80">
                 Company
                 <input
-                  className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                  className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
                   value={newQuote.company}
                   onChange={(e) => setNewQuote((s) => ({ ...s, company: e.target.value }))}
                 />
               </label>
-              <label className="text-xs text-slate-600">
+              <label className="text-xs text-sa-muted/80">
                 Role
                 <input
-                  className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                  className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
                   value={newQuote.role}
                   onChange={(e) => setNewQuote((s) => ({ ...s, role: e.target.value }))}
                 />
               </label>
-              <label className="text-xs text-slate-600">
+              <label className="text-xs text-sa-muted/80">
                 Sort order
                 <input
-                  className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                  className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
                   value={newQuote.sortOrder}
                   onChange={(e) => setNewQuote((s) => ({ ...s, sortOrder: e.target.value }))}
                 />
               </label>
             </div>
-            <label className="block text-xs text-slate-600">
+            <label className="block text-xs text-sa-muted/80">
               Quote
               <textarea
-                className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
                 rows={3}
                 value={newQuote.content}
                 onChange={(e) => setNewQuote((s) => ({ ...s, content: e.target.value }))}
               />
             </label>
             <div className="flex flex-wrap gap-4">
-              <label className="text-xs text-slate-600">
+              <label className="text-xs text-sa-muted/80">
                 Rating (1–5)
                 <input
-                  className="mt-1 w-20 rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                  className="mt-1 w-20 rounded-lg border border-sa-border px-2 py-1.5 text-sm"
                   value={newQuote.rating}
                   onChange={(e) => setNewQuote((s) => ({ ...s, rating: e.target.value }))}
                 />
               </label>
-              <label className="text-xs text-slate-600">
+              <label className="text-xs text-sa-muted/80">
                 Initials (optional)
                 <input
-                  className="mt-1 w-20 rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                  className="mt-1 w-20 rounded-lg border border-sa-border px-2 py-1.5 text-sm"
                   value={newQuote.initials}
                   onChange={(e) => setNewQuote((s) => ({ ...s, initials: e.target.value }))}
                 />
               </label>
-              <label className="flex items-center gap-2 text-sm text-slate-700">
+              <label className="flex items-center gap-2 text-sm text-sa-muted">
                 <input
                   type="checkbox"
                   checked={newQuote.featured}
@@ -792,7 +792,7 @@ export default function AdminContentPage() {
             </div>
             <button
               type="button"
-              className="rounded-lg bg-ocean-600 px-4 py-2 text-sm font-semibold text-white hover:bg-ocean-700"
+              className="rounded-lg bg-sa-primary px-4 py-2 text-sm font-semibold text-white hover:bg-sa-primary/80"
               onClick={async () => {
                 try {
                   await createAdminSiteTestimonial({
@@ -828,7 +828,7 @@ export default function AdminContentPage() {
           </div>
 
           {!loading ? (
-            <ul className="mt-6 divide-y divide-slate-100">
+            <ul className="mt-6 divide-y divide-sa-border">
               {quotes.map((row) => (
                 <li key={row.id} className="py-4">
                   {editQuote?.id === row.id ? (
@@ -845,17 +845,17 @@ export default function AdminContentPage() {
                   ) : (
                     <div className="flex flex-wrap items-start justify-between gap-3">
                       <div>
-                        <p className="font-semibold text-slate-900">{row.name}</p>
-                        <p className="text-xs text-slate-500">
+                        <p className="font-semibold text-white">{row.name}</p>
+                        <p className="text-xs text-sa-muted/60">
                           {row.role}, {row.company} · ★{row.rating}
                           {row.featured ? " · featured" : ""} · order {row.sortOrder}
                         </p>
-                        <p className="mt-2 max-w-prose text-sm text-slate-600 line-clamp-3">{row.content}</p>
+                        <p className="mt-2 max-w-prose text-sm text-sa-muted/80 line-clamp-3">{row.content}</p>
                       </div>
                       <div className="flex gap-2">
                         <button
                           type="button"
-                          className="rounded-lg border border-slate-200 px-3 py-1 text-xs font-semibold text-slate-800"
+                          className="rounded-lg border border-sa-border px-3 py-1 text-xs font-semibold text-white"
                           onClick={() => setEditQuote(row)}
                         >
                           Edit
@@ -887,17 +887,17 @@ export default function AdminContentPage() {
         </section>
 
         {/* Navigation */}
-        <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 className="text-lg font-bold text-slate-900">Navigation menus</h2>
-          <p className="mt-1 text-sm text-slate-600">
+        <section className="rounded-2xl border border-sa-border bg-sa-surface p-6 ">
+          <h2 className="text-lg font-bold text-white">Navigation menus</h2>
+          <p className="mt-1 text-sm text-sa-muted/80">
             Manage header/menu groups from the database-backed navigation config.
           </p>
 
           <div className="mt-4 grid gap-3 sm:grid-cols-[1fr_auto_auto] sm:items-end">
-            <label className="text-xs text-slate-600">
+            <label className="text-xs text-sa-muted/80">
               Admin API key
               <input
-                className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-2 text-sm"
+                className="mt-1 w-full rounded-lg border border-sa-border px-2 py-2 text-sm"
                 type="password"
                 placeholder="x-admin-key (required in production)"
                 value={adminApiKey}
@@ -912,7 +912,7 @@ export default function AdminContentPage() {
             </label>
             <button
               type="button"
-              className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800"
+              className="rounded-lg border border-sa-border bg-sa-surface px-4 py-2 text-sm font-semibold text-white"
               onClick={async () => {
                 setNavLoading(true);
                 try {
@@ -939,7 +939,7 @@ export default function AdminContentPage() {
             <button
               type="button"
               disabled={navSaving || navLoading}
-              className="rounded-lg bg-ocean-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
+              className="rounded-lg bg-sa-primary px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
               onClick={async () => {
                 setNavSaving(true);
                 try {
@@ -985,56 +985,56 @@ export default function AdminContentPage() {
             <div className="flex flex-wrap justify-end gap-2">
               <button
                 type="button"
-                className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800"
+                className="rounded-lg border border-sa-border bg-sa-surface px-3 py-2 text-xs font-semibold text-white"
                 onClick={() => setMenus((prev) => [...prev, buildMenuPreset("startup-primary")])}
               >
                 Add startup-primary preset
               </button>
               <button
                 type="button"
-                className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800"
+                className="rounded-lg border border-sa-border bg-sa-surface px-3 py-2 text-xs font-semibold text-white"
                 onClick={() => setMenus((prev) => [...prev, buildMenuPreset("startup-pages")])}
               >
                 Add startup-pages preset
               </button>
               <button
                 type="button"
-                className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800"
+                className="rounded-lg border border-sa-border bg-sa-surface px-3 py-2 text-xs font-semibold text-white"
                 onClick={() => setMenus((prev) => [...prev, buildMenuPreset("main-header")])}
               >
                 Add main-header preset
               </button>
               <button
                 type="button"
-                className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800"
+                className="rounded-lg border border-sa-border bg-sa-surface px-3 py-2 text-xs font-semibold text-white"
                 onClick={() => setMenus((prev) => [...prev, buildMenuPreset("main-dropdown-services")])}
               >
                 Add services dropdown preset
               </button>
               <button
                 type="button"
-                className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800"
+                className="rounded-lg border border-sa-border bg-sa-surface px-3 py-2 text-xs font-semibold text-white"
                 onClick={() => setMenus((prev) => [...prev, buildMenuPreset("main-dropdown-industries")])}
               >
                 Add industries dropdown preset
               </button>
               <button
                 type="button"
-                className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800"
+                className="rounded-lg border border-sa-border bg-sa-surface px-3 py-2 text-xs font-semibold text-white"
                 onClick={() => setMenus((prev) => [...prev, buildMenuPreset("main-dropdown-infrastructure")])}
               >
                 Add infrastructure dropdown preset
               </button>
               <button
                 type="button"
-                className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800"
+                className="rounded-lg border border-sa-border bg-sa-surface px-3 py-2 text-xs font-semibold text-white"
                 onClick={() => setMenus((prev) => [...prev, buildMenuPreset("main-dropdown-resources")])}
               >
                 Add resources dropdown preset
               </button>
               <button
                 type="button"
-                className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800"
+                className="rounded-lg border border-sa-border bg-sa-surface px-3 py-2 text-xs font-semibold text-white"
                 onClick={() => setMenus((prev) => [...prev, buildMenuPreset("main-dropdown-company")])}
               >
                 Add company dropdown preset
@@ -1053,19 +1053,19 @@ export default function AdminContentPage() {
               </button>
               <button
                 type="button"
-                className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800"
+                className="rounded-lg border border-sa-border bg-sa-surface px-4 py-2 text-sm font-semibold text-white"
                 onClick={() => setMenus((prev) => [...prev, createEmptyNavMenu()])}
               >
                 Add menu
               </button>
             </div>
             {menus.map((menu, menuIndex) => (
-              <div key={menu.key} className="rounded-xl border border-slate-200 bg-slate-50/80 p-4">
+              <div key={menu.key} className="rounded-xl border border-sa-border bg-sa-bg/80 p-4">
                 <div className="grid gap-3 sm:grid-cols-4">
-                  <label className="text-xs text-slate-600">
+                  <label className="text-xs text-sa-muted/80">
                     Menu key
                     <input
-                      className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                      className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
                       value={menu.key}
                       onChange={(e) =>
                         setMenus((prev) =>
@@ -1074,10 +1074,10 @@ export default function AdminContentPage() {
                       }
                     />
                   </label>
-                  <label className="text-xs text-slate-600">
+                  <label className="text-xs text-sa-muted/80">
                     Label
                     <input
-                      className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                      className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
                       value={menu.label}
                       onChange={(e) =>
                         setMenus((prev) =>
@@ -1086,10 +1086,10 @@ export default function AdminContentPage() {
                       }
                     />
                   </label>
-                  <label className="text-xs text-slate-600">
+                  <label className="text-xs text-sa-muted/80">
                     Description
                     <input
-                      className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
+                      className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
                       value={menu.description ?? ""}
                       onChange={(e) =>
                         setMenus((prev) =>
@@ -1100,7 +1100,7 @@ export default function AdminContentPage() {
                       }
                     />
                   </label>
-                  <label className="flex items-center gap-2 self-end text-xs text-slate-700">
+                  <label className="flex items-center gap-2 self-end text-xs text-sa-muted">
                     <input
                       type="checkbox"
                       checked={menu.isActive}
@@ -1116,7 +1116,7 @@ export default function AdminContentPage() {
                 <div className="mt-3 flex flex-wrap gap-2">
                   <button
                     type="button"
-                    className="rounded-md border border-slate-300 bg-white px-2.5 py-1 text-xs font-semibold text-slate-700 disabled:opacity-50"
+                    className="rounded-md border border-sa-border bg-sa-surface px-2.5 py-1 text-xs font-semibold text-sa-muted disabled:opacity-50"
                     disabled={menuIndex === 0}
                     onClick={() =>
                       setMenus((prev) => {
@@ -1131,7 +1131,7 @@ export default function AdminContentPage() {
                   </button>
                   <button
                     type="button"
-                    className="rounded-md border border-slate-300 bg-white px-2.5 py-1 text-xs font-semibold text-slate-700 disabled:opacity-50"
+                    className="rounded-md border border-sa-border bg-sa-surface px-2.5 py-1 text-xs font-semibold text-sa-muted disabled:opacity-50"
                     disabled={menuIndex === menus.length - 1}
                     onClick={() =>
                       setMenus((prev) => {
@@ -1146,7 +1146,7 @@ export default function AdminContentPage() {
                   </button>
                   <button
                     type="button"
-                    className="rounded-md border border-red-200 bg-white px-2.5 py-1 text-xs font-semibold text-red-700"
+                    className="rounded-md border border-red-200 bg-sa-surface px-2.5 py-1 text-xs font-semibold text-red-700"
                     onClick={() =>
                       setMenus((prev) => prev.filter((_, i) => i !== menuIndex))
                     }
@@ -1155,7 +1155,7 @@ export default function AdminContentPage() {
                   </button>
                   <button
                     type="button"
-                    className="rounded-md border border-slate-300 bg-white px-2.5 py-1 text-xs font-semibold text-slate-700"
+                    className="rounded-md border border-sa-border bg-sa-surface px-2.5 py-1 text-xs font-semibold text-sa-muted"
                     onClick={() =>
                       setMenus((prev) =>
                         prev.map((m, i) =>
@@ -1183,7 +1183,7 @@ export default function AdminContentPage() {
                   {menu.items.map((item, itemIndex) => (
                     <div key={`${menu.key}-${itemIndex}`} className="grid gap-2 sm:grid-cols-4">
                       <input
-                        className="rounded-lg border border-slate-200 px-2 py-1.5 text-xs"
+                        className="rounded-lg border border-sa-border px-2 py-1.5 text-xs"
                         placeholder="Heading"
                         value={item.heading}
                         onChange={(e) =>
@@ -1202,7 +1202,7 @@ export default function AdminContentPage() {
                         }
                       />
                       <input
-                        className="rounded-lg border border-slate-200 px-2 py-1.5 text-xs"
+                        className="rounded-lg border border-sa-border px-2 py-1.5 text-xs"
                         placeholder="Href"
                         value={item.href}
                         onChange={(e) =>
@@ -1221,7 +1221,7 @@ export default function AdminContentPage() {
                         }
                       />
                       <input
-                        className="rounded-lg border border-slate-200 px-2 py-1.5 text-xs"
+                        className="rounded-lg border border-sa-border px-2 py-1.5 text-xs"
                         placeholder="Description"
                         value={item.description ?? ""}
                         onChange={(e) =>
@@ -1242,7 +1242,7 @@ export default function AdminContentPage() {
                         }
                       />
                       <input
-                        className="rounded-lg border border-slate-200 px-2 py-1.5 text-xs"
+                        className="rounded-lg border border-sa-border px-2 py-1.5 text-xs"
                         placeholder="Sort order"
                         value={String(item.sortOrder)}
                         onChange={(e) =>
@@ -1263,7 +1263,7 @@ export default function AdminContentPage() {
                         }
                       />
                       <textarea
-                        className="rounded-lg border border-slate-200 px-2 py-1.5 font-mono text-[11px]"
+                        className="rounded-lg border border-sa-border px-2 py-1.5 font-mono text-[11px]"
                         rows={3}
                         placeholder='{"dropdownKey":"services","activeMatch":["/services"]}'
                         value={item.metadataInput}
@@ -1283,7 +1283,7 @@ export default function AdminContentPage() {
                         }
                       />
                       <div className="flex items-center gap-2">
-                        <label className="flex items-center gap-1 text-xs text-slate-700">
+                        <label className="flex items-center gap-1 text-xs text-sa-muted">
                           <input
                             type="checkbox"
                             checked={item.isActive}
@@ -1306,7 +1306,7 @@ export default function AdminContentPage() {
                         </label>
                         <button
                           type="button"
-                          className="rounded border border-slate-300 bg-white px-2 py-1 text-[11px] font-semibold text-slate-700 disabled:opacity-50"
+                          className="rounded border border-sa-border bg-sa-surface px-2 py-1 text-[11px] font-semibold text-sa-muted disabled:opacity-50"
                           disabled={itemIndex === 0}
                           onClick={() =>
                             setMenus((prev) =>
@@ -1326,7 +1326,7 @@ export default function AdminContentPage() {
                         </button>
                         <button
                           type="button"
-                          className="rounded border border-slate-300 bg-white px-2 py-1 text-[11px] font-semibold text-slate-700 disabled:opacity-50"
+                          className="rounded border border-sa-border bg-sa-surface px-2 py-1 text-[11px] font-semibold text-sa-muted disabled:opacity-50"
                           disabled={itemIndex === menu.items.length - 1}
                           onClick={() =>
                             setMenus((prev) =>
@@ -1346,7 +1346,7 @@ export default function AdminContentPage() {
                         </button>
                         <button
                           type="button"
-                          className="rounded border border-red-200 bg-white px-2 py-1 text-[11px] font-semibold text-red-700"
+                          className="rounded border border-red-200 bg-sa-surface px-2 py-1 text-[11px] font-semibold text-red-700"
                           onClick={() =>
                             setMenus((prev) =>
                               prev.map((m, i) =>
@@ -1400,40 +1400,40 @@ function ProjectEditor({
   const [saving, setSaving] = useState(false);
 
   return (
-    <div className="rounded-xl border border-ocean-200 bg-ocean-50/40 p-4 space-y-3">
+    <div className="rounded-xl border border-sa-primary/20 bg-sa-primary/10/40 p-4 space-y-3">
       <div className="grid gap-3 sm:grid-cols-2">
-        <label className="text-xs text-slate-600">
+        <label className="text-xs text-sa-muted/80">
           Title
-          <input className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm" value={title} onChange={(e) => setTitle(e.target.value)} />
+          <input className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm" value={title} onChange={(e) => setTitle(e.target.value)} />
         </label>
-        <label className="text-xs text-slate-600">
+        <label className="text-xs text-sa-muted/80">
           Slug
-          <input className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm" value={slug} onChange={(e) => setSlug(e.target.value)} />
+          <input className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm" value={slug} onChange={(e) => setSlug(e.target.value)} />
         </label>
-        <label className="text-xs text-slate-600">
+        <label className="text-xs text-sa-muted/80">
           Category
-          <input className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm" value={category} onChange={(e) => setCategory(e.target.value)} />
+          <input className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm" value={category} onChange={(e) => setCategory(e.target.value)} />
         </label>
-        <label className="text-xs text-slate-600">
+        <label className="text-xs text-sa-muted/80">
           Sort order
-          <input className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} />
+          <input className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} />
         </label>
       </div>
-      <label className="block text-xs text-slate-600">
+      <label className="block text-xs text-sa-muted/80">
         Description
-        <textarea className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm" rows={2} value={description} onChange={(e) => setDescription(e.target.value)} />
+        <textarea className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm" rows={2} value={description} onChange={(e) => setDescription(e.target.value)} />
       </label>
-      <label className="block text-xs text-slate-600">
+      <label className="block text-xs text-sa-muted/80">
         Tech (comma-separated)
-        <input className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm" value={tech} onChange={(e) => setTech(e.target.value)} />
+        <input className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm" value={tech} onChange={(e) => setTech(e.target.value)} />
       </label>
-      <label className="block text-xs text-slate-600">
+      <label className="block text-xs text-sa-muted/80">
         Image URL
-        <input className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
+        <input className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
       </label>
-      <label className="block text-xs text-slate-600">
+      <label className="block text-xs text-sa-muted/80">
         Details JSON
-        <textarea className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 font-mono text-xs" rows={5} value={detailsJson} onChange={(e) => setDetailsJson(e.target.value)} />
+        <textarea className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 font-mono text-xs" rows={5} value={detailsJson} onChange={(e) => setDetailsJson(e.target.value)} />
       </label>
       <label className="flex items-center gap-2 text-sm">
         <input type="checkbox" checked={featured} onChange={(e) => setFeatured(e.target.checked)} />
@@ -1443,7 +1443,7 @@ function ProjectEditor({
         <button
           type="button"
           disabled={saving}
-          className="rounded-lg bg-ocean-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
+          className="rounded-lg bg-sa-primary px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
           onClick={async () => {
             let details: Record<string, unknown> | undefined;
             if (detailsJson.trim()) {
@@ -1475,7 +1475,7 @@ function ProjectEditor({
         >
           {saving ? "Saving…" : "Save"}
         </button>
-        <button type="button" className="rounded-lg border border-slate-300 px-4 py-2 text-sm" onClick={onCancel}>
+        <button type="button" className="rounded-lg border border-sa-border px-4 py-2 text-sm" onClick={onCancel}>
           Cancel
         </button>
       </div>
@@ -1503,37 +1503,37 @@ function QuoteEditor({
   const [saving, setSaving] = useState(false);
 
   return (
-    <div className="rounded-xl border border-ocean-200 bg-ocean-50/40 p-4 space-y-3">
+    <div className="rounded-xl border border-sa-primary/20 bg-sa-primary/10/40 p-4 space-y-3">
       <div className="grid gap-3 sm:grid-cols-2">
-        <label className="text-xs text-slate-600">
+        <label className="text-xs text-sa-muted/80">
           Name
-          <input className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm" value={name} onChange={(e) => setName(e.target.value)} />
+          <input className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm" value={name} onChange={(e) => setName(e.target.value)} />
         </label>
-        <label className="text-xs text-slate-600">
+        <label className="text-xs text-sa-muted/80">
           Company
-          <input className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm" value={company} onChange={(e) => setCompany(e.target.value)} />
+          <input className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm" value={company} onChange={(e) => setCompany(e.target.value)} />
         </label>
-        <label className="text-xs text-slate-600">
+        <label className="text-xs text-sa-muted/80">
           Role
-          <input className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm" value={role} onChange={(e) => setRole(e.target.value)} />
+          <input className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm" value={role} onChange={(e) => setRole(e.target.value)} />
         </label>
-        <label className="text-xs text-slate-600">
+        <label className="text-xs text-sa-muted/80">
           Sort order
-          <input className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} />
+          <input className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} />
         </label>
       </div>
-      <label className="block text-xs text-slate-600">
+      <label className="block text-xs text-sa-muted/80">
         Quote
-        <textarea className="mt-1 w-full rounded-lg border border-slate-200 px-2 py-1.5 text-sm" rows={4} value={content} onChange={(e) => setContent(e.target.value)} />
+        <textarea className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm" rows={4} value={content} onChange={(e) => setContent(e.target.value)} />
       </label>
       <div className="flex flex-wrap gap-4">
-        <label className="text-xs text-slate-600">
+        <label className="text-xs text-sa-muted/80">
           Rating
-          <input className="mt-1 w-16 rounded-lg border border-slate-200 px-2 py-1.5 text-sm" value={rating} onChange={(e) => setRating(e.target.value)} />
+          <input className="mt-1 w-16 rounded-lg border border-sa-border px-2 py-1.5 text-sm" value={rating} onChange={(e) => setRating(e.target.value)} />
         </label>
-        <label className="text-xs text-slate-600">
+        <label className="text-xs text-sa-muted/80">
           Initials
-          <input className="mt-1 w-16 rounded-lg border border-slate-200 px-2 py-1.5 text-sm" value={initials} onChange={(e) => setInitials(e.target.value)} />
+          <input className="mt-1 w-16 rounded-lg border border-sa-border px-2 py-1.5 text-sm" value={initials} onChange={(e) => setInitials(e.target.value)} />
         </label>
         <label className="flex items-center gap-2 text-sm">
           <input type="checkbox" checked={featured} onChange={(e) => setFeatured(e.target.checked)} />
@@ -1544,7 +1544,7 @@ function QuoteEditor({
         <button
           type="button"
           disabled={saving}
-          className="rounded-lg bg-ocean-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
+          className="rounded-lg bg-sa-primary px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
           onClick={async () => {
             setSaving(true);
             try {
@@ -1566,7 +1566,7 @@ function QuoteEditor({
         >
           {saving ? "Saving…" : "Save"}
         </button>
-        <button type="button" className="rounded-lg border border-slate-300 px-4 py-2 text-sm" onClick={onCancel}>
+        <button type="button" className="rounded-lg border border-sa-border px-4 py-2 text-sm" onClick={onCancel}>
           Cancel
         </button>
       </div>

@@ -11,6 +11,7 @@ import {
   revealViewport,
   staggerDelay,
 } from "@/lib/scroll-reveal";
+import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 
 type ServiceCard = {
   title: string;
@@ -83,28 +84,7 @@ const services: ServiceCard[] = [
   },
 ];
 
-function PageAmbient() {
-  return (
-    <div
-      className="pointer-events-none absolute inset-0 opacity-[0.12]"
-      aria-hidden
-    >
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(2, 106, 255, 0.2) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(2, 106, 255, 0.16) 1px, transparent 1px)
-          `,
-          backgroundSize: "56px 56px",
-          maskImage:
-            "radial-gradient(ellipse 100% 70% at 50% 0%, black 0%, transparent 75%)",
-        }}
-      />
-      <div className="absolute left-1/2 top-0 h-[min(420px,50vh)] w-[min(100%,900px)] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(2,106,255,0.1)_0%,transparent_72%)] blur-[88px]" />
-    </div>
-  );
-}
+
 
 function ServiceGridCard({
   service,
@@ -171,6 +151,7 @@ export default function ServicesPage() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
+      <SaPageAmbient />
       <section className="sa-section relative z-10 overflow-hidden border-b border-sa-border pt-28 md:pt-36">
         <div className="sa-container relative z-10 text-center">
           <motion.div

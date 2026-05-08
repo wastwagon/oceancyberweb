@@ -283,7 +283,7 @@ function ContactNotesField({
         onChange={(e) => setText(e.target.value)}
         rows={2}
         disabled={disabled}
-        className="w-full min-w-[140px] rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-xs text-slate-800"
+        className="w-full min-w-[140px] rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-xs text-white"
         placeholder="Internal note…"
         aria-label="Team note"
       />
@@ -299,7 +299,7 @@ function ContactNotesField({
             setSaving(false);
           }
         }}
-        className="self-start rounded-md bg-slate-100 px-2 py-1 text-[11px] font-semibold text-slate-800 hover:bg-slate-200"
+        className="self-start rounded-md bg-sa-surface px-2 py-1 text-[11px] font-semibold text-white hover:bg-sa-border"
       >
         {saving ? "Saving…" : "Save note"}
       </button>
@@ -496,23 +496,23 @@ export default function AdminPage() {
 
   if (allowed === null) {
     return (
-      <main className="min-h-screen bg-slate-50 px-4 py-16">
-        <p className="text-slate-600">Loading…</p>
+      <main className="min-h-screen bg-sa-bg px-4 py-16">
+        <p className="text-sa-muted/80">Loading…</p>
       </main>
     );
   }
 
   if (allowed === false) {
     return (
-      <main className="min-h-screen bg-slate-50 px-4 py-16">
-        <div className="mx-auto max-w-md rounded-2xl border border-slate-200 bg-white p-6">
-          <h1 className="text-lg font-bold text-slate-900">Not authorized</h1>
-          <p className="mt-2 text-sm text-slate-600">
+      <main className="min-h-screen bg-sa-bg px-4 py-16">
+        <div className="mx-auto max-w-md rounded-2xl border border-sa-border bg-sa-surface p-6">
+          <h1 className="text-lg font-bold text-white">Not authorized</h1>
+          <p className="mt-2 text-sm text-sa-muted/80">
             {err || "You need an admin account or to be listed in ADMIN_EMAILS on the server."}
           </p>
           <Link
             href="/"
-            className="mt-4 inline-flex rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800"
+            className="mt-4 inline-flex rounded-xl border border-sa-border bg-sa-surface px-4 py-2 text-sm font-semibold text-white"
           >
             Home
           </Link>
@@ -522,7 +522,7 @@ export default function AdminPage() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-50 px-4 py-10 md:py-14">
+    <main className="min-h-screen bg-sa-bg px-4 py-10 md:py-14">
       <div className="mx-auto max-w-6xl space-y-8">
         {toast ? (
           <div
@@ -537,14 +537,14 @@ export default function AdminPage() {
         ) : null}
         <header className="flex flex-wrap items-end justify-between gap-3">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-ocean-600">Operations</p>
-            <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">Admin overview</h1>
-            <p className="mt-1 text-sm text-slate-600">{email}</p>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-sa-primary">Operations</p>
+            <h1 className="text-2xl font-bold text-white md:text-3xl">Admin overview</h1>
+            <p className="mt-1 text-sm text-sa-muted/80">{email}</p>
           </div>
           <div className="flex flex-wrap gap-2">
             <Link
               href="/admin/content"
-              className="rounded-xl border border-ocean-200 bg-ocean-50 px-4 py-2 text-sm font-semibold text-ocean-900 hover:bg-ocean-100"
+              className="rounded-xl border border-sa-primary/20 bg-sa-primary/10 px-4 py-2 text-sm font-semibold text-white hover:bg-sa-primary/20"
             >
               Site content
             </Link>
@@ -553,13 +553,13 @@ export default function AdminPage() {
               onClick={() => {
                 void load();
               }}
-              className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:border-slate-400"
+              className="rounded-xl border border-sa-border bg-sa-surface px-4 py-2 text-sm font-semibold text-white hover:border-sa-border/80"
             >
               Refresh
             </button>
             <Link
               href="/dashboard"
-              className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800"
+              className="rounded-xl border border-sa-border bg-sa-surface px-4 py-2 text-sm font-semibold text-white"
             >
               My dashboard
             </Link>
@@ -569,7 +569,7 @@ export default function AdminPage() {
                 clearAccessToken();
                 window.location.href = "/signin";
               }}
-              className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800"
+              className="rounded-xl border border-sa-border bg-sa-surface px-4 py-2 text-sm font-semibold text-white"
             >
               Sign out
             </button>
@@ -590,22 +590,22 @@ export default function AdminPage() {
               ].map(({ k, v }) => (
                 <div
                   key={k}
-                  className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
+                  className="rounded-2xl border border-sa-border bg-sa-surface p-4 "
                 >
-                  <p className="text-xs font-bold uppercase tracking-wider text-slate-500">{k}</p>
-                  <p className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{v}</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-sa-muted/60">{k}</p>
+                  <p className="mt-1 text-2xl font-bold tabular-nums text-white">{v}</p>
                 </div>
               ))}
             </section>
-            <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-              <p className="text-xs font-bold uppercase tracking-wider text-slate-500">
+            <section className="rounded-2xl border border-sa-border bg-sa-surface p-4 ">
+              <p className="text-xs font-bold uppercase tracking-wider text-sa-muted/60">
                 Renewals by status
               </p>
-              <ul className="mt-2 flex flex-wrap gap-2 text-sm text-slate-800">
+              <ul className="mt-2 flex flex-wrap gap-2 text-sm text-white">
                 {Object.entries(summary.renewalsByStatus).map(([status, n]) => (
                   <li
                     key={status}
-                    className="rounded-lg border border-slate-200 bg-slate-50 px-2 py-1"
+                    className="rounded-lg border border-sa-border bg-sa-bg px-2 py-1"
                   >
                     {status}: <span className="font-semibold">{n}</span>
                   </li>
@@ -615,9 +615,9 @@ export default function AdminPage() {
           </>
         ) : null}
 
-        <section id="admin-client-projects" className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-lg font-bold text-slate-900">Client projects (30/30/40)</h2>
-          <p className="mt-1 text-sm text-slate-600">
+        <section id="admin-client-projects" className="rounded-2xl border border-sa-border bg-sa-surface p-5 ">
+          <h2 className="text-lg font-bold text-white">Client projects (30/30/40)</h2>
+          <p className="mt-1 text-sm text-sa-muted/80">
             Create project milestones from accepted estimates, then unlock build/launch stages as delivery progresses.
           </p>
           <form
@@ -654,14 +654,14 @@ export default function AdminPage() {
               placeholder="Client email"
               type="email"
               required
-              className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900"
+              className="rounded-lg border border-sa-border bg-sa-surface px-3 py-2 text-sm text-white"
             />
             <input
               value={projectForm.title}
               onChange={(e) => setProjectForm((p) => ({ ...p, title: e.target.value }))}
               placeholder="Project title"
               required
-              className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900"
+              className="rounded-lg border border-sa-border bg-sa-surface px-3 py-2 text-sm text-white"
             />
             <input
               value={projectForm.totalAmountGhs}
@@ -670,12 +670,12 @@ export default function AdminPage() {
               type="number"
               min={100}
               required
-              className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900"
+              className="rounded-lg border border-sa-border bg-sa-surface px-3 py-2 text-sm text-white"
             />
             <button
               type="submit"
               disabled={projectBusy}
-              className="rounded-lg bg-ocean-600 px-3 py-2 text-sm font-semibold text-white hover:bg-ocean-700 disabled:opacity-60"
+              className="rounded-lg bg-sa-primary px-3 py-2 text-sm font-semibold text-white hover:bg-sa-primary/80 disabled:opacity-60"
             >
               {projectBusy ? "Creating..." : "Create project"}
             </button>
@@ -683,7 +683,7 @@ export default function AdminPage() {
               value={projectForm.description}
               onChange={(e) => setProjectForm((p) => ({ ...p, description: e.target.value }))}
               placeholder="Optional description"
-              className="sm:col-span-4 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900"
+              className="sm:col-span-4 rounded-lg border border-sa-border bg-sa-surface px-3 py-2 text-sm text-white"
             />
           </form>
 
@@ -692,13 +692,13 @@ export default function AdminPage() {
               value={projectSearch}
               onChange={(e) => setProjectSearch(e.target.value)}
               placeholder="Filter by project ID, title, or email"
-              className="w-full max-w-md rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900"
+              className="w-full max-w-md rounded-lg border border-sa-border bg-sa-surface px-3 py-2 text-sm text-white"
             />
             {projectSearch ? (
               <button
                 type="button"
                 onClick={() => setProjectSearch("")}
-                className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 hover:border-slate-400"
+                className="rounded-lg border border-sa-border bg-sa-surface px-3 py-2 text-xs font-semibold text-sa-muted hover:border-sa-border/80"
               >
                 Clear filter
               </button>
@@ -721,7 +721,7 @@ export default function AdminPage() {
                         const target = document.getElementById(`project-card-${p.id}`);
                         target?.scrollIntoView({ behavior: "smooth", block: "start" });
                       }}
-                      className="rounded-lg border border-rose-300 bg-white px-2 py-1 text-xs font-semibold text-rose-900 hover:border-rose-400"
+                      className="rounded-lg border border-rose-300 bg-sa-surface px-2 py-1 text-xs font-semibold text-rose-900 hover:border-rose-400"
                     >
                       {p.title}
                     </button>
@@ -745,20 +745,20 @@ export default function AdminPage() {
                 className={`rounded-xl p-3 ${
                   projectHasOpenBlocker(p.activities)
                     ? "border border-rose-300 bg-rose-50/40"
-                    : "border border-slate-200 bg-slate-50"
+                    : "border border-sa-border bg-sa-bg"
                 }`}
               >
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <div>
-                    <p className="text-sm font-bold text-slate-900">{p.title}</p>
-                    <p className="text-xs text-slate-600">
+                    <p className="text-sm font-bold text-white">{p.title}</p>
+                    <p className="text-xs text-sa-muted/80">
                       {p.user.email} · ₵{(Number(p.totalAmountMinor) / 100).toFixed(2)}
                     </p>
-                    <p className="mt-0.5 text-[11px] font-mono text-slate-500">{p.id}</p>
+                    <p className="mt-0.5 text-[11px] font-mono text-sa-muted/60">{p.id}</p>
                   </div>
                   <select
                     value={p.status}
-                    className="rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs font-semibold text-slate-800"
+                    className="rounded-lg border border-sa-border bg-sa-surface px-2 py-1 text-xs font-semibold text-white"
                     onChange={async (e) => {
                       try {
                         setProjectBusy(true);
@@ -809,7 +809,7 @@ export default function AdminPage() {
                           setProjectBusy(false);
                         }
                       }}
-                      className="rounded-md border border-emerald-300 bg-white px-2.5 py-1 text-xs font-semibold text-emerald-800 hover:border-emerald-400 disabled:opacity-60"
+                      className="rounded-md border border-emerald-300 bg-sa-surface px-2.5 py-1 text-xs font-semibold text-emerald-800 hover:border-emerald-400 disabled:opacity-60"
                     >
                       Resolve blocker
                     </button>
@@ -836,7 +836,7 @@ export default function AdminPage() {
                           setProjectBusy(false);
                         }
                       }}
-                      className="rounded-md border border-rose-300 bg-white px-2.5 py-1 text-xs font-semibold text-rose-800 hover:border-rose-400 disabled:opacity-60"
+                      className="rounded-md border border-rose-300 bg-sa-surface px-2.5 py-1 text-xs font-semibold text-rose-800 hover:border-rose-400 disabled:opacity-60"
                     >
                       Re-open blocker
                     </button>
@@ -844,11 +844,11 @@ export default function AdminPage() {
                 )}
                 <div className="mt-2 flex flex-wrap gap-2">
                   {p.milestones.map((m) => (
-                    <div key={m.id} className="rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-xs">
-                      <p className="font-semibold text-slate-800">
+                    <div key={m.id} className="rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-xs">
+                      <p className="font-semibold text-white">
                         {m.title} ({m.percentage}%)
                       </p>
-                      <p className="text-slate-600">Status: {m.status}</p>
+                      <p className="text-sa-muted/80">Status: {m.status}</p>
                       {m.status === "locked" ? (
                         <button
                           type="button"
@@ -868,7 +868,7 @@ export default function AdminPage() {
                               setProjectBusy(false);
                             }
                           }}
-                          className="mt-1 rounded-md border border-slate-300 bg-white px-2 py-0.5 font-semibold text-slate-700 hover:border-slate-400 disabled:opacity-60"
+                          className="mt-1 rounded-md border border-sa-border bg-sa-surface px-2 py-0.5 font-semibold text-sa-muted hover:border-sa-border/80 disabled:opacity-60"
                         >
                           Unlock
                         </button>
@@ -885,7 +885,7 @@ export default function AdminPage() {
                         [p.id]: e.target.value,
                       }))
                     }
-                    className="rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-xs text-slate-800"
+                    className="rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-xs text-white"
                   >
                     {PROJECT_ACTIVITY_CATEGORIES.map((cat) => (
                       <option key={cat.id} value={cat.id}>
@@ -899,7 +899,7 @@ export default function AdminPage() {
                       setProjectActivityDraft((prev) => ({ ...prev, [p.id]: e.target.value }))
                     }
                     placeholder="Add project note (e.g. Awaiting client content)"
-                    className="w-full max-w-md rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs text-slate-900"
+                    className="w-full max-w-md rounded-lg border border-sa-border bg-sa-surface px-2.5 py-1.5 text-xs text-white"
                   />
                   <button
                     type="button"
@@ -926,14 +926,14 @@ export default function AdminPage() {
                         setProjectBusy(false);
                       }
                     }}
-                    className="rounded-md border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:border-slate-400 disabled:opacity-60"
+                    className="rounded-md border border-sa-border bg-sa-surface px-2.5 py-1.5 text-xs font-semibold text-sa-muted hover:border-sa-border/80 disabled:opacity-60"
                   >
                     Add note
                   </button>
                 </div>
-                <div className="mt-3 rounded-lg border border-slate-200 bg-white p-2">
+                <div className="mt-3 rounded-lg border border-sa-border bg-sa-surface p-2">
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-sa-muted/60">
                       Recent activity
                     </p>
                     <select
@@ -941,7 +941,7 @@ export default function AdminPage() {
                       onChange={(e) =>
                         setProjectActivityFilter((prev) => ({ ...prev, [p.id]: e.target.value }))
                       }
-                      className="rounded-md border border-slate-200 bg-white px-2 py-1 text-[11px] text-slate-700"
+                      className="rounded-md border border-sa-border bg-sa-surface px-2 py-1 text-[11px] text-sa-muted"
                     >
                       <option value="all">All categories</option>
                       {PROJECT_ACTIVITY_CATEGORIES.map((cat) => (
@@ -961,31 +961,31 @@ export default function AdminPage() {
                           return cat === active;
                         })
                         .map((a) => (
-                        <li key={a.id} className="rounded-md border border-slate-100 bg-slate-50 px-2 py-1.5 text-[11px]">
-                          <p className="font-semibold text-slate-700">
+                        <li key={a.id} className="rounded-md border border-sa-border bg-sa-bg px-2 py-1.5 text-[11px]">
+                          <p className="font-semibold text-sa-muted">
                             {a.action.replace(/_/g, " ")} ·{" "}
-                            <span className="text-slate-500">{a.actorType}</span>
+                            <span className="text-sa-muted/60">{a.actorType}</span>
                           </p>
                           <p className="mt-0.5">
-                            <span className="rounded-full border border-slate-200 bg-white px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-600">
+                            <span className="rounded-full border border-sa-border bg-sa-surface px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-sa-muted/80">
                               {a.metadata && typeof a.metadata === "object" && "category" in a.metadata
                                 ? activityCategory(a).replace(/_/g, " ")
                                 : "general"}
                             </span>
                           </p>
-                          {a.note ? <p className="text-slate-600">{a.note}</p> : null}
-                          <p className="text-slate-500">{new Date(a.createdAt).toLocaleString()}</p>
+                          {a.note ? <p className="text-sa-muted/80">{a.note}</p> : null}
+                          <p className="text-sa-muted/60">{new Date(a.createdAt).toLocaleString()}</p>
                         </li>
                       ))}
                     </ul>
                   ) : (
-                    <p className="mt-1 text-[11px] text-slate-500">No activity events yet.</p>
+                    <p className="mt-1 text-[11px] text-sa-muted/60">No activity events yet.</p>
                   )}
                 </div>
               </div>
             ))}
             {(adminProjects ?? []).length === 0 ? (
-              <p className="text-sm text-slate-500">No client projects created yet.</p>
+              <p className="text-sm text-sa-muted/60">No client projects created yet.</p>
             ) : normalizedProjectSearch &&
               (adminProjects ?? []).filter((p) => {
                 return (
@@ -994,14 +994,14 @@ export default function AdminPage() {
                   p.user.email.toLowerCase().includes(normalizedProjectSearch)
                 );
               }).length === 0 ? (
-              <p className="text-sm text-slate-500">No projects match this filter.</p>
+              <p className="text-sm text-sa-muted/60">No projects match this filter.</p>
             ) : null}
           </div>
         </section>
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-lg font-bold text-slate-900">Inbound (website)</h2>
-          <p className="mt-1 text-sm text-slate-600">
+        <section className="rounded-2xl border border-sa-border bg-sa-surface p-5 ">
+          <h2 className="text-lg font-bold text-white">Inbound (website)</h2>
+          <p className="mt-1 text-sm text-sa-muted/80">
             Form, project calculator, and (optional) chat follow-ups. Status and notes are saved to the same{" "}
             <code>Contact</code> rows.
           </p>
@@ -1020,14 +1020,14 @@ export default function AdminPage() {
                 }}
                 className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${
                   activePresetId === p.id
-                    ? "bg-ocean-600 text-white"
-                    : "border border-slate-300 bg-white text-slate-700 hover:border-slate-400"
+                    ? "bg-sa-primary text-white"
+                    : "border border-sa-border bg-sa-surface text-sa-muted hover:border-sa-border/80"
                 }`}
               >
                 {p.label}
                 <span
                   className={`ml-1.5 rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
-                    activePresetId === p.id ? "bg-white/20 text-white" : "bg-slate-100 text-slate-700"
+                    activePresetId === p.id ? "bg-sa-surface/20 text-white" : "bg-sa-surface text-sa-muted"
                   }`}
                 >
                   {p.id === "all"
@@ -1052,16 +1052,16 @@ export default function AdminPage() {
                 setLeadDateRange("all");
                 setActivePresetId(null);
               }}
-              className="rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:border-slate-400"
+              className="rounded-full border border-sa-border bg-sa-surface px-3 py-1.5 text-xs font-semibold text-sa-muted hover:border-sa-border/80"
             >
               Clear
             </button>
           </div>
           <div className="mt-3 grid gap-2 sm:grid-cols-6">
-            <label className="text-xs font-semibold text-slate-600">
+            <label className="text-xs font-semibold text-sa-muted/80">
               Status
               <select
-                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm text-slate-900"
+                className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-2 text-sm text-white"
                 value={leadStatusFilter}
                 disabled={leadLoading}
                 onChange={(e) => {
@@ -1076,10 +1076,10 @@ export default function AdminPage() {
                 <option value="lost">lost</option>
               </select>
             </label>
-            <label className="text-xs font-semibold text-slate-600">
+            <label className="text-xs font-semibold text-sa-muted/80">
               Source
               <select
-                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm text-slate-900"
+                className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-2 text-sm text-white"
                 value={leadSourceFilter}
                 disabled={leadLoading}
                 onChange={(e) => {
@@ -1098,10 +1098,10 @@ export default function AdminPage() {
                 <option value="website_to_app_quote">Website-to-Mobile App Conversion Quote</option>
               </select>
             </label>
-            <label className="text-xs font-semibold text-slate-600">
+            <label className="text-xs font-semibold text-sa-muted/80">
               Date range
               <select
-                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm text-slate-900"
+                className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-2 text-sm text-white"
                 value={leadDateRange}
                 disabled={leadLoading}
                 onChange={(e) => {
@@ -1114,7 +1114,7 @@ export default function AdminPage() {
                 <option value="30d">Last 30 days</option>
               </select>
             </label>
-            <label className="sm:col-span-2 text-xs font-semibold text-slate-600">
+            <label className="sm:col-span-2 text-xs font-semibold text-sa-muted/80">
               Search (name or email)
               <input
                 value={leadSearch}
@@ -1124,13 +1124,13 @@ export default function AdminPage() {
                   setActivePresetId(null);
                 }}
                 placeholder="john@company.com"
-                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900"
+                className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-3 py-2 text-sm text-white"
               />
             </label>
-            <label className="text-xs font-semibold text-slate-600">
+            <label className="text-xs font-semibold text-sa-muted/80">
               Sort
               <select
-                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm text-slate-900"
+                className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-2 text-sm text-white"
                 value={leadSort}
                 disabled={leadLoading}
                 onChange={(e) => {
@@ -1170,21 +1170,21 @@ export default function AdminPage() {
                   setExportingCsv(false);
                 }
               }}
-              className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-800 hover:border-slate-400"
+              className="rounded-lg border border-sa-border bg-sa-surface px-3 py-1.5 text-xs font-semibold text-white hover:border-sa-border/80"
             >
               {exportingCsv ? "Exporting…" : "Export filtered CSV"}
             </button>
           </div>
           {leadLoading ? (
-            <div className="mt-2 inline-flex items-center gap-2 rounded-md bg-slate-100 px-2.5 py-1.5 text-xs text-slate-700">
-              <span className="h-3 w-3 animate-spin rounded-full border-2 border-slate-300 border-t-slate-700" />
+            <div className="mt-2 inline-flex items-center gap-2 rounded-md bg-sa-surface px-2.5 py-1.5 text-xs text-sa-muted">
+              <span className="h-3 w-3 animate-spin rounded-full border-2 border-sa-border border-t-slate-700" />
               Updating leads…
             </div>
           ) : null}
           <div className="mt-3 overflow-x-auto">
             <table className="min-w-[720px] w-full text-left text-sm">
               <thead>
-                <tr className="text-xs uppercase text-slate-500">
+                <tr className="text-xs uppercase text-sa-muted/60">
                   <th className="py-2 pr-2">When</th>
                   <th className="py-2 pr-2">Name</th>
                   <th className="py-2 pr-2">Email</th>
@@ -1208,8 +1208,8 @@ export default function AdminPage() {
                       ? checkoutRef(c.metadata)
                       : null;
                   return (
-                    <tr key={c.id} className="border-t border-slate-100">
-                      <td className="whitespace-nowrap py-2 pr-2 text-slate-600">
+                    <tr key={c.id} className="border-t border-sa-border">
+                      <td className="whitespace-nowrap py-2 pr-2 text-sa-muted/80">
                         {new Date(c.createdAt).toLocaleString()}
                       </td>
                       <td className="max-w-[100px] truncate py-2 pr-2" title={c.name}>
@@ -1225,7 +1225,7 @@ export default function AdminPage() {
                         </label>
                         <select
                           id={`st-${c.id}`}
-                          className="max-w-[130px] rounded-lg border border-slate-200 bg-slate-50 py-1.5 pl-2 text-xs font-medium text-slate-900"
+                          className="max-w-[130px] rounded-lg border border-sa-border bg-sa-bg py-1.5 pl-2 text-xs font-medium text-white"
                           value={c.status || "new"}
                           disabled={leadLoading}
                           onChange={async (e) => {
@@ -1262,14 +1262,14 @@ export default function AdminPage() {
                         />
                       </td>
                       <td
-                        className="max-w-sm py-2 pr-2 text-slate-700"
+                        className="max-w-sm py-2 pr-2 text-sa-muted"
                         title={c.message.length > 200 ? c.message : undefined}
                       >
-                        {ghs ? <span className="mr-2 font-semibold text-slate-900">{ghs}</span> : null}
+                        {ghs ? <span className="mr-2 font-semibold text-white">{ghs}</span> : null}
                         {truncate(c.message, 160)}
                         {linkedProjectId ? (
                           <div className="mt-1 space-y-1">
-                            <p className="text-[11px] text-slate-500">
+                            <p className="text-[11px] text-sa-muted/60">
                               Linked project:{" "}
                               <span className="rounded-full border border-emerald-200 bg-emerald-50 px-1.5 py-0.5 font-mono text-emerald-800">
                                 {linkedProjectId}
@@ -1286,7 +1286,7 @@ export default function AdminPage() {
                                     setToast({ kind: "error", text: "Could not copy project ID." });
                                   }
                                 }}
-                                className="rounded-md border border-slate-300 bg-white px-2 py-0.5 text-[11px] font-semibold text-slate-700 hover:border-slate-400"
+                                className="rounded-md border border-sa-border bg-sa-surface px-2 py-0.5 text-[11px] font-semibold text-sa-muted hover:border-sa-border/80"
                               >
                                 Copy ID
                               </button>
@@ -1297,7 +1297,7 @@ export default function AdminPage() {
                                   const target = document.getElementById("admin-client-projects");
                                   target?.scrollIntoView({ behavior: "smooth", block: "start" });
                                 }}
-                                className="rounded-md border border-slate-300 bg-white px-2 py-0.5 text-[11px] font-semibold text-slate-700 hover:border-slate-400"
+                                className="rounded-md border border-sa-border bg-sa-surface px-2 py-0.5 text-[11px] font-semibold text-sa-muted hover:border-sa-border/80"
                               >
                                 Find in projects
                               </button>
@@ -1376,7 +1376,7 @@ export default function AdminPage() {
                                   setProjectBusy(false);
                                 }
                               }}
-                              className="rounded-md border border-ocean-300 bg-white px-2 py-1 text-[11px] font-semibold text-ocean-800 hover:border-ocean-400 disabled:opacity-60"
+                              className="rounded-md border border-sa-primary/30 bg-sa-surface px-2 py-1 text-[11px] font-semibold text-white hover:border-sa-primary/40 disabled:opacity-60"
                             >
                               {convertingLeadId === c.id
                                 ? "Converting..."
@@ -1385,7 +1385,7 @@ export default function AdminPage() {
                           </div>
                         ) : null}
                         {unifiedRef ? (
-                          <p className="mt-1 text-[11px] text-slate-500">
+                          <p className="mt-1 text-[11px] text-sa-muted/60">
                             Ref: <span className="font-mono">{unifiedRef}</span>
                           </p>
                         ) : null}
@@ -1395,17 +1395,17 @@ export default function AdminPage() {
                 })}
               </tbody>
             </table>
-            {(contacts ?? []).length === 0 ? <p className="mt-2 text-sm text-slate-500">No rows yet.</p> : null}
+            {(contacts ?? []).length === 0 ? <p className="mt-2 text-sm text-sa-muted/60">No rows yet.</p> : null}
           </div>
         </section>
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-lg font-bold text-slate-900">Namecheap orders</h2>
-          <p className="mt-1 text-sm text-slate-600">
+        <section className="rounded-2xl border border-sa-border bg-sa-surface p-5 ">
+          <h2 className="text-lg font-bold text-white">Namecheap orders</h2>
+          <p className="mt-1 text-sm text-sa-muted/80">
             Unified checkout attempts with per-item domain, SSL, and hosting outcomes.
           </p>
-          <div className="mt-2 flex flex-wrap items-center gap-2 text-[11px] text-slate-600">
-            <span className="font-semibold text-slate-700">Depth legend:</span>
+          <div className="mt-2 flex flex-wrap items-center gap-2 text-[11px] text-sa-muted/80">
+            <span className="font-semibold text-sa-muted">Depth legend:</span>
             <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 font-semibold text-emerald-800">
               Root
             </span>
@@ -1417,13 +1417,13 @@ export default function AdminPage() {
             </span>
           </div>
           {activeOrderChainRef ? (
-            <div className="mt-3 inline-flex items-center gap-2 rounded-lg border border-ocean-200 bg-ocean-50 px-3 py-1.5 text-xs text-ocean-900">
+            <div className="mt-3 inline-flex items-center gap-2 rounded-lg border border-sa-primary/20 bg-sa-primary/10 px-3 py-1.5 text-xs text-white">
               Showing related retries for{" "}
               <span className="font-mono font-semibold">{activeOrderChainRef}</span>
               <button
                 type="button"
                 onClick={() => setActiveOrderChainRef(null)}
-                className="rounded-md border border-ocean-300 bg-white px-2 py-0.5 font-semibold text-ocean-800 hover:border-ocean-400"
+                className="rounded-md border border-sa-primary/30 bg-sa-surface px-2 py-0.5 font-semibold text-white hover:border-sa-primary/40"
               >
                 Clear
               </button>
@@ -1447,7 +1447,7 @@ export default function AdminPage() {
           <div className="mt-3 overflow-x-auto">
             <table className="min-w-[760px] w-full text-left text-sm">
               <thead>
-                <tr className="text-xs uppercase text-slate-500">
+                <tr className="text-xs uppercase text-sa-muted/60">
                   <th className="py-2 pr-3">When</th>
                   <th className="py-2 pr-3">Checkout ref</th>
                   <th className="py-2 pr-3">User</th>
@@ -1484,13 +1484,13 @@ export default function AdminPage() {
                     );
                     const contactPayload = unifiedDomainContact(c.metadata);
                     return (
-                      <tr key={c.id} className="border-t border-slate-100 align-top">
-                        <td className="whitespace-nowrap py-2 pr-3 text-slate-600">
+                      <tr key={c.id} className="border-t border-sa-border align-top">
+                        <td className="whitespace-nowrap py-2 pr-3 text-sa-muted/80">
                           {new Date(c.createdAt).toLocaleString()}
                         </td>
                         <td className="py-2 pr-3">
-                          <span className="font-mono text-xs text-slate-800">{ref || "N/A"}</span>
-                          <p className="mt-1 text-[11px] text-slate-500">
+                          <span className="font-mono text-xs text-white">{ref || "N/A"}</span>
+                          <p className="mt-1 text-[11px] text-sa-muted/60">
                             <span
                               className={`rounded-full border px-1.5 py-0.5 font-semibold uppercase tracking-wide ${depthBadgeClass(
                                 depth,
@@ -1500,7 +1500,7 @@ export default function AdminPage() {
                             </span>
                           </p>
                           {parentRef ? (
-                            <p className="mt-1 text-[11px] text-slate-500">
+                            <p className="mt-1 text-[11px] text-sa-muted/60">
                               Retry of <span className="font-mono">{parentRef}</span>
                             </p>
                           ) : null}
@@ -1508,17 +1508,17 @@ export default function AdminPage() {
                             <button
                               type="button"
                               onClick={() => setActiveOrderChainRef(chainRef)}
-                              className="mt-1 block rounded-md border border-slate-300 bg-white px-2 py-0.5 text-[11px] font-semibold text-slate-700 hover:border-slate-400"
+                              className="mt-1 block rounded-md border border-sa-border bg-sa-surface px-2 py-0.5 text-[11px] font-semibold text-sa-muted hover:border-sa-border/80"
                             >
                               View related retries
                             </button>
                           ) : null}
                         </td>
-                        <td className="max-w-[200px] truncate py-2 pr-3 text-xs text-slate-700" title={c.email}>
+                        <td className="max-w-[200px] truncate py-2 pr-3 text-xs text-sa-muted" title={c.email}>
                           {c.email}
                         </td>
                         <td className="py-2 pr-3">
-                          <span className="inline-flex rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-slate-700">
+                          <span className="inline-flex rounded-full border border-sa-border bg-sa-bg px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-sa-muted">
                             {c.status}
                           </span>
                           {retryItems.length > 0 ? (
@@ -1567,7 +1567,7 @@ export default function AdminPage() {
                                     setRetryingRef(null);
                                   }
                                 }}
-                                className="rounded-md border border-slate-300 bg-white px-2 py-1 text-[11px] font-semibold text-slate-700 hover:border-slate-400 disabled:opacity-60"
+                                className="rounded-md border border-sa-border bg-sa-surface px-2 py-1 text-[11px] font-semibold text-sa-muted hover:border-sa-border/80 disabled:opacity-60"
                               >
                                 {retryingRef === (ref || c.id)
                                   ? "Retrying…"
@@ -1578,28 +1578,28 @@ export default function AdminPage() {
                         </td>
                         <td className="py-2 pr-3">
                           {rows.length === 0 ? (
-                            <p className="text-xs text-slate-500">No item rows recorded.</p>
+                            <p className="text-xs text-sa-muted/60">No item rows recorded.</p>
                           ) : (
                             <ul className="space-y-1.5">
                               {rows.map((r, idx) => (
                                 <li
                                   key={`${c.id}-result-${idx}`}
-                                  className="rounded-md border border-slate-200 bg-slate-50 px-2 py-1.5"
+                                  className="rounded-md border border-sa-border bg-sa-bg px-2 py-1.5"
                                 >
-                                  <p className="text-xs font-semibold text-slate-800">
+                                  <p className="text-xs font-semibold text-white">
                                     {r.label || "Item"}{" "}
-                                    <span className="text-slate-500">
+                                    <span className="text-sa-muted/60">
                                       ({r.kind || "unknown"})
                                     </span>
                                   </p>
-                                  <p className="text-[11px] text-slate-600">Status: {r.status || "unknown"}</p>
+                                  <p className="text-[11px] text-sa-muted/80">Status: {r.status || "unknown"}</p>
                                   {r.orderId ? (
-                                    <p className="text-[11px] text-slate-500">
+                                    <p className="text-[11px] text-sa-muted/60">
                                       Order ID: <span className="font-mono">{r.orderId}</span>
                                     </p>
                                   ) : null}
                                   {r.certificateId ? (
-                                    <p className="text-[11px] text-slate-500">
+                                    <p className="text-[11px] text-sa-muted/60">
                                       Certificate ID:{" "}
                                       <span className="font-mono">{r.certificateId}</span>
                                     </p>
@@ -1618,27 +1618,27 @@ export default function AdminPage() {
               </tbody>
             </table>
             {filteredUnified.length === 0 ? (
-              <p className="mt-2 text-sm text-slate-500">No Namecheap unified orders yet.</p>
+              <p className="mt-2 text-sm text-sa-muted/60">No Namecheap unified orders yet.</p>
             ) : null}
           </div>
             );
           })()}
         </section>
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-lg font-bold text-slate-900">Help center feedback summary</h2>
-          <p className="mt-1 text-sm text-slate-600">
+        <section className="rounded-2xl border border-sa-border bg-sa-surface p-5 ">
+          <h2 className="text-lg font-bold text-white">Help center feedback summary</h2>
+          <p className="mt-1 text-sm text-sa-muted/80">
             Captured from the &quot;Was this helpful?&quot; buttons in Help Center.
           </p>
-          <p className="mt-2 text-sm font-semibold text-slate-800">
+          <p className="mt-2 text-sm font-semibold text-white">
             Total feedback captured: {helpFeedback?.totalFeedback ?? 0}
           </p>
-          <p className="mt-1 text-xs text-slate-600">
+          <p className="mt-1 text-xs text-sa-muted/80">
             Trend: 7d {helpFeedback7d?.totalFeedback ?? 0} vs 30d {helpFeedback30d?.totalFeedback ?? 0}
           </p>
           <div className="mt-3 overflow-x-auto">
             <table className="min-w-full text-left text-sm">
-              <thead className="text-xs uppercase tracking-wide text-slate-500">
+              <thead className="text-xs uppercase tracking-wide text-sa-muted/60">
                 <tr>
                   <th className="py-2 pr-3">Article</th>
                   <th className="py-2 pr-3">Yes</th>
@@ -1649,16 +1649,16 @@ export default function AdminPage() {
               <tbody>
                 {!helpFeedback || helpFeedback.articles.length === 0 ? (
                   <tr>
-                    <td className="py-3 text-slate-600" colSpan={4}>
+                    <td className="py-3 text-sa-muted/80" colSpan={4}>
                       No help center feedback yet.
                     </td>
                   </tr>
                 ) : (
                   helpFeedback.articles.map((row) => (
-                    <tr key={row.articleId} className="border-t border-slate-100">
-                      <td className="py-2 pr-3 text-slate-700">
+                    <tr key={row.articleId} className="border-t border-sa-border">
+                      <td className="py-2 pr-3 text-sa-muted">
                         <p className="font-medium">{HELP_ARTICLE_LABELS[row.articleId] ?? row.articleId}</p>
-                        <p className="font-mono text-[11px] text-slate-500">{row.articleId}</p>
+                        <p className="font-mono text-[11px] text-sa-muted/60">{row.articleId}</p>
                       </td>
                       <td className="py-2 pr-3">{row.yes}</td>
                       <td className="py-2 pr-3">{row.no}</td>
@@ -1671,12 +1671,12 @@ export default function AdminPage() {
           </div>
         </section>
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-lg font-bold text-slate-900">Users</h2>
+        <section className="rounded-2xl border border-sa-border bg-sa-surface p-5 ">
+          <h2 className="text-lg font-bold text-white">Users</h2>
           <div className="mt-3 overflow-x-auto">
             <table className="min-w-full text-left text-sm">
               <thead>
-                <tr className="text-xs uppercase text-slate-500">
+                <tr className="text-xs uppercase text-sa-muted/60">
                   <th className="py-2 pr-2">Email</th>
                   <th className="py-2 pr-2">Role</th>
                   <th className="py-2 pr-2">Wallet</th>
@@ -1685,13 +1685,13 @@ export default function AdminPage() {
               </thead>
               <tbody>
                 {(users ?? []).map((u) => (
-                  <tr key={u.id} className="border-t border-slate-100">
+                  <tr key={u.id} className="border-t border-sa-border">
                     <td className="py-2 pr-2 font-mono text-xs">{u.email}</td>
                     <td className="py-2 pr-2">{u.role}</td>
                     <td className="py-2 pr-2 tabular-nums">
                       ₵{(Number(u.walletBalanceMinor) / 100).toFixed(2)} {u.walletCurrency}
                     </td>
-                    <td className="py-2 pr-2 text-slate-600">
+                    <td className="py-2 pr-2 text-sa-muted/80">
                       {new Date(u.createdAt).toLocaleString()}
                     </td>
                   </tr>
@@ -1701,12 +1701,12 @@ export default function AdminPage() {
           </div>
         </section>
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-lg font-bold text-slate-900">Past-due & suspended</h2>
+        <section className="rounded-2xl border border-sa-border bg-sa-surface p-5 ">
+          <h2 className="text-lg font-bold text-white">Past-due & suspended</h2>
           <div className="mt-3 overflow-x-auto">
             <table className="min-w-full text-left text-sm">
               <thead>
-                <tr className="text-xs uppercase text-slate-500">
+                <tr className="text-xs uppercase text-sa-muted/60">
                   <th className="py-2 pr-2">User</th>
                   <th className="py-2 pr-2">Plan</th>
                   <th className="py-2 pr-2">Status</th>
@@ -1715,29 +1715,29 @@ export default function AdminPage() {
               </thead>
               <tbody>
                 {(issues ?? []).map((r) => (
-                  <tr key={r.id} className="border-t border-slate-100">
+                  <tr key={r.id} className="border-t border-sa-border">
                     <td className="max-w-[200px] truncate py-2 pr-2 text-xs" title={r.userEmail}>
                       {r.userEmail}
                     </td>
                     <td className="py-2 pr-2">{r.planName}</td>
                     <td className="py-2 pr-2 font-semibold">{r.status}</td>
-                    <td className="py-2 pr-2 text-slate-600">
+                    <td className="py-2 pr-2 text-sa-muted/80">
                       {new Date(r.nextRenewalAt).toLocaleDateString()}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            {(issues ?? []).length === 0 ? <p className="mt-2 text-sm text-slate-500">No rows.</p> : null}
+            {(issues ?? []).length === 0 ? <p className="mt-2 text-sm text-sa-muted/60">No rows.</p> : null}
           </div>
         </section>
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-lg font-bold text-slate-900">Recent transactions</h2>
+        <section className="rounded-2xl border border-sa-border bg-sa-surface p-5 ">
+          <h2 className="text-lg font-bold text-white">Recent transactions</h2>
           <div className="mt-3 overflow-x-auto">
             <table className="min-w-full text-left text-sm">
               <thead>
-                <tr className="text-xs uppercase text-slate-500">
+                <tr className="text-xs uppercase text-sa-muted/60">
                   <th className="py-2 pr-2">When</th>
                   <th className="py-2 pr-2">User</th>
                   <th className="py-2 pr-2">Type</th>
@@ -1747,8 +1747,8 @@ export default function AdminPage() {
               </thead>
               <tbody>
                 {(txs ?? []).map((t) => (
-                  <tr key={t.id} className="border-t border-slate-100">
-                    <td className="whitespace-nowrap py-2 pr-2 text-slate-600">
+                  <tr key={t.id} className="border-t border-sa-border">
+                    <td className="whitespace-nowrap py-2 pr-2 text-sa-muted/80">
                       {new Date(t.createdAt).toLocaleString()}
                     </td>
                     <td className="max-w-[180px] truncate py-2 pr-2 text-xs" title={t.userEmail}>

@@ -53,7 +53,7 @@
     @apply border-gray-200;
   }
   body {
-    @apply bg-white text-[hsl(var(--text-primary))];
+    @apply bg-sa-bg text-sa-muted;
   }
 
   /* WCAG 2.1 AA: visible focus for keyboard users */

@@ -18,12 +18,15 @@ export function SaHeroSection() {
       </div>
 
       {/* Huge Stroked Text (Initial State) */}
-      <div 
-        className={`absolute inset-0 z-10 flex items-center justify-center transition-opacity duration-700 pointer-events-none ${
-          hoveredIndex !== null ? "opacity-0" : "opacity-100"
-        }`}
+      <div
+        className={`absolute inset-0 z-10 flex flex-col items-center justify-center transition-opacity duration-700 pointer-events-none ${hoveredIndex !== null ? "opacity-0" : "opacity-100"
+          }`}
       >
-        <h1 
+        <div className="mb-4 flex items-center gap-3 rounded-full border border-white/20 bg-black/40 px-4 py-2 backdrop-blur-md">
+          <span className="h-1.5 w-1.5 rounded-full bg-sa-primary animate-pulse" />
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80">Engineered for Results</span>
+        </div>
+        <h1
           className="font-heading text-[12vw] font-bold tracking-tighter uppercase leading-none"
           style={{
             WebkitTextStroke: "2px rgba(255, 255, 255, 0.4)",
@@ -32,13 +35,15 @@ export function SaHeroSection() {
         >
           OceanCyber
         </h1>
+        <div className="mt-6 text-[11px] font-medium uppercase tracking-[0.3em] text-sa-muted/60">
+          Accra · London · Global
+        </div>
       </div>
 
       {/* Default Background Image */}
-      <div 
-        className={`absolute inset-0 z-0 transition-opacity duration-1000 ${
-          hoveredIndex !== null ? "opacity-0" : "opacity-40"
-        }`}
+      <div
+        className={`absolute inset-0 z-0 transition-opacity duration-1000 ${hoveredIndex !== null ? "opacity-0" : "opacity-40"
+          }`}
       >
         <Image
           src={heroServiceSlides[0].image}
@@ -51,11 +56,10 @@ export function SaHeroSection() {
 
       {/* Hovered Background Images (Full Width) */}
       {heroServiceSlides.map((slide, index) => (
-        <div 
+        <div
           key={`bg-${slide.title}`}
-          className={`absolute inset-0 z-0 transition-all duration-1000 ease-in-out ${
-            hoveredIndex === index ? "opacity-100 scale-105" : "opacity-0 scale-100"
-          }`}
+          className={`absolute inset-0 z-0 transition-all duration-1000 ease-in-out ${hoveredIndex === index ? "opacity-100 scale-105" : "opacity-0 scale-100"
+            }`}
         >
           <Image
             src={slide.image}
@@ -86,32 +90,34 @@ export function SaHeroSection() {
                 {/* When hovered, show huge stroked text for the specific service */}
                 {isHovered && (
                   <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none w-max z-30">
-                     <h2 
-                        className="font-heading text-[10vw] font-bold tracking-tight uppercase leading-none whitespace-nowrap animate-fade-in"
-                        style={{
-                          WebkitTextStroke: "1px rgba(255, 255, 255, 0.6)",
-                          color: "transparent",
-                        }}
-                      >
-                        {slide.title}
-                      </h2>
+                    <h2
+                      className="font-heading text-[10vw] font-bold tracking-tight uppercase leading-none whitespace-nowrap animate-fade-in"
+                      style={{
+                        WebkitTextStroke: "1px rgba(255, 255, 255, 0.6)",
+                        color: "transparent",
+                      }}
+                    >
+                      {slide.title}
+                    </h2>
                   </div>
                 )}
-                
-                <h3 className={`font-heading text-xl font-bold uppercase tracking-widest text-white transition-all duration-500 md:text-2xl ${
-                  isHovered ? "opacity-0 -translate-y-10" : "opacity-100"
-                }`}>
+
+                <div className="mb-4 flex items-center justify-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-sa-primary animate-pulse" />
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80">Engineered for Results</span>
+                </div>
+
+                <h3 className={`font-heading text-xl font-bold uppercase tracking-widest text-white transition-all duration-500 md:text-2xl ${isHovered ? "opacity-0 -translate-y-10" : "opacity-100"
+                  }`}>
                   {slide.title}
                 </h3>
-                <div className={`mx-auto mt-6 h-12 w-12 flex items-center justify-center rounded-full border border-white/30 transition-all duration-500 ${
-                  isHovered ? "border-sa-primary bg-sa-primary/20 scale-125" : "group-hover:border-white group-hover:bg-white/10"
-                }`}>
-                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transform transition-all duration-500 ${
-                     isHovered ? "-rotate-45 text-sa-primary" : "text-white"
-                   }`}>
-                     <line x1="5" y1="12" x2="19" y2="12"></line>
-                     <polyline points="12 5 19 12 12 19"></polyline>
-                   </svg>
+                <div className={`mx-auto mt-6 h-12 w-12 flex items-center justify-center rounded-full border border-white/30 transition-all duration-500 ${isHovered ? "border-sa-primary bg-sa-primary/20 scale-125" : "group-hover:border-white group-hover:bg-white/10"
+                  }`}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transform transition-all duration-500 ${isHovered ? "-rotate-45 text-sa-primary" : "text-white"
+                    }`}>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
                 </div>
               </div>
             </Link>

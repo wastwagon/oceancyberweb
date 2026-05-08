@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { clearAccessToken, getProfile, listClientRequests, type ClientRequestRow } from "@/lib/auth-client";
+import { cn } from "@/lib/utils";
 
 function sourceLabel(source: string | null) {
   if (source === "contact_form") return "Contact form";
@@ -22,10 +23,10 @@ function unifiedCheckoutRef(metadata: unknown): string | null {
 }
 
 function statusBadge(status: string) {
-  if (status === "won") return "border-emerald-200 bg-emerald-50 text-emerald-800";
-  if (status === "contacted") return "border-ocean-200 bg-ocean-50 text-ocean-800";
-  if (status === "lost") return "border-slate-300 bg-slate-100 text-slate-700";
-  return "border-amber-200 bg-amber-50 text-amber-900";
+  if (status === "won") return "border-emerald-500/30 bg-emerald-500/10 text-emerald-400";
+  if (status === "contacted") return "border-sa-primary/30 bg-sa-primary/10 text-sa-primary";
+  if (status === "lost") return "border-sa-border bg-sa-bg text-sa-muted/60";
+  return "border-amber-500/30 bg-amber-500/10 text-amber-400";
 }
 
 export default function ClientRequestsPage() {
@@ -52,34 +53,34 @@ export default function ClientRequestsPage() {
   }, []);
 
   return (
-    <main className="bg-gradient-to-b from-slate-50 via-white to-slate-100 px-4 py-10 md:py-14">
-      <div className="mx-auto w-full max-w-5xl space-y-6">
-        <header className="rounded-3xl border border-slate-200/90 bg-white p-5 shadow-sm ring-1 ring-slate-200/60 md:p-7">
-          <div className="flex flex-wrap items-start justify-between gap-3">
+    <main className="sa-shell min-h-screen bg-sa-bg pt-28 pb-16 md:py-36">
+      <div className="sa-container max-w-5xl space-y-6">
+        <header className="sa-card p-6 border-sa-border md:p-8">
+          <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-ocean-600">Dashboard</p>
-              <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">Project requests</h1>
-              <p className="mt-1 text-sm text-slate-600">{email || "Signed-in user"}</p>
-              <p className="mt-2 max-w-2xl text-sm text-slate-600">
+              <p className="sa-eyebrow inline-flex">Dashboard</p>
+              <h1 className="sa-title !text-left mt-3 text-2xl md:text-3xl">Project requests</h1>
+              <p className="mt-1 text-sm text-sa-muted/80">{email || "Signed-in user"}</p>
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-sa-muted/80">
                 Track submissions across intake, proposal requests, Namecheap checkout, and website-to-app quotes.
               </p>
             </div>
-            <div className="rounded-xl border border-ocean-200 bg-ocean-50 px-3 py-2 text-xs font-semibold text-ocean-800">
+            <div className="rounded-2xl border border-sa-primary/20 bg-sa-primary/10 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-sa-primary">
               Lead status overview
             </div>
           </div>
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/dashboard"
-              className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-400"
+              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-5 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition-colors hover:border-sa-primary/50 hover:text-white"
             >
               Back to billing
             </Link>
             <Link
               href="/services/website-to-mobile-app"
-              className="rounded-xl border border-ocean-300 bg-ocean-50 px-4 py-2 text-sm font-semibold text-ocean-800 hover:border-ocean-400"
+              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-sa-primary/30 bg-sa-primary/10 px-5 text-[10px] font-bold uppercase tracking-widest text-sa-primary transition-colors hover:border-sa-primary hover:text-white"
             >
-              Website-to-Mobile App Conversion Quote
+              App Quote
             </Link>
             <button
               type="button"
@@ -87,74 +88,75 @@ export default function ClientRequestsPage() {
                 clearAccessToken();
                 window.location.href = "/signin";
               }}
-              className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-400"
+              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-rose-500/30 bg-rose-500/10 px-5 text-[10px] font-bold uppercase tracking-widest text-rose-400 transition-colors hover:border-rose-500 hover:text-white"
             >
               Sign out
             </button>
           </div>
         </header>
 
-        {loading ? <p className="text-slate-600">Loading requests...</p> : null}
+        {loading ? <p className="text-sa-muted text-sm px-2">Loading requests...</p> : null}
         {error ? (
-          <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{error}</div>
+          <div className="rounded-2xl border border-rose-500/50 bg-rose-500/10 px-5 py-4 text-sm text-rose-400">{error}</div>
         ) : null}
 
         {!loading && !error ? (
-          <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <div className="mb-3 flex items-start justify-between gap-3">
+          <section className="sa-card p-6 border-sa-border md:p-8">
+            <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
               <div>
-                <h2 className="text-lg font-bold text-slate-900">Your submitted requests</h2>
-                <p className="mt-1 text-sm text-slate-600">
+                <h2 className="font-heading text-xl font-bold text-white">Your submitted requests</h2>
+                <p className="mt-2 text-sm text-sa-muted/80">
                   Track request status across intake, proposal, calculator, and contact submissions.
                 </p>
               </div>
               <Link
                 href="/get-started"
-                className="rounded-lg bg-ocean-600 px-3 py-2 text-sm font-bold text-white hover:bg-ocean-700"
+                className="sa-btn-primary min-h-[44px] px-6 text-[10px]"
               >
                 New request
               </Link>
             </div>
             <div className="overflow-x-auto">
-              <table className="min-w-full text-left text-sm">
-                <thead className="text-xs uppercase tracking-wide text-slate-500">
+              <table className="min-w-full text-left text-sm whitespace-nowrap">
+                <thead className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60 border-b border-sa-border">
                   <tr>
-                    <th className="py-2 pr-4">Type</th>
-                    <th className="py-2 pr-4">Status</th>
-                    <th className="py-2 pr-4">Last update</th>
-                    <th className="py-2 pr-4">Summary</th>
+                    <th className="py-3 pr-6">Type</th>
+                    <th className="py-3 pr-6">Status</th>
+                    <th className="py-3 pr-6">Last update</th>
+                    <th className="py-3 pr-6">Summary</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="divide-y divide-sa-border/50">
                   {rows.length === 0 ? (
                     <tr>
-                      <td className="py-3 text-slate-600" colSpan={4}>
+                      <td className="py-6 text-sa-muted/80 text-center" colSpan={4}>
                         No requests yet.
                       </td>
                     </tr>
                   ) : (
                     rows.map((r) => (
-                      <tr key={r.id} className="border-t border-slate-100 align-top">
-                        <td className="py-3 pr-4">{sourceLabel(r.source)}</td>
-                        <td className="py-3 pr-4">
+                      <tr key={r.id} className="transition-colors hover:bg-sa-surface/50">
+                        <td className="py-4 pr-6 text-white">{sourceLabel(r.source)}</td>
+                        <td className="py-4 pr-6">
                           <span
-                            className={`inline-flex rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${statusBadge(
-                              r.status,
-                            )}`}
+                            className={cn(
+                              "inline-flex rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-widest",
+                              statusBadge(r.status)
+                            )}
                           >
                             {r.status}
                           </span>
                         </td>
-                        <td className="py-3 pr-4 whitespace-nowrap text-slate-600">
+                        <td className="py-4 pr-6 text-sa-muted/80">
                           {new Date(r.updatedAt).toLocaleString()}
                         </td>
-                        <td className="max-w-xl py-3 pr-4 text-slate-700">
+                        <td className="py-4 pr-6 text-sa-muted whitespace-normal max-w-md">
                           {r.message.slice(0, 180)}
                           {r.message.length > 180 ? "..." : ""}
                           {r.source === "namecheap_unified_checkout" ? (
-                            <p className="mt-1 text-xs text-slate-500">
+                            <p className="mt-2 text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">
                               Ref:{" "}
-                              <span className="font-mono">
+                              <span className="font-mono text-sa-muted">
                                 {unifiedCheckoutRef(r.metadata) || "N/A"}
                               </span>
                             </p>

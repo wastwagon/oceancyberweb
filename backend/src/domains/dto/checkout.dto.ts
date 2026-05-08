@@ -25,20 +25,44 @@ export interface CheckoutResult {
 
 export class DomainContactDto {
   @IsEmail()
-  @IsOptional()
-  emailAddress?: string;
+  @IsNotEmpty()
+  emailAddress!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  firstName!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  lastName!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  phone!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  address1!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  city!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  stateProvince!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  postalCode!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  country!: string;
 
   @IsString()
   @IsOptional()
-  firstName?: string;
-
-  @IsString()
-  @IsOptional()
-  lastName?: string;
-
-  @IsString()
-  @IsOptional()
-  phone?: string;
+  organizationName?: string;
 }
 
 export class CheckoutItemDto {

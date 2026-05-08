@@ -75,30 +75,51 @@ export class DomainsService {
       `Processing unified checkout for ${data.domainContact?.emailAddress || "unknown"}`,
     );
 
+    const cfg = this.getNamecheapConfig();
     const results: CheckoutResult[] = [];
     const checkoutRef =
       "UC-" + Math.random().toString(36).slice(2, 9).toUpperCase();
 
     for (const item of data.items) {
       if (item.kind === "domain") {
-        // Mock Namecheap registration
-        results.push({
-          kind: "domain",
-          label: item.label,
-          status: "success",
-          orderId:
-            "NC-D-" + Math.random().toString(36).slice(2, 7).toUpperCase(),
-          message: "Domain registered successfully via sandbox.",
-        });
+        if (cfg && data.domainContact) {
+          const res = await this.registerDomain(item.label, data.domainContact, cfg);
+          results.push({
+            kind: "domain",
+            label: item.label,
+            status: res.ok ? "success" : "failed",
+            orderId: res.orderId,
+            message: res.message || (res.ok ? "Domain registered successfully." : "Registration failed."),
+          });
+        } else {
+          // Fallback to mock if not configured
+          results.push({
+            kind: "domain",
+            label: item.label,
+            status: "success",
+            orderId: "MOCK-D-" + Math.random().toString(36).slice(2, 7).toUpperCase(),
+            message: "Domain registered successfully (MOCK).",
+          });
+        }
       } else if (item.kind === "ssl") {
-        results.push({
-          kind: "ssl",
-          label: item.label,
-          status: "success",
-          certificateId:
-            "NC-S-" + Math.random().toString(36).slice(2, 7).toUpperCase(),
-          message: "SSL certificate provisioned.",
-        });
+        if (cfg) {
+          const res = await this.createSsl(item.label, cfg);
+          results.push({
+            kind: "ssl",
+            label: item.label,
+            status: res.ok ? "success" : "failed",
+            certificateId: res.certificateId,
+            message: res.message || (res.ok ? "SSL provisioned." : "SSL provisioning failed."),
+          });
+        } else {
+          results.push({
+            kind: "ssl",
+            label: item.label,
+            status: "success",
+            certificateId: "MOCK-S-" + Math.random().toString(36).slice(2, 7).toUpperCase(),
+            message: "SSL certificate provisioned (MOCK).",
+          });
+        }
       } else {
         results.push({
           kind: item.kind,
@@ -109,11 +130,86 @@ export class DomainsService {
       }
     }
 
-    // In a real scenario, we'd save this to a 'Transaction' or 'Order' table
     this.logger.log(
       `Checkout ${checkoutRef} completed with ${results.length} items`,
     );
 
     return { ok: true, checkoutRef, results };
+  }
+
+  private async registerDomain(domain: string, contact: DomainContactDto, cfg: any) {
+    const params = new URLSearchParams({
+      ApiUser: cfg.apiUser,
+      ApiKey: cfg.apiKey,
+      UserName: cfg.userName,
+      ClientIp: cfg.clientIp,
+      Command: "namecheap.domains.create",
+      DomainName: domain,
+      Years: "1",
+    });
+
+    // Add contact details for all 4 roles
+    const roles = ["Registrant", "Admin", "Tech", "AuxBilling"];
+    for (const role of roles) {
+      params.append(`${role}FirstName`, contact.firstName);
+      params.append(`${role}LastName`, contact.lastName);
+      params.append(`${role}Address1`, contact.address1);
+      params.append(`${role}City`, contact.city);
+      params.append(`${role}StateProvince`, contact.stateProvince);
+      params.append(`${role}PostalCode`, contact.postalCode);
+      params.append(`${role}Country`, contact.country);
+      params.append(`${role}Phone`, contact.phone);
+      params.append(`${role}EmailAddress`, contact.emailAddress);
+      if (contact.organizationName) {
+        params.append(`${role}OrganizationName`, contact.organizationName);
+      }
+    }
+
+    try {
+      const res = await fetch(`${this.getBaseUrl(cfg.useSandbox)}?${params.toString()}`);
+      const xml = await res.text();
+      
+      const successMatch = /IsSuccess="true"/i.test(xml);
+      if (successMatch) {
+        const orderIdMatch = /OrderID="([^"]*)"/i.exec(xml);
+        return { ok: true, orderId: orderIdMatch?.[1] };
+      } else {
+        const errorMatch = /<Error\b[^>]*>([^<]*)<\/Error>/i.exec(xml);
+        return { ok: false, message: errorMatch?.[1] || "Namecheap API error" };
+      }
+    } catch (e) {
+      this.logger.error(`Registration failed for ${domain}`, e);
+      return { ok: false, message: "Network error during registration" };
+    }
+  }
+
+  private async createSsl(domain: string, cfg: any) {
+    // Basic PositiveSSL creation
+    const params = new URLSearchParams({
+      ApiUser: cfg.apiUser,
+      ApiKey: cfg.apiKey,
+      UserName: cfg.userName,
+      ClientIp: cfg.clientIp,
+      Command: "namecheap.ssl.create",
+      Type: "PositiveSSL",
+      Years: "1",
+    });
+
+    try {
+      const res = await fetch(`${this.getBaseUrl(cfg.useSandbox)}?${params.toString()}`);
+      const xml = await res.text();
+      
+      const successMatch = /IsSuccess="true"/i.test(xml);
+      if (successMatch) {
+        const certIdMatch = /CertificateID="([^"]*)"/i.exec(xml);
+        return { ok: true, certificateId: certIdMatch?.[1] };
+      } else {
+        const errorMatch = /<Error\b[^>]*>([^<]*)<\/Error>/i.exec(xml);
+        return { ok: false, message: errorMatch?.[1] || "Namecheap API error" };
+      }
+    } catch (e) {
+      this.logger.error(`SSL creation failed for ${domain}`, e);
+      return { ok: false, message: "Network error during SSL creation" };
+    }
   }
 }

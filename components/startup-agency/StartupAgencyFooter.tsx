@@ -55,12 +55,12 @@ export function StartupAgencyFooter() {
                 />
               </Link>
               <p className="mt-8 max-w-md text-lg leading-relaxed text-sa-muted/80">
-                Ready to elevate your digital presence? We ship with clear milestones, disciplined delivery, and Ghana‑based support for ambitious African brands.
+                The partner for teams that need to ship reliable code. We focus on hard engineering, clear milestones, and regional support for ambitious African products.
               </p>
 
               <div className="mt-12">
                 <p className="mb-4 font-heading text-xs font-bold uppercase tracking-[0.2em] text-sa-primary">
-                  Emergency Support
+                  Need immediate help?
                 </p>
                 <div className="flex items-center gap-4 rounded-2xl border border-sa-primary/20 bg-sa-primary/5 p-4 max-w-sm group">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sa-primary text-black">
@@ -68,7 +68,7 @@ export function StartupAgencyFooter() {
                   </div>
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">
-                      24/7 Security Line
+                      Technical & Security Ops
                     </p>
                     <a href="tel:+233242565695" className="font-heading text-sm font-bold text-white transition-colors group-hover:text-sa-primary">
                       +233 242 565 695

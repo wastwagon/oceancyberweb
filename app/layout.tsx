@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Oswald } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { StartupAgencyNavbar } from "@/components/startup-agency/StartupAgencyNavbar";
 import { StartupAgencyFooter } from "@/components/startup-agency/StartupAgencyFooter";
@@ -12,26 +12,26 @@ import { WebVitals } from "@/components/analytics/WebVitals";
 import { AppProviders } from "@/components/providers/AppProviders";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-const oswald = Oswald({
+const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-heading",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "OceanCyber | Web & Mobile App Development in Ghana",
+    default: "OceanCyber | Engineering Digital Products that Scale",
     template: "%s | OceanCyber",
   },
   description:
-    "Web and mobile app development partner in Ghana. We design, build, and secure digital products for teams across multiple industries.",
+    "We build and secure high-performance digital products for teams across Ghana. From GH¢3T MoMo ecosystems to zero-trust security — we ship solid code with zero fluff.",
   keywords: [
     "web development Ghana",
     "mobile app development Accra",
-    "IT services Ghana",
-    "digital transformation Ghana",
-    "website design Accra",
-    "software development Ghana",
+    "cybersecurity services Ghana",
+    "e-commerce solutions West Africa",
+    "software engineering Accra",
+    "fintech development Ghana",
   ],
   authors: [{ name: "OceanCyber" }],
   creator: "OceanCyber",
@@ -44,9 +44,9 @@ export const metadata: Metadata = {
     locale: "en_GH",
     url: "https://oceancyber.net",
     siteName: "OceanCyber",
-    title: "OceanCyber | Web & Mobile App Development in Ghana",
+    title: "OceanCyber | Engineering Digital Products that Scale",
     description:
-      "We help teams in Ghana design, build, and secure digital products with clear delivery and local support.",
+      "No-fluff engineering for Ghanaian businesses. We build secure, scalable web and mobile platforms that actually work.",
     images: [
       {
         url: "/images/og-image.jpg",
@@ -58,9 +58,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "OceanCyber | Web & Mobile App Development in Ghana",
+    title: "OceanCyber | Engineering Digital Products that Scale",
     description:
-      "We help teams in Ghana design, build, and secure digital products with clear delivery and local support.",
+      "No-fluff engineering for Ghanaian businesses. We build secure, scalable web and mobile platforms that actually work.",
     images: ["/images/og-image.jpg"],
   },
   robots: {
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0066CC",
+  themeColor: "#00F3FF",
   width: "device-width",
   initialScale: 1,
 };
@@ -91,7 +91,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${oswald.variable}`}>
+    <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
       <body className="sa-shell min-h-screen font-sans antialiased">
         <AppProviders>
           <OrganizationJsonLd />

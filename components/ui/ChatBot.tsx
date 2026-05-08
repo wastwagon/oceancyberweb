@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Bot, Send, MessageSquare, X, Minimize2, Maximize2 } from "lucide-react";
 import { getApiBaseUrl } from "@/lib/api-config";
-
+import { cn } from "@/lib/utils";
 
 interface Message {
   id: string;
@@ -107,143 +107,134 @@ export function ChatBot() {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-5 left-4 z-50 flex h-12 w-12 items-center justify-center rounded-full border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 text-white shadow-lg shadow-ocean-600/30 transition-all hover:brightness-110 hover:shadow-ocean-600/40 active:scale-[0.97] sm:bottom-6 sm:left-6 sm:h-11 sm:w-11"
+        className="fixed bottom-5 left-4 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-sa-primary/30 bg-sa-bg text-sa-primary shadow-2xl transition-all hover:bg-sa-primary hover:text-sa-bg active:scale-[0.95] sm:bottom-6 sm:left-6"
         aria-label="Open chat"
       >
-        <MessageSquare className="h-5 w-5 sm:h-[1.15rem] sm:w-[1.15rem]" strokeWidth={2.1} />
+        <MessageSquare className="h-6 w-6" strokeWidth={2} />
       </button>
     );
   }
 
   return (
     <div
-      className="fixed bottom-5 left-1/2 z-50 flex max-h-[min(85vh,560px)] w-[min(calc(100vw-2rem),22rem)] -translate-x-1/2 flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white text-left shadow-2xl shadow-slate-300/50 ring-1 ring-slate-200/40 backdrop-blur-xl sm:bottom-6 sm:left-6 sm:max-h-[min(82vh,520px)] sm:w-[min(calc(100vw-3rem),24rem)] sm:translate-x-0"
+      className={cn(
+        "fixed bottom-5 left-1/2 z-50 flex flex-col overflow-hidden rounded-3xl border border-sa-border bg-sa-bg shadow-2xl transition-all duration-300 sm:bottom-6 sm:left-6 sm:translate-x-0",
+        isMinimized ? "h-16 w-64" : "h-[min(85vh,580px)] w-[min(calc(100vw-2rem),24rem)] -translate-x-1/2 sm:translate-x-0"
+      )}
       role="dialog"
       aria-label="OceanCyber chat"
     >
-      <header className="shrink-0 border-b border-slate-200/80 bg-gradient-to-r from-ocean-600 to-ocean-800 px-4 py-3.5 text-white">
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex min-w-0 flex-1 items-center gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20 ring-1 ring-white/30">
-              <Bot className="h-5 w-5" aria-hidden />
-            </div>
-            <div className="min-w-0">
-              <h3 className="truncate text-sm font-semibold tracking-tight sm:text-base">
-                OceanCyber Assistant
-              </h3>
-              <p className="text-xs text-sky-100/90">Always here to help</p>
-            </div>
+      <header className="flex shrink-0 items-center justify-between border-b border-sa-border bg-sa-surface px-5 py-4">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sa-primary/10 text-sa-primary ring-1 ring-sa-primary/20">
+            <Bot className="h-5 w-5" aria-hidden />
           </div>
-          <div className="flex shrink-0 items-center gap-1">
-            <button
-              type="button"
-              onClick={() => setIsMinimized(!isMinimized)}
-              className="rounded-lg p-2 text-white/95 transition-colors hover:bg-white/15"
-              aria-label={isMinimized ? "Expand chat" : "Minimize chat"}
-            >
-              {isMinimized ? (
-                <Maximize2 className="h-4 w-4" />
-              ) : (
-                <Minimize2 className="h-4 w-4" />
-              )}
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setIsOpen(false);
-                setIsMinimized(false);
-              }}
-              className="rounded-lg p-2 text-white/95 transition-colors hover:bg-white/15"
-              aria-label="Close chat"
-            >
-              <X className="h-4 w-4" />
-            </button>
+          <div className="min-w-0">
+            <h3 className="truncate font-heading text-sm font-bold uppercase tracking-widest text-white">
+              Assistant
+            </h3>
+            {!isMinimized && <p className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">Online</p>}
           </div>
+        </div>
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            onClick={() => setIsMinimized(!isMinimized)}
+            className="rounded-lg p-2 text-sa-muted transition-colors hover:bg-white/5 hover:text-white"
+            aria-label={isMinimized ? "Expand chat" : "Minimize chat"}
+          >
+            {isMinimized ? (
+              <Maximize2 className="h-4 w-4" />
+            ) : (
+              <Minimize2 className="h-4 w-4" />
+            )}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setIsOpen(false);
+              setIsMinimized(false);
+            }}
+            className="rounded-lg p-2 text-sa-muted transition-colors hover:bg-white/5 hover:text-white"
+            aria-label="Close chat"
+          >
+            <X className="h-4 w-4" />
+          </button>
         </div>
       </header>
 
-      {!isMinimized ? (
+      {!isMinimized && (
         <>
-          <div className="flex min-h-0 flex-1 flex-col bg-slate-50/95">
-            <div className="min-h-0 flex-1 space-y-3 overflow-y-auto px-3 py-3 sm:px-4 sm:py-4">
+          <div className="flex min-h-0 flex-1 flex-col">
+            <div className="min-h-0 flex-1 space-y-4 overflow-y-auto px-5 py-6">
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`flex ${message.isUser ? "justify-end" : "justify-start"}`}
+                  className={cn(
+                    "flex flex-col",
+                    message.isUser ? "items-end" : "items-start"
+                  )}
                 >
                   <div
-                    className={`max-w-[88%] rounded-2xl px-3.5 py-2.5 sm:max-w-[85%] sm:px-4 sm:py-3 ${
+                    className={cn(
+                      "max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed",
                       message.isUser
-                        ? "border border-ocean-500/30 bg-gradient-to-b from-ocean-600 to-ocean-800 text-white shadow-md shadow-ocean-600/20"
-                        : "border border-slate-200/90 bg-white text-slate-800 shadow-sm ring-1 ring-slate-200/40"
-                    }`}
+                        ? "bg-sa-primary text-black"
+                        : "border border-sa-border bg-sa-surface text-sa-muted"
+                    )}
                   >
-                    <p className="text-sm leading-relaxed">{message.text}</p>
-                    <p
-                      className={`mt-1.5 text-[10px] font-medium uppercase tracking-wider sm:text-[11px] ${
-                        message.isUser ? "text-sky-100/85" : "text-slate-500"
-                      }`}
-                    >
-                      {formatTime(message.timestamp)}
-                    </p>
+                    {message.text}
                   </div>
+                  <span className="mt-1.5 px-1 text-[9px] font-bold uppercase tracking-widest text-sa-muted/40">
+                    {formatTime(message.timestamp)}
+                  </span>
                 </div>
               ))}
-              {isTyping ? (
+              {isTyping && (
                 <div className="flex justify-start">
-                  <div className="rounded-2xl border border-slate-200/90 bg-white px-4 py-3 shadow-sm ring-1 ring-slate-200/30">
+                  <div className="rounded-2xl border border-sa-border bg-sa-surface px-4 py-3">
                     <div className="flex gap-1.5">
-                      <span className="h-2 w-2 animate-bounce rounded-full bg-ocean-500/90" />
+                      <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-sa-primary" />
                       <span
-                        className="h-2 w-2 animate-bounce rounded-full bg-ocean-500/90"
+                        className="h-1.5 w-1.5 animate-bounce rounded-full bg-sa-primary"
                         style={{ animationDelay: "0.15s" }}
                       />
                       <span
-                        className="h-2 w-2 animate-bounce rounded-full bg-ocean-500/90"
+                        className="h-1.5 w-1.5 animate-bounce rounded-full bg-sa-primary"
                         style={{ animationDelay: "0.3s" }}
                       />
                     </div>
                   </div>
                 </div>
-              ) : null}
+              )}
               <div ref={messagesEndRef} />
             </div>
           </div>
 
-          <footer className="shrink-0 border-t border-slate-200/80 bg-white px-3 py-3 sm:px-4 sm:py-3.5">
+          <footer className="shrink-0 border-t border-sa-border bg-sa-surface p-4">
             <form onSubmit={handleSendMessage} className="flex items-center gap-2">
-              <label htmlFor="chatbot-input" className="sr-only">
-                Message
-              </label>
               <input
-                id="chatbot-input"
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Type your message…"
-                className="min-h-[44px] flex-1 rounded-full border border-slate-200/90 bg-slate-50/90 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-ocean-500 focus:outline-none focus:ring-2 focus:ring-ocean-200"
+                className="h-12 flex-1 rounded-xl border border-sa-border bg-sa-bg px-4 text-sm text-white outline-none ring-sa-primary/50 transition placeholder:text-sa-muted/30 focus:border-sa-primary focus:ring-1"
               />
               <button
                 type="submit"
                 disabled={!inputValue.trim() || isTyping}
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 text-white shadow-md shadow-ocean-600/25 transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:brightness-100"
+                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-sa-primary text-black transition-all hover:scale-105 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100"
                 aria-label="Send message"
               >
-                <Send className="h-4 w-4" />
+                <Send className="h-5 w-5" />
               </button>
             </form>
-            <p className="mt-2.5 text-center text-[11px] leading-snug text-slate-500">
-              Need immediate help?{" "}
-              <a
-                href="mailto:info@oceancyber.net"
-                className="font-medium text-ocean-600 underline-offset-2 hover:text-ocean-800 hover:underline"
-              >
-                info@oceancyber.net
-              </a>
+            <p className="mt-3 text-center text-[10px] font-bold uppercase tracking-widest text-sa-muted/40">
+              Need help? <a href="mailto:info@oceancyber.net" className="text-sa-primary hover:underline">info@oceancyber.net</a>
             </p>
           </footer>
         </>
-      ) : null}
+      )}
     </div>
   );
 }

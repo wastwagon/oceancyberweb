@@ -6,10 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-import { HeroSectionMotionLayers } from "@/components/layout/HeroSectionMotionLayers";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
 import {
-  fadeUpProps,
   fadeUpSoft,
   revealViewport,
   staggerDelay,
@@ -21,29 +19,6 @@ import {
   insightPosts,
   parseInsightCategoryParam,
 } from "@/lib/insights/content";
-
-function PageAmbient() {
-  return (
-    <div
-      className="pointer-events-none absolute inset-0 opacity-[0.12]"
-      aria-hidden
-    >
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(2, 106, 255, 0.2) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(2, 106, 255, 0.16) 1px, transparent 1px)
-          `,
-          backgroundSize: "56px 56px",
-          maskImage:
-            "radial-gradient(ellipse 100% 70% at 50% 0%, black 0%, transparent 75%)",
-        }}
-      />
-      <div className="absolute left-1/2 top-0 h-[min(420px,50vh)] w-[min(100%,900px)] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(2,106,255,0.1)_0%,transparent_72%)] blur-[88px]" />
-    </div>
-  );
-}
 
 function contactHrefForTopic(title: string) {
   return `/contact?topic=${encodeURIComponent(title)}`;
@@ -87,12 +62,10 @@ export function InsightsPageClient() {
   const heroMotion = getPageHeroMotionVariants(reduceMotion);
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-100 text-slate-900">
-      <PageAmbient />
-
-      <section className="relative z-10 overflow-hidden border-b border-slate-200/80 pb-16 pt-28 md:pb-20 md:pt-36">
-        <HeroSectionMotionLayers tone="light" />
-        <div className="container relative z-10 mx-auto max-w-4xl px-6 text-center md:px-8">
+    <main className="sa-shell relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
+      
+      <section className="sa-section relative z-10 overflow-hidden border-b border-sa-border pt-28 md:pt-36">
+        <div className="sa-container relative z-10 text-center">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -100,24 +73,21 @@ export function InsightsPageClient() {
           >
             <motion.span
               variants={heroMotion.item}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-ocean-200 bg-ocean-50/95 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-ocean-800 shadow-sm"
+              className="sa-eyebrow mb-6 inline-flex items-center gap-2"
             >
-              <Newspaper className="h-3.5 w-3.5 text-ocean-600" aria-hidden />
+              <Newspaper className="h-4 w-4" aria-hidden />
               Insights
             </motion.span>
             <motion.h1
               variants={heroMotion.item}
-              className="mx-auto max-w-4xl text-balance text-center text-4xl font-bold leading-[1.08] tracking-tight text-slate-900 md:text-5xl lg:text-6xl"
+              className="sa-title mx-auto max-w-4xl"
             >
               Thought
-              <span className="bg-gradient-to-r from-ocean-600 via-ocean-700 to-cyan-600 bg-clip-text text-transparent">
-                {" "}
-                leadership
-              </span>
+              <span className="text-sa-primary"> leadership</span>
             </motion.h1>
             <motion.p
               variants={heroMotion.item}
-              className="mx-auto mt-6 max-w-2xl text-pretty text-center text-base font-light leading-relaxed text-slate-600 md:text-lg"
+              className="sa-subtitle mx-auto mt-6"
             >
               Perspectives on security, platforms, and digital transformation
               across Ghana and Africa, written for leaders who ship.
@@ -126,8 +96,8 @@ export function InsightsPageClient() {
         </div>
       </section>
 
-      <section className="relative z-10 border-b border-slate-200/80 py-6 md:py-8">
-        <div className="container mx-auto max-w-6xl px-6 md:px-8">
+      <section className="sa-section relative z-10 border-b border-sa-border">
+        <div className="sa-container">
           <form
             role="search"
             className="mx-auto flex max-w-2xl flex-col gap-3 sm:flex-row sm:items-stretch"
@@ -147,33 +117,29 @@ export function InsightsPageClient() {
               onChange={(e) => setDraft(e.target.value)}
               placeholder="Search articles…"
               autoComplete="off"
-              className="min-h-[48px] flex-1 rounded-xl border border-slate-200/90 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-ocean-500 focus:outline-none focus:ring-2 focus:ring-ocean-200"
+              className="min-h-[48px] flex-1 rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm text-white placeholder:text-sa-muted/50 focus:border-sa-primary focus:outline-none transition"
             />
             <div className="flex shrink-0 gap-2 sm:flex-row">
               <button
                 type="submit"
-                className="min-h-[48px] rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-6 text-sm font-bold text-white shadow-lg shadow-ocean-600/25 transition-all hover:brightness-110 active:scale-[0.98]"
+                className="sa-btn-primary min-h-[48px] px-6"
               >
                 Search
               </button>
               {q ? (
                 <Link
                   href={buildInsightsHref("", category)}
-                  className="inline-flex min-h-[48px] items-center justify-center rounded-xl border border-slate-200 bg-white px-5 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
+                  className="inline-flex min-h-[48px] items-center justify-center rounded-xl border border-sa-border bg-sa-surface px-5 text-sm font-semibold text-sa-muted transition-colors hover:border-sa-primary/50 hover:text-white"
                 >
                   Clear
                 </Link>
               ) : null}
             </div>
           </form>
-        </div>
-      </section>
 
-      <section className="relative z-10 border-b border-slate-200/80 py-10 md:py-12">
-        <div className="container mx-auto max-w-6xl px-6 md:px-8">
           <motion.div
             {...fadeUpSoft}
-            className="flex flex-wrap justify-center gap-2 md:justify-start md:gap-2.5"
+            className="mt-8 flex flex-wrap justify-center gap-2"
             role="tablist"
             aria-label="Filter by category"
           >
@@ -188,10 +154,10 @@ export function InsightsPageClient() {
                   onClick={() => {
                     router.replace(buildInsightsHref(q, cat));
                   }}
-                  className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-all md:px-5 md:text-[11px] ${
+                  className={`rounded-full border px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-colors ${
                     active
-                      ? "border-ocean-600 bg-ocean-50 text-ocean-900 shadow-sm shadow-slate-200/40"
-                      : "border-slate-200/90 bg-white text-slate-600 ring-1 ring-slate-200/40 hover:border-ocean-200 hover:text-slate-900"
+                      ? "border-sa-primary bg-sa-primary/20 text-sa-primary"
+                      : "border-sa-border bg-sa-surface text-sa-muted hover:border-sa-primary/50 hover:text-white"
                   }`}
                 >
                   {cat}
@@ -202,9 +168,9 @@ export function InsightsPageClient() {
         </div>
       </section>
 
-      <section className="relative z-10 border-b border-slate-200/70 bg-white/70 py-8 md:py-10">
-        <div className="container mx-auto max-w-6xl px-6 md:px-8">
-          <div className="grid gap-3 md:grid-cols-3">
+      <section className="sa-section relative z-10">
+        <div className="sa-container">
+          <div className="grid gap-4 md:grid-cols-3 mb-16">
             {[
               {
                 title: "Security & resilience",
@@ -221,106 +187,106 @@ export function InsightsPageClient() {
             ].map((item) => (
               <div
                 key={item.title}
-                className="rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm ring-1 ring-slate-200/50"
+                className="sa-card p-6 border-sa-border/50"
               >
-                <p className="text-sm font-bold text-slate-900">{item.title}</p>
-                <p className="mt-1 text-xs leading-relaxed text-slate-600">{item.body}</p>
+                <p className="font-heading text-sm font-bold text-white">{item.title}</p>
+                <p className="mt-2 text-xs leading-relaxed text-sa-muted/80">{item.body}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      <section className="relative z-10 py-16 md:py-20">
-        <div className="container mx-auto max-w-6xl px-6 md:px-8">
           {filtered.length === 0 ? (
-            <p className="py-16 text-center text-slate-600">
-              {q ? (
-                <>
-                  No articles match &ldquo;{q}&rdquo;. Try different keywords or{" "}
-                  <Link
-                    href={buildInsightsHref("", category)}
-                    className="font-semibold text-ocean-700 underline-offset-2 hover:underline"
-                  >
-                    clear search
-                  </Link>
-                  .
-                </>
-              ) : category !== "All" ? (
-                "No articles in this category yet. Try another filter."
-              ) : (
-                "No articles yet."
-              )}
-            </p>
+            <div className="sa-card p-10 text-center">
+              <p className="text-sa-muted">
+                {q ? (
+                  <>
+                    No articles match &ldquo;{q}&rdquo;. Try different keywords or{" "}
+                    <Link
+                      href={buildInsightsHref("", category)}
+                      className="font-bold text-sa-primary underline-offset-2 hover:underline hover:text-white"
+                    >
+                      clear search
+                    </Link>
+                    .
+                  </>
+                ) : category !== "All" ? (
+                  "No articles in this category yet. Try another filter."
+                ) : (
+                  "No articles yet."
+                )}
+              </p>
+            </div>
           ) : (
             <>
-              <motion.article
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={revealViewport}
-                transition={{ duration: 0.55 }}
-                className="mb-10 overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-sm ring-1 ring-slate-200/50 transition-colors hover:border-ocean-200/80 hover:shadow-md md:mb-12"
-              >
-                <div className="flex flex-col md:flex-row md:items-stretch">
-                  <Link
-                    href={insightArticlePath(featured.slug)}
-                    className="relative block aspect-[16/10] w-full md:aspect-auto md:w-[48%] md:min-h-[280px]"
-                  >
-                    <Image
-                      src={featured.image}
-                      alt=""
-                      fill
-                      className="object-cover object-center transition duration-300 hover:opacity-95"
-                      sizes="(max-width: 768px) 100vw, 45vw"
-                      priority
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:via-slate-900/2 md:to-slate-900/3" />
-                    <div className="pointer-events-none absolute left-4 top-4 flex flex-wrap gap-2">
-                      <span className="rounded-full border border-white/25 bg-slate-900/50 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur-md">
-                        {featured.category}
-                      </span>
-                      <span className="rounded-full border border-white/20 bg-white/20 px-3 py-1 font-mono text-[10px] text-slate-100 backdrop-blur-md">
-                        Featured
-                      </span>
-                    </div>
-                  </Link>
-                  <div className="flex flex-1 flex-col justify-center border-t border-slate-100 p-6 md:border-t-0 md:border-l md:border-slate-200/60 md:p-10 lg:p-12">
-                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500">
-                      <time dateTime={featured.date}>{featured.date}</time>
-                      <span className="text-slate-400">·</span>
-                      <span>{featured.readTime}</span>
-                    </div>
-                    <h2 className="mt-3 text-2xl font-bold leading-tight tracking-tight text-slate-900 md:text-3xl lg:text-4xl">
-                      <Link
-                        href={insightArticlePath(featured.slug)}
-                        className="transition hover:text-ocean-800"
-                      >
-                        {featured.title}
-                      </Link>
-                    </h2>
-                    <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-600 md:text-base">
-                      {featured.excerpt}
-                    </p>
-                    <div className="mt-8 flex flex-wrap gap-3">
-                      <Link
-                        href={insightArticlePath(featured.slug)}
-                        className="inline-flex min-h-[48px] items-center gap-2 rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-5 py-4 text-sm font-bold text-white shadow-lg shadow-ocean-600/25 transition-all hover:brightness-110 active:scale-[0.98]"
-                      >
-                        Read article
-                        <ArrowRight className="h-4 w-4" aria-hidden />
-                      </Link>
-                      <Link
-                        href={contactHrefForTopic(featured.title)}
-                        className="inline-flex min-h-[48px] items-center justify-center rounded-xl border border-slate-200 bg-white px-5 py-4 text-sm font-semibold text-slate-800 transition hover:border-ocean-200 hover:bg-slate-50"
-                      >
-                        Talk to our team
-                      </Link>
+              {featured && (
+                <motion.article
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={revealViewport}
+                  transition={{ duration: 0.55 }}
+                  className="sa-card mb-10 overflow-hidden md:mb-12"
+                >
+                  <div className="flex flex-col md:flex-row md:items-stretch">
+                    <Link
+                      href={insightArticlePath(featured.slug)}
+                      className="relative block aspect-[16/10] w-full border-b border-sa-border md:aspect-auto md:w-[48%] md:min-h-[320px] md:border-b-0 md:border-r"
+                    >
+                      <Image
+                        src={featured.image}
+                        alt=""
+                        fill
+                        className="object-cover object-center grayscale transition duration-700 hover:scale-105 hover:grayscale-0"
+                        sizes="(max-width: 768px) 100vw, 45vw"
+                        priority
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-sa-bg via-transparent to-transparent opacity-80 md:bg-gradient-to-r" />
+                      <div className="pointer-events-none absolute left-4 top-4 flex flex-wrap gap-2">
+                        <span className="rounded-full border border-sa-primary/20 bg-sa-bg/80 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-sa-primary backdrop-blur-md">
+                          {featured.category}
+                        </span>
+                        <span className="rounded-full border border-white/10 bg-sa-bg/80 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white backdrop-blur-md">
+                          Featured
+                        </span>
+                      </div>
+                    </Link>
+                    <div className="flex flex-1 flex-col justify-center p-6 md:p-10 lg:p-12">
+                      <div className="flex flex-wrap items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">
+                        <time dateTime={featured.date}>{featured.date}</time>
+                        <span className="text-sa-border">·</span>
+                        <span>{featured.readTime}</span>
+                      </div>
+                      <h2 className="mt-4 font-heading text-2xl font-bold leading-tight tracking-tight text-white md:text-3xl lg:text-4xl">
+                        <Link
+                          href={insightArticlePath(featured.slug)}
+                          className="transition hover:text-sa-primary"
+                        >
+                          {featured.title}
+                        </Link>
+                      </h2>
+                      <p className="mt-4 max-w-xl text-sm leading-relaxed text-sa-muted/80 md:text-base">
+                        {featured.excerpt}
+                      </p>
+                      <div className="mt-8 flex flex-wrap gap-3">
+                        <Link
+                          href={insightArticlePath(featured.slug)}
+                          className="sa-btn-primary gap-2"
+                        >
+                          Read article
+                          <ArrowRight className="h-4 w-4" aria-hidden />
+                        </Link>
+                        <Link
+                          href={contactHrefForTopic(featured.title)}
+                          className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-6 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition-colors hover:border-sa-primary hover:text-white"
+                        >
+                          Talk to our team
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.article>
+                </motion.article>
+              )}
 
-              <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {rest.map((post, index) => (
                   <motion.article
                     key={post.slug}
@@ -328,54 +294,48 @@ export function InsightsPageClient() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={revealViewport}
                     transition={staggerDelay(index, 0.06)}
-                    className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-sm ring-1 ring-slate-200/50 transition-all hover:-translate-y-0.5 hover:border-ocean-200/80 hover:shadow-md"
+                    className="sa-card flex h-full flex-col overflow-hidden"
                   >
                     <Link
                       href={insightArticlePath(post.slug)}
-                      className="relative block aspect-[16/10] w-full shrink-0 overflow-hidden"
+                      className="relative block aspect-[16/10] w-full shrink-0 overflow-hidden border-b border-sa-border"
                     >
                       <Image
                         src={post.image}
                         alt=""
                         fill
-                        className="object-cover object-top transition-transform duration-700 ease-out hover:scale-[1.03]"
+                        className="object-cover object-top grayscale transition-transform duration-700 ease-out hover:scale-105 hover:grayscale-0"
                         sizes="(max-width: 768px) 100vw, 33vw"
                       />
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent" />
-                      <span className="pointer-events-none absolute left-3 top-3 rounded-full border border-white/20 bg-slate-900/45 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur-md">
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-sa-bg/80 via-transparent to-transparent" />
+                      <span className="pointer-events-none absolute left-4 top-4 rounded-full border border-sa-primary/20 bg-sa-bg/80 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-sa-primary backdrop-blur-md">
                         {post.category}
                       </span>
                     </Link>
-                    <div className="flex flex-1 flex-col border-t border-slate-100 p-5 md:p-6">
-                      <div className="flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
+                    <div className="flex flex-1 flex-col p-6">
+                      <div className="flex flex-wrap items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">
                         <time dateTime={post.date}>{post.date}</time>
-                        <span>·</span>
+                        <span className="text-sa-border">·</span>
                         <span>{post.readTime}</span>
                       </div>
-                      <h2 className="mt-2 line-clamp-2 text-lg font-bold leading-snug tracking-tight text-slate-900">
+                      <h2 className="mt-3 font-heading text-lg font-bold leading-snug tracking-tight text-white">
                         <Link
                           href={insightArticlePath(post.slug)}
-                          className="transition hover:text-ocean-800"
+                          className="transition hover:text-sa-primary"
                         >
                           {post.title}
                         </Link>
                       </h2>
-                      <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-slate-600">
+                      <p className="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-sa-muted/80">
                         {post.excerpt}
                       </p>
-                      <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+                      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
                         <Link
                           href={insightArticlePath(post.slug)}
-                          className="group inline-flex items-center gap-1.5 text-sm font-semibold text-ocean-700 transition-colors hover:text-ocean-900"
+                          className="group inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-sa-primary transition-colors hover:text-white"
                         >
                           Read article
-                          <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
-                        </Link>
-                        <Link
-                          href={contactHrefForTopic(post.title)}
-                          className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 underline-offset-2 transition-colors hover:text-slate-900 hover:underline"
-                        >
-                          Talk to our team
+                          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
                         </Link>
                       </div>
                     </div>
@@ -387,16 +347,16 @@ export function InsightsPageClient() {
         </div>
       </section>
 
-      <section className="relative z-10 border-t border-slate-200/80 py-20 md:py-24">
-        <div className="container mx-auto max-w-3xl px-6 md:px-8">
+      <section className="sa-section relative z-10 border-t border-sa-border">
+        <div className="sa-container max-w-3xl">
           <motion.div
-            {...fadeUpProps}
-            className="rounded-[2rem] border border-slate-200/90 bg-gradient-to-b from-white to-slate-50/80 p-10 text-center shadow-xl shadow-slate-200/50 ring-1 ring-slate-200/50 backdrop-blur-sm md:p-14 [&_h2]:text-center [&_p]:text-center"
+            {...fadeUpSoft}
+            className="sa-card p-10 text-center md:p-14"
           >
-            <h2 className="text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
+            <h2 className="sa-title !text-3xl">
               Editorial newsletter
             </h2>
-            <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-slate-600 md:text-base">
+            <p className="sa-subtitle mx-auto mt-4 max-w-lg text-sm">
               We&apos;re building a mailing list for long-form notes and release
               notes. Leave your email, and we&apos;ll only write when it&apos;s
               worth your time.
@@ -417,21 +377,21 @@ export function InsightsPageClient() {
                 required
                 placeholder="you@company.com"
                 autoComplete="email"
-                className="min-h-[48px] flex-1 rounded-xl border border-slate-200/90 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-ocean-500 focus:outline-none focus:ring-2 focus:ring-ocean-200"
+                className="min-h-[48px] flex-1 rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm text-white placeholder:text-sa-muted/50 focus:border-sa-primary focus:outline-none transition"
               />
               <button
                 type="submit"
-                className="min-h-[48px] shrink-0 rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-6 text-sm font-bold text-white shadow-lg shadow-ocean-600/25 transition-all hover:brightness-110 active:scale-[0.98]"
+                className="sa-btn-primary min-h-[48px] shrink-0"
               >
                 Notify me
               </button>
             </form>
-            <p className="mt-4 text-xs text-slate-500">
+            <p className="mt-4 text-[10px] font-bold uppercase tracking-widest text-sa-muted/40">
               No spam. Unsubscribe anytime, once the program is live.
             </p>
             <Link
               href="/services/website-to-mobile-app"
-              className="mt-4 inline-flex min-h-[42px] items-center justify-center rounded-xl border border-ocean-300 bg-ocean-50 px-5 text-xs font-semibold uppercase tracking-[0.12em] text-ocean-800 transition hover:border-ocean-400 hover:bg-ocean-100/70"
+              className="mt-6 inline-flex min-h-[42px] items-center justify-center rounded-full border border-sa-primary/30 bg-sa-primary/10 px-6 text-[10px] font-bold uppercase tracking-widest text-sa-primary transition hover:border-sa-primary hover:bg-sa-primary/20 hover:text-white"
             >
               Convert your website into a mobile app
             </Link>

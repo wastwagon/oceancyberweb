@@ -9,17 +9,18 @@ import {
   type ClientProjectInvoice,
   type ClientProjectRow,
 } from "@/lib/auth-client";
+import { cn } from "@/lib/utils";
 
 function money(amountMinor: string, currency: string) {
   return `${currency} ${(Number(amountMinor) / 100).toFixed(2)}`;
 }
 
 function badgeClass(status: string) {
-  if (status === "paid") return "border-emerald-200 bg-emerald-50 text-emerald-800";
-  if (status === "issued") return "border-blue-200 bg-blue-50 text-blue-800";
-  if (status === "unlocked") return "border-cyan-200 bg-cyan-50 text-cyan-800";
-  if (status === "locked" || status === "draft") return "border-slate-200 bg-slate-100 text-slate-700";
-  return "border-slate-200 bg-slate-50 text-slate-700";
+  if (status === "paid") return "border-emerald-500/30 bg-emerald-500/10 text-emerald-400";
+  if (status === "issued") return "border-blue-500/30 bg-blue-500/10 text-blue-400";
+  if (status === "unlocked") return "border-cyan-500/30 bg-cyan-500/10 text-cyan-400";
+  if (status === "locked" || status === "draft") return "border-sa-border bg-sa-bg text-sa-muted/60";
+  return "border-sa-border bg-sa-surface text-sa-muted";
 }
 
 export default function DashboardProjectsPage() {
@@ -66,33 +67,33 @@ export default function DashboardProjectsPage() {
   }
 
   return (
-    <main className="bg-gradient-to-b from-slate-50 via-white to-slate-100 px-4 py-10 md:py-14">
-      <div className="mx-auto w-full max-w-5xl space-y-6">
-        <header className="rounded-3xl border border-slate-200/90 bg-white p-5 shadow-sm ring-1 ring-slate-200/60 md:p-7">
-          <div className="flex flex-wrap items-start justify-between gap-3">
+    <main className="sa-shell min-h-screen bg-sa-bg pt-28 pb-16 md:py-36">
+      <div className="sa-container max-w-5xl space-y-6">
+        <header className="sa-card p-6 border-sa-border md:p-8">
+          <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-ocean-600">Dashboard</p>
-              <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">Projects & milestone invoices</h1>
-              <p className="mt-1 text-sm text-slate-600">
+              <p className="sa-eyebrow inline-flex">Dashboard</p>
+              <h1 className="sa-title !text-left mt-3 text-2xl md:text-3xl">Projects & milestone invoices</h1>
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-sa-muted/80">
                 Pay milestones in sequence: kickoff, build, then launch handover.
               </p>
             </div>
-            <div className="rounded-xl border border-ocean-200 bg-ocean-50 px-3 py-2 text-xs font-semibold text-ocean-800">
-              30 / 30 / 40 project workflow
+            <div className="rounded-2xl border border-sa-primary/20 bg-sa-primary/10 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-sa-primary">
+              30 / 30 / 40 workflow
             </div>
           </div>
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/dashboard"
-              className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-400"
+              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-5 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition-colors hover:border-sa-primary/50 hover:text-white"
             >
               Billing dashboard
             </Link>
             <Link
               href="/services/website-to-mobile-app"
-              className="rounded-xl border border-ocean-300 bg-ocean-50 px-4 py-2 text-sm font-semibold text-ocean-800 hover:border-ocean-400"
+              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-sa-primary/30 bg-sa-primary/10 px-5 text-[10px] font-bold uppercase tracking-widest text-sa-primary transition-colors hover:border-sa-primary hover:text-white"
             >
-              Website-to-Mobile App Conversion Quote
+              App Quote
             </Link>
             <button
               type="button"
@@ -100,67 +101,67 @@ export default function DashboardProjectsPage() {
                 clearAccessToken();
                 window.location.href = "/signin";
               }}
-              className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-400"
+              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-rose-500/30 bg-rose-500/10 px-5 text-[10px] font-bold uppercase tracking-widest text-rose-400 transition-colors hover:border-rose-500 hover:text-white"
             >
               Sign out
             </button>
           </div>
         </header>
 
-        <section className="grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Projects</p>
-            <p className="mt-2 text-3xl font-bold text-slate-900">{totals.total}</p>
+        <section className="grid gap-6 md:grid-cols-3">
+          <div className="sa-card p-6 border-sa-border md:p-8">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">Projects</p>
+            <p className="mt-3 font-heading text-4xl font-bold tracking-tight text-white md:text-5xl">{totals.total}</p>
           </div>
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Active pipeline</p>
-            <p className="mt-2 text-3xl font-bold text-slate-900">{totals.active}</p>
+          <div className="sa-card p-6 border-sa-border md:p-8">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">Active pipeline</p>
+            <p className="mt-3 font-heading text-4xl font-bold tracking-tight text-white md:text-5xl">{totals.active}</p>
           </div>
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Invoices due</p>
-            <p className="mt-2 text-3xl font-bold text-slate-900">{totals.dueInvoices}</p>
+          <div className="sa-card p-6 border-sa-border md:p-8">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">Invoices due</p>
+            <p className="mt-3 font-heading text-4xl font-bold tracking-tight text-white md:text-5xl">{totals.dueInvoices}</p>
           </div>
         </section>
 
-        {loading ? <p className="text-sm text-slate-600">Loading projects...</p> : null}
+        {loading ? <p className="text-sa-muted text-sm px-2">Loading projects...</p> : null}
         {error ? (
-          <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{error}</div>
+          <div className="rounded-2xl border border-rose-500/50 bg-rose-500/10 px-5 py-4 text-sm text-rose-400">{error}</div>
         ) : null}
 
         {!loading && rows.length === 0 ? (
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 text-sm text-slate-600 shadow-sm">
+          <div className="rounded-2xl border border-sa-border border-dashed p-8 text-center text-sm text-sa-muted/80">
             No client projects yet. Ask admin to create your project timeline to start milestone payments.
           </div>
         ) : null}
 
         {rows.map((project) => (
-          <section key={project.id} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <div className="flex flex-wrap items-start justify-between gap-3">
+          <section key={project.id} className="sa-card p-6 border-sa-border md:p-8">
+            <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
-                <h2 className="text-lg font-bold text-slate-900">{project.title}</h2>
-                <p className="mt-1 text-sm text-slate-600">{project.description || "No project summary added yet."}</p>
-                <p className="mt-2 text-xs text-slate-500">
-                  Project total: {money(project.totalAmountMinor, project.currency)}
+                <h2 className="font-heading text-xl font-bold text-white">{project.title}</h2>
+                <p className="mt-2 text-sm text-sa-muted/80 max-w-2xl">{project.description || "No project summary added yet."}</p>
+                <p className="mt-4 text-[10px] font-bold uppercase tracking-widest text-sa-muted">
+                  Project total: <span className="text-white">{money(project.totalAmountMinor, project.currency)}</span>
                 </p>
               </div>
-              <span className={`rounded-full border px-2 py-1 text-xs font-semibold uppercase ${badgeClass(project.status)}`}>
+              <span className={cn("rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-widest", badgeClass(project.status))}>
                 {project.status.replace(/_/g, " ")}
               </span>
             </div>
 
-            <div className="mt-4 grid gap-4 lg:grid-cols-2">
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Milestones</p>
-                <ul className="mt-2 space-y-2">
+            <div className="mt-8 grid gap-6 lg:grid-cols-2">
+              <div className="rounded-2xl border border-sa-border bg-sa-bg p-5">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">Milestones</p>
+                <ul className="mt-4 space-y-3">
                   {project.milestones.map((m) => (
-                    <li key={m.id} className="flex items-center justify-between rounded-lg border border-slate-200 bg-white px-3 py-2">
+                    <li key={m.id} className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-xl border border-sa-border bg-sa-surface p-4 transition-colors hover:border-sa-primary/30">
                       <div>
-                        <p className="text-sm font-semibold text-slate-900">{m.title}</p>
-                        <p className="text-xs text-slate-500">
-                          {m.percentage}% · {money(m.amountMinor, project.currency)}
+                        <p className="text-sm font-bold text-white">{m.title}</p>
+                        <p className="mt-1 text-[10px] font-bold uppercase tracking-widest text-sa-muted/80">
+                          {m.percentage}% <span className="text-sa-border mx-1">|</span> {money(m.amountMinor, project.currency)}
                         </p>
                       </div>
-                      <span className={`rounded-full border px-2 py-0.5 text-[11px] font-semibold uppercase ${badgeClass(m.status)}`}>
+                      <span className={cn("inline-flex rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-widest self-start sm:self-auto", badgeClass(m.status))}>
                         {m.status}
                       </span>
                     </li>
@@ -168,19 +169,19 @@ export default function DashboardProjectsPage() {
                 </ul>
               </div>
 
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Invoices</p>
-                <ul className="mt-2 space-y-2">
+              <div className="rounded-2xl border border-sa-border bg-sa-bg p-5">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">Invoices</p>
+                <ul className="mt-4 space-y-3">
                   {project.invoices.map((invoice) => (
-                    <li key={invoice.id} className="rounded-lg border border-slate-200 bg-white px-3 py-2">
-                      <div className="flex flex-wrap items-center justify-between gap-2">
+                    <li key={invoice.id} className="rounded-xl border border-sa-border bg-sa-surface p-4 transition-colors hover:border-sa-primary/30">
+                      <div className="flex flex-wrap items-center justify-between gap-3">
                         <div>
-                          <p className="text-sm font-semibold text-slate-900">{invoice.title}</p>
-                          <p className="text-xs text-slate-500">
-                            {invoice.invoiceNumber} · {money(invoice.amountMinor, invoice.currency)}
+                          <p className="text-sm font-bold text-white">{invoice.title}</p>
+                          <p className="mt-1 text-[10px] font-bold uppercase tracking-widest text-sa-muted/80">
+                            {invoice.invoiceNumber} <span className="text-sa-border mx-1">|</span> <span className="text-white">{money(invoice.amountMinor, invoice.currency)}</span>
                           </p>
                         </div>
-                        <span className={`rounded-full border px-2 py-0.5 text-[11px] font-semibold uppercase ${badgeClass(invoice.status)}`}>
+                        <span className={cn("rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-widest", badgeClass(invoice.status))}>
                           {invoice.status}
                         </span>
                       </div>
@@ -189,7 +190,7 @@ export default function DashboardProjectsPage() {
                           type="button"
                           disabled={busyInvoiceId === invoice.id}
                           onClick={() => payInvoice(project.id, invoice)}
-                          className="mt-2 inline-flex min-h-[38px] items-center rounded-lg bg-ocean-600 px-3 text-xs font-bold text-white hover:bg-ocean-700 disabled:opacity-60"
+                          className="mt-4 inline-flex min-h-[40px] items-center justify-center rounded-full border border-sa-primary bg-sa-primary/20 px-5 text-[10px] font-bold uppercase tracking-widest text-sa-primary transition-colors hover:bg-sa-primary hover:text-white disabled:opacity-60"
                         >
                           {busyInvoiceId === invoice.id ? "Initializing..." : "Pay now"}
                         </button>

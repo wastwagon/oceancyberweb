@@ -2,28 +2,28 @@
 
 export const heroServiceSlides = [
   {
-    title: "Bespoke Web Platforms",
+    title: "Platforms that Scale",
     href: "/services/web-development",
     imageAlt: "Developer workspace with laptop and code editor",
     image:
       "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&q=80",
   },
   {
-    title: "Native Mobile Apps",
+    title: "Apps that Convert",
     href: "/services/mobile-apps",
     imageAlt: "Hands holding a smartphone in use outdoors",
     image:
       "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1920&q=80",
   },
   {
-    title: "Zero‑Trust Security",
+    title: "Security that Protects",
     href: "/services/cybersecurity",
     imageAlt: "Abstract digital security network visualization",
     image:
       "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1920&q=80",
   },
   {
-    title: "Enterprise Cloud",
+    title: "Cloud that Lasts",
     href: "/services/ecommerce",
     imageAlt: "Retail checkout and shopping context",
     image:
@@ -32,81 +32,81 @@ export const heroServiceSlides = [
 ] as const;
 
 export const marqueeTags = [
-  "Premium Web Development",
-  "High‑Performance Mobile Apps",
-  "Enterprise Cloud Solutions",
-  "Zero‑Trust Cybersecurity",
-  "Built for Africa · Built for Scale",
-  "Disciplined Product Delivery",
-  "Premium UI/UX Design",
+  "Hard-Core Engineering",
+  "GH¢3.01T+ MoMo Economy",
+  "Zero‑Trust Security",
+  "99.9% Uptime Hosting",
+  "Built for Growth",
+  "US$1B+ E‑commerce Market",
+  "No-Fluff Product Delivery",
   "Managed IT Infrastructure",
   "Web · Mobile · Cloud · Security",
-  "Accra · Ghana · Regional Support",
+  "The Partner for Global Standards",
 ] as const;
 
 export const serviceCards = [
   {
-    title: "Bespoke Web Development",
-    desc: "Accelerating your growth with high‑performance, conversion‑optimised web platforms built on modern stacks.",
+    title: "Web Platforms",
+    desc: "We build the high-performance foundations that power your business. No templates, no shortcuts, just solid code.",
     href: "/services/web-development",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
+    image: "/images/EGP Ghana.webp",
   },
   {
-    title: "Custom Mobile Solutions",
-    desc: "Seamless iOS and Android experiences designed to engage users and scale effortlessly with your business.",
+    title: "Mobile Products",
+    desc: "We ship native iOS and Android apps that users actually enjoy using. Built for speed and reliability.",
     href: "/services/mobile-apps",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80",
+    image: "/images/Juelle Hair.webp",
   },
   {
-    title: "E‑commerce Engineering",
-    desc: "Powering regional commerce with secure, high‑availability storefronts and integrated payment ecosystems.",
+    title: "E‑commerce Engines",
+    desc: "Secure storefronts that handle thousands of orders and MoMo payments without breaking a sweat.",
     href: "/services/ecommerce",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+    image: "/images/Tour World Tourism.webp",
   },
   {
-    title: "SEO & Brand Growth",
-    desc: "Dominating search results and driving organic traffic through data‑led content strategies and technical SEO.",
+    title: "Search & SEO",
+    desc: "Stop hiding on page 2. We use technical SEO and data to get your brand in front of the right people.",
     href: "/services",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+    image: "/images/Fitch Advisory.webp",
   },
   {
-    title: "Zero‑Trust Cybersecurity",
-    desc: "Hardening your digital assets with enterprise‑grade security audits, penetration testing, and compliance monitoring.",
+    title: "Cyber Security",
+    desc: "We find the holes in your security before the bad guys do. Audits, pentesting, and 24/7 monitoring.",
     href: "/services/cybersecurity",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
+    image: "/images/Fitch Attorney.webp",
   },
   {
-    title: "Infrastructure & Cloud",
-    desc: "Reliable cloud foundations and managed hosting with localized support for mission‑critical digital services.",
+    title: "Cloud Hosting",
+    desc: "Bulletproof infrastructure with localized support. We keep your site live while you sleep.",
     href: "/hosting",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
+    image: "/images/Africa Trade Chamber.webp",
   },
 ] as const;
 
 export const processSteps = [
   {
     step: 1,
-    title: "Strategic Discovery",
-    body: "We dive deep into your business goals to map out a technical blueprint that prioritizes ROI and user experience.",
-    bullets: ["Stakeholder Alignment", "Competitor Analysis", "Technical Roadmap"],
+    title: "Product Roadmapping",
+    body: "We skip the generic talk and get straight to your business requirements. We map out exactly what needs to be built.",
+    bullets: ["No-Fluff Discovery", "System Design", "Technical Specs"],
   },
   {
     step: 2,
-    title: "Agile Development",
-    body: "Iterative sprints with weekly demos ensure transparency and allow for rapid pivots based on real‑world feedback.",
-    bullets: ["UI/UX Prototyping", "Scalable Engineering", "Continuous Integration"],
+    title: "Building & Shipping",
+    body: "Our engineers write clean code in weekly cycles. You get a private link to see the progress as it happens.",
+    bullets: ["Weekly Demos", "Clean Engineering", "Real-Time Updates"],
   },
   {
     step: 3,
-    title: "Security Hardening",
-    body: "Before go‑live, we perform rigorous security audits and performance stress tests to ensure a bulletproof launch.",
-    bullets: ["Penetration Testing", "Load Balancing", "Launch Monitoring"],
+    title: "Stress Testing",
+    body: "We try to break the software before your users do. Security audits and load tests are standard, not extra.",
+    bullets: ["Security Audits", "Load Testing", "Final Polish"],
   },
   {
     step: 4,
-    title: "Growth & Optimization",
-    body: "Launch is just the beginning. We provide ongoing support and data insights to continuously refine your product.",
-    bullets: ["Post‑Launch Support", "Analytics Review", "Future Scaling"],
+    title: "Live Operations",
+    body: "Launch is the first step. We stay on board to manage the servers and optimize for growth.",
+    bullets: ["24/7 Monitoring", "Conversion Tuning", "Continuous Support"],
   },
 ] as const;
 
@@ -223,27 +223,27 @@ export const faqItems = [
 
 export const blogTeasers = [
   {
-    title: "Cyber Resilience in the West African Digital Economy",
-    date: "April 24, 2024",
-    href: "/insights/cyber-resilience-ghana",
+    title: "Navigating the GH¢3 Trillion Mobile Money Economy",
+    date: "May 2024",
+    href: "/insights/ghana-momo-economy",
     image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+    category: "Fintech",
+    author: "OceanCyber Research",
+  },
+  {
+    title: "Why Cyberattacks on Ghanaian Businesses Rose 50% in 2024",
+    date: "April 2024",
+    href: "/insights/ghana-cybersecurity-trends",
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
     category: "Security",
-    author: "Ama Boateng",
+    author: "OceanCyber Security",
   },
   {
-    title: "Scaling Mobile Products for the Next Billion Users",
-    date: "April 18, 2024",
-    href: "/insights/scaling-mobile-products",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80",
-    category: "Product",
-    author: "James Osei",
-  },
-  {
-    title: "The Shift to Serverless: Modern Cloud Architectures",
-    date: "April 10, 2024",
-    href: "/insights/serverless-cloud-ghana",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
-    category: "Infrastructure",
-    author: "Sarah Mensah",
+    title: "Preparing for Ghana's US$1 Billion E‑commerce Boom in 2025",
+    date: "March 2024",
+    href: "/insights/ecommerce-growth-ghana",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+    category: "Growth",
+    author: "OceanCyber Product",
   },
 ] as const;

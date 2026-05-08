@@ -21,7 +21,7 @@ function PortfolioCard({ project, index }: { project: Project; index: number }) 
         href={`/portfolio/${project.slug}`}
         className="sa-card group relative flex h-full flex-col overflow-hidden text-left"
       >
-        <div className="relative min-h-[210px] overflow-hidden sm:min-h-[230px]">
+        <div className="relative min-h-[260px] overflow-hidden md:min-h-[320px]">
           <Image
             src={project.image}
             alt={project.title}

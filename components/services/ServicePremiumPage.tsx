@@ -3,7 +3,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Briefcase } from "lucide-react";
 import Link from "next/link";
-import { HeroSectionMotionLayers } from "@/components/layout/HeroSectionMotionLayers";
 import {
   PremiumFinalCtaSection,
   PremiumStoriesGridSection,
@@ -14,6 +13,7 @@ import {
   revealViewport,
   staggerDelay,
 } from "@/lib/scroll-reveal";
+import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
 
 export type ServiceCard = { title: string; description: string };
 
@@ -28,7 +28,6 @@ export type ServicePageContent = {
   heroPrefix: string;
   heroHighlight: string;
   heroSuffix: string;
-  /** Default: gradient blue; use `white` for a solid headline (e.g. service names). */
   heroHighlightTone?: "gradient" | "white";
   heroDescription: string;
   heroCtaLabel: string;
@@ -54,46 +53,19 @@ export type ServicePageContent = {
   ctaDescription: string;
 };
 
-function PageAmbient() {
-  return (
-    <div
-      className="pointer-events-none absolute inset-0 opacity-[0.12]"
-      aria-hidden
-    >
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(2, 106, 255, 0.2) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(2, 106, 255, 0.16) 1px, transparent 1px)
-          `,
-          backgroundSize: "56px 56px",
-          maskImage:
-            "radial-gradient(ellipse 100% 72% at 50% 0%, black 0%, transparent 76%)",
-        }}
-      />
-      <div className="absolute left-1/2 top-0 h-[min(420px,52vh)] w-[min(100%,880px)] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(2,106,255,0.1)_0%,transparent_72%)] blur-[88px]" />
-    </div>
-  );
-}
+import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 
 export function ServicePremiumPage({ content }: { content: ServicePageContent }) {
   const hasOutcomes = content.outcomes && content.outcomes.length > 0;
   const reduceMotion = useReducedMotion();
   const heroMotion = getPageHeroMotionVariants(reduceMotion);
-  const highlightTone = content.heroHighlightTone ?? "gradient";
-  const highlightClassName =
-    highlightTone === "white"
-      ? "text-slate-900"
-      : "bg-gradient-to-r from-ocean-600 via-ocean-700 to-cyan-600 bg-clip-text text-transparent";
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-100 text-slate-900">
-      <PageAmbient />
+    <main className="sa-shell relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
+      <SaPageAmbient />
 
-      <section className="relative z-10 overflow-hidden border-b border-slate-200/80 pb-16 pt-28 md:pb-20 md:pt-36">
-        <HeroSectionMotionLayers tone="light" />
-        <div className="container relative z-10 mx-auto max-w-4xl px-6 text-center md:px-8">
+      <section className="sa-section relative z-10 overflow-hidden border-b border-sa-border pt-28 md:pt-36">
+        <div className="sa-container relative z-10 text-center">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -101,65 +73,64 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
           >
             <motion.span
               variants={heroMotion.item}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-ocean-200 bg-ocean-50/95 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-ocean-800 shadow-sm"
+              className="sa-eyebrow mb-6 inline-flex items-center gap-2"
             >
-              <Briefcase className="h-3.5 w-3.5 text-ocean-600" aria-hidden />
+              <Briefcase className="h-4 w-4" aria-hidden />
               {content.heroEyebrow}
             </motion.span>
             <motion.h1
               variants={heroMotion.item}
-              className="mx-auto max-w-4xl text-balance text-center text-4xl font-bold leading-[1.1] tracking-tight text-slate-900 md:text-5xl lg:text-6xl"
+              className="sa-title mx-auto max-w-4xl text-balance"
             >
               {content.heroPrefix}
-              <span className={highlightClassName}>{content.heroHighlight}</span>
+              <span className="text-sa-primary">{content.heroHighlight}</span>
               {content.heroSuffix}
             </motion.h1>
             <motion.p
               variants={heroMotion.item}
-              className="mx-auto mt-6 max-w-2xl text-pretty text-center text-base font-light leading-relaxed text-slate-600 md:text-lg"
+              className="sa-subtitle mx-auto mt-6"
             >
               {content.heroDescription}
             </motion.p>
             <motion.div
               variants={heroMotion.item}
-              className="mx-auto mt-8 flex max-w-2xl flex-col items-center justify-center gap-4 sm:flex-row"
+              className="mx-auto mt-10 flex max-w-2xl flex-col items-center justify-center gap-4 sm:flex-row"
             >
-              <div className="flex flex-wrap justify-center gap-2 md:gap-3">
+              <div className="flex flex-wrap justify-center gap-3">
                 {content.pills.map((pill) => (
                   <span
                     key={pill}
-                    className="rounded-full border border-slate-200/90 bg-white px-4 py-2 text-xs font-medium text-slate-700"
+                    className="rounded-full border border-sa-border bg-sa-surface px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-sa-muted/80"
                   >
                     {pill}
                   </span>
                 ))}
               </div>
             </motion.div>
-            <motion.div variants={heroMotion.item} className="mt-10">
+            <motion.div variants={heroMotion.item} className="mt-12">
               <Link
                 href={content.heroCtaHref}
-                className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-8 py-4 text-sm font-bold text-white shadow-lg shadow-ocean-600/25 transition-all hover:brightness-110 active:scale-[0.98] md:text-base"
+                className="sa-btn-primary"
               >
                 {content.heroCtaLabel}
-                <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      <section className="relative z-10 border-b border-slate-200/80 py-20 md:py-24">
-        <div className="container mx-auto max-w-6xl px-6 md:px-8">
-          <motion.div {...fadeUpProps} className="mx-auto mb-12 max-w-2xl text-center md:mb-14">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-ocean-600">
+      <section className="sa-section relative z-10 border-b border-sa-border">
+        <div className="sa-container">
+          <motion.div {...fadeUpProps} className="mx-auto mb-14 max-w-2xl text-center">
+            <p className="sa-eyebrow">
               {content.focusEyebrow}
             </p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
+            <h2 className="sa-title mt-4">
               {content.focusTitle}
             </h2>
-            <p className="mt-3 text-slate-600 md:text-base">{content.focusSubtitle}</p>
+            <p className="sa-subtitle mx-auto mt-6">{content.focusSubtitle}</p>
           </motion.div>
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {content.focusAreas.map((item, index) => (
               <motion.div
                 key={item.title}
@@ -167,12 +138,12 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={staggerDelay(index, 0.06)}
-                className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm ring-1 ring-slate-200/50 transition-colors hover:border-ocean-200/80 hover:shadow-md md:p-7"
+                className="sa-card p-8 md:p-10"
               >
-                <h3 className="text-base font-semibold text-slate-900 md:text-lg">
+                <h3 className="font-heading text-lg font-bold text-white">
                   {item.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <p className="mt-3 text-sm leading-relaxed text-sa-muted/80">
                   {item.description}
                 </p>
               </motion.div>
@@ -181,16 +152,16 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
         </div>
       </section>
 
-      <section className="relative z-10 border-b border-slate-200/80 py-20 md:py-24">
-        <div className="container mx-auto max-w-6xl px-6 md:px-8">
-          <motion.div {...fadeUpProps} className="mx-auto mb-12 max-w-2xl text-center md:mb-14">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-ocean-600">
+      <section className="sa-section relative z-10 border-b border-sa-border">
+        <div className="sa-container">
+          <motion.div {...fadeUpProps} className="mx-auto mb-14 max-w-2xl text-center">
+            <p className="sa-eyebrow">
               {content.stackEyebrow}
             </p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
+            <h2 className="sa-title mt-4">
               {content.stackTitle}
             </h2>
-            <p className="mt-3 text-slate-600 md:text-base">{content.stackSubtitle}</p>
+            <p className="sa-subtitle mx-auto mt-6">{content.stackSubtitle}</p>
           </motion.div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {content.stack.map((item, index) => (
@@ -200,10 +171,10 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={staggerDelay(index, 0.05)}
-                className="flex flex-col rounded-xl border border-slate-200/90 bg-slate-50/80 px-5 py-4 transition-colors hover:border-ocean-200/70"
+                className="sa-card flex flex-col p-6"
               >
-                <span className="text-sm font-semibold text-slate-900">{item.title}</span>
-                <span className="mt-1 text-xs leading-relaxed text-slate-600">
+                <span className="font-heading text-sm font-bold text-white">{item.title}</span>
+                <span className="mt-2 text-xs leading-relaxed text-sa-muted/70">
                   {item.description}
                 </span>
               </motion.div>
@@ -212,18 +183,18 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
         </div>
       </section>
 
-      <section className="relative z-10 border-b border-slate-200/80 py-20 md:py-24">
-        <div className="container mx-auto max-w-6xl px-6 md:px-8">
-          <motion.div {...fadeUpProps} className="mx-auto mb-12 max-w-2xl text-center md:mb-14">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-ocean-600">
+      <section className="sa-section relative z-10 border-b border-sa-border">
+        <div className="sa-container">
+          <motion.div {...fadeUpProps} className="mx-auto mb-14 max-w-2xl text-center">
+            <p className="sa-eyebrow">
               {content.deliverEyebrow}
             </p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
+            <h2 className="sa-title mt-4">
               {content.deliverTitle}
             </h2>
-            <p className="mt-3 text-slate-600 md:text-base">{content.deliverSubtitle}</p>
+            <p className="sa-subtitle mx-auto mt-6">{content.deliverSubtitle}</p>
           </motion.div>
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {content.deliverables.map((item, index) => (
               <motion.div
                 key={item.title}
@@ -231,12 +202,12 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={staggerDelay(index, 0.06)}
-                className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm ring-1 ring-slate-200/50 transition-colors hover:border-ocean-200/80 hover:shadow-md md:p-7"
+                className="sa-card p-8 md:p-10"
               >
-                <h3 className="text-base font-semibold text-slate-900 md:text-lg">
+                <h3 className="font-heading text-lg font-bold text-white">
                   {item.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <p className="mt-3 text-sm leading-relaxed text-sa-muted/80">
                   {item.description}
                 </p>
               </motion.div>
@@ -258,6 +229,8 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
         title={content.ctaTitle}
         description={content.ctaDescription}
       />
+      
+      <StartupAgencyMobileQuickBar />
     </main>
   );
 }

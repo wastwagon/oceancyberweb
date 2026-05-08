@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import {
   DetailIntroMotion,
-  DetailPageHeroAmbient,
 } from "@/components/layout/DetailPageMotion";
+import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import type { PortfolioCaseStudy } from "@/lib/types/portfolio-case-study";
 
 type CaseStudyNarrative = {
@@ -30,128 +31,108 @@ export function CaseStudyDetailView({
   narrative,
 }: Props) {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-ocean-900 via-ocean-800 to-ocean-900">
-      <DetailPageHeroAmbient />
-      <div className="container relative z-10 mx-auto px-6 py-32 md:px-8">
-        <div className="mx-auto max-w-4xl">
+    <div className="relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted antialiased">
+      <SaPageAmbient />
+      
+      <div className="sa-container relative z-10 py-32">
+        <div className="mx-auto max-w-6xl">
           <DetailIntroMotion>
             <>
-              <div className="mb-8">
+              <div className="mb-12">
                 <Link
                   href={backHref}
-                  className="inline-flex items-center gap-2 text-cyan-300 transition-colors hover:text-cyan-100"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-sa-primary transition-colors hover:text-white"
                 >
+                  <ArrowLeft className="h-4 w-4" />
                   {backLabel}
                 </Link>
               </div>
 
-              <div className="mb-8 rounded-2xl border border-cyan-400/20 bg-gradient-to-br from-ocean-800/50 to-ocean-900/50 p-8 backdrop-blur-xl">
-                <div className="flex flex-col gap-6 md:flex-row">
-                  <div className="flex-1">
-                    <div className="mb-4 flex items-center gap-4">
-                      <span className="rounded-full border border-cyan-400/30 bg-cyan-500/10 px-3 py-1 text-sm font-medium text-cyan-200">
-                        {project.category}
-                      </span>
-                      <span className="text-sm text-cyan-300/70">
-                        {project.year}
-                      </span>
-                    </div>
-                    <h1 className="mb-2 text-balance text-center text-4xl font-bold text-cyan-100 md:text-5xl">
-                      {project.title}
-                    </h1>
-                    <p className="text-center text-lg text-cyan-200/80">
-                      {project.client}
-                    </p>
-                  </div>
-                  <div className="md:w-64">
-                    {project.metrics ? (
-                      <div className="rounded-lg border border-cyan-400/20 bg-gradient-to-r from-cyan-500/10 to-teal-500/10 p-4">
-                        <div className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-3xl font-bold text-transparent">
-                          {project.metrics.increase}
-                        </div>
-                        <div className="mt-1 text-sm text-cyan-300/70">
-                          {project.metrics.metric}
-                        </div>
-                      </div>
-                    ) : null}
-                  </div>
+              <div className="mb-12 text-center md:text-left">
+                <div className="flex flex-wrap items-center justify-center gap-4 md:justify-start">
+                  <span className="sa-eyebrow">
+                    {project.category}
+                  </span>
+                  <span className="h-1 w-1 rounded-full bg-sa-border" />
+                  <span className="text-xs font-bold uppercase tracking-widest text-sa-muted/60">
+                    {project.year}
+                  </span>
                 </div>
+                <h1 className="sa-title mt-6 text-4xl md:text-6xl lg:text-7xl">
+                  {project.title}
+                </h1>
+                <p className="mt-4 text-xl font-medium text-sa-muted/80">
+                  {project.client}
+                </p>
               </div>
             </>
           </DetailIntroMotion>
 
-          <div className="grid gap-8 lg:grid-cols-3">
-            <div className="space-y-8 lg:col-span-2">
-              <div className="overflow-hidden rounded-2xl border border-cyan-400/20 bg-gradient-to-br from-ocean-800/50 to-ocean-900/50 backdrop-blur-xl">
-                <div className="relative h-64 md:h-96">
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20`}
-                  />
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),transparent_70%)]" />
+          <div className="grid gap-12 lg:grid-cols-3">
+            <div className="space-y-12 lg:col-span-2">
+              <div className="sa-card overflow-hidden">
+                <div className="relative aspect-video w-full">
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 900px"
+                    sizes="(max-width: 1024px) 100vw, 800px"
                     priority
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-sa-bg/40 to-transparent" />
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
-                {[...Array(5)].map((_, i) => (
-                  <svg
-                    key={i}
-                    className={`h-5 w-5 ${i < project.rating ? "fill-yellow-400 text-yellow-400" : "text-cyan-400"}`}
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-                <span className="ml-2 text-sm text-cyan-300/70">
-                  {project.rating}/5 Rating
-                </span>
-              </div>
+              {/* Quick Metrics */}
+              {project.metrics ? (
+                <div className="sa-card p-8 border-l-4 border-sa-primary">
+                  <div className="text-4xl font-black text-white md:text-5xl">
+                    {project.metrics.increase}
+                  </div>
+                  <div className="mt-2 text-sm font-bold uppercase tracking-[0.2em] text-sa-primary">
+                    {project.metrics.metric}
+                  </div>
+                </div>
+              ) : null}
 
-              <div className="space-y-4">
-                <h2 className="text-2xl font-bold text-cyan-100">
+              <div className="space-y-6">
+                <h2 className="font-heading text-2xl font-bold text-white md:text-3xl">
                   Project Overview
                 </h2>
-                <p className="leading-relaxed text-cyan-200/80">
+                <p className="text-lg leading-relaxed text-sa-muted/90">
                   {project.description}
                 </p>
               </div>
 
               {narrative?.challenge || narrative?.solution || narrative?.impact ? (
-                <div className="space-y-6">
+                <div className="space-y-10">
                   {narrative?.challenge ? (
-                    <div>
-                      <h3 className="mb-3 text-xl font-bold text-cyan-100">
+                    <div className="space-y-4">
+                      <h3 className="font-heading text-xl font-bold text-white">
                         The Challenge
                       </h3>
-                      <p className="leading-relaxed text-cyan-200/80">
+                      <p className="leading-relaxed text-sa-muted/80">
                         {narrative.challenge}
                       </p>
                     </div>
                   ) : null}
                   {narrative?.solution ? (
-                    <div>
-                      <h3 className="mb-3 text-xl font-bold text-cyan-100">
+                    <div className="space-y-4">
+                      <h3 className="font-heading text-xl font-bold text-white">
                         Our Solution
                       </h3>
-                      <p className="leading-relaxed text-cyan-200/80">
+                      <p className="leading-relaxed text-sa-muted/80">
                         {narrative.solution}
                       </p>
                     </div>
                   ) : null}
                   {narrative?.impact ? (
-                    <div>
-                      <h3 className="mb-3 text-xl font-bold text-cyan-100">
+                    <div className="space-y-4">
+                      <h3 className="font-heading text-xl font-bold text-white">
                         Impact & Results
                       </h3>
-                      <p className="leading-relaxed text-cyan-200/80">
+                      <p className="leading-relaxed text-sa-muted/80">
                         {narrative.impact}
                       </p>
                     </div>
@@ -160,15 +141,15 @@ export function CaseStudyDetailView({
               ) : null}
 
               {project.services ? (
-                <div className="space-y-4">
-                  <h2 className="text-2xl font-bold text-cyan-100">
+                <div className="space-y-6">
+                  <h2 className="font-heading text-xl font-bold text-white">
                     Services Provided
                   </h2>
                   <div className="flex flex-wrap gap-2">
                     {project.services.map((service) => (
                       <span
                         key={service}
-                        className="rounded-lg border border-teal-400/20 bg-teal-500/10 px-3 py-1.5 text-sm font-medium text-teal-200"
+                        className="rounded-full border border-sa-border bg-sa-surface/50 px-4 py-2 text-xs font-bold text-sa-muted/80"
                       >
                         {service}
                       </span>
@@ -177,91 +158,76 @@ export function CaseStudyDetailView({
                 </div>
               ) : null}
 
-              {project.results ? (
-                <div className="space-y-4">
-                  <h2 className="text-2xl font-bold text-cyan-100">
-                    Results & Impact
-                  </h2>
-                  <p className="leading-relaxed text-cyan-200/80">
-                    {project.results}
-                  </p>
-                </div>
-              ) : null}
-
               {project.testimonial ? (
-                <div className="rounded-lg border border-cyan-400/20 bg-gradient-to-r from-cyan-500/10 to-teal-500/10 p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="text-4xl text-cyan-300/50">"</div>
-                    <div>
-                      <p className="italic leading-relaxed text-cyan-200/80">
-                        {project.testimonial}
-                      </p>
-                      <div className="mt-4 text-right">
-                        <div className="font-semibold text-cyan-100">
+                <div className="sa-card relative p-8 md:p-12">
+                  <span className="absolute -top-4 left-8 text-6xl font-serif text-sa-primary/20">"</span>
+                  <div className="relative z-10">
+                    <p className="text-xl italic leading-relaxed text-white/90">
+                      {project.testimonial}
+                    </p>
+                    <div className="mt-8 flex items-center gap-4">
+                      <div className="h-12 w-12 rounded-full bg-sa-primary/10 flex items-center justify-center text-sa-primary font-bold">
+                        {project.client[0]}
+                      </div>
+                      <div>
+                        <div className="font-bold text-white">
                           {project.client}
                         </div>
-                        <div className="text-sm text-cyan-300/70">Client</div>
+                        <div className="text-xs font-bold uppercase tracking-widest text-sa-muted/60">
+                          Verified Client Partner
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               ) : null}
-
-              <div className="space-y-4">
-                <h2 className="text-2xl font-bold text-cyan-100">
-                  Technologies Used
-                </h2>
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded-lg border border-cyan-400/20 bg-cyan-500/10 px-3 py-1.5 text-sm font-medium text-cyan-200"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
             </div>
 
             <div className="lg:col-span-1">
-              <div className="space-y-6">
-                <div className="rounded-2xl border border-cyan-400/20 bg-gradient-to-br from-ocean-800/50 to-ocean-900/50 p-6 backdrop-blur-xl">
-                  <h3 className="mb-4 text-lg font-bold text-cyan-100">
+              <div className="sticky top-32 space-y-8">
+                <div className="sa-card p-8">
+                  <h3 className="font-heading mb-8 text-sm font-bold uppercase tracking-[0.2em] text-sa-primary">
                     {sidebarTitle}
                   </h3>
-                  <div className="space-y-3 text-cyan-200/80">
-                    <div className="flex justify-between">
-                      <span>Client:</span>
-                      <span className="font-semibold">{project.client}</span>
+                  <div className="space-y-6">
+                    <div className="flex flex-col gap-1">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/50">Client</span>
+                      <span className="font-bold text-white">{project.client}</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Category:</span>
-                      <span className="font-semibold">{project.category}</span>
+                    <div className="flex flex-col gap-1">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/50">Industry</span>
+                      <span className="font-bold text-white">{project.category}</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Year:</span>
-                      <span className="font-semibold">{project.year}</span>
+                    <div className="flex flex-col gap-1">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/50">Year</span>
+                      <span className="font-bold text-white">{project.year}</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Rating:</span>
-                      <span className="font-semibold">{project.rating}/5</span>
+                  </div>
+
+                  <div className="mt-10 pt-8 border-t border-sa-border">
+                    <h4 className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/50 mb-4">Core Stack</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((t) => (
+                        <span key={t} className="text-xs font-medium text-white/70 bg-white/5 px-2 py-1 rounded">
+                          {t}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <Link
                     href={`/contact?topic=${encodeURIComponent(project.title)}`}
-                    className="inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-cyan-500 to-teal-500 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:scale-105"
+                    className="sa-btn-primary w-full justify-center"
                   >
                     Discuss this project
                   </Link>
                   <Link
                     href={backHref}
-                    className="inline-flex w-full items-center justify-center rounded-lg border border-cyan-400/50 px-6 py-3 font-semibold text-cyan-200 transition-all hover:bg-cyan-500/10"
+                    className="sa-btn-outline w-full justify-center"
                   >
-                    {detailTitle}
+                    View all portfolio
                   </Link>
                 </div>
               </div>
@@ -272,3 +238,4 @@ export function CaseStudyDetailView({
     </div>
   );
 }
+

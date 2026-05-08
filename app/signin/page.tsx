@@ -4,19 +4,20 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, Suspense, useState } from "react";
 import { signIn } from "@/lib/auth-client";
+import { Loader2 } from "lucide-react";
 
 function AuthIllustration() {
   return (
-    <svg viewBox="0 0 220 140" className="h-auto w-full max-w-[320px]" fill="none" aria-hidden>
-      <rect x="10" y="20" width="96" height="64" rx="10" fill="#E0F2FE" stroke="#0EA5E9" strokeWidth="2" />
-      <rect x="22" y="32" width="58" height="8" rx="4" fill="#7DD3FC" />
-      <rect x="22" y="46" width="72" height="6" rx="3" fill="#38BDF8" fillOpacity="0.85" />
-      <rect x="22" y="58" width="50" height="6" rx="3" fill="#0EA5E9" fillOpacity="0.75" />
-      <rect x="126" y="14" width="84" height="112" rx="14" fill="#DBEAFE" stroke="#2563EB" strokeWidth="2.2" />
-      <rect x="138" y="26" width="60" height="60" rx="8" fill="#EFF6FF" stroke="#93C5FD" />
-      <path d="M168 52a10 10 0 0 0-10 10v8h20v-8a10 10 0 0 0-10-10Z" fill="#3B82F6" fillOpacity="0.85" />
-      <circle cx="168" cy="50" r="6" fill="#60A5FA" />
-      <rect x="153" y="98" width="30" height="4" rx="2" fill="#60A5FA" />
+    <svg viewBox="0 0 220 140" className="h-auto w-full max-w-[320px] opacity-80" fill="none" aria-hidden>
+      <rect x="10" y="20" width="96" height="64" rx="10" fill="#1e293b" stroke="#38bdf8" strokeWidth="2" />
+      <rect x="22" y="32" width="58" height="8" rx="4" fill="#334155" />
+      <rect x="22" y="46" width="72" height="6" rx="3" fill="#38bdf8" fillOpacity="0.85" />
+      <rect x="22" y="58" width="50" height="6" rx="3" fill="#0ea5e9" fillOpacity="0.75" />
+      <rect x="126" y="14" width="84" height="112" rx="14" fill="#0f172a" stroke="#0ea5e9" strokeWidth="2.2" />
+      <rect x="138" y="26" width="60" height="60" rx="8" fill="#1e293b" stroke="#38bdf8" strokeOpacity="0.3" />
+      <path d="M168 52a10 10 0 0 0-10 10v8h20v-8a10 10 0 0 0-10-10Z" fill="#38bdf8" fillOpacity="0.85" />
+      <circle cx="168" cy="50" r="6" fill="#0ea5e9" />
+      <rect x="153" y="98" width="30" height="4" rx="2" fill="#38bdf8" />
     </svg>
   );
 }
@@ -45,62 +46,62 @@ function SignInForm() {
   }
 
   return (
-    <main className="bg-gradient-to-b from-slate-50 via-white to-slate-100 px-4 py-16 md:py-24">
-      <div className="mx-auto grid w-full max-w-5xl gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-        <section className="rounded-3xl border border-slate-200/90 bg-white p-7 shadow-lg shadow-slate-200/50 ring-1 ring-slate-200/60 md:p-10">
-          <p className="inline-flex rounded-full border border-ocean-200 bg-ocean-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-ocean-800">
+    <main className="sa-shell min-h-screen bg-sa-bg pt-24 pb-16 md:py-32">
+      <div className="sa-container mx-auto grid w-full max-w-5xl gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+        <section className="sa-card p-8 md:p-10 border-sa-border">
+          <p className="sa-eyebrow inline-flex">
             Client access
           </p>
-          <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
+          <h1 className="sa-title !text-left mt-5 text-3xl md:text-4xl">
             Sign in to your OceanCyber account
           </h1>
-          <p className="mt-3 text-sm leading-relaxed text-slate-600 md:text-base">
+          <p className="sa-subtitle !text-left mt-4">
             Access wallet top-ups, renewal tracking, request history, and project milestones
             in one secure dashboard.
           </p>
-          <div className="mt-6 rounded-2xl border border-sky-100 bg-gradient-to-br from-sky-50 via-blue-50/70 to-white p-4 md:p-5">
+          <div className="mt-8 rounded-3xl border border-sa-primary/20 bg-sa-primary/5 p-6 flex justify-center backdrop-blur-sm">
             <AuthIllustration />
           </div>
-          <div className="mt-6 grid gap-2 sm:grid-cols-2">
-            <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-700">
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            <div className="rounded-2xl border border-sa-border bg-sa-surface p-4 text-[10px] font-bold uppercase tracking-widest text-sa-primary text-center">
               Secure account access
             </div>
-            <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-700">
-              Billing and project visibility
+            <div className="rounded-2xl border border-sa-border bg-sa-surface p-4 text-[10px] font-bold uppercase tracking-widest text-sa-primary text-center">
+              Billing & project visibility
             </div>
           </div>
         </section>
 
-        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-          <h2 className="text-2xl font-bold text-slate-900">Sign in</h2>
-          <p className="mt-1 text-sm text-slate-600">
+        <section className="sa-card p-8 md:p-10 border-sa-border h-fit">
+          <h2 className="font-heading text-2xl font-bold text-white">Sign in</h2>
+          <p className="mt-2 text-sm text-sa-muted/70">
             Use your account details to continue.
           </p>
 
-          <form onSubmit={onSubmit} className="mt-6 space-y-4">
-          <div>
-            <label className="mb-1.5 block text-sm font-medium text-slate-700">Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-xl border border-slate-300 px-3 py-2.5 outline-none ring-ocean-500 focus:ring-2"
-              required
-            />
-          </div>
-          <div>
-            <label className="mb-1.5 block text-sm font-medium text-slate-700">Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-xl border border-slate-300 px-3 py-2.5 outline-none ring-ocean-500 focus:ring-2"
-              required
-            />
-          </div>
+          <form onSubmit={onSubmit} className="mt-8 space-y-5">
+            <div>
+              <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 mb-2 block">Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm text-white outline-none focus:border-sa-primary transition"
+                required
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 mb-2 block">Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm text-white outline-none focus:border-sa-primary transition"
+                required
+              />
+            </div>
 
             {error ? (
-              <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+              <p className="rounded-xl border border-rose-500/50 bg-rose-500/10 px-4 py-3 text-sm text-rose-400">
                 {error}
               </p>
             ) : null}
@@ -108,17 +109,24 @@ function SignInForm() {
             <button
               type="submit"
               disabled={loading}
-              className="inline-flex w-full items-center justify-center rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-4 py-3 font-bold text-white transition hover:brightness-110 disabled:opacity-60"
+              className="sa-btn-primary w-full min-h-[48px] justify-center mt-2"
             >
-              {loading ? "Signing in..." : "Sign in"}
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Signing in...
+                </>
+              ) : (
+                "Sign in"
+              )}
             </button>
           </form>
 
-          <p className="mt-4 text-sm text-slate-600">
+          <p className="mt-6 text-sm text-sa-muted/80 text-center">
             No account yet?{" "}
             <Link
               href={`/signup${nextPath ? `?next=${encodeURIComponent(nextPath)}` : ""}`}
-              className="font-semibold text-ocean-700 hover:text-ocean-800"
+              className="font-bold text-sa-primary hover:text-white transition-colors"
             >
               Create one
             </Link>
@@ -131,9 +139,8 @@ function SignInForm() {
 
 export default function SignInPage() {
   return (
-    <Suspense fallback={<main className="bg-slate-50 px-4 py-16 text-slate-600">Loading…</main>}>
+    <Suspense fallback={<main className="sa-shell min-h-screen bg-sa-bg px-4 py-32 text-center text-sa-muted">Loading…</main>}>
       <SignInForm />
     </Suspense>
   );
 }
-

@@ -15,20 +15,22 @@ export function SaAboutSection() {
               <span className="sa-eyebrow">Our Agency</span>
             </div>
             <h2 className="sa-title text-4xl md:text-5xl lg:text-6xl">
-              Accelerating digital growth with disciplined engineering
+              We build software that 
+              <span className="text-sa-primary"> actually works.</span>
             </h2>
             <p className="sa-subtitle mt-8 text-lg leading-relaxed md:text-xl">
-              We don&apos;t just build websites; we engineer digital foundations that scale.
-              OceanCyber brings together strategic vision and technical precision to deliver
-              products that drive measurable business value across Ghana and the region.
+              Forget the fluff. At OceanCyber, we focus on the hard engineering 
+              required to scale products in Ghana&apos;s digital economy. We bridge 
+              the gap between high-level specs and real-world code, delivering 
+              infrastructure that stands up to heavy traffic and zero-day threats.
             </p>
 
             <div className="mt-12 grid gap-6 sm:grid-cols-2">
               <div className="sa-card p-6 border-l-2 border-l-sa-primary bg-sa-surface/30">
                 <h3 className="font-heading text-lg font-bold text-white">Our mission</h3>
                 <p className="mt-3 text-sm leading-relaxed text-sa-muted">
-                  Help Ghana‑based and regional teams ship trustworthy software and web experiences
-                  without surprises.
+                  We give regional teams the technical muscle to ship reliable products 
+                  without the typical infrastructure headaches.
                 </p>
               </div>
               <div className="sa-card p-6 border-l-2 border-l-sa-primary bg-sa-surface/30">
@@ -64,7 +66,7 @@ export function SaAboutSection() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-sa-bg/60 via-transparent to-transparent" />
             </div>
-            
+
             {/* Decorative Element */}
             <div className="absolute -bottom-6 -left-6 h-32 w-32 rounded-3xl border border-sa-primary/20 bg-sa-primary/5 backdrop-blur-xl md:h-48 md:w-48" />
           </SaReveal>

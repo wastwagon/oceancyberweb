@@ -107,7 +107,7 @@ function PortfolioCard({
   return (
     <SaReveal
       delay={index * 0.05}
-      className={`group relative overflow-hidden border-sa-border h-64 transition-all duration-500 hover:z-10 ${
+      className={`group relative overflow-hidden border-sa-border h-[320px] md:h-[400px] transition-all duration-500 hover:z-10 ${
         isHighlight ? "ring-1 ring-inset ring-sa-primary/20" : ""
       }`}
     >

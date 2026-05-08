@@ -17,23 +17,24 @@ import {
   pauseRenewal,
   resumeRenewal,
 } from "@/lib/auth-client";
+import { cn } from "@/lib/utils";
 
 type DashboardData = Awaited<ReturnType<typeof getBillingDashboard>>;
 
 function statusStyles(status: string) {
   switch (status) {
     case "active":
-      return "border-emerald-200 bg-emerald-50 text-emerald-800";
+      return "border-emerald-500/30 bg-emerald-500/10 text-emerald-400";
     case "paused":
-      return "border-amber-200 bg-amber-50 text-amber-900";
+      return "border-amber-500/30 bg-amber-500/10 text-amber-400";
     case "past_due":
-      return "border-orange-200 bg-orange-50 text-orange-900";
+      return "border-orange-500/30 bg-orange-500/10 text-orange-400";
     case "suspended":
-      return "border-red-200 bg-red-50 text-red-800";
+      return "border-red-500/30 bg-red-500/10 text-red-400";
     case "cancelled":
-      return "border-slate-200 bg-slate-100 text-slate-600";
+      return "border-sa-border bg-sa-bg text-sa-muted/60";
     default:
-      return "border-slate-200 bg-slate-50 text-slate-700";
+      return "border-sa-border bg-sa-surface text-sa-muted";
   }
 }
 
@@ -94,46 +95,46 @@ export default function DashboardPage() {
   }
 
   return (
-    <main className="bg-gradient-to-b from-slate-50 via-white to-slate-100 px-4 py-10 md:py-14">
-      <div className="mx-auto w-full max-w-5xl space-y-6">
-        <header className="rounded-3xl border border-slate-200/90 bg-white p-5 shadow-sm ring-1 ring-slate-200/60 md:p-7">
-          <div className="flex flex-wrap items-start justify-between gap-3">
+    <main className="sa-shell min-h-screen bg-sa-bg pt-28 pb-16 md:py-36">
+      <div className="sa-container max-w-5xl space-y-6">
+        <header className="sa-card p-6 border-sa-border md:p-8">
+          <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-ocean-600">Dashboard</p>
-              <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">Billing & renewals</h1>
-              <p className="mt-1 text-sm text-slate-600">{email || "Signed-in user"}</p>
-              <p className="mt-2 max-w-2xl text-sm text-slate-600">
+              <p className="sa-eyebrow inline-flex">Dashboard</p>
+              <h1 className="sa-title !text-left mt-3 text-2xl md:text-3xl">Billing & renewals</h1>
+              <p className="mt-1 text-sm text-sa-muted/80">{email || "Signed-in user"}</p>
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-sa-muted/80">
                 Manage wallet funding, recurring renewals, and project invoices in one place.
               </p>
             </div>
-            <div className="rounded-xl border border-ocean-200 bg-ocean-50 px-3 py-2 text-xs font-semibold text-ocean-800">
+            <div className="rounded-2xl border border-sa-primary/20 bg-sa-primary/10 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-sa-primary">
               Live account overview
             </div>
           </div>
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/dashboard/requests"
-              className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-400"
+              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-5 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition-colors hover:border-sa-primary/50 hover:text-white"
             >
               Requests
             </Link>
             <Link
               href="/dashboard/projects"
-              className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-400"
+              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-5 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition-colors hover:border-sa-primary/50 hover:text-white"
             >
               Projects
             </Link>
             <Link
               href="/dashboard/statements"
-              className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-400"
+              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-5 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition-colors hover:border-sa-primary/50 hover:text-white"
             >
               Statements
             </Link>
             <Link
               href="/services/website-to-mobile-app"
-              className="rounded-xl border border-ocean-300 bg-ocean-50 px-4 py-2 text-sm font-semibold text-ocean-800 hover:border-ocean-400"
+              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-sa-primary/30 bg-sa-primary/10 px-5 text-[10px] font-bold uppercase tracking-widest text-sa-primary transition-colors hover:border-sa-primary hover:text-white"
             >
-              Website-to-Mobile App Conversion Quote
+              App Quote
             </Link>
             <button
               type="button"
@@ -141,82 +142,82 @@ export default function DashboardPage() {
                 clearAccessToken();
                 window.location.href = "/signin";
               }}
-              className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-400"
+              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-rose-500/30 bg-rose-500/10 px-5 text-[10px] font-bold uppercase tracking-widest text-rose-400 transition-colors hover:border-rose-500 hover:text-white"
             >
               Sign out
             </button>
           </div>
         </header>
 
-        {loading ? <p className="text-slate-600">Loading dashboard...</p> : null}
+        {loading ? <p className="text-sa-muted text-sm px-2">Loading dashboard...</p> : null}
         {error ? (
-          <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{error}</div>
+          <div className="rounded-2xl border border-rose-500/50 bg-rose-500/10 px-5 py-4 text-sm text-rose-400">{error}</div>
         ) : null}
 
         {data ? (
           <>
             {pastDueCount > 0 || suspendedCount > 0 ? (
-              <section className="rounded-2xl border border-orange-200 bg-orange-50 p-4 shadow-sm">
-                <p className="text-sm font-semibold text-orange-900">
+              <section className="rounded-3xl border border-orange-500/30 bg-orange-500/10 p-6 shadow-sm">
+                <p className="text-sm font-bold text-orange-400">
                   Action needed: {pastDueCount} past due {pastDueCount === 1 ? "renewal" : "renewals"}
                   {suspendedCount > 0
                     ? `, ${suspendedCount} suspended ${suspendedCount === 1 ? "service" : "services"}`
                     : ""}
                   .
                 </p>
-                <p className="mt-1 text-sm text-orange-800">
-                  Add wallet funds, then use <span className="font-semibold">Charge wallet</span> on each affected
+                <p className="mt-2 text-sm text-orange-400/80">
+                  Add wallet funds, then use <span className="font-bold text-orange-400">Charge wallet</span> on each affected
                   renewal to restore service quickly.
                 </p>
               </section>
             ) : null}
 
-            <section className="grid gap-4 md:grid-cols-3">
-              <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:col-span-2">
-                <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Wallet balance</p>
-                <p className="mt-2 text-4xl font-bold tracking-tight text-slate-900">{balanceLabel}</p>
-                <p className="mt-2 text-sm text-slate-600">
+            <section className="grid gap-6 md:grid-cols-3">
+              <div className="sa-card p-6 border-sa-border md:col-span-2 md:p-8">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">Wallet balance</p>
+                <p className="mt-3 font-heading text-4xl font-bold tracking-tight text-white md:text-5xl">{balanceLabel}</p>
+                <p className="mt-3 text-sm text-sa-muted/80 leading-relaxed max-w-md">
                   Top up with Paystack. Renewals can auto-charge every 10 minutes when due, or you can pay manually.
                 </p>
                 <Link
                   href="/dashboard/wallet"
-                  className="mt-4 inline-flex rounded-xl bg-ocean-600 px-4 py-2.5 text-sm font-bold text-white hover:bg-ocean-700"
+                  className="sa-btn-primary mt-6 min-h-[44px] px-6 text-[10px]"
                 >
                   Top up wallet
                 </Link>
               </div>
-              <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Subscriptions</p>
-                <p className="mt-2 text-4xl font-bold tracking-tight text-slate-900">{data.renewals.length}</p>
-                <p className="mt-2 text-sm text-slate-600">Pause, resume, or cancel anytime.</p>
+              <div className="sa-card p-6 border-sa-border md:p-8">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">Subscriptions</p>
+                <p className="mt-3 font-heading text-4xl font-bold tracking-tight text-white md:text-5xl">{data.renewals.length}</p>
+                <p className="mt-3 text-sm text-sa-muted/80 leading-relaxed">Pause, resume, or cancel anytime.</p>
               </div>
             </section>
 
-            <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <div className="flex flex-wrap items-center justify-between gap-3">
+            <section className="sa-card p-6 border-sa-border md:p-8">
+              <div className="flex flex-wrap items-center justify-between gap-6">
                 <div>
-                  <h2 className="text-lg font-bold text-slate-900">Need a new build quote?</h2>
-                  <p className="mt-1 text-sm text-slate-600">
+                  <h2 className="font-heading text-xl font-bold text-white">Need a new build quote?</h2>
+                  <p className="mt-2 text-sm text-sa-muted/80 max-w-xl">
                     Already have a website? Submit a conversion request and receive a scoped mobile app quote.
                   </p>
                 </div>
                 <Link
                   href="/services/website-to-mobile-app"
-                  className="inline-flex min-h-[42px] items-center rounded-xl border-2 border-ocean-600 bg-gradient-to-b from-ocean-600 to-ocean-800 px-4 text-sm font-bold text-white transition hover:brightness-110"
+                  className="sa-btn-primary min-h-[44px] px-6 text-[10px]"
                 >
                   Request conversion quote
                 </Link>
               </div>
             </section>
 
-            <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <h2 className="text-lg font-bold text-slate-900">Recurring renewals</h2>
-                <div className="flex flex-wrap items-center gap-2">
+            <section className="sa-card p-6 border-sa-border md:p-8">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <h2 className="font-heading text-xl font-bold text-white">Recurring renewals</h2>
+                <div className="flex flex-wrap items-center gap-3">
                   <select
                     value={selectedPlanCode}
                     onChange={(e) => setSelectedPlanCode(e.target.value)}
-                    className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800"
+                    className="rounded-xl border border-sa-border bg-sa-bg px-4 py-2.5 text-sm text-white focus:border-sa-primary focus:outline-none"
                     disabled={creating || plans.length === 0}
                   >
                     {plans.length === 0 ? (
@@ -230,9 +231,10 @@ export default function DashboardPage() {
                       ))
                     )}
                   </select>
-                  <label className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700">
+                  <label className="inline-flex items-center gap-2 rounded-xl border border-sa-border bg-sa-surface px-4 py-2.5 text-[10px] font-bold uppercase tracking-widest text-sa-muted cursor-pointer hover:border-sa-primary/50">
                     <input
                       type="checkbox"
+                      className="accent-sa-primary"
                       checked={autoRenewUsingWallet}
                       onChange={(e) => setAutoRenewUsingWallet(e.target.checked)}
                     />
@@ -253,16 +255,16 @@ export default function DashboardPage() {
                         setCreating(false);
                       }
                     }}
-                    className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-700 hover:border-slate-400 disabled:opacity-50"
+                    className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-sa-border bg-sa-surface px-6 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition-colors hover:border-sa-primary/50 hover:text-white disabled:opacity-50"
                   >
                     {creating ? "Creating..." : "Add renewal"}
                   </button>
                 </div>
               </div>
 
-              <div className="mt-4 space-y-3">
+              <div className="mt-8 space-y-4">
                 {data.renewals.length === 0 ? (
-                  <p className="text-sm text-slate-600">No renewals yet.</p>
+                  <p className="text-sm text-sa-muted/80 rounded-2xl border border-sa-border border-dashed p-8 text-center">No renewals yet.</p>
                 ) : (
                   data.renewals.map((row: BillingRenewal) => {
                     const isBusy = busyId === row.id;
@@ -271,37 +273,38 @@ export default function DashboardPage() {
                     return (
                       <div
                         key={row.id}
-                        className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 space-y-3"
+                        className="rounded-2xl border border-sa-border bg-sa-bg px-5 py-5 transition-colors hover:border-sa-primary/50"
                       >
-                        <div className="flex flex-wrap items-start justify-between gap-3">
-                          <div className="min-w-0 space-y-1">
-                            <div className="flex flex-wrap items-center gap-2">
-                              <p className="font-semibold text-slate-900">{row.plan.name}</p>
+                        <div className="flex flex-col lg:flex-row items-start justify-between gap-5">
+                          <div className="min-w-0 space-y-2">
+                            <div className="flex flex-wrap items-center gap-3">
+                              <p className="font-heading font-bold text-white text-lg">{row.plan.name}</p>
                               <span
-                                className={`rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${statusStyles(row.status)}`}
+                                className={cn("rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-widest", statusStyles(row.status))}
                               >
                                 {row.status.replace("_", " ")}
                               </span>
                             </div>
-                            <p className="text-xs text-slate-600">
-                              Next renewal: {new Date(row.nextRenewalAt).toLocaleDateString()}
-                              {row.autoRenewUsingWallet ? " · Auto-pay from wallet" : " · Manual only"}
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">
+                              Next renewal: <span className="text-sa-muted">{new Date(row.nextRenewalAt).toLocaleDateString()}</span>
+                              <span className="text-sa-border mx-2">|</span>
+                              {row.autoRenewUsingWallet ? "Auto-pay from wallet" : "Manual only"}
                             </p>
                             {row.externalRef ? (
-                              <p className="text-xs font-mono text-slate-500">Ref: {row.externalRef}</p>
+                              <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40">Ref: {row.externalRef}</p>
                             ) : null}
                             {row.status === "past_due" && row.graceEndsAt ? (
-                              <p className="text-xs font-medium text-orange-800">
+                              <p className="text-[10px] font-bold uppercase tracking-widest text-orange-400 mt-2">
                                 Grace until {new Date(row.graceEndsAt).toLocaleString()} — add funds or pay from wallet.
                               </p>
                             ) : null}
                             {row.status === "suspended" ? (
-                              <p className="text-xs font-medium text-red-800">
+                              <p className="text-[10px] font-bold uppercase tracking-widest text-red-400 mt-2">
                                 Suspended after grace — contact support to reactivate.
                               </p>
                             ) : null}
                           </div>
-                          <div className="flex flex-wrap gap-2">
+                          <div className="flex flex-wrap items-center gap-2 lg:justify-end">
                             {canCharge ? (
                               <button
                                 type="button"
@@ -309,7 +312,7 @@ export default function DashboardPage() {
                                 onClick={() =>
                                   withRenewalAction(row.id, () => chargeRenewal(row.id))
                                 }
-                                className="rounded-lg bg-slate-900 px-3 py-2 text-xs font-bold uppercase tracking-wide text-white hover:bg-black disabled:opacity-50"
+                                className="inline-flex min-h-[36px] items-center justify-center rounded-full border border-sa-primary bg-sa-primary/20 px-4 text-[10px] font-bold uppercase tracking-widest text-sa-primary transition-colors hover:bg-sa-primary hover:text-white disabled:opacity-50"
                               >
                                 {isBusy ? "..." : "Charge wallet"}
                               </button>
@@ -319,7 +322,7 @@ export default function DashboardPage() {
                                 type="button"
                                 disabled={isBusy}
                                 onClick={() => withRenewalAction(row.id, () => resumeRenewal(row.id))}
-                                className="rounded-lg border border-emerald-300 bg-white px-3 py-2 text-xs font-bold uppercase tracking-wide text-emerald-800 hover:bg-emerald-50"
+                                className="inline-flex min-h-[36px] items-center justify-center rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 text-[10px] font-bold uppercase tracking-widest text-emerald-400 transition-colors hover:bg-emerald-500 hover:text-white disabled:opacity-50"
                               >
                                 Resume
                               </button>
@@ -328,7 +331,7 @@ export default function DashboardPage() {
                                 type="button"
                                 disabled={isBusy}
                                 onClick={() => withRenewalAction(row.id, () => pauseRenewal(row.id))}
-                                className="rounded-lg border border-amber-300 bg-white px-3 py-2 text-xs font-bold uppercase tracking-wide text-amber-900 hover:bg-amber-50"
+                                className="inline-flex min-h-[36px] items-center justify-center rounded-full border border-amber-500/30 bg-amber-500/10 px-4 text-[10px] font-bold uppercase tracking-widest text-amber-400 transition-colors hover:bg-amber-500 hover:text-white disabled:opacity-50"
                               >
                                 Pause
                               </button>
@@ -341,7 +344,7 @@ export default function DashboardPage() {
                                   if (!confirm("Cancel this renewal? Auto-pay will stop.")) return;
                                   withRenewalAction(row.id, () => cancelRenewal(row.id));
                                 }}
-                                className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-bold uppercase tracking-wide text-slate-700 hover:bg-slate-100"
+                                className="inline-flex min-h-[36px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-4 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition-colors hover:border-sa-primary/50 hover:text-white disabled:opacity-50"
                               >
                                 Cancel
                               </button>
@@ -356,18 +359,18 @@ export default function DashboardPage() {
             </section>
 
             {data.recentLedger?.length ? (
-              <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <h2 className="text-lg font-bold text-slate-900">Recent wallet activity</h2>
-                  <Link href="/dashboard/statements" className="text-sm font-semibold text-ocean-600 hover:text-ocean-700">
+              <section className="sa-card p-6 border-sa-border md:p-8">
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <h2 className="font-heading text-xl font-bold text-white">Recent wallet activity</h2>
+                  <Link href="/dashboard/statements" className="text-[10px] font-bold uppercase tracking-widest text-sa-primary hover:text-white transition-colors">
                     View all →
                   </Link>
                 </div>
-                <ul className="mt-3 divide-y divide-slate-100 text-sm">
+                <ul className="mt-6 divide-y divide-sa-border text-sm">
                   {data.recentLedger.map((e: BillingLedgerEntry) => (
-                    <li key={e.id} className="flex flex-wrap justify-between gap-2 py-2">
-                      <span className="text-slate-600">{e.description || e.type}</span>
-                      <span className="tabular-nums font-medium text-slate-900">
+                    <li key={e.id} className="flex flex-wrap justify-between items-center gap-3 py-3">
+                      <span className="text-sa-muted">{e.description || e.type}</span>
+                      <span className="font-heading font-bold text-white text-base">
                         {e.type === "debit" ? "−" : "+"}₵{(Number(e.amountMinor) / 100).toFixed(2)}
                       </span>
                     </li>
@@ -376,40 +379,40 @@ export default function DashboardPage() {
               </section>
             ) : null}
 
-            <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <h2 className="text-lg font-bold text-slate-900">Recent transactions</h2>
-              <div className="mt-4 overflow-x-auto">
-                <table className="min-w-full text-left text-sm">
-                  <thead className="text-xs uppercase tracking-wide text-slate-500">
+            <section className="sa-card p-6 border-sa-border md:p-8">
+              <h2 className="font-heading text-xl font-bold text-white">Recent transactions</h2>
+              <div className="mt-6 overflow-x-auto">
+                <table className="min-w-full text-left text-sm whitespace-nowrap">
+                  <thead className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60 border-b border-sa-border">
                     <tr>
-                      <th className="py-2 pr-4">Type</th>
-                      <th className="py-2 pr-4">Status</th>
-                      <th className="py-2 pr-4">Amount</th>
-                      <th className="py-2 pr-4">Date</th>
+                      <th className="py-3 pr-6">Type</th>
+                      <th className="py-3 pr-6">Status</th>
+                      <th className="py-3 pr-6">Amount</th>
+                      <th className="py-3 pr-6">Date</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="divide-y divide-sa-border/50">
                     {data.recentTransactions.length === 0 ? (
                       <tr>
-                        <td className="py-3 text-slate-600" colSpan={4}>
+                        <td className="py-6 text-sa-muted/80 text-center" colSpan={4}>
                           No transactions yet.
                         </td>
                       </tr>
                     ) : (
                       data.recentTransactions.map((tx: BillingTransaction) => (
-                        <tr key={tx.id} className="border-t border-slate-100">
-                          <td className="py-3 pr-4">{tx.type}</td>
-                          <td className="py-3 pr-4">{tx.status}</td>
-                          <td className="py-3 pr-4">₵{(Number(tx.amountMinor) / 100).toFixed(2)}</td>
-                          <td className="py-3 pr-4">{new Date(tx.createdAt).toLocaleString()}</td>
+                        <tr key={tx.id} className="transition-colors hover:bg-sa-surface/50">
+                          <td className="py-4 pr-6 text-white">{tx.type}</td>
+                          <td className="py-4 pr-6 text-sa-muted capitalize">{tx.status.replace("_", " ")}</td>
+                          <td className="py-4 pr-6 font-heading font-bold text-white">₵{(Number(tx.amountMinor) / 100).toFixed(2)}</td>
+                          <td className="py-4 pr-6 text-sa-muted/80">{new Date(tx.createdAt).toLocaleString()}</td>
                         </tr>
                       ))
                     )}
                   </tbody>
                 </table>
               </div>
-              <p className="mt-3 text-sm text-slate-600">
-                Receipts: open <Link href="/dashboard/statements" className="font-semibold text-ocean-600">Statements</Link>.
+              <p className="mt-6 text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">
+                Receipts: open <Link href="/dashboard/statements" className="text-sa-primary hover:text-white transition-colors">Statements</Link>.
               </p>
             </section>
           </>
