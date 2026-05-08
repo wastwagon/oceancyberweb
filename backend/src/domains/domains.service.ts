@@ -21,15 +21,19 @@ export class DomainsService {
 
   constructor(private readonly config: ConfigService) {}
 
-  private getNamecheapConfig() {
+  private getNamecheapConfig(): NamecheapApiConfig | null {
     const apiUser = this.config.get<string>("NAMECHEAP_API_USER");
     const apiKey = this.config.get<string>("NAMECHEAP_API_KEY");
-    const userName = this.config.get<string>("NAMECHEAP_USER_NAME") || apiUser;
     const clientIp = this.config.get<string>("NAMECHEAP_CLIENT_IP");
     const useSandbox =
       this.config.get<boolean>("NAMECHEAP_USE_SANDBOX") ?? true;
 
     if (!apiUser || !apiKey || !clientIp) return null;
+
+    const userName =
+      this.config.get<string>("NAMECHEAP_USERNAME") ??
+      this.config.get<string>("NAMECHEAP_USER_NAME") ??
+      apiUser;
 
     return { apiUser, apiKey, userName, clientIp, useSandbox };
   }
@@ -49,7 +53,7 @@ export class DomainsService {
     const params = new URLSearchParams({
       ApiUser: cfg.apiUser,
       ApiKey: cfg.apiKey,
-      UserName: cfg.userName as string,
+      UserName: cfg.userName,
       ClientIp: cfg.clientIp,
       Command: "namecheap.domains.check",
       DomainList: domainList.join(","),
