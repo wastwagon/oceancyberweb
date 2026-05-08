@@ -13,7 +13,7 @@ export const startupPagesMenu = [
   { label: "Team", href: "/team" },
   { label: "Pricing", href: "/pricing" },
   { label: "Projects", href: "/projects" },
-  { label: "Project calculator", href: "/tools/project-cost" },
+  { label: "Project Calculator", href: "/tools/project-cost" },
   { label: "Contact", href: "/contact" },
   { label: "Services", href: "/services" },
   { label: "Insights", href: "/insights" },
@@ -21,7 +21,7 @@ export const startupPagesMenu = [
   { label: "Domains & SSL", href: "/domains" },
   { label: "Hosting", href: "/hosting" },
   { label: "Checkout", href: "/checkout/cart" },
-  { label: "Get started", href: "/get-started" },
+  { label: "Get Started", href: "/get-started" },
 ] as const;
 
 export type HeaderDropdownKey =
@@ -71,7 +71,7 @@ export const mainHeaderDropdownContent: Record<
   }
 > = {
   services: {
-    title: "Our services",
+    title: "Our Services",
     description: "Build, secure, and scale digital products with one delivery partner.",
     items: [
       {
@@ -80,7 +80,7 @@ export const mainHeaderDropdownContent: Record<
         link: "/services/web-development",
       },
       {
-        heading: "Mobile apps",
+        heading: "Mobile Apps",
         description: "Native and cross-platform applications designed for reliable user experiences.",
         link: "/services/mobile-apps",
       },
@@ -102,7 +102,7 @@ export const mainHeaderDropdownContent: Record<
     ],
   },
   industries: {
-    title: "Industries we serve",
+    title: "Industries We Serve",
     description: "Proven delivery patterns for regulated and growth-focused sectors.",
     items: [
       {
@@ -128,7 +128,7 @@ export const mainHeaderDropdownContent: Record<
     ],
   },
   resources: {
-    title: "Insights and guidance",
+    title: "Insights and Guidance",
     description: "Planning playbooks, delivery stories, and practical security guidance.",
     items: [
       {
@@ -137,17 +137,17 @@ export const mainHeaderDropdownContent: Record<
         link: "/insights",
       },
       {
-        heading: "Case studies",
+        heading: "Case Studies",
         description: "Delivery outcomes across sectors in Ghana and beyond.",
         link: "/case-studies",
       },
       {
-        heading: "Security journey",
+        heading: "Security Journey",
         description: "A practical path to strengthen your security posture.",
         link: "/security-journey",
       },
       {
-        heading: "Help center",
+        heading: "Help Center",
         description: "Answers to common questions about onboarding and support.",
         link: "/help-center",
       },

@@ -8,7 +8,7 @@ COPY package.json package-lock.json* ./
 COPY packages ./packages
 COPY backend ./backend
 COPY prisma ./prisma
-RUN npm ci
+RUN npm install
 
 FROM node:20-bookworm-slim AS builder
 RUN apt-get update && apt-get install -y openssl ca-certificates && rm -rf /var/lib/apt/lists/*

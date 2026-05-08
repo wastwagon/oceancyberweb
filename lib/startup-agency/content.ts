@@ -1,29 +1,29 @@
-/** Marketing homepage content — structure aligned with Start-Up Agencyy; copy tailored for OceanCyber. */
+/** Marketing homepage content — structure aligned with Start-Up Agency; copy tailored for OceanCyber. */
 
 export const heroServiceSlides = [
   {
-    title: "Platforms that Scale",
+    title: "Web Development",
     href: "/services/web-development",
     imageAlt: "Developer workspace with laptop and code editor",
     image:
       "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&q=80",
   },
   {
-    title: "Apps that Convert",
+    title: "Mobile Apps",
     href: "/services/mobile-apps",
     imageAlt: "Hands holding a smartphone in use outdoors",
     image:
       "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1920&q=80",
   },
   {
-    title: "Security that Protects",
+    title: "Cyber Security",
     href: "/services/cybersecurity",
     imageAlt: "Abstract digital security network visualization",
     image:
       "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1920&q=80",
   },
   {
-    title: "Cloud that Lasts",
+    title: "E-Commerce",
     href: "/services/ecommerce",
     imageAlt: "Retail checkout and shopping context",
     image:
@@ -32,16 +32,16 @@ export const heroServiceSlides = [
 ] as const;
 
 export const marqueeTags = [
-  "Hard-Core Engineering",
-  "GH¢3.01T+ MoMo Economy",
+  "Expert Software Engineering",
+  "Trusted Payment Solutions",
   "Zero‑Trust Security",
-  "99.9% Uptime Hosting",
-  "Built for Growth",
-  "US$1B+ E‑commerce Market",
-  "No-Fluff Product Delivery",
-  "Managed IT Infrastructure",
+  "High-Performance Hosting",
+  "Built for Your Growth",
+  "Scalable E‑commerce",
+  "Professional Product Delivery",
+  "Managed IT Services",
   "Web · Mobile · Cloud · Security",
-  "The Partner for Global Standards",
+  "Your Technology Partner",
 ] as const;
 
 export const serviceCards = [
@@ -185,7 +185,7 @@ export const pricingPlans = [
       "Compliance‑friendly workflows",
       "Dedicated delivery lead",
       "SLA options",
-      "Ongoing optimisation",
+      "Ongoing optimization",
     ],
   },
 ] as const;
@@ -212,12 +212,12 @@ export const faqItems = [
     a: "Most engagements use phased billing aligned to milestones — we’ll spell this out in the proposal.",
   },
   {
-    q: "Can we customise a package?",
+    q: "Can we customize a package?",
     a: "Packages are starting points; we scope to your constraints and priorities.",
   },
   {
     q: "How do you measure success?",
-    a: "We agree KPIs up front — technical, commercial, or operational — and review them after launch.",
+    a: "We agree KPIs upfront — technical, commercial, or operational — and review them after launch.",
   },
 ] as const;
 

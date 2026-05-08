@@ -19,8 +19,8 @@ export function SaPromoSection() {
               Launch your MVP in <span className="text-sa-primary">4 Weeks</span>
             </h2>
             <p className="mt-4 max-w-xl text-sa-muted/80">
-              Get a battle-tested, security-hardened digital product ready for users. 
-              We are currently offering a priority launch package for new Q3 partners.
+              Get a professional and secure digital product ready for your users. 
+              We are currently offering a priority launch package for new partners.
             </p>
           </motion.div>
 

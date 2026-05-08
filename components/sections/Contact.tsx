@@ -175,10 +175,10 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
             variants={contactHeaderItem}
             className="sa-title mx-auto mb-5 max-w-4xl text-balance text-center"
           >
-            Start a conversation
+            Start a Conversation
             <br />
             <span className="text-sa-primary">
-              about your next release
+              About Your Next Release
             </span>
           </motion.h2>
           <motion.p

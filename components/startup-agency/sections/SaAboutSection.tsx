@@ -19,10 +19,9 @@ export function SaAboutSection() {
               <span className="text-sa-primary"> actually works.</span>
             </h2>
             <p className="sa-subtitle mt-8 text-lg leading-relaxed md:text-xl">
-              Forget the fluff. At OceanCyber, we focus on the hard engineering 
-              required to scale products in Ghana&apos;s digital economy. We bridge 
-              the gap between high-level specs and real-world code, delivering 
-              infrastructure that stands up to heavy traffic and zero-day threats.
+              We specialize in building reliable products for Ghana&apos;s growing digital economy. 
+              Our team bridges the gap between your vision and professional engineering, 
+              delivering high-performance software that your users will love.
             </p>
 
             <div className="mt-12 grid gap-6 sm:grid-cols-2">

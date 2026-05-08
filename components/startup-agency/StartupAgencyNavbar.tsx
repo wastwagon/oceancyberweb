@@ -153,6 +153,21 @@ export function StartupAgencyNavbar() {
           >
             <Search className="h-5 w-5" />
           </button>
+          
+          {/* New Login/Register Links */}
+          <Link
+            href="/signin"
+            className="hidden px-4 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary sm:inline-flex"
+          >
+            Sign In
+          </Link>
+          <Link
+            href="/signup"
+            className="hidden px-4 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary sm:inline-flex"
+          >
+            Sign Up
+          </Link>
+
           <Link
             href="/get-started"
             className="hidden min-h-[42px] items-center rounded-xl border border-sa-border px-3.5 py-2.5 font-heading text-[11px] font-semibold uppercase tracking-[0.14em] text-white transition duration-300 hover:border-sa-primary hover:text-sa-primary sm:inline-flex"
@@ -226,6 +241,22 @@ export function StartupAgencyNavbar() {
             </div>
           ))}
           <div className="mt-6 flex flex-col gap-3">
+            <div className="flex gap-2">
+              <Link
+                href="/signin"
+                className="flex-1 rounded-lg border border-sa-border px-3 py-3 text-center font-heading text-sm font-semibold uppercase tracking-[0.14em] text-white"
+                onClick={() => setMobileOpen(false)}
+              >
+                Sign In
+              </Link>
+              <Link
+                href="/signup"
+                className="flex-1 rounded-lg border border-sa-border px-3 py-3 text-center font-heading text-sm font-semibold uppercase tracking-[0.14em] text-white"
+                onClick={() => setMobileOpen(false)}
+              >
+                Sign Up
+              </Link>
+            </div>
             <Link
               href="/get-started"
               className="rounded-lg border border-sa-border px-3 py-3 text-center font-heading text-sm font-semibold uppercase tracking-[0.14em] text-white"

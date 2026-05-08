@@ -4,23 +4,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, Suspense, useState } from "react";
 import { signIn } from "@/lib/auth-client";
-import { Loader2 } from "lucide-react";
-
-function AuthIllustration() {
-  return (
-    <svg viewBox="0 0 220 140" className="h-auto w-full max-w-[320px] opacity-80" fill="none" aria-hidden>
-      <rect x="10" y="20" width="96" height="64" rx="10" fill="#1e293b" stroke="#38bdf8" strokeWidth="2" />
-      <rect x="22" y="32" width="58" height="8" rx="4" fill="#334155" />
-      <rect x="22" y="46" width="72" height="6" rx="3" fill="#38bdf8" fillOpacity="0.85" />
-      <rect x="22" y="58" width="50" height="6" rx="3" fill="#0ea5e9" fillOpacity="0.75" />
-      <rect x="126" y="14" width="84" height="112" rx="14" fill="#0f172a" stroke="#0ea5e9" strokeWidth="2.2" />
-      <rect x="138" y="26" width="60" height="60" rx="8" fill="#1e293b" stroke="#38bdf8" strokeOpacity="0.3" />
-      <path d="M168 52a10 10 0 0 0-10 10v8h20v-8a10 10 0 0 0-10-10Z" fill="#38bdf8" fillOpacity="0.85" />
-      <circle cx="168" cy="50" r="6" fill="#0ea5e9" />
-      <rect x="153" y="98" width="30" height="4" rx="2" fill="#38bdf8" />
-    </svg>
-  );
-}
+import { Eye, EyeOff, Loader2, ShieldCheck, Zap } from "lucide-react";
 
 function SignInForm() {
   const router = useRouter();
@@ -28,6 +12,7 @@ function SignInForm() {
   const nextPath = params.get("next");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -39,99 +24,151 @@ function SignInForm() {
       await signIn(email, password);
       router.push(nextPath || "/dashboard");
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Could not sign in");
+      setError(err instanceof Error ? err.message : "Invalid credentials. Please verify your entry.");
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <main className="sa-shell min-h-screen bg-sa-bg pt-24 pb-16 md:py-32">
-      <div className="sa-container mx-auto grid w-full max-w-5xl gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-        <section className="sa-card p-8 md:p-10 border-sa-border">
-          <p className="sa-eyebrow inline-flex">
-            Client access
-          </p>
-          <h1 className="sa-title !text-left mt-5 text-3xl md:text-4xl">
-            Sign in to your OceanCyber account
-          </h1>
-          <p className="sa-subtitle !text-left mt-4">
-            Access wallet top-ups, renewal tracking, request history, and project milestones
-            in one secure dashboard.
-          </p>
-          <div className="mt-8 rounded-3xl border border-sa-primary/20 bg-sa-primary/5 p-6 flex justify-center backdrop-blur-sm">
-            <AuthIllustration />
-          </div>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-2xl border border-sa-border bg-sa-surface p-4 text-[10px] font-bold uppercase tracking-widest text-sa-primary text-center">
-              Secure account access
-            </div>
-            <div className="rounded-2xl border border-sa-border bg-sa-surface p-4 text-[10px] font-bold uppercase tracking-widest text-sa-primary text-center">
-              Billing & project visibility
-            </div>
-          </div>
-        </section>
+    <main className="relative min-h-screen bg-black text-white selection:bg-sa-primary/30">
+      {/* Forced Dark Template Background */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute -left-[10%] -top-[10%] h-[60%] w-[60%] rounded-full bg-sa-primary/10 blur-[120px]" />
+        <div className="absolute -right-[10%] bottom-[10%] h-[60%] w-[60%] rounded-full bg-sa-primary/10 blur-[120px]" />
+        <div className="absolute inset-0 bg-[url('/images/grid.svg')] bg-center opacity-[0.05]" />
+      </div>
 
-        <section className="sa-card p-8 md:p-10 border-sa-border h-fit">
-          <h2 className="font-heading text-2xl font-bold text-white">Sign in</h2>
-          <p className="mt-2 text-sm text-sa-muted/70">
-            Use your account details to continue.
-          </p>
-
-          <form onSubmit={onSubmit} className="mt-8 space-y-5">
-            <div>
-              <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 mb-2 block">Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm text-white outline-none focus:border-sa-primary transition"
-                required
-              />
+      <div className="sa-container relative z-10 flex min-h-screen flex-col items-center justify-center py-20">
+        <div className="grid w-full max-w-6xl gap-16 lg:grid-cols-[1fr_420px] lg:items-center">
+          
+          {/* Brand/Value Proposition (Startup Agency Theme) */}
+          <section className="hidden lg:block">
+            <div className="inline-flex items-center gap-3 rounded-full border border-sa-primary/20 bg-sa-primary/5 px-4 py-2 text-[10px] font-black uppercase tracking-[0.3em] text-sa-primary">
+              <ShieldCheck className="h-4 w-4" />
+              Secure Login
             </div>
-            <div>
-              <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 mb-2 block">Password</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm text-white outline-none focus:border-sa-primary transition"
-                required
-              />
+            <h1 className="mt-8 font-heading text-6xl font-black leading-[1.05] tracking-tight text-white xl:text-7xl">
+              Welcome <br />
+              <span className="text-sa-primary">Back</span>
+            </h1>
+            <p className="mt-8 max-w-xl text-xl leading-relaxed text-sa-muted/60">
+              Access your OceanCyber account to manage your projects, 
+              check your renewals, and track your development milestones.
+            </p>
+            
+            <div className="mt-12 flex gap-10">
+              <div className="flex items-center gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sa-surface border border-sa-border">
+                  <Zap className="h-6 w-6 text-sa-primary" />
+                </div>
+                <div>
+                  <div className="text-sm font-bold text-white">Project Tracking</div>
+                  <div className="text-xs text-sa-muted/40">Real-time Updates</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sa-surface border border-sa-border">
+                  <ShieldCheck className="h-6 w-6 text-sa-primary" />
+                </div>
+                <div>
+                  <div className="text-sm font-bold text-white">Secure Access</div>
+                  <div className="text-xs text-sa-muted/40">Tier-1 Encryption</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Login Card (Premium Glassmorphism) */}
+          <section className="w-full">
+            <div className="relative overflow-hidden rounded-[40px] border border-sa-border bg-[#0d0d10]/90 p-8 shadow-2xl backdrop-blur-2xl md:p-12">
+              <div className="mb-10 text-center lg:text-left">
+                <h2 className="font-heading text-4xl font-bold text-white">Sign In</h2>
+                <p className="mt-3 text-sa-muted/50">
+                  Please enter your details to access your account.
+                </p>
+              </div>
+
+              <form onSubmit={onSubmit} className="space-y-6">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-sa-primary/70">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="admin@oceancyber.net"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full rounded-2xl border border-sa-border bg-sa-bg/50 px-5 py-4 text-sm text-white outline-none ring-sa-primary/10 transition-all focus:border-sa-primary focus:ring-4 placeholder:text-sa-muted/20"
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-sa-primary/70">
+                      Password
+                    </label>
+                  </div>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      placeholder="••••••••••••"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-full rounded-2xl border border-sa-border bg-sa-bg/50 px-5 py-4 text-sm text-white outline-none ring-sa-primary/10 transition-all focus:border-sa-primary focus:ring-4 placeholder:text-sa-muted/20"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-sa-muted/30 hover:text-sa-primary transition-colors"
+                    >
+                      {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                    </button>
+                  </div>
+                </div>
+
+                {error && (
+                  <div className="animate-in fade-in slide-in-from-top-1 rounded-2xl border border-rose-500/20 bg-rose-500/5 px-4 py-4 text-sm font-medium text-rose-400">
+                    {error}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="sa-btn-primary group w-full justify-center py-5 text-base font-bold tracking-wide"
+                >
+                  {loading ? (
+                    <Loader2 className="h-6 w-6 animate-spin" />
+                  ) : (
+                    "Sign In"
+                  )}
+                </button>
+              </form>
+
+              <div className="mt-10 border-t border-sa-border pt-8 text-center">
+                <p className="text-sm text-sa-muted/40">
+                  New project?{" "}
+                  <Link
+                    href={`/signup${nextPath ? `?next=${encodeURIComponent(nextPath)}` : ""}`}
+                    className="font-bold text-sa-primary hover:underline underline-offset-8"
+                  >
+                    Register Organization
+                  </Link>
+                </p>
+              </div>
             </div>
 
-            {error ? (
-              <p className="rounded-xl border border-rose-500/50 bg-rose-500/10 px-4 py-3 text-sm text-rose-400">
-                {error}
+            {/* Mobile Footer Branding */}
+            <div className="mt-12 text-center lg:hidden">
+              <p className="text-[10px] font-black uppercase tracking-[0.5em] text-sa-muted/20">
+                OceanCyber Infrastructure
               </p>
-            ) : null}
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="sa-btn-primary w-full min-h-[48px] justify-center mt-2"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Signing in...
-                </>
-              ) : (
-                "Sign in"
-              )}
-            </button>
-          </form>
-
-          <p className="mt-6 text-sm text-sa-muted/80 text-center">
-            No account yet?{" "}
-            <Link
-              href={`/signup${nextPath ? `?next=${encodeURIComponent(nextPath)}` : ""}`}
-              className="font-bold text-sa-primary hover:text-white transition-colors"
-            >
-              Create one
-            </Link>
-          </p>
-        </section>
+            </div>
+          </section>
+        </div>
       </div>
     </main>
   );
@@ -139,7 +176,7 @@ function SignInForm() {
 
 export default function SignInPage() {
   return (
-    <Suspense fallback={<main className="sa-shell min-h-screen bg-sa-bg px-4 py-32 text-center text-sa-muted">Loading…</main>}>
+    <Suspense fallback={<main className="min-h-screen bg-black flex items-center justify-center text-sa-primary font-heading uppercase tracking-widest">Initialising Security Protocol...</main>}>
       <SignInForm />
     </Suspense>
   );

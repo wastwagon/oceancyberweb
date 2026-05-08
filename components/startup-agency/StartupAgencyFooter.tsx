@@ -55,7 +55,7 @@ export function StartupAgencyFooter() {
                 />
               </Link>
               <p className="mt-8 max-w-md text-lg leading-relaxed text-sa-muted/80">
-                The partner for teams that need to ship reliable code. We focus on hard engineering, clear milestones, and regional support for ambitious African products.
+                The partner for teams that need to ship reliable code. We focus on professional software delivery, clear milestones, and regional support for ambitious African products.
               </p>
 
               <div className="mt-12">

@@ -1,6 +1,6 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { CheckoutRequestDto, DomainCheckResult, CheckoutResult } from "./dto/checkout.dto";
+import { CheckoutRequestDto, DomainCheckResult, CheckoutResult, DomainContactDto } from "./dto/checkout.dto";
 
 @Injectable()
 export class DomainsService {

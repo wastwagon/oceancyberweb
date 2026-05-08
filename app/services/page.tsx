@@ -23,7 +23,7 @@ type ServiceCard = {
 
 const services: ServiceCard[] = [
   {
-    title: "Web development",
+    title: "Web Development",
     description:
       "Modern, high-performance websites and web products, with SEO, accessibility, and speed budgets built in from day one.",
       image: "/images/Fitch Advisory.webp",
@@ -35,7 +35,7 @@ const services: ServiceCard[] = [
     href: "/services/web-development",
   },
   {
-    title: "Mobile apps",
+    title: "Mobile Apps",
     description:
       "Cross-platform and native paths: offline-aware flows, push, and store-ready release discipline.",
       image: "/images/EGP Ghana.webp",
@@ -47,7 +47,7 @@ const services: ServiceCard[] = [
     href: "/services/mobile-apps",
   },
   {
-    title: "Website to mobile app conversion",
+    title: "Website to Mobile App Conversion",
     description:
       "Bring your existing website, and we will convert it into an iOS- and Android-ready app with a structured quote and migration roadmap.",
     image: "/images/EGP Ghana.webp",
@@ -59,7 +59,7 @@ const services: ServiceCard[] = [
     href: "/services/website-to-mobile-app",
   },
   {
-    title: "E-commerce",
+    title: "E-Commerce",
     description:
       "Checkout trust, catalog accuracy, and operations tooling, from launch campaigns to steady-state ops.",
       image: "/images/Juelle Hair.webp",

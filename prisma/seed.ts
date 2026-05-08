@@ -333,6 +333,10 @@ async function seedSampleUsers() {
 
   const demoEmail = (process.env.SEED_DEMO_EMAIL || "sample.user@oceancyber.local").toLowerCase();
   const adminEmail = (process.env.SEED_ADMIN_EMAIL || "sample.admin@oceancyber.local").toLowerCase();
+  const testAdminEmail = "admin@oceancyber.net";
+  const testUserEmail = "user@oceancyber.net";
+  const testPass = "OceanCyber123!";
+  const testHash = await bcrypt.hash(testPass, 12);
 
   await prisma.user.upsert({
     where: { email: demoEmail },
@@ -364,8 +368,31 @@ async function seedSampleUsers() {
     },
   });
 
+  // New Testing Accounts
+  await prisma.user.upsert({
+    where: { email: testAdminEmail },
+    create: {
+      email: testAdminEmail,
+      passwordHash: testHash,
+      fullName: "Test Administrator",
+      role: "admin",
+    },
+    update: { passwordHash: testHash },
+  });
+
+  await prisma.user.upsert({
+    where: { email: testUserEmail },
+    create: {
+      email: testUserEmail,
+      passwordHash: testHash,
+      fullName: "Test Client",
+      role: "user",
+    },
+    update: { passwordHash: testHash },
+  });
+
   // eslint-disable-next-line no-console -- seed CLI
-  console.log(`Sample users upserted: ${demoEmail} (user), ${adminEmail} (admin).`);
+  console.log(`Sample users upserted: ${demoEmail}, ${testUserEmail} (user), ${adminEmail}, ${testAdminEmail} (admin). Password for new: ${testPass}`);
   if (isProd) {
     // eslint-disable-next-line no-console -- seed CLI
     console.log("Production: rotate these passwords after first login if you keep sample accounts.");

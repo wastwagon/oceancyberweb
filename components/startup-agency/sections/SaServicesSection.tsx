@@ -45,7 +45,7 @@ export function SaServicesSection() {
             <div className="h-px bg-white/20 flex-1"></div>
           </div>
           <h2 className="font-heading text-4xl font-bold uppercase tracking-widest text-white md:text-5xl lg:text-6xl text-center">
-            View Our Services
+            What We Do
           </h2>
         </div>
 

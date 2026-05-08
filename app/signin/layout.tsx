@@ -3,8 +3,8 @@ import { privateSurfaceMetadata } from "@/lib/seo/canonical";
 
 export const metadata: Metadata = {
   ...privateSurfaceMetadata("/signin"),
-  title: "Sign in",
-  description: "Sign in to your OceanCyber account for billing, renewals, and services.",
+  title: "Initialize Command",
+  description: "Secure terminal for OceanCyber account management and engineering operations.",
 };
 
 export default function SignInLayout({
