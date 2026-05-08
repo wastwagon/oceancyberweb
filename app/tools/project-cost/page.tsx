@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { ProjectCostWizard } from "@/components/project-calculator/ProjectCostWizard";
-import { PrintEstimatorClass } from "@/components/project-calculator/PrintEstimatorClass";
 import { withCanonical } from "@/lib/seo/canonical";
 
 export const metadata: Metadata = withCanonical(
@@ -15,7 +14,6 @@ export const metadata: Metadata = withCanonical(
 export default function ProjectCostPage() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted pt-28 md:pt-32 print:bg-white print:text-black">
-      <PrintEstimatorClass />
       <section className="sa-section relative z-10 overflow-hidden border-b border-sa-border">
         <div className="sa-container max-w-3xl pb-6 md:pb-8">
           <p className="sa-eyebrow mb-3 text-center block">Tools</p>

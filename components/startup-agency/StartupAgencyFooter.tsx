@@ -37,7 +37,7 @@ const socialLinks = [
 
 export function StartupAgencyFooter() {
   return (
-    <footer className="bg-sa-bg py-12 lg:py-24">
+    <footer className="bg-sa-bg py-12 lg:py-24" data-app-print-hide-chrome>
       <div className="sa-container">
         {/* Main Floating Container */}
         <div className="relative overflow-hidden rounded-[40px] border border-sa-border bg-sa-surface p-10 lg:p-20">

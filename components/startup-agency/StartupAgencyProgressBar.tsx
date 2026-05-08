@@ -11,6 +11,7 @@ export function StartupAgencyProgressBar() {
     <div
       className="fixed left-0 right-0 top-0 z-[110] h-[3px] overflow-hidden bg-transparent"
       aria-hidden
+      data-app-print-hide-chrome
     >
       <motion.div
         className="h-full origin-left rounded-r-[10px] bg-sa-primary"

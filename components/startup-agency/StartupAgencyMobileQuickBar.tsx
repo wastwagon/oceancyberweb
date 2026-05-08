@@ -31,7 +31,10 @@ export function StartupAgencyMobileQuickBar() {
   }
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-[140] border-t border-sa-border bg-black/95 px-3 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] pt-2 backdrop-blur-sm md:hidden">
+    <div
+      className="fixed inset-x-0 bottom-0 z-[140] border-t border-sa-border bg-black/95 px-3 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] pt-2 backdrop-blur-sm md:hidden"
+      data-app-print-hide-chrome
+    >
       <div className="mx-auto grid w-full max-w-7xl grid-cols-3 gap-2">
         {quickActions.map((action) => (
           <Link

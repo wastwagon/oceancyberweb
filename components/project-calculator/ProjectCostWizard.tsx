@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { z } from "zod";
 import { Calculator, Check, ChevronLeft, ChevronRight, FileDown, Loader2, Printer } from "lucide-react";
@@ -8,6 +8,8 @@ import {
   COMPLEXITY_OPTIONS,
   DESIGN_OPTIONS,
   PLATFORM_OPTIONS,
+  PROFORMA_COMPANY,
+  PROFORMA_DISCLAIMER,
   PROJECT_FEATURES,
   TIMELINE_OPTIONS,
 } from "@/lib/project-calculator/config";
@@ -54,6 +56,8 @@ export function ProjectCostWizard() {
   const [leadTouched, setLeadTouched] = useState(false);
   const [pdfLoading, setPdfLoading] = useState(false);
   const [printLoading, setPrintLoading] = useState(false);
+  const [exportError, setExportError] = useState<string | null>(null);
+  const [leadSaveWarning, setLeadSaveWarning] = useState<string | null>(null);
 
   const leadParsed = useMemo(
     () => leadSchema.safeParse({ name: name.trim(), email: email.trim(), timeline }),
@@ -65,6 +69,25 @@ export function ProjectCostWizard() {
     () => computeProjectPricing(platformId, designId, featureIds, complexityId, { timelineId: timeline || null }),
     [platformId, designId, featureIds, complexityId, timeline],
   );
+
+  /** Lets ⌘P / Ctrl+P use the same print stylesheet as “Print summary” while on the unlocked summary step. */
+  useEffect(() => {
+    if (step !== 3 || !isLeadValid) return;
+    const onBeforePrint = () => document.documentElement.classList.add("app-print-estimator");
+    const onAfterPrint = () => document.documentElement.classList.remove("app-print-estimator");
+    window.addEventListener("beforeprint", onBeforePrint);
+    window.addEventListener("afterprint", onAfterPrint);
+    return () => {
+      window.removeEventListener("beforeprint", onBeforePrint);
+      window.removeEventListener("afterprint", onAfterPrint);
+      document.documentElement.classList.remove("app-print-estimator");
+    };
+  }, [step, isLeadValid]);
+
+  useEffect(() => {
+    setExportError(null);
+    setLeadSaveWarning(null);
+  }, [name, email, timeline]);
 
   const platformLabel = PLATFORM_OPTIONS.find((p) => p.id === platformId)?.label ?? "";
   const designLabel = DESIGN_OPTIONS.find((d) => d.id === designId)?.label ?? "";
@@ -122,11 +145,19 @@ export function ProjectCostWizard() {
       setLeadTouched(true);
       return;
     }
+    setExportError(null);
+    setLeadSaveWarning(null);
     setPdfLoading(true);
+    let leadSaved = true;
     try {
       const timelineLabel = TIMELINE_OPTIONS.find((t) => t.value === timeline);
       const rushNote = `${timelineLabel?.label ?? ""} (×${pricing.rushLabourMultiplier} on labour for timeline)`;
-      await postLeadToServer("proforma_download");
+      try {
+        await postLeadToServer("proforma_download");
+      } catch (e) {
+        console.warn(e);
+        leadSaved = false;
+      }
       await downloadProformaPdf({
         pricing,
         lineItems: pricing.lineItems,
@@ -138,8 +169,16 @@ export function ProjectCostWizard() {
         complexityLabel,
         rushNote,
       });
+      if (!leadSaved) {
+        setLeadSaveWarning(
+          "PDF downloaded, but we could not save your details to our server. Check your connection or try again later.",
+        );
+      }
     } catch (e) {
       console.error(e);
+      setExportError(
+        e instanceof Error ? e.message : "Could not download the PDF. Check your connection and try again.",
+      );
     } finally {
       setPdfLoading(false);
     }
@@ -150,19 +189,33 @@ export function ProjectCostWizard() {
       setLeadTouched(true);
       return;
     }
+    setExportError(null);
+    setLeadSaveWarning(null);
     setPrintLoading(true);
+    let leadSaved = true;
     try {
-      await postLeadToServer("print_summary");
+      try {
+        await postLeadToServer("print_summary");
+      } catch (e) {
+        console.warn(e);
+        leadSaved = false;
+      }
       window.print();
-    } catch (e) {
-      console.error(e);
+      if (!leadSaved) {
+        setLeadSaveWarning(
+          "We could not save this estimate online. Your printout is still available — try again when you are back online.",
+        );
+      }
     } finally {
       setPrintLoading(false);
     }
   };
 
   return (
-    <div className="pb-32 print:pb-0 sa-card p-6">
+    <div
+      id="estimator-print-root"
+      className="pb-32 print:pb-0 sa-card p-6 print:rounded-lg print:shadow-none"
+    >
       {/* Progress */}
       <div className="print:hidden mb-8 flex flex-wrap items-center justify-center gap-1 sm:gap-2">
         {STEPS.map((label, i) => (
@@ -415,28 +468,87 @@ export function ProjectCostWizard() {
               </p>
             )}
 
+            {exportError && (
+              <p
+                role="alert"
+                aria-live="assertive"
+                className="text-sm text-red-400 border border-red-500/50 bg-red-500/10 px-4 py-3 rounded-xl print:hidden"
+              >
+                {exportError}
+              </p>
+            )}
+
+            {leadSaveWarning && (
+              <p
+                role="status"
+                aria-live="polite"
+                className="text-sm text-amber-200 border border-amber-500/40 bg-amber-500/10 px-4 py-3 rounded-xl print:hidden"
+              >
+                {leadSaveWarning}
+              </p>
+            )}
+
             {isLeadValid && (
               <>
-                <div id="estimator-line-items" className="overflow-hidden rounded-2xl border border-sa-border bg-sa-surface">
-                  <table className="w-full text-left text-sm">
-                    <thead className="bg-black/40 text-sa-muted/80 border-b border-sa-border">
+                <div className="hidden print:block mb-4 border-b border-neutral-400 pb-4 text-black">
+                  <p className="font-heading text-base font-bold tracking-tight">{PROFORMA_COMPANY.name}</p>
+                  <p className="mt-0.5 text-[11px] text-neutral-600">
+                    {PROFORMA_COMPANY.email} · {PROFORMA_COMPANY.phone}
+                  </p>
+                  <p className="mt-3 text-xs font-semibold uppercase tracking-widest text-neutral-800">
+                    Project investment estimate
+                  </p>
+                  <p className="mt-1 text-[10px] text-neutral-600" suppressHydrationWarning>
+                    Indicative only — not a binding quote · Printed{" "}
+                    {new Date().toLocaleDateString("en-GB", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </p>
+                </div>
+
+                <div
+                  id="estimator-line-items"
+                  className="overflow-hidden rounded-2xl border border-sa-border bg-sa-surface print:border-neutral-400 print:bg-white"
+                >
+                  <table className="w-full text-left text-sm print:text-black">
+                    <thead className="bg-black/40 text-sa-muted/80 border-b border-sa-border print:bg-neutral-200 print:text-black print:border-neutral-400">
                       <tr>
                         <th className="px-4 py-3 font-bold">Item</th>
                         <th className="w-20 px-2 py-3 text-center font-bold">Hrs</th>
                         <th className="w-28 px-4 py-3 text-right font-bold">GHS</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-sa-border">
+                    <tbody className="divide-y divide-sa-border print:divide-neutral-300">
                       {pricing.lineItems.map((row) => (
                         <tr key={row.id}>
-                          <td className="px-4 py-3 text-white">{row.label}</td>
-                          <td className="px-2 py-3 text-center text-sa-muted/80">{row.hours}</td>
-                          <td className="px-4 py-3 text-right font-medium text-white">{formatGhs(row.amountGhs)}</td>
+                          <td className="px-4 py-3 text-white print:text-black">{row.label}</td>
+                          <td className="px-2 py-3 text-center text-sa-muted/80 print:text-black">{row.hours}</td>
+                          <td className="px-4 py-3 text-right font-medium text-white print:text-black">
+                            {formatGhs(row.amountGhs)}
+                          </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
+
+                <div className="hidden print:block mt-4 space-y-1 border-t border-neutral-400 pt-3 text-sm text-black">
+                  <p className="text-right font-semibold">Mid estimate: {formatGhs(pricing.totalMidGhs)}</p>
+                  <p className="text-right text-xs text-neutral-800">
+                    Range (±10%): {formatGhs(pricing.rangeLowGhs)} – {formatGhs(pricing.rangeHighGhs)}
+                  </p>
+                  <p className="text-right text-[10px] text-neutral-600">
+                    {pricing.totalHours}h total · nominal {formatGhs(pricing.hourlyRateGhs)}/h · ×
+                    {pricing.complexityMultiplier} complexity · ×{pricing.rushLabourMultiplier} timeline
+                  </p>
+                </div>
+
+                <p className="hidden print:block mt-4 text-[9px] leading-relaxed text-neutral-700">
+                  {PROFORMA_DISCLAIMER}
+                </p>
+
                 <p className="text-[11px] text-sa-muted/60 ml-1 print:hidden">
                   Tip: add contingency for content, sign-off, and post-launch work in a formal SOW.
                 </p>

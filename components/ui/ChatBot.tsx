@@ -109,6 +109,7 @@ export function ChatBot() {
         onClick={() => setIsOpen(true)}
         className="fixed bottom-5 left-4 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-sa-primary/30 bg-sa-bg text-sa-primary shadow-2xl transition-all hover:bg-sa-primary hover:text-sa-bg active:scale-[0.95] sm:bottom-6 sm:left-6"
         aria-label="Open chat"
+        data-app-print-hide-chrome
       >
         <MessageSquare className="h-6 w-6" strokeWidth={2} />
       </button>
@@ -123,6 +124,7 @@ export function ChatBot() {
       )}
       role="dialog"
       aria-label="OceanCyber chat"
+      data-app-print-hide-chrome
     >
       <header className="flex shrink-0 items-center justify-between border-b border-sa-border bg-sa-surface px-5 py-4">
         <div className="flex items-center gap-3">

@@ -14,7 +14,10 @@ export function CreativeEnhancements() {
 
 function NoiseOverlay() {
   return (
-    <div className="pointer-events-none fixed inset-0 z-[999] opacity-[0.03] mix-blend-overlay">
+    <div
+      className="pointer-events-none fixed inset-0 z-[999] opacity-[0.03] mix-blend-overlay"
+      data-app-print-hide-chrome
+    >
       <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="h-full w-full">
         <filter id="noiseFilter">
           <feTurbulence 
@@ -72,6 +75,7 @@ function CustomCursor() {
   return (
     <motion.div
       className="pointer-events-none fixed left-0 top-0 z-[1000] hidden h-8 w-8 items-center justify-center rounded-full border border-sa-primary mix-blend-difference md:flex"
+      data-app-print-hide-chrome
       style={{
         x: cursorX,
         y: cursorY,

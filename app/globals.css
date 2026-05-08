@@ -954,3 +954,42 @@
     @apply inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-white px-8 font-heading text-sm font-bold uppercase tracking-[0.14em] text-white transition duration-300 hover:bg-white hover:text-sa-bg;
   }
 }
+
+/* Project cost estimator: hide global chrome + isolate printable card (see html.app-print-estimator) */
+@media print {
+  html.app-print-estimator [data-app-print-hide-chrome] {
+    display: none !important;
+  }
+
+  /* Homepage / long pages: print only #estimator-print-root (summary uses beforeprint to set html class) */
+  html.app-print-estimator body * {
+    visibility: hidden;
+  }
+
+  html.app-print-estimator #estimator-print-root,
+  html.app-print-estimator #estimator-print-root * {
+    visibility: visible;
+  }
+
+  html.app-print-estimator #estimator-print-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 10mm 12mm;
+    background: #fff !important;
+    color: #0a0a0a !important;
+    border: 1px solid #404040 !important;
+  }
+
+  html.app-print-estimator #estimator-print-root table {
+    break-inside: auto;
+  }
+
+  html.app-print-estimator #estimator-print-root tr {
+    break-inside: avoid;
+    break-after: auto;
+  }
+}

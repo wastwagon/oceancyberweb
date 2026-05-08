@@ -71,7 +71,11 @@ export function StartupAgencyNavbar() {
   };
 
   return (
-    <header className="fixed left-0 right-0 top-3 z-[100] px-3 sm:px-4 md:px-6" role="banner">
+    <header
+      className="fixed left-0 right-0 top-3 z-[100] px-3 sm:px-4 md:px-6"
+      role="banner"
+      data-app-print-hide-chrome
+    >
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-3 rounded-[18px] border border-sa-border bg-black/80 px-4 py-3 shadow-[0_18px_48px_rgba(0,0,0,0.45)] backdrop-blur-md md:px-6">
         <Link href="/" className="relative z-10 flex shrink-0 items-center gap-2">
           <Image
