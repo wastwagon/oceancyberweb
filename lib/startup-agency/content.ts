@@ -32,39 +32,39 @@ export const heroServiceSlides = [
 ] as const;
 
 export const marqueeTags = [
-  "Expert Software Engineering",
-  "Trusted Payment Solutions",
+  "Solid Software Engineering",
+  "Trusted Payment Systems",
   "Zero‑Trust Security",
-  "High-Performance Hosting",
-  "Built for Your Growth",
-  "Scalable E‑commerce",
+  "High-Performance Cloud Hosting",
+  "Engineering for Growth",
+  "Scalable E‑commerce Solutions",
   "Professional Product Delivery",
-  "Managed IT Services",
+  "Managed ICT Services",
   "Web · Mobile · Cloud · Security",
   "Your Technology Partner",
 ] as const;
 
 export const serviceCards = [
   {
-    title: "Web Platforms",
+    title: "Web Development",
     desc: "We build the high-performance foundations that power your business. No templates, no shortcuts, just solid code.",
     href: "/services/web-development",
     image: "/images/EGP Ghana.webp",
   },
   {
-    title: "Mobile Products",
+    title: "Mobile Apps",
     desc: "We ship native iOS and Android apps that users actually enjoy using. Built for speed and reliability.",
     href: "/services/mobile-apps",
     image: "/images/Juelle Hair.webp",
   },
   {
-    title: "E‑commerce Engines",
+    title: "E‑commerce",
     desc: "Secure storefronts that handle thousands of orders and MoMo payments without breaking a sweat.",
     href: "/services/ecommerce",
     image: "/images/Tour World Tourism.webp",
   },
   {
-    title: "Search & SEO",
+    title: "SEO & Growth",
     desc: "Stop hiding on page 2. We use technical SEO and data to get your brand in front of the right people.",
     href: "/services",
     image: "/images/Fitch Advisory.webp",

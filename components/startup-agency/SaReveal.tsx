@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
-const ease: [number, number, number, number] = [0.16, 1, 0.3, 1];
+const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 export function SaReveal({
   children,

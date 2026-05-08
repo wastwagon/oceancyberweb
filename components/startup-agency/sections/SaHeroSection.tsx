@@ -50,6 +50,7 @@ export function SaHeroSection() {
           alt="OceanCyber Default"
           fill
           className="object-cover"
+          sizes="100vw"
           priority
         />
       </div>
@@ -66,6 +67,7 @@ export function SaHeroSection() {
             alt={slide.imageAlt}
             fill
             className="object-cover"
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
         </div>

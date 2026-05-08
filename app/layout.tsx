@@ -10,6 +10,7 @@ import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
 import { WebSiteJsonLd } from "@/components/seo/WebSiteJsonLd";
 import { WebVitals } from "@/components/analytics/WebVitals";
 import { AppProviders } from "@/components/providers/AppProviders";
+import { CreativeEnhancements } from "@/components/shared/CreativeEnhancements";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const outfit = Outfit({
@@ -77,6 +78,11 @@ export const metadata: Metadata = {
   verification: {
     google: process.env.GOOGLE_VERIFICATION_CODE || undefined,
   },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export const viewport: Viewport = {
@@ -94,6 +100,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
       <body className="sa-shell min-h-screen font-sans antialiased">
         <AppProviders>
+          <CreativeEnhancements />
           <OrganizationJsonLd />
           <WebSiteJsonLd />
           <WebVitals />

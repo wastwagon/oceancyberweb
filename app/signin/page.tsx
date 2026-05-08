@@ -53,8 +53,8 @@ function SignInForm() {
               <span className="text-sa-primary">Back</span>
             </h1>
             <p className="mt-8 max-w-xl text-xl leading-relaxed text-sa-muted/60">
-              Access your OceanCyber account to manage your projects, 
-              check your renewals, and track your development milestones.
+              Sign in to manage your digital infrastructure, track project updates, 
+              and access your secure client workspace.
             </p>
             
             <div className="mt-12 flex gap-10">
@@ -63,8 +63,8 @@ function SignInForm() {
                   <Zap className="h-6 w-6 text-sa-primary" />
                 </div>
                 <div>
-                  <div className="text-sm font-bold text-white">Project Tracking</div>
-                  <div className="text-xs text-sa-muted/40">Real-time Updates</div>
+                  <div className="text-sm font-bold text-white">Project Visibility</div>
+                  <div className="text-xs text-sa-muted/40">Real-time status</div>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -73,7 +73,7 @@ function SignInForm() {
                 </div>
                 <div>
                   <div className="text-sm font-bold text-white">Secure Access</div>
-                  <div className="text-xs text-sa-muted/40">Tier-1 Encryption</div>
+                  <div className="text-xs text-sa-muted/40">Zero-trust protocols</div>
                 </div>
               </div>
             </div>
@@ -85,7 +85,7 @@ function SignInForm() {
               <div className="mb-10 text-center lg:text-left">
                 <h2 className="font-heading text-4xl font-bold text-white">Sign In</h2>
                 <p className="mt-3 text-sa-muted/50">
-                  Please enter your details to access your account.
+                  Enter your credentials to continue to your dashboard.
                 </p>
               </div>
 

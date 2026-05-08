@@ -197,7 +197,7 @@ export function StartupAgencyNavbar() {
 
           <button
             type="button"
-            className="inline-flex rounded-xl border border-sa-border p-2.5 text-white lg:hidden"
+            className="inline-flex touch-target items-center justify-center rounded-xl border border-sa-border p-2.5 text-white lg:hidden"
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((v) => !v)}
           >

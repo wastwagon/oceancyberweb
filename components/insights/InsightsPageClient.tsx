@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Newspaper } from "lucide-react";
+import { ArrowRight, Newspaper, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -196,25 +196,29 @@ export function InsightsPageClient() {
           </div>
 
           {filtered.length === 0 ? (
-            <div className="sa-card p-10 text-center">
-              <p className="text-sa-muted">
+            <div className="sa-card flex flex-col items-center justify-center p-16 text-center border-dashed border-sa-border/40">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-sa-surface border border-sa-border">
+                <Search className="h-8 w-8 text-sa-muted/40" />
+              </div>
+              <h3 className="font-heading text-2xl font-bold text-white">No matches found</h3>
+              <p className="mt-4 max-w-sm text-sm leading-relaxed text-sa-muted/60">
                 {q ? (
                   <>
-                    No articles match &ldquo;{q}&rdquo;. Try different keywords or{" "}
-                    <Link
-                      href={buildInsightsHref("", category)}
-                      className="font-bold text-sa-primary underline-offset-2 hover:underline hover:text-white"
-                    >
-                      clear search
-                    </Link>
-                    .
+                    We couldn&apos;t find any articles matching &ldquo;<span className="text-white font-semibold">{q}</span>&rdquo;. 
+                    Try adjusting your keywords or refine your filters.
                   </>
-                ) : category !== "All" ? (
-                  "No articles in this category yet. Try another filter."
                 ) : (
-                  "No articles yet."
+                  "There are currently no articles in this category. We're constantly publishing new insights, so check back soon."
                 )}
               </p>
+              <div className="mt-8">
+                <Link
+                  href="/insights"
+                  className="sa-btn-outline !min-h-[40px] text-xs"
+                >
+                  Clear All Filters
+                </Link>
+              </div>
             </div>
           ) : (
             <>

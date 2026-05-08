@@ -156,7 +156,7 @@ export function StartupAgencyFooter() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex h-14 w-14 items-center justify-center rounded-full border border-sa-border bg-transparent text-white transition-all duration-500 hover:border-sa-primary hover:bg-sa-primary hover:text-black"
+                  className="group flex h-14 w-14 touch-target items-center justify-center rounded-full border border-sa-border bg-transparent text-white transition-all duration-500 hover:border-sa-primary hover:bg-sa-primary hover:text-black"
                 >
                   <social.icon className="h-6 w-6 transition-transform duration-500 group-hover:scale-110" />
                 </Link>

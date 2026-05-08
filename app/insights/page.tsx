@@ -14,8 +14,8 @@ export const metadata = withCanonical(
 
 function InsightsLoadingFallback() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gradient-to-b from-slate-50 to-slate-100">
-      <p className="text-sm text-slate-500">Loading insights…</p>
+    <main className="flex min-h-screen items-center justify-center bg-sa-bg">
+      <p className="text-sm text-sa-muted/50">Loading insights…</p>
     </main>
   );
 }
