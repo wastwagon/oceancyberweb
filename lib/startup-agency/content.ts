@@ -86,27 +86,27 @@ export const serviceCards = [
 export const processSteps = [
   {
     step: 1,
-    title: "Product Roadmapping",
-    body: "We skip the generic talk and get straight to your business requirements. We map out exactly what needs to be built.",
-    bullets: ["No-Fluff Discovery", "System Design", "Technical Specs"],
+    title: "Strategic Discovery",
+    body: "We start by understanding your goals and business requirements to build a clear roadmap for success.",
+    bullets: ["Requirements Analysis", "System Design", "Technical Specs"],
   },
   {
     step: 2,
-    title: "Building & Shipping",
-    body: "Our engineers write clean code in weekly cycles. You get a private link to see the progress as it happens.",
-    bullets: ["Weekly Demos", "Clean Engineering", "Real-Time Updates"],
+    title: "Design & Prototyping",
+    body: "We transform your vision into intuitive user experiences and interactive prototypes that validate the direction.",
+    bullets: ["UX/UI Design", "Interactive Mockups", "Brand Alignment"],
   },
   {
     step: 3,
-    title: "Stress Testing",
-    body: "We try to break the software before your users do. Security audits and load tests are standard, not extra.",
-    bullets: ["Security Audits", "Load Testing", "Final Polish"],
+    title: "Iterative Engineering",
+    body: "Our engineers build your product in transparent, weekly cycles with regular updates and live demos.",
+    bullets: ["Weekly Sprints", "Clean Architecture", "Progress Updates"],
   },
   {
     step: 4,
-    title: "Live Operations",
-    body: "Launch is the first step. We stay on board to manage the servers and optimize for growth.",
-    bullets: ["24/7 Monitoring", "Conversion Tuning", "Continuous Support"],
+    title: "Testing & Launch",
+    body: "We perform rigorous quality checks and final optimizations to ensure your product is ready for the world.",
+    bullets: ["Quality Assurance", "Performance Tuning", "Seamless Deployment"],
   },
 ] as const;
 

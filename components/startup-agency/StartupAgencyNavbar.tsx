@@ -11,6 +11,7 @@ import {
 } from "@/lib/navigation/menu";
 import { useNavigationConfig } from "@/lib/navigation/useNavigationConfig";
 import { cn } from "@/lib/utils";
+import { getAccessToken } from "@/lib/auth-client";
 
 const navLinkClass =
   "group relative inline-flex min-h-[42px] items-center gap-1 px-3 py-2 font-heading text-[13px] font-medium uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary";
@@ -19,10 +20,15 @@ export function StartupAgencyNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<HeaderDropdownKey | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   const { mainHeaderNav, mainHeaderDropdownContent } = useNavigationConfig();
   const pathname = usePathname();
+
+  useEffect(() => {
+    setIsLoggedIn(!!getAccessToken());
+  }, [pathname]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -154,31 +160,39 @@ export function StartupAgencyNavbar() {
             <Search className="h-5 w-5" />
           </button>
           
-          {/* New Login/Register Links */}
-          <Link
-            href="/signin"
-            className="hidden px-4 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary sm:inline-flex"
-          >
-            Sign In
-          </Link>
-          <Link
-            href="/signup"
-            className="hidden px-4 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary sm:inline-flex"
-          >
-            Sign Up
-          </Link>
+          {/* Streamlined Auth Links (Conditional) */}
+          <div className="hidden items-center gap-1 sm:flex">
+            {isLoggedIn ? (
+              <Link
+                href="/dashboard"
+                className="px-4 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-sa-primary transition duration-300 hover:text-white"
+              >
+                Dashboard
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href="/signin"
+                  className="px-2 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary"
+                >
+                  Sign In
+                </Link>
+                <span className="text-[10px] text-sa-muted/30">/</span>
+                <Link
+                  href="/signup"
+                  className="px-2 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </div>
 
           <Link
             href="/get-started"
             className="hidden min-h-[42px] items-center rounded-xl border border-sa-border px-3.5 py-2.5 font-heading text-[11px] font-semibold uppercase tracking-[0.14em] text-white transition duration-300 hover:border-sa-primary hover:text-sa-primary sm:inline-flex"
           >
             Get started
-          </Link>
-          <Link
-            href="/contact"
-            className="hidden min-h-[42px] items-center rounded-full border-2 border-sa-primary bg-sa-primary px-5 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-sa-bg transition duration-300 hover:bg-transparent hover:text-sa-primary md:inline-flex"
-          >
-            Contact
           </Link>
 
           <button
@@ -241,35 +255,38 @@ export function StartupAgencyNavbar() {
             </div>
           ))}
           <div className="mt-6 flex flex-col gap-3">
-            <div className="flex gap-2">
+            {isLoggedIn ? (
               <Link
-                href="/signin"
-                className="flex-1 rounded-lg border border-sa-border px-3 py-3 text-center font-heading text-sm font-semibold uppercase tracking-[0.14em] text-white"
+                href="/dashboard"
+                className="rounded-lg border border-sa-primary bg-sa-primary/10 px-3 py-3 text-center font-heading text-sm font-bold uppercase tracking-[0.14em] text-sa-primary"
                 onClick={() => setMobileOpen(false)}
               >
-                Sign In
+                Dashboard
               </Link>
-              <Link
-                href="/signup"
-                className="flex-1 rounded-lg border border-sa-border px-3 py-3 text-center font-heading text-sm font-semibold uppercase tracking-[0.14em] text-white"
-                onClick={() => setMobileOpen(false)}
-              >
-                Sign Up
-              </Link>
-            </div>
+            ) : (
+              <div className="flex gap-2">
+                <Link
+                  href="/signin"
+                  className="flex-1 rounded-lg border border-sa-border px-3 py-3 text-center font-heading text-sm font-semibold uppercase tracking-[0.14em] text-white"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/signup"
+                  className="flex-1 rounded-lg border border-sa-border px-3 py-3 text-center font-heading text-sm font-semibold uppercase tracking-[0.14em] text-white"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Sign Up
+                </Link>
+              </div>
+            )}
             <Link
               href="/get-started"
               className="rounded-lg border border-sa-border px-3 py-3 text-center font-heading text-sm font-semibold uppercase tracking-[0.14em] text-white"
               onClick={() => setMobileOpen(false)}
             >
               Get started
-            </Link>
-            <Link
-              href="/contact"
-              className="rounded-lg border-2 border-sa-primary bg-sa-primary py-3 text-center font-heading text-sm font-bold uppercase tracking-[0.14em] text-sa-bg"
-              onClick={() => setMobileOpen(false)}
-            >
-              Contact
             </Link>
           </div>
         </div>

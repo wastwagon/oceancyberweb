@@ -13,7 +13,7 @@ export function SaProcessSection() {
         <SaReveal className="mb-16">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <h2 className="sa-title uppercase font-heading text-4xl sm:text-5xl lg:text-6xl text-white font-bold max-w-2xl">
-              At the intersection of vision and execution, we bring creative ideas
+              A Clear Path From Vision to Launch
             </h2>
             <div className="flex items-center gap-2">
               <span className="font-heading font-bold text-white uppercase text-sm tracking-widest">Steps</span>

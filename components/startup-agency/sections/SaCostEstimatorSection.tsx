@@ -13,11 +13,11 @@ export function SaCostEstimatorSection() {
           <motion.div {...fadeUpSoft}>
             <span className="sa-eyebrow mb-6 inline-flex items-center gap-2">
               <Calculator className="h-4 w-4" aria-hidden />
-              Transparency
+              Investment
             </span>
             <h2 className="sa-title mb-6">
-              Instant
-              <span className="text-sa-primary"> project estimator</span>
+              Project
+              <span className="text-sa-primary"> investment estimator</span>
             </h2>
             <p className="sa-subtitle mx-auto">
               Get an immediate sense of investment for your next web or mobile product. 

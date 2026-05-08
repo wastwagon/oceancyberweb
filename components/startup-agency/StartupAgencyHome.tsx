@@ -44,7 +44,6 @@ export function StartupAgencyHome() {
         <SaTechSection />
         <SaPortfolioGallerySection />
         <SaTestimonialsSection />
-        <SaPricingSection />
         <SaPromoSection />
         <SaHomeFaqSection />
         <SaCtaStripSection />
