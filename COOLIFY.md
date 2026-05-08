@@ -89,7 +89,7 @@ Replace examples with your real domains.
 | Name                                                           | Purpose                                                                                                      |
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | `OPENAI_API_KEY`, `OPENAI_CHAT_MODEL`                           | Passed to the **`backend`** service only: enables LLM replies for `POST /api/v1/chat` instead of the local fallback. Same vars as root `.env.example`. |
-| `FRONTEND_PORT`, `BACKEND_PORT` | Host port mappings for `web` and `backend` (Coolify’s proxy should point at these). `POSTGRES_PORT` / `REDIS_PORT` are not used by root `docker-compose.yml` (DB/Redis stay on the Compose network only). |
+| `FRONTEND_PORT`, `BACKEND_PORT` | Optional host port mappings (defaults **3020** / **4100** in `docker-compose.yml` if unset). Coolify’s proxy usually maps domains to container ports **3000** / **4000** directly, so you may leave these unset. `POSTGRES_PORT` / `REDIS_PORT` are not used by root `docker-compose.yml`. |
 
 
 **Do not** use nested shell-style defaults inside a single value in Coolify (e.g. `http://localhost:${PORT}`). Use one plain URL per variable.
@@ -137,6 +137,7 @@ For host access during local development, use `docker/docker-compose.dev.yml` or
 | Docker: `Bind for 0.0.0.0:6379 failed: port is already allocated`             | Another service on the host owns `6379` (often another Redis). Root compose no longer publishes Redis/Postgres—pull latest and redeploy. If you still map ports manually, pick a free host port or stop the conflicting container. |
 | CORS errors from browser                                                      | `CORS_ORIGIN` must exactly match the site origin (scheme + host, no path).                                                          |
 | Public site missing new homepage sections (promo strips, hero tools)         | **Git** on the server is behind: push your branch, redeploy, and **rebuild** the `web` service. Then purge **CDN** cache. Uncommitted local changes never reach Coolify. |
+| Coolify / Compose: build exits **255** right after `npm install` or during `next build` | Often **out-of-memory** when `web` and `backend` build in parallel on a small VPS. Images set a larger Node heap for compile steps; if it still fails, add swap or temporarily build one service, or upgrade RAM. Also ensure `BACKEND_PORT` / `FRONTEND_PORT` are either unset (Compose defaults **4100** / **3020**) or valid integers—blank values used to produce invalid `:4000` port syntax. |
 
 
 For local Docker usage (not Coolify), see `SETUP.md` and `ports.env.example`.

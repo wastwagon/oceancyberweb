@@ -86,7 +86,8 @@ services:
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       OPENAI_CHAT_MODEL: ${OPENAI_CHAT_MODEL:-gpt-4o-mini}
     ports:
-      - "${BACKEND_PORT}:4000"
+      # Coolify often omits host port envs during build/merge; defaults match `.env.example`
+      - "${BACKEND_PORT:-4100}:4000"
     depends_on:
       postgres:
         condition: service_healthy
@@ -126,7 +127,7 @@ services:
       # Same secret as Nest — Next.js middleware + /api/auth/* verify the JWT stored in HttpOnly cookie
       JWT_SECRET: ${JWT_SECRET}
     ports:
-      - "${FRONTEND_PORT}:3000"
+      - "${FRONTEND_PORT:-3020}:3000"
     depends_on:
       postgres:
         condition: service_healthy

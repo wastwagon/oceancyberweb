@@ -8,6 +8,8 @@ COPY packages/shared ./packages/shared
 COPY backend ./backend
 COPY prisma ./prisma
 
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+
 RUN npm install
 RUN npm run build:shared
 RUN npx prisma generate --schema=./prisma/schema.prisma
