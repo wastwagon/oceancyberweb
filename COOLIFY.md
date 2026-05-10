@@ -13,7 +13,9 @@ Coolify’s build-time env merge may scan **all** `docker-compose*.yml` (and sim
 | `web`      | Next.js (standalone)        | 3000           | host `3020`              |
 
 
-Migrations run automatically on container start (`prisma migrate deploy` in both `web` and `backend` images).
+Migrations run automatically on container start (`prisma migrate deploy` in both `web` and `backend` images). **`prisma db seed`** runs automatically on **`backend`** startup after migrations (the API image includes the tooling to execute `prisma/seed.ts`). The **`web`** service still runs migrations only (its standalone image does not ship the seed runner). Because `web` waits for `backend` to become healthy, the database is typically seeded before the site serves traffic.
+
+To disable seed on a deploy, set **`SKIP_PRISMA_SEED=true`** on the **`backend`** service in Coolify. Sample login users still require **`SEED_DEMO_PASSWORD`** and **`SEED_ADMIN_PASSWORD`** in production (see `.env.example` / `prisma/seed.ts`).
 
 ---
 

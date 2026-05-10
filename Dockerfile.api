@@ -39,4 +39,6 @@ EXPOSE 4000
 
 ENV BACKEND_PORT=4000
 
-CMD ["sh", "-c", "npx prisma migrate deploy && node backend/dist/main.js"]
+# Seed runs here (not in `web`): API image has full node_modules + `tsx` for `prisma db seed`.
+# Set SKIP_PRISMA_SEED=true in Coolify to skip. `web` waits for backend health, so DB is seeded before traffic.
+CMD ["sh", "-c", "npx prisma migrate deploy && if [ \"$SKIP_PRISMA_SEED\" != \"true\" ]; then npx prisma db seed; fi && node backend/dist/main.js"]
