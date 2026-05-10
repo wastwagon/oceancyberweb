@@ -993,3 +993,16 @@
     break-after: auto;
   }
 }
+
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-sa-surface/30 rounded-full;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-sa-primary/20 rounded-full transition-colors hover:bg-sa-primary/40;
+  }
+}

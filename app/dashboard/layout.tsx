@@ -5,10 +5,10 @@ import { appShellNoIndexMetadata } from "@/lib/seo/canonical";
 export const metadata: Metadata = {
   ...appShellNoIndexMetadata(),
   title: {
-    default: "Dashboard",
-    template: "%s · Dashboard | OceanCyber",
+    default: "Control Center",
+    template: "%s · Control Center | OceanCyber",
   },
-  description: "Billing, renewals, wallet, and project requests for your OceanCyber account.",
+  description: "Secure gateway for billing, infrastructure management, and project collaboration.",
 };
 
 export default function DashboardLayout({

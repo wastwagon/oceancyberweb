@@ -2,6 +2,18 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  Plus, 
+  Wallet, 
+  RefreshCcw, 
+  ArrowUpRight, 
+  Clock, 
+  ShieldCheck, 
+  LogOut,
+  ChevronRight,
+  AlertCircle
+} from "lucide-react";
 import {
   BillingLedgerEntry,
   BillingRenewalPlan,
@@ -19,24 +31,29 @@ import {
 } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 
+// Components
+import { WalletHero } from "@/components/dashboard/WalletHero";
+import { SubscriptionNode } from "@/components/dashboard/SubscriptionNode";
+import { ActivityHub } from "@/components/dashboard/ActivityHub";
+import { DashboardSkeleton } from "@/components/dashboard/DashboardSkeleton";
+
 type DashboardData = Awaited<ReturnType<typeof getBillingDashboard>>;
 
-function statusStyles(status: string) {
-  switch (status) {
-    case "active":
-      return "border-emerald-500/30 bg-emerald-500/10 text-emerald-400";
-    case "paused":
-      return "border-amber-500/30 bg-amber-500/10 text-amber-400";
-    case "past_due":
-      return "border-orange-500/30 bg-orange-500/10 text-orange-400";
-    case "suspended":
-      return "border-red-500/30 bg-red-500/10 text-red-400";
-    case "cancelled":
-      return "border-sa-border bg-sa-bg text-sa-muted/60";
-    default:
-      return "border-sa-border bg-sa-surface text-sa-muted";
-  }
-}
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
 
 export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
@@ -95,148 +112,208 @@ export default function DashboardPage() {
   }
 
   return (
-    <main className="sa-shell min-h-screen bg-sa-bg pt-28 pb-16 md:py-36">
-      <div className="sa-container max-w-5xl space-y-6">
-        <header className="sa-card p-6 border-sa-border md:p-8">
-          <div className="flex flex-wrap items-start justify-between gap-4">
-            <div>
-              <p className="sa-eyebrow inline-flex">Dashboard</p>
-              <h1 className="sa-title !text-left mt-3 text-2xl md:text-3xl">Billing & renewals</h1>
-              <p className="mt-1 text-sm text-sa-muted/80">{email || "Signed-in user"}</p>
-              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-sa-muted/80">
-                Manage wallet funding, recurring renewals, and project invoices in one place.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-sa-primary/20 bg-sa-primary/10 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-sa-primary">
-              Live account overview
-            </div>
+    <main className="min-h-screen bg-[#050505] pb-20 pt-28 md:pt-36">
+      {/* Background Glow */}
+      <div className="pointer-events-none fixed left-1/2 top-0 -z-10 h-[500px] w-full -translate-x-1/2 overflow-hidden opacity-10 blur-[120px]">
+        <div className="absolute inset-0 bg-gradient-to-b from-sa-primary/20 via-sa-primary/10 to-transparent" />
+      </div>
+
+      <div className="sa-container max-w-6xl space-y-10">
+        <header className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="space-y-2">
+            <motion.p 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="sa-eyebrow"
+            >
+              Control Center
+            </motion.p>
+            <motion.h1 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.1 }}
+              className="sa-title !text-left text-3xl md:text-5xl"
+            >
+              System <span className="text-sa-muted/40">Dashboard</span>
+            </motion.h1>
+            <motion.p 
+               initial={{ opacity: 0 }}
+               animate={{ opacity: 1 }}
+               transition={{ delay: 0.2 }}
+               className="text-sm text-sa-muted/60 font-medium"
+            >
+              Securely connected as <span className="text-white font-bold">{email || "..." }</span>
+            </motion.p>
           </div>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/dashboard/requests"
-              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-5 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition-colors hover:border-sa-primary/50 hover:text-white"
-            >
-              Requests
-            </Link>
-            <Link
-              href="/dashboard/projects"
-              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-5 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition-colors hover:border-sa-primary/50 hover:text-white"
-            >
-              Projects
-            </Link>
-            <Link
-              href="/dashboard/statements"
-              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-5 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition-colors hover:border-sa-primary/50 hover:text-white"
-            >
-              Statements
-            </Link>
-            <Link
-              href="/services/website-to-mobile-app"
-              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-sa-primary/30 bg-sa-primary/10 px-5 text-[10px] font-bold uppercase tracking-widest text-sa-primary transition-colors hover:border-sa-primary hover:text-white"
-            >
-              App Quote
-            </Link>
-            <button
+
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-wrap gap-2"
+          >
+             <button
               type="button"
               onClick={() => void signOut()}
-              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-rose-500/30 bg-rose-500/10 px-5 text-[10px] font-bold uppercase tracking-widest text-rose-400 transition-colors hover:border-rose-500 hover:text-white"
+              className="group flex items-center gap-2 rounded-full border border-rose-500/20 bg-rose-500/5 px-5 py-2.5 text-[10px] font-bold uppercase tracking-widest text-rose-400 transition-all hover:border-rose-500 hover:bg-rose-500/10 hover:text-white"
             >
+              <LogOut size={12} className="transition-transform group-hover:-translate-x-1" />
               Sign out
             </button>
-          </div>
+          </motion.div>
         </header>
 
-        {loading ? <p className="text-sa-muted text-sm px-2">Loading dashboard...</p> : null}
+        {/* Action Bar */}
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="flex flex-wrap gap-3 p-1 rounded-full border border-sa-border bg-sa-surface/30 w-fit backdrop-blur-sm"
+        >
+          {[
+            { label: "Overview", href: "/dashboard", active: true },
+            { label: "Projects", href: "/dashboard/projects", active: false },
+            { label: "Statements", href: "/dashboard/statements", active: false },
+            { label: "Requests", href: "/dashboard/requests", active: false },
+          ].map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className={cn(
+                "px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all",
+                link.active 
+                  ? "bg-sa-primary text-black shadow-[0_0_20px_rgba(187,243,64,0.3)]" 
+                  : "text-sa-muted hover:text-white hover:bg-sa-surface"
+              )}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </motion.div>
+
+        {loading && !data ? <DashboardSkeleton /> : null}
+
         {error ? (
-          <div className="rounded-2xl border border-rose-500/50 bg-rose-500/10 px-5 py-4 text-sm text-rose-400">{error}</div>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="rounded-2xl border border-rose-500/50 bg-rose-500/10 p-6 flex items-start gap-4 text-rose-400 shadow-[0_10px_30px_rgba(244,63,94,0.1)]"
+          >
+            <AlertCircle className="shrink-0" />
+            <div>
+              <p className="font-bold uppercase tracking-wider text-xs">System Error</p>
+              <p className="mt-1 text-sm font-medium">{error}</p>
+            </div>
+          </motion.div>
         ) : null}
 
         {data ? (
-          <>
-            {pastDueCount > 0 || suspendedCount > 0 ? (
-              <section className="rounded-3xl border border-orange-500/30 bg-orange-500/10 p-6 shadow-sm">
-                <p className="text-sm font-bold text-orange-400">
-                  Action needed: {pastDueCount} past due {pastDueCount === 1 ? "renewal" : "renewals"}
-                  {suspendedCount > 0
-                    ? `, ${suspendedCount} suspended ${suspendedCount === 1 ? "service" : "services"}`
-                    : ""}
-                  .
-                </p>
-                <p className="mt-2 text-sm text-orange-400/80">
-                  Add wallet funds, then use <span className="font-bold text-orange-400">Charge wallet</span> on each affected
-                  renewal to restore service quickly.
-                </p>
-              </section>
-            ) : null}
-
-            <section className="grid gap-6 md:grid-cols-3">
-              <div className="sa-card p-6 border-sa-border md:col-span-2 md:p-8">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">Wallet balance</p>
-                <p className="mt-3 font-heading text-4xl font-bold tracking-tight text-white md:text-5xl">{balanceLabel}</p>
-                <p className="mt-3 text-sm text-sa-muted/80 leading-relaxed max-w-md">
-                  Top up with Paystack. Renewals can auto-charge every 10 minutes when due, or you can pay manually.
-                </p>
-                <Link
-                  href="/dashboard/wallet"
-                  className="sa-btn-primary mt-6 min-h-[44px] px-6 text-[10px]"
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+            className="space-y-8"
+          >
+            {/* Urgent Alerts */}
+            <AnimatePresence>
+              {(pastDueCount > 0 || suspendedCount > 0) && (
+                <motion.section 
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  className="overflow-hidden"
                 >
-                  Top up wallet
-                </Link>
-              </div>
-              <div className="sa-card p-6 border-sa-border md:p-8">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">Subscriptions</p>
-                <p className="mt-3 font-heading text-4xl font-bold tracking-tight text-white md:text-5xl">{data.renewals.length}</p>
-                <p className="mt-3 text-sm text-sa-muted/80 leading-relaxed">Pause, resume, or cancel anytime.</p>
-              </div>
+                  <div className="rounded-3xl border border-orange-500/40 bg-orange-500/5 p-6 backdrop-blur-md">
+                    <div className="flex gap-4">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-500/20 text-orange-400">
+                        <AlertCircle size={20} />
+                      </div>
+                      <div>
+                        <h3 className="font-heading font-bold text-orange-400 text-lg leading-none">Immediate Action Required</h3>
+                        <p className="mt-2 text-sm text-orange-400/80 max-w-2xl leading-relaxed">
+                          You have <span className="font-bold text-white underline decoration-orange-500/50 underline-offset-4">{pastDueCount} past due</span> renewals
+                          {suspendedCount > 0 ? ` and ${suspendedCount} suspended services.` : "."}
+                          Please fund your wallet to restore service stability.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.section>
+              )}
+            </AnimatePresence>
+
+            {/* Top Cards Grid */}
+            <section className="grid gap-6 md:grid-cols-3">
+              <WalletHero balanceLabel={balanceLabel} />
+
+              <motion.div variants={itemVariants} className="sa-card group flex flex-col justify-between overflow-hidden border-sa-border">
+                 <div className="p-8 md:p-10">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-sa-surface text-sa-muted">
+                      <RefreshCcw size={20} />
+                    </div>
+                    <p className="mt-6 text-[10px] font-bold uppercase tracking-[0.2em] text-sa-muted/60">Active Subscriptions</p>
+                    <h2 className="mt-4 font-heading text-6xl font-bold text-white">{data.renewals.length}</h2>
+                    <p className="mt-4 text-sm text-sa-muted/60 font-medium">
+                      Manage recurring infra and hosting services.
+                    </p>
+                 </div>
+                 <div className="bg-sa-surface/30 p-8 md:px-10 md:py-6">
+                   <Link href="/dashboard/statements" className="text-[10px] font-bold uppercase tracking-widest text-sa-muted hover:text-white transition-colors flex items-center gap-2">
+                     Transaction History <ChevronRight size={12} />
+                   </Link>
+                 </div>
+              </motion.div>
             </section>
 
-            <section className="sa-card p-6 border-sa-border md:p-8">
-              <div className="flex flex-wrap items-center justify-between gap-6">
-                <div>
-                  <h2 className="font-heading text-xl font-bold text-white">Need a new build quote?</h2>
-                  <p className="mt-2 text-sm text-sa-muted/80 max-w-xl">
-                    Already have a website? Submit a conversion request and receive a scoped mobile app quote.
+            {/* Quick Actions Card */}
+            <motion.section variants={itemVariants} className="sa-card group relative overflow-hidden bg-gradient-to-r from-sa-surface/50 to-transparent p-1">
+              <div className="rounded-[inherit] bg-[#0A0A0A] p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <div className="space-y-3">
+                  <div className="inline-flex rounded-full bg-sa-primary/10 px-3 py-1 text-[10px] font-bold text-sa-primary">
+                    PROMOTION
+                  </div>
+                  <h2 className="font-heading text-2xl font-bold text-white">Need an App Build?</h2>
+                  <p className="text-sm text-sa-muted/70 max-w-xl font-medium leading-relaxed">
+                    Convert your existing website into a high-performance native mobile app. 
+                    Submit your URL for a custom scoped conversion quote.
                   </p>
                 </div>
                 <Link
                   href="/services/website-to-mobile-app"
-                  className="sa-btn-primary min-h-[44px] px-6 text-[10px]"
+                  className="sa-btn-primary group min-h-[52px] px-10 text-[11px]"
                 >
-                  Request conversion quote
+                  Get App Quote
+                  <ChevronRight size={14} className="transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
-            </section>
+            </motion.section>
 
-            <section className="sa-card p-6 border-sa-border md:p-8">
+            {/* Renewals Management */}
+            <motion.section variants={itemVariants} className="space-y-6">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <h2 className="font-heading text-xl font-bold text-white">Recurring renewals</h2>
-                <div className="flex flex-wrap items-center gap-3">
+                <div>
+                  <h2 className="font-heading text-2xl font-bold text-white">Subscription Infrastructure</h2>
+                  <p className="text-sm text-sa-muted/60 font-medium">Deploy and manage your recurring service nodes.</p>
+                </div>
+                
+                <div className="flex flex-wrap items-center gap-3 bg-sa-surface/30 p-2 rounded-2xl border border-sa-border backdrop-blur-sm">
                   <select
                     value={selectedPlanCode}
                     onChange={(e) => setSelectedPlanCode(e.target.value)}
-                    className="rounded-xl border border-sa-border bg-sa-bg px-4 py-2.5 text-sm text-white focus:border-sa-primary focus:outline-none"
+                    className="rounded-xl border-none bg-transparent px-4 py-2 text-sm font-semibold text-white focus:ring-0 cursor-pointer"
                     disabled={creating || plans.length === 0}
                   >
                     {plans.length === 0 ? (
                       <option value="">No plans available</option>
                     ) : (
                       plans.map((p) => (
-                        <option key={p.code} value={p.code}>
-                          {p.name} - {(Number(p.amountMinor) / 100).toFixed(2)} {p.currency}/
-                          {p.interval === "yearly" ? "yr" : "mo"}
+                        <option key={p.code} value={p.code} className="bg-sa-surface">
+                          {p.name} — ₵{(Number(p.amountMinor) / 100).toFixed(2)}
                         </option>
                       ))
                     )}
                   </select>
-                  <label className="inline-flex items-center gap-2 rounded-xl border border-sa-border bg-sa-surface px-4 py-2.5 text-[10px] font-bold uppercase tracking-widest text-sa-muted cursor-pointer hover:border-sa-primary/50">
-                    <input
-                      type="checkbox"
-                      className="accent-sa-primary"
-                      checked={autoRenewUsingWallet}
-                      onChange={(e) => setAutoRenewUsingWallet(e.target.checked)}
-                    />
-                    Auto-renew
-                  </label>
+                  
                   <button
                     type="button"
                     disabled={creating || !selectedPlanCode}
@@ -252,167 +329,47 @@ export default function DashboardPage() {
                         setCreating(false);
                       }
                     }}
-                    className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-sa-border bg-sa-surface px-6 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition-colors hover:border-sa-primary/50 hover:text-white disabled:opacity-50"
+                    className="sa-btn-primary min-h-[40px] px-6 text-[10px]"
                   >
-                    {creating ? "Creating..." : "Add renewal"}
+                    <Plus size={14} className={creating ? "animate-spin" : ""} />
+                    {creating ? "Deploying..." : "Add Node"}
                   </button>
                 </div>
               </div>
 
-              <div className="mt-8 space-y-4">
+              <div className="grid gap-4">
                 {data.renewals.length === 0 ? (
-                  <p className="text-sm text-sa-muted/80 rounded-2xl border border-sa-border border-dashed p-8 text-center">No renewals yet.</p>
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="flex flex-col items-center justify-center py-20 rounded-3xl border border-sa-border border-dashed bg-sa-surface/10"
+                  >
+                    <RefreshCcw size={48} className="text-sa-muted/20" />
+                    <p className="mt-4 text-sm text-sa-muted/60 font-medium">No active subscriptions found.</p>
+                  </motion.div>
                 ) : (
-                  data.renewals.map((row: BillingRenewal) => {
-                    const isBusy = busyId === row.id;
-                    const canCharge = row.status === "active" || row.status === "past_due";
-                    const showPause = row.status === "active" || row.status === "past_due";
-                    return (
-                      <div
-                        key={row.id}
-                        className="rounded-2xl border border-sa-border bg-sa-bg px-5 py-5 transition-colors hover:border-sa-primary/50"
-                      >
-                        <div className="flex flex-col lg:flex-row items-start justify-between gap-5">
-                          <div className="min-w-0 space-y-2">
-                            <div className="flex flex-wrap items-center gap-3">
-                              <p className="font-heading font-bold text-white text-lg">{row.plan.name}</p>
-                              <span
-                                className={cn("rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-widest", statusStyles(row.status))}
-                              >
-                                {row.status.replace("_", " ")}
-                              </span>
-                            </div>
-                            <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">
-                              Next renewal: <span className="text-sa-muted">{new Date(row.nextRenewalAt).toLocaleDateString()}</span>
-                              <span className="text-sa-border mx-2">|</span>
-                              {row.autoRenewUsingWallet ? "Auto-pay from wallet" : "Manual only"}
-                            </p>
-                            {row.externalRef ? (
-                              <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40">Ref: {row.externalRef}</p>
-                            ) : null}
-                            {row.status === "past_due" && row.graceEndsAt ? (
-                              <p className="text-[10px] font-bold uppercase tracking-widest text-orange-400 mt-2">
-                                Grace until {new Date(row.graceEndsAt).toLocaleString()} — add funds or pay from wallet.
-                              </p>
-                            ) : null}
-                            {row.status === "suspended" ? (
-                              <p className="text-[10px] font-bold uppercase tracking-widest text-red-400 mt-2">
-                                Suspended after grace — contact support to reactivate.
-                              </p>
-                            ) : null}
-                          </div>
-                          <div className="flex flex-wrap items-center gap-2 lg:justify-end">
-                            {canCharge ? (
-                              <button
-                                type="button"
-                                disabled={isBusy || row.status === "paused"}
-                                onClick={() =>
-                                  withRenewalAction(row.id, () => chargeRenewal(row.id))
-                                }
-                                className="inline-flex min-h-[36px] items-center justify-center rounded-full border border-sa-primary bg-sa-primary/20 px-4 text-[10px] font-bold uppercase tracking-widest text-sa-primary transition-colors hover:bg-sa-primary hover:text-white disabled:opacity-50"
-                              >
-                                {isBusy ? "..." : "Charge wallet"}
-                              </button>
-                            ) : null}
-                            {row.status === "paused" ? (
-                              <button
-                                type="button"
-                                disabled={isBusy}
-                                onClick={() => withRenewalAction(row.id, () => resumeRenewal(row.id))}
-                                className="inline-flex min-h-[36px] items-center justify-center rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 text-[10px] font-bold uppercase tracking-widest text-emerald-400 transition-colors hover:bg-emerald-500 hover:text-white disabled:opacity-50"
-                              >
-                                Resume
-                              </button>
-                            ) : showPause && row.status !== "cancelled" ? (
-                              <button
-                                type="button"
-                                disabled={isBusy}
-                                onClick={() => withRenewalAction(row.id, () => pauseRenewal(row.id))}
-                                className="inline-flex min-h-[36px] items-center justify-center rounded-full border border-amber-500/30 bg-amber-500/10 px-4 text-[10px] font-bold uppercase tracking-widest text-amber-400 transition-colors hover:bg-amber-500 hover:text-white disabled:opacity-50"
-                              >
-                                Pause
-                              </button>
-                            ) : null}
-                            {row.status !== "cancelled" ? (
-                              <button
-                                type="button"
-                                disabled={isBusy}
-                                onClick={() => {
-                                  if (!confirm("Cancel this renewal? Auto-pay will stop.")) return;
-                                  withRenewalAction(row.id, () => cancelRenewal(row.id));
-                                }}
-                                className="inline-flex min-h-[36px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-4 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition-colors hover:border-sa-primary/50 hover:text-white disabled:opacity-50"
-                              >
-                                Cancel
-                              </button>
-                            ) : null}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })
+                  data.renewals.map((row: BillingRenewal) => (
+                    <SubscriptionNode 
+                      key={row.id}
+                      renewal={row}
+                      busyId={busyId}
+                      onAction={withRenewalAction}
+                      chargeRenewal={chargeRenewal}
+                      pauseRenewal={pauseRenewal}
+                      resumeRenewal={resumeRenewal}
+                      cancelRenewal={cancelRenewal}
+                    />
+                  ))
                 )}
               </div>
-            </section>
+            </motion.section>
 
-            {data.recentLedger?.length ? (
-              <section className="sa-card p-6 border-sa-border md:p-8">
-                <div className="flex flex-wrap items-center justify-between gap-4">
-                  <h2 className="font-heading text-xl font-bold text-white">Recent wallet activity</h2>
-                  <Link href="/dashboard/statements" className="text-[10px] font-bold uppercase tracking-widest text-sa-primary hover:text-white transition-colors">
-                    View all →
-                  </Link>
-                </div>
-                <ul className="mt-6 divide-y divide-sa-border text-sm">
-                  {data.recentLedger.map((e: BillingLedgerEntry) => (
-                    <li key={e.id} className="flex flex-wrap justify-between items-center gap-3 py-3">
-                      <span className="text-sa-muted">{e.description || e.type}</span>
-                      <span className="font-heading font-bold text-white text-base">
-                        {e.type === "debit" ? "−" : "+"}₵{(Number(e.amountMinor) / 100).toFixed(2)}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            ) : null}
-
-            <section className="sa-card p-6 border-sa-border md:p-8">
-              <h2 className="font-heading text-xl font-bold text-white">Recent transactions</h2>
-              <div className="mt-6 overflow-x-auto">
-                <table className="min-w-full text-left text-sm whitespace-nowrap">
-                  <thead className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60 border-b border-sa-border">
-                    <tr>
-                      <th className="py-3 pr-6">Type</th>
-                      <th className="py-3 pr-6">Status</th>
-                      <th className="py-3 pr-6">Amount</th>
-                      <th className="py-3 pr-6">Date</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-sa-border/50">
-                    {data.recentTransactions.length === 0 ? (
-                      <tr>
-                        <td className="py-6 text-sa-muted/80 text-center" colSpan={4}>
-                          No transactions yet.
-                        </td>
-                      </tr>
-                    ) : (
-                      data.recentTransactions.map((tx: BillingTransaction) => (
-                        <tr key={tx.id} className="transition-colors hover:bg-sa-surface/50">
-                          <td className="py-4 pr-6 text-white">{tx.type}</td>
-                          <td className="py-4 pr-6 text-sa-muted capitalize">{tx.status.replace("_", " ")}</td>
-                          <td className="py-4 pr-6 font-heading font-bold text-white">₵{(Number(tx.amountMinor) / 100).toFixed(2)}</td>
-                          <td className="py-4 pr-6 text-sa-muted/80">{new Date(tx.createdAt).toLocaleString()}</td>
-                        </tr>
-                      ))
-                    )}
-                  </tbody>
-                </table>
-              </div>
-              <p className="mt-6 text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">
-                Receipts: open <Link href="/dashboard/statements" className="text-sa-primary hover:text-white transition-colors">Statements</Link>.
-              </p>
-            </section>
-          </>
+            <ActivityHub 
+              ledger={data.recentLedger} 
+              transactions={data.recentTransactions} 
+              itemVariants={itemVariants} 
+            />
+          </motion.div>
         ) : null}
       </div>
     </main>

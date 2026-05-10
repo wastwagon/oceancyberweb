@@ -5,10 +5,10 @@ import { appShellNoIndexMetadata } from "@/lib/seo/canonical";
 export const metadata: Metadata = {
   ...appShellNoIndexMetadata(),
   title: {
-    default: "Admin",
-    template: "%s · Admin | OceanCyber",
+    default: "Command Center",
+    template: "%s · Command Center | OceanCyber",
   },
-  description: "OceanCyber internal administration.",
+  description: "Internal operational control and project lifecycle management hub.",
 };
 
 export default function AdminLayout({

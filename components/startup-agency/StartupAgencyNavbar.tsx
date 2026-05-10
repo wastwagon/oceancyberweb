@@ -181,21 +181,21 @@ export function StartupAgencyNavbar() {
                 Dashboard
               </Link>
             ) : (
-              <>
+              <div className="flex items-center">
                 <Link
                   href="/signin"
                   className="px-2 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary"
                 >
                   Sign In
                 </Link>
-                <span className="text-[10px] text-sa-muted/30">/</span>
+                <span className="text-[10px] text-sa-muted/30 mx-0.5">/</span>
                 <Link
                   href="/signup"
                   className="px-2 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary"
                 >
                   Sign Up
                 </Link>
-              </>
+              </div>
             )}
           </div>
 

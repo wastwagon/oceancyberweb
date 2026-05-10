@@ -29,10 +29,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     if (!user) {
       throw new UnauthorizedException();
     }
+    const { isAdminForUser } = await import("../admin/admin.util");
     return {
       id: user.id,
       email: user.email,
       role: user.role,
+      isAdmin: isAdminForUser(user, this.config.get<string>("ADMIN_EMAILS") || ""),
     };
   }
 }

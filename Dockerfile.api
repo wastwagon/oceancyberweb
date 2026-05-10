@@ -9,6 +9,7 @@ COPY backend ./backend
 COPY prisma ./prisma
 
 ENV NODE_OPTIONS="--max-old-space-size=4096"
+ENV NODE_PATH=/app/node_modules
 
 RUN npm install
 RUN npm run build:shared
