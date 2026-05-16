@@ -20,6 +20,22 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: "OceanCyber Creative Hub",
+    category: "Creative Dashboard",
+    description: "A visually stunning, high-performance creative hub dashboard showcasing our premium UI/UX design capabilities, featuring dynamic glassmorphism and real-time analytics.",
+    tech: ["Next.js", "Framer Motion", "Tailwind CSS", "TypeScript", "Three.js"],
+    gradient: "from-purple-500 to-cyan-500",
+    image: "/images/creative-template.png",
+    metrics: { increase: "500%", metric: "Visual Engagement" },
+    year: "2026",
+    client: "Internal Prototype",
+    rating: 5,
+    slug: "creative-hub-template",
+    services: ["Premium UI/UX", "Interactive Prototyping", "Dashboard Design", "3D Elements"],
+    testimonial: "This prototype demonstrates the absolute cutting edge of web design, blending complex data visualization with breathtaking aesthetics.",
+    results: "Set a new benchmark for premium agency deliverables and increased client inquiry rates."
+  },
+  {
     title: "EGP Ghana",
     category: "Financial Services",
     description: "Comprehensive digital transformation for a leading financial institution, implementing secure online banking solutions and customer portal systems.",

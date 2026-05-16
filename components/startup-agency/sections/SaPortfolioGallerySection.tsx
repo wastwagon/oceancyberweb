@@ -44,7 +44,10 @@ export function SaPortfolioGallerySection() {
     load();
   }, []);
 
-  const displayProjects = dynamicProjects.length > 0 ? dynamicProjects : staticProjects.slice(0, 6);
+  // Always feature the top creative template first
+  const displayProjects = dynamicProjects.length > 0 
+    ? [staticProjects[0], ...dynamicProjects].slice(0, 6) 
+    : staticProjects.slice(0, 6);
 
   // Parallax: top row moves left, bottom row moves right
   const xLeft = useTransform(scrollYProgress, [0, 1], [100, -100]);

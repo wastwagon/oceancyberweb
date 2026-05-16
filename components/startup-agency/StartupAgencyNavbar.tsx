@@ -120,38 +120,30 @@ export function StartupAgencyNavbar() {
                   />
                 </Link>
 
-                {/* Desktop Mega Dropdown */}
+                {/* Premium Desktop Dropdown */}
                 {item.dropdownKey && activeDropdown === item.dropdownKey && mainHeaderDropdownContent[item.dropdownKey] && (
                   <div
-                    className="absolute left-1/2 top-[calc(100%+12px)] z-[120] w-[640px] -translate-x-1/2 rounded-2xl border border-sa-border bg-[#131317]/95 p-6 shadow-[0_24px_54px_rgba(0,0,0,0.6)] backdrop-blur-xl"
+                    className="absolute left-0 top-[calc(100%+12px)] z-[120] w-[280px] rounded-2xl border border-sa-border bg-[#131317]/95 p-2 shadow-[0_24px_54px_rgba(0,0,0,0.6)] backdrop-blur-xl transition-all duration-300"
                     role="menu"
                   >
-                    <div className="grid grid-cols-1 gap-8 md:grid-cols-12">
-                      <div className="md:col-span-4">
-                        <h3 className="font-heading text-lg font-bold text-white">
-                          {mainHeaderDropdownContent[item.dropdownKey].title}
-                        </h3>
-                        <p className="mt-2 text-sm leading-relaxed text-sa-muted">
-                          {mainHeaderDropdownContent[item.dropdownKey].description}
-                        </p>
-                      </div>
-                      <div className="grid grid-cols-1 gap-4 md:col-span-8 md:grid-cols-2">
-                        {mainHeaderDropdownContent[item.dropdownKey].items.map((subItem) => (
-                          <Link
-                            key={subItem.link}
-                            href={subItem.link}
-                            className="group/link block rounded-xl border border-transparent p-3 transition-colors hover:border-sa-border hover:bg-black/40"
-                            onClick={() => setActiveDropdown(null)}
-                          >
-                            <p className="font-heading text-sm font-semibold text-white transition-colors group-hover/link:text-sa-primary">
-                              {subItem.heading}
-                            </p>
-                            <p className="mt-1 text-xs text-sa-muted">
+                    <div className="flex flex-col gap-1">
+                      {mainHeaderDropdownContent[item.dropdownKey].items.map((subItem) => (
+                        <Link
+                          key={subItem.link}
+                          href={subItem.link}
+                          className="group/link flex flex-col justify-center rounded-xl border border-transparent px-4 py-3 transition-colors hover:border-sa-border hover:bg-black/40"
+                          onClick={() => setActiveDropdown(null)}
+                        >
+                          <p className="font-heading text-[13px] font-semibold text-white transition-colors group-hover/link:text-sa-primary">
+                            {subItem.heading}
+                          </p>
+                          {subItem.description && (
+                            <p className="mt-1 text-[11px] text-sa-muted/80 line-clamp-2 leading-relaxed">
                               {subItem.description}
                             </p>
-                          </Link>
-                        ))}
-                      </div>
+                          )}
+                        </Link>
+                      ))}
                     </div>
                   </div>
                 )}
