@@ -26,6 +26,7 @@ jobs:
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/oceancyber?schema=public
       JWT_SECRET: ci-jwt-secret-for-build-tests-only
+      SESSION_SECRET: ci-session-secret-for-build-tests-only
       NEXT_PUBLIC_SITE_URL: http://127.0.0.1:3020
       NEXT_PUBLIC_API_URL: http://127.0.0.1:4100
 

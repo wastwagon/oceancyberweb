@@ -1,6 +1,7 @@
 import { ValidationPipe, VersioningType } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import { NestExpressApplication } from "@nestjs/platform-express";
+import { assertProductionSecrets } from "@oceancyber/shared";
 import helmet from "helmet";
 import session from "express-session";
 import RedisStore from "connect-redis";
@@ -24,6 +25,16 @@ function trustProxySetting(): number | boolean {
 }
 
 async function bootstrap() {
+  assertProductionSecrets(
+    {
+      nodeEnv: process.env.NODE_ENV,
+      jwtSecret: process.env.JWT_SECRET,
+      sessionSecret: process.env.SESSION_SECRET,
+      ci: process.env.CI === "true",
+    },
+    "nestjs",
+  );
+
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     rawBody: true,
   });

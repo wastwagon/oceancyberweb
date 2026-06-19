@@ -1,9 +1,10 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { OC_ACCESS_COOKIE_NAME, ocAccessCookieBase } from "@/lib/auth/oc-session";
-import { verifyAccessJwt } from "@/lib/auth/verify-access-jwt";
+import { decodeAccessJwt } from "@/lib/auth/verify-access-jwt";
 
 const PRIVATE_PREFIXES = ["/dashboard", "/admin"];
+const ADMIN_PREFIX = "/admin";
 
 function signinRedirect(request: NextRequest, pathWithSearch: string) {
   const url = request.nextUrl.clone();
@@ -12,9 +13,17 @@ function signinRedirect(request: NextRequest, pathWithSearch: string) {
   return NextResponse.redirect(url);
 }
 
+function dashboardRedirect(request: NextRequest) {
+  const url = request.nextUrl.clone();
+  url.pathname = "/dashboard";
+  url.search = "";
+  return NextResponse.redirect(url);
+}
+
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const isPrivate = PRIVATE_PREFIXES.some((p) => path === p || path.startsWith(`${p}/`));
+  const isAdminRoute = path === ADMIN_PREFIX || path.startsWith(`${ADMIN_PREFIX}/`);
   const nextWithSearch = `${path}${request.nextUrl.search}`;
 
   if (isPrivate) {
@@ -23,7 +32,10 @@ export async function middleware(request: NextRequest) {
       return signinRedirect(request, nextWithSearch);
     }
     try {
-      await verifyAccessJwt(token);
+      const claims = await decodeAccessJwt(token);
+      if (isAdminRoute && !claims.isAdmin) {
+        return dashboardRedirect(request);
+      }
     } catch {
       const res = signinRedirect(request, nextWithSearch);
       const b = ocAccessCookieBase();

@@ -1,5 +1,9 @@
 /** Shared API contract between Next.js and NestJS */
 
+export { isAdminForUser } from "./admin";
+export { assertProductionSecrets } from "./secrets";
+export type { SecretEnv } from "./secrets";
+
 export const API_VERSION = "v1" as const;
 
 export interface ApiHealthResponse {
@@ -18,7 +22,7 @@ export interface AuthTokens {
 export interface AuthUserPublic {
   id: string;
   email: string;
-  /** `"user"` until a `role` column exists on `User`; admin flows may override via JWT/profile. */
+  /** `user` or `admin` (see Prisma `UserRole` enum). */
   role: string;
   isAdmin?: boolean;
 }

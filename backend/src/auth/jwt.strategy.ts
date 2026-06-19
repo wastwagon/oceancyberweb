@@ -4,6 +4,7 @@ import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
 import { PrismaService } from "../prisma/prisma.service";
 import type { AuthUserPublic } from "@oceancyber/shared";
+import { isAdminForUser } from "@oceancyber/shared";
 
 /** Decoded JWT (may omit `role` on legacy tokens); `validate` loads the user from the DB. */
 export type JwtPayload = { sub: string; email?: string; role?: string };
@@ -29,12 +30,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     if (!user) {
       throw new UnauthorizedException();
     }
-    const { isAdminForUser } = await import("../admin/admin.util");
     return {
       id: user.id,
       email: user.email,
       role: user.role,
-      isAdmin: isAdminForUser(user, this.config.get<string>("ADMIN_EMAILS") || ""),
+      isAdmin: isAdminForUser(
+        user,
+        this.config.get<string>("ADMIN_EMAILS") || "",
+      ),
     };
   }
 }

@@ -1,8 +1,10 @@
 import { Body, Controller, Get, Post, Query } from "@nestjs/common";
+import { Throttle } from "@nestjs/throttler";
 import { DomainsService } from "./domains.service";
 import { CheckoutRequestDto } from "./dto/checkout.dto";
 
 @Controller("domains")
+@Throttle({ default: { limit: 30, ttl: 60_000 } })
 export class DomainsController {
   constructor(private readonly domainsService: DomainsService) {}
 

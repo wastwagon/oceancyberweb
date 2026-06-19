@@ -3,8 +3,10 @@ import {
   Injectable,
   UnauthorizedException,
 } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcryptjs";
+import { isAdminForUser } from "@oceancyber/shared";
 import { PrismaService } from "../prisma/prisma.service";
 import type { AuthTokens, AuthUserPublic } from "@oceancyber/shared";
 import type { LoginDto, RegisterDto } from "./dto";
@@ -14,7 +16,21 @@ export class AuthService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly jwt: JwtService,
+    private readonly config: ConfigService,
   ) {}
+
+  private adminEmails(): string {
+    return this.config.get<string>("ADMIN_EMAILS") || "";
+  }
+
+  private toPublicUser(u: {
+    id: string;
+    email: string;
+    role: string;
+  }): AuthUserPublic {
+    const isAdmin = isAdminForUser(u, this.adminEmails());
+    return { id: u.id, email: u.email, role: u.role, isAdmin };
+  }
 
   async register(
     dto: RegisterDto,
@@ -35,11 +51,7 @@ export class AuthService {
       select: { id: true, email: true, role: true },
     });
 
-    const publicUser: AuthUserPublic = {
-      id: user.id,
-      email: user.email,
-      role: user.role,
-    };
+    const publicUser = this.toPublicUser(user);
 
     return {
       user: publicUser,
@@ -60,11 +72,7 @@ export class AuthService {
       throw new UnauthorizedException("Invalid credentials");
     }
 
-    const publicUser: AuthUserPublic = {
-      id: user.id,
-      email: user.email,
-      role: user.role,
-    };
+    const publicUser = this.toPublicUser(user);
 
     return {
       user: publicUser,
@@ -77,6 +85,7 @@ export class AuthService {
       sub: user.id,
       email: user.email,
       role: user.role,
+      isAdmin: user.isAdmin === true,
     });
     return {
       access_token,

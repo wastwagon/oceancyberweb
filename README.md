@@ -83,22 +83,25 @@ Do **not** run `npm run docker:up --build` — `--build` is already included, an
 
 ```
 oceancyber-website/
-├── app/                    # Next.js App Router
-│   ├── layout.tsx         # Root layout
-│   ├── page.tsx           # Homepage
-│   └── globals.css        # Global styles
+├── app/                         # Next.js App Router (45+ routes)
+│   ├── layout.tsx               # Root layout (startup-agency chrome)
+│   ├── page.tsx                 # Homepage → StartupAgencyHome
+│   ├── sitemap.ts               # Dynamic sitemap + portfolio slugs
+│   ├── api/auth/                # Login/register session cookies
+│   ├── api/nest/v1/             # Authenticated Nest proxy
+│   ├── dashboard/               # Client portal
+│   └── admin/                   # Command center (admin-only)
+├── backend/                     # NestJS API (@oceancyber/api workspace)
+├── packages/shared/             # Shared types + security helpers
 ├── components/
-│   ├── ui/                # Reusable UI components
-│   ├── sections/          # Page sections
-│   ├── layout/            # Header, Footer
-│   └── ghana-specific/    # Ghana market features
-├── lib/                   # Utilities
-│   ├── utils.ts          # Helper functions
-│   ├── seo.ts            # SEO configuration
-│   └── analytics.ts      # Analytics setup
-├── prisma/                # Database schema
-├── public/                # Static assets
-└── docker-compose.yml     # Docker configuration
+│   ├── startup-agency/          # Primary marketing shell (navbar, home sections)
+│   ├── sections/                # Legacy section blocks (contact, portfolio pages)
+│   ├── admin/                   # Admin UI
+│   └── dashboard/               # Client dashboard UI
+├── lib/                         # Auth, SEO, Paystack, Namecheap clients
+├── prisma/                      # Schema + migrations
+├── docker-compose.yml           # Full stack (Coolify)
+└── scripts/                     # Docker helpers, one-off tooling
 ```
 
 ## 🔧 Available Scripts

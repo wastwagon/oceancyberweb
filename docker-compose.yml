@@ -78,6 +78,7 @@ services:
       REDIS_URL: redis://redis:6379
       JWT_SECRET: ${JWT_SECRET}
       SESSION_SECRET: ${SESSION_SECRET}
+      ADMIN_EMAILS: ${ADMIN_EMAILS:-}
       CORS_ORIGIN: ${CORS_ORIGIN}
       # Optional: Next.js on-demand revalidation after /admin/content edits (same secret on `web`)
       REVALIDATE_SECRET: ${REVALIDATE_SECRET}

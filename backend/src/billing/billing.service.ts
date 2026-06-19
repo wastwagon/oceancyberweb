@@ -8,7 +8,7 @@ import {
 } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { Cron, CronExpression } from "@nestjs/schedule";
-import { createHmac, timingSafeEqual } from "node:crypto";
+import { verifyPaystackWebhookSignature } from "@oceancyber/shared/dist/paystack";
 import { Prisma } from "@prisma/client";
 import { MailService } from "../mail/mail.service";
 import { PrismaService } from "../prisma/prisma.service";
@@ -120,10 +120,7 @@ export class BillingService {
     if (!signature)
       throw new UnauthorizedException("Missing Paystack signature");
 
-    const expected = createHmac("sha512", secret).update(rawBody).digest("hex");
-    const a = Buffer.from(expected, "utf8");
-    const b = Buffer.from(signature, "utf8");
-    if (a.length !== b.length || !timingSafeEqual(a, b)) {
+    if (!verifyPaystackWebhookSignature(rawBody, signature, secret)) {
       throw new UnauthorizedException("Invalid Paystack signature");
     }
   }
