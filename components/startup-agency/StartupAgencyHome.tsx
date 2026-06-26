@@ -3,6 +3,7 @@ import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/Startup
 import { StartupAgencyNavbar } from "@/components/startup-agency/StartupAgencyNavbar";
 import { StartupAgencyProgressBar } from "@/components/startup-agency/StartupAgencyProgressBar";
 import { SaAboutSection } from "@/components/startup-agency/sections/SaAboutSection";
+import { SaClientLogosSection } from "@/components/startup-agency/sections/SaClientLogosSection";
 import { SaCtaStripSection } from "@/components/startup-agency/sections/SaCtaStripSection";
 import { SaDomainSearchSection } from "@/components/startup-agency/sections/SaDomainSearchSection";
 import { SaCostEstimatorSection } from "@/components/startup-agency/sections/SaCostEstimatorSection";
@@ -16,6 +17,7 @@ import { SaPortfolioGallerySection } from "@/components/startup-agency/sections/
 import { SaServicesSection } from "@/components/startup-agency/sections/SaServicesSection";
 import { SaTechSection } from "@/components/startup-agency/sections/SaTechSection";
 import { SaTestimonialsSection } from "@/components/startup-agency/sections/SaTestimonialsSection";
+import { SaTrustSection } from "@/components/startup-agency/sections/SaTrustSection";
 import { SaPromoSection } from "@/components/startup-agency/sections/SaPromoSection";
 
 export function StartupAgencyHome() {
@@ -31,22 +33,30 @@ export function StartupAgencyHome() {
 
       <main id="startup-main-content" className="pb-24 pt-24 md:pb-0 md:pt-28" tabIndex={-1}>
         <h1 className="sr-only">
-          OceanCyber — Web and mobile app development in Ghana
+          OceanCyber — UI/UX design, web and mobile app development in Ghana
         </h1>
 
+        {/* Phase 1: Hero → trust → story → services → work */}
         <SaHeroSection />
         <SaMarqueeSection />
-        <SaDomainSearchSection />
+        <SaClientLogosSection />
         <SaAboutSection />
         <SaServicesSection />
+        <SaPortfolioGallerySection />
         <SaProcessSection />
+
+        {/* Phase 2: Social proof, pricing, tools */}
+        <SaTestimonialsSection />
+        <SaTrustSection />
+        <SaPricingSection />
         <SaCostEstimatorSection />
         <SaTechSection />
-        <SaPortfolioGallerySection />
-        <SaTestimonialsSection />
         <SaPromoSection />
         <SaHomeFaqSection />
         <SaCtaStripSection />
+
+        {/* Commerce utilities after conversion path */}
+        <SaDomainSearchSection />
         <SaInsightsTeaserSection />
       </main>
 

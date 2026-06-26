@@ -5,6 +5,7 @@ import type { Project } from "@prisma/client";
 import { prisma } from "@/lib/db";
 import type { PortfolioCaseStudy } from "@/lib/types/portfolio-case-study";
 import type { PortfolioDetailsV1 } from "@/lib/types/portfolio-details-v1";
+import { enrichPortfolioCaseStudy } from "@/lib/portfolio/project-type";
 import { fallbackPortfolioCaseStudies } from "./projects";
 
 export type { PortfolioDetailsV1 } from "@/lib/types/portfolio-details-v1";
@@ -28,6 +29,8 @@ function mapPrismaProjectToCaseStudy(row: Project): PortfolioCaseStudy | null {
       services: v1.services,
       testimonial: v1.testimonial,
       results: v1.results,
+      projectType: v1.projectType,
+      designArtifacts: v1.designArtifacts,
     };
   }
   if (!row.imageUrl) {
@@ -60,18 +63,19 @@ export const getPortfolioCaseStudies = unstable_cache(
         orderBy: [{ featured: "desc" }, { sortOrder: "asc" }, { createdAt: "asc" }],
       });
       if (rows.length === 0) {
-        return fallbackPortfolioCaseStudies;
+        return fallbackPortfolioCaseStudies.map(enrichPortfolioCaseStudy);
       }
       const mapped = rows
         .map((r) => mapPrismaProjectToCaseStudy(r))
-        .filter((x): x is PortfolioCaseStudy => x != null);
+        .filter((x): x is PortfolioCaseStudy => x != null)
+        .map(enrichPortfolioCaseStudy);
       if (mapped.length > 0) {
         return mapped;
       }
     } catch (e) {
       logPortfolioLoaderError("[getPortfolioCaseStudies]", e);
     }
-    return fallbackPortfolioCaseStudies;
+    return fallbackPortfolioCaseStudies.map(enrichPortfolioCaseStudy);
   },
   ["site-portfolio-case-studies"],
   { revalidate: 300, tags: ["portfolio"] },
@@ -99,11 +103,12 @@ export async function getPortfolioCaseStudyBySlug(
     if (row) {
       const m = mapPrismaProjectToCaseStudy(row);
       if (m) {
-        return m;
+        return enrichPortfolioCaseStudy(m);
       }
     }
   } catch (e) {
     logPortfolioLoaderError("[getPortfolioCaseStudyBySlug]", e);
   }
-  return fallbackPortfolioCaseStudies.find((p) => p.slug === slug) ?? null;
+  const fallback = fallbackPortfolioCaseStudies.find((p) => p.slug === slug);
+  return fallback ? enrichPortfolioCaseStudy(fallback) : null;
 }

@@ -23,6 +23,18 @@ type ServiceCard = {
 
 const services: ServiceCard[] = [
   {
+    title: "UI/UX & Brand Design",
+    description:
+      "Research, wireframes, and Figma prototypes — brand systems and interfaces that convert and hand off cleanly to engineering.",
+    image: "/images/creative-template.png",
+    services: [
+      "Brand identity and visual language",
+      "UX research and journey mapping",
+      "Figma prototypes and design systems",
+    ],
+    href: "/services/ui-ux-design",
+  },
+  {
     title: "Web Development",
     description:
       "Modern, high-performance websites and web products, with SEO, accessibility, and speed budgets built in from day one.",

@@ -57,12 +57,6 @@ const DEFAULT_CONFIG = {
     { href: "/services", label: "Services", dropdownKey: "services" },
     { href: "/industries", label: "Industries", dropdownKey: "industries" },
     {
-      href: "/domains",
-      label: "Infrastructure",
-      dropdownKey: "infrastructure",
-      activeMatch: ["/domains", "/hosting"],
-    },
-    {
       href: "/insights",
       label: "Resources",
       dropdownKey: "resources",
@@ -71,6 +65,9 @@ const DEFAULT_CONFIG = {
         "/case-studies",
         "/security-journey",
         "/help-center",
+        "/design-process",
+        "/domains",
+        "/hosting",
       ],
     },
     {
@@ -86,6 +83,12 @@ const DEFAULT_CONFIG = {
       description:
         "Build, secure, and scale digital products with one delivery partner.",
       items: [
+        {
+          heading: "UI/UX & Brand Design",
+          description:
+            "Research, Figma prototypes, and design systems ready for engineering.",
+          link: "/services/ui-ux-design",
+        },
         {
           heading: "Web Development",
           description:
@@ -159,6 +162,12 @@ const DEFAULT_CONFIG = {
           link: "/insights",
         },
         {
+          heading: "Design process",
+          description:
+            "How we research, prototype in Figma, and hand off to engineering.",
+          link: "/design-process",
+        },
+        {
           heading: "Case studies",
           description: "Delivery outcomes across sectors in Ghana and beyond.",
           link: "/case-studies",
@@ -173,6 +182,18 @@ const DEFAULT_CONFIG = {
           description:
             "Answers to common questions about onboarding and support.",
           link: "/help-center",
+        },
+        {
+          heading: "Domains & SSL",
+          description:
+            "Search domain availability and add SSL with secure checkout.",
+          link: "/domains",
+        },
+        {
+          heading: "Hosting",
+          description:
+            "Launch cPanel and WHM hosting plans with local support.",
+          link: "/hosting",
         },
       ],
     },

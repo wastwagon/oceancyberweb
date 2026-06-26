@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Portfolio } from "@/components/sections/Portfolio";
+import { PortfolioFilteredLibrary } from "@/components/portfolio/PortfolioFilteredLibrary";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { getPortfolioCaseStudies } from "@/lib/data/portfolio-loader";
 import { withCanonical } from "@/lib/seo/canonical";
@@ -47,7 +47,7 @@ export default async function PortfolioPage() {
           </div>
         </div>
       </section>
-      <Portfolio cases={cases} />
+      <PortfolioFilteredLibrary projects={cases} />
     </main>
   );
 }

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 700" fill="none" role="img" aria-label="Mobile wireframe">
+  <rect width="400" height="700" fill="#131317"/>
+  <rect x="120" y="24" width="160" height="28" rx="14" stroke="#414141" stroke-width="2"/>
+  <rect x="48" y="80" width="304" height="120" rx="12" stroke="#bbf340" stroke-width="2" stroke-dasharray="8 6"/>
+  <rect x="48" y="220" width="304" height="64" rx="8" stroke="#414141" stroke-width="2"/>
+  <rect x="48" y="300" width="304" height="64" rx="8" stroke="#414141" stroke-width="2"/>
+  <rect x="48" y="380" width="304" height="64" rx="8" stroke="#414141" stroke-width="2"/>
+  <rect x="48" y="620" width="304" height="48" rx="24" stroke="#414141" stroke-width="2"/>
+  <text x="200" y="680" fill="#666" font-family="system-ui,sans-serif" font-size="12" text-anchor="middle">Mobile wireframe</text>
+</svg>

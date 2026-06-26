@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none" role="img" aria-label="Wireframe layout">
+  <rect width="800" height="500" fill="#131317"/>
+  <rect x="40" y="40" width="720" height="48" rx="8" stroke="#414141" stroke-width="2"/>
+  <rect x="40" y="120" width="220" height="320" rx="8" stroke="#414141" stroke-width="2"/>
+  <rect x="280" y="120" width="480" height="150" rx="8" stroke="#bbf340" stroke-width="2" stroke-dasharray="8 6"/>
+  <rect x="280" y="290" width="220" height="150" rx="8" stroke="#414141" stroke-width="2"/>
+  <rect x="520" y="290" width="240" height="150" rx="8" stroke="#414141" stroke-width="2"/>
+  <text x="400" y="470" fill="#666" font-family="system-ui,sans-serif" font-size="14" text-anchor="middle">Wireframe  IA &amp; layout</text>
+</svg>

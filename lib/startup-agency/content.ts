@@ -1,33 +1,83 @@
 /** Marketing homepage content — structure aligned with Start-Up Agency; copy tailored for OceanCyber. */
 
+export const heroTagline =
+  "We design and build digital products that help African businesses grow — from brand and UX to launch.";
+
 export const heroServiceSlides = [
   {
     title: "Web Development",
     href: "/services/web-development",
-    imageAlt: "Developer workspace with laptop and code editor",
-    image:
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&q=80",
+    imageAlt: "Fitch Advisory web platform delivered by OceanCyber",
+    image: "/images/Fitch Advisory.webp",
   },
   {
     title: "Mobile Apps",
     href: "/services/mobile-apps",
-    imageAlt: "Hands holding a smartphone in use outdoors",
-    image:
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1920&q=80",
+    imageAlt: "Juelle Hair mobile commerce experience",
+    image: "/images/Juelle Hair.webp",
   },
   {
     title: "Cyber Security",
     href: "/services/cybersecurity",
-    imageAlt: "Abstract digital security network visualization",
-    image:
-      "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1920&q=80",
+    imageAlt: "Fitch Attorneys secure legal platform",
+    image: "/images/Fitch Attorney.webp",
   },
   {
     title: "E-Commerce",
     href: "/services/ecommerce",
-    imageAlt: "Retail checkout and shopping context",
-    image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1920&q=80",
+    imageAlt: "Tour World Tourism booking platform",
+    image: "/images/Tour World Tourism.webp",
+  },
+] as const;
+
+export const clientLogos = [
+  { name: "EGP Ghana", order: 0, thumb: "/images/EGP Ghana.webp", logo: "/images/clients/egp-ghana.svg", href: "/portfolio/egp-ghana" },
+  { name: "Juelle Hair", order: 1, thumb: "/images/Juelle Hair.webp", logo: "/images/clients/juelle-hair.svg", href: "/portfolio/juelle-hair" },
+  { name: "Tour World", order: 2, thumb: "/images/Tour World Tourism.webp", logo: "/images/clients/tour-world.svg", href: "/portfolio/tour-world-tourism" },
+  { name: "Fitch Advisory", order: 3, thumb: "/images/Fitch Advisory.webp", logo: "/images/clients/fitch-advisory.svg", href: "/portfolio/fitch-advisory" },
+  { name: "Fitch Attorneys", order: 4, thumb: "/images/Fitch Attorney.webp", logo: "/images/clients/fitch-attorneys.svg", href: "/portfolio/fitch-attorneys" },
+  { name: "Africa Trade Chamber", order: 5, thumb: "/images/Africa Trade Chamber.webp", logo: "/images/clients/africa-trade-chamber.svg", href: "/portfolio/african-trade-chamber" },
+] as const;
+
+export const showreelSlides = [
+  { src: "/images/creative-template.png", caption: "OceanCyber Creative Hub" },
+  { src: "/images/EGP Ghana.webp", caption: "EGP Ghana — Financial Services" },
+  { src: "/images/Juelle Hair.webp", caption: "Juelle Hair — E-commerce" },
+  { src: "/images/Tour World Tourism.webp", caption: "Tour World Tourism" },
+  { src: "/images/Fitch Advisory.webp", caption: "Fitch Advisory" },
+] as const;
+
+export const aboutTeamPreview = [
+  { name: "Marcus Owusu", role: "Founder & CEO", image: "/images/team/marcus.png" },
+  { name: "Sarah Mensah", role: "CTO", image: "/images/team/sarah.png" },
+  { name: "Kwame Nkrumah", role: "Head of Security", image: "/images/team/kwame.png" },
+  { name: "Ama Serwaa", role: "Creative Director", image: "/images/team/ama.png" },
+] as const;
+
+export const aboutStats = [
+  { value: "8+", label: "Years delivering" },
+  { value: "50+", label: "Products launched" },
+  { value: "5", label: "Industry verticals" },
+] as const;
+
+export const trustSignals = [
+  {
+    icon: "award" as const,
+    stat: "8+",
+    title: "Years in market",
+    body: "Founded in Accra in 2018 — shipping for startups, SMEs, and enterprise teams.",
+  },
+  {
+    icon: "star" as const,
+    stat: "5★",
+    title: "Client satisfaction",
+    body: "Partners cite clear communication, on-time delivery, and craft they can show stakeholders.",
+  },
+  {
+    icon: "shield" as const,
+    stat: "100%",
+    title: "Security-first builds",
+    body: "Every engagement treats performance, privacy, and resilience as product requirements.",
   },
 ] as const;
 
@@ -46,38 +96,38 @@ export const marqueeTags = [
 
 export const serviceCards = [
   {
+    title: "UI/UX & Brand",
+    desc: "Human-centered interfaces and brand systems in Figma — wireframes, prototypes, and design handoff your engineers can ship.",
+    href: "/services/ui-ux-design",
+    image: "/images/creative-template.png",
+  },
+  {
     title: "Web Development",
-    desc: "We build the high-performance foundations that power your business. No templates, no shortcuts, just solid code.",
+    desc: "High-performance websites and web apps that convert visitors into customers — built for speed, SEO, and long-term growth.",
     href: "/services/web-development",
     image: "/images/EGP Ghana.webp",
   },
   {
     title: "Mobile Apps",
-    desc: "We ship native iOS and Android apps that users actually enjoy using. Built for speed and reliability.",
+    desc: "Native-quality iOS and Android experiences users enjoy — offline flows, MoMo payments, and store-ready releases.",
     href: "/services/mobile-apps",
     image: "/images/Juelle Hair.webp",
   },
   {
     title: "E‑commerce",
-    desc: "Secure storefronts that handle thousands of orders and MoMo payments without breaking a sweat.",
+    desc: "Storefronts that handle real volume — catalog, checkout, MoMo, and ops tooling without breaking under pressure.",
     href: "/services/ecommerce",
     image: "/images/Tour World Tourism.webp",
   },
   {
-    title: "SEO & Growth",
-    desc: "Stop hiding on page 2. We use technical SEO and data to get your brand in front of the right people.",
-    href: "/services",
-    image: "/images/Fitch Advisory.webp",
-  },
-  {
     title: "Cyber Security",
-    desc: "We find the holes in your security before the bad guys do. Audits, pentesting, and 24/7 monitoring.",
+    desc: "Find vulnerabilities before attackers do — audits, hardening, and monitoring that protect your reputation and revenue.",
     href: "/services/cybersecurity",
     image: "/images/Fitch Attorney.webp",
   },
   {
     title: "Cloud Hosting",
-    desc: "Bulletproof infrastructure with localized support. We keep your site live while you sleep.",
+    desc: "Reliable infrastructure with local support — domains, SSL, and hosting that keeps your business online.",
     href: "/hosting",
     image: "/images/Africa Trade Chamber.webp",
   },
@@ -197,7 +247,7 @@ export const faqItems = [
   },
   {
     q: "What services do you offer?",
-    a: "Web, mobile apps, e‑commerce, cybersecurity, hosting, and related delivery — see Services for detail.",
+    a: "UI/UX design, brand identity, web, mobile apps, e‑commerce, cybersecurity, hosting, and related delivery — see Services for detail.",
   },
   {
     q: "Do you offer maintenance?",

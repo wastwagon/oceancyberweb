@@ -1,6 +1,9 @@
 import * as bcrypt from "bcryptjs";
 import { randomUUID } from "crypto";
 import { Prisma, PrismaClient } from "@prisma/client";
+import { caseStudyDesignBySlug } from "../lib/data/case-study-design";
+import { PROJECT_TYPE_BY_SLUG } from "../lib/portfolio/project-type";
+import type { PortfolioProjectType } from "../lib/types/portfolio-project-type";
 
 type PortfolioDetailsV1 = {
   v: 1;
@@ -13,6 +16,8 @@ type PortfolioDetailsV1 = {
   services?: unknown;
   testimonial?: unknown;
   results?: unknown;
+  projectType?: PortfolioProjectType;
+  designArtifacts?: (typeof caseStudyDesignBySlug)[string];
 };
 
 type PortfolioFallback = {
@@ -405,6 +410,8 @@ async function main() {
   const fallbackPortfolioCaseStudies = await loadPortfolioFallbacks();
   for (let i = 0; i < fallbackPortfolioCaseStudies.length; i++) {
     const p = fallbackPortfolioCaseStudies[i]!;
+    const designArtifacts = caseStudyDesignBySlug[p.slug];
+    const projectType = PROJECT_TYPE_BY_SLUG[p.slug];
     const details: PortfolioDetailsV1 = {
       v: 1,
       gradient: p.gradient,
@@ -416,6 +423,8 @@ async function main() {
       services: p.services,
       testimonial: p.testimonial,
       results: p.results,
+      ...(projectType ? { projectType } : {}),
+      ...(designArtifacts?.length ? { designArtifacts } : {}),
     };
     const json: Prisma.InputJsonValue = details as unknown as Prisma.InputJsonValue;
     await prisma.project.upsert({

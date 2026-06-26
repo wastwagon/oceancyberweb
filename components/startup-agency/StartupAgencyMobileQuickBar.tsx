@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 import { useCart } from "@/components/commerce/CartProvider";
 
 const quickActions = [
-  { label: "Domains", href: "/domains" },
-  { label: "Hosting", href: "/hosting" },
-  { label: "Checkout", href: "/checkout/cart" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Contact", href: "/contact" },
+  { label: "Get started", href: "/get-started", primary: true },
 ] as const;
 
 export function StartupAgencyMobileQuickBar() {
@@ -24,9 +24,6 @@ export function StartupAgencyMobileQuickBar() {
   }, [itemCount]);
 
   function isActive(href: string): boolean {
-    if (href === "/checkout/cart") {
-      return pathname.startsWith("/checkout");
-    }
     return pathname === href || pathname.startsWith(`${href}/`);
   }
 
@@ -41,18 +38,21 @@ export function StartupAgencyMobileQuickBar() {
             key={action.href}
             href={action.href}
             className={`inline-flex min-h-[42px] items-center justify-center rounded-lg border px-2 text-center font-heading text-[10px] font-semibold uppercase tracking-[0.12em] transition duration-300 ${
-              isActive(action.href)
-                ? "border-sa-primary bg-sa-primary/15 text-sa-primary"
-                : "border-sa-border bg-sa-surface/70 text-white hover:border-sa-primary hover:text-sa-primary"
+              "primary" in action && action.primary
+                ? "border-sa-primary bg-sa-primary text-sa-bg hover:bg-sa-primary/90"
+                : isActive(action.href)
+                  ? "border-sa-primary bg-sa-primary/15 text-sa-primary"
+                  : "border-sa-border bg-sa-surface/70 text-white hover:border-sa-primary hover:text-sa-primary"
             }`}
             aria-current={isActive(action.href) ? "page" : undefined}
           >
             {action.label}
-            {action.href === "/checkout/cart" && itemCount > 0 ? (
+            {action.href === "/get-started" && itemCount > 0 ? (
               <span
-                className={`ml-1 inline-flex min-w-[18px] items-center justify-center rounded-full bg-sa-primary px-1.5 text-[9px] font-bold leading-4 text-sa-bg transition ${
+                className={`ml-1 inline-flex min-w-[18px] items-center justify-center rounded-full bg-sa-bg px-1.5 text-[9px] font-bold leading-4 text-sa-primary transition ${
                   animateBadge ? "scale-110" : "scale-100"
                 }`}
+                title={`${itemCount} item(s) in cart`}
               >
                 {itemCount > 99 ? "99+" : itemCount}
               </span>

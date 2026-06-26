@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none" role="img" aria-label="Discovery wireframe">
+  <rect width="800" height="500" fill="#131317"/>
+  <circle cx="120" cy="160" r="48" stroke="#414141" stroke-width="2"/>
+  <rect x="220" y="120" width="200" height="16" rx="4" fill="#414141"/>
+  <rect x="220" y="148" width="320" height="12" rx="4" fill="#2a2a30"/>
+  <rect x="220" y="172" width="280" height="12" rx="4" fill="#2a2a30"/>
+  <path d="M120 260 H680" stroke="#414141" stroke-width="2" stroke-dasharray="6 6"/>
+  <rect x="80" y="300" width="180" height="120" rx="8" stroke="#bbf340" stroke-width="2"/>
+  <rect x="310" y="300" width="180" height="120" rx="8" stroke="#414141" stroke-width="2"/>
+  <rect x="540" y="300" width="180" height="120" rx="8" stroke="#414141" stroke-width="2"/>
+  <text x="400" y="470" fill="#666" font-family="system-ui,sans-serif" font-size="14" text-anchor="middle">Discovery &amp; user flows</text>
+</svg>

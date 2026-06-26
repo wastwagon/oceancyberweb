@@ -4,7 +4,10 @@ import { ArrowLeft } from "lucide-react";
 import {
   DetailIntroMotion,
 } from "@/components/layout/DetailPageMotion";
+import { CaseStudyDesignGallery } from "@/components/portfolio/CaseStudyDesignGallery";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
+import { getDesignArtifactsForProject } from "@/lib/portfolio/design-artifacts";
+import { resolveProjectType, getProjectTypeLabel } from "@/lib/portfolio/project-type";
 import type { PortfolioCaseStudy } from "@/lib/types/portfolio-case-study";
 
 type CaseStudyNarrative = {
@@ -30,6 +33,9 @@ export function CaseStudyDetailView({
   detailTitle,
   narrative,
 }: Props) {
+  const designArtifacts = getDesignArtifactsForProject(project);
+  const projectType = resolveProjectType(project);
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted antialiased">
       <SaPageAmbient />
@@ -140,6 +146,11 @@ export function CaseStudyDetailView({
                 </div>
               ) : null}
 
+              <CaseStudyDesignGallery
+                artifacts={designArtifacts}
+                projectTitle={project.title}
+              />
+
               {project.services ? (
                 <div className="space-y-6">
                   <h2 className="font-heading text-xl font-bold text-white">
@@ -199,6 +210,12 @@ export function CaseStudyDetailView({
                     <div className="flex flex-col gap-1">
                       <span className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/50">Industry</span>
                       <span className="font-bold text-white">{project.category}</span>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/50">Delivery type</span>
+                      <span className="font-bold text-white">
+                        {getProjectTypeLabel(projectType)}
+                      </span>
                     </div>
                     <div className="flex flex-col gap-1">
                       <span className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/50">Year</span>

@@ -3,129 +3,179 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { heroServiceSlides } from "@/lib/startup-agency/content";
+import { Play } from "lucide-react";
+import { SaShowreelModal } from "@/components/startup-agency/SaShowreelModal";
+import { heroServiceSlides, heroTagline } from "@/lib/startup-agency/content";
 
 export function SaHeroSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [showreelOpen, setShowreelOpen] = useState(false);
 
   return (
-    <section id="hero" className="relative h-screen min-h-[600px] w-full overflow-hidden bg-sa-bg pt-20">
-      {/* Grid Beam Animation Layer */}
-      <div className="hero-grid-cells opacity-20">
-        {Array.from({ length: 48 }).map((_, i) => (
-          <div key={i} className="hero-grid-cell" />
-        ))}
-      </div>
-
-      {/* Huge Stroked Text (Initial State) */}
-      <div
-        className={`absolute inset-0 z-10 flex flex-col items-center justify-center transition-opacity duration-700 pointer-events-none ${hoveredIndex !== null ? "opacity-0" : "opacity-100"
-          }`}
-      >
-        <div className="mb-4 flex items-center gap-3 rounded-full border border-white/20 bg-black/40 px-4 py-2 backdrop-blur-md">
-          <span className="h-1.5 w-1.5 rounded-full bg-sa-primary animate-pulse" />
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80">Engineered for Results</span>
+    <>
+      <section id="hero" className="relative min-h-[100dvh] w-full overflow-hidden bg-sa-bg pt-20 md:h-screen md:min-h-[600px]">
+        <div className="hero-grid-cells opacity-20">
+          {Array.from({ length: 48 }).map((_, i) => (
+            <div key={i} className="hero-grid-cell" />
+          ))}
         </div>
-        <h1
-          className="font-heading text-[12vw] font-bold tracking-tighter uppercase leading-none"
-          style={{
-            WebkitTextStroke: "2px rgba(255, 255, 255, 0.4)",
-            color: "transparent",
-          }}
-        >
-          OceanCyber
-        </h1>
-        <div className="mt-6 text-[11px] font-medium uppercase tracking-[0.3em] text-sa-muted/60">
-          Accra · London · Global
-        </div>
-      </div>
 
-      {/* Default Background Image */}
-      <div
-        className={`absolute inset-0 z-0 transition-opacity duration-1000 ${hoveredIndex !== null ? "opacity-0" : "opacity-40"
-          }`}
-      >
-        <Image
-          src={heroServiceSlides[0].image}
-          alt="OceanCyber Default"
-          fill
-          className="object-cover"
-          sizes="100vw"
-          priority
-        />
-      </div>
-
-      {/* Hovered Background Images (Full Width) */}
-      {heroServiceSlides.map((slide, index) => (
         <div
-          key={`bg-${slide.title}`}
-          className={`absolute inset-0 z-0 transition-all duration-1000 ease-in-out ${hoveredIndex === index ? "opacity-100 scale-105" : "opacity-0 scale-100"
-            }`}
+          className={`absolute inset-0 z-10 flex flex-col items-center justify-center px-4 transition-opacity duration-700 pointer-events-none md:px-0 ${
+            hoveredIndex !== null ? "opacity-0" : "opacity-100"
+          }`}
+        >
+          <div className="mb-4 flex items-center gap-3 rounded-full border border-white/20 bg-black/40 px-4 py-2 backdrop-blur-md">
+            <span className="h-1.5 w-1.5 rounded-full bg-sa-primary animate-pulse" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80">
+              Engineered for Results
+            </span>
+          </div>
+          <p
+            className="font-heading text-[14vw] font-bold tracking-tighter uppercase leading-none md:text-[12vw]"
+            style={{
+              WebkitTextStroke: "2px rgba(255, 255, 255, 0.4)",
+              color: "transparent",
+            }}
+            aria-hidden
+          >
+            OceanCyber
+          </p>
+          <p className="mt-6 max-w-xl text-center text-sm leading-relaxed text-white/80 md:mt-8 md:text-base">
+            {heroTagline}
+          </p>
+          <div className="pointer-events-auto mt-8 flex flex-wrap items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => setShowreelOpen(true)}
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-white/30 bg-black/50 px-5 py-2.5 font-heading text-[10px] font-bold uppercase tracking-[0.14em] text-white backdrop-blur-md transition hover:border-sa-primary hover:text-sa-primary"
+            >
+              <Play className="h-4 w-4 fill-current" aria-hidden />
+              Watch showreel
+            </button>
+            <Link
+              href="/portfolio"
+              className="inline-flex min-h-[44px] items-center rounded-full border border-sa-primary bg-sa-primary px-5 py-2.5 font-heading text-[10px] font-bold uppercase tracking-[0.14em] text-sa-bg transition hover:bg-sa-primary/90"
+            >
+              View our work
+            </Link>
+          </div>
+          <div className="mt-6 text-[11px] font-medium uppercase tracking-[0.3em] text-sa-muted/60">
+            Accra · London · Global
+          </div>
+        </div>
+
+        <div
+          className={`absolute inset-0 z-0 transition-opacity duration-1000 ${
+            hoveredIndex !== null ? "opacity-0" : "opacity-40"
+          }`}
         >
           <Image
-            src={slide.image}
-            alt={slide.imageAlt}
+            src={heroServiceSlides[0].image}
+            alt=""
             fill
             className="object-cover"
             sizes="100vw"
+            priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
         </div>
-      ))}
 
-      {/* 4-Column Grid */}
-      <div className="relative z-20 flex h-full w-full border-t border-white/5">
-        {heroServiceSlides.map((slide, index) => {
-          const isHovered = hoveredIndex === index;
+        {heroServiceSlides.map((slide, index) => (
+          <div
+            key={`bg-${slide.title}`}
+            className={`absolute inset-0 z-0 transition-all duration-1000 ease-in-out ${
+              hoveredIndex === index ? "opacity-100 scale-105" : "opacity-0 scale-100"
+            }`}
+          >
+            <Image
+              src={slide.image}
+              alt={slide.imageAlt}
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+          </div>
+        ))}
 
-          return (
-            <Link
-              key={slide.title}
-              href={slide.href}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              className="group relative flex h-full flex-1 cursor-pointer items-end justify-center border-r border-white/10 transition-all duration-700 ease-in-out last:border-r-0 hover:flex-[2]"
-            >
+        <div className="relative z-20 flex min-h-[280px] w-full flex-col border-t border-white/5 md:h-full md:min-h-0 md:flex-row">
+          {heroServiceSlides.map((slide, index) => {
+            const isHovered = hoveredIndex === index;
 
-              {/* Slide Content */}
-              <div className="mb-20 w-full px-6 text-center transition-all duration-500">
-                {/* When hovered, show huge stroked text for the specific service */}
+            return (
+              <Link
+                key={slide.title}
+                href={slide.href}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                className="group relative flex min-h-[72px] flex-1 cursor-pointer items-center justify-between border-b border-white/10 px-5 py-4 transition-all duration-700 ease-in-out last:border-b-0 md:min-h-0 md:flex-col md:items-end md:justify-end md:border-b-0 md:border-r md:px-6 md:py-0 md:last:border-r-0 md:hover:flex-[2]"
+              >
                 {isHovered && (
-                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none w-max z-30">
-                    <h2
-                      className="font-heading text-[10vw] font-bold tracking-tight uppercase leading-none whitespace-nowrap animate-fade-in"
+                  <div className="pointer-events-none absolute left-1/2 top-1/2 z-30 hidden w-max -translate-x-1/2 -translate-y-1/2 md:block">
+                    <p
+                      className="animate-fade-in font-heading text-[10vw] font-bold uppercase leading-none tracking-tight whitespace-nowrap"
                       style={{
                         WebkitTextStroke: "1px rgba(255, 255, 255, 0.6)",
                         color: "transparent",
                       }}
                     >
                       {slide.title}
-                    </h2>
+                    </p>
                   </div>
                 )}
 
-                <div className="mb-4 flex items-center justify-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-sa-primary animate-pulse" />
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80">Engineered for Results</span>
+                <div className="flex w-full flex-col items-start md:mb-20 md:items-center md:text-center">
+                  <div className="mb-1 hidden items-center justify-center gap-2 md:mb-4 md:flex">
+                    <span className="h-1.5 w-1.5 rounded-full bg-sa-primary animate-pulse" />
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80">
+                      Engineered for Results
+                    </span>
+                  </div>
+
+                  <h2
+                    className={`font-heading text-sm font-bold uppercase tracking-widest text-white transition-all duration-500 md:text-2xl ${
+                      isHovered ? "md:opacity-0 md:-translate-y-10" : "opacity-100"
+                    }`}
+                  >
+                    {slide.title}
+                  </h2>
+
+                  <div
+                    className={`hidden h-12 w-12 items-center justify-center rounded-full border border-white/30 transition-all duration-500 md:mt-6 md:flex ${
+                      isHovered
+                        ? "border-sa-primary bg-sa-primary/20 scale-125"
+                        : "group-hover:border-white group-hover:bg-white/10"
+                    }`}
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className={`transform transition-all duration-500 ${
+                        isHovered ? "-rotate-45 text-sa-primary" : "text-white"
+                      }`}
+                    >
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                  </div>
                 </div>
 
-                <h3 className={`font-heading text-xl font-bold uppercase tracking-widest text-white transition-all duration-500 md:text-2xl ${isHovered ? "opacity-0 -translate-y-10" : "opacity-100"
-                  }`}>
-                  {slide.title}
-                </h3>
-                <div className={`mx-auto mt-6 h-12 w-12 flex items-center justify-center rounded-full border border-white/30 transition-all duration-500 ${isHovered ? "border-sa-primary bg-sa-primary/20 scale-125" : "group-hover:border-white group-hover:bg-white/10"
-                  }`}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transform transition-all duration-500 ${isHovered ? "-rotate-45 text-sa-primary" : "text-white"
-                    }`}>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                  </svg>
-                </div>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
-    </section>
+                <span className="text-white/40 md:hidden" aria-hidden>
+                  →
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      <SaShowreelModal open={showreelOpen} onClose={() => setShowreelOpen(false)} />
+    </>
   );
 }

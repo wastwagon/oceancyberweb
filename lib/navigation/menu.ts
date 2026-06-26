@@ -43,16 +43,18 @@ export const mainHeaderNav: HeaderNavItem[] = [
   { href: "/services", label: "Services", dropdownKey: "services" },
   { href: "/industries", label: "Industries", dropdownKey: "industries" },
   {
-    href: "/domains",
-    label: "Infrastructure",
-    dropdownKey: "infrastructure",
-    activeMatch: ["/domains", "/hosting"],
-  },
-  {
     href: "/insights",
     label: "Resources",
     dropdownKey: "resources",
-    activeMatch: ["/insights", "/case-studies", "/security-journey", "/help-center"],
+    activeMatch: [
+      "/insights",
+      "/case-studies",
+      "/security-journey",
+      "/help-center",
+      "/design-process",
+      "/domains",
+      "/hosting",
+    ],
   },
   {
     href: "/about",
@@ -74,6 +76,11 @@ export const mainHeaderDropdownContent: Record<
     title: "Our Services",
     description: "Build, secure, and scale digital products with one delivery partner.",
     items: [
+      {
+        heading: "UI/UX & Brand Design",
+        description: "Research, Figma prototypes, and design systems ready for engineering.",
+        link: "/services/ui-ux-design",
+      },
       {
         heading: "Web Development",
         description: "Modern, high-performance websites built with proven technologies.",
@@ -137,6 +144,11 @@ export const mainHeaderDropdownContent: Record<
         link: "/insights",
       },
       {
+        heading: "Design Process",
+        description: "How we research, prototype in Figma, and hand off to engineering.",
+        link: "/design-process",
+      },
+      {
         heading: "Case Studies",
         description: "Delivery outcomes across sectors in Ghana and beyond.",
         link: "/case-studies",
@@ -150,6 +162,16 @@ export const mainHeaderDropdownContent: Record<
         heading: "Help Center",
         description: "Answers to common questions about onboarding and support.",
         link: "/help-center",
+      },
+      {
+        heading: "Domains & SSL",
+        description: "Search domain availability and add SSL with secure checkout.",
+        link: "/domains",
+      },
+      {
+        heading: "Hosting",
+        description: "Launch cPanel and WHM hosting plans with local support.",
+        link: "/hosting",
       },
     ],
   },

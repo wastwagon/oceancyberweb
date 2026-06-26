@@ -19,6 +19,13 @@ import {
   type AdminSiteTestimonialRow,
 } from "@/lib/auth-client";
 import { defaultNavigationConfig } from "@/lib/navigation/menu";
+import { ProjectDesignFields } from "@/components/admin/ProjectDesignFields";
+import { ClientLogoManager } from "@/components/admin/ClientLogoManager";
+import { MediaUploadField } from "@/components/admin/MediaUploadField";
+import {
+  mergeDetailsFromForm,
+  parseProjectDetailsForm,
+} from "@/lib/admin/portfolio-details-form";
 
 type AdminNavItem = {
   id?: string;
@@ -514,11 +521,16 @@ export default function AdminContentPage() {
           </p>
         </section>
 
+        <div className="mt-8">
+          <ClientLogoManager />
+        </div>
+
         {/* Projects */}
         <section className="rounded-2xl border border-sa-border bg-sa-surface p-6 ">
           <h2 className="text-lg font-bold text-white">Portfolio projects</h2>
           <p className="mt-1 text-sm text-sa-muted/80">
-            Powers <code className="rounded bg-sa-surface px-1">/portfolio</code>. Rich detail JSON is optional (
+            Powers <code className="rounded bg-sa-surface px-1">/portfolio</code>. Use structured
+            fields when editing a project, or optional raw JSON (
             <code className="rounded bg-sa-surface px-1">details.v === 1</code>).
           </p>
 
@@ -586,11 +598,11 @@ export default function AdminContentPage() {
               />
             </label>
             <label className="block text-xs text-sa-muted/80">
-              Details JSON (optional)
+              Details JSON (optional — or configure after create in the editor)
               <textarea
                 className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 font-mono text-xs"
                 rows={4}
-                placeholder='{"v":1,"image":"/images/..."}'
+                placeholder='{"v":1,"image":"/images/...","projectType":"hybrid","designArtifacts":[]}'
                 value={newProj.detailsJson}
                 onChange={(e) => setNewProj((s) => ({ ...s, detailsJson: e.target.value }))}
               />
@@ -1385,6 +1397,7 @@ function ProjectEditor({
   onCancel: () => void;
   onSaved: () => Promise<void>;
 }) {
+  const initialDetails = parseProjectDetailsForm(row.details);
   const [title, setTitle] = useState(row.title);
   const [slug, setSlug] = useState(row.slug);
   const [category, setCategory] = useState(row.category);
@@ -1393,9 +1406,10 @@ function ProjectEditor({
   const [imageUrl, setImageUrl] = useState(row.imageUrl ?? "");
   const [featured, setFeatured] = useState(row.featured);
   const [sortOrder, setSortOrder] = useState(String(row.sortOrder));
-  const [detailsJson, setDetailsJson] = useState(
-    row.details && typeof row.details === "object" ? JSON.stringify(row.details, null, 2) : "",
-  );
+  const [projectType, setProjectType] = useState(initialDetails.projectType);
+  const [designArtifacts, setDesignArtifacts] = useState(initialDetails.designArtifacts);
+  const [detailsJson, setDetailsJson] = useState(initialDetails.detailsJson);
+  const [showRawJson, setShowRawJson] = useState(false);
   const [saving, setSaving] = useState(false);
 
   return (
@@ -1427,13 +1441,35 @@ function ProjectEditor({
         <input className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm" value={tech} onChange={(e) => setTech(e.target.value)} />
       </label>
       <label className="block text-xs text-sa-muted/80">
-        Image URL
-        <input className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
+        Cover image
+        <div className="mt-1">
+          <MediaUploadField
+            label="Project cover"
+            folder="uploads"
+            value={imageUrl}
+            onChange={setImageUrl}
+          />
+        </div>
       </label>
-      <label className="block text-xs text-sa-muted/80">
-        Details JSON
-        <textarea className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 font-mono text-xs" rows={5} value={detailsJson} onChange={(e) => setDetailsJson(e.target.value)} />
+
+      <ProjectDesignFields
+        projectType={projectType}
+        designArtifacts={designArtifacts}
+        onProjectTypeChange={setProjectType}
+        onArtifactsChange={setDesignArtifacts}
+      />
+
+      <label className="flex items-center gap-2 text-sm text-sa-muted">
+        <input type="checkbox" checked={showRawJson} onChange={(e) => setShowRawJson(e.target.checked)} />
+        Edit raw details JSON
       </label>
+      {showRawJson ? (
+        <label className="block text-xs text-sa-muted/80">
+          Details JSON
+          <textarea className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 font-mono text-xs" rows={5} value={detailsJson} onChange={(e) => setDetailsJson(e.target.value)} />
+        </label>
+      ) : null}
+
       <label className="flex items-center gap-2 text-sm">
         <input type="checkbox" checked={featured} onChange={(e) => setFeatured(e.target.checked)} />
         Featured
@@ -1444,14 +1480,20 @@ function ProjectEditor({
           disabled={saving}
           className="rounded-lg bg-sa-primary px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
           onClick={async () => {
-            let details: Record<string, unknown> | undefined;
-            if (detailsJson.trim()) {
+            let details: Record<string, unknown>;
+            if (showRawJson && detailsJson.trim()) {
               try {
                 details = JSON.parse(detailsJson) as Record<string, unknown>;
               } catch {
                 window.alert("Invalid JSON in details");
                 return;
               }
+            } else {
+              details = mergeDetailsFromForm(
+                row.details,
+                { projectType, designArtifacts },
+                imageUrl.trim() || "/images/oceancyber-logo.webp",
+              ) as Record<string, unknown>;
             }
             setSaving(true);
             try {

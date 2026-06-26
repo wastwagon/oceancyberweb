@@ -3,17 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Code, Smartphone, Shield, ShoppingCart, TrendingUp, Cloud } from "lucide-react";
+import { ArrowUpRight, Code, Smartphone, Shield, ShoppingCart, Cloud, Palette } from "lucide-react";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
 import { serviceCards } from "@/lib/startup-agency/content";
 
 function getServiceIcon(title: string) {
   const t = title.toLowerCase();
+  if (t.includes("ui") || t.includes("brand") || t.includes("ux")) return Palette;
   if (t.includes("web")) return Code;
   if (t.includes("mobile")) return Smartphone;
   if (t.includes("cyber")) return Shield;
   if (t.includes("commerce")) return ShoppingCart;
-  if (t.includes("seo") || t.includes("growth")) return TrendingUp;
   if (t.includes("cloud") || t.includes("hosting")) return Cloud;
   return Code; // fallback
 }

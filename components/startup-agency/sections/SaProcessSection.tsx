@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
 import { processSteps } from "@/lib/startup-agency/content";
 
@@ -43,6 +44,22 @@ export function SaProcessSection() {
                   </li>
                 ))}
               </ul>
+              {p.step === 2 ? (
+                <Link
+                  href="/services/ui-ux-design"
+                  className="mt-6 inline-flex text-xs font-bold uppercase tracking-widest text-sa-primary transition hover:text-white"
+                >
+                  Explore our design process →
+                </Link>
+              ) : null}
+              {p.step === 1 ? (
+                <Link
+                  href="/design-process"
+                  className="mt-6 inline-flex text-xs font-bold uppercase tracking-widest text-sa-muted transition hover:text-sa-primary"
+                >
+                  Full design playbook →
+                </Link>
+              ) : null}
             </SaReveal>
           ))}
         </div>

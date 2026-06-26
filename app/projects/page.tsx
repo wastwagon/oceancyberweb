@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SaProjectsPageGrid } from "@/components/startup-agency/SaProjectsPageGrid";
+import { PortfolioFilteredLibrary } from "@/components/portfolio/PortfolioFilteredLibrary";
 import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
 import { getPortfolioCaseStudies } from "@/lib/data/portfolio-loader";
 import { withCanonical } from "@/lib/seo/canonical";
@@ -30,7 +30,7 @@ export default async function ProjectsPage() {
           </p>
         </div>
       </section>
-      <SaProjectsPageGrid cases={cases} />
+      <PortfolioFilteredLibrary projects={cases} showHeader={false} />
       <StartupAgencyMobileQuickBar />
     </main>
   );

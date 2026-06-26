@@ -163,37 +163,28 @@ export function StartupAgencyNavbar() {
             <Search className="h-5 w-5" />
           </button>
           
-          {/* Streamlined Auth Links (Conditional) */}
-          <div className="hidden items-center gap-1 sm:flex">
+          {/* Account access — secondary to project CTA */}
+          <div className="hidden items-center sm:flex">
             {isLoggedIn ? (
               <Link
                 href="/dashboard"
-                className="px-4 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-sa-primary transition duration-300 hover:text-white"
+                className="px-3 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:text-sa-primary"
               >
                 Dashboard
               </Link>
             ) : (
-              <div className="flex items-center">
-                <Link
-                  href="/signin"
-                  className="px-2 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary"
-                >
-                  Sign In
-                </Link>
-                <span className="text-[10px] text-sa-muted/30 mx-0.5">/</span>
-                <Link
-                  href="/signup"
-                  className="px-2 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary"
-                >
-                  Sign Up
-                </Link>
-              </div>
+              <Link
+                href="/signin"
+                className="px-3 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:text-white"
+              >
+                Client login
+              </Link>
             )}
           </div>
 
           <Link
             href="/get-started"
-            className="hidden min-h-[42px] items-center rounded-xl border border-sa-border px-3.5 py-2.5 font-heading text-[11px] font-semibold uppercase tracking-[0.14em] text-white transition duration-300 hover:border-sa-primary hover:text-sa-primary sm:inline-flex"
+            className="hidden min-h-[42px] items-center rounded-xl border border-sa-primary bg-sa-primary px-4 py-2.5 font-heading text-[11px] font-semibold uppercase tracking-[0.14em] text-sa-bg transition duration-300 hover:bg-sa-primary/90 sm:inline-flex"
           >
             Get started
           </Link>
@@ -270,23 +261,23 @@ export function StartupAgencyNavbar() {
               <div className="flex gap-2">
                 <Link
                   href="/signin"
-                  className="flex-1 rounded-lg border border-sa-border px-3 py-3 text-center font-heading text-sm font-semibold uppercase tracking-[0.14em] text-white"
+                  className="flex-1 rounded-lg border border-sa-border px-3 py-3 text-center font-heading text-sm font-semibold uppercase tracking-[0.14em] text-sa-muted"
                   onClick={() => setMobileOpen(false)}
                 >
-                  Sign In
+                  Client login
                 </Link>
                 <Link
                   href="/signup"
                   className="flex-1 rounded-lg border border-sa-border px-3 py-3 text-center font-heading text-sm font-semibold uppercase tracking-[0.14em] text-white"
                   onClick={() => setMobileOpen(false)}
                 >
-                  Sign Up
+                  Sign up
                 </Link>
               </div>
             )}
             <Link
               href="/get-started"
-              className="rounded-lg border border-sa-border px-3 py-3 text-center font-heading text-sm font-semibold uppercase tracking-[0.14em] text-white"
+              className="rounded-lg border border-sa-primary bg-sa-primary px-3 py-3 text-center font-heading text-sm font-semibold uppercase tracking-[0.14em] text-sa-bg"
               onClick={() => setMobileOpen(false)}
             >
               Get started
