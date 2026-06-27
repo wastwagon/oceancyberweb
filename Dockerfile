@@ -18,7 +18,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Coolify/small VPS: parallel web+backend builds can OOM during `next build`
-ENV NODE_OPTIONS="--max-old-space-size=6144"
+ENV NODE_OPTIONS="--max-old-space-size=4096"
 
 ARG NEXT_PUBLIC_SITE_URL=http://localhost:3020
 ARG NEXT_PUBLIC_API_URL=http://localhost:4100

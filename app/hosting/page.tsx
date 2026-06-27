@@ -1,9 +1,9 @@
+"use client";
+
 import { motion, useReducedMotion } from "framer-motion";
 import { Server, Shield, Wrench, Check } from "lucide-react";
 import { HostingPackagesSection } from "@/components/hosting/HostingPackagesSection";
 import { HOSTING_TRUST_POINTS } from "@/lib/hosting-packages";
-import { withCanonical } from "@/lib/seo/canonical";
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
@@ -17,15 +17,6 @@ import {
 import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { serviceImages } from "@/lib/startup-agency/service-images";
-
-export const metadata: Metadata = withCanonical(
-  {
-    title: "cPanel & WHM hosting",
-    description:
-      "cPanel hosting in Ghana cedis on our Namecheap reseller + WHM stack—optional currency preview, Paystack checkout in GHS, local support from Accra.",
-  },
-  "/hosting",
-);
 
 export default function HostingPage({
   searchParams,

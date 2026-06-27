@@ -11,3 +11,14 @@ npm-debug.log*
 !.env.example
 mcps
 .cursor
+scripts
+*.pdf
+Invoice*
+Quotation*
+assets
+.DS_Store
+**/*.png
+!public/images/team/**
+!public/images/industries/**
+!public/images/creative-template.png
+!public/images/agency-about.png

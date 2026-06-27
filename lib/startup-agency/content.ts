@@ -53,27 +53,27 @@ export const aboutWorkPreview = [
   {
     title: "Financial Services Platform",
     category: "Web · Dashboard",
-    image: "/images/agency-bento/agency-bento-fintech-dashboard.png",
+    image: "/images/agency-bento/agency-bento-fintech-dashboard.webp",
   },
   {
     title: "Mobile Commerce Experience",
     category: "E‑commerce · iOS & Android",
-    image: "/images/agency-bento/agency-bento-mobile-commerce.png",
+    image: "/images/agency-bento/agency-bento-mobile-commerce.webp",
   },
   {
     title: "Brand & Design System",
     category: "UI/UX · Identity",
-    image: "/images/agency-bento/agency-bento-brand-system.png",
+    image: "/images/agency-bento/agency-bento-brand-system.webp",
   },
   {
     title: "Travel Booking Platform",
     category: "Web · Hospitality",
-    image: "/images/agency-bento/agency-bento-travel-platform.png",
+    image: "/images/agency-bento/agency-bento-travel-platform.webp",
   },
   {
     title: "Secure Enterprise Portal",
     category: "Cyber Security · Web",
-    image: "/images/agency-bento/agency-bento-cybersecurity-platform.png",
+    image: "/images/agency-bento/agency-bento-cybersecurity-platform.webp",
   },
 ] as const;
 
