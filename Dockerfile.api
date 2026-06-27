@@ -16,6 +16,20 @@ RUN npm run build:shared
 RUN npx prisma generate --schema=./prisma/schema.prisma
 RUN npm run build:api
 
+# Runtime deps only — avoid copying builder's full node_modules (Next.js + dev tooling).
+FROM node:20-bookworm-slim AS prod-deps
+RUN apt-get update && apt-get install -y openssl ca-certificates && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+
+COPY package.json package-lock.json* ./
+COPY packages/shared/package.json ./packages/shared/package.json
+COPY backend/package.json ./backend/package.json
+COPY prisma ./prisma
+
+RUN npm ci --omit=dev --workspace=@oceancyber/api \
+    && npm install --no-save prisma@5.22.0 tsx@4.19.4 \
+    && npx prisma generate --schema=./prisma/schema.prisma
+
 FROM node:20-bookworm-slim AS runner
 RUN apt-get update && apt-get install -y openssl ca-certificates curl && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
@@ -24,15 +38,24 @@ ENV NODE_ENV=production
 
 RUN groupadd --system --gid 1001 nodejs && useradd --system --uid 1001 --gid nodejs nestjs
 
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/packages/shared/package.json ./packages/shared/package.json
-COPY --from=builder /app/packages/shared/dist ./packages/shared/dist
-COPY --from=builder /app/backend/dist ./backend/dist
-COPY --from=builder /app/backend/package.json ./backend/package.json
-COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/package.json ./package.json
+COPY --from=prod-deps --chown=nestjs:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=nestjs:nodejs /app/packages/shared/package.json ./packages/shared/package.json
+COPY --from=builder --chown=nestjs:nodejs /app/packages/shared/dist ./packages/shared/dist
+COPY --from=builder --chown=nestjs:nodejs /app/backend/dist ./backend/dist
+COPY --from=builder --chown=nestjs:nodejs /app/backend/package.json ./backend/package.json
+COPY --from=builder --chown=nestjs:nodejs /app/prisma ./prisma
+COPY --from=builder --chown=nestjs:nodejs /app/package.json ./package.json
+# Root seed script (`tsx prisma/seed.ts`) imports lib/* and `@/*` path aliases from tsconfig.
+COPY --chown=nestjs:nodejs lib ./lib
+COPY --chown=nestjs:nodejs tsconfig.json ./tsconfig.json
 
-RUN chown -R nestjs:nodejs /app
+# Fail the image build if seed imports are missing (avoids unhealthy backend at deploy time).
+RUN npx tsx -e "\
+import { caseStudyDesignBySlug } from './lib/data/case-study-design';\
+import { PROJECT_TYPE_BY_SLUG } from './lib/portfolio/project-type';\
+if (!Object.keys(caseStudyDesignBySlug).length || !Object.keys(PROJECT_TYPE_BY_SLUG).length) throw new Error('seed static data empty');\
+console.log('seed imports ok');\
+"
 
 USER nestjs
 
@@ -40,6 +63,6 @@ EXPOSE 4000
 
 ENV BACKEND_PORT=4000
 
-# Seed runs here (not in `web`): API image has full node_modules + `tsx` for `prisma db seed`.
+# Seed runs here (not in `web`): API image has prisma + tsx for `prisma db seed`.
 # Set SKIP_PRISMA_SEED=true in Coolify to skip. `web` waits for backend health, so DB is seeded before traffic.
 CMD ["sh", "-c", "npx prisma migrate deploy && if [ \"$SKIP_PRISMA_SEED\" != \"true\" ]; then npx prisma db seed; fi && node backend/dist/main.js"]
