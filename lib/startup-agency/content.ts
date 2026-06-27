@@ -47,11 +47,32 @@ export const showreelSlides = [
   { src: "/images/Fitch Advisory.webp", caption: "Fitch Advisory" },
 ] as const;
 
-export const aboutTeamPreview = [
-  { name: "Marcus Owusu", role: "Founder & CEO", image: "/images/team/marcus.png" },
-  { name: "Sarah Mensah", role: "CTO", image: "/images/team/sarah.png" },
-  { name: "Kwame Nkrumah", role: "Head of Security", image: "/images/team/kwame.png" },
-  { name: "Ama Serwaa", role: "Creative Director", image: "/images/team/ama.png" },
+export const aboutWorkPreview = [
+  {
+    title: "Financial Services Platform",
+    category: "Web · Dashboard",
+    image: "/images/agency-bento/agency-bento-fintech-dashboard.png",
+  },
+  {
+    title: "Mobile Commerce Experience",
+    category: "E‑commerce · iOS & Android",
+    image: "/images/agency-bento/agency-bento-mobile-commerce.png",
+  },
+  {
+    title: "Brand & Design System",
+    category: "UI/UX · Identity",
+    image: "/images/agency-bento/agency-bento-brand-system.png",
+  },
+  {
+    title: "Travel Booking Platform",
+    category: "Web · Hospitality",
+    image: "/images/agency-bento/agency-bento-travel-platform.png",
+  },
+  {
+    title: "Secure Enterprise Portal",
+    category: "Cyber Security · Web",
+    image: "/images/agency-bento/agency-bento-cybersecurity-platform.png",
+  },
 ] as const;
 
 export const aboutStats = [
