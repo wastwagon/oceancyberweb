@@ -182,7 +182,7 @@ export function SaPortfolioGallerySection() {
             transition={{ duration: 0.2 }}
             role="dialog"
             aria-modal="true"
-            aria-label={activeProject.title}
+            aria-label={activeProject.category}
           >
             <button
               type="button"
@@ -214,7 +214,7 @@ export function SaPortfolioGallerySection() {
               <div className="relative aspect-[16/10] w-full md:aspect-[16/9]">
                 <Image
                   src={activeProject.image}
-                  alt={activeProject.title}
+                  alt={activeProject.category}
                   fill
                   className="bg-black object-contain"
                   sizes="(max-width: 1280px) 100vw, 1152px"
@@ -222,12 +222,10 @@ export function SaPortfolioGallerySection() {
                 />
               </div>
               <figcaption className="border-t border-sa-border px-5 py-4 md:px-6 md:py-5">
-                <p className="font-heading text-base font-bold text-white md:text-lg">
-                  {activeProject.title}
+                <p className="font-heading text-base font-bold uppercase tracking-widest text-sa-primary md:text-lg">
+                  {getProjectTypeLabel(resolveProjectType(activeProject))}
                 </p>
-                <p className="mt-1 text-xs font-bold uppercase tracking-widest text-sa-primary">
-                  {activeProject.category}
-                </p>
+                <p className="mt-1 text-sm text-white/80">{activeProject.category}</p>
               </figcaption>
             </motion.figure>
           </motion.div>
@@ -260,12 +258,12 @@ function PortfolioCard({
       <button
         type="button"
         onClick={onOpen}
-        aria-label={`View ${project.title}`}
+        aria-label={`View ${project.category} project`}
         className="block h-full w-full cursor-zoom-in text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sa-primary"
       >
         <Image
           src={project.image}
-          alt={project.title}
+          alt={project.category}
           fill
           className="object-cover brightness-105 saturate-110 transition duration-700 ease-out group-hover:scale-105"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -280,12 +278,9 @@ function PortfolioCard({
           </span>
         </div>
         <div className="absolute inset-x-0 bottom-0 z-10 p-6">
-          <p className="font-heading text-[10px] font-bold uppercase tracking-[0.2em] text-sa-primary">
+          <p className="font-heading text-lg font-bold uppercase tracking-wide text-white md:text-xl">
             {project.category}
           </p>
-          <h3 className="mt-2 font-heading text-xl font-bold text-white md:text-2xl">
-            {project.title}
-          </h3>
         </div>
       </button>
     </SaReveal>
