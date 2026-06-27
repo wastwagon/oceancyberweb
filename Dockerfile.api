@@ -46,8 +46,8 @@ if (!Object.keys(caseStudyDesignBySlug).length || !Object.keys(PROJECT_TYPE_BY_S
 console.log('seed imports ok');\
 "
 
-# Nest loads BillingModule at startup — verify shared paystack export resolves.
-RUN node -e "const s=require('@oceancyber/shared'); if(typeof s.verifyPaystackWebhookSignature!=='function') throw new Error('paystack export missing'); console.log('shared paystack ok');"
+# Nest loads BillingModule at startup — paystack stays off the main shared entry (Next.js).
+RUN node -e "const p=require('@oceancyber/shared/paystack'); if(typeof p.verifyPaystackWebhookSignature!=='function') throw new Error('paystack export missing'); console.log('shared paystack ok');"
 
 USER nestjs
 
