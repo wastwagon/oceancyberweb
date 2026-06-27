@@ -38,42 +38,62 @@ export function SaServicesSection() {
           </h2>
         </div>
 
-        <div className="border-t border-white/20">
+        <div className="space-y-6 md:space-y-8">
           {serviceCards.map((service, index) => {
             const Icon = getServiceIcon(service.title);
+            const imageFirst = index % 2 === 0;
 
             return (
               <SaReveal key={service.title} delay={index * 0.08}>
                 <Link
                   href={service.href}
-                  className="group grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-5 border-b border-white/20 px-4 py-8 transition-colors duration-300 hover:bg-white/[0.03] md:grid-cols-[minmax(0,240px)_176px_minmax(0,1fr)_auto] md:gap-x-8 md:px-8 md:py-10 lg:grid-cols-[minmax(0,280px)_192px_minmax(0,1fr)_auto] lg:gap-x-10"
+                  className="group grid overflow-hidden rounded-3xl border border-white/10 bg-sa-surface/30 transition-colors duration-300 hover:border-sa-primary/30 hover:bg-white/[0.03] md:min-h-[300px] md:grid-cols-2 lg:min-h-[340px]"
                 >
-                  <div className="col-start-1 row-start-1 flex min-w-0 items-center gap-5">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-sa-primary text-black transition-colors duration-300 group-hover:bg-white">
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <h3 className="font-heading text-lg font-bold uppercase tracking-wide text-white md:text-xl lg:text-2xl">
-                      {service.title}
-                    </h3>
-                  </div>
-
-                  <div className="col-start-2 row-start-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-black transition-colors duration-300 group-hover:bg-sa-primary md:col-start-4">
-                    <ArrowUpRight className="h-5 w-5" />
-                  </div>
-
-                  <div className="relative col-span-2 aspect-[16/10] overflow-hidden rounded-2xl border border-white/10 bg-sa-surface md:col-span-1 md:col-start-2 md:row-start-1 md:aspect-[4/3]">
+                  <div
+                    className={`relative aspect-[16/10] w-full md:aspect-auto md:min-h-[300px] lg:min-h-[340px] ${
+                      imageFirst ? "md:order-1" : "md:order-2"
+                    }`}
+                  >
                     <Image
                       src={service.image}
                       alt={service.title}
                       fill
-                      className="object-cover transition duration-700 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 192px"
+                      className="object-cover transition duration-700 group-hover:scale-[1.03]"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      priority={index < 2}
                     />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 transition group-hover:opacity-40" />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-black/10" />
                   </div>
 
-                  <div className="col-span-2 border-t border-white/10 pt-5 md:col-span-1 md:col-start-3 md:row-start-1 md:border-l md:border-t-0 md:py-2 md:pl-8 lg:pl-10">
-                    <p className="text-sm leading-relaxed text-sa-muted">{service.desc}</p>
+                  <div
+                    className={`flex flex-col justify-center gap-6 p-6 md:p-10 lg:p-12 ${
+                      imageFirst
+                        ? "md:border-l md:border-white/10"
+                        : "md:order-1 md:border-r md:border-white/10"
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex min-w-0 items-center gap-4">
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-sa-primary text-black transition-colors duration-300 group-hover:bg-white md:h-14 md:w-14">
+                          <Icon className="h-5 w-5 md:h-6 md:w-6" />
+                        </div>
+                        <h3 className="font-heading text-xl font-bold uppercase tracking-wide text-white md:text-2xl lg:text-3xl">
+                          {service.title}
+                        </h3>
+                      </div>
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition-colors duration-300 group-hover:border-sa-primary group-hover:bg-sa-primary group-hover:text-black">
+                        <ArrowUpRight className="h-5 w-5" />
+                      </div>
+                    </div>
+
+                    <p className="max-w-xl text-sm leading-relaxed text-sa-muted md:text-base">
+                      {service.desc}
+                    </p>
+
+                    <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-sa-primary transition group-hover:text-white">
+                      Explore service
+                      <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+                    </span>
                   </div>
                 </Link>
               </SaReveal>
