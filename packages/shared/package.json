@@ -12,6 +12,10 @@
     "./paystack": {
       "types": "./dist/paystack.d.ts",
       "default": "./dist/paystack.js"
+    },
+    "./dist/paystack": {
+      "types": "./dist/paystack.d.ts",
+      "default": "./dist/paystack.js"
     }
   },
   "scripts": {

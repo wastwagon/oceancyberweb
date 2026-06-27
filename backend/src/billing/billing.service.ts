@@ -8,7 +8,7 @@ import {
 } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { Cron, CronExpression } from "@nestjs/schedule";
-import { verifyPaystackWebhookSignature } from "@oceancyber/shared/paystack";
+import { verifyPaystackWebhookSignature } from "@oceancyber/shared";
 import { Prisma } from "@prisma/client";
 import { MailService } from "../mail/mail.service";
 import { PrismaService } from "../prisma/prisma.service";

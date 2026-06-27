@@ -2,6 +2,7 @@
 
 export { isAdminForUser } from "./admin";
 export { assertProductionSecrets } from "./secrets";
+export { verifyPaystackWebhookSignature } from "./paystack";
 export type { SecretEnv } from "./secrets";
 
 export const API_VERSION = "v1" as const;

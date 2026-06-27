@@ -47,7 +47,7 @@ console.log('seed imports ok');\
 "
 
 # Nest loads BillingModule at startup — verify shared paystack export resolves.
-RUN node -e "require('@oceancyber/shared/paystack'); console.log('shared paystack ok');"
+RUN node -e "const s=require('@oceancyber/shared'); if(typeof s.verifyPaystackWebhookSignature!=='function') throw new Error('paystack export missing'); console.log('shared paystack ok');"
 
 USER nestjs
 
