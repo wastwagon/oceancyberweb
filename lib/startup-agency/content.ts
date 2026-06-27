@@ -7,26 +7,26 @@ export const heroServiceSlides = [
   {
     title: "Web Development",
     href: "/services/web-development",
-    imageAlt: "Fitch Advisory web platform delivered by OceanCyber",
-    image: "/images/Fitch Advisory.webp",
+    imageAlt: "Premium web platform and dashboard interfaces built by OceanCyber",
+    image: "/images/hero-services/hero-web-development.png",
   },
   {
     title: "Mobile Apps",
     href: "/services/mobile-apps",
-    imageAlt: "Juelle Hair mobile commerce experience",
-    image: "/images/Juelle Hair.webp",
+    imageAlt: "Native iOS and Android app experiences designed by OceanCyber",
+    image: "/images/hero-services/hero-mobile-apps.png",
   },
   {
     title: "Cyber Security",
     href: "/services/cybersecurity",
-    imageAlt: "Fitch Attorneys secure legal platform",
-    image: "/images/Fitch Attorney.webp",
+    imageAlt: "Secure enterprise monitoring and protection systems by OceanCyber",
+    image: "/images/hero-services/hero-cyber-security.png",
   },
   {
     title: "E-Commerce",
     href: "/services/ecommerce",
-    imageAlt: "Tour World Tourism booking platform",
-    image: "/images/Tour World Tourism.webp",
+    imageAlt: "High-converting online storefront and checkout experiences by OceanCyber",
+    image: "/images/hero-services/hero-ecommerce.png",
   },
 ] as const;
 
