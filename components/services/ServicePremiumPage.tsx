@@ -2,7 +2,6 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Briefcase } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import {
   PremiumFinalCtaSection,
@@ -15,6 +14,7 @@ import {
   staggerDelay,
 } from "@/lib/scroll-reveal";
 import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
+import { ServicePageHeroBanner } from "@/components/services/ServicePageHeroBanner";
 
 export type ServiceCard = { title: string; description: string };
 
@@ -66,23 +66,11 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
     <main className="sa-shell relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
       <SaPageAmbient />
 
-      <section className="sa-section relative z-10 overflow-hidden border-b border-sa-border pt-28 md:pt-36">
+      <section className="relative z-10 min-h-[72vh] overflow-hidden border-b border-sa-border pt-28 md:min-h-[78vh] md:pt-36">
         {content.heroImage ? (
-          <>
-            <div className="pointer-events-none absolute inset-0 z-0">
-              <Image
-                src={content.heroImage}
-                alt=""
-                fill
-                className="object-cover opacity-35"
-                sizes="100vw"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-sa-bg/85 via-sa-bg/75 to-sa-bg" />
-            </div>
-          </>
+          <ServicePageHeroBanner image={content.heroImage} />
         ) : null}
-        <div className="sa-container relative z-10 text-center">
+        <div className="sa-container relative z-10 flex min-h-[calc(72vh-7rem)] flex-col items-center justify-center pb-16 text-center md:min-h-[calc(78vh-9rem)] md:pb-20">
           <motion.div
             initial="hidden"
             animate="visible"

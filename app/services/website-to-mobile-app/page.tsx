@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { ArrowRight, Smartphone } from "lucide-react";
 import { WebsiteToAppQuoteForm } from "@/components/services/WebsiteToAppQuoteForm";
+import { ServicePageHeroBanner } from "@/components/services/ServicePageHeroBanner";
 import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
+import { serviceImages } from "@/lib/startup-agency/service-images";
 
 function ConversionClipart() {
   return (
@@ -25,8 +27,9 @@ export default function WebsiteToMobileAppPage() {
   return (
     <main className="sa-shell relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
       <SaPageAmbient />
-      <section className="sa-section relative z-10 overflow-hidden border-b border-sa-border pt-28 md:pt-36">
-        <div className="sa-container relative z-10">
+      <section className="relative z-10 overflow-hidden border-b border-sa-border pt-28 md:pt-36">
+        <ServicePageHeroBanner image={serviceImages.mobileApps} />
+        <div className="sa-container relative z-10 pb-16 md:pb-20">
           <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
             <div className="sa-card p-8 md:p-10 border-sa-border">
               <span className="sa-eyebrow inline-flex items-center gap-2">
