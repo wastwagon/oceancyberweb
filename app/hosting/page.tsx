@@ -16,6 +16,7 @@ import {
 } from "@/lib/scroll-reveal";
 import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
+import { serviceImages } from "@/lib/startup-agency/service-images";
 
 export const metadata: Metadata = withCanonical(
   {
@@ -41,6 +42,17 @@ export default function HostingPage({
       <SaPageAmbient />
       {/* Hero */}
       <section className="sa-section relative z-10 overflow-hidden border-b border-sa-border pt-28 md:pt-36">
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <Image
+            src={serviceImages.cloudHosting}
+            alt=""
+            fill
+            className="object-cover opacity-35"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-sa-bg/85 via-sa-bg/75 to-sa-bg" />
+        </div>
         <div className="sa-container relative z-10 text-center">
           <motion.div
             initial="hidden"

@@ -12,6 +12,7 @@ import {
   staggerDelay,
 } from "@/lib/scroll-reveal";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
+import { serviceImages } from "@/lib/startup-agency/service-images";
 
 type ServiceCard = {
   title: string;
@@ -26,7 +27,7 @@ const services: ServiceCard[] = [
     title: "UI/UX & Brand Design",
     description:
       "Research, wireframes, and Figma prototypes — brand systems and interfaces that convert and hand off cleanly to engineering.",
-    image: "/images/creative-template.png",
+    image: serviceImages.uiUxBrand,
     services: [
       "Brand identity and visual language",
       "UX research and journey mapping",
@@ -38,7 +39,7 @@ const services: ServiceCard[] = [
     title: "Web Development",
     description:
       "Modern, high-performance websites and web products, with SEO, accessibility, and speed budgets built in from day one.",
-      image: "/images/Fitch Advisory.webp",
+      image: serviceImages.webDevelopment,
     services: [
       "Marketing and brand experiences",
       "Product dashboards and workflows",
@@ -50,7 +51,7 @@ const services: ServiceCard[] = [
     title: "Mobile Apps",
     description:
       "Cross-platform and native paths: offline-aware flows, push, and store-ready release discipline.",
-      image: "/images/EGP Ghana.webp",
+      image: serviceImages.mobileApps,
     services: [
       "iOS and Android delivery",
       "Performance and crash hygiene",
@@ -62,7 +63,7 @@ const services: ServiceCard[] = [
     title: "Website to Mobile App Conversion",
     description:
       "Bring your existing website, and we will convert it into an iOS- and Android-ready app with a structured quote and migration roadmap.",
-    image: "/images/EGP Ghana.webp",
+    image: serviceImages.mobileApps,
     services: [
       "Website architecture audit",
       "Mobile UX conversion plan",
@@ -74,7 +75,7 @@ const services: ServiceCard[] = [
     title: "E-Commerce",
     description:
       "Checkout trust, catalog accuracy, and operations tooling, from launch campaigns to steady-state ops.",
-      image: "/images/Juelle Hair.webp",
+      image: serviceImages.ecommerce,
     services: [
       "Shopify, WooCommerce, and custom",
       "Payments and reconciliation",
@@ -86,7 +87,7 @@ const services: ServiceCard[] = [
       title: "Cybersecurity",
     description:
       "Assessments, hardening, and readiness: practical controls, evidence, and response planning your teams can run.",
-      image: "/images/Fitch Attorney.webp",
+      image: serviceImages.cyberSecurity,
     services: [
       "Threat detection alignment",
       "Data protection and privacy",

@@ -4,6 +4,7 @@ import {
   ServicePremiumPage,
   type ServicePageContent,
 } from "@/components/services/ServicePremiumPage";
+import { serviceImages } from "@/lib/startup-agency/service-images";
 
 const content: ServicePageContent = {
   heroEyebrow: "Engineering",
@@ -15,6 +16,7 @@ const content: ServicePageContent = {
     "Fast, accessible marketing sites and robust web products, with performance budgets, SEO foundations, and maintainable systems your team can extend.",
   heroCtaLabel: "Talk to our team",
   heroCtaHref: "/contact",
+  heroImage: serviceImages.webDevelopment,
   pills: ["Next.js", "Performance", "Design systems"],
   focusEyebrow: "Product surfaces",
   focusTitle: "Sites and apps that feel as good as they measure",

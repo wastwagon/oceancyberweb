@@ -4,6 +4,7 @@ import {
   ServicePremiumPage,
   type ServicePageContent,
 } from "@/components/services/ServicePremiumPage";
+import { serviceImages } from "@/lib/startup-agency/service-images";
 
 const content: ServicePageContent = {
   heroEyebrow: "Mobile",
@@ -15,6 +16,7 @@ const content: ServicePageContent = {
     "Native-quality experiences on iOS and Android: offline-aware flows, push engagement, and release discipline your users feel.",
   heroCtaLabel: "Build your app",
   heroCtaHref: "/contact",
+  heroImage: serviceImages.mobileApps,
   pills: ["iOS", "Android", "Cross-platform"],
   focusEyebrow: "Experiences",
   focusTitle: "Apps people keep installed",

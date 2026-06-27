@@ -1,5 +1,7 @@
 /** Marketing homepage content — structure aligned with Start-Up Agency; copy tailored for OceanCyber. */
 
+import { serviceImages } from "./service-images";
+
 export const heroTagline =
   "We design and build digital products that help African businesses grow — from brand and UX to launch.";
 
@@ -8,25 +10,25 @@ export const heroServiceSlides = [
     title: "Web Development",
     href: "/services/web-development",
     imageAlt: "Premium web platform and dashboard interfaces built by OceanCyber",
-    image: "/images/hero-services/hero-web-development.png",
+    image: serviceImages.webDevelopment,
   },
   {
     title: "Mobile Apps",
     href: "/services/mobile-apps",
     imageAlt: "Native iOS and Android app experiences designed by OceanCyber",
-    image: "/images/hero-services/hero-mobile-apps.png",
+    image: serviceImages.mobileApps,
   },
   {
     title: "Cyber Security",
     href: "/services/cybersecurity",
     imageAlt: "Secure enterprise monitoring and protection systems by OceanCyber",
-    image: "/images/hero-services/hero-cyber-security.png",
+    image: serviceImages.cyberSecurity,
   },
   {
     title: "E-Commerce",
     href: "/services/ecommerce",
     imageAlt: "High-converting online storefront and checkout experiences by OceanCyber",
-    image: "/images/hero-services/hero-ecommerce.png",
+    image: serviceImages.ecommerce,
   },
 ] as const;
 
@@ -120,37 +122,37 @@ export const serviceCards = [
     title: "UI/UX & Brand",
     desc: "Human-centered interfaces and brand systems in Figma — wireframes, prototypes, and design handoff your engineers can ship.",
     href: "/services/ui-ux-design",
-    image: "/images/creative-template.png",
+    image: serviceImages.uiUxBrand,
   },
   {
     title: "Web Development",
     desc: "High-performance websites and web apps that convert visitors into customers — built for speed, SEO, and long-term growth.",
     href: "/services/web-development",
-    image: "/images/EGP Ghana.webp",
+    image: serviceImages.webDevelopment,
   },
   {
     title: "Mobile Apps",
     desc: "Native-quality iOS and Android experiences users enjoy — offline flows, MoMo payments, and store-ready releases.",
     href: "/services/mobile-apps",
-    image: "/images/Juelle Hair.webp",
+    image: serviceImages.mobileApps,
   },
   {
     title: "E‑commerce",
     desc: "Storefronts that handle real volume — catalog, checkout, MoMo, and ops tooling without breaking under pressure.",
     href: "/services/ecommerce",
-    image: "/images/Tour World Tourism.webp",
+    image: serviceImages.ecommerce,
   },
   {
     title: "Cyber Security",
     desc: "Find vulnerabilities before attackers do — audits, hardening, and monitoring that protect your reputation and revenue.",
     href: "/services/cybersecurity",
-    image: "/images/Fitch Attorney.webp",
+    image: serviceImages.cyberSecurity,
   },
   {
     title: "Cloud Hosting",
     desc: "Reliable infrastructure with local support — domains, SSL, and hosting that keeps your business online.",
     href: "/hosting",
-    image: "/images/Africa Trade Chamber.webp",
+    image: serviceImages.cloudHosting,
   },
 ] as const;
 

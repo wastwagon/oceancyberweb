@@ -4,6 +4,7 @@ import {
   ServicePremiumPage,
   type ServicePageContent,
 } from "@/components/services/ServicePremiumPage";
+import { serviceImages } from "@/lib/startup-agency/service-images";
 
 const content: ServicePageContent = {
   heroEyebrow: "Security practice",
@@ -15,6 +16,7 @@ const content: ServicePageContent = {
     "Protect digital assets with assessments, hardening, monitoring alignment, and response readiness: practical controls, not checkbox theater.",
   heroCtaLabel: "Secure your business",
   heroCtaHref: "/contact",
+  heroImage: serviceImages.cyberSecurity,
   pills: ["Threat detection", "Data protection", "Compliance"],
   focusEyebrow: "Coverage",
   focusTitle: "Defense across people, process, and systems",

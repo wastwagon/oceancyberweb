@@ -4,6 +4,7 @@ import {
   ServicePremiumPage,
   type ServicePageContent,
 } from "@/components/services/ServicePremiumPage";
+import { serviceImages } from "@/lib/startup-agency/service-images";
 
 const content: ServicePageContent = {
   heroEyebrow: "Commerce",
@@ -15,6 +16,7 @@ const content: ServicePageContent = {
     "Stores that convert: catalog modeling, checkout trust, payments, and operations tooling sized from launch to scale.",
   heroCtaLabel: "Launch your store",
   heroCtaHref: "/contact",
+  heroImage: serviceImages.ecommerce,
   pills: ["Checkout", "Payments", "Operations"],
   focusEyebrow: "Capabilities",
   focusTitle: "Commerce that holds up on launch day and year two",

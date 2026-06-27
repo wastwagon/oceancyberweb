@@ -4,6 +4,7 @@ import {
   ServicePremiumPage,
   type ServicePageContent,
 } from "@/components/services/ServicePremiumPage";
+import { serviceImages } from "@/lib/startup-agency/service-images";
 
 const content: ServicePageContent = {
   heroEyebrow: "Design",
@@ -15,6 +16,7 @@ const content: ServicePageContent = {
     "Interfaces and brand systems that convert — researched with real users, prototyped in Figma, and handed off ready for engineering.",
   heroCtaLabel: "Book a design discovery call",
   heroCtaHref: "/contact?topic=UI%2FUX%20design",
+  heroImage: serviceImages.uiUxBrand,
   pills: ["Figma", "Design systems", "User research"],
   focusEyebrow: "Experience design",
   focusTitle: "Design that earns trust before the first click",
