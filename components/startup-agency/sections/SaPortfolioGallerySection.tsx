@@ -1,9 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
-import { X, ZoomIn } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowUpRight, X, ZoomIn } from "lucide-react";
 import Image from "next/image";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
 import {
@@ -19,8 +19,16 @@ import {
   resolveProjectType,
 } from "@/lib/portfolio/project-type";
 
+const BENTO_LAYOUT = [
+  "md:col-span-2 md:row-span-2 md:min-h-[420px] lg:min-h-[520px]",
+  "aspect-[16/10] md:aspect-auto md:min-h-[200px] lg:min-h-[248px]",
+  "aspect-[16/10] md:aspect-auto md:min-h-[200px] lg:min-h-[248px]",
+  "aspect-[4/3] md:aspect-auto md:min-h-[220px] lg:min-h-[248px]",
+  "aspect-[4/3] md:aspect-auto md:min-h-[220px] lg:min-h-[248px]",
+  "aspect-[4/3] md:aspect-auto md:min-h-[220px] lg:min-h-[248px]",
+] as const;
+
 export function SaPortfolioGallerySection() {
-  const sectionRef = useRef<HTMLElement>(null);
   const [dynamicProjects, setDynamicProjects] = useState<PortfolioCaseStudy[]>([]);
   const [workType, setWorkType] = useState<WorkTypeFilter>("All");
   const [activeProject, setActiveProject] = useState<PortfolioCaseStudy | null>(null);
@@ -42,11 +50,6 @@ export function SaPortfolioGallerySection() {
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [activeProject, closeLightbox]);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
 
   useEffect(() => {
     async function load() {
@@ -94,83 +97,80 @@ export function SaPortfolioGallerySection() {
       .slice(0, 6);
   }, [allProjects, workType]);
 
-  const xLeft = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const xRight = useTransform(scrollYProgress, [0, 1], [-100, 100]);
-
   return (
     <section
       id="projects"
-      ref={sectionRef}
-      className="relative overflow-hidden border-b border-sa-border bg-sa-bg py-10 lg:py-20"
+      className="relative overflow-hidden border-b border-sa-border bg-sa-bg py-24 md:py-32"
     >
-      <div className="sa-container relative z-20 mb-8">
-        <PortfolioWorkTypeChips value={workType} onChange={setWorkType} />
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-          <p className="text-xs text-sa-muted/70">
-            {filteredProjects.length} project{filteredProjects.length === 1 ? "" : "s"} shown
-          </p>
-          <Link
-            href={workType === "All" ? "/portfolio" : `/portfolio?type=${workType}`}
-            className="text-xs font-bold uppercase tracking-widest text-sa-primary hover:text-white"
-          >
-            View full portfolio →
-          </Link>
-        </div>
-      </div>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-32 top-20 h-72 w-72 rounded-full bg-sa-primary/10 blur-[100px]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-24 bottom-10 h-64 w-64 rounded-full bg-cyan-500/10 blur-[90px]"
+      />
 
-      {filteredProjects.length === 0 ? (
-        <div className="sa-container py-16 text-center text-sm text-sa-muted">
-          No projects in this category yet.{" "}
-          <button
-            type="button"
-            className="font-bold text-sa-primary underline"
-            onClick={() => setWorkType("All")}
-          >
-            Show all
-          </button>
-        </div>
-      ) : (
-        <>
-          <div className="pointer-events-none absolute left-1/2 top-1/2 z-50 hidden -translate-x-1/2 -translate-y-1/2 lg:block">
-            <div className="flex h-24 w-24 items-center justify-center rounded-full bg-white shadow-2xl">
-              <span className="font-heading text-[10px] font-bold uppercase tracking-[0.2em] text-black">
-                Projects
-              </span>
+      <div className="sa-container relative z-10">
+        <div className="mb-12 flex flex-col items-center md:mb-16">
+          <div className="mb-8 flex w-full max-w-4xl items-center">
+            <div className="h-px flex-1 bg-white/20" />
+            <div className="mx-6 flex items-center gap-2 rounded-full border border-white/20 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white">
+              <span className="h-1.5 w-1.5 rounded-full bg-sa-primary" />
+              Portfolio
             </div>
+            <div className="h-px flex-1 bg-white/20" />
           </div>
+          <h2 className="max-w-3xl text-center font-heading text-4xl font-bold uppercase tracking-widest text-white md:text-5xl lg:text-6xl">
+            Selected Work
+          </h2>
+          <p className="mt-5 max-w-2xl text-center text-sm leading-relaxed text-sa-muted md:text-base">
+            A curated look at the interfaces, brands, and digital products we craft for ambitious teams.
+          </p>
+        </div>
 
-          <div className="flex w-full flex-col gap-0 overflow-hidden">
-            <motion.div
-              style={{ x: xLeft }}
-              className="-ml-[10%] grid w-[120%] grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+        <div className="mb-10">
+          <PortfolioWorkTypeChips value={workType} onChange={setWorkType} />
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+            <p className="text-xs text-sa-muted/70">
+              {filteredProjects.length} project{filteredProjects.length === 1 ? "" : "s"} shown
+            </p>
+            <Link
+              href={workType === "All" ? "/portfolio" : `/portfolio?type=${workType}`}
+              className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-sa-primary transition hover:text-white"
             >
-              {filteredProjects.slice(0, 3).map((project, index) => (
-                <PortfolioCard
-                  key={project.slug}
-                  project={project}
-                  index={index}
-                  onOpen={() => setActiveProject(project)}
-                />
-              ))}
-            </motion.div>
-
-            <motion.div
-              style={{ x: xRight }}
-              className="-ml-[10%] grid w-[120%] grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-            >
-              {filteredProjects.slice(3, 6).map((project, index) => (
-                <PortfolioCard
-                  key={project.slug}
-                  project={project}
-                  index={index + 3}
-                  isHighlight={index === 1}
-                  onOpen={() => setActiveProject(project)}
-                />
-              ))}
-            </motion.div>
+              View full portfolio
+              <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+            </Link>
           </div>
-        </>
-      )}
+        </div>
+
+        {filteredProjects.length === 0 ? (
+          <div className="py-16 text-center text-sm text-sa-muted">
+            No projects in this category yet.{" "}
+            <button
+              type="button"
+              className="font-bold text-sa-primary underline"
+              onClick={() => setWorkType("All")}
+            >
+              Show all
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-3 md:grid-rows-[auto_auto_auto] md:gap-4">
+            {filteredProjects.map((project, index) => (
+              <PortfolioCard
+                key={project.slug}
+                project={project}
+                index={index}
+                layoutClass={BENTO_LAYOUT[index] ?? BENTO_LAYOUT[5]}
+                featured={index === 0}
+                onOpen={() => setActiveProject(project)}
+              />
+            ))}
+          </div>
+        )}
+      </div>
 
       <AnimatePresence>
         {activeProject ? (
@@ -238,49 +238,76 @@ export function SaPortfolioGallerySection() {
 function PortfolioCard({
   project,
   index,
-  isHighlight,
+  layoutClass,
+  featured,
   onOpen,
 }: {
   project: PortfolioCaseStudy;
   index: number;
-  isHighlight?: boolean;
+  layoutClass: string;
+  featured?: boolean;
   onOpen: () => void;
 }) {
   const type = resolveProjectType(project);
+  const indexLabel = String(index + 1).padStart(2, "0");
 
   return (
-    <SaReveal
-      delay={index * 0.05}
-      className={`group relative h-[320px] overflow-hidden border-sa-border transition-all duration-500 hover:z-10 md:h-[400px] ${
-        isHighlight ? "ring-1 ring-inset ring-sa-primary/30" : ""
-      }`}
-    >
+    <SaReveal delay={index * 0.06} className={layoutClass}>
       <button
         type="button"
         onClick={onOpen}
         aria-label={`View ${project.category} project`}
-        className="block h-full w-full cursor-zoom-in text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sa-primary"
+        className={`group relative flex h-full min-h-[280px] w-full cursor-zoom-in overflow-hidden rounded-3xl border border-white/10 bg-sa-surface text-left transition duration-500 hover:border-sa-primary/40 hover:shadow-[0_0_40px_-12px_rgba(0,255,200,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sa-primary ${
+          featured ? "min-h-[360px]" : ""
+        }`}
       >
         <Image
           src={project.image}
           alt={project.category}
           fill
-          className="object-cover brightness-105 saturate-110 transition duration-700 ease-out group-hover:scale-105"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover brightness-105 saturate-110 transition duration-700 ease-out group-hover:scale-[1.04]"
+          sizes={
+            featured
+              ? "(max-width: 768px) 100vw, 66vw"
+              : "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          }
+          priority={featured}
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
-        <div className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-black/40 text-white opacity-0 backdrop-blur-sm transition group-hover:opacity-100">
+
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/5 transition duration-500 group-hover:from-black/70" />
+
+        <span
+          className={`absolute left-5 top-5 font-heading font-bold text-white/15 transition group-hover:text-white/25 ${
+            featured ? "text-4xl md:text-5xl" : "text-2xl md:text-3xl"
+          }`}
+        >
+          {indexLabel}
+        </span>
+
+        <div className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/50 text-white opacity-0 backdrop-blur-sm transition duration-300 group-hover:opacity-100">
           <ZoomIn className="h-4 w-4" aria-hidden />
         </div>
-        <div className="absolute left-4 top-4 z-10">
-          <span className="rounded-full border border-sa-primary/50 bg-black/60 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-widest text-sa-primary backdrop-blur-sm">
+
+        <div className="absolute inset-x-0 bottom-0 z-10 p-5 md:p-6">
+          <span className="mb-2 inline-block rounded-full border border-sa-primary/50 bg-black/60 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-sa-primary backdrop-blur-sm">
             {getProjectTypeLabel(type)}
           </span>
-        </div>
-        <div className="absolute inset-x-0 bottom-0 z-10 p-6">
-          <p className="font-heading text-lg font-bold uppercase tracking-wide text-white md:text-xl">
+          <p
+            className={`font-heading font-bold uppercase tracking-wide text-white ${
+              featured ? "text-xl md:text-2xl lg:text-3xl" : "text-base md:text-lg"
+            }`}
+          >
             {project.category}
           </p>
+          {featured ? (
+            <p className="mt-2 max-w-md text-sm leading-relaxed text-white/70 line-clamp-2">
+              {project.description}
+            </p>
+          ) : null}
+          <span className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-sa-primary opacity-0 transition duration-300 group-hover:opacity-100">
+            View project
+            <ArrowUpRight className="h-3 w-3" aria-hidden />
+          </span>
         </div>
       </button>
     </SaReveal>
