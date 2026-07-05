@@ -20,6 +20,9 @@ export const googleBusinessProfile = {
   },
 } as const;
 
+const mapsProfileUrl =
+  "https://maps.app.goo.gl/yWiB5pNhev2rgZSx7";
+
 const mapsSearchFallback =
   "https://www.google.com/maps/search/?api=1&query=" +
   encodeURIComponent(
@@ -28,7 +31,7 @@ const mapsSearchFallback =
 
 /** Profile / reviews page — override in Coolify with Share link from Google Business Profile. */
 export function getGoogleBusinessProfileUrl(): string {
-  return process.env.NEXT_PUBLIC_GOOGLE_REVIEWS_URL?.trim() || mapsSearchFallback;
+  return process.env.NEXT_PUBLIC_GOOGLE_REVIEWS_URL?.trim() || mapsProfileUrl || mapsSearchFallback;
 }
 
 /** Direct “Write a review” link when Place ID is configured. */
@@ -44,9 +47,10 @@ export function formatGoogleRatingLabel(): string {
   return `${googleBusinessProfile.rating.toFixed(1)}`;
 }
 
-export function formatGoogleReviewCountLabel(): string {
-  const n = googleBusinessProfile.reviewCount;
-  return `${n} Google review${n === 1 ? "" : "s"}`;
+export function formatGoogleReviewCountLabel(
+  count: number = googleBusinessProfile.reviewCount,
+): string {
+  return `${count} Google review${count === 1 ? "" : "s"}`;
 }
 
 /**

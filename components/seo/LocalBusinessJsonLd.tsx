@@ -2,12 +2,15 @@ import {
   getGoogleBusinessProfileUrl,
   googleBusinessProfile,
 } from "@/lib/startup-agency/google-business";
+import { getGooglePlaceStats } from "@/lib/google-places-stats";
 
 const site =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
   "https://oceancyber.net";
 
-export function LocalBusinessJsonLd() {
+export async function LocalBusinessJsonLd() {
+  const stats = await getGooglePlaceStats();
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
@@ -31,8 +34,8 @@ export function LocalBusinessJsonLd() {
     },
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: googleBusinessProfile.rating,
-      reviewCount: googleBusinessProfile.reviewCount,
+      ratingValue: stats.rating,
+      reviewCount: stats.reviewCount,
       bestRating: 5,
       worstRating: 1,
     },
