@@ -173,11 +173,34 @@ export class BillingService {
         status: true,
         message: true,
         metadata: true,
+        notes: true,
         createdAt: true,
         updatedAt: true,
       },
     });
-    return rows;
+    return rows.map((row) => ({
+      id: row.id,
+      source: row.source,
+      status: row.status,
+      message: row.message,
+      metadata: row.metadata,
+      linkedProjectId: this.linkedProjectIdFromContact(row.notes, row.metadata),
+      createdAt: row.createdAt,
+      updatedAt: row.updatedAt,
+    }));
+  }
+
+  private linkedProjectIdFromContact(
+    notes: string | null,
+    metadata: unknown,
+  ): string | null {
+    if (metadata && typeof metadata === "object" && metadata !== null) {
+      const maybe = (metadata as { linkedProjectId?: unknown }).linkedProjectId;
+      if (typeof maybe === "string" && maybe.trim()) return maybe.trim();
+    }
+    if (!notes) return null;
+    const match = /Linked project:\s*([a-z0-9]+)/i.exec(notes);
+    return match?.[1] ?? null;
   }
 
   async getTransactionReceipt(user: SafeUser, transactionId: string) {

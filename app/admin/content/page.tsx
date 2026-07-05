@@ -20,6 +20,7 @@ import {
 } from "@/lib/auth-client";
 import { defaultNavigationConfig } from "@/lib/navigation/menu";
 import { ProjectDesignFields } from "@/components/admin/ProjectDesignFields";
+import { AdminNav } from "@/components/admin/AdminNav";
 import { ClientLogoManager } from "@/components/admin/ClientLogoManager";
 import { MediaUploadField } from "@/components/admin/MediaUploadField";
 import {
@@ -519,6 +520,8 @@ export default function AdminContentPage() {
             </button>
           </div>
         </header>
+
+        <AdminNav />
 
         {err ? <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">{err}</div> : null}
 

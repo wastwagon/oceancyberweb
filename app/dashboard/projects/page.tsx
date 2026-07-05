@@ -75,6 +75,16 @@ export default function DashboardProjectsPage() {
     load();
   }, []);
 
+  useEffect(() => {
+    if (loading || rows.length === 0 || typeof window === "undefined") return;
+    const hash = window.location.hash.replace(/^#/, "");
+    if (!hash.startsWith("project-")) return;
+    const el = document.getElementById(hash);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [loading, rows]);
+
   const totals = useMemo(() => {
     const total = rows.length;
     const active = rows.filter((r) => ["active", "in_review", "ready_for_launch"].includes(r.status)).length;
@@ -149,7 +159,11 @@ export default function DashboardProjectsPage() {
         ) : null}
 
         {rows.map((project) => (
-          <section key={project.id} className="sa-card p-6 border-sa-border md:p-8">
+          <section
+            key={project.id}
+            id={`project-${project.id}`}
+            className="scroll-mt-28 sa-card p-6 border-sa-border md:p-8"
+          >
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
                 <h2 className="font-heading text-xl font-bold text-white">{project.title}</h2>

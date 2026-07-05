@@ -499,13 +499,36 @@ export class AdminService {
     };
   }
 
-  async updateContact(id: string, data: { status?: string; notes?: string }) {
-    const patch: { status?: string; notes?: string } = {};
+  async updateContact(
+    id: string,
+    data: { status?: string; notes?: string; linkedProjectId?: string },
+  ) {
+    const patch: {
+      status?: string;
+      notes?: string;
+      metadata?: Prisma.InputJsonValue;
+    } = {};
     if (data.status != null) {
       patch.status = data.status;
     }
     if (data.notes !== undefined) {
       patch.notes = data.notes;
+    }
+    if (data.linkedProjectId !== undefined) {
+      const existing = await this.prisma.contact.findUnique({
+        where: { id },
+        select: { metadata: true },
+      });
+      const prev =
+        existing?.metadata &&
+        typeof existing.metadata === "object" &&
+        existing.metadata !== null
+          ? (existing.metadata as Record<string, unknown>)
+          : {};
+      patch.metadata = {
+        ...prev,
+        linkedProjectId: data.linkedProjectId,
+      } as Prisma.InputJsonValue;
     }
     return this.prisma.contact.update({
       where: { id },

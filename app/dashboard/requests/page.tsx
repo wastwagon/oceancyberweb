@@ -147,9 +147,13 @@ export default function ClientRequestsPage() {
                               </span>
                             </p>
                           ) : null}
-                          {r.status === "won" ? (
+                          {r.linkedProjectId || r.status === "won" ? (
                             <Link
-                              href="/dashboard/projects"
+                              href={
+                                r.linkedProjectId
+                                  ? `/dashboard/projects#project-${r.linkedProjectId}`
+                                  : "/dashboard/projects"
+                              }
                               className="mt-2 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-sa-primary hover:underline underline-offset-4"
                             >
                               View project →

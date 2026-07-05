@@ -30,6 +30,8 @@ import { cn } from "@/lib/utils";
 // Components
 import { AdminStatGrid } from "@/components/admin/AdminStatGrid";
 import { AdminOpsPanels } from "@/components/admin/AdminOpsPanels";
+import { AdminHelpCenterPanel } from "@/components/admin/AdminHelpCenterPanel";
+import { AdminNav } from "@/components/admin/AdminNav";
 import { ProjectCard } from "@/components/admin/ProjectCard";
 import { LeadPipeline } from "@/components/admin/LeadPipeline";
 import { UserRegistry } from "@/components/admin/UserRegistry";
@@ -363,6 +365,8 @@ export default function AdminPage() {
           </motion.div>
         </header>
 
+        <AdminNav />
+
         {leadLoading && !summary ? <AdminSkeleton /> : null}
 
         {summary ? (
@@ -486,7 +490,23 @@ export default function AdminPage() {
               LEAD_FILTER_PRESETS={LEAD_FILTER_PRESETS}
             />
 
-            <UserRegistry users={users} />
+            <AdminHelpCenterPanel
+              all={helpFeedback}
+              last7d={helpFeedback7d}
+              last30d={helpFeedback30d}
+              articleLabels={HELP_ARTICLE_LABELS}
+            />
+
+            <UserRegistry
+              users={users}
+              onViewProjects={(userEmail) => {
+                setProjectSearch(userEmail);
+                document.getElementById("admin-client-projects")?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }}
+            />
           </div>
         ) : null}
       </div>

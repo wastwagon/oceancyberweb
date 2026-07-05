@@ -137,7 +137,14 @@ export function LeadPipeline({
   LEAD_FILTER_PRESETS
 }: LeadPipelineProps) {
   
-  const linkedProjectIdFromNotes = (notes: string | null): string | null => {
+  const linkedProjectIdFromContact = (
+    notes: string | null,
+    metadata: unknown,
+  ): string | null => {
+    if (metadata && typeof metadata === "object" && metadata !== null) {
+      const maybe = (metadata as { linkedProjectId?: unknown }).linkedProjectId;
+      if (typeof maybe === "string" && maybe.trim()) return maybe.trim();
+    }
     if (!notes) return null;
     const m = /Linked project:\s*([a-z0-9]+)/i.exec(notes);
     return m?.[1] ?? null;
@@ -255,7 +262,7 @@ export function LeadPipeline({
                 <tbody className="divide-y divide-sa-border/20">
                    {contacts.map((c) => {
                       const midGhs = projectCalcMidGhs(c.metadata);
-                      const linkedProjectId = linkedProjectIdFromNotes(c.notes);
+                      const linkedProjectId = linkedProjectIdFromContact(c.notes, c.metadata);
                       
                       return (
                         <tr key={c.id} className="group hover:bg-sa-surface/10 transition-colors">
@@ -329,7 +336,11 @@ export function LeadPipeline({
                                                totalAmountGhs: Number(amount),
                                                kickoffPercent: 30, buildPercent: 30, launchPercent: 40
                                             });
-                                            await patchAdminContact(c.id, { notes: `${c.notes || ""}\nLinked project: ${created.id}`.trim() });
+                                            await patchAdminContact(c.id, {
+                                              status: "won",
+                                              linkedProjectId: created.id,
+                                              notes: `${c.notes || ""}\nLinked project: ${created.id}`.trim(),
+                                            });
                                             setToast({ kind: "success", text: "Deployment initiated." });
                                             await load();
                                          } catch (x) {

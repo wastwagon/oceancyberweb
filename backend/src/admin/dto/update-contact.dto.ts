@@ -12,4 +12,10 @@ export class UpdateContactDto {
   @IsString()
   @MaxLength(20_000)
   notes?: string;
+
+  /** Merged into contact metadata when a lead is linked to a client project. */
+  @IsOptional()
+  @IsString()
+  @MaxLength(64)
+  linkedProjectId?: string;
 }

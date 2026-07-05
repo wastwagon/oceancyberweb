@@ -118,12 +118,19 @@ export class AdminController {
 
   @Patch("contacts/:id")
   updateContact(@Param("id") id: string, @Body() body: UpdateContactDto) {
-    if (body.status == null && body.notes === undefined) {
-      throw new BadRequestException("Provide at least one of: status, notes");
+    if (
+      body.status == null &&
+      body.notes === undefined &&
+      body.linkedProjectId === undefined
+    ) {
+      throw new BadRequestException(
+        "Provide at least one of: status, notes, linkedProjectId",
+      );
     }
     return this.admin.updateContact(id, {
       status: body.status,
       notes: body.notes,
+      linkedProjectId: body.linkedProjectId,
     });
   }
 

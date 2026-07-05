@@ -30,6 +30,7 @@ export type ClientRequestRow = {
   status: string;
   message: string;
   metadata: unknown;
+  linkedProjectId?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -323,7 +324,7 @@ export async function listClientRequests(take = 50) {
 
 export async function patchAdminContact(
   id: string,
-  body: { status?: string; notes?: string },
+  body: { status?: string; notes?: string; linkedProjectId?: string },
 ) {
   return authRequest<AdminContactRow>(`/api/v1/admin/contacts/${encodeURIComponent(id)}`, {
     method: "PATCH",

@@ -24,13 +24,16 @@ import {
   createRenewal,
   getBillingDashboard,
   getProfile,
+  listMyProjects,
   listRenewalPlans,
   pauseRenewal,
   resumeRenewal,
   signOut,
+  type ClientProjectRow,
 } from "@/lib/auth-client";
 // Components
 import { DashboardNav } from "@/components/dashboard/DashboardNav";
+import { ProjectOverviewCard } from "@/components/dashboard/ProjectOverviewCard";
 import { WalletHero } from "@/components/dashboard/WalletHero";
 import { SubscriptionNode } from "@/components/dashboard/SubscriptionNode";
 import { ActivityHub } from "@/components/dashboard/ActivityHub";
@@ -64,6 +67,7 @@ export default function DashboardPage() {
   const [autoRenewUsingWallet, setAutoRenewUsingWallet] = useState(true);
   const [creating, setCreating] = useState(false);
   const [busyId, setBusyId] = useState<string | null>(null);
+  const [projects, setProjects] = useState<ClientProjectRow[]>([]);
 
   async function load() {
     setLoading(true);
@@ -78,6 +82,11 @@ export default function DashboardPage() {
       setData(dashboard);
       setPlans(availablePlans);
       setSelectedPlanCode((prev) => prev || availablePlans[0]?.code || "");
+      try {
+        setProjects(await listMyProjects());
+      } catch {
+        setProjects([]);
+      }
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Could not load dashboard");
     } finally {
@@ -244,6 +253,8 @@ export default function DashboardPage() {
                  </div>
               </motion.div>
             </section>
+
+            <ProjectOverviewCard projects={projects} />
 
             {/* Quick Actions Card */}
             <motion.section variants={itemVariants} className="sa-card group relative overflow-hidden bg-gradient-to-r from-sa-surface/50 to-transparent p-1">
