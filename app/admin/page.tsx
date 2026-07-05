@@ -142,7 +142,7 @@ export default function AdminPage() {
     }
     setEmail(p.email);
     try {
-      const [a, b, c, d, e, f, g, h, i] = await Promise.all([
+      const [a, b, c, d, e, f, g, h] = await Promise.all([
         getAdminSummary(),
         getAdminUsers(40),
         getAdminTransactions(50),
@@ -157,7 +157,6 @@ export default function AdminPage() {
         getAdminHelpCenterFeedbackSummary({ dateRange: leadDateRange }),
         getAdminHelpCenterFeedbackSummary({ dateRange: "7d" }),
         getAdminHelpCenterFeedbackSummary({ dateRange: "30d" }),
-        listAdminClientProjects(),
       ]);
       setSummary(a);
       setUsers(b);
@@ -167,12 +166,32 @@ export default function AdminPage() {
       setHelpFeedback(f);
       setHelpFeedback7d(g);
       setHelpFeedback30d(h);
-      setAdminProjects(i);
-      const counts = await getAdminContactPresetCounts({
-        q: leadSearchDebounced,
-        dateRange: leadDateRange,
+      try {
+        setAdminProjects(await listAdminClientProjects());
+      } catch (projectsErr: unknown) {
+        setAdminProjects([]);
+        setToast({
+          kind: "error",
+          text:
+            projectsErr instanceof Error
+              ? projectsErr.message
+              : "Could not load client projects.",
+        });
+      }
+      try {
+        const counts = await getAdminContactPresetCounts({
+          q: leadSearchDebounced,
+          dateRange: leadDateRange,
+        });
+        setPresetCounts(counts);
+      } catch {
+        // preset counts are optional; leads still render
+      }
+    } catch (loadErr: unknown) {
+      setToast({
+        kind: "error",
+        text: loadErr instanceof Error ? loadErr.message : "Failed to load admin data.",
       });
-      setPresetCounts(counts);
     } finally {
       setLeadLoading(false);
     }
