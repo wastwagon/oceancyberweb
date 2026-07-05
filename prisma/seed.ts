@@ -210,6 +210,7 @@ async function seedNavigationConfig() {
       ${dropdownMenuIds.industries},
       ${dropdownMenuIds.infrastructure},
       ${dropdownMenuIds.resources},
+      ${dropdownMenuIds.support},
       ${dropdownMenuIds.company}
     )
   `;

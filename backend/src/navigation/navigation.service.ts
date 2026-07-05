@@ -60,21 +60,27 @@ const DEFAULT_CONFIG = {
       href: "/insights",
       label: "Resources",
       dropdownKey: "resources",
+      activeMatch: ["/insights", "/case-studies", "/design-process", "/security-journey"],
+    },
+    {
+      href: "/help-center",
+      label: "Support",
+      dropdownKey: "support",
       activeMatch: [
-        "/insights",
-        "/case-studies",
-        "/security-journey",
         "/help-center",
-        "/design-process",
+        "/contact",
+        "/reviews",
+        "/tools/project-cost",
         "/domains",
         "/hosting",
+        "/get-started",
       ],
     },
     {
       href: "/about",
       label: "Company",
       dropdownKey: "company",
-      activeMatch: ["/about", "/portfolio", "/contact"],
+      activeMatch: ["/about", "/team", "/portfolio", "/pricing", "/projects"],
     },
   ],
   mainHeaderDropdownContent: {
@@ -151,9 +157,9 @@ const DEFAULT_CONFIG = {
       ],
     },
     resources: {
-      title: "Insights and guidance",
+      title: "Resources",
       description:
-        "Planning playbooks, delivery stories, and practical security guidance.",
+        "Guides, delivery stories, and practical playbooks for your team.",
       items: [
         {
           heading: "Insights",
@@ -162,26 +168,48 @@ const DEFAULT_CONFIG = {
           link: "/insights",
         },
         {
+          heading: "Case studies",
+          description: "Delivery outcomes across sectors in Ghana and beyond.",
+          link: "/case-studies",
+        },
+        {
           heading: "Design process",
           description:
             "How we research, prototype in Figma, and hand off to engineering.",
           link: "/design-process",
         },
         {
-          heading: "Case studies",
-          description: "Delivery outcomes across sectors in Ghana and beyond.",
-          link: "/case-studies",
-        },
-        {
           heading: "Security journey",
           description: "A practical path to strengthen your security posture.",
           link: "/security-journey",
         },
+      ],
+    },
+    support: {
+      title: "Support",
+      description:
+        "Get help, read reviews, estimate projects, and launch with confidence.",
+      items: [
+        {
+          heading: "Google Reviews",
+          description: "Verified client ratings and recent feedback from Google.",
+          link: "/reviews",
+        },
         {
           heading: "Help center",
           description:
-            "Answers to common questions about onboarding and support.",
+            "Answers to common questions about onboarding and delivery.",
           link: "/help-center",
+        },
+        {
+          heading: "Contact",
+          description: "Talk to our team about your project or requirements.",
+          link: "/contact",
+        },
+        {
+          heading: "Project calculator",
+          description: "Estimate scope and investment for your next build.",
+          link: "/tools/project-cost",
         },
         {
           heading: "Domains & SSL",
@@ -194,6 +222,11 @@ const DEFAULT_CONFIG = {
           description:
             "Launch cPanel and WHM hosting plans with local support.",
           link: "/hosting",
+        },
+        {
+          heading: "Get started",
+          description: "Begin your project intake and next steps with our team.",
+          link: "/get-started",
         },
       ],
     },
@@ -219,7 +252,7 @@ const DEFAULT_CONFIG = {
     company: {
       title: "Company",
       description:
-        "See our work, learn about our team, and contact us directly.",
+        "Who we are, the work we ship, and how we partner with clients.",
       items: [
         {
           heading: "About",
@@ -227,14 +260,19 @@ const DEFAULT_CONFIG = {
           link: "/about",
         },
         {
+          heading: "Team",
+          description: "Meet the people behind design, engineering, and delivery.",
+          link: "/team",
+        },
+        {
           heading: "Portfolio",
           description: "Delivery examples across sectors and product types.",
           link: "/portfolio",
         },
         {
-          heading: "Contact",
-          description: "Talk to our team about your project or requirements.",
-          link: "/contact",
+          heading: "Pricing",
+          description: "Transparent tiers and indicative investment ranges in GHS.",
+          link: "/pricing",
         },
       ],
     },

@@ -130,9 +130,21 @@ function buildMenuPreset(kind: string): AdminNavMenu {
         },
         {
           ...createEmptyNavItem(30),
-          heading: "Infrastructure",
-          href: "/domains",
-          metadataInput: '{"dropdownKey":"infrastructure","activeMatch":["/domains","/hosting"]}',
+          heading: "Resources",
+          href: "/insights",
+          metadataInput: '{"dropdownKey":"resources","activeMatch":["/insights","/case-studies","/design-process","/security-journey"]}',
+        },
+        {
+          ...createEmptyNavItem(40),
+          heading: "Support",
+          href: "/help-center",
+          metadataInput: '{"dropdownKey":"support","activeMatch":["/help-center","/contact","/reviews","/tools/project-cost","/domains","/hosting","/get-started"]}',
+        },
+        {
+          ...createEmptyNavItem(50),
+          heading: "Company",
+          href: "/about",
+          metadataInput: '{"dropdownKey":"company","activeMatch":["/about","/team","/portfolio","/pricing","/projects"]}',
         },
       ],
     };
@@ -202,6 +214,31 @@ function buildMenuPreset(kind: string): AdminNavMenu {
         ],
       };
     }
+    if (suffix === "support") {
+      return {
+        ...shared,
+        items: [
+          {
+            ...createEmptyNavItem(0),
+            heading: "Google Reviews",
+            href: "/reviews",
+            description: "Verified client ratings and recent feedback from Google.",
+          },
+          {
+            ...createEmptyNavItem(10),
+            heading: "Help Center",
+            href: "/help-center",
+            description: "Answers to common questions about onboarding and delivery.",
+          },
+          {
+            ...createEmptyNavItem(20),
+            heading: "Contact",
+            href: "/contact",
+            description: "Talk to our team about your project or requirements.",
+          },
+        ],
+      };
+    }
     if (suffix === "company") {
       return {
         ...shared,
@@ -214,9 +251,21 @@ function buildMenuPreset(kind: string): AdminNavMenu {
           },
           {
             ...createEmptyNavItem(10),
+            heading: "Team",
+            href: "/team",
+            description: "Meet the people behind design, engineering, and delivery.",
+          },
+          {
+            ...createEmptyNavItem(20),
             heading: "Portfolio",
             href: "/portfolio",
             description: "Delivery examples across sectors and product types.",
+          },
+          {
+            ...createEmptyNavItem(30),
+            heading: "Pricing",
+            href: "/pricing",
+            description: "Transparent tiers and indicative investment ranges in GHS.",
           },
         ],
       };
@@ -1042,6 +1091,13 @@ export default function AdminContentPage() {
                 onClick={() => setMenus((prev) => [...prev, buildMenuPreset("main-dropdown-resources")])}
               >
                 Add resources dropdown preset
+              </button>
+              <button
+                type="button"
+                className="rounded-lg border border-sa-border bg-sa-surface px-3 py-2 text-xs font-semibold text-white"
+                onClick={() => setMenus((prev) => [...prev, buildMenuPreset("main-dropdown-support")])}
+              >
+                Add support dropdown preset
               </button>
               <button
                 type="button"

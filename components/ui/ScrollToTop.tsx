@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { ArrowUp } from "lucide-react";
+import { floatingChrome } from "@/components/ui/floating-chrome";
+import { cn } from "@/lib/utils";
 
 export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,7 +30,7 @@ export function ScrollToTop() {
     <button
       type="button"
       onClick={scrollToTop}
-      className="fixed bottom-5 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-sa-primary/30 bg-sa-bg text-sa-primary shadow-2xl transition-all hover:bg-sa-primary hover:text-sa-bg active:scale-[0.95] sm:bottom-6 sm:right-6"
+      className={cn(floatingChrome.scrollToTop, floatingChrome.fab)}
       aria-label="Scroll to top"
       data-app-print-hide-chrome
     >

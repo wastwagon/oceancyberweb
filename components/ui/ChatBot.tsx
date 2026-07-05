@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Bot, Send, MessageSquare, X, Minimize2, Maximize2 } from "lucide-react";
 import { getApiBaseUrl } from "@/lib/api-config";
+import { floatingChrome } from "@/components/ui/floating-chrome";
 import { cn } from "@/lib/utils";
 
 interface Message {
@@ -107,8 +108,8 @@ export function ChatBot() {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-5 left-4 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-sa-primary/30 bg-sa-bg text-sa-primary shadow-2xl transition-all hover:bg-sa-primary hover:text-sa-bg active:scale-[0.95] sm:bottom-6 sm:left-6"
-        aria-label="Open chat"
+        className={cn(floatingChrome.chat, floatingChrome.fab)}
+        aria-label="Open chat assistant"
         data-app-print-hide-chrome
       >
         <MessageSquare className="h-6 w-6" strokeWidth={2} />
@@ -119,8 +120,9 @@ export function ChatBot() {
   return (
     <div
       className={cn(
-        "fixed bottom-5 left-1/2 z-50 flex flex-col overflow-hidden rounded-3xl border border-sa-border bg-sa-bg shadow-2xl transition-all duration-300 sm:bottom-6 sm:left-6 sm:translate-x-0",
-        isMinimized ? "h-16 w-64" : "h-[min(85vh,580px)] w-[min(calc(100vw-2rem),24rem)] -translate-x-1/2 sm:translate-x-0"
+        floatingChrome.chat,
+        "flex flex-col overflow-hidden rounded-3xl border border-sa-border bg-sa-bg shadow-2xl transition-all duration-300",
+        isMinimized ? "h-16 w-64" : "h-[min(85vh,580px)] w-[min(calc(100vw-2rem),24rem)]",
       )}
       role="dialog"
       aria-label="OceanCyber chat"
