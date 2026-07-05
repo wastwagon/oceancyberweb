@@ -210,9 +210,9 @@ export default function AdminPage() {
         }
         setAllowed(true);
         await load();
-      } catch {
+      } catch (err: unknown) {
         setAllowed(false);
-        setErr("Not signed in or not authorized.");
+        setErr(err instanceof Error ? err.message : "Not signed in or not authorized.");
       }
     })();
   }, [load]);

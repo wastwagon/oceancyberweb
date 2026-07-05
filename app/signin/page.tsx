@@ -1,13 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { FormEvent, Suspense, useState } from "react";
 import { signIn } from "@/lib/auth-client";
 import { Eye, EyeOff, Loader2, ShieldCheck, Zap } from "lucide-react";
 
 function SignInForm() {
-  const router = useRouter();
   const params = useSearchParams();
   const nextPath = params.get("next");
   const [email, setEmail] = useState("");
@@ -21,8 +20,10 @@ function SignInForm() {
     setLoading(true);
     setError(null);
     try {
-      await signIn(email, password);
-      router.push(nextPath || "/dashboard");
+      const user = await signIn(email, password);
+      const target = nextPath || (user.isAdmin ? "/admin" : "/dashboard");
+      // Full navigation so the HttpOnly session cookie is sent on the next request.
+      window.location.assign(target);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Invalid credentials. Please verify your entry.");
     } finally {

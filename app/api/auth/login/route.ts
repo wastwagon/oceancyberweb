@@ -4,7 +4,7 @@ import { nestInternalBaseUrl } from "@/lib/server/nest-internal-base";
 
 type NestAuthSuccess = {
   access_token: string;
-  user?: { id: string; email: string; role: string };
+  user?: { id: string; email: string; role: string; isAdmin?: boolean };
 };
 
 export async function POST(req: Request) {
