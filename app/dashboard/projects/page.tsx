@@ -3,12 +3,12 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
-  signOut,
   initializeProjectInvoicePayment,
   listMyProjects,
   type ClientProjectInvoice,
   type ClientProjectRow,
 } from "@/lib/auth-client";
+import { DashboardNav } from "@/components/dashboard/DashboardNav";
 import { cn } from "@/lib/utils";
 
 function money(amountMinor: string, currency: string) {
@@ -21,6 +21,35 @@ function badgeClass(status: string) {
   if (status === "unlocked") return "border-cyan-500/30 bg-cyan-500/10 text-cyan-400";
   if (status === "locked" || status === "draft") return "border-sa-border bg-sa-bg text-sa-muted/60";
   return "border-sa-border bg-sa-surface text-sa-muted";
+}
+
+type ProjectActivity = NonNullable<ClientProjectRow["activities"]>[number];
+
+function activityCategory(a: ProjectActivity): string {
+  const raw = a.metadata?.category;
+  return typeof raw === "string" && raw.trim() ? raw : "general";
+}
+
+/** Activities that make sense for a client to see (hide internal blocker chatter). */
+function clientVisibleActivities(activities: ClientProjectRow["activities"]): ProjectActivity[] {
+  if (!activities) return [];
+  return activities.filter((a) => {
+    const category = activityCategory(a);
+    if (category === "blocker") return false;
+    const note = (a.note || "").toLowerCase();
+    if (note.startsWith("blocker resolved:")) return false;
+    return true;
+  });
+}
+
+function activityLabel(category: string): { label: string; cls: string } {
+  if (category === "dev_update")
+    return { label: "Update", cls: "border-sa-primary/30 bg-sa-primary/10 text-sa-primary" };
+  if (category === "approval")
+    return { label: "Approval", cls: "border-emerald-500/30 bg-emerald-500/10 text-emerald-400" };
+  if (category === "client_feedback")
+    return { label: "Feedback", cls: "border-blue-500/30 bg-blue-500/10 text-blue-400" };
+  return { label: "Note", cls: "border-sa-border bg-sa-surface text-sa-muted" };
 }
 
 export default function DashboardProjectsPage() {
@@ -82,28 +111,14 @@ export default function DashboardProjectsPage() {
               30 / 30 / 40 workflow
             </div>
           </div>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/dashboard"
-              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-5 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition-colors hover:border-sa-primary/50 hover:text-white"
-            >
-              Billing dashboard
-            </Link>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <DashboardNav />
             <Link
               href="/services/website-to-mobile-app"
               className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-sa-primary/30 bg-sa-primary/10 px-5 text-[10px] font-bold uppercase tracking-widest text-sa-primary transition-colors hover:border-sa-primary hover:text-white"
             >
               App Quote
             </Link>
-            <button
-              type="button"
-              onClick={() => {
-                void signOut();
-              }}
-              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-rose-500/30 bg-rose-500/10 px-5 text-[10px] font-bold uppercase tracking-widest text-rose-400 transition-colors hover:border-rose-500 hover:text-white"
-            >
-              Sign out
-            </button>
           </div>
         </header>
 
@@ -199,6 +214,47 @@ export default function DashboardProjectsPage() {
                 </ul>
               </div>
             </div>
+
+            {(() => {
+              const feed = clientVisibleActivities(project.activities);
+              if (feed.length === 0) return null;
+              return (
+                <div className="mt-8 rounded-2xl border border-sa-border bg-sa-bg p-5">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">
+                    Progress updates
+                  </p>
+                  <ul className="mt-4 space-y-4">
+                    {feed.map((a) => {
+                      const meta = activityLabel(activityCategory(a));
+                      return (
+                        <li key={a.id} className="flex flex-col gap-1.5 border-l-2 border-sa-border pl-4">
+                          <div className="flex flex-wrap items-center gap-3">
+                            <span
+                              className={cn(
+                                "inline-flex rounded-full border px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-widest",
+                                meta.cls,
+                              )}
+                            >
+                              {meta.label}
+                            </span>
+                            <span className="text-[10px] font-medium uppercase tracking-widest text-sa-muted/50">
+                              {new Date(a.createdAt).toLocaleString()}
+                            </span>
+                          </div>
+                          {a.note ? (
+                            <p className="text-sm leading-relaxed text-sa-muted/90">{a.note}</p>
+                          ) : (
+                            <p className="text-sm leading-relaxed text-sa-muted/60">
+                              {a.action.replace(/_/g, " ")}
+                            </p>
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              );
+            })()}
           </section>
         ))}
       </div>

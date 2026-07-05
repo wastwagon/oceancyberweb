@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { OC_ACCESS_COOKIE_NAME } from "@/lib/auth/oc-session";
-import { verifyAccessJwt } from "@/lib/auth/verify-access-jwt";
+import { decodeAccessJwt } from "@/lib/auth/verify-access-jwt";
 
 /**
  * Lightweight session probe for UI (navbar, checkout shell). Does not return the JWT.
@@ -12,9 +12,9 @@ export async function GET() {
     return NextResponse.json({ ok: false }, { status: 401 });
   }
   try {
-    await verifyAccessJwt(token);
+    const claims = await decodeAccessJwt(token);
+    return NextResponse.json({ ok: true, isAdmin: claims.isAdmin === true });
   } catch {
     return NextResponse.json({ ok: false }, { status: 401 });
   }
-  return NextResponse.json({ ok: true });
 }

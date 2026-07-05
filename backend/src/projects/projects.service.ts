@@ -30,6 +30,7 @@ export class ProjectsService {
       include: {
         milestones: { orderBy: { orderIndex: "asc" } },
         invoices: { orderBy: { createdAt: "asc" } },
+        activities: { orderBy: { createdAt: "desc" }, take: 12 },
       },
       orderBy: { createdAt: "desc" },
     });
@@ -43,6 +44,14 @@ export class ProjectsService {
       invoices: row.invoices.map((i) => ({
         ...i,
         amountMinor: i.amountMinor.toString(),
+      })),
+      activities: row.activities.map((a) => ({
+        id: a.id,
+        actorType: a.actorType,
+        action: a.action,
+        note: a.note,
+        metadata: a.metadata,
+        createdAt: a.createdAt,
       })),
     }));
   }

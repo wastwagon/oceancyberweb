@@ -121,14 +121,26 @@ export function clearAccessToken() {
   }
 }
 
-/** True when HttpOnly session cookie is accepted by the server (no JWT exposed to JS). */
-export async function checkBrowserSession(): Promise<boolean> {
+export type BrowserSession = { ok: boolean; isAdmin: boolean };
+
+/** Session probe that also reports admin status (no JWT exposed to JS). */
+export async function getBrowserSession(): Promise<BrowserSession> {
   try {
     const res = await fetch("/api/auth/session", { credentials: "same-origin" });
-    return res.ok;
+    if (!res.ok) return { ok: false, isAdmin: false };
+    const data = (await res.json().catch(() => ({}))) as {
+      ok?: boolean;
+      isAdmin?: boolean;
+    };
+    return { ok: data.ok === true, isAdmin: data.isAdmin === true };
   } catch {
-    return false;
+    return { ok: false, isAdmin: false };
   }
+}
+
+/** True when HttpOnly session cookie is accepted by the server (no JWT exposed to JS). */
+export async function checkBrowserSession(): Promise<boolean> {
+  return (await getBrowserSession()).ok;
 }
 
 /** Clears httpOnly session cookie (Next) and Bearer storage; redirects to sign-in. */

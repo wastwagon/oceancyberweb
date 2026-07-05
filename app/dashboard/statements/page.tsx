@@ -1,17 +1,16 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
   BillingLedgerEntry,
   BillingTransaction,
-  signOut,
   downloadTransactionReceipt,
   getProfile,
   getWalletLedger,
   listBillingTransactions,
   openTransactionInvoiceHtml,
 } from "@/lib/auth-client";
+import { DashboardNav } from "@/components/dashboard/DashboardNav";
 import { cn } from "@/lib/utils";
 
 export default function StatementsPage() {
@@ -61,29 +60,7 @@ export default function StatementsPage() {
               Financial records
             </div>
           </div>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/dashboard"
-              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-5 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition-colors hover:border-sa-primary/50 hover:text-white"
-            >
-              Back to billing
-            </Link>
-            <Link
-              href="/dashboard/wallet"
-              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-sa-primary/30 bg-sa-primary/10 px-5 text-[10px] font-bold uppercase tracking-widest text-sa-primary transition-colors hover:border-sa-primary hover:text-white"
-            >
-              Top up wallet
-            </Link>
-            <button
-              type="button"
-              onClick={() => {
-                void signOut();
-              }}
-              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-rose-500/30 bg-rose-500/10 px-5 text-[10px] font-bold uppercase tracking-widest text-rose-400 transition-colors hover:border-rose-500 hover:text-white"
-            >
-              Sign out
-            </button>
-          </div>
+          <DashboardNav className="mt-8" />
         </header>
 
         {loading ? <p className="text-sa-muted text-sm px-2">Loading...</p> : null}

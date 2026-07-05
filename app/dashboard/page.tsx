@@ -29,9 +29,8 @@ import {
   resumeRenewal,
   signOut,
 } from "@/lib/auth-client";
-import { cn } from "@/lib/utils";
-
 // Components
+import { DashboardNav } from "@/components/dashboard/DashboardNav";
 import { WalletHero } from "@/components/dashboard/WalletHero";
 import { SubscriptionNode } from "@/components/dashboard/SubscriptionNode";
 import { ActivityHub } from "@/components/dashboard/ActivityHub";
@@ -168,27 +167,8 @@ export default function DashboardPage() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="flex flex-wrap gap-3 p-1 rounded-full border border-sa-border bg-sa-surface/30 w-fit backdrop-blur-sm"
         >
-          {[
-            { label: "Overview", href: "/dashboard", active: true },
-            { label: "Projects", href: "/dashboard/projects", active: false },
-            { label: "Statements", href: "/dashboard/statements", active: false },
-            { label: "Requests", href: "/dashboard/requests", active: false },
-          ].map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className={cn(
-                "px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all",
-                link.active 
-                  ? "bg-sa-primary text-black shadow-[0_0_20px_rgba(187,243,64,0.3)]" 
-                  : "text-sa-muted hover:text-white hover:bg-sa-surface"
-              )}
-            >
-              {link.label}
-            </Link>
-          ))}
+          <DashboardNav showSignOut={false} />
         </motion.div>
 
         {loading && !data ? <DashboardSkeleton /> : null}

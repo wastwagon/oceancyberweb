@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { initializeWalletTopup } from "@/lib/auth-client";
+import { DashboardNav } from "@/components/dashboard/DashboardNav";
 import { Loader2 } from "lucide-react";
 
 export default function WalletTopupPage() {
@@ -32,6 +33,7 @@ export default function WalletTopupPage() {
           <p className="mt-3 text-sm leading-relaxed text-sa-muted/80 max-w-xl">
             Add funds in cedis using Paystack. Renewals and milestone invoices can then draw from wallet balance.
           </p>
+          <DashboardNav className="mt-8" />
         </header>
 
         <div className="sa-card p-6 border-sa-border md:p-8">

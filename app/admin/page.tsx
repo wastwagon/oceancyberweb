@@ -29,6 +29,7 @@ import { cn } from "@/lib/utils";
 
 // Components
 import { AdminStatGrid } from "@/components/admin/AdminStatGrid";
+import { AdminOpsPanels } from "@/components/admin/AdminOpsPanels";
 import { ProjectCard } from "@/components/admin/ProjectCard";
 import { LeadPipeline } from "@/components/admin/LeadPipeline";
 import { UserRegistry } from "@/components/admin/UserRegistry";
@@ -368,8 +369,10 @@ export default function AdminPage() {
           <div className="space-y-10">
             <AdminStatGrid summary={summary} itemVariants={itemVariants} />
 
+            <AdminOpsPanels transactions={txs} issues={issues} />
+
             {/* Client Projects Management */}
-            <section className="space-y-6">
+            <section id="admin-client-projects" className="scroll-mt-28 space-y-6">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
                   <h2 className="font-heading text-2xl font-bold text-white">Client Projects <span className="text-sa-muted/30 text-sm ml-2">30/30/40 ARCHITECTURE</span></h2>

@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { getProfile, listClientRequests, signOut, type ClientRequestRow } from "@/lib/auth-client";
+import { getProfile, listClientRequests, type ClientRequestRow } from "@/lib/auth-client";
+import { DashboardNav } from "@/components/dashboard/DashboardNav";
 import { cn } from "@/lib/utils";
 
 function sourceLabel(source: string | null) {
@@ -69,26 +70,14 @@ export default function ClientRequestsPage() {
               Lead status overview
             </div>
           </div>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/dashboard"
-              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-5 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition-colors hover:border-sa-primary/50 hover:text-white"
-            >
-              Back to billing
-            </Link>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <DashboardNav />
             <Link
               href="/services/website-to-mobile-app"
               className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-sa-primary/30 bg-sa-primary/10 px-5 text-[10px] font-bold uppercase tracking-widest text-sa-primary transition-colors hover:border-sa-primary hover:text-white"
             >
               App Quote
             </Link>
-            <button
-              type="button"
-              onClick={() => void signOut()}
-              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-rose-500/30 bg-rose-500/10 px-5 text-[10px] font-bold uppercase tracking-widest text-rose-400 transition-colors hover:border-rose-500 hover:text-white"
-            >
-              Sign out
-            </button>
           </div>
         </header>
 
@@ -157,6 +146,14 @@ export default function ClientRequestsPage() {
                                 {unifiedCheckoutRef(r.metadata) || "N/A"}
                               </span>
                             </p>
+                          ) : null}
+                          {r.status === "won" ? (
+                            <Link
+                              href="/dashboard/projects"
+                              className="mt-2 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-sa-primary hover:underline underline-offset-4"
+                            >
+                              View project →
+                            </Link>
                           ) : null}
                         </td>
                       </tr>

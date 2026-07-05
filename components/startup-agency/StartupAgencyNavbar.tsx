@@ -11,7 +11,7 @@ import {
 } from "@/lib/navigation/menu";
 import { useNavigationConfig } from "@/lib/navigation/useNavigationConfig";
 import { cn } from "@/lib/utils";
-import { checkBrowserSession } from "@/lib/auth-client";
+import { getBrowserSession } from "@/lib/auth-client";
 
 const navLinkClass =
   "group relative inline-flex min-h-[42px] items-center gap-1 px-3 py-2 font-heading text-[13px] font-medium uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary";
@@ -21,6 +21,7 @@ export function StartupAgencyNavbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<HeaderDropdownKey | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   const { mainHeaderNav, mainHeaderDropdownContent } = useNavigationConfig();
@@ -29,8 +30,11 @@ export function StartupAgencyNavbar() {
   useEffect(() => {
     let cancelled = false;
     void (async () => {
-      const ok = await checkBrowserSession();
-      if (!cancelled) setIsLoggedIn(ok);
+      const session = await getBrowserSession();
+      if (!cancelled) {
+        setIsLoggedIn(session.ok);
+        setIsAdmin(session.isAdmin);
+      }
     })();
     return () => {
       cancelled = true;
@@ -164,14 +168,24 @@ export function StartupAgencyNavbar() {
           </button>
           
           {/* Account access — secondary to project CTA */}
-          <div className="hidden items-center sm:flex">
+          <div className="hidden items-center gap-1 sm:flex">
             {isLoggedIn ? (
-              <Link
-                href="/dashboard"
-                className="px-3 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:text-sa-primary"
-              >
-                Dashboard
-              </Link>
+              <>
+                {isAdmin ? (
+                  <Link
+                    href="/admin"
+                    className="px-3 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-sa-primary transition duration-300 hover:text-white"
+                  >
+                    Admin
+                  </Link>
+                ) : null}
+                <Link
+                  href="/dashboard"
+                  className="px-3 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:text-sa-primary"
+                >
+                  Dashboard
+                </Link>
+              </>
             ) : (
               <Link
                 href="/signin"
@@ -250,13 +264,24 @@ export function StartupAgencyNavbar() {
           ))}
           <div className="mt-6 flex flex-col gap-3">
             {isLoggedIn ? (
-              <Link
-                href="/dashboard"
-                className="rounded-lg border border-sa-primary bg-sa-primary/10 px-3 py-3 text-center font-heading text-sm font-bold uppercase tracking-[0.14em] text-sa-primary"
-                onClick={() => setMobileOpen(false)}
-              >
-                Dashboard
-              </Link>
+              <>
+                {isAdmin ? (
+                  <Link
+                    href="/admin"
+                    className="rounded-lg border border-sa-primary bg-sa-primary px-3 py-3 text-center font-heading text-sm font-bold uppercase tracking-[0.14em] text-sa-bg"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Admin
+                  </Link>
+                ) : null}
+                <Link
+                  href="/dashboard"
+                  className="rounded-lg border border-sa-primary bg-sa-primary/10 px-3 py-3 text-center font-heading text-sm font-bold uppercase tracking-[0.14em] text-sa-primary"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Dashboard
+                </Link>
+              </>
             ) : (
               <div className="flex gap-2">
                 <Link
