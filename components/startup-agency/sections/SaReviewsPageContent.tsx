@@ -6,7 +6,7 @@ import {
   googleBusinessProfile,
 } from "@/lib/startup-agency/google-business";
 import { getReviewBadges } from "@/lib/startup-agency/reviews";
-import { GoogleReviewCard } from "@/components/startup-agency/sections/GoogleReviewCard";
+import { GoogleReviewsCarousel } from "@/components/startup-agency/sections/GoogleReviewsCarousel";
 import type { GooglePlaceReview, GooglePlaceStats } from "@/lib/google-places-stats";
 
 type Props = {
@@ -114,10 +114,8 @@ export function SaReviewsPageContent({ stats, reviews }: Props) {
         </div>
 
         {reviews.length > 0 ? (
-          <div className="mx-auto mt-20 grid max-w-5xl gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {reviews.map((review, index) => (
-              <GoogleReviewCard key={`${review.name}-${index}`} review={review} />
-            ))}
+          <div className="mx-auto mt-20 max-w-4xl">
+            <GoogleReviewsCarousel reviews={reviews} size="large" />
           </div>
         ) : (
           <p className="mx-auto mt-20 max-w-xl text-center text-sm text-sa-muted">
