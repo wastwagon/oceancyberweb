@@ -110,20 +110,6 @@ export function SaHeroSection() {
                 onMouseLeave={() => setHoveredIndex(null)}
                 className="group relative flex min-h-[72px] flex-1 cursor-pointer items-center justify-between border-b border-white/10 px-5 py-4 transition-all duration-700 ease-in-out last:border-b-0 md:min-h-0 md:flex-col md:items-end md:justify-end md:border-b-0 md:border-r md:px-6 md:py-0 md:last:border-r-0 md:hover:flex-[2]"
               >
-                {isHovered && (
-                  <div className="pointer-events-none absolute left-1/2 top-1/2 z-30 hidden w-max -translate-x-1/2 -translate-y-1/2 md:block">
-                    <p
-                      className="animate-fade-in font-heading text-[10vw] font-bold uppercase leading-none tracking-tight whitespace-nowrap"
-                      style={{
-                        WebkitTextStroke: "1px rgba(255, 255, 255, 0.6)",
-                        color: "transparent",
-                      }}
-                    >
-                      {slide.title}
-                    </p>
-                  </div>
-                )}
-
                 <div className="flex w-full flex-col items-start md:mb-20 md:items-center md:text-center">
                   <div className="mb-1 hidden items-center justify-center gap-2 md:mb-4 md:flex">
                     <span className="h-1.5 w-1.5 rounded-full bg-sa-primary animate-pulse" />
@@ -134,7 +120,7 @@ export function SaHeroSection() {
 
                   <h2
                     className={`font-heading text-sm font-bold uppercase tracking-widest text-white transition-all duration-500 md:text-2xl ${
-                      isHovered ? "md:opacity-0 md:-translate-y-10" : "opacity-100"
+                      isHovered ? "text-sa-primary" : ""
                     }`}
                   >
                     {slide.title}

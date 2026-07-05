@@ -4,7 +4,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Briefcase } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { HeroSectionMotionLayers } from "@/components/layout/HeroSectionMotionLayers";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
 import {
   fadeUpProps,
@@ -12,6 +11,7 @@ import {
   staggerDelay,
 } from "@/lib/scroll-reveal";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
+import { ServicePageHeroBanner } from "@/components/services/ServicePageHeroBanner";
 import { serviceImages } from "@/lib/startup-agency/service-images";
 
 type ServiceCard = {
@@ -39,7 +39,7 @@ const services: ServiceCard[] = [
     title: "Web Development",
     description:
       "Modern, high-performance websites and web products, with SEO, accessibility, and speed budgets built in from day one.",
-      image: serviceImages.webDevelopment,
+    image: serviceImages.webDevelopment,
     services: [
       "Marketing and brand experiences",
       "Product dashboards and workflows",
@@ -51,7 +51,7 @@ const services: ServiceCard[] = [
     title: "Mobile Apps",
     description:
       "Cross-platform and native paths: offline-aware flows, push, and store-ready release discipline.",
-      image: serviceImages.mobileApps,
+    image: serviceImages.mobileApps,
     services: [
       "iOS and Android delivery",
       "Performance and crash hygiene",
@@ -75,25 +75,37 @@ const services: ServiceCard[] = [
     title: "E-Commerce",
     description:
       "Checkout trust, catalog accuracy, and operations tooling, from launch campaigns to steady-state ops.",
-      image: serviceImages.ecommerce,
+    image: serviceImages.ecommerce,
     services: [
       "Shopify, WooCommerce, and custom",
       "Payments and reconciliation",
       "Inventory and analytics layers",
     ],
     href: "/services/ecommerce",
-    },
-    {
-      title: "Cybersecurity",
+  },
+  {
+    title: "Cybersecurity",
     description:
       "Assessments, hardening, and readiness: practical controls, evidence, and response planning your teams can run.",
-      image: serviceImages.cyberSecurity,
+    image: serviceImages.cyberSecurity,
     services: [
       "Threat detection alignment",
       "Data protection and privacy",
       "Compliance and incident readiness",
     ],
     href: "/services/cybersecurity",
+  },
+  {
+    title: "Cloud Hosting",
+    description:
+      "High-performance cPanel hosting with LiteSpeed, WHM isolation, and local GHS billing for Ghanaian businesses.",
+    image: serviceImages.cloudHosting,
+    services: [
+      "Managed cPanel accounts",
+      "SSL and backup routines",
+      "Paystack billing in GHS",
+    ],
+    href: "/hosting",
   },
 ];
 
@@ -122,7 +134,7 @@ function ServiceGridCard({
             src={service.image}
             alt=""
             fill
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] grayscale hover:grayscale-0"
+            className="object-cover brightness-105 saturate-110 transition-transform duration-700 ease-out group-hover:scale-[1.03]"
             sizes="(max-width: 768px) 100vw, 50vw"
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-sa-surface via-transparent to-transparent" />
@@ -165,8 +177,9 @@ export default function ServicesPage() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
       <SaPageAmbient />
-      <section className="sa-section relative z-10 overflow-hidden border-b border-sa-border pt-28 md:pt-36">
-        <div className="sa-container relative z-10 text-center">
+      <section className="relative z-10 min-h-[72vh] overflow-hidden border-b border-sa-border pt-28 md:min-h-[78vh] md:pt-36">
+        <ServicePageHeroBanner image={serviceImages.webDevelopment} />
+        <div className="sa-container relative z-10 flex min-h-[calc(72vh-7rem)] flex-col items-center justify-center pb-16 text-center md:min-h-[calc(78vh-9rem)] md:pb-20">
           <motion.div
             initial="hidden"
             animate="visible"

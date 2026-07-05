@@ -54,7 +54,7 @@ function PortfolioLibraryCard({
             src={project.image}
             alt={project.title}
             fill
-            className="object-cover transition duration-500 grayscale group-hover:scale-[1.03] group-hover:grayscale-0"
+            className="object-cover brightness-105 saturate-110 transition duration-500 group-hover:scale-[1.03]"
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-sa-surface via-transparent to-transparent" />
