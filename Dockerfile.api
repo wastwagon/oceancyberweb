@@ -8,12 +8,13 @@ COPY packages/shared ./packages/shared
 COPY backend ./backend
 COPY prisma ./prisma
 
-ENV NODE_OPTIONS="--max-old-space-size=4096"
+ENV NODE_OPTIONS="--max-old-space-size=2048"
 ENV NODE_PATH=/app/node_modules
 
-RUN npm install
+RUN npm ci --ignore-scripts
 RUN npm run build:shared
 RUN npx prisma generate --schema=./prisma/schema.prisma
+ENV NODE_OPTIONS="--max-old-space-size=3072"
 RUN npm run build:api
 
 FROM node:20-bookworm-slim AS runner

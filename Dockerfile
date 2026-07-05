@@ -8,7 +8,8 @@ COPY package.json package-lock.json* ./
 COPY packages ./packages
 COPY backend ./backend
 COPY prisma ./prisma
-RUN npm install
+ENV NODE_OPTIONS="--max-old-space-size=2048"
+RUN npm ci --ignore-scripts
 
 FROM node:20-bookworm-slim AS builder
 RUN apt-get update && apt-get install -y openssl ca-certificates && rm -rf /var/lib/apt/lists/*
@@ -18,7 +19,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Coolify/small VPS: parallel web+backend builds can OOM during `next build`
-ENV NODE_OPTIONS="--max-old-space-size=4096"
+ENV NODE_OPTIONS="--max-old-space-size=3072"
 
 ARG NEXT_PUBLIC_SITE_URL=http://localhost:3020
 ARG NEXT_PUBLIC_API_URL=http://localhost:4100
