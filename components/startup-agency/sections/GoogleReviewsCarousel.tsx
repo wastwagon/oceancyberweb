@@ -9,6 +9,21 @@ import type { GooglePlaceReview } from "@/lib/google-places-stats";
 import { cn } from "@/lib/utils";
 
 const AUTOPLAY_MS = 6000;
+const MD_BREAKPOINT = 768;
+
+function useSlidesPerView() {
+  const [slidesPerView, setSlidesPerView] = useState(1);
+
+  useEffect(() => {
+    const mq = window.matchMedia(`(min-width: ${MD_BREAKPOINT}px)`);
+    const update = () => setSlidesPerView(mq.matches ? 2 : 1);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  return slidesPerView;
+}
 
 type Props = {
   reviews: GooglePlaceReview[];
@@ -52,8 +67,8 @@ function CarouselReviewCard({
   return (
     <article
       className={cn(
-        "relative flex h-full flex-col overflow-hidden rounded-[28px] border border-sa-border/80 bg-gradient-to-br from-sa-surface/80 via-sa-surface/50 to-sa-bg/40 p-6 shadow-[0_24px_80px_-32px_rgba(0,0,0,0.65)] backdrop-blur-sm md:p-8",
-        large && "md:p-10",
+        "relative flex h-full min-h-[260px] flex-col overflow-hidden rounded-[28px] border border-sa-border/80 bg-gradient-to-br from-sa-surface/80 via-sa-surface/50 to-sa-bg/40 p-6 shadow-[0_24px_80px_-32px_rgba(0,0,0,0.65)] backdrop-blur-sm md:min-h-[280px] md:p-8",
+        large && "md:min-h-[300px] md:p-10",
       )}
     >
       <Quote
@@ -62,7 +77,7 @@ function CarouselReviewCard({
       />
 
       <div className="relative flex items-start justify-between gap-4">
-        <StarRow rating={review.rating} className={large ? "scale-110 origin-left" : undefined} />
+        <StarRow rating={review.rating} className={large ? "origin-left scale-110" : undefined} />
         <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-sa-border/60 bg-sa-bg/50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-sa-muted">
           <FcGoogle className="h-3.5 w-3.5" aria-hidden />
           Google
@@ -71,8 +86,8 @@ function CarouselReviewCard({
 
       <blockquote
         className={cn(
-          "relative mt-5 flex-1 text-sm leading-relaxed text-sa-muted/95 md:text-base md:leading-relaxed",
-          large && "md:text-lg md:leading-relaxed",
+          "relative mt-5 flex-1 text-sm leading-relaxed text-sa-muted/95 md:text-[15px] md:leading-relaxed",
+          large && "md:text-base md:leading-relaxed lg:text-lg",
         )}
       >
         &ldquo;{review.quote}&rdquo;
@@ -86,10 +101,10 @@ function CarouselReviewCard({
             alt=""
             width={48}
             height={48}
-            className="h-12 w-12 rounded-full object-cover ring-2 ring-sa-primary/20"
+            className="h-12 w-12 shrink-0 rounded-full object-cover ring-2 ring-sa-primary/20"
           />
         ) : (
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white font-heading text-sm font-bold text-black ring-2 ring-sa-primary/20">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white font-heading text-sm font-bold text-black ring-2 ring-sa-primary/20">
             {review.initials}
           </div>
         )}
@@ -113,8 +128,13 @@ function CarouselReviewCard({
   );
 }
 
+function visibleReviewIndices(active: number, count: number, slidesPerView: number): number[] {
+  return Array.from({ length: slidesPerView }, (_, offset) => (active + offset) % count);
+}
+
 export function GoogleReviewsCarousel({ reviews, className, size = "default" }: Props) {
   const reduceMotion = useReducedMotion();
+  const slidesPerView = useSlidesPerView();
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [direction, setDirection] = useState(0);
@@ -140,21 +160,24 @@ export function GoogleReviewsCarousel({ reviews, className, size = "default" }: 
 
   if (count === 0) return null;
 
+  const indices = visibleReviewIndices(active, count, Math.min(slidesPerView, count));
+  const showNav = count > slidesPerView;
+
   const slideVariants = {
     enter: (dir: number) => ({
-      x: reduceMotion ? 0 : dir >= 0 ? 48 : -48,
+      x: reduceMotion ? 0 : dir >= 0 ? 40 : -40,
       opacity: reduceMotion ? 1 : 0,
     }),
     center: { x: 0, opacity: 1 },
     exit: (dir: number) => ({
-      x: reduceMotion ? 0 : dir >= 0 ? -48 : 48,
+      x: reduceMotion ? 0 : dir >= 0 ? -40 : 40,
       opacity: reduceMotion ? 1 : 0,
     }),
   };
 
   return (
     <div
-      className={cn("relative mx-auto w-full max-w-3xl", className)}
+      className={cn("relative mx-auto w-full max-w-7xl px-1 md:px-4", className)}
       role="region"
       aria-roledescription="carousel"
       aria-label="Google reviews"
@@ -167,56 +190,60 @@ export function GoogleReviewsCarousel({ reviews, className, size = "default" }: 
         }
       }}
     >
-      <div
-        className={cn(
-          "relative min-h-[280px] md:min-h-[300px]",
-          size === "large" && "md:min-h-[340px]",
-        )}
-      >
-        <AnimatePresence mode="wait" custom={direction}>
-          <motion.div
-            key={active}
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ duration: reduceMotion ? 0 : 0.38, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-0"
-          >
-            <CarouselReviewCard review={reviews[active]!} size={size} />
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      {count > 1 ? (
-        <>
-          <div className="pointer-events-none absolute inset-y-0 -left-2 z-10 hidden items-center md:flex">
+      <div className="relative">
+        {showNav ? (
+          <>
             <button
               type="button"
               onClick={goPrev}
-              className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-sa-border bg-sa-bg/90 text-white shadow-lg backdrop-blur transition hover:border-sa-primary/50 hover:text-sa-primary"
+              className="absolute -left-1 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-sa-border bg-sa-bg/95 text-white shadow-lg backdrop-blur transition hover:border-sa-primary/50 hover:text-sa-primary md:flex lg:-left-5"
               aria-label="Previous review"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
-          </div>
-          <div className="pointer-events-none absolute inset-y-0 -right-2 z-10 hidden items-center md:flex">
             <button
               type="button"
               onClick={goNext}
-              className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-sa-border bg-sa-bg/90 text-white shadow-lg backdrop-blur transition hover:border-sa-primary/50 hover:text-sa-primary"
+              className="absolute -right-1 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-sa-border bg-sa-bg/95 text-white shadow-lg backdrop-blur transition hover:border-sa-primary/50 hover:text-sa-primary md:flex lg:-right-5"
               aria-label="Next review"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
-          </div>
+          </>
+        ) : null}
 
-          <div className="mt-8 flex items-center justify-center gap-3">
+        <div
+          className={cn(
+            "grid gap-5 md:gap-6",
+            slidesPerView >= 2 && count >= 2 ? "md:grid-cols-2" : "grid-cols-1",
+          )}
+        >
+          <AnimatePresence mode="popLayout" custom={direction}>
+            {indices.map((reviewIndex, slot) => (
+              <motion.div
+                key={`${reviewIndex}-${active}-${slot}`}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: reduceMotion ? 0 : 0.34, ease: [0.22, 1, 0.36, 1] }}
+                className="min-w-0"
+              >
+                <CarouselReviewCard review={reviews[reviewIndex]!} size={size} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {showNav ? (
+        <>
+          <div className="mt-8 flex items-center justify-center gap-3 md:hidden">
             <button
               type="button"
               onClick={goPrev}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-sa-border bg-sa-surface/50 text-white transition hover:border-sa-primary/40 md:hidden"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-sa-border bg-sa-surface/50 text-white transition hover:border-sa-primary/40"
               aria-label="Previous review"
             >
               <ChevronLeft className="h-4 w-4" />
@@ -244,14 +271,14 @@ export function GoogleReviewsCarousel({ reviews, className, size = "default" }: 
             <button
               type="button"
               onClick={goNext}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-sa-border bg-sa-surface/50 text-white transition hover:border-sa-primary/40 md:hidden"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-sa-border bg-sa-surface/50 text-white transition hover:border-sa-primary/40"
               aria-label="Next review"
             >
               <ChevronRight className="h-4 w-4" />
             </button>
           </div>
 
-          <div className="mx-auto mt-4 flex max-w-xs flex-wrap items-center justify-center gap-2">
+          <div className="mx-auto mt-6 hidden max-w-2xl flex-wrap items-center justify-center gap-2 md:flex">
             {reviews.map((review, i) => (
               <button
                 key={`thumb-${review.name}-${i}`}
@@ -259,9 +286,9 @@ export function GoogleReviewsCarousel({ reviews, className, size = "default" }: 
                 onClick={() => goTo(i, i > active ? 1 : -1)}
                 className={cn(
                   "rounded-full transition-all",
-                  i === active
+                  i === active || (slidesPerView === 2 && i === (active + 1) % count)
                     ? "ring-2 ring-sa-primary ring-offset-2 ring-offset-sa-bg"
-                    : "opacity-60 hover:opacity-100",
+                    : "opacity-55 hover:opacity-100",
                 )}
                 aria-label={`Show review by ${review.name}`}
               >
@@ -280,6 +307,23 @@ export function GoogleReviewsCarousel({ reviews, className, size = "default" }: 
                   </span>
                 )}
               </button>
+            ))}
+          </div>
+
+          <div className="mt-4 hidden items-center justify-center gap-2 md:flex" role="tablist">
+            {reviews.map((review, i) => (
+              <button
+                key={`dot-${review.name}-${i}`}
+                type="button"
+                role="tab"
+                aria-selected={i === active}
+                aria-label={`Review ${i + 1} of ${count}`}
+                onClick={() => goTo(i, i > active ? 1 : -1)}
+                className={cn(
+                  "h-2 rounded-full transition-all duration-300",
+                  i === active ? "w-8 bg-sa-primary" : "w-2 bg-sa-muted/30 hover:bg-sa-muted/50",
+                )}
+              />
             ))}
           </div>
         </>

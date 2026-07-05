@@ -114,7 +114,7 @@ export function SaReviewsPageContent({ stats, reviews }: Props) {
         </div>
 
         {reviews.length > 0 ? (
-          <div className="mx-auto mt-20 max-w-4xl">
+          <div className="mx-auto mt-20 w-full">
             <GoogleReviewsCarousel reviews={reviews} size="large" />
           </div>
         ) : (
