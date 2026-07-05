@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "framer-motion";
-import { testimonials as staticTestimonials } from "@/lib/startup-agency/content";
+import { googleReviewHighlights } from "@/lib/startup-agency/google-business";
 import { getPublicTestimonials } from "@/lib/auth-client";
+import { SaGoogleReviewsBanner } from "@/components/startup-agency/sections/SaGoogleReviewsBanner";
 import { cn } from "@/lib/utils";
 
 interface TestimonialData {
@@ -39,7 +40,7 @@ export function SaTestimonialsSection() {
   }, []);
 
   const displayTestimonials =
-    dynamicTestimonials.length > 0 ? dynamicTestimonials : [...staticTestimonials];
+    dynamicTestimonials.length > 0 ? dynamicTestimonials : [...googleReviewHighlights];
 
   return (
     <section id="testimonials" className="sa-section relative overflow-hidden bg-sa-bg border-b border-sa-border">
@@ -49,8 +50,13 @@ export function SaTestimonialsSection() {
             <span className="h-1.5 w-1.5 rounded-full bg-sa-primary" />
             <span className="sa-eyebrow">Social Proof</span>
           </div>
-          <h2 className="sa-title">What our partners say</h2>
+          <h2 className="sa-title">What clients say on Google</h2>
+          <p className="sa-subtitle mx-auto mt-4 max-w-2xl">
+            Highlights from verified Google reviews. Read the full list on our Business Profile.
+          </p>
         </div>
+
+        <SaGoogleReviewsBanner />
 
         {reduceMotion ? (
           <div className="grid gap-6 md:grid-cols-3">
@@ -78,14 +84,20 @@ export function SaTestimonialsSection() {
 }
 
 function TestimonialCard({ testimonial: t }: { testimonial: TestimonialData }) {
+  const isGoogle = t.name === "Verified on Google";
+
   return (
     <div className="sa-card flex flex-col justify-between p-8">
       <p className="text-base leading-relaxed text-sa-muted/90 italic">
         {`${String.fromCharCode(8220)}${t.quote}${String.fromCharCode(8221)}`}
       </p>
       <div className="mt-8 flex items-center gap-4">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sa-primary font-heading text-sm font-bold text-black">
-          {t.initials}
+        <div
+          className={`flex h-10 w-10 items-center justify-center rounded-full font-heading text-sm font-bold ${
+            isGoogle ? "bg-white text-black" : "bg-sa-primary text-black"
+          }`}
+        >
+          {isGoogle ? "G" : t.initials}
         </div>
         <div>
           <p className="text-sm font-bold text-white">{t.name}</p>

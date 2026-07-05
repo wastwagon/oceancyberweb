@@ -1,3 +1,11 @@
+import {
+  formatGoogleRatingLabel,
+  formatGoogleReviewCountLabel,
+  getGoogleBusinessProfileUrl,
+  getGoogleWriteReviewUrl,
+  googleBusinessProfile,
+} from "@/lib/startup-agency/google-business";
+
 export type ReviewBadge = {
   id: string;
   provider: string;
@@ -7,19 +15,18 @@ export type ReviewBadge = {
   external: boolean;
 };
 
-/** Review profile URLs — set in env when verified profiles are live. */
 export function getReviewBadges(): ReviewBadge[] {
-  const googleUrl = process.env.NEXT_PUBLIC_GOOGLE_REVIEWS_URL?.trim();
+  const googleUrl = getGoogleBusinessProfileUrl();
   const clutchUrl = process.env.NEXT_PUBLIC_CLUTCH_PROFILE_URL?.trim();
 
   return [
     {
       id: "google",
       provider: "Google",
-      rating: "5.0",
-      label: googleUrl ? "Verified Google reviews" : "Request client references",
-      href: googleUrl || "/contact?topic=Client%20references",
-      external: Boolean(googleUrl),
+      rating: formatGoogleRatingLabel(),
+      label: formatGoogleReviewCountLabel(),
+      href: googleUrl,
+      external: true,
     },
     {
       id: "clutch",
@@ -30,4 +37,14 @@ export function getReviewBadges(): ReviewBadge[] {
       external: Boolean(clutchUrl),
     },
   ];
+}
+
+export function getGoogleReviewCta() {
+  return {
+    profileUrl: getGoogleBusinessProfileUrl(),
+    writeReviewUrl: getGoogleWriteReviewUrl(),
+    rating: googleBusinessProfile.rating,
+    reviewCount: googleBusinessProfile.reviewCount,
+    businessName: googleBusinessProfile.name,
+  };
 }

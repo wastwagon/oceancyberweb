@@ -7,6 +7,7 @@ import { ConditionalChrome } from "@/components/layout/ConditionalChrome";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { ChatBot } from "@/components/ui/ChatBot";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
+import { LocalBusinessJsonLd } from "@/components/seo/LocalBusinessJsonLd";
 import { WebSiteJsonLd } from "@/components/seo/WebSiteJsonLd";
 import { WebVitals } from "@/components/analytics/WebVitals";
 import { AppProviders } from "@/components/providers/AppProviders";
@@ -102,6 +103,7 @@ export default function RootLayout({
         <AppProviders>
           <CreativeEnhancements />
           <OrganizationJsonLd />
+          <LocalBusinessJsonLd />
           <WebSiteJsonLd />
           <WebVitals />
           <ConditionalChrome

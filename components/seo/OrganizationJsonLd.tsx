@@ -1,3 +1,5 @@
+import { getGoogleBusinessProfileUrl } from "@/lib/startup-agency/google-business";
+
 const site =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
   "https://oceancyber.net";
@@ -15,7 +17,7 @@ const jsonLd = {
     addressCountry: "GH",
     addressLocality: "Accra",
   },
-  sameAs: ["https://twitter.com/oceancyber"],
+  sameAs: [getGoogleBusinessProfileUrl(), "https://twitter.com/oceancyber"],
 };
 
 export function OrganizationJsonLd() {

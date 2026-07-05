@@ -14,7 +14,7 @@ export function SaProcessSection() {
         <SaReveal className="mb-16">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <h2 className="sa-title uppercase font-heading text-4xl sm:text-5xl lg:text-6xl text-white font-bold max-w-2xl">
-              A Clear Path From Vision to Launch
+              From brief to launch
             </h2>
             <div className="flex items-center gap-2">
               <span className="font-heading font-bold text-white uppercase text-sm tracking-widest">Steps</span>
@@ -49,7 +49,7 @@ export function SaProcessSection() {
                   href="/services/ui-ux-design"
                   className="mt-6 inline-flex text-xs font-bold uppercase tracking-widest text-sa-primary transition hover:text-white"
                 >
-                  Explore our design process →
+                  UI/UX services →
                 </Link>
               ) : null}
               {p.step === 1 ? (
@@ -57,7 +57,7 @@ export function SaProcessSection() {
                   href="/design-process"
                   className="mt-6 inline-flex text-xs font-bold uppercase tracking-widest text-sa-muted transition hover:text-sa-primary"
                 >
-                  Full design playbook →
+                  Full design process →
                 </Link>
               ) : null}
             </SaReveal>

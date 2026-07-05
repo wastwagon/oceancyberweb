@@ -1,6 +1,7 @@
 /** Marketing homepage content — structure aligned with Start-Up Agency; copy tailored for OceanCyber. */
 
 import { serviceImages } from "./service-images";
+import { googleReviewHighlights } from "./google-business";
 
 export const heroTagline =
   "We design and build digital products that help African businesses grow — from brand and UX to launch.";
@@ -92,9 +93,9 @@ export const trustSignals = [
   },
   {
     icon: "star" as const,
-    stat: "5★",
-    title: "Client satisfaction",
-    body: "Partners cite clear communication, on-time delivery, and craft they can show stakeholders.",
+    stat: "4.9★",
+    title: "Google rating",
+    body: "54 verified Google reviews from clients across web, mobile, and digital projects.",
   },
   {
     icon: "shield" as const,
@@ -159,27 +160,27 @@ export const serviceCards = [
 export const processSteps = [
   {
     step: 1,
-    title: "Strategic Discovery",
-    body: "We start by understanding your goals and business requirements to build a clear roadmap for success.",
-    bullets: ["Requirements Analysis", "System Design", "Technical Specs"],
+    title: "Discovery & scoping",
+    body: "We clarify goals, users, and constraints up front — then agree scope, timeline, and success metrics before design or development begins.",
+    bullets: ["Stakeholder alignment", "Technical feasibility", "Scope and milestones"],
   },
   {
     step: 2,
-    title: "Design & Prototyping",
-    body: "We transform your vision into intuitive user experiences and interactive prototypes that validate the direction.",
-    bullets: ["UX/UI Design", "Interactive Mockups", "Brand Alignment"],
+    title: "Design & prototyping",
+    body: "Where design is in scope, we wireframe and prototype in Figma so you can review structure and flows before engineering commits to build.",
+    bullets: ["UX/UI and brand systems", "Clickable prototypes", "Handoff specs for dev"],
   },
   {
     step: 3,
-    title: "Iterative Engineering",
-    body: "Our engineers build your product in transparent, weekly cycles with regular updates and live demos.",
-    bullets: ["Weekly Sprints", "Clean Architecture", "Progress Updates"],
+    title: "Build & integrate",
+    body: "We ship in agreed phases with demo checkpoints — web, mobile, payments, APIs, and hosting connected to the tools your team already uses.",
+    bullets: ["Phased delivery", "Integrations and APIs", "Staging previews"],
   },
   {
     step: 4,
-    title: "Testing & Launch",
-    body: "We perform rigorous quality checks and final optimizations to ensure your product is ready for the world.",
-    bullets: ["Quality Assurance", "Performance Tuning", "Seamless Deployment"],
+    title: "QA, security & go-live",
+    body: "We test on real devices, tune performance, apply security hardening where required, and deploy with documentation your team can run after handover.",
+    bullets: ["QA and accessibility", "Performance and security", "Launch and handover"],
   },
 ] as const;
 
@@ -201,27 +202,7 @@ export const projectChips = [
 ] as const;
 
 export const testimonials = [
-  {
-    quote:
-      "Clear communication, disciplined delivery, and a team that actually ships. Our launch landed on time.",
-    name: "Sarah Mensah",
-    role: "Operations Director",
-    initials: "SM",
-  },
-  {
-    quote:
-      "They translated messy requirements into a clean product roadmap — rare in this market.",
-    name: "James Osei",
-    role: "Founder",
-    initials: "JO",
-  },
-  {
-    quote:
-      "Security and performance were treated as first‑class, not an afterthought.",
-    name: "Ama Boateng",
-    role: "IT Lead",
-    initials: "AB",
-  },
+  ...googleReviewHighlights,
 ] as const;
 
 export const pricingPlans = [
