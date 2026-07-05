@@ -92,6 +92,36 @@ Replace examples with your real domains.
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | `OPENAI_API_KEY`, `OPENAI_CHAT_MODEL`                           | Passed to the **`backend`** service only: enables LLM replies for `POST /api/v1/chat` instead of the local fallback. Same vars as root `.env.example`. |
 | `FRONTEND_PORT`, `BACKEND_PORT` | Optional host port mappings (defaults **3020** / **4100** in `docker-compose.yml` if unset). Coolify’s proxy usually maps domains to container ports **3000** / **4000** directly, so you may leave these unset. `POSTGRES_PORT` / `REDIS_PORT` are not used by root `docker-compose.yml`. |
+| `COMPOSE_PARALLEL_LIMIT` | Set to `1` on small VPS if parallel `web` + `backend` builds OOM. |
+
+### Marketing, SEO & Google reviews (`web` service)
+
+Set in Coolify **before rebuilding `web`**. `NEXT_PUBLIC_*` values are baked in at **build time**; `GOOGLE_MAPS_API_KEY` is read at **runtime** (daily cache on `/reviews` and JSON-LD).
+
+| Name | Example | Purpose |
+| ---- | ------- | ------- |
+| `NEXT_PUBLIC_GOOGLE_REVIEWS_URL` | `https://maps.app.goo.gl/yWiB5pNhev2rgZSx7` | “Read reviews on Google” links (fallback exists in code if unset). |
+| `NEXT_PUBLIC_GOOGLE_PLACE_ID` | `ChIJ…` | Direct “Write a review” URL ([Place ID Finder](https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder)). |
+| `GOOGLE_MAPS_API_KEY` | server API key | Sync live rating/count from Google Places API. Enable **Places API** in Google Cloud; restrict key to Places + your server IP. |
+| `GOOGLE_PLACE_ID` | `ChIJ…` | Same as above; server-side Places lookup (optional if text search finds your listing). |
+| `NEXT_PUBLIC_CLUTCH_PROFILE_URL` | `https://clutch.co/profile/…` | Clutch badge on `/reviews` and trust section. |
+| `GOOGLE_VERIFICATION_CODE` | meta tag `content` value | Search Console HTML-tag verification. **Skip if you verified via** `public/google4aca0206ad5fa02e.html`. |
+| `NEXT_PUBLIC_GA_ID` | `G-XXXXXXXX` | Google Analytics. |
+| `NEXT_PUBLIC_SHOWREEL_URL` | CDN MP4 URL | Hero showreel video (optional). |
+
+**Production copy-paste (OceanCyber):**
+
+```bash
+NEXT_PUBLIC_GOOGLE_REVIEWS_URL=https://maps.app.goo.gl/yWiB5pNhev2rgZSx7
+# Optional — after creating Google Cloud project + Places API:
+# GOOGLE_MAPS_API_KEY=
+# GOOGLE_PLACE_ID=
+# NEXT_PUBLIC_GOOGLE_PLACE_ID=
+# NEXT_PUBLIC_CLUTCH_PROFILE_URL=
+# NEXT_PUBLIC_GA_ID=
+```
+
+After adding or changing any `NEXT_PUBLIC_*` or `GOOGLE_VERIFICATION_CODE`, **rebuild** the `web` service in Coolify.
 
 
 **Do not** use nested shell-style defaults inside a single value in Coolify (e.g. `http://localhost:${PORT}`). Use one plain URL per variable.

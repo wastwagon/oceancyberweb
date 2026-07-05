@@ -67,7 +67,11 @@ async function findPlaceByText(apiKey: string): Promise<GooglePlaceStats | null>
   );
   url.searchParams.set("input", query);
   url.searchParams.set("inputtype", "textquery");
-  url.searchParams.set("fields", "place_id,rating,user_ratings_total");
+  url.searchParams.set("fields", "place_id,rating,user_ratings_total,name");
+  url.searchParams.set(
+    "locationbias",
+    `circle:5000@${googleBusinessProfile.geo.latitude},${googleBusinessProfile.geo.longitude}`,
+  );
   url.searchParams.set("key", apiKey);
 
   const res = await fetch(url, { next: { revalidate: REVALIDATE_SECONDS } });

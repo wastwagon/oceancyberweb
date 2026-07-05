@@ -110,6 +110,12 @@ services:
       args:
         NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
         NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+        NEXT_PUBLIC_GOOGLE_REVIEWS_URL: ${NEXT_PUBLIC_GOOGLE_REVIEWS_URL:-}
+        NEXT_PUBLIC_GOOGLE_PLACE_ID: ${NEXT_PUBLIC_GOOGLE_PLACE_ID:-}
+        NEXT_PUBLIC_CLUTCH_PROFILE_URL: ${NEXT_PUBLIC_CLUTCH_PROFILE_URL:-}
+        NEXT_PUBLIC_GA_ID: ${NEXT_PUBLIC_GA_ID:-}
+        NEXT_PUBLIC_SHOWREEL_URL: ${NEXT_PUBLIC_SHOWREEL_URL:-}
+        GOOGLE_VERIFICATION_CODE: ${GOOGLE_VERIFICATION_CODE:-}
     container_name: oceancyber-web
     restart: unless-stopped
     # Reach host-mapped Postgres from inside the container (e.g. dev DB on 55432). Linux: host-gateway.
@@ -129,6 +135,15 @@ services:
       REVALIDATE_SECRET: ${REVALIDATE_SECRET}
       # Same secret as Nest — Next.js middleware + /api/auth/* verify the JWT stored in HttpOnly cookie
       JWT_SECRET: ${JWT_SECRET}
+      # Marketing / SEO / trust (optional — see COOLIFY.md)
+      GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY:-}
+      GOOGLE_PLACE_ID: ${GOOGLE_PLACE_ID:-}
+      GOOGLE_VERIFICATION_CODE: ${GOOGLE_VERIFICATION_CODE:-}
+      NEXT_PUBLIC_GOOGLE_REVIEWS_URL: ${NEXT_PUBLIC_GOOGLE_REVIEWS_URL:-}
+      NEXT_PUBLIC_GOOGLE_PLACE_ID: ${NEXT_PUBLIC_GOOGLE_PLACE_ID:-}
+      NEXT_PUBLIC_CLUTCH_PROFILE_URL: ${NEXT_PUBLIC_CLUTCH_PROFILE_URL:-}
+      NEXT_PUBLIC_GA_ID: ${NEXT_PUBLIC_GA_ID:-}
+      NEXT_PUBLIC_SHOWREEL_URL: ${NEXT_PUBLIC_SHOWREEL_URL:-}
     ports:
       - "${FRONTEND_PORT:-3020}:3000"
     depends_on:
