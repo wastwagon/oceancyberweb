@@ -52,31 +52,3 @@ export function formatGoogleReviewCountLabel(
 ): string {
   return `${count} Google review${count === 1 ? "" : "s"}`;
 }
-
-/**
- * Paraphrased themes from public Google feedback — not verbatim copies.
- * Link out for full verified reviews on Google.
- */
-export const googleReviewHighlights = [
-  {
-    quote:
-      "Highly competent and professional team — they exceeded our expectations on website delivery.",
-    name: "Verified on Google",
-    role: "Client review",
-    initials: "G",
-  },
-  {
-    quote:
-      "Dedicated from start to finish. They digitised a complex school management system on a tight timeline.",
-    name: "Verified on Google",
-    role: "Client review",
-    initials: "G",
-  },
-  {
-    quote:
-      "Clear communication and solid engineering. We would recommend them for web and mobile work in Accra.",
-    name: "Verified on Google",
-    role: "Client review",
-    initials: "G",
-  },
-] as const;

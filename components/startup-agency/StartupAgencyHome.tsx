@@ -16,7 +16,7 @@ import { SaProcessSection } from "@/components/startup-agency/sections/SaProcess
 import { SaPortfolioGallerySection } from "@/components/startup-agency/sections/SaPortfolioGallerySection";
 import { SaServicesSection } from "@/components/startup-agency/sections/SaServicesSection";
 import { SaTechSection } from "@/components/startup-agency/sections/SaTechSection";
-import { SaTestimonialsSection } from "@/components/startup-agency/sections/SaTestimonialsSection";
+import { SaTestimonialsSectionWithData } from "@/components/startup-agency/sections/SaTestimonialsSectionWithData";
 import { SaTrustSection } from "@/components/startup-agency/sections/SaTrustSection";
 import { SaPromoSection } from "@/components/startup-agency/sections/SaPromoSection";
 
@@ -46,7 +46,7 @@ export function StartupAgencyHome() {
         <SaProcessSection />
 
         {/* Phase 2: Social proof, pricing, tools */}
-        <SaTestimonialsSection />
+        <SaTestimonialsSectionWithData />
         <SaTrustSection />
         <SaPricingSection />
         <SaCostEstimatorSection />

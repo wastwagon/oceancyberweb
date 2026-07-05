@@ -3,9 +3,18 @@
 import Link from "next/link";
 import { ExternalLink, Star } from "lucide-react";
 import { getGoogleReviewCta } from "@/lib/startup-agency/reviews";
+import type { GooglePlaceStats } from "@/lib/google-places-stats";
 
-export function SaGoogleReviewsBanner() {
-  const { profileUrl, rating, reviewCount, businessName } = getGoogleReviewCta();
+type Props = {
+  stats?: GooglePlaceStats;
+};
+
+export function SaGoogleReviewsBanner({ stats }: Props) {
+  const fallback = getGoogleReviewCta();
+  const rating = stats?.rating ?? fallback.rating;
+  const reviewCount = stats?.reviewCount ?? fallback.reviewCount;
+  const businessName = fallback.businessName;
+  const profileUrl = fallback.profileUrl;
   const fullStars = Math.floor(rating);
   const hasHalf = rating - fullStars >= 0.5;
 
@@ -31,6 +40,9 @@ export function SaGoogleReviewsBanner() {
       <p className="mt-2 text-sm text-sa-muted">
         {reviewCount} verified reviews · {businessName}
       </p>
+      {stats?.source === "places-api" ? (
+        <p className="mt-2 text-xs text-sa-muted/70">Synced from Google Business Profile</p>
+      ) : null}
       <Link
         href={profileUrl}
         target="_blank"

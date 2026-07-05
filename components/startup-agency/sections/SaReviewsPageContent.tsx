@@ -4,13 +4,14 @@ import {
   getGoogleBusinessProfileUrl,
   getGoogleWriteReviewUrl,
   googleBusinessProfile,
-  googleReviewHighlights,
 } from "@/lib/startup-agency/google-business";
 import { getReviewBadges } from "@/lib/startup-agency/reviews";
-import type { GooglePlaceStats } from "@/lib/google-places-stats";
+import { GoogleReviewCard } from "@/components/startup-agency/sections/GoogleReviewCard";
+import type { GooglePlaceReview, GooglePlaceStats } from "@/lib/google-places-stats";
 
 type Props = {
   stats: GooglePlaceStats;
+  reviews: GooglePlaceReview[];
 };
 
 function StarRow({ rating }: { rating: number }) {
@@ -34,7 +35,7 @@ function StarRow({ rating }: { rating: number }) {
   );
 }
 
-export function SaReviewsPageContent({ stats }: Props) {
+export function SaReviewsPageContent({ stats, reviews }: Props) {
   const profileUrl = getGoogleBusinessProfileUrl();
   const writeReviewUrl = getGoogleWriteReviewUrl();
   const badges = getReviewBadges().map((badge) =>
@@ -58,8 +59,7 @@ export function SaReviewsPageContent({ stats }: Props) {
             What clients say on Google
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-sa-muted">
-            Our reputation is built on delivery — not marketing copy. Read verified
-            reviews on Google or leave your own after working with us.
+            Real reviews from our Google Business Profile — synced automatically.
           </p>
         </div>
 
@@ -113,27 +113,22 @@ export function SaReviewsPageContent({ stats }: Props) {
           ))}
         </div>
 
-        <div className="mx-auto mt-20 grid max-w-5xl gap-6 md:grid-cols-3">
-          {googleReviewHighlights.map((item, index) => (
-            <article
-              key={index}
-              className="rounded-3xl border border-sa-border bg-sa-surface/30 p-6"
-            >
-              <StarRow rating={5} />
-              <blockquote className="mt-4 text-sm leading-relaxed text-sa-muted">
-                &ldquo;{item.quote}&rdquo;
-              </blockquote>
-              <footer className="mt-6 border-t border-sa-border/60 pt-4">
-                <p className="text-sm font-semibold text-white">{item.name}</p>
-                <p className="text-xs text-sa-muted">{item.role}</p>
-              </footer>
-            </article>
-          ))}
-        </div>
+        {reviews.length > 0 ? (
+          <div className="mx-auto mt-20 grid max-w-5xl gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {reviews.map((review, index) => (
+              <GoogleReviewCard key={`${review.name}-${index}`} review={review} />
+            ))}
+          </div>
+        ) : (
+          <p className="mx-auto mt-20 max-w-xl text-center text-sm text-sa-muted">
+            Recent Google reviews will appear here once the Places API key is configured on the
+            server.
+          </p>
+        )}
 
         <p className="mx-auto mt-10 max-w-2xl text-center text-xs leading-relaxed text-sa-muted/80">
-          Highlights above summarise themes from public Google feedback. Full text and
-          timestamps appear only on{" "}
+          Showing up to five recent public reviews from Google. View all {stats.reviewCount}{" "}
+          on{" "}
           <Link
             href={profileUrl}
             target="_blank"

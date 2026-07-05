@@ -1,7 +1,6 @@
 /** Marketing homepage content — structure aligned with Start-Up Agency; copy tailored for OceanCyber. */
 
 import { serviceImages } from "./service-images";
-import { googleReviewHighlights } from "./google-business";
 
 export const heroTagline =
   "We design and build digital products that help African businesses grow — from brand and UX to launch.";
@@ -199,10 +198,6 @@ export const projectChips = [
   "Healthcare Portal Hardening",
   "E‑commerce Platform Rebuild",
   "Government Digital Strategy",
-] as const;
-
-export const testimonials = [
-  ...googleReviewHighlights,
 ] as const;
 
 export const pricingPlans = [

@@ -116,6 +116,21 @@ try {
   console.log(`  Place ID:  ${resolvedPlaceId}`);
   if (result.url) console.log(`  Maps URL:  ${result.url}`);
 
+  const reviewsUrl = new URL("https://maps.googleapis.com/maps/api/place/details/json");
+  reviewsUrl.searchParams.set("place_id", resolvedPlaceId);
+  reviewsUrl.searchParams.set("fields", "reviews");
+  reviewsUrl.searchParams.set("key", apiKey);
+  const reviewsRes = await fetch(reviewsUrl);
+  const reviewsData = await reviewsRes.json();
+  const reviews = reviewsData.result?.reviews ?? [];
+  if (reviews.length > 0) {
+    console.log(`\n  Recent reviews (${reviews.length}):`);
+    for (const review of reviews) {
+      const snippet = (review.text ?? "").slice(0, 80).replace(/\s+/g, " ");
+      console.log(`    · ${review.author_name} (${review.rating}★): ${snippet}…`);
+    }
+  }
+
   console.log("\nAdd to Coolify (web service):");
   console.log(`  GOOGLE_MAPS_API_KEY=${apiKey.slice(0, 8)}…`);
   console.log(`  GOOGLE_PLACE_ID=${resolvedPlaceId}`);
