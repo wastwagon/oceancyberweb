@@ -193,11 +193,14 @@ export async function signUp(email: string, password: string, fullName?: string)
   });
   const data = (await res.json().catch(() => ({}))) as {
     user?: AuthUser;
-    message?: string;
+    message?: string | string[];
     error?: string;
   };
   if (!res.ok) {
-    throw new Error(data.message || data.error || "Sign-up failed");
+    const msg = Array.isArray(data.message)
+      ? data.message.join(". ")
+      : data.message || data.error || "Sign-up failed";
+    throw new Error(msg);
   }
   if (!data.user?.email) {
     throw new Error("Missing user from sign-up response");

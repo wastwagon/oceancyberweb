@@ -47,6 +47,7 @@ export class AuthService {
       data: {
         email: dto.email.toLowerCase(),
         passwordHash,
+        fullName: dto.fullName?.trim() || null,
       },
       select: { id: true, email: true, role: true },
     });

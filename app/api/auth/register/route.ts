@@ -21,10 +21,18 @@ export async function POST(req: Request) {
     body: JSON.stringify(body),
   });
 
-  const data = (await upstream.json().catch(() => ({}))) as NestAuthSuccess & { message?: string };
+  const data = (await upstream.json().catch(() => ({}))) as NestAuthSuccess & {
+    message?: string | string[];
+  };
 
   if (!upstream.ok) {
-    const msg = typeof data.message === "string" ? data.message : "Registration failed";
+    const raw = data.message;
+    const msg =
+      typeof raw === "string"
+        ? raw
+        : Array.isArray(raw)
+          ? raw.join(". ")
+          : "Registration failed";
     return NextResponse.json({ message: msg }, { status: upstream.status });
   }
 

@@ -69,7 +69,7 @@ export function FxProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     let cancelled = false;
     setStatus((s) => (s === "idle" ? "loading" : s));
-    fetch(`${getApiBaseUrl()}/fx/rates`)
+    fetch(`${getApiBaseUrl()}/api/v1/fx/rates`)
       .then(async (res) => {
         if (!res.ok) throw new Error(String(res.status));
         return res.json() as Promise<FxResponse>;
