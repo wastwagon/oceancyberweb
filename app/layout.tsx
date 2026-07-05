@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { StartupAgencyNavbar } from "@/components/startup-agency/StartupAgencyNavbar";
@@ -10,6 +11,8 @@ import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
 import { LocalBusinessJsonLd } from "@/components/seo/LocalBusinessJsonLd";
 import { WebSiteJsonLd } from "@/components/seo/WebSiteJsonLd";
 import { WebVitals } from "@/components/analytics/WebVitals";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { GoogleAnalyticsRouteTracker } from "@/components/analytics/GoogleAnalyticsRouteTracker";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { CreativeEnhancements } from "@/components/shared/CreativeEnhancements";
 
@@ -100,7 +103,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
       <body className="sa-shell min-h-screen font-sans antialiased">
+        <GoogleAnalytics />
         <AppProviders>
+          <Suspense fallback={null}>
+            <GoogleAnalyticsRouteTracker />
+          </Suspense>
           <CreativeEnhancements />
           <OrganizationJsonLd />
           <LocalBusinessJsonLd />
