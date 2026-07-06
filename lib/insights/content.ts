@@ -103,6 +103,54 @@ export const insightPosts: InsightPost[] = [
     readTime: "10 min read",
   },
   {
+    slug: "ghana-momo-economy",
+    title: "Navigating the GH¢3 Trillion Mobile Money Economy",
+    excerpt:
+      "How Ghana's mobile money volume reshapes product design, fraud controls, and partnership strategy for fintech and commerce teams.",
+    paragraphs: [
+      "Ghana's mobile money rails now move volumes that rival many traditional banking segments. For product teams, that scale changes the baseline: users expect instant transfers, agent-network fallbacks, and reconciliation that survives end-of-day spikes.",
+      "Winning operators treat MoMo as infrastructure—not a checkout checkbox. That means clear fee disclosure, idempotent payment callbacks, dispute flows tied to telco statements, and fraud monitoring tuned to SIM-swap and social-engineering patterns common in high-velocity wallets.",
+      "Partnership governance matters as much as UX. API uptime, settlement timing, and KYC handoffs between aggregators and merchants should be contracted early. Teams that map money movement before marketing spend avoid painful retrofits when volume grows.",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80",
+    category: "Finance",
+    date: "May 12, 2024",
+    readTime: "6 min read",
+  },
+  {
+    slug: "ghana-cybersecurity-trends",
+    title: "Why Cyberattacks on Ghanaian Businesses Rose 50% in 2024",
+    excerpt:
+      "The threat patterns driving higher incident rates for Ghanaian SMEs—and the controls that reduce exposure without slowing delivery.",
+    paragraphs: [
+      "Rising attack rates against Ghanaian businesses reflect a familiar mix: phishing aimed at finance and HR inboxes, exposed admin panels on hastily launched sites, and credential reuse across business email and cloud tools.",
+      "SMEs are hit hardest because security is often deferred until after launch. The practical fix is sequencing: MFA on email and admin accounts, patched dependencies on public-facing apps, backups that are tested—not just scheduled—and an incident contact list before campaigns go live.",
+      "Leaders should align security spend with revenue risk. Payment flows, customer data, and brand-facing properties deserve earlier hardening than internal experiments. Measurable baselines—patch age, MFA coverage, phishing simulation results—beat generic awareness slides.",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=80",
+    category: "Security",
+    date: "April 18, 2024",
+    readTime: "5 min read",
+  },
+  {
+    slug: "ecommerce-growth-ghana",
+    title: "Preparing for Ghana's US$1 Billion E‑commerce Boom in 2025",
+    excerpt:
+      "What merchants and marketplaces should invest in now—logistics, payments, and ops systems—to capture Ghana's accelerating online retail growth.",
+    paragraphs: [
+      "Ghana's e-commerce trajectory is less about storefront aesthetics and more about fulfillment truth: accurate delivery windows, returns policies customers trust, and payment options that match how people actually pay on mobile.",
+      "Operators preparing for the next growth wave should prioritize inventory visibility, carrier integrations with realistic SLA messaging, and checkout flows that surface fees before confirmation. Campaign traffic amplifies weak ops faster than it fixes them.",
+      "Platform choices should support scale without re-platforming every year—catalog tooling, promo engines, and reporting that finance and marketing both trust. Teams that build operational muscle early compound gains when demand spikes.",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80",
+    category: "Business",
+    date: "March 22, 2024",
+    readTime: "7 min read",
+  },
+  {
     slug: "data-privacy-compliance",
     title: "Data Privacy and Compliance in the Digital Age",
     excerpt:
