@@ -1,9 +1,6 @@
-import { CaseStudies } from "@/components/sections/CaseStudies";
+import { permanentRedirect } from "next/navigation";
 
-export default function CaseStudiesPage() {
-  return (
-    <main>
-      <CaseStudies />
-    </main>
-  );
+/** Case study index consolidated under `/portfolio`. */
+export default function CaseStudiesRedirectPage() {
+  permanentRedirect("/portfolio");
 }

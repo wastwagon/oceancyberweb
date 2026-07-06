@@ -48,6 +48,8 @@ const config: Config = {
         /** Start-Up Agencyy–style marketing tokens (Webflow :root parity) */
         sa: {
           bg: "#000000",
+          /** App workspace base — softer than pure black for dashboard/admin. */
+          workspace: "#0c0c10",
           surface: "#131317",
           primary: "#bbf340",
           heading: "#ffffff",

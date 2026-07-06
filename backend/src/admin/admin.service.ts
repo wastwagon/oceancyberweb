@@ -1,6 +1,7 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { Prisma } from "@prisma/client";
+import { BillingService } from "../billing/billing.service";
 import { PrismaService } from "../prisma/prisma.service";
 import type {
   CreateSiteProjectDto,
@@ -16,6 +17,7 @@ export class AdminService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly config: ConfigService,
+    private readonly billing: BillingService,
   ) {}
 
   async listSiteProjects() {
@@ -244,11 +246,55 @@ export class AdminService {
     };
   }
 
-  async listUsers(take: number) {
-    const t = Math.min(Math.max(take, 1), 100);
-    const rows = await this.prisma.user.findMany({
-      take: t,
-      orderBy: { createdAt: "desc" },
+  async listUsers(opts: { take: number; skip?: number; q?: string }) {
+    const take = Math.min(Math.max(opts.take, 1), 50);
+    const skip = Math.max(opts.skip ?? 0, 0);
+    const where: Prisma.UserWhereInput = {};
+    const q = opts.q?.trim();
+    if (q) {
+      where.OR = [
+        { email: { contains: q, mode: "insensitive" } },
+        { fullName: { contains: q, mode: "insensitive" } },
+      ];
+    }
+    const [rows, total] = await Promise.all([
+      this.prisma.user.findMany({
+        take,
+        skip,
+        where,
+        orderBy: { createdAt: "desc" },
+        select: {
+          id: true,
+          email: true,
+          role: true,
+          fullName: true,
+          createdAt: true,
+          walletBalanceMinor: true,
+          walletCurrency: true,
+        },
+      }),
+      this.prisma.user.count({ where }),
+    ]);
+    return {
+      users: rows.map((r) => ({
+        ...r,
+        walletBalanceMinor: r.walletBalanceMinor.toString(),
+      })),
+      total,
+      skip,
+      take,
+    };
+  }
+
+  async updateUserRole(userId: string, role: "user" | "admin", actorEmail: string) {
+    const user = await this.prisma.user.findUnique({ where: { id: userId } });
+    if (!user) throw new NotFoundException("User not found");
+    if (user.email.toLowerCase() === actorEmail.toLowerCase() && role === "user") {
+      throw new BadRequestException("You cannot demote your own admin account.");
+    }
+    const row = await this.prisma.user.update({
+      where: { id: userId },
+      data: { role },
       select: {
         id: true,
         email: true,
@@ -259,16 +305,21 @@ export class AdminService {
         walletCurrency: true,
       },
     });
-    return rows.map((r) => ({
-      ...r,
-      walletBalanceMinor: r.walletBalanceMinor.toString(),
-    }));
+    return {
+      ...row,
+      walletBalanceMinor: row.walletBalanceMinor.toString(),
+    };
   }
 
-  async listRecentTransactions(take: number) {
-    const t = Math.min(Math.max(take, 1), 100);
+  async listTransactions(opts: { take: number; status?: string }) {
+    const t = Math.min(Math.max(opts.take, 1), 100);
+    const where =
+      opts.status && opts.status !== "all"
+        ? { status: opts.status }
+        : undefined;
     const rows = await this.prisma.paymentTransaction.findMany({
       take: t,
+      where,
       orderBy: { createdAt: "desc" },
       include: { user: { select: { email: true } } },
     });
@@ -286,6 +337,10 @@ export class AdminService {
     }));
   }
 
+  async reconcileTransaction(transactionId: string) {
+    return this.billing.adminReconcilePaystackTransaction(transactionId);
+  }
+
   async listRenewalIssues(take: number) {
     const t = Math.min(Math.max(take, 1), 100);
     const rows = await this.prisma.userRenewal.findMany({
@@ -293,7 +348,9 @@ export class AdminService {
       take: t,
       orderBy: { updatedAt: "desc" },
       include: {
-        user: { select: { email: true, id: true } },
+        user: {
+          select: { email: true, id: true, walletBalanceMinor: true },
+        },
         plan: { select: { name: true, code: true, amountMinor: true } },
       },
     });
@@ -304,11 +361,16 @@ export class AdminService {
       graceEndsAt: r.graceEndsAt,
       userEmail: r.user.email,
       userId: r.user.id,
+      walletBalanceMinor: r.user.walletBalanceMinor.toString(),
       planName: r.plan.name,
       planCode: r.plan.code,
       amountMinor: r.plan.amountMinor.toString(),
       autoRenew: r.autoRenewUsingWallet,
     }));
+  }
+
+  async adminChargeRenewal(renewalId: string) {
+    return this.billing.adminChargeRenewalFromWallet(renewalId);
   }
 
   /** Public-site inbound messages and calculator leads (PostgreSQL `Contact` table, written by Next.js). */
@@ -418,7 +480,7 @@ export class AdminService {
           .join(","),
       );
     }
-    return lines.join("\n");
+    return `\uFEFF${lines.join("\n")}`;
   }
 
   async getContactPresetCounts(filters: {
@@ -428,19 +490,28 @@ export class AdminService {
     dateRange?: string;
   }) {
     const base = this.buildContactWhere(filters);
-    const [all, newOnly, projectCalc, chat] = await Promise.all([
+    const [all, newOnly, projectCalc, chat, namecheapCheckout, websiteToAppQuote] =
+      await Promise.all([
       this.prisma.contact.count({ where: { ...base } }),
       this.prisma.contact.count({ where: { ...base, status: "new" } }),
       this.prisma.contact.count({
         where: { ...base, source: "project_calculator" },
       }),
       this.prisma.contact.count({ where: { ...base, source: "chat" } }),
+      this.prisma.contact.count({
+        where: { ...base, source: "namecheap_unified_checkout" },
+      }),
+      this.prisma.contact.count({
+        where: { ...base, source: "website_to_app_quote" },
+      }),
     ]);
     return {
       all,
       newOnly,
       projectCalculator: projectCalc,
       chat,
+      namecheapCheckout,
+      websiteToAppQuote,
     };
   }
 

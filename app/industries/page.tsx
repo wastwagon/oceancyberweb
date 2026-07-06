@@ -72,7 +72,7 @@ const industries: IndustryCard[] = [
       "Travel apps",
       "Customer experience platforms",
     ],
-    href: null,
+    href: "/industries/tourism",
   },
   {
     title: "Retail & E-commerce",
@@ -98,7 +98,7 @@ const industries: IndustryCard[] = [
       "Client portals",
       "Legal analytics",
     ],
-    href: null,
+    href: "/industries/legal",
   },
 ];
 

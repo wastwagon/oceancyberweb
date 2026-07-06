@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { InsightArticleView } from "@/components/insights/InsightArticleView";
-import {
-  getInsightPostBySlug,
-  insightArticlePath,
-  insightPosts,
-} from "@/lib/insights/content";
+import { getInsightPostBySlug, getInsightPosts } from "@/lib/data/insights-loader";
+import { insightArticlePath } from "@/lib/insights/content";
+
+export const revalidate = 60;
 
 const siteBase =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
@@ -15,22 +14,23 @@ interface InsightArticlePageProps {
   params: { slug: string };
 }
 
-export default function InsightArticlePage({ params }: InsightArticlePageProps) {
-  const post = getInsightPostBySlug(params.slug);
+export default async function InsightArticlePage({ params }: InsightArticlePageProps) {
+  const post = await getInsightPostBySlug(params.slug);
   if (!post) {
     notFound();
   }
   return <InsightArticleView post={post} />;
 }
 
-export function generateStaticParams() {
-  return insightPosts.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  const posts = await getInsightPosts();
+  return posts.map((p) => ({ slug: p.slug }));
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
-}: InsightArticlePageProps): Metadata {
-  const post = getInsightPostBySlug(params.slug);
+}: InsightArticlePageProps): Promise<Metadata> {
+  const post = await getInsightPostBySlug(params.slug);
   if (!post) {
     return {
       title: "Article not found",

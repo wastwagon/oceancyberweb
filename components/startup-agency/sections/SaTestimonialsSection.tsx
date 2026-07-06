@@ -4,14 +4,17 @@ import Link from "next/link";
 import { getGoogleBusinessProfileUrl } from "@/lib/startup-agency/google-business";
 import { SaGoogleReviewsBanner } from "@/components/startup-agency/sections/SaGoogleReviewsBanner";
 import { GoogleReviewsCarousel } from "@/components/startup-agency/sections/GoogleReviewsCarousel";
+import { SaFeaturedQuotesStrip } from "@/components/startup-agency/sections/SaFeaturedQuotesStrip";
 import type { GooglePlaceReview, GooglePlaceStats } from "@/lib/google-places-stats";
+import type { TestimonialCard } from "@/lib/types/testimonial-card";
 
 type Props = {
   googleStats: GooglePlaceStats;
   googleReviews: GooglePlaceReview[];
+  featuredCards?: TestimonialCard[];
 };
 
-export function SaTestimonialsSection({ googleStats, googleReviews }: Props) {
+export function SaTestimonialsSection({ googleStats, googleReviews, featuredCards = [] }: Props) {
   const profileUrl = getGoogleBusinessProfileUrl();
 
   return (
@@ -61,6 +64,8 @@ export function SaTestimonialsSection({ googleStats, googleReviews }: Props) {
             </p>
           </>
         )}
+
+        <SaFeaturedQuotesStrip cards={featuredCards} />
       </div>
     </section>
   );

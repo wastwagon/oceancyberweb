@@ -240,9 +240,15 @@ export async function getAdminSummary() {
   }>("/api/v1/admin/summary");
 }
 
-export async function getAdminUsers(take = 40) {
-  return authRequest<
-    Array<{
+export async function getAdminUsers(opts?: { take?: number; skip?: number; q?: string }) {
+  const take = opts?.take ?? 20;
+  const skip = opts?.skip ?? 0;
+  const p = new URLSearchParams();
+  p.set("take", String(take));
+  p.set("skip", String(skip));
+  if (opts?.q?.trim()) p.set("q", opts.q.trim());
+  return authRequest<{
+    users: Array<{
       id: string;
       email: string;
       role: string;
@@ -250,11 +256,33 @@ export async function getAdminUsers(take = 40) {
       createdAt: string;
       walletBalanceMinor: string;
       walletCurrency: string;
-    }>
-  >(`/api/v1/admin/users?take=${take}`);
+    }>;
+    total: number;
+    skip: number;
+    take: number;
+  }>(`/api/v1/admin/users?${p.toString()}`);
 }
 
-export async function getAdminTransactions(take = 50) {
+export async function updateAdminUserRole(userId: string, role: "user" | "admin") {
+  return authRequest<{
+    id: string;
+    email: string;
+    role: string;
+    fullName: string | null;
+    createdAt: string;
+    walletBalanceMinor: string;
+    walletCurrency: string;
+  }>(`/api/v1/admin/users/${userId}/role`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ role }),
+  });
+}
+
+export async function getAdminTransactions(take = 50, status?: string) {
+  const p = new URLSearchParams();
+  p.set("take", String(take));
+  if (status && status !== "all") p.set("status", status);
   return authRequest<
     Array<{
       id: string;
@@ -268,7 +296,14 @@ export async function getAdminTransactions(take = 50) {
       providerReference: string;
       createdAt: string;
     }>
-  >(`/api/v1/admin/transactions?take=${take}`);
+  >(`/api/v1/admin/transactions?${p.toString()}`);
+}
+
+export async function adminReconcileTransaction(transactionId: string) {
+  return authRequest<{ ok: boolean; status: string; alreadyApplied?: boolean }>(
+    `/api/v1/admin/transactions/${transactionId}/reconcile`,
+    { method: "POST" },
+  );
 }
 
 export async function getAdminRenewalIssues(take = 50) {
@@ -280,12 +315,20 @@ export async function getAdminRenewalIssues(take = 50) {
       graceEndsAt: string | null;
       userEmail: string;
       userId: string;
+      walletBalanceMinor: string;
       planName: string;
       planCode: string;
       amountMinor: string;
       autoRenew: boolean;
     }>
   >(`/api/v1/admin/renewals/issues?take=${take}`);
+}
+
+export async function adminChargeRenewal(renewalId: string) {
+  return authRequest<{ ok: boolean; renewalId: string }>(
+    `/api/v1/admin/renewals/${renewalId}/charge`,
+    { method: "POST" },
+  );
 }
 
 export type AdminContactRow = {
@@ -339,6 +382,7 @@ export async function downloadAdminContactsCsv(filters?: {
   q?: string;
   dateRange?: string;
   sort?: string;
+  filenameSuffix?: string;
 }) {
   const p = new URLSearchParams();
   p.set("take", String(filters?.take ?? 1000));
@@ -359,7 +403,11 @@ export async function downloadAdminContactsCsv(filters?: {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `oceancyber-leads-${new Date().toISOString().slice(0, 10)}.csv`;
+  const date = new Date().toISOString().slice(0, 10);
+  const suffix = filters?.filenameSuffix?.replace(/[^a-z0-9-_]+/gi, "-").replace(/^-|-$/g, "");
+  a.download = suffix
+    ? `oceancyber-leads-${suffix}-${date}.csv`
+    : `oceancyber-leads-${date}.csv`;
   a.rel = "noopener";
   a.click();
   URL.revokeObjectURL(url);
@@ -377,6 +425,8 @@ export async function getAdminContactPresetCounts(filters?: {
     newOnly: number;
     projectCalculator: number;
     chat: number;
+    namecheapCheckout: number;
+    websiteToAppQuote: number;
   }>(`/api/v1/admin/contacts/preset-counts?${p.toString()}`);
 }
 

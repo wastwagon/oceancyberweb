@@ -12,7 +12,7 @@ import {
   type FormEvent,
 } from "react";
 import { useSearchParams } from "next/navigation";
-import { getApiBaseUrl } from "@/lib/api-config";
+import { publicApiFetch } from "@/lib/public-api";
 
 import { HeroSectionMotionLayers } from "@/components/layout/HeroSectionMotionLayers";
 import { WhatsAppButton } from "@/components/ghana-specific/WhatsAppButton";
@@ -114,7 +114,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
     setStatus("loading");
     setErrorMessage(null);
     try {
-      const res = await fetch(`${getApiBaseUrl()}/contact`, {
+      const res = await publicApiFetch("contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -16,6 +16,30 @@ const nextConfig = {
     optimizePackageImports: ["lucide-react", "framer-motion"],
     instrumentationHook: true,
   },
+  async redirects() {
+    return [
+      {
+        source: "/projects",
+        destination: "/portfolio",
+        permanent: true,
+      },
+      {
+        source: "/case-studies",
+        destination: "/portfolio",
+        permanent: true,
+      },
+      {
+        source: "/case-studies/:slug",
+        destination: "/portfolio/:slug",
+        permanent: true,
+      },
+      {
+        source: "/ocean-legacy",
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

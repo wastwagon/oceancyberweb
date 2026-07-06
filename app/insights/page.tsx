@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { InsightsPageClient } from "@/components/insights/InsightsPageClient";
+import { getInsightPosts } from "@/lib/data/insights-loader";
 import { withCanonical } from "@/lib/seo/canonical";
 
-export const metadata = withCanonical(
+export const revalidate = 60;
+
+export const metadata: Metadata = withCanonical(
   {
     title: "Insights",
     description:
@@ -20,10 +23,12 @@ function InsightsLoadingFallback() {
   );
 }
 
-export default function InsightsPage() {
+export default async function InsightsPage() {
+  const posts = await getInsightPosts();
+
   return (
     <Suspense fallback={<InsightsLoadingFallback />}>
-      <InsightsPageClient />
+      <InsightsPageClient posts={posts} />
     </Suspense>
   );
 }

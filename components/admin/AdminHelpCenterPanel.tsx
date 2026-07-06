@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BookOpen } from "lucide-react";
+import { defaultHelpArticles } from "@/lib/help-center/content";
 import { cn } from "@/lib/utils";
 
 type HelpFeedbackSummary = {
@@ -19,7 +20,6 @@ interface AdminHelpCenterPanelProps {
   all: HelpFeedbackSummary | null;
   last7d: HelpFeedbackSummary | null;
   last30d: HelpFeedbackSummary | null;
-  articleLabels: Record<string, string>;
 }
 
 const RANGES = [
@@ -32,9 +32,21 @@ export function AdminHelpCenterPanel({
   all,
   last7d,
   last30d,
-  articleLabels,
 }: AdminHelpCenterPanelProps) {
   const [range, setRange] = useState<(typeof RANGES)[number]["id"]>("30d");
+  const [articleLabels, setArticleLabels] = useState<Record<string, string>>(() =>
+    Object.fromEntries(defaultHelpArticles.map((a) => [a.id, a.title])),
+  );
+
+  useEffect(() => {
+    void fetch("/api/admin/help-center", { cache: "no-store" })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: { articles?: Array<{ id: string; title: string }> } | null) => {
+        if (!data?.articles?.length) return;
+        setArticleLabels(Object.fromEntries(data.articles.map((a) => [a.id, a.title])));
+      })
+      .catch(() => undefined);
+  }, []);
 
   const active =
     range === "7d" ? last7d : range === "30d" ? last30d : all;

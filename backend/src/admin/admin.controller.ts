@@ -8,10 +8,11 @@ import {
   Patch,
   Post,
   Query,
+  Req,
   Res,
   UseGuards,
 } from "@nestjs/common";
-import type { Response } from "express";
+import type { Request, Response } from "express";
 import {
   CreateSiteProjectDto,
   UpdateSiteProjectDto,
@@ -21,6 +22,7 @@ import {
   UpdateSiteTestimonialDto,
 } from "./dto/site-testimonial.dto";
 import { UpdateContactDto } from "./dto/update-contact.dto";
+import { UpdateUserRoleDto } from "./dto/update-user-role.dto";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { AdminGuard } from "./admin.guard";
 import { AdminService } from "./admin.service";
@@ -36,18 +38,52 @@ export class AdminController {
   }
 
   @Get("users")
-  users(@Query("take") take?: string) {
-    return this.admin.listUsers(take ? Number(take) : 40);
+  users(
+    @Query("take") take?: string,
+    @Query("skip") skip?: string,
+    @Query("q") q?: string,
+  ) {
+    return this.admin.listUsers({
+      take: take ? Number(take) : 20,
+      skip: skip ? Number(skip) : 0,
+      q,
+    });
+  }
+
+  @Patch("users/:id/role")
+  updateUserRole(
+    @Param("id") id: string,
+    @Body() body: UpdateUserRoleDto,
+    @Req() req: Request & { user?: { email: string } },
+  ) {
+    const actorEmail = req.user?.email?.trim();
+    if (!actorEmail) {
+      throw new BadRequestException("Authenticated admin required");
+    }
+    return this.admin.updateUserRole(id, body.role, actorEmail);
   }
 
   @Get("transactions")
-  transactions(@Query("take") take?: string) {
-    return this.admin.listRecentTransactions(take ? Number(take) : 50);
+  transactions(@Query("take") take?: string, @Query("status") status?: string) {
+    return this.admin.listTransactions({
+      take: take ? Number(take) : 50,
+      status,
+    });
+  }
+
+  @Post("transactions/:id/reconcile")
+  reconcileTransaction(@Param("id") id: string) {
+    return this.admin.reconcileTransaction(id);
   }
 
   @Get("renewals/issues")
   renewalIssues(@Query("take") take?: string) {
     return this.admin.listRenewalIssues(take ? Number(take) : 50);
+  }
+
+  @Post("renewals/:id/charge")
+  chargeRenewal(@Param("id") id: string) {
+    return this.admin.adminChargeRenewal(id);
   }
 
   @Get("contacts")

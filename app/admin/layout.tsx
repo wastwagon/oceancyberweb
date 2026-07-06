@@ -16,5 +16,9 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <RequireClientSession requireAdmin>{children}</RequireClientSession>;
+  return (
+    <RequireClientSession requireAdmin>
+      <div className="min-h-screen bg-sa-workspace">{children}</div>
+    </RequireClientSession>
+  );
 }

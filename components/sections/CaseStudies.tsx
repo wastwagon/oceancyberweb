@@ -91,7 +91,7 @@ export function CaseStudies() {
                 transition={staggerDelay(index, 0.07)}
               >
                 <Link
-                  href={`/case-studies/${study.slug}`}
+                  href={`/portfolio/${study.slug}`}
                   className="sa-card group flex h-full flex-col overflow-hidden transition-all duration-300 hover:border-sa-primary/50 md:flex-row md:items-stretch"
                 >
                   <div className="relative h-48 w-full shrink-0 overflow-hidden md:h-auto md:w-[44%] md:min-h-[260px]">

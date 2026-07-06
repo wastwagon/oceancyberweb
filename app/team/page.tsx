@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
-import { teamMembers } from "@/lib/data/team";
+import { getTeamMembers } from "@/lib/data/team-loader";
 import { withCanonical } from "@/lib/seo/canonical";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = withCanonical(
   {
@@ -14,7 +16,8 @@ export const metadata: Metadata = withCanonical(
   "/team",
 );
 
-export default function TeamPage() {
+export default async function TeamPage() {
+  const teamMembers = await getTeamMembers();
   return (
     <main className="sa-shell min-h-screen pb-24 pt-28 md:pb-0 md:pt-32">
       <section className="border-b border-sa-border pb-12">

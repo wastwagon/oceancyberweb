@@ -1,0 +1,70 @@
+[
+  {
+    "id": "wallet-topup",
+    "title": "How to top up wallet and pay renewals",
+    "category": "billing",
+    "body": "Go to Dashboard > Wallet, add funds with Paystack, then return to Dashboard and click Charge wallet on any due renewal.",
+    "actions": [
+      {
+        "label": "Open wallet",
+        "href": "/dashboard/wallet"
+      },
+      {
+        "label": "Open renewals dashboard",
+        "href": "/dashboard"
+      }
+    ]
+  },
+  {
+    "id": "past-due",
+    "title": "What to do when a renewal is past due",
+    "category": "renewals",
+    "body": "Past due means payment was not collected on schedule. Add funds and charge manually before grace ends to avoid suspension.",
+    "actions": [
+      {
+        "label": "Go to billing dashboard",
+        "href": "/dashboard"
+      }
+    ]
+  },
+  {
+    "id": "intake-vs-proposal",
+    "title": "Intake request vs formal proposal request",
+    "category": "support",
+    "body": "Use interactive intake to describe needs quickly. Use formal proposal request when you want a structured scope, timeline, and cost sections.",
+    "actions": [
+      {
+        "label": "Start interactive intake",
+        "href": "/get-started?topic=Need quote or proposal"
+      },
+      {
+        "label": "Request formal proposal",
+        "href": "/tools/proposal?topic=Need quote or proposal"
+      }
+    ]
+  },
+  {
+    "id": "project-estimate",
+    "title": "How to generate a project estimate in GHS",
+    "category": "websites",
+    "body": "Use the calculator to choose platform, design, scope, and timeline. It gives a rough range and lets you download a proforma PDF.",
+    "actions": [
+      {
+        "label": "Open project calculator",
+        "href": "/tools/project-cost"
+      }
+    ]
+  },
+  {
+    "id": "secure-launch",
+    "title": "Security checks before website launch",
+    "category": "security",
+    "body": "Minimum launch checks: HTTPS enabled, strong admin passwords, role-based access, backups, and monitoring alerts.",
+    "actions": [
+      {
+        "label": "View security journey",
+        "href": "/security-journey"
+      }
+    ]
+  }
+]

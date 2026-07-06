@@ -19,8 +19,13 @@ import { SaTechSection } from "@/components/startup-agency/sections/SaTechSectio
 import { SaTestimonialsSectionWithData } from "@/components/startup-agency/sections/SaTestimonialsSectionWithData";
 import { SaTrustSection } from "@/components/startup-agency/sections/SaTrustSection";
 import { SaPromoSection } from "@/components/startup-agency/sections/SaPromoSection";
+import type { ClientLogoEntry } from "@/lib/startup-agency/client-logos-runtime";
 
-export function StartupAgencyHome() {
+type StartupAgencyHomeProps = {
+  clientLogos: ClientLogoEntry[];
+};
+
+export function StartupAgencyHome({ clientLogos }: StartupAgencyHomeProps) {
   return (
     <div
       className="sa-shell relative min-h-screen bg-sa-bg text-sa-muted antialiased"
@@ -39,7 +44,7 @@ export function StartupAgencyHome() {
         {/* Phase 1: Hero → trust → story → services → work */}
         <SaHeroSection />
         <SaMarqueeSection />
-        <SaClientLogosSection />
+        <SaClientLogosSection entries={clientLogos} />
         <SaAboutSection />
         <SaServicesSection />
         <SaPortfolioGallerySection />

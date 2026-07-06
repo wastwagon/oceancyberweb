@@ -3,6 +3,15 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Search, Download, MessageSquare, Rocket, Construction, ExternalLink } from "lucide-react";
+import { sourceLabel } from "@/lib/ops/format";
+import {
+  LEAD_DATE_RANGE_OPTIONS,
+  LEAD_SORT_OPTIONS,
+  LEAD_SOURCE_OPTIONS,
+  LEAD_STATUS_OPTIONS,
+  leadPresetCount,
+  type LeadPresetCounts,
+} from "@/lib/ops/lead-filters";
 import { cn } from "@/lib/utils";
 import { 
   patchAdminContact, 
@@ -19,13 +28,15 @@ interface LeadPipelineProps {
   leadSourceFilter: string;
   setLeadSourceFilter: (s: string) => void;
   leadSearch: string;
+  leadSearchDebounced: string;
   setLeadSearch: (s: string) => void;
   leadDateRange: string;
   setLeadDateRange: (s: string) => void;
   leadSort: string;
+  setLeadSort: (s: string) => void;
   activePresetId: string | null;
   setActivePresetId: (s: string | null) => void;
-  presetCounts: any;
+  presetCounts: LeadPresetCounts | null;
   load: () => Promise<void>;
   setToast: (t: any) => void;
   setProjectBusy: (b: boolean) => void;
@@ -55,19 +66,6 @@ function websiteToAppBudgetSuggestion(metadata: unknown): number | null {
   if (band.includes("15,000 - 30,000")) return 22500;
   if (band.includes("Below GHS 15,000")) return 12000;
   return null;
-}
-
-function sourceLabel(s: string | null) {
-  if (s === "contact_form") return "Contact form";
-  if (s === "project_calculator") return "Project calculator";
-  if (s === "chat") return "Chat";
-  if (s === "intake_wizard") return "Interactive intake";
-  if (s === "proposal_request") return "Proposal request";
-  if (s === "help_center_feedback") return "Help center feedback";
-  if (s === "namecheap_unified_checkout") return "Namecheap unified checkout";
-  if (s === "website_to_app_quote") return "Website-to-Mobile App Conversion Quote";
-  if (s == null || s === "") return "—";
-  return s;
 }
 
 function ContactNotesField({
@@ -123,10 +121,12 @@ export function LeadPipeline({
   leadSourceFilter,
   setLeadSourceFilter,
   leadSearch,
+  leadSearchDebounced,
   setLeadSearch,
   leadDateRange,
   setLeadDateRange,
   leadSort,
+  setLeadSort,
   activePresetId,
   setActivePresetId,
   presetCounts,
@@ -136,7 +136,8 @@ export function LeadPipeline({
   setProjectSearch,
   LEAD_FILTER_PRESETS
 }: LeadPipelineProps) {
-  
+  const [exportBusy, setExportBusy] = useState(false);
+
   const linkedProjectIdFromContact = (
     notes: string | null,
     metadata: unknown,
@@ -151,7 +152,7 @@ export function LeadPipeline({
   };
 
   return (
-    <section className="space-y-6">
+    <section id="admin-leads" className="scroll-mt-28 space-y-6">
        <div>
           <h2 className="font-heading text-2xl font-bold text-white">Inbound Lead Flow <span className="text-sa-muted/30 text-sm ml-2">CONVERSION PIPELINE</span></h2>
           <p className="text-sm text-sa-muted/60 font-medium max-w-2xl">
@@ -187,60 +188,145 @@ export function LeadPipeline({
                     )}
                   >
                     {p.label}
-                    <span className={cn(
-                      "ml-2 rounded-full px-2 py-0.5 text-[9px] font-black",
-                      activePresetId === p.id ? "bg-black/10" : "bg-sa-surface/50 text-sa-primary"
-                    )}>
-                      {p.id === "all" ? (presetCounts?.all ?? 0) : p.id === "new" ? (presetCounts?.newOnly ?? 0) : p.id === "project-calc" ? (presetCounts?.projectCalculator ?? 0) : (presetCounts?.chat ?? "•")}
+                    <span
+                      className={cn(
+                        "ml-2 rounded-full px-2 py-0.5 text-[9px] font-black",
+                        activePresetId === p.id ? "bg-black/10" : "bg-sa-surface/50 text-sa-primary",
+                      )}
+                    >
+                      {leadPresetCount(p.id, presetCounts)}
                     </span>
                   </button>
                 ))}
                 <button
                   type="button"
-                  onClick={() => downloadAdminContactsCsv({ take: 1000, status: leadStatusFilter, source: leadSourceFilter, q: leadSearch, dateRange: leadDateRange, sort: leadSort })}
-                  className="ml-auto flex items-center gap-2 rounded-full border border-sa-primary/30 bg-sa-primary/5 px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-sa-primary hover:bg-sa-primary hover:text-black transition-all"
+                  disabled={exportBusy || leadLoading}
+                  onClick={async () => {
+                    setExportBusy(true);
+                    try {
+                      await downloadAdminContactsCsv({
+                        take: 5000,
+                        status: leadStatusFilter,
+                        source: leadSourceFilter,
+                        q: leadSearchDebounced,
+                        dateRange: leadDateRange,
+                        sort: leadSort,
+                        filenameSuffix: [
+                          leadStatusFilter !== "all" ? leadStatusFilter : null,
+                          leadSourceFilter !== "all" ? leadSourceFilter : null,
+                          leadDateRange !== "all" ? leadDateRange : null,
+                        ]
+                          .filter(Boolean)
+                          .join("-") || undefined,
+                      });
+                      setToast({ kind: "success", text: "Lead CSV downloaded." });
+                    } catch (err: unknown) {
+                      setToast({
+                        kind: "error",
+                        text: err instanceof Error ? err.message : "Export failed",
+                      });
+                    } finally {
+                      setExportBusy(false);
+                    }
+                  }}
+                  className="ml-auto flex items-center gap-2 rounded-full border border-sa-primary/30 bg-sa-primary/5 px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-sa-primary hover:bg-sa-primary hover:text-black transition-all disabled:opacity-50"
                 >
-                  <Download size={12} />
-                  Export CSV
+                  <Download size={12} className={exportBusy ? "animate-pulse" : ""} />
+                  {exportBusy ? "Exporting…" : "Export CSV"}
                 </button>
              </div>
 
-             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-sa-muted/40 px-1">Phase</label>
+                  <label className="px-1 text-[10px] font-black uppercase tracking-widest text-sa-muted/40">
+                    Phase
+                  </label>
                   <select
-                    className="w-full rounded-xl border border-sa-border bg-sa-bg px-4 py-2.5 text-xs font-bold uppercase text-white focus:ring-0"
+                    className="w-full rounded-xl border border-sa-border bg-sa-workspace px-4 py-2.5 text-xs font-bold uppercase text-white focus:ring-0"
                     value={leadStatusFilter}
-                    onChange={(e) => { setLeadStatusFilter(e.target.value); setActivePresetId(null); }}
+                    onChange={(e) => {
+                      setLeadStatusFilter(e.target.value);
+                      setActivePresetId(null);
+                    }}
                   >
-                    <option value="all">All Statuses</option>
-                    {["new", "contacted", "won", "lost"].map(s => <option key={s} value={s}>{s}</option>)}
+                    {LEAD_STATUS_OPTIONS.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div className="space-y-1.5 lg:col-span-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-sa-muted/40 px-1">Source Node</label>
+                  <label className="px-1 text-[10px] font-black uppercase tracking-widest text-sa-muted/40">
+                    Source
+                  </label>
                   <select
-                    className="w-full rounded-xl border border-sa-border bg-sa-bg px-4 py-2.5 text-xs font-bold uppercase text-white focus:ring-0"
+                    className="w-full rounded-xl border border-sa-border bg-sa-workspace px-4 py-2.5 text-xs font-bold uppercase text-white focus:ring-0"
                     value={leadSourceFilter}
-                    onChange={(e) => { setLeadSourceFilter(e.target.value); setActivePresetId(null); }}
+                    onChange={(e) => {
+                      setLeadSourceFilter(e.target.value);
+                      setActivePresetId(null);
+                    }}
                   >
-                    <option value="all">All Sources</option>
-                    <option value="contact_form">Contact Form</option>
-                    <option value="project_calculator">Project Calculator</option>
-                    <option value="chat">Internal Chat</option>
-                    <option value="website_to_app_quote">Website-to-App conversion</option>
-                    <option value="namecheap_unified_checkout">Infrastructure Checkout</option>
+                    {LEAD_SOURCE_OPTIONS.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
                   </select>
                 </div>
-                <div className="space-y-1.5 lg:col-span-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-sa-muted/40 px-1">Identity Search</label>
+                <div className="space-y-1.5">
+                  <label className="px-1 text-[10px] font-black uppercase tracking-widest text-sa-muted/40">
+                    Date range
+                  </label>
+                  <select
+                    className="w-full rounded-xl border border-sa-border bg-sa-workspace px-4 py-2.5 text-xs font-bold uppercase text-white focus:ring-0"
+                    value={leadDateRange}
+                    onChange={(e) => {
+                      setLeadDateRange(e.target.value);
+                      setActivePresetId(null);
+                    }}
+                  >
+                    {LEAD_DATE_RANGE_OPTIONS.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="space-y-1.5">
+                  <label className="px-1 text-[10px] font-black uppercase tracking-widest text-sa-muted/40">
+                    Sort
+                  </label>
+                  <select
+                    className="w-full rounded-xl border border-sa-border bg-sa-workspace px-4 py-2.5 text-xs font-bold uppercase text-white focus:ring-0"
+                    value={leadSort}
+                    onChange={(e) => {
+                      setLeadSort(e.target.value);
+                      setActivePresetId(null);
+                    }}
+                  >
+                    {LEAD_SORT_OPTIONS.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="space-y-1.5 sm:col-span-2 lg:col-span-6 xl:col-span-2">
+                  <label className="px-1 text-[10px] font-black uppercase tracking-widest text-sa-muted/40">
+                    Search
+                  </label>
                   <div className="relative">
                     <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-sa-muted/30" />
                     <input
                       value={leadSearch}
-                      onChange={(e) => { setLeadSearch(e.target.value); setActivePresetId(null); }}
+                      onChange={(e) => {
+                        setLeadSearch(e.target.value);
+                        setActivePresetId(null);
+                      }}
                       placeholder="Search identity or message..."
-                      className="w-full rounded-xl border border-sa-border bg-sa-bg pl-10 pr-4 py-2.5 text-xs font-bold text-white focus:ring-0"
+                      className="w-full rounded-xl border border-sa-border bg-sa-workspace py-2.5 pl-10 pr-4 text-xs font-bold text-white focus:ring-0"
                     />
                   </div>
                 </div>

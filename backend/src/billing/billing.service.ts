@@ -635,6 +635,73 @@ export class BillingService {
     };
   }
 
+  /** Admin: verify a pending Paystack charge and apply the same logic as the webhook. */
+  async adminReconcilePaystackTransaction(transactionId: string) {
+    const tx = await this.prisma.paymentTransaction.findUnique({
+      where: { id: transactionId },
+    });
+    if (!tx) throw new NotFoundException("Transaction not found");
+    if (tx.status === "success") {
+      return { ok: true as const, status: tx.status, alreadyApplied: true };
+    }
+    if (tx.provider !== "paystack") {
+      throw new BadRequestException(
+        "Only Paystack transactions can be reconciled from admin",
+      );
+    }
+
+    const paystackSecret = this.config.get<string>("PAYSTACK_SECRET_KEY");
+    if (!paystackSecret) {
+      throw new BadRequestException("PAYSTACK_SECRET_KEY is not configured");
+    }
+
+    const res = await fetch(
+      `${PAYSTACK_BASE}/transaction/verify/${encodeURIComponent(tx.providerReference)}`,
+      { headers: { Authorization: `Bearer ${paystackSecret}` } },
+    );
+    const body = (await res.json()) as {
+      status?: boolean;
+      message?: string;
+      data?: {
+        status?: string;
+        amount?: number;
+        reference?: string;
+        paid_at?: string;
+        metadata?: unknown;
+      };
+    };
+    if (!res.ok || !body.status || !body.data) {
+      throw new BadRequestException(
+        body.message || "Paystack verification failed",
+      );
+    }
+    if (body.data.status !== "success") {
+      throw new BadRequestException(
+        `Paystack reports status "${body.data.status ?? "unknown"}"`,
+      );
+    }
+
+    await this.handlePaystackWebhook({
+      event: "charge.success",
+      data: {
+        reference: body.data.reference ?? tx.providerReference,
+        amount: body.data.amount,
+        status: body.data.status,
+        paid_at: body.data.paid_at,
+        metadata: body.data.metadata,
+      },
+    });
+
+    const updated = await this.prisma.paymentTransaction.findUnique({
+      where: { id: transactionId },
+    });
+    return {
+      ok: true as const,
+      status: updated?.status ?? tx.status,
+      alreadyApplied: false,
+    };
+  }
+
   async handlePaystackWebhook(payload: unknown) {
     const event = (payload as { event?: string } | null)?.event;
     const tx = (payload as { data?: Record<string, unknown> } | null)?.data;
@@ -1021,6 +1088,36 @@ export class BillingService {
       where: { id: renewalId, userId: user.id },
     });
     if (!renewal) throw new NotFoundException("Renewal not found");
+    const result = await this.attemptWalletChargeRenewal(renewalId, {
+      forceRetry: true,
+      triggeredBy: "user",
+    });
+    if (!result.ok) {
+      const msg: Record<string, string> = {
+        insufficient_balance: "Insufficient wallet balance",
+        paused: "Renewal is paused",
+        cancelled: "Renewal is cancelled",
+        suspended: "Renewal is suspended after grace period — contact support",
+        grace_expired: "Grace period expired",
+        invalid_status: "Renewal cannot be charged in its current state",
+        not_found: "Renewal not found",
+        retry_later: "Please try again later",
+      };
+      throw new BadRequestException(
+        msg[result.code] || "Could not charge renewal",
+      );
+    }
+    void this.notifyWalletRenewalCharged(result.renewalId, result.userId).catch(
+      (e) => {
+        this.logger.error(
+          `notifyWalletRenewalCharged: ${e instanceof Error ? e.message : String(e)}`,
+        );
+      },
+    );
+    return result;
+  }
+
+  async adminChargeRenewalFromWallet(renewalId: string) {
     const result = await this.attemptWalletChargeRenewal(renewalId, {
       forceRetry: true,
       triggeredBy: "user",

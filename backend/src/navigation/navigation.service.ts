@@ -41,7 +41,6 @@ const DEFAULT_CONFIG = {
     { label: "About", href: "/about" },
     { label: "Team", href: "/team" },
     { label: "Pricing", href: "/pricing" },
-    { label: "Projects", href: "/projects" },
     { label: "Project calculator", href: "/tools/project-cost" },
     { label: "Contact", href: "/contact" },
     { label: "Services", href: "/services" },
@@ -60,7 +59,7 @@ const DEFAULT_CONFIG = {
       href: "/insights",
       label: "Resources",
       dropdownKey: "resources",
-      activeMatch: ["/insights", "/case-studies", "/design-process", "/security-journey"],
+      activeMatch: ["/insights", "/portfolio", "/design-process", "/security-journey"],
     },
     {
       href: "/help-center",
@@ -80,7 +79,7 @@ const DEFAULT_CONFIG = {
       href: "/about",
       label: "Company",
       dropdownKey: "company",
-      activeMatch: ["/about", "/team", "/portfolio", "/pricing", "/projects"],
+      activeMatch: ["/about", "/team", "/portfolio", "/pricing"],
     },
   ],
   mainHeaderDropdownContent: {
@@ -154,6 +153,16 @@ const DEFAULT_CONFIG = {
             "Retail technology to boost online sales and engagement.",
           link: "/industries/retail",
         },
+        {
+          heading: "Tourism & Hospitality",
+          description: "Booking and guest experience platforms for travel brands.",
+          link: "/industries/tourism",
+        },
+        {
+          heading: "Legal Services",
+          description: "Case management and secure client portals for law firms.",
+          link: "/industries/legal",
+        },
       ],
     },
     resources: {
@@ -170,7 +179,7 @@ const DEFAULT_CONFIG = {
         {
           heading: "Case studies",
           description: "Delivery outcomes across sectors in Ghana and beyond.",
-          link: "/case-studies",
+          link: "/portfolio",
         },
         {
           heading: "Design process",

@@ -16,15 +16,19 @@ import {
   buildInsightsHref,
   insightArticlePath,
   insightCategories,
-  insightPosts,
   parseInsightCategoryParam,
+  type InsightPost,
 } from "@/lib/insights/content";
 
 function contactHrefForTopic(title: string) {
   return `/contact?topic=${encodeURIComponent(title)}`;
 }
 
-export function InsightsPageClient() {
+type InsightsPageClientProps = {
+  posts: InsightPost[];
+};
+
+export function InsightsPageClient({ posts }: InsightsPageClientProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const q = (searchParams.get("q") ?? "").trim();
@@ -41,9 +45,9 @@ export function InsightsPageClient() {
   }, [q]);
 
   const byCategory = useMemo(() => {
-    if (category === "All") return insightPosts;
-    return insightPosts.filter((p) => p.category === category);
-  }, [category]);
+    if (category === "All") return posts;
+    return posts.filter((p) => p.category === category);
+  }, [category, posts]);
 
   const filtered = useMemo(() => {
     if (!q) return byCategory;

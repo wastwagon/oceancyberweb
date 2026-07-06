@@ -16,5 +16,9 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <RequireClientSession>{children}</RequireClientSession>;
+  return (
+    <RequireClientSession>
+      <div className="min-h-screen bg-sa-workspace">{children}</div>
+    </RequireClientSession>
+  );
 }

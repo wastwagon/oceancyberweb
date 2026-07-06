@@ -1,13 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
-import {
-  buildClientLogoEntries,
-  type ClientLogoEntry,
-} from "@/lib/startup-agency/client-logos-runtime";
+import type { ClientLogoEntry } from "@/lib/startup-agency/client-logos-runtime";
 
 function ClientLogoMark({ client }: { client: ClientLogoEntry }) {
   return (
@@ -23,22 +20,11 @@ function ClientLogoMark({ client }: { client: ClientLogoEntry }) {
   );
 }
 
-export function SaClientLogosSection() {
-  const [entries, setEntries] = useState<ClientLogoEntry[]>(() => buildClientLogoEntries());
+type SaClientLogosSectionProps = {
+  entries: ClientLogoEntry[];
+};
 
-  useEffect(() => {
-    void (async () => {
-      try {
-        const res = await fetch("/data/client-logos.json", { cache: "no-store" });
-        if (!res.ok) return;
-        const overrides = (await res.json()) as Record<string, string>;
-        setEntries(buildClientLogoEntries(overrides));
-      } catch {
-        /* defaults */
-      }
-    })();
-  }, []);
-
+export function SaClientLogosSection({ entries }: SaClientLogosSectionProps) {
   const loop = useMemo(() => [...entries, ...entries], [entries]);
 
   return (

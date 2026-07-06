@@ -25,9 +25,9 @@ export function ClientLogoManager() {
     <section className="rounded-2xl border border-sa-border bg-sa-surface p-6">
       <h2 className="text-lg font-bold text-white">Client logos</h2>
       <p className="mt-1 text-sm text-sa-muted/80">
-        Upload PNG, WebP, or SVG replacements. Overrides are stored in{" "}
+        Upload PNG, WebP, or SVG replacements. Overrides save to{" "}
         <code className="rounded bg-sa-bg px-1">public/data/client-logos.json</code> and
-        appear on the homepage after refresh.
+        publish on the homepage immediately after upload.
       </p>
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         {CLIENT_LOGO_KEYS.map(({ name, key }) => (

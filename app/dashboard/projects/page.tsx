@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import {
   initializeProjectInvoicePayment,
   listMyProjects,
@@ -9,10 +10,14 @@ import {
   type ClientProjectRow,
 } from "@/lib/auth-client";
 import { DashboardNav } from "@/components/dashboard/DashboardNav";
+import { PaystackReturnBanner } from "@/components/payments/PaystackReturnBanner";
+import { AppAlert } from "@/components/ui/AppAlert";
+import { usePaystackReturn } from "@/hooks/usePaystackReturn";
+import { formatMoney } from "@/lib/ops/format";
 import { cn } from "@/lib/utils";
 
 function money(amountMinor: string, currency: string) {
-  return `${currency} ${(Number(amountMinor) / 100).toFixed(2)}`;
+  return formatMoney(amountMinor, currency);
 }
 
 function badgeClass(status: string) {
@@ -53,12 +58,32 @@ function activityLabel(category: string): { label: string; cls: string } {
 }
 
 export default function DashboardProjectsPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen pb-16">
+          <div className="sa-container py-12 text-sm text-sa-muted">Loading projects...</div>
+        </main>
+      }
+    >
+      <DashboardProjectsContent />
+    </Suspense>
+  );
+}
+
+function DashboardProjectsContent() {
+  const searchParams = useSearchParams();
+  const paidProjectId = (searchParams.get("project") || "").trim();
+  const paidInvoiceId = (searchParams.get("invoice") || "").trim();
+  const paidFlag = searchParams.get("paid") === "1";
+  const paystackRef = (searchParams.get("reference") || searchParams.get("trxref") || "").trim();
+
   const [rows, setRows] = useState<ClientProjectRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [busyInvoiceId, setBusyInvoiceId] = useState<string | null>(null);
 
-  async function load() {
+  const load = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
@@ -69,21 +94,27 @@ export default function DashboardProjectsPage() {
     } finally {
       setLoading(false);
     }
-  }
+  }, []);
+
+  const payState = usePaystackReturn(paystackRef, {
+    onPaid: () => void load(),
+  });
 
   useEffect(() => {
-    load();
-  }, []);
+    void load();
+  }, [load]);
 
   useEffect(() => {
     if (loading || rows.length === 0 || typeof window === "undefined") return;
     const hash = window.location.hash.replace(/^#/, "");
-    if (!hash.startsWith("project-")) return;
-    const el = document.getElementById(hash);
+    const targetId =
+      hash.startsWith("project-") ? hash : paidProjectId ? `project-${paidProjectId}` : "";
+    if (!targetId.startsWith("project-")) return;
+    const el = document.getElementById(targetId);
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-  }, [loading, rows]);
+  }, [loading, rows, paidProjectId]);
 
   const totals = useMemo(() => {
     const total = rows.length;
@@ -106,9 +137,9 @@ export default function DashboardProjectsPage() {
   }
 
   return (
-    <main className="sa-shell min-h-screen bg-sa-bg pt-28 pb-16 md:py-36">
-      <div className="sa-container max-w-5xl space-y-6">
-        <header className="sa-card p-6 border-sa-border md:p-8">
+    <main className="min-h-screen pb-16">
+      <div className="sa-container max-w-5xl space-y-6 py-8 md:py-12">
+        <header className="sa-card border-sa-border p-6 md:p-8">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <p className="sa-eyebrow inline-flex">Dashboard</p>
@@ -132,6 +163,17 @@ export default function DashboardProjectsPage() {
           </div>
         </header>
 
+        <PaystackReturnBanner
+          state={paystackRef ? payState : paidFlag ? "paid" : "idle"}
+          successTitle="Invoice payment confirmed"
+          successMessage={
+            paidInvoiceId
+              ? `Payment for invoice ${paidInvoiceId} was received. Milestone status updates shortly.`
+              : "Your milestone payment was received. Invoice status updates shortly."
+          }
+          backHref="/dashboard"
+        />
+
         <section className="grid gap-6 md:grid-cols-3">
           <div className="sa-card p-6 border-sa-border md:p-8">
             <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">Projects</p>
@@ -148,9 +190,7 @@ export default function DashboardProjectsPage() {
         </section>
 
         {loading ? <p className="text-sa-muted text-sm px-2">Loading projects...</p> : null}
-        {error ? (
-          <div className="rounded-2xl border border-rose-500/50 bg-rose-500/10 px-5 py-4 text-sm text-rose-400">{error}</div>
-        ) : null}
+        {error ? <AppAlert variant="error">{error}</AppAlert> : null}
 
         {!loading && rows.length === 0 ? (
           <div className="rounded-2xl border border-sa-border border-dashed p-8 text-center text-sm text-sa-muted/80">

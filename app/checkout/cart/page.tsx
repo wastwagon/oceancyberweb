@@ -6,7 +6,7 @@ import { useMemo, useState } from "react";
 import { Trash2, ShoppingCart, User, CreditCard, ArrowRight, Check } from "lucide-react";
 import { FxPrice } from "@/components/currency/FxPrice";
 import { useCart } from "@/components/commerce/CartProvider";
-import { getApiBaseUrl } from "@/lib/api-config";
+import { publicApiFetch } from "@/lib/public-api";
 import { fadeUpProps, revealViewport, staggerDelay } from "@/lib/scroll-reveal";
 import { cn } from "@/lib/utils";
 
@@ -125,7 +125,7 @@ export default function CheckoutCartPage() {
     setCheckoutRef(null);
     setSubmitResults([]);
     try {
-      const res = await fetch(`${getApiBaseUrl()}/api/v1/domains/checkout`, {
+      const res = await publicApiFetch("domains/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

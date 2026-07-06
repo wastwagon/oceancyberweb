@@ -29,6 +29,7 @@ function mapPrismaProjectToCaseStudy(row: Project): PortfolioCaseStudy | null {
       services: v1.services,
       testimonial: v1.testimonial,
       results: v1.results,
+      liveUrl: row.liveUrl ?? undefined,
       projectType: v1.projectType,
       designArtifacts: v1.designArtifacts,
     };
@@ -47,6 +48,7 @@ function mapPrismaProjectToCaseStudy(row: Project): PortfolioCaseStudy | null {
     year: "",
     client: row.title,
     rating: 5,
+    liveUrl: row.liveUrl ?? undefined,
   };
 }
 
@@ -111,4 +113,13 @@ export async function getPortfolioCaseStudyBySlug(
   }
   const fallback = fallbackPortfolioCaseStudies.find((p) => p.slug === slug);
   return fallback ? enrichPortfolioCaseStudy(fallback) : null;
+}
+
+export async function getRelatedPortfolioProjects(
+  slug: string,
+  category: string,
+  limit = 3,
+): Promise<PortfolioCaseStudy[]> {
+  const all = await getPortfolioCaseStudies();
+  return all.filter((p) => p.slug !== slug && p.category === category).slice(0, limit);
 }

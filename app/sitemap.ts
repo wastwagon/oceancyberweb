@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getPortfolioSlugs } from "@/lib/data/portfolio-loader";
-import { insightArticlePath, insightPosts } from "@/lib/insights/content";
+import { getInsightPosts } from "@/lib/data/insights-loader";
+import { insightArticlePath } from "@/lib/insights/content";
 
 const base =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
@@ -20,7 +21,6 @@ const routes = [
   "/insights",
   "/portfolio",
   "/pricing",
-  "/projects",
   "/reviews",
   "/privacy",
   "/security-journey",
@@ -40,15 +40,17 @@ const routes = [
   "/industries/financial-services",
   "/industries/healthcare",
   "/industries/retail",
+  "/industries/tourism",
+  "/industries/legal",
 ];
-
-const insightRoutes = insightPosts.map((p) => insightArticlePath(p.slug));
 
 /** Align with portfolio revalidation so sitemap picks up new projects without redeploy. */
 export const revalidate = 300;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+  const insightPosts = await getInsightPosts();
+  const insightRoutes = insightPosts.map((p) => insightArticlePath(p.slug));
   const highIntent = new Set([
     "/get-started",
     "/tools/project-cost",

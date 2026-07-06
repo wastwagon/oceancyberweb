@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
 import { CaseStudyDetailView } from "@/components/portfolio/CaseStudyDetailView";
+import { getCaseStudyNarrativeBySlug } from "@/lib/data/case-studies";
 import {
   getPortfolioCaseStudyBySlug,
   getPortfolioSlugs,
+  getRelatedPortfolioProjects,
 } from "@/lib/data/portfolio-loader";
 
 /** Always resolve case study from DB / fallback so admin edits show without per-path static rebuild. */
@@ -21,6 +23,12 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPag
     notFound();
   }
 
+  const narrative = getCaseStudyNarrativeBySlug(params.slug);
+  const relatedProjects = await getRelatedPortfolioProjects(
+    params.slug,
+    project.category,
+  );
+
   return (
     <CaseStudyDetailView
       project={project}
@@ -28,6 +36,8 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPag
       backLabel="← Back to Portfolio"
       sidebarTitle="Project Details"
       detailTitle="View all portfolio"
+      narrative={narrative}
+      relatedProjects={relatedProjects}
     />
   );
 }

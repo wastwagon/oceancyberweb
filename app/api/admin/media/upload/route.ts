@@ -8,6 +8,7 @@ import {
   sanitizeUploadFolder,
   setClientLogoOverride,
 } from "@/lib/admin/media-upload-server";
+import { revalidateMarketingContent } from "@/lib/admin/revalidate-marketing";
 
 export const runtime = "nodejs";
 
@@ -45,6 +46,7 @@ export async function POST(request: Request) {
 
     if (clientKey && folder === "clients") {
       await setClientLogoOverride(sanitizeClientKey(clientKey), url);
+      revalidateMarketingContent("client-logos");
     }
 
     return NextResponse.json({ url });

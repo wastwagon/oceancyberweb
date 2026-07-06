@@ -2,9 +2,12 @@
 
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
+import { AppTopBar } from "@/components/app/AppTopBar";
+import { isAppRoute } from "@/lib/routes";
 
 /**
- * Hides the default site header/footer/chat on `/` when the marketing homepage renders its own shell (startup-agency layout).
+ * Marketing chrome on public pages; minimal workspace shell on `/dashboard` and `/admin`.
+ * Homepage (`/`) hides footer only — it renders its own footer in-page.
  */
 export function ConditionalChrome({
   header,
@@ -20,9 +23,19 @@ export function ConditionalChrome({
   children: ReactNode;
 }) {
   const pathname = usePathname();
-  const hideChrome = pathname === "/";
+  const appRoute = isAppRoute(pathname);
+  const homepage = pathname === "/";
 
-  if (hideChrome) {
+  if (appRoute) {
+    return (
+      <div className="sa-workspace-shell flex min-h-screen flex-col">
+        <AppTopBar />
+        <main className="flex-1">{children}</main>
+      </div>
+    );
+  }
+
+  if (homepage) {
     return (
       <>
         {header}

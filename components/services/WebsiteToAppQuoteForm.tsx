@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { getApiBaseUrl } from "@/lib/api-config";
+import { publicApiFetch } from "@/lib/public-api";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -59,7 +59,7 @@ export function WebsiteToAppQuoteForm() {
     setIsSubmitting(true);
     setStatus(null);
     try {
-      const res = await fetch(`${getApiBaseUrl()}/contact/website-to-app`, {
+      const res = await publicApiFetch("contact/website-to-app", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(form),

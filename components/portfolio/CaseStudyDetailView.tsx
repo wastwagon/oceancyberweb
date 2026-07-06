@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 import {
   DetailIntroMotion,
 } from "@/components/layout/DetailPageMotion";
@@ -23,6 +23,7 @@ type Props = {
   sidebarTitle: string;
   detailTitle: string;
   narrative?: CaseStudyNarrative | null;
+  relatedProjects?: PortfolioCaseStudy[];
 };
 
 export function CaseStudyDetailView({
@@ -32,6 +33,7 @@ export function CaseStudyDetailView({
   sidebarTitle,
   detailTitle,
   narrative,
+  relatedProjects = [],
 }: Props) {
   const designArtifacts = getDesignArtifactsForProject(project);
   const projectType = resolveProjectType(project);
@@ -236,22 +238,63 @@ export function CaseStudyDetailView({
                 </div>
 
                 <div className="space-y-4">
+                  {project.liveUrl ? (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="sa-btn-primary w-full justify-center"
+                    >
+                      Visit live site
+                      <ExternalLink className="ml-2 h-4 w-4" />
+                    </a>
+                  ) : null}
                   <Link
                     href={`/contact?topic=${encodeURIComponent(project.title)}`}
-                    className="sa-btn-primary w-full justify-center"
+                    className={project.liveUrl ? "sa-btn-outline w-full justify-center" : "sa-btn-primary w-full justify-center"}
                   >
                     Discuss this project
                   </Link>
-                  <Link
-                    href={backHref}
-                    className="sa-btn-outline w-full justify-center"
-                  >
-                    View all portfolio
+                  <Link href={backHref} className="sa-btn-outline w-full justify-center">
+                    {detailTitle}
                   </Link>
                 </div>
               </div>
             </div>
           </div>
+
+          {relatedProjects.length > 0 ? (
+            <div className="mt-20 space-y-6">
+              <h2 className="font-heading text-2xl font-bold text-white md:text-3xl">Related work</h2>
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {relatedProjects.map((item) => (
+                  <Link
+                    key={item.slug}
+                    href={`/portfolio/${item.slug}`}
+                    className="sa-card group overflow-hidden transition hover:border-sa-primary/30"
+                  >
+                    <div className="relative aspect-[16/10] w-full">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className="object-cover transition duration-500 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, 400px"
+                      />
+                    </div>
+                    <div className="p-5">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">
+                        {item.category}
+                      </p>
+                      <h3 className="mt-2 font-heading text-lg font-bold text-white group-hover:text-sa-primary">
+                        {item.title}
+                      </h3>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

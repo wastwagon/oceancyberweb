@@ -14,7 +14,6 @@ export default function robots(): MetadataRoute.Robots {
         "/admin",
         "/checkout",
         "/dashboard",
-        "/ocean-legacy",
         "/signin",
         "/signup",
       ],

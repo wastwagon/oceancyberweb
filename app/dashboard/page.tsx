@@ -5,12 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Plus, 
-  Wallet, 
   RefreshCcw, 
-  ArrowUpRight, 
-  Clock, 
-  ShieldCheck, 
-  LogOut,
   ChevronRight,
   AlertCircle
 } from "lucide-react";
@@ -28,7 +23,6 @@ import {
   listRenewalPlans,
   pauseRenewal,
   resumeRenewal,
-  signOut,
   type ClientProjectRow,
 } from "@/lib/auth-client";
 // Components
@@ -38,6 +32,7 @@ import { WalletHero } from "@/components/dashboard/WalletHero";
 import { SubscriptionNode } from "@/components/dashboard/SubscriptionNode";
 import { ActivityHub } from "@/components/dashboard/ActivityHub";
 import { DashboardSkeleton } from "@/components/dashboard/DashboardSkeleton";
+import { AppAlert } from "@/components/ui/AppAlert";
 
 type DashboardData = Awaited<ReturnType<typeof getBillingDashboard>>;
 
@@ -120,7 +115,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#050505] pb-20 pt-28 md:pt-36">
+    <main className="min-h-screen pb-20 pt-8 md:pt-12">
       {/* Background Glow */}
       <div className="pointer-events-none fixed left-1/2 top-0 -z-10 h-[500px] w-full -translate-x-1/2 overflow-hidden opacity-10 blur-[120px]">
         <div className="absolute inset-0 bg-gradient-to-b from-sa-primary/20 via-sa-primary/10 to-transparent" />
@@ -153,22 +148,17 @@ export default function DashboardPage() {
               Securely connected as <span className="text-white font-bold">{email || "..." }</span>
             </motion.p>
           </div>
-
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-wrap gap-2"
-          >
-             <button
+          <div className="flex flex-wrap items-end gap-3">
+            <button
               type="button"
-              onClick={() => void signOut()}
-              className="group flex items-center gap-2 rounded-full border border-rose-500/20 bg-rose-500/5 px-5 py-2.5 text-[10px] font-bold uppercase tracking-widest text-rose-400 transition-all hover:border-rose-500 hover:bg-rose-500/10 hover:text-white"
+              onClick={() => void load()}
+              disabled={loading}
+              className="rounded-full border border-sa-border bg-sa-surface/50 px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition hover:border-sa-primary/40 hover:text-white disabled:opacity-50"
             >
-              <LogOut size={12} className="transition-transform group-hover:-translate-x-1" />
-              Sign out
+              <RefreshCcw size={12} className={loading ? "mr-2 inline animate-spin" : "mr-2 inline"} />
+              Refresh
             </button>
-          </motion.div>
+          </div>
         </header>
 
         {/* Action Bar */}
@@ -183,17 +173,9 @@ export default function DashboardPage() {
         {loading && !data ? <DashboardSkeleton /> : null}
 
         {error ? (
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="rounded-2xl border border-rose-500/50 bg-rose-500/10 p-6 flex items-start gap-4 text-rose-400 shadow-[0_10px_30px_rgba(244,63,94,0.1)]"
-          >
-            <AlertCircle className="shrink-0" />
-            <div>
-              <p className="font-bold uppercase tracking-wider text-xs">System Error</p>
-              <p className="mt-1 text-sm font-medium">{error}</p>
-            </div>
-          </motion.div>
+          <AppAlert variant="error" title="Could not complete action">
+            {error}
+          </AppAlert>
         ) : null}
 
         {data ? (
@@ -222,8 +204,19 @@ export default function DashboardPage() {
                         <p className="mt-2 text-sm text-orange-400/80 max-w-2xl leading-relaxed">
                           You have <span className="font-bold text-white underline decoration-orange-500/50 underline-offset-4">{pastDueCount} past due</span> renewals
                           {suspendedCount > 0 ? ` and ${suspendedCount} suspended services.` : "."}
-                          Please fund your wallet to restore service stability.
+                          {" "}Top up your wallet and charge the affected renewal to restore service.
                         </p>
+                        <div className="mt-4 flex flex-wrap gap-3">
+                          <Link href="/dashboard/wallet" className="sa-btn-primary min-h-[40px] px-6 text-[10px]">
+                            Top up wallet
+                          </Link>
+                          <Link
+                            href="/help-center"
+                            className="rounded-full border border-orange-500/30 bg-orange-500/10 px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-orange-300 transition hover:bg-orange-500/20"
+                          >
+                            Billing help
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -287,7 +280,17 @@ export default function DashboardPage() {
                   <p className="text-sm text-sa-muted/60 font-medium">Deploy and manage your recurring service nodes.</p>
                 </div>
                 
-                <div className="flex flex-wrap items-center gap-3 bg-sa-surface/30 p-2 rounded-2xl border border-sa-border backdrop-blur-sm">
+                <div className="flex flex-col gap-3 bg-sa-surface/50 p-2 rounded-2xl border border-sa-border backdrop-blur-sm sm:flex-row sm:flex-wrap sm:items-center">
+                  <label className="flex cursor-pointer items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium text-sa-muted">
+                    <input
+                      type="checkbox"
+                      checked={autoRenewUsingWallet}
+                      onChange={(e) => setAutoRenewUsingWallet(e.target.checked)}
+                      className="h-4 w-4 rounded border-sa-border bg-sa-surface text-sa-primary focus:ring-sa-primary"
+                      disabled={creating || plans.length === 0}
+                    />
+                    Auto-renew from wallet
+                  </label>
                   <select
                     value={selectedPlanCode}
                     onChange={(e) => setSelectedPlanCode(e.target.value)}

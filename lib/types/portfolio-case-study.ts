@@ -23,6 +23,7 @@ export type PortfolioCaseStudy = {
   services?: string[];
   slug: string;
   results?: string;
+  liveUrl?: string;
   projectType?: PortfolioProjectType;
   designArtifacts?: DesignArtifact[];
 };

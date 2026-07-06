@@ -20,15 +20,17 @@ import {
   getAdminRenewalIssues,
   getAdminSummary,
   getAdminTransactions,
-  getAdminUsers,
   getProfile,
   listAdminClientProjects,
   getAdminHelpCenterFeedbackSummary,
+  adminChargeRenewal,
+  adminReconcileTransaction,
 } from "@/lib/auth-client";
+import { projectHasOpenBlocker } from "@/lib/ops/project-blockers";
 import { cn } from "@/lib/utils";
 
 // Components
-import { AdminStatGrid } from "@/components/admin/AdminStatGrid";
+import { AdminStatGrid, type AdminStatAction } from "@/components/admin/AdminStatGrid";
 import { AdminOpsPanels } from "@/components/admin/AdminOpsPanels";
 import { AdminHelpCenterPanel } from "@/components/admin/AdminHelpCenterPanel";
 import { AdminNav } from "@/components/admin/AdminNav";
@@ -38,43 +40,7 @@ import { UserRegistry } from "@/components/admin/UserRegistry";
 import { AdminSkeleton } from "@/components/admin/AdminSkeleton";
 import { ProjectDeploymentForm } from "@/components/admin/ProjectDeploymentForm";
 
-const LEAD_FILTER_PRESETS = [
-  { id: "all", label: "All leads", status: "all", source: "all", q: "", dateRange: "all" },
-  { id: "new", label: "New only", status: "new", source: "all", q: "", dateRange: "all" },
-  {
-    id: "project-calc",
-    label: "Project calculator",
-    status: "all",
-    source: "project_calculator",
-    q: "",
-    dateRange: "all",
-  },
-  { id: "chat", label: "Chat follow-ups", status: "all", source: "chat", q: "", dateRange: "all" },
-  {
-    id: "namecheap-checkout",
-    label: "Namecheap checkout",
-    status: "all",
-    source: "namecheap_unified_checkout",
-    q: "",
-    dateRange: "all",
-  },
-  {
-    id: "website-to-app",
-    label: "Website-to-Mobile App Conversion Quote",
-    status: "all",
-    source: "website_to_app_quote",
-    q: "",
-    dateRange: "all",
-  },
-] as const;
-
-const HELP_ARTICLE_LABELS: Record<string, string> = {
-  "wallet-topup": "How to top up wallet and pay renewals",
-  "past-due": "What to do when a renewal is past due",
-  "intake-vs-proposal": "Intake request vs formal proposal request",
-  "project-estimate": "How to generate a project estimate in GHS",
-  "secure-launch": "Security checks before website launch",
-};
+import { LEAD_FILTER_PRESETS } from "@/lib/ops/lead-filters";
 
 const PROJECT_ACTIVITY_CATEGORIES = [
   { id: "general", label: "General" },
@@ -89,29 +55,14 @@ const itemVariants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
 };
 
-function projectHasOpenBlocker(
-  activities: Array<{ note?: string | null; metadata?: { category?: string }; createdAt: string }> | undefined,
-): boolean {
-  if (!activities || activities.length === 0) return false;
-  const sorted = [...activities].sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-  );
-  for (const a of sorted) {
-    const note = (a.note || "").toLowerCase();
-    if (note.startsWith("blocker resolved:")) return false;
-    const category = a.metadata?.category || "general";
-    if (category === "blocker") return true;
-  }
-  return false;
-}
-
 export default function AdminPage() {
   const [allowed, setAllowed] = useState<null | boolean>(null);
   const [err, setErr] = useState<string | null>(null);
   const [summary, setSummary] = useState<any>(null);
-  const [users, setUsers] = useState<any>(null);
   const [txs, setTxs] = useState<any>(null);
   const [issues, setIssues] = useState<any>(null);
+  const [renewalBusyId, setRenewalBusyId] = useState<string | null>(null);
+  const [transactionBusyId, setTransactionBusyId] = useState<string | null>(null);
   const [contacts, setContacts] = useState<any>(null);
   const [leadStatusFilter, setLeadStatusFilter] = useState("all");
   const [leadSourceFilter, setLeadSourceFilter] = useState("all");
@@ -134,6 +85,54 @@ export default function AdminPage() {
   const normalizedProjectSearch = projectSearch.trim().toLowerCase();
   const blockedProjects = (adminProjects ?? []).filter((p: any) => projectHasOpenBlocker(p.activities));
 
+  const scrollToSection = useCallback((id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+
+  const handleStatAction = useCallback(
+    (action: AdminStatAction) => {
+      if (action === "users") {
+        scrollToSection("admin-user-registry");
+        return;
+      }
+      if (action === "transactions") {
+        scrollToSection("admin-transactions-panel");
+        return;
+      }
+      if (action === "renewals") {
+        scrollToSection("admin-ops-panels");
+        return;
+      }
+      if (action === "pending-payments") {
+        scrollToSection("admin-transactions-panel");
+        return;
+      }
+      if (action === "leads-week") {
+        setLeadStatusFilter("all");
+        setLeadSourceFilter("all");
+        setLeadSearch("");
+        setLeadSearchDebounced("");
+        setLeadDateRange("7d");
+        setActivePresetId(null);
+        scrollToSection("admin-leads");
+        return;
+      }
+      if (action === "calculator-leads") {
+        const preset = LEAD_FILTER_PRESETS.find((p) => p.id === "project-calc");
+        if (preset) {
+          setLeadStatusFilter(preset.status);
+          setLeadSourceFilter(preset.source);
+          setLeadSearch(preset.q);
+          setLeadSearchDebounced(preset.q);
+          setLeadDateRange(preset.dateRange);
+          setActivePresetId(preset.id);
+        }
+        scrollToSection("admin-leads");
+      }
+    },
+    [scrollToSection],
+  );
+
   const load = useCallback(async () => {
     setErr(null);
     setLeadLoading(true);
@@ -145,9 +144,8 @@ export default function AdminPage() {
     }
     setEmail(p.email);
     try {
-      const [a, b, c, d, e, f, g, h] = await Promise.all([
+      const [a, c, d, e, f, g, h] = await Promise.all([
         getAdminSummary(),
-        getAdminUsers(40),
         getAdminTransactions(50),
         getAdminRenewalIssues(50),
         getAdminContacts(50, {
@@ -162,7 +160,6 @@ export default function AdminPage() {
         getAdminHelpCenterFeedbackSummary({ dateRange: "30d" }),
       ]);
       setSummary(a);
-      setUsers(b);
       setTxs(c);
       setIssues(d);
       setContacts(e);
@@ -287,7 +284,7 @@ export default function AdminPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#050505] pt-28 pb-20 md:pt-36">
+    <main className="min-h-screen pb-20 pt-8 md:pt-12">
       {/* Background Glow */}
       <div className="pointer-events-none fixed left-1/2 top-0 -z-10 h-[500px] w-full -translate-x-1/2 overflow-hidden opacity-10 blur-[120px]">
         <div className="absolute inset-0 bg-gradient-to-b from-sa-primary/20 via-sa-primary/10 to-transparent" />
@@ -371,9 +368,59 @@ export default function AdminPage() {
 
         {summary ? (
           <div className="space-y-10">
-            <AdminStatGrid summary={summary} itemVariants={itemVariants} />
+            <AdminStatGrid
+              summary={summary}
+              itemVariants={itemVariants}
+              onStatAction={handleStatAction}
+            />
 
-            <AdminOpsPanels transactions={txs} issues={issues} />
+            <AdminOpsPanels
+              transactions={txs}
+              issues={issues}
+              busyRenewalId={renewalBusyId}
+              busyTransactionId={transactionBusyId}
+              onChargeRenewal={async (renewalId) => {
+                setRenewalBusyId(renewalId);
+                try {
+                  await adminChargeRenewal(renewalId);
+                  setToast({ kind: "success", text: "Renewal charged from user wallet." });
+                  await load();
+                } catch (chargeErr: unknown) {
+                  setToast({
+                    kind: "error",
+                    text:
+                      chargeErr instanceof Error
+                        ? chargeErr.message
+                        : "Could not charge renewal.",
+                  });
+                } finally {
+                  setRenewalBusyId(null);
+                }
+              }}
+              onReconcileTransaction={async (transactionId) => {
+                setTransactionBusyId(transactionId);
+                try {
+                  const result = await adminReconcileTransaction(transactionId);
+                  setToast({
+                    kind: "success",
+                    text: result.alreadyApplied
+                      ? "Payment was already applied."
+                      : `Payment reconciled (${result.status}).`,
+                  });
+                  await load();
+                } catch (reconcileErr: unknown) {
+                  setToast({
+                    kind: "error",
+                    text:
+                      reconcileErr instanceof Error
+                        ? reconcileErr.message
+                        : "Could not reconcile payment.",
+                  });
+                } finally {
+                  setTransactionBusyId(null);
+                }
+              }}
+            />
 
             {/* Client Projects Management */}
             <section id="admin-client-projects" className="scroll-mt-28 space-y-6">
@@ -476,10 +523,12 @@ export default function AdminPage() {
               leadSourceFilter={leadSourceFilter}
               setLeadSourceFilter={setLeadSourceFilter}
               leadSearch={leadSearch}
+              leadSearchDebounced={leadSearchDebounced}
               setLeadSearch={setLeadSearch}
               leadDateRange={leadDateRange}
               setLeadDateRange={setLeadDateRange}
               leadSort={leadSort}
+              setLeadSort={setLeadSort}
               activePresetId={activePresetId}
               setActivePresetId={setActivePresetId}
               presetCounts={presetCounts}
@@ -494,11 +543,9 @@ export default function AdminPage() {
               all={helpFeedback}
               last7d={helpFeedback7d}
               last30d={helpFeedback30d}
-              articleLabels={HELP_ARTICLE_LABELS}
             />
 
             <UserRegistry
-              users={users}
               onViewProjects={(userEmail) => {
                 setProjectSearch(userEmail);
                 document.getElementById("admin-client-projects")?.scrollIntoView({

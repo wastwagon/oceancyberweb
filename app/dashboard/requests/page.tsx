@@ -4,18 +4,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getProfile, listClientRequests, type ClientRequestRow } from "@/lib/auth-client";
 import { DashboardNav } from "@/components/dashboard/DashboardNav";
+import { AppAlert } from "@/components/ui/AppAlert";
+import { sourceLabel } from "@/lib/ops/format";
 import { cn } from "@/lib/utils";
-
-function sourceLabel(source: string | null) {
-  if (source === "contact_form") return "Contact form";
-  if (source === "project_calculator") return "Project calculator";
-  if (source === "chat") return "Chat";
-  if (source === "intake_wizard") return "Interactive intake";
-  if (source === "proposal_request") return "Proposal request";
-  if (source === "namecheap_unified_checkout") return "Namecheap unified checkout";
-  if (source === "website_to_app_quote") return "Website-to-Mobile App Conversion Quote";
-  return source || "General";
-}
 
 function unifiedCheckoutRef(metadata: unknown): string | null {
   if (!metadata || typeof metadata !== "object") return null;
@@ -54,8 +45,8 @@ export default function ClientRequestsPage() {
   }, []);
 
   return (
-    <main className="sa-shell min-h-screen bg-sa-bg pt-28 pb-16 md:py-36">
-      <div className="sa-container max-w-5xl space-y-6">
+    <main className="min-h-screen pb-16">
+      <div className="sa-container max-w-5xl space-y-6 py-8 md:py-12">
         <header className="sa-card p-6 border-sa-border md:p-8">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
@@ -82,9 +73,7 @@ export default function ClientRequestsPage() {
         </header>
 
         {loading ? <p className="text-sa-muted text-sm px-2">Loading requests...</p> : null}
-        {error ? (
-          <div className="rounded-2xl border border-rose-500/50 bg-rose-500/10 px-5 py-4 text-sm text-rose-400">{error}</div>
-        ) : null}
+        {error ? <AppAlert variant="error">{error}</AppAlert> : null}
 
         {!loading && !error ? (
           <section className="sa-card p-6 border-sa-border md:p-8">

@@ -7,7 +7,7 @@ import { defaultNavigationConfig, type NavigationConfig } from "@/lib/navigation
  */
 export async function getMenuConfig(): Promise<NavigationConfig> {
   try {
-    const res = await fetch(`${getApiBaseUrl()}/navigation`, {
+    const res = await fetch(`${getApiBaseUrl()}/api/v1/navigation`, {
       next: { revalidate: 3600, tags: ["navigation"] }, // Cache for 1 hour, support on-demand tag revalidation
     });
     
