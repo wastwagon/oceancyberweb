@@ -208,8 +208,8 @@ function PortfolioFilteredLibraryInner({
             <Link href="/contact" className="sa-btn-primary">
               Talk to our team
             </Link>
-            <Link href="/case-studies" className="sa-btn-outline">
-              View all case studies
+            <Link href="/portfolio" className="sa-btn-outline">
+              View full portfolio
             </Link>
           </div>
         </motion.div>

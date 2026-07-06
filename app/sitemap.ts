@@ -10,7 +10,6 @@ const base =
 const routes = [
   "",
   "/about",
-  "/case-studies",
   "/contact",
   "/cookies",
   "/design-process",
@@ -88,20 +87,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const slugs = await getPortfolioSlugs();
-  const projectEntries: MetadataRoute.Sitemap = slugs.flatMap((slug) => [
-    {
-      url: `${base}/portfolio/${slug}`,
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    },
-    {
-      url: `${base}/case-studies/${slug}`,
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: 0.55,
-    },
-  ]);
+  const projectEntries: MetadataRoute.Sitemap = slugs.map((slug) => ({
+    url: `${base}/portfolio/${slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
 
   return [...staticEntries, ...insightEntries, ...projectEntries];
 }

@@ -6,16 +6,20 @@ import { Instagram, Linkedin, Twitter, Facebook, ArrowRight, ShieldAlert } from 
 
 const footerLinks = [
   { label: "About Us", href: "/about" },
-  { label: "Our Works", href: "/portfolio" },
-  { label: "Case Studies", href: "/case-studies" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Team", href: "/team" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Design Process", href: "/design-process" },
   { label: "Insights", href: "/insights" },
   { label: "Reviews", href: "/reviews" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
 const serviceLinks = [
+  { label: "UI/UX Design", href: "/services/ui-ux-design" },
   { label: "Web Development", href: "/services/web-development" },
   { label: "Mobile Apps", href: "/services/mobile-apps" },
+  { label: "Website to App", href: "/services/website-to-mobile-app" },
   { label: "Cybersecurity", href: "/services/cybersecurity" },
   { label: "E-commerce", href: "/services/ecommerce" },
   { label: "Cloud Hosting", href: "/hosting" },
@@ -26,6 +30,8 @@ const industryLinks = [
   { label: "Healthcare", href: "/industries/healthcare" },
   { label: "Education", href: "/industries/education" },
   { label: "Retail & Commerce", href: "/industries/retail" },
+  { label: "Tourism", href: "/industries/tourism" },
+  { label: "Legal", href: "/industries/legal" },
   { label: "All Sectors", href: "/industries" },
 ] as const;
 
@@ -104,7 +110,7 @@ export function StartupAgencyFooter() {
                 Services
               </span>
               <ul className="space-y-4">
-                {serviceLinks.slice(0, 4).map((l) => (
+                {serviceLinks.map((l) => (
                   <li key={l.label}>
                     <Link
                       href={l.href}

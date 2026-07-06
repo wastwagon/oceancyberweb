@@ -29,7 +29,7 @@ export function getLocalChatReply(userText: string): string {
   }
 
   if (/\b(portfolio|work|project|case\s*stud|example)\b/.test(t)) {
-    return "See selected work on the home page portfolio section, the full /portfolio listing, and /case-studies for deeper write-ups.";
+    return "See selected work on the home page portfolio section and the full /portfolio listing for deeper project write-ups.";
   }
 
   if (/\b(where|location|address|accra|ghana)\b/.test(t)) {

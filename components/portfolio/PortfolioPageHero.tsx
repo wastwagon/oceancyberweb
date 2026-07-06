@@ -53,11 +53,11 @@ export function PortfolioPageHero({
             <ArrowUpRight className="h-4 w-4" aria-hidden />
           </Link>
           <Link
-            href="/case-studies"
+            href="/portfolio"
             className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-sa-border bg-sa-surface px-6 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition-colors hover:border-sa-primary/50 hover:text-white"
           >
             <Layers className="h-4 w-4" aria-hidden />
-            Case studies
+            Portfolio
           </Link>
         </div>
         <p className="mt-8 text-center text-[10px] tracking-wide text-sa-muted/40 uppercase">

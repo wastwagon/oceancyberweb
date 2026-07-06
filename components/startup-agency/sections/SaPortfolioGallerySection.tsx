@@ -221,11 +221,20 @@ export function SaPortfolioGallerySection() {
                   priority
                 />
               </div>
-              <figcaption className="border-t border-sa-border px-5 py-4 md:px-6 md:py-5">
-                <p className="font-heading text-base font-bold uppercase tracking-widest text-sa-primary md:text-lg">
-                  {getProjectTypeLabel(resolveProjectType(activeProject))}
-                </p>
-                <p className="mt-1 text-sm text-white/80">{activeProject.category}</p>
+              <figcaption className="flex flex-col gap-4 border-t border-sa-border px-5 py-4 md:flex-row md:items-center md:justify-between md:px-6 md:py-5">
+                <div>
+                  <p className="font-heading text-base font-bold uppercase tracking-widest text-sa-primary md:text-lg">
+                    {getProjectTypeLabel(resolveProjectType(activeProject))}
+                  </p>
+                  <p className="mt-1 text-sm text-white/80">{activeProject.category}</p>
+                </div>
+                <Link
+                  href={`/portfolio/${activeProject.slug}`}
+                  className="inline-flex items-center gap-2 font-heading text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:text-sa-primary"
+                >
+                  View case study
+                  <ArrowUpRight className="h-4 w-4" aria-hidden />
+                </Link>
               </figcaption>
             </motion.figure>
           </motion.div>
@@ -253,63 +262,68 @@ function PortfolioCard({
 
   return (
     <SaReveal delay={index * 0.06} className={layoutClass}>
-      <button
-        type="button"
-        onClick={onOpen}
-        aria-label={`View ${project.category} project`}
-        className={`group relative flex h-full min-h-[280px] w-full cursor-zoom-in overflow-hidden rounded-3xl border border-white/10 bg-sa-surface text-left transition duration-500 hover:border-sa-primary/40 hover:shadow-[0_0_40px_-12px_rgba(0,255,200,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sa-primary ${
+      <div className="group/card relative h-full">
+        <Link
+          href={`/portfolio/${project.slug}`}
+          aria-label={`View ${project.category} case study`}
+          className={`group relative flex h-full min-h-[280px] w-full overflow-hidden rounded-3xl border border-white/10 bg-sa-surface text-left transition duration-500 hover:border-sa-primary/40 hover:shadow-[0_0_40px_-12px_rgba(0,255,200,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sa-primary ${
           featured ? "min-h-[360px]" : ""
         }`}
-      >
-        <Image
-          src={project.image}
-          alt={project.category}
-          fill
-          className="object-cover brightness-105 saturate-110 transition duration-700 ease-out group-hover:scale-[1.04]"
-          sizes={
-            featured
-              ? "(max-width: 768px) 100vw, 66vw"
-              : "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          }
-          priority={featured}
-        />
-
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/5 transition duration-500 group-hover:from-black/70" />
-
-        <span
-          className={`absolute left-5 top-5 font-heading font-bold text-white/15 transition group-hover:text-white/25 ${
-            featured ? "text-4xl md:text-5xl" : "text-2xl md:text-3xl"
-          }`}
         >
-          {indexLabel}
-        </span>
+          <Image
+            src={project.image}
+            alt={project.category}
+            fill
+            className="object-cover brightness-105 saturate-110 transition duration-700 ease-out group-hover:scale-[1.04]"
+            sizes={
+              featured
+                ? "(max-width: 768px) 100vw, 66vw"
+                : "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            }
+            priority={featured}
+          />
 
-        <div className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/50 text-white opacity-0 backdrop-blur-sm transition duration-300 group-hover:opacity-100">
-          <ZoomIn className="h-4 w-4" aria-hidden />
-        </div>
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/5 transition duration-500 group-hover:from-black/70" />
 
-        <div className="absolute inset-x-0 bottom-0 z-10 p-5 md:p-6">
-          <span className="mb-2 inline-block rounded-full border border-sa-primary/50 bg-black/60 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-sa-primary backdrop-blur-sm">
-            {getProjectTypeLabel(type)}
-          </span>
-          <p
-            className={`font-heading font-bold uppercase tracking-wide text-white ${
-              featured ? "text-xl md:text-2xl lg:text-3xl" : "text-base md:text-lg"
+          <span
+            className={`absolute left-5 top-5 font-heading font-bold text-white/15 transition group-hover:text-white/25 ${
+              featured ? "text-4xl md:text-5xl" : "text-2xl md:text-3xl"
             }`}
           >
-            {project.category}
-          </p>
-          {featured ? (
-            <p className="mt-2 max-w-md text-sm leading-relaxed text-white/70 line-clamp-2">
-              {project.description}
-            </p>
-          ) : null}
-          <span className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-sa-primary opacity-0 transition duration-300 group-hover:opacity-100">
-            View project
-            <ArrowUpRight className="h-3 w-3" aria-hidden />
+            {indexLabel}
           </span>
-        </div>
-      </button>
+
+          <div className="absolute inset-x-0 bottom-0 z-10 p-5 md:p-6">
+            <span className="mb-2 inline-block rounded-full border border-sa-primary/50 bg-black/60 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-sa-primary backdrop-blur-sm">
+              {getProjectTypeLabel(type)}
+            </span>
+            <p
+              className={`font-heading font-bold uppercase tracking-wide text-white ${
+                featured ? "text-xl md:text-2xl lg:text-3xl" : "text-base md:text-lg"
+              }`}
+            >
+              {project.category}
+            </p>
+            {featured ? (
+              <p className="mt-2 max-w-md text-sm leading-relaxed text-white/70 line-clamp-2">
+                {project.description}
+              </p>
+            ) : null}
+            <span className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-sa-primary opacity-0 transition duration-300 group-hover:opacity-100">
+              View case study
+              <ArrowUpRight className="h-3 w-3" aria-hidden />
+            </span>
+          </div>
+        </Link>
+        <button
+          type="button"
+          onClick={onOpen}
+          aria-label={`Open ${project.category} visual preview`}
+          className="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/60 text-white opacity-0 backdrop-blur-sm transition duration-300 hover:border-sa-primary hover:text-sa-primary focus:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sa-primary group-hover/card:opacity-100"
+        >
+          <ZoomIn className="h-4 w-4" aria-hidden />
+        </button>
+      </div>
     </SaReveal>
   );
 }

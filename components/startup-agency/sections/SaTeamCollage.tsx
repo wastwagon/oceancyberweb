@@ -1,8 +1,9 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { X, ZoomIn } from "lucide-react";
+import { ArrowUpRight, X, ZoomIn } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { aboutWorkPreview } from "@/lib/startup-agency/content";
 
@@ -114,11 +115,20 @@ export function SaTeamCollage() {
                   priority
                 />
               </div>
-              <figcaption className="border-t border-sa-border px-5 py-4 md:px-6 md:py-5">
-                <p className="font-heading text-base font-bold text-white md:text-lg">{activeItem.title}</p>
-                <p className="mt-1 text-xs font-bold uppercase tracking-widest text-sa-primary">
-                  {activeItem.category}
-                </p>
+              <figcaption className="flex flex-col gap-4 border-t border-sa-border px-5 py-4 md:flex-row md:items-center md:justify-between md:px-6 md:py-5">
+                <div>
+                  <p className="font-heading text-base font-bold text-white md:text-lg">{activeItem.title}</p>
+                  <p className="mt-1 text-xs font-bold uppercase tracking-widest text-sa-primary">
+                    {activeItem.category}
+                  </p>
+                </div>
+                <Link
+                  href={activeItem.href}
+                  className="inline-flex items-center gap-2 font-heading text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:text-sa-primary"
+                >
+                  View case study
+                  <ArrowUpRight className="h-4 w-4" aria-hidden />
+                </Link>
               </figcaption>
             </motion.figure>
           </motion.div>

@@ -85,7 +85,7 @@ const navDefaults = {
       label: "Resources",
       href: "/insights",
       dropdownKey: "resources",
-      activeMatch: ["/insights", "/case-studies", "/security-journey", "/help-center"],
+      activeMatch: ["/insights", "/portfolio", "/security-journey", "/help-center"],
     },
     {
       label: "Company",
@@ -121,7 +121,7 @@ const navDefaults = {
     resources: {
       items: [
         { heading: "Insights", link: "/insights" },
-        { heading: "Case studies", link: "/case-studies" },
+        { heading: "Portfolio", link: "/portfolio" },
         { heading: "Security journey", link: "/security-journey" },
         { heading: "Help center", link: "/help-center" },
       ],
