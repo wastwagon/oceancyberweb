@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { InsightArticleJsonLd } from "@/components/seo/InsightArticleJsonLd";
 import { buildInsightsHref, type InsightPost } from "@/lib/insights/content";
 
@@ -15,6 +16,7 @@ type Props = {
 export function InsightArticleView({ post }: Props) {
   return (
     <main className="sa-shell relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
+      <SaPageAmbient />
       <InsightArticleJsonLd post={post} />
 
       <article className="relative z-10 pt-20">
@@ -36,7 +38,7 @@ export function InsightArticleView({ post }: Props) {
               src={post.image}
               alt={post.title}
               fill
-              className="object-cover object-center grayscale"
+              className="object-cover object-center"
               sizes="100vw"
               priority
             />

@@ -1,3 +1,5 @@
+import { insightCoverPath } from "@/lib/insights/covers";
+
 export type InsightPost = {
   slug: string;
   title: string;
@@ -37,7 +39,7 @@ export const insightPosts: InsightPost[] = [
       "National frameworks and sector regulators are maturing, but execution still varies by industry and company size. The teams that win treat security as a product discipline: measurable controls, incident playbooks, and executive-level accountability—not checkbox audits alone.",
       "For leaders shipping software or operating critical services, the practical sequence is risk prioritization, identity and endpoint hygiene, logging that supports investigation, and vendor oversight that matches how data actually flows.",
     ],
-    image: "/images/EGP Ghana.webp",
+    image: insightCoverPath("future-cybersecurity-africa"),
     category: "Security",
     date: "March 15, 2024",
     readTime: "5 min read",
@@ -52,7 +54,7 @@ export const insightPosts: InsightPost[] = [
       "High-performing teams align roadmaps around a few measurable outcomes: shorter fulfillment cycles, fewer manual reconciliations, and clearer ownership between business and engineering.",
       "Partnerships matter. Local regulatory context, telco and banking rails, and real-world connectivity constraints should inform architecture choices early—not after launch.",
     ],
-    image: "/images/Fitch Advisory.webp",
+    image: insightCoverPath("digital-transformation-ghana"),
     category: "Technology",
     date: "March 10, 2024",
     readTime: "7 min read",
@@ -67,7 +69,7 @@ export const insightPosts: InsightPost[] = [
       "Building for underserved users means designing for intermittent connectivity, shared devices, and support channels that do not assume desktop literacy. Interfaces must build trust step by step.",
       "Compliance and partnership governance are not overhead—they protect users and keep programs durable when volumes spike or regulation shifts.",
     ],
-    image: "/images/Juelle Hair.webp",
+    image: insightCoverPath("fintech-banking-unbanked"),
     category: "Finance",
     date: "March 5, 2024",
     readTime: "6 min read",
@@ -82,7 +84,7 @@ export const insightPosts: InsightPost[] = [
       "Checkout friction remains the silent killer: carrier-defined delivery expectations, cash versus digital incentives, and clear duty or fee disclosure matter more than marginal conversion tweaks.",
       "Inventory and supplier coordination systems become the bottleneck at scale. Investing early in operational visibility pays off when traffic spikes during campaigns.",
     ],
-    image: "/images/Tour World Tourism.webp",
+    image: insightCoverPath("ecommerce-emerging-markets"),
     category: "Business",
     date: "February 28, 2024",
     readTime: "8 min read",
@@ -97,7 +99,7 @@ export const insightPosts: InsightPost[] = [
       "Document extraction, support triage, forecasting, and ranking are common early wins because evaluation is straightforward and humans remain in the loop during rollout.",
       "Responsible rollout includes monitoring drift, documenting limitations, and avoiding features that infer sensitive attributes without governance. Shipping fast still requires audit trails.",
     ],
-    image: "/images/Africa Trade Chamber.webp",
+    image: insightCoverPath("ai-ml-practical"),
     category: "Innovation",
     date: "February 20, 2024",
     readTime: "10 min read",
@@ -112,8 +114,7 @@ export const insightPosts: InsightPost[] = [
       "Winning operators treat MoMo as infrastructure—not a checkout checkbox. That means clear fee disclosure, idempotent payment callbacks, dispute flows tied to telco statements, and fraud monitoring tuned to SIM-swap and social-engineering patterns common in high-velocity wallets.",
       "Partnership governance matters as much as UX. API uptime, settlement timing, and KYC handoffs between aggregators and merchants should be contracted early. Teams that map money movement before marketing spend avoid painful retrofits when volume grows.",
     ],
-    image:
-      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80",
+    image: insightCoverPath("ghana-momo-economy"),
     category: "Finance",
     date: "May 12, 2024",
     readTime: "6 min read",
@@ -128,8 +129,7 @@ export const insightPosts: InsightPost[] = [
       "SMEs are hit hardest because security is often deferred until after launch. The practical fix is sequencing: MFA on email and admin accounts, patched dependencies on public-facing apps, backups that are tested—not just scheduled—and an incident contact list before campaigns go live.",
       "Leaders should align security spend with revenue risk. Payment flows, customer data, and brand-facing properties deserve earlier hardening than internal experiments. Measurable baselines—patch age, MFA coverage, phishing simulation results—beat generic awareness slides.",
     ],
-    image:
-      "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=80",
+    image: insightCoverPath("ghana-cybersecurity-trends"),
     category: "Security",
     date: "April 18, 2024",
     readTime: "5 min read",
@@ -144,8 +144,7 @@ export const insightPosts: InsightPost[] = [
       "Operators preparing for the next growth wave should prioritize inventory visibility, carrier integrations with realistic SLA messaging, and checkout flows that surface fees before confirmation. Campaign traffic amplifies weak ops faster than it fixes them.",
       "Platform choices should support scale without re-platforming every year—catalog tooling, promo engines, and reporting that finance and marketing both trust. Teams that build operational muscle early compound gains when demand spikes.",
     ],
-    image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80",
+    image: insightCoverPath("ecommerce-growth-ghana"),
     category: "Business",
     date: "March 22, 2024",
     readTime: "7 min read",
@@ -160,7 +159,7 @@ export const insightPosts: InsightPost[] = [
       "Engineering teams implement privacy through data inventories, retention limits, access controls, and breach procedures—not through policy PDFs alone.",
       "For cross-border services, vendor contracts and subprocessors must match where data is processed and who can access it. Early mapping prevents emergency redesigns.",
     ],
-    image: "/images/Fitch Attorney.webp",
+    image: insightCoverPath("data-privacy-compliance"),
     category: "Compliance",
     date: "February 15, 2024",
     readTime: "4 min read",
