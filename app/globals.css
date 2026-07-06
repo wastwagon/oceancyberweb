@@ -932,15 +932,64 @@
   }
 
   .sa-eyebrow {
-    @apply font-heading text-xs font-semibold uppercase tracking-[0.22em] text-sa-primary;
+    @apply font-heading text-[10px] font-medium uppercase tracking-[0.28em] text-sa-primary;
   }
 
+  /*
+   * Digital product studio type scale (B2B agency benchmark)
+   * — restrained heroes, editorial sections, readable lead copy
+   */
   .sa-title {
-    @apply font-heading text-[clamp(2rem,4.8vw,3.45rem)] font-bold leading-[0.98] tracking-[-0.018em] text-white;
+    @apply font-heading text-[clamp(1.75rem,2.35vw,2.125rem)] font-bold leading-[1.1] tracking-[-0.015em] text-white;
   }
 
+  .sa-title-lg {
+    @apply font-heading text-[clamp(2rem,2.85vw,2.625rem)] font-bold leading-[1.06] tracking-[-0.02em] text-white;
+  }
+
+  /* Rare uppercase section labels — use sparingly */
+  .sa-title-display {
+    @apply font-heading text-[clamp(1.375rem,2vw,1.875rem)] font-bold uppercase leading-[1.12] tracking-[0.04em] text-white;
+  }
+
+  /* Hero / page intro — 16–17px, ~34rem measure */
+  .sa-lead {
+    @apply max-w-[34rem] text-base leading-[1.65] text-sa-muted/90 md:text-[17px] md:leading-[1.7];
+  }
+
+  /* Section intro — 14–15px, ~32rem measure */
   .sa-subtitle {
-    @apply mt-4 max-w-2xl text-sm leading-relaxed text-sa-muted md:text-base;
+    @apply max-w-[32rem] text-sm leading-[1.65] text-sa-muted/85 md:text-[15px] md:leading-[1.7];
+  }
+
+  .sa-card-title {
+    @apply font-heading text-[17px] font-bold leading-snug tracking-[-0.01em] text-white md:text-lg;
+  }
+
+  .sa-section-head {
+    @apply flex flex-col gap-2.5;
+  }
+
+  .sa-section-head--center {
+    @apply mx-auto max-w-3xl items-center text-center;
+  }
+
+  .sa-section-head--left {
+    @apply max-w-2xl items-start text-left;
+  }
+
+  .sa-section-head--center .sa-lead,
+  .sa-section-head--center .sa-subtitle {
+    @apply mx-auto text-center;
+  }
+
+  .sa-section-head .sa-lead,
+  .sa-section-head .sa-subtitle {
+    @apply mt-1;
+  }
+
+  .sa-kicker {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white/85;
   }
 
   .sa-card {

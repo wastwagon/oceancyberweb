@@ -47,7 +47,7 @@ export default function DesignProcessPage() {
         <div className="sa-container text-center">
           <p className="sa-eyebrow">How we design</p>
           <h1 className="sa-title mt-6">A design process built for shipping</h1>
-          <p className="sa-subtitle mx-auto mt-6 max-w-2xl">
+          <p className="sa-lead mx-auto mt-3 max-w-2xl">
             We do not stop at mockups. Every engagement connects user research, brand
             alignment, and engineering-ready deliverables — so your product looks premium
             and launches on schedule.
@@ -66,7 +66,7 @@ export default function DesignProcessPage() {
 
       <section className="sa-section border-b border-sa-border">
         <div className="sa-container">
-          <h2 className="sa-title mb-12 text-center text-3xl md:text-4xl">
+          <h2 className="sa-title mb-12 text-center">
             Five phases of craft
           </h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
@@ -93,7 +93,7 @@ export default function DesignProcessPage() {
 
       <section className="sa-section border-b border-sa-border">
         <div className="sa-container">
-          <h2 className="sa-title mb-12 text-center text-3xl md:text-4xl">
+          <h2 className="sa-title mb-12 text-center">
             Fits our delivery model
           </h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
@@ -112,7 +112,7 @@ export default function DesignProcessPage() {
 
       <section className="sa-section">
         <div className="sa-container text-center">
-          <h2 className="sa-title text-3xl md:text-4xl">Ready for a design sprint?</h2>
+          <h2 className="sa-title">Ready for a design sprint?</h2>
           <p className="sa-subtitle mx-auto mt-4 max-w-xl">
             Tell us about your product and we will propose a discovery workshop and Figma roadmap.
           </p>

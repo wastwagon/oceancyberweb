@@ -16,7 +16,7 @@ export function SaProjectsCtaSection() {
         <SaReveal className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div>
             <span className="sa-eyebrow">Projects</span>
-            <h2 className="sa-title mt-3 md:text-4xl">Featured work</h2>
+            <h2 className="sa-title mt-3">Featured work</h2>
           </div>
           <Link href="/portfolio" className="sa-btn-outline shrink-0">
             View all projects

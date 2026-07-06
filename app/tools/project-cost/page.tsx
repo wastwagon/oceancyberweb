@@ -20,7 +20,7 @@ export default function ProjectCostPage() {
           <h1 className="sa-title mt-3 text-center md:text-4xl">
             Project cost calculator
           </h1>
-          <p className="sa-subtitle mx-auto mt-4 text-center">
+          <p className="sa-lead mx-auto mt-3 text-center">
             We use clear hour estimates, then adjust for platform, design, and how urgent you need it. The total is
             a <span className="font-semibold text-white">rough guide, not a contract</span> (we show a band of
             about plus or minus 10% in cedis). You can download a proforma when you are ready to share the numbers.

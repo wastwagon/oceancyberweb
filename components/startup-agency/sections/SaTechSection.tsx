@@ -1,4 +1,5 @@
 import { SaReveal } from "@/components/startup-agency/SaReveal";
+import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
 import { projectChips, techStack } from "@/lib/startup-agency/content";
 
 export function SaTechSection() {
@@ -8,9 +9,8 @@ export function SaTechSection() {
       className="sa-section scroll-mt-28 border-b border-sa-border md:scroll-mt-32"
     >
       <div className="sa-container">
-        <SaReveal className="mb-8 text-center">
-          <span className="sa-eyebrow">Tech</span>
-          <h2 className="sa-title mt-3 md:text-3xl">Stack we ship with</h2>
+        <SaReveal className="mb-8">
+          <SaSectionHeader eyebrow="Tech" title="Stack we ship with" />
         </SaReveal>
         <div className="mb-10 flex flex-wrap justify-center gap-3">
           {techStack.map((t) => (

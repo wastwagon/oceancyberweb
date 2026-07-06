@@ -156,7 +156,7 @@ export default function SecurityJourneyPage() {
             </motion.span>
             <motion.h1
               variants={heroMotion.item}
-              className="sa-title mx-auto max-w-4xl text-balance"
+              className="sa-title-lg mx-auto max-w-4xl text-balance"
             >
               Your security
               <br />
@@ -164,7 +164,7 @@ export default function SecurityJourneyPage() {
             </motion.h1>
             <motion.p
               variants={heroMotion.item}
-              className="sa-subtitle mx-auto mt-8"
+              className="sa-lead mx-auto mt-3"
             >
               Six disciplined phases, from first assessment through continuous
               improvement, so protection, compliance, and operations move

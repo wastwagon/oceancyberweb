@@ -56,6 +56,7 @@ export type ServicePageContent = {
 };
 
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
+import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
 
 export function ServicePremiumPage({ content }: { content: ServicePageContent }) {
   const hasOutcomes = content.outcomes && content.outcomes.length > 0;
@@ -85,7 +86,7 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
             </motion.span>
             <motion.h1
               variants={heroMotion.item}
-              className="sa-title mx-auto max-w-4xl text-balance"
+              className="sa-title-lg mx-auto max-w-4xl text-balance"
             >
               {content.heroPrefix}
               <span className="text-sa-primary">{content.heroHighlight}</span>
@@ -93,7 +94,7 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
             </motion.h1>
             <motion.p
               variants={heroMotion.item}
-              className="sa-subtitle mx-auto mt-6"
+              className="sa-lead mx-auto mt-3"
             >
               {content.heroDescription}
             </motion.p>
@@ -126,14 +127,12 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
 
       <section className="sa-section relative z-10 border-b border-sa-border">
         <div className="sa-container">
-          <motion.div {...fadeUpProps} className="mx-auto mb-14 max-w-2xl text-center">
-            <p className="sa-eyebrow">
-              {content.focusEyebrow}
-            </p>
-            <h2 className="sa-title mt-4">
-              {content.focusTitle}
-            </h2>
-            <p className="sa-subtitle mx-auto mt-6">{content.focusSubtitle}</p>
+          <motion.div {...fadeUpProps} className="mb-14">
+            <SaSectionHeader
+              eyebrow={content.focusEyebrow}
+              title={content.focusTitle}
+              subtitle={content.focusSubtitle}
+            />
           </motion.div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {content.focusAreas.map((item, index) => (
@@ -145,7 +144,7 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
                 transition={staggerDelay(index, 0.06)}
                 className="sa-card p-8 md:p-10"
               >
-                <h3 className="font-heading text-lg font-bold text-white">
+                <h3 className="sa-card-title">
                   {item.title}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-sa-muted/80">
@@ -159,14 +158,12 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
 
       <section className="sa-section relative z-10 border-b border-sa-border">
         <div className="sa-container">
-          <motion.div {...fadeUpProps} className="mx-auto mb-14 max-w-2xl text-center">
-            <p className="sa-eyebrow">
-              {content.stackEyebrow}
-            </p>
-            <h2 className="sa-title mt-4">
-              {content.stackTitle}
-            </h2>
-            <p className="sa-subtitle mx-auto mt-6">{content.stackSubtitle}</p>
+          <motion.div {...fadeUpProps} className="mb-14">
+            <SaSectionHeader
+              eyebrow={content.stackEyebrow}
+              title={content.stackTitle}
+              subtitle={content.stackSubtitle}
+            />
           </motion.div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {content.stack.map((item, index) => (
@@ -190,14 +187,12 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
 
       <section className="sa-section relative z-10 border-b border-sa-border">
         <div className="sa-container">
-          <motion.div {...fadeUpProps} className="mx-auto mb-14 max-w-2xl text-center">
-            <p className="sa-eyebrow">
-              {content.deliverEyebrow}
-            </p>
-            <h2 className="sa-title mt-4">
-              {content.deliverTitle}
-            </h2>
-            <p className="sa-subtitle mx-auto mt-6">{content.deliverSubtitle}</p>
+          <motion.div {...fadeUpProps} className="mb-14">
+            <SaSectionHeader
+              eyebrow={content.deliverEyebrow}
+              title={content.deliverTitle}
+              subtitle={content.deliverSubtitle}
+            />
           </motion.div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {content.deliverables.map((item, index) => (
@@ -209,7 +204,7 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
                 transition={staggerDelay(index, 0.06)}
                 className="sa-card p-8 md:p-10"
               >
-                <h3 className="font-heading text-lg font-bold text-white">
+                <h3 className="sa-card-title">
                   {item.title}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-sa-muted/80">

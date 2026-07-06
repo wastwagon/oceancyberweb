@@ -15,10 +15,10 @@ export function PortfolioPageHero({
           <Sparkles className="h-3.5 w-3.5" aria-hidden />
           Selected work
         </p>
-        <h1 className="sa-title mt-6 text-4xl md:text-5xl lg:text-6xl">
+        <h1 className="sa-title-lg mt-6">
           Digital products with measurable impact
         </h1>
-        <p className="sa-subtitle mx-auto mt-6 max-w-2xl">
+        <p className="sa-lead mx-auto mt-3 max-w-2xl">
           From fintech and e-commerce to events and professional services—each
           build is designed for performance, security, and growth. Every project
           is delivered with local partnership from Accra, with a global

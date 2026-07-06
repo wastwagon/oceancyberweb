@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, X, ZoomIn } from "lucide-react";
 import Image from "next/image";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
+import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
 import {
   PortfolioWorkTypeChips,
   type WorkTypeFilter,
@@ -112,22 +113,13 @@ export function SaPortfolioGallerySection() {
       />
 
       <div className="sa-container relative z-10">
-        <div className="mb-12 flex flex-col items-center md:mb-16">
-          <div className="mb-8 flex w-full max-w-4xl items-center">
-            <div className="h-px flex-1 bg-white/20" />
-            <div className="mx-6 flex items-center gap-2 rounded-full border border-white/20 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white">
-              <span className="h-1.5 w-1.5 rounded-full bg-sa-primary" />
-              Portfolio
-            </div>
-            <div className="h-px flex-1 bg-white/20" />
-          </div>
-          <h2 className="max-w-3xl text-center font-heading text-4xl font-bold uppercase tracking-widest text-white md:text-5xl lg:text-6xl">
-            Selected Work
-          </h2>
-          <p className="mt-5 max-w-2xl text-center text-sm leading-relaxed text-sa-muted md:text-base">
-            A curated look at the interfaces, brands, and digital products we craft for ambitious teams.
-          </p>
-        </div>
+        <SaSectionHeader
+          align="center"
+          eyebrow="Portfolio"
+          title="Selected work"
+          subtitle="A curated look at the interfaces, brands, and digital products we craft for ambitious teams."
+          className="mb-12 md:mb-16"
+        />
 
         <div className="mb-10">
           <PortfolioWorkTypeChips value={workType} onChange={setWorkType} />

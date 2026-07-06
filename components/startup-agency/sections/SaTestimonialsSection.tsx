@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { getGoogleBusinessProfileUrl } from "@/lib/startup-agency/google-business";
+import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
 import { SaGoogleReviewsBanner } from "@/components/startup-agency/sections/SaGoogleReviewsBanner";
 import { GoogleReviewsCarousel } from "@/components/startup-agency/sections/GoogleReviewsCarousel";
 import { SaFeaturedQuotesStrip } from "@/components/startup-agency/sections/SaFeaturedQuotesStrip";
@@ -25,16 +26,12 @@ export function SaTestimonialsSection({ googleStats, googleReviews, featuredCard
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(var(--sa-primary-rgb,212,255,0),0.08),transparent)]" />
 
       <div className="sa-container relative z-10">
-        <div className="mb-12 text-center md:mb-14">
-          <div className="mb-4 inline-flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-sa-primary" />
-            <span className="sa-eyebrow">Social Proof</span>
-          </div>
-          <h2 className="sa-title">What clients say on Google</h2>
-          <p className="sa-subtitle mx-auto mt-4 max-w-2xl">
-            Live reviews synced from our Google Business Profile — updated automatically.
-          </p>
-        </div>
+        <SaSectionHeader
+          className="mb-12 md:mb-14"
+          eyebrow="Social Proof"
+          title="What clients say on Google"
+          subtitle="Live reviews synced from our Google Business Profile — updated automatically."
+        />
 
         <SaGoogleReviewsBanner stats={googleStats} />
 

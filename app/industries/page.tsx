@@ -229,14 +229,14 @@ export default function IndustriesPage() {
             </motion.span>
             <motion.h1
               variants={heroMotion.item}
-              className="sa-title mx-auto max-w-4xl text-balance"
+              className="sa-title-lg mx-auto max-w-4xl text-balance"
             >
               Sectors we
               <span className="text-sa-primary"> ship for</span>
             </motion.h1>
             <motion.p
               variants={heroMotion.item}
-              className="sa-subtitle mx-auto mt-6"
+              className="sa-lead mx-auto mt-3"
             >
               Deep vertical context: regulation, customer journeys, and
               operational reality, folded into every architecture and release

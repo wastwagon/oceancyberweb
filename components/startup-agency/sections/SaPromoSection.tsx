@@ -15,10 +15,10 @@ export function SaPromoSection() {
               <Zap className="h-3 w-3" />
               Limited Offer
             </div>
-            <h2 className="font-heading text-3xl font-bold text-white md:text-4xl">
+            <h2 className="sa-title mt-4">
               Launch your MVP in <span className="text-sa-primary">4 Weeks</span>
             </h2>
-            <p className="mt-4 max-w-xl text-sa-muted/80">
+            <p className="sa-subtitle mt-3 max-w-xl text-left md:text-left">
               Get a professional and secure digital product ready for your users. 
               We are currently offering a priority launch package for new partners.
             </p>

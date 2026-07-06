@@ -165,7 +165,7 @@ export default function AboutPage() {
             </motion.span>
             <motion.h1
               variants={aboutHeroItem}
-              className="sa-title mx-auto max-w-4xl text-balance"
+              className="sa-title-lg mx-auto max-w-4xl text-balance"
             >
               Building Africa&apos;s
               <br />
@@ -173,7 +173,7 @@ export default function AboutPage() {
             </motion.h1>
             <motion.p
               variants={aboutHeroItem}
-              className="sa-subtitle mx-auto mt-8"
+              className="sa-lead mx-auto mt-3"
             >
               We design and secure the platforms businesses rely on, from
               first sketch to production-grade infrastructure, with a team
@@ -213,10 +213,10 @@ export default function AboutPage() {
               <p className="sa-eyebrow mb-3 block">
                 How we work
               </p>
-              <h2 className="font-heading text-3xl font-bold tracking-tight text-white md:text-4xl">
+              <h2 className="sa-title">
                 Mission &amp; principles
               </h2>
-              <p className="mt-4 max-w-md text-sm leading-relaxed text-sa-muted/80 md:text-base">
+              <p className="sa-subtitle mt-3 max-w-md text-left">
                 Three commitments shape every roadmap, line of code, and
                 security review we ship for our partners.
               </p>
@@ -253,7 +253,7 @@ export default function AboutPage() {
               <p className="sa-eyebrow mb-3 block">
                 Where we&apos;re headed
               </p>
-              <h2 className="font-heading text-3xl font-bold tracking-tight text-white md:text-4xl">
+              <h2 className="sa-title">
                 Vision
               </h2>
               <div className="sa-card mt-8 overflow-hidden !rounded-3xl">
@@ -307,10 +307,10 @@ export default function AboutPage() {
             <p className="sa-eyebrow mb-3 block">
               People
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-white md:text-5xl">
+            <h2 className="sa-title">
               Leadership &amp; craft
             </h2>
-            <p className="mt-4 text-sa-muted/80 md:text-lg">
+            <p className="sa-subtitle mx-auto mt-3">
               A multidisciplinary team blending strategy, engineering, and
               design, built for ambitious African brands.
             </p>
@@ -378,10 +378,10 @@ export default function AboutPage() {
             <p className="sa-eyebrow mb-3 block">
               Timeline
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-white md:text-5xl">
+            <h2 className="sa-title">
               Our journey
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-sa-muted/80 md:text-lg">
+            <p className="sa-subtitle mx-auto mt-3 max-w-xl">
               From a focused Accra studio to a regional partner: milestones
               that mark how we scale responsibility with growth.
             </p>
@@ -436,10 +436,10 @@ export default function AboutPage() {
             {...fadeUpProps}
             className="sa-card p-10 text-center md:p-14"
           >
-            <h2 className="font-heading text-2xl font-bold tracking-tight text-white md:text-4xl">
+            <h2 className="sa-title">
               Ready to work with us?
             </h2>
-            <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-sa-muted/80 md:text-base">
+            <p className="sa-subtitle mx-auto mt-3 max-w-lg">
               Tell us about your product, security posture, or growth goals, and
               we&apos;ll respond with a clear path forward.
             </p>

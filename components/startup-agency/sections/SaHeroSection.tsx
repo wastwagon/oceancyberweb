@@ -41,7 +41,7 @@ export function SaHeroSection() {
           >
             OceanCyber
           </p>
-          <p className="mt-6 max-w-xl text-center text-sm leading-relaxed text-white/80 md:mt-8 md:text-base">
+          <p className="sa-lead mx-auto max-w-xl text-center text-white/85">
             {heroTagline}
           </p>
           <div className="pointer-events-auto mt-8 flex flex-wrap items-center justify-center gap-3">

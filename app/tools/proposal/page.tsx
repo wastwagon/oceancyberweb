@@ -25,7 +25,7 @@ export default function ProposalRequestPage({
           <h1 className="sa-title mt-3 text-center md:text-4xl">
             Request a formal proposal
           </h1>
-          <p className="sa-subtitle mx-auto mt-4 text-center">
+          <p className="sa-lead mx-auto mt-3 text-center">
             Share your current situation, budget band, timeline, and the exact sections you want in your proposal. We
             use this to send a better first draft faster.
           </p>

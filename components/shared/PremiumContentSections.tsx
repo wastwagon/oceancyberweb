@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
 import { fadeUpSoft, revealViewport, staggerDelay } from "@/lib/scroll-reveal";
 
 type StoryCard = {
@@ -27,14 +28,12 @@ export function PremiumStoriesGridSection({
   return (
     <section className="sa-section relative z-10 border-t border-sa-border">
       <div className="sa-container">
-        <motion.div {...fadeUpSoft} className="mx-auto max-w-3xl text-center">
-          <p className="sa-eyebrow">
-            {eyebrow}
-          </p>
-          <h2 className="sa-title mt-4">
-            {title}
-          </h2>
-          <p className="sa-subtitle mx-auto mt-6">{subtitle}</p>
+        <motion.div {...fadeUpSoft} className="mx-auto max-w-3xl">
+          <SaSectionHeader
+            eyebrow={eyebrow}
+            title={title}
+            subtitle={subtitle}
+          />
         </motion.div>
         <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
           {stories.map((story, index) => (
@@ -46,7 +45,7 @@ export function PremiumStoriesGridSection({
               transition={staggerDelay(index, 0.07)}
               className="sa-card flex h-full flex-col p-6 md:p-8"
             >
-              <h3 className="font-heading text-lg font-bold text-white">
+              <h3 className="sa-card-title">
                 {story.title}
               </h3>
               <p className="mt-2 text-[10px] font-bold uppercase tracking-widest text-sa-primary">
@@ -86,12 +85,7 @@ export function PremiumFinalCtaSection({
           {...fadeUpSoft}
           className="sa-card p-10 md:p-14"
         >
-          <h2 className="sa-title !text-3xl md:!text-4xl">
-            {title}
-          </h2>
-          <p className="sa-subtitle mx-auto mt-6">
-            {description}
-          </p>
+          <SaSectionHeader title={title} subtitle={description} />
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Link
               href="/contact"

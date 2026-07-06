@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Code, Smartphone, Shield, ShoppingCart, Cloud, Palette } from "lucide-react";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
+import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
 import { serviceCards } from "@/lib/startup-agency/content";
 
 function getServiceIcon(title: string) {
@@ -24,19 +25,12 @@ export function SaServicesSection() {
       className="relative overflow-hidden border-b border-sa-border bg-sa-bg py-24 md:py-32"
     >
       <div className="sa-container">
-        <div className="mb-16 flex flex-col items-center">
-          <div className="mb-8 flex w-full max-w-4xl items-center">
-            <div className="h-px flex-1 bg-white/20" />
-            <div className="mx-6 flex items-center gap-2 rounded-full border border-white/20 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white">
-              <span className="h-1.5 w-1.5 rounded-full bg-white" />
-              Services
-            </div>
-            <div className="h-px flex-1 bg-white/20" />
-          </div>
-          <h2 className="text-center font-heading text-4xl font-bold uppercase tracking-widest text-white md:text-5xl lg:text-6xl">
-            What We Do
-          </h2>
-        </div>
+        <SaSectionHeader
+          align="center"
+          eyebrow="Services"
+          title="What we do"
+          className="mb-16"
+        />
 
         <div className="space-y-6 md:space-y-8">
           {serviceCards.map((service, index) => {

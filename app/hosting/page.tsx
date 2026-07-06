@@ -50,14 +50,14 @@ export default function HostingPage({
             </motion.span>
             <motion.h1
               variants={heroMotion.item}
-              className="sa-title mx-auto max-w-4xl text-balance"
+              className="sa-title-lg mx-auto max-w-4xl text-balance"
             >
               High-performance
               <span className="text-sa-primary"> web hosting</span>
             </motion.h1>
             <motion.p
               variants={heroMotion.item}
-              className="sa-subtitle mx-auto mt-6"
+              className="sa-lead mx-auto mt-3"
             >
               Built on a Namecheap reseller stack with WHM isolation, LiteSpeed
               performance, and local GHS billing via Paystack.
@@ -154,7 +154,7 @@ export default function HostingPage({
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
             <motion.div {...fadeFromLeft}>
               <p className="sa-eyebrow">Local context</p>
-              <h2 className="sa-title mt-4 text-left">Why host with OceanCyber?</h2>
+            <h2 className="sa-title mt-4 text-left">Why host with OceanCyber?</h2>
               <p className="sa-subtitle mt-6 text-left">
                 We combine global registrar standards with local operational reality.
                 Pay in GHS, get local support, and enjoy the reliability of Namecheap-level infrastructure.
@@ -203,7 +203,7 @@ export default function HostingPage({
             {...fadeUpProps}
             className="sa-card p-10 text-center md:p-14"
           >
-            <h2 className="sa-title !text-2xl md:!text-3xl">
+            <h2 className="sa-title">
               Need a custom VPS or Dedicated Server?
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-sa-muted/80 md:text-base">

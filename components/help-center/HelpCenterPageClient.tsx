@@ -115,11 +115,11 @@ export function HelpCenterPageClient({ articles }: HelpCenterPageClientProps) {
               <HelpCircle className="h-4 w-4" aria-hidden />
               Support
             </span>
-            <h1 className="sa-title mx-auto max-w-4xl text-balance">
+            <h1 className="sa-title-lg mx-auto max-w-4xl text-balance">
               Help center &
               <span className="text-sa-primary"> guided support</span>
             </h1>
-            <p className="sa-subtitle mx-auto mt-6">
+            <p className="sa-lead mx-auto mt-3">
               Find answers quickly, then follow guided next steps for billing, renewals, and project requests.
             </p>
             <div className="relative mx-auto mt-10 max-w-2xl">

@@ -84,14 +84,14 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
             </motion.span>
             <motion.h1
               variants={heroMotion.item}
-              className="sa-title mx-auto max-w-4xl"
+              className="sa-title-lg mx-auto max-w-4xl"
             >
               Thought
               <span className="text-sa-primary"> leadership</span>
             </motion.h1>
             <motion.p
               variants={heroMotion.item}
-              className="sa-subtitle mx-auto mt-6"
+              className="sa-lead mx-auto mt-3"
             >
               Perspectives on security, platforms, and digital transformation
               across Ghana and Africa, written for leaders who ship.
@@ -263,7 +263,7 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
                         <span className="text-sa-border">·</span>
                         <span>{featured.readTime}</span>
                       </div>
-                      <h2 className="mt-4 font-heading text-2xl font-bold leading-tight tracking-tight text-white md:text-3xl lg:text-4xl">
+                      <h2 className="mt-4 font-heading text-xl font-bold leading-snug tracking-tight text-white md:text-2xl">
                         <Link
                           href={insightArticlePath(featured.slug)}
                           className="transition hover:text-sa-primary"
@@ -361,7 +361,7 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
             {...fadeUpSoft}
             className="sa-card p-10 text-center md:p-14"
           >
-            <h2 className="sa-title !text-3xl">
+            <h2 className="sa-title">
               Editorial newsletter
             </h2>
             <p className="sa-subtitle mx-auto mt-4 max-w-lg text-sm">

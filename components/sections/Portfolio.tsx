@@ -81,7 +81,7 @@ export function Portfolio({ cases }: { cases?: PortfolioCaseStudy[] }) {
           >
             Portfolio
           </motion.span>
-          <h2 className="sa-title mb-4 sm:text-4xl md:mb-5 md:text-5xl lg:text-6xl">
+          <h2 className="sa-title mb-4">
             Case studies with measurable outcomes
           </h2>
           <p className="sa-subtitle mx-auto">

@@ -22,7 +22,7 @@ export default function GetStartedPage() {
           <h1 className="sa-title mt-3 text-center md:text-4xl">
             Start your project in one guided flow
           </h1>
-          <p className="sa-subtitle mx-auto mt-4 text-center">
+          <p className="sa-lead mx-auto mt-3 text-center">
             Share your goals, scope, budget range, and timeline, then choose your preferred next step. We use this to
             respond faster with the right proposal.
           </p>

@@ -19,7 +19,7 @@ export default function PricingPage() {
       <section className="border-b border-sa-border pb-12">
         <div className="sa-container max-w-5xl text-center">
           <p className="sa-eyebrow">Pricing</p>
-          <h1 className="sa-title mt-4 md:text-5xl">Clear starting points for your next build</h1>
+          <h1 className="sa-title-lg mt-4">Clear starting points for your next build</h1>
           <p className="sa-subtitle mx-auto">
             These GHS-based tiers are starting anchors. Final pricing follows discovery, risk
             profile, and delivery timeline, with optional converter views.

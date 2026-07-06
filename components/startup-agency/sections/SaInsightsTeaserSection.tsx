@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
+import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
 import { blogTeasers } from "@/lib/startup-agency/content";
 
 export function SaInsightsTeaserSection() {
@@ -10,10 +11,7 @@ export function SaInsightsTeaserSection() {
     <section id="insights" className="sa-section scroll-mt-28 md:scroll-mt-32">
       <div className="sa-container">
         <SaReveal className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div>
-            <span className="sa-eyebrow">Insights</span>
-            <h2 className="sa-title mt-2 md:text-4xl">Latest notes</h2>
-          </div>
+          <SaSectionHeader align="left" eyebrow="Insights" title="Latest notes" />
           <Link
             href="/insights"
             className="sa-button-outline"
@@ -51,7 +49,7 @@ export function SaInsightsTeaserSection() {
                     <span>By {post.author}</span>
                   </div>
                   
-                  <h3 className="mt-4 font-heading text-xl font-bold uppercase leading-tight tracking-tight text-white transition-colors duration-300 group-hover:text-sa-primary lg:text-2xl">
+                  <h3 className="mt-4 font-heading text-lg font-bold uppercase leading-snug tracking-tight text-white transition-colors duration-300 group-hover:text-sa-primary md:text-xl">
                     {post.title}
                   </h3>
 

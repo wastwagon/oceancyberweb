@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Globe2 } from "lucide-react";
+import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
 import { DomainSearchPanel, TldPriceChips } from "@/components/domains/DomainSearchPanel";
 import { fadeUpSoft } from "@/lib/scroll-reveal";
 
@@ -14,20 +14,19 @@ export function SaDomainSearchSection() {
       </div>
 
       <div className="sa-container relative z-10">
-        <div className="mx-auto max-w-4xl text-center">
+        <div className="mx-auto max-w-4xl">
           <motion.div {...fadeUpSoft}>
-            <span className="sa-eyebrow mb-6 inline-flex items-center gap-2">
-              <Globe2 className="h-4 w-4" aria-hidden />
-              Global Registrations
-            </span>
-            <h2 className="sa-title mb-6">
-              Find your perfect
-              <span className="text-sa-primary"> domain name</span>
-            </h2>
-            <p className="sa-subtitle mx-auto mb-12">
-              Search live availability for .com, .net, .org and more. Professional GHS billing, 
-              managed DNS setup, and integrated SSL certificates.
-            </p>
+            <SaSectionHeader
+              eyebrow="Global Registrations"
+              title={
+                <>
+                  Find your perfect
+                  <span className="text-sa-primary"> domain name</span>
+                </>
+              }
+              subtitle="Search live availability for .com, .net, .org and more. Professional GHS billing, managed DNS setup, and integrated SSL certificates."
+              subtitleClassName="mb-12"
+            />
           </motion.div>
 
           <motion.div 

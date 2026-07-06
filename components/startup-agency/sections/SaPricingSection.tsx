@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Check } from "lucide-react";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
+import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
 import { pricingPlans } from "@/lib/startup-agency/content";
 
 export function SaPricingSection() {
@@ -12,13 +13,12 @@ export function SaPricingSection() {
       className="sa-section scroll-mt-28 border-b border-sa-border md:scroll-mt-32 bg-sa-bg"
     >
       <div className="sa-container">
-        <SaReveal className="mb-16 text-center">
-          <span className="sa-eyebrow">Investment</span>
-          <h2 className="sa-title mt-3 md:text-5xl">Transparent pricing</h2>
-          <p className="sa-subtitle mx-auto">
-            Indicative tiers in GHS. We ship with clear milestones and fixed-price contracts. 
-            Final quotes follow discovery and technical scoping.
-          </p>
+        <SaReveal className="mb-16">
+          <SaSectionHeader
+            eyebrow="Investment"
+            title="Transparent pricing"
+            subtitle="Indicative tiers in GHS. We ship with clear milestones and fixed-price contracts. Final quotes follow discovery and technical scoping."
+          />
           <div className="mt-8 flex justify-center">
             <Link
               href="/tools/project-cost"

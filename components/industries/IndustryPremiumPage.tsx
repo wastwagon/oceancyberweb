@@ -98,7 +98,7 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
             </motion.span>
             <motion.h1
               variants={heroMotion.item}
-              className="sa-title mx-auto max-w-4xl text-balance"
+              className="sa-title-lg mx-auto max-w-4xl text-balance"
             >
               {content.heroPrefix}
               <span className={highlightClassName}>{content.heroHighlight}</span>
@@ -106,7 +106,7 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
             </motion.h1>
             <motion.p
               variants={heroMotion.item}
-              className="sa-subtitle mx-auto mt-6"
+              className="sa-lead mx-auto mt-3"
             >
               {content.heroDescription}
             </motion.p>

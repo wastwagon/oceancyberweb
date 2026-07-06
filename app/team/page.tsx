@@ -23,7 +23,7 @@ export default async function TeamPage() {
       <section className="border-b border-sa-border pb-12">
         <div className="sa-container max-w-5xl text-center">
           <p className="sa-eyebrow">Team</p>
-          <h1 className="sa-title mt-4 text-balance">
+          <h1 className="sa-title-lg mt-4 text-balance">
             Leadership and specialists focused on outcomes
           </h1>
           <p className="sa-subtitle mx-auto max-w-3xl">

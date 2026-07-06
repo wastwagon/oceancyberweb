@@ -146,7 +146,7 @@ function PortfolioFilteredLibraryInner({
         {showHeader ? (
           <motion.div {...fadeUpProps} className="mx-auto max-w-6xl text-center">
             <span className="sa-eyebrow mb-5 inline-flex items-center">Portfolio</span>
-            <h2 className="sa-title mb-4 sm:text-4xl md:mb-5 md:text-5xl lg:text-6xl">
+            <h2 className="sa-title mb-4">
               Case studies with measurable outcomes
             </h2>
             <p className="sa-subtitle mx-auto">

@@ -66,7 +66,7 @@ export function CaseStudyDetailView({
                     {project.year}
                   </span>
                 </div>
-                <h1 className="sa-title mt-6 text-4xl md:text-6xl lg:text-7xl">
+                <h1 className="sa-title-lg mt-6">
                   {project.title}
                 </h1>
                 <p className="mt-4 text-xl font-medium text-sa-muted/80">

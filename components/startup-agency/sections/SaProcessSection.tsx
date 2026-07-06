@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
+import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
 import { processSteps } from "@/lib/startup-agency/content";
 
 export function SaProcessSection() {
@@ -12,10 +13,12 @@ export function SaProcessSection() {
     >
       <div className="sa-container">
         <SaReveal className="mb-16">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <h2 className="sa-title uppercase font-heading text-4xl sm:text-5xl lg:text-6xl text-white font-bold max-w-2xl">
-              From brief to launch
-            </h2>
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <SaSectionHeader
+              align="left"
+              title="From brief to launch"
+              className="max-w-2xl"
+            />
             <div className="flex items-center gap-2">
               <span className="font-heading font-bold text-white uppercase text-sm tracking-widest">Steps</span>
               <span className="text-sa-primary font-bold text-lg">1 2 3 4</span>

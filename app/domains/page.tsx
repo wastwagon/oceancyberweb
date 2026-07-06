@@ -36,14 +36,14 @@ export default function DomainsPage() {
             </motion.span>
             <motion.h1
               variants={heroMotion.item}
-              className="sa-title mx-auto max-w-4xl text-balance"
+              className="sa-title-lg mx-auto max-w-4xl text-balance"
             >
               Find your identity
               <span className="text-sa-primary"> on the web</span>
             </motion.h1>
             <motion.p
               variants={heroMotion.item}
-              className="sa-subtitle mx-auto mt-6"
+              className="sa-lead mx-auto mt-3"
             >
               Search domain availability, compare options, and secure
               SSL and hosting add-ons with confidence and clarity.

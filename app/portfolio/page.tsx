@@ -23,7 +23,7 @@ export default async function PortfolioPage() {
           <p className="sa-eyebrow mb-4">
             Showcase
           </p>
-          <h1 className="sa-title text-balance">
+          <h1 className="sa-title-lg text-balance">
             Digital excellence,
             <span className="text-sa-primary"> engineered for scale.</span>
           </h1>

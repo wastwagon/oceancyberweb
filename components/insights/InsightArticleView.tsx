@@ -46,7 +46,7 @@ export function InsightArticleView({ post }: Props) {
                 <span className="inline-block rounded-full border border-sa-primary/20 bg-sa-bg/80 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-sa-primary backdrop-blur-md">
                   {post.category}
                 </span>
-                <h1 className="sa-title !text-left mt-4 text-3xl md:text-4xl lg:text-5xl text-white">
+                <h1 className="sa-title-lg !text-left mt-4 text-white">
                   {post.title}
                 </h1>
                 <div className="mt-6 flex flex-wrap items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">
