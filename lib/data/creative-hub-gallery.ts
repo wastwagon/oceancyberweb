@@ -102,6 +102,20 @@ export const creativeHubGallery: CreativeHubItem[] = [
     imageAlt: "Cloud hosting service visual",
   },
   {
+    id: "fitch-advisory-concept",
+    title: "Fitch Advisory",
+    category: "Concept UI",
+    image: siteImagePaths.portfolio.fitchAdvisory,
+    imageAlt: "Fitch Advisory platform concept visual",
+  },
+  {
+    id: "fitch-attorneys-concept",
+    title: "Fitch Attorneys",
+    category: "Concept UI",
+    image: siteImagePaths.portfolio.fitchAttorneys,
+    imageAlt: "Fitch Attorneys platform concept visual",
+  },
+  {
     id: "egp-concept",
     title: "Financial Platform",
     category: "Concept UI",

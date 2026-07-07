@@ -35,7 +35,8 @@
     "import:industry-stories": "node scripts/import-industry-story-images.mjs",
     "export:industry-stories": "node scripts/export-industry-story-ads.mjs",
     "rename:site-images": "node scripts/rename-site-images-descriptive.mjs",
-    "verify:google-places": "node scripts/verify-google-places.mjs"
+    "verify:google-places": "node scripts/verify-google-places.mjs",
+    "capture:live-previews": "node scripts/capture-live-client-previews.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

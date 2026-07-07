@@ -1,7 +1,9 @@
+"use client";
+
 import Link from "next/link";
+import { Suspense } from "react";
 import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
-import { ClientWorkGrid } from "@/components/portfolio/ClientWorkGrid";
-import { featuredClientWork } from "@/lib/data/featured-client-work";
+import { PortfolioTabbedGallery } from "@/components/portfolio/PortfolioTabbedGallery";
 
 export function SaPortfolioGallerySection() {
   return (
@@ -22,26 +24,22 @@ export function SaPortfolioGallerySection() {
         <SaSectionHeader
           align="center"
           eyebrow="Portfolio"
-          title="Live client work"
-          subtitle="Open real partner sites in production — then explore studio concepts in our Creative Hub."
-          className="mb-12 md:mb-16"
+          title="Live sites & Creative Hub"
+          subtitle="Tab between production partner sites and studio concept work — always know what's live versus illustrative."
+          className="mb-10 md:mb-12"
         />
 
-        <ClientWorkGrid items={featuredClientWork} className="mx-auto max-w-6xl" />
+        <Suspense fallback={<div className="min-h-[280px] animate-pulse rounded-3xl bg-white/5" />}>
+          <PortfolioTabbedGallery variant="section" className="mx-auto max-w-6xl" />
+        </Suspense>
 
-        <div className="mx-auto mt-12 flex max-w-2xl flex-col items-center gap-4 text-center md:mt-16">
-          <p className="text-sm text-sa-muted/70">
-            Illustrative UI and brand explorations are kept separate so live deliveries stay
-            credible.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <Link href="/portfolio" className="sa-btn-outline">
-              Full portfolio
-            </Link>
-            <Link href="/creative-hub" className="sa-btn-primary">
-              Creative Hub
-            </Link>
-          </div>
+        <div className="mx-auto mt-10 text-center md:mt-12">
+          <Link href="/portfolio" className="sa-btn-outline">
+            Open full portfolio
+          </Link>
+          <Link href="/portfolio?tab=creative" className="sa-btn-primary ml-0 mt-3 inline-flex sm:ml-3 sm:mt-0">
+            Creative Hub
+          </Link>
         </div>
       </div>
     </section>

@@ -52,6 +52,13 @@ export const siteImagePaths = {
     africaTradeAwards:
       "/images/oceancyber-accra-portfolio-africa-trade-awards-ghana.webp",
   },
+  /** Screenshots captured from live client URLs — run npm run capture:live-previews */
+  portfolioLive: {
+    fitchAdvisory: "/images/portfolio-live/fitch-advisory.webp",
+    fitchAttorneys: "/images/portfolio-live/fitch-attorneys.webp",
+    africaGovernanceCentre: "/images/portfolio-live/africa-governance-centre.webp",
+    thinqShopping: "/images/portfolio-live/thinq-shopping.webp",
+  },
   work: {
     fintechDashboard:
       "/images/agency-bento/oceancyber-accra-fintech-dashboard-work-ghana.webp",

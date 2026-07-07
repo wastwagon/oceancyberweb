@@ -1,11 +1,12 @@
 import { siteImagePaths } from "@/lib/seo/site-image-paths";
 
-/** Live client deliveries — cards link out; no fabricated case studies. */
+/** Live client deliveries — cards link out; preview images from live URL screenshots. */
 export type FeaturedClientWork = {
   slug: string;
   title: string;
   category: string;
   summary: string;
+  /** Screenshot from liveUrl — regenerate via npm run capture:live-previews */
   image: string;
   liveUrl: string;
 };
@@ -17,7 +18,7 @@ export const featuredClientWork: FeaturedClientWork[] = [
     category: "Advisory & Consultancy",
     summary:
       "Institutional advisory platform for governments, corporates, and investors — services, insights, and sector practices.",
-    image: siteImagePaths.portfolio.fitchAdvisory,
+    image: siteImagePaths.portfolioLive.fitchAdvisory,
     liveUrl: "https://www.fitchadvisory.com/",
   },
   {
@@ -26,7 +27,7 @@ export const featuredClientWork: FeaturedClientWork[] = [
     category: "Legal Services",
     summary:
       "Full-service corporate law firm site covering practice areas, sectors, and international affiliations.",
-    image: siteImagePaths.portfolio.fitchAttorneys,
+    image: siteImagePaths.portfolioLive.fitchAttorneys,
     liveUrl: "https://www.fitchattorneys.com/",
   },
   {
@@ -35,7 +36,7 @@ export const featuredClientWork: FeaturedClientWork[] = [
     category: "Governance & Policy",
     summary:
       "Continental governance centre platform for programmes, research, events, and policy engagement.",
-    image: siteImagePaths.portfolio.africaGovernanceCentre,
+    image: siteImagePaths.portfolioLive.africaGovernanceCentre,
     liveUrl: "https://www.africagovernancecentre.org/",
   },
   {
@@ -44,7 +45,7 @@ export const featuredClientWork: FeaturedClientWork[] = [
     category: "E-Commerce & Services",
     summary:
       "E-commerce and services app experience — product discovery, checkout flows, and mobile-first retail.",
-    image: siteImagePaths.portfolio.thinqShopping,
+    image: siteImagePaths.portfolioLive.thinqShopping,
     liveUrl: "https://thinqshopping.app/",
   },
 ];

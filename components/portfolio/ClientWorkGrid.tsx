@@ -30,7 +30,10 @@ export function ClientWorkGrid({ items, className = "" }: ClientWorkGridProps) {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-sa-surface via-transparent to-transparent" />
             <span className="absolute left-4 top-4 rounded-full border border-sa-primary/40 bg-black/50 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-sa-primary backdrop-blur-sm">
-              Live client
+              Live site
+            </span>
+            <span className="absolute right-4 top-4 rounded-full border border-white/15 bg-black/50 px-2.5 py-1 text-[9px] font-medium text-white/70 backdrop-blur-sm">
+              Screenshot
             </span>
           </div>
           <div className="flex flex-1 flex-col p-5 md:p-6">

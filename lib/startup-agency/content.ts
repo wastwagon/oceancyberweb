@@ -37,38 +37,38 @@ export const clientLogos = [
   {
     name: "Fitch Advisory",
     order: 0,
-    thumb: "/images/Fitch Advisory.webp",
+    thumb: siteImagePaths.portfolioLive.fitchAdvisory,
     logo: "/images/clients/fitch-advisory.svg",
     href: "https://www.fitchadvisory.com/",
   },
   {
     name: "Fitch Attorneys",
     order: 1,
-    thumb: "/images/Fitch Attorney.webp",
+    thumb: siteImagePaths.portfolioLive.fitchAttorneys,
     logo: "/images/clients/fitch-attorneys.svg",
     href: "https://www.fitchattorneys.com/",
   },
   {
     name: "Africa Governance Centre",
     order: 2,
-    thumb: siteImagePaths.portfolio.africaGovernanceCentre,
+    thumb: siteImagePaths.portfolioLive.africaGovernanceCentre,
     logo: "/images/clients/africa-governance-centre.svg",
     href: "https://www.africagovernancecentre.org/",
   },
   {
     name: "ThinQ Shopping",
     order: 3,
-    thumb: siteImagePaths.portfolio.thinqShopping,
+    thumb: siteImagePaths.portfolioLive.thinqShopping,
     logo: "/images/clients/thinq-shopping.svg",
     href: "https://thinqshopping.app/",
   },
 ] as const;
 
 export const showreelSlides = [
-  { src: siteImagePaths.portfolio.fitchAdvisory, caption: "Fitch Advisory — Live client" },
-  { src: siteImagePaths.portfolio.fitchAttorneys, caption: "Fitch Attorneys — Live client" },
-  { src: siteImagePaths.portfolio.africaGovernanceCentre, caption: "Africa Governance Centre — Live client" },
-  { src: siteImagePaths.portfolio.thinqShopping, caption: "ThinQ Shopping — Live client" },
+  { src: siteImagePaths.portfolioLive.fitchAdvisory, caption: "Fitch Advisory — Live client" },
+  { src: siteImagePaths.portfolioLive.fitchAttorneys, caption: "Fitch Attorneys — Live client" },
+  { src: siteImagePaths.portfolioLive.africaGovernanceCentre, caption: "Africa Governance Centre — Live client" },
+  { src: siteImagePaths.portfolioLive.thinqShopping, caption: "ThinQ Shopping — Live client" },
   { src: siteImagePaths.portfolio.creativeHub, caption: "Creative Hub — Studio concepts" },
 ] as const;
 
@@ -76,32 +76,32 @@ export const aboutWorkPreview = [
   {
     title: "Fitch Advisory",
     category: "Advisory · Web",
-    image: siteImagePaths.portfolio.fitchAdvisory,
+    image: siteImagePaths.portfolioLive.fitchAdvisory,
     href: "https://www.fitchadvisory.com/",
   },
   {
     title: "Africa Governance Centre",
     category: "Governance · Web",
-    image: siteImagePaths.portfolio.africaGovernanceCentre,
+    image: siteImagePaths.portfolioLive.africaGovernanceCentre,
     href: "https://www.africagovernancecentre.org/",
   },
   {
     title: "ThinQ Shopping",
     category: "E‑commerce · App",
-    image: siteImagePaths.portfolio.thinqShopping,
+    image: siteImagePaths.portfolioLive.thinqShopping,
     href: "https://thinqshopping.app/",
   },
   {
     title: "Fitch Attorneys",
     category: "Legal · Web",
-    image: siteImagePaths.portfolio.fitchAttorneys,
+    image: siteImagePaths.portfolioLive.fitchAttorneys,
     href: "https://www.fitchattorneys.com/",
   },
   {
     title: "Creative Hub",
     category: "Studio concepts",
     image: siteImagePaths.portfolio.creativeHub,
-    href: "/creative-hub",
+    href: "/portfolio?tab=creative",
   },
 ] as const;
 
