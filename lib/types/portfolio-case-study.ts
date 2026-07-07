@@ -4,6 +4,7 @@
  */
 import type { DesignArtifact } from "@/lib/data/case-study-design";
 import type { PortfolioProjectType } from "@/lib/types/portfolio-project-type";
+import type { PortfolioSource } from "@/lib/types/portfolio-source";
 
 export type PortfolioCaseStudy = {
   title: string;
@@ -25,5 +26,7 @@ export type PortfolioCaseStudy = {
   results?: string;
   liveUrl?: string;
   projectType?: PortfolioProjectType;
+  /** Client delivery vs in-house studio / concept work. */
+  portfolioSource?: PortfolioSource;
   designArtifacts?: DesignArtifact[];
 };

@@ -14,7 +14,7 @@ export function SaInsightsTeaserSection() {
           <SaSectionHeader align="left" eyebrow="Insights" title="Latest notes" />
           <Link
             href="/insights"
-            className="sa-button-outline"
+            className="sa-btn-outline"
           >
             View all insights
           </Link>

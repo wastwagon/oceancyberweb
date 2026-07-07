@@ -12,9 +12,5 @@ export const metadata = withCanonical(
 );
 
 export default function ContactPage() {
-  return (
-    <main className="pt-24 md:pt-28">
-      <Contact revealHeaderOnMount />
-    </main>
-  );
+  return <Contact revealHeaderOnMount />;
 }

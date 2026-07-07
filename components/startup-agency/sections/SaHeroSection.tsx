@@ -16,7 +16,7 @@ export function SaHeroSection() {
     <>
       <section
         id="hero"
-        className="relative min-h-[72vh] w-full overflow-hidden bg-sa-bg pt-20 md:h-screen md:min-h-[600px]"
+        className="relative min-h-[100dvh] w-full overflow-hidden bg-sa-bg pt-[max(5rem,env(safe-area-inset-top))] md:h-screen md:min-h-[600px] md:pt-20"
       >
         <div className="hero-grid-cells opacity-20">
           {Array.from({ length: 48 }).map((_, i) => (
@@ -38,8 +38,8 @@ export function SaHeroSection() {
         >
           <div className="mb-4 flex items-center gap-3 rounded-full border border-white/20 bg-black/40 px-4 py-2 backdrop-blur-md">
             <span className="h-1.5 w-1.5 rounded-full bg-sa-primary animate-pulse" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80">
-              Engineered for Results
+            <span className="text-[11px] font-medium text-white/80 md:text-[10px] md:font-bold md:uppercase md:tracking-[0.2em]">
+              Engineered for results
             </span>
           </div>
           <p
@@ -55,23 +55,23 @@ export function SaHeroSection() {
           <p className="sa-lead mx-auto max-w-xl text-balance text-center text-white/85 md:mt-0">
             {heroTagline}
           </p>
-          <div className="pointer-events-auto mt-6 flex flex-wrap items-center justify-center gap-3 md:mt-8">
+          <div className="pointer-events-auto mt-6 flex w-full max-w-sm flex-col gap-3 px-2 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center md:mt-8">
             <button
               type="button"
               onClick={() => setShowreelOpen(true)}
-              className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-white/30 bg-black/50 px-5 py-2.5 font-heading text-[10px] font-bold uppercase tracking-[0.14em] text-white backdrop-blur-md transition hover:border-sa-primary hover:text-sa-primary"
+              className="sa-pressable inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-5 py-3 text-[15px] font-semibold text-white backdrop-blur-md sm:w-auto md:rounded-full md:text-[10px] md:font-bold md:uppercase md:tracking-[0.14em]"
             >
               <Play className="h-4 w-4 fill-current" aria-hidden />
               Watch showreel
             </button>
             <Link
               href="/portfolio"
-              className="inline-flex min-h-[44px] items-center rounded-full border border-sa-primary bg-sa-primary px-5 py-2.5 font-heading text-[10px] font-bold uppercase tracking-[0.14em] text-sa-bg transition hover:bg-sa-primary/90"
+              className="sa-pressable inline-flex min-h-[48px] w-full items-center justify-center rounded-2xl border border-sa-primary bg-sa-primary px-5 py-3 text-[15px] font-semibold text-sa-bg sm:w-auto md:rounded-full md:text-[10px] md:font-bold md:uppercase md:tracking-[0.14em]"
             >
               View our work
             </Link>
           </div>
-          <div className="mt-6 text-[11px] font-medium uppercase tracking-[0.3em] text-sa-muted/60">
+          <div className="mt-6 text-xs font-medium text-sa-muted/60 md:text-[11px] md:uppercase md:tracking-[0.3em]">
             Accra · London · Global
           </div>
         </div>

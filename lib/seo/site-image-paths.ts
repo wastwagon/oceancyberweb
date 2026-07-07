@@ -47,6 +47,8 @@ export const siteImagePaths = {
       "/images/portfolio-showcase/oceancyber-accra-portfolio-fitch-advisory-ghana.webp",
     fitchAttorneys:
       "/images/portfolio-showcase/oceancyber-accra-portfolio-fitch-attorneys-ghana.webp",
+    africaGovernanceCentre: "/images/industries/government.png",
+    thinqShopping: "/images/agency-bento/oceancyber-accra-mobile-commerce-work-ghana.webp",
     africaTradeAwards:
       "/images/oceancyber-accra-portfolio-africa-trade-awards-ghana.webp",
   },

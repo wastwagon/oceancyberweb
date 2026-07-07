@@ -43,7 +43,7 @@ export default function DesignProcessPage() {
   return (
     <main className="sa-shell relative min-h-screen bg-sa-bg text-sa-muted">
       <SaPageAmbient />
-      <section className="sa-section border-b border-sa-border pt-28 md:pt-36">
+      <section className="sa-page-intro border-b border-sa-border">
         <div className="sa-container text-center">
           <p className="sa-eyebrow">How we design</p>
           <h1 className="sa-title mt-6">A design process built for shipping</h1>

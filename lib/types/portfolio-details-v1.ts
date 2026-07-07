@@ -1,6 +1,7 @@
 /** `Project.details` JSON in PostgreSQL, version 1. */
 import type { DesignArtifact } from "@/lib/data/case-study-design";
 import type { PortfolioProjectType } from "@/lib/types/portfolio-project-type";
+import type { PortfolioSource } from "@/lib/types/portfolio-source";
 
 export type PortfolioDetailsV1 = {
   v: 1;
@@ -16,6 +17,8 @@ export type PortfolioDetailsV1 = {
   results?: string;
   /** Primary delivery emphasis for portfolio filters. */
   projectType?: PortfolioProjectType;
+  /** Client delivery vs studio concept work. */
+  portfolioSource?: PortfolioSource;
   /** Design-process gallery (research → wireframes → UI). */
   designArtifacts?: DesignArtifact[];
 };

@@ -5,7 +5,7 @@ import type { Project } from "@prisma/client";
 import { prisma } from "@/lib/db";
 import type { PortfolioCaseStudy } from "@/lib/types/portfolio-case-study";
 import type { PortfolioDetailsV1 } from "@/lib/types/portfolio-details-v1";
-import { enrichPortfolioCaseStudy } from "@/lib/portfolio/project-type";
+import { enrichPortfolioEntry, sortPortfolioForDisplay } from "@/lib/portfolio/portfolio-source";
 import { fallbackPortfolioCaseStudies } from "./projects";
 
 export type { PortfolioDetailsV1 } from "@/lib/types/portfolio-details-v1";
@@ -31,6 +31,7 @@ function mapPrismaProjectToCaseStudy(row: Project): PortfolioCaseStudy | null {
       results: v1.results,
       liveUrl: row.liveUrl ?? undefined,
       projectType: v1.projectType,
+      portfolioSource: v1.portfolioSource,
       designArtifacts: v1.designArtifacts,
     };
   }
@@ -65,19 +66,21 @@ export const getPortfolioCaseStudies = unstable_cache(
         orderBy: [{ featured: "desc" }, { sortOrder: "asc" }, { createdAt: "asc" }],
       });
       if (rows.length === 0) {
-        return fallbackPortfolioCaseStudies.map(enrichPortfolioCaseStudy);
+        return sortPortfolioForDisplay(
+          fallbackPortfolioCaseStudies.map(enrichPortfolioEntry),
+        );
       }
       const mapped = rows
         .map((r) => mapPrismaProjectToCaseStudy(r))
         .filter((x): x is PortfolioCaseStudy => x != null)
-        .map(enrichPortfolioCaseStudy);
+        .map(enrichPortfolioEntry);
       if (mapped.length > 0) {
-        return mapped;
+        return sortPortfolioForDisplay(mapped);
       }
     } catch (e) {
       logPortfolioLoaderError("[getPortfolioCaseStudies]", e);
     }
-    return fallbackPortfolioCaseStudies.map(enrichPortfolioCaseStudy);
+    return sortPortfolioForDisplay(fallbackPortfolioCaseStudies.map(enrichPortfolioEntry));
   },
   ["site-portfolio-case-studies"],
   { revalidate: 300, tags: ["portfolio"] },
@@ -105,14 +108,14 @@ export async function getPortfolioCaseStudyBySlug(
     if (row) {
       const m = mapPrismaProjectToCaseStudy(row);
       if (m) {
-        return enrichPortfolioCaseStudy(m);
+        return enrichPortfolioEntry(m);
       }
     }
   } catch (e) {
     logPortfolioLoaderError("[getPortfolioCaseStudyBySlug]", e);
   }
   const fallback = fallbackPortfolioCaseStudies.find((p) => p.slug === slug);
-  return fallback ? enrichPortfolioCaseStudy(fallback) : null;
+  return fallback ? enrichPortfolioEntry(fallback) : null;
 }
 
 export async function getRelatedPortfolioProjects(

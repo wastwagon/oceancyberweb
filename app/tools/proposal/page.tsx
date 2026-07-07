@@ -18,7 +18,7 @@ export default function ProposalRequestPage({
 }) {
   const topic = typeof searchParams?.topic === "string" ? searchParams.topic : "";
   return (
-    <main className="relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted pt-28 md:pt-32">
+    <main className="relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted sa-page-top md:pt-32">
       <section className="sa-section relative z-10 overflow-hidden border-b border-sa-border">
         <div className="sa-container max-w-3xl pb-8 md:pb-10">
           <p className="sa-eyebrow mb-3 text-center block">Self-serve</p>

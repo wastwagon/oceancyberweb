@@ -147,7 +147,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
   return (
     <section
       id="contact"
-      className="sa-section relative overflow-hidden"
+      className="sa-section sa-page-top relative overflow-hidden"
     >
       <ContactAmbient />
       <div className="sa-container">
@@ -210,7 +210,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={revealViewport}
                       transition={staggerDelay(index, 0.08)}
-                      className="sa-card group flex items-start gap-5 p-4 transition-all duration-300"
+                      className="sa-card sa-pressable group flex items-start gap-5 p-4 transition-all duration-300"
                     >
                       <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-sa-border bg-black/40 transition-all group-hover:border-sa-primary group-hover:bg-sa-primary/10">
                         <Icon
@@ -244,7 +244,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
             <WhatsAppButton variant="default" size="lg" className="h-14 w-full" />
             <Link
               href="/services/website-to-mobile-app"
-              className="flex min-h-[56px] w-full items-center justify-center rounded-xl border border-sa-border bg-sa-surface px-4 text-sm font-semibold text-white shadow-sm transition-colors hover:border-sa-primary hover:bg-black/20"
+              className="sa-pressable flex min-h-[52px] w-full items-center justify-center rounded-2xl border border-sa-border bg-sa-surface px-4 text-[15px] font-semibold text-white shadow-sm transition active:scale-[0.99] md:rounded-xl md:text-sm"
             >
               Convert your existing website into a mobile app
             </Link>
@@ -289,7 +289,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
                     value={name}
                     onChange={(ev) => setName(ev.target.value)}
                     placeholder="Your name"
-                    className="w-full rounded-xl border border-sa-border bg-sa-surface px-5 py-4 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary"
+                    className="w-full rounded-2xl border border-sa-border bg-sa-surface px-5 py-4 text-base text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary md:text-sm"
                   />
                 </div>
                 <div className="space-y-2">
@@ -308,7 +308,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
                     value={email}
                     onChange={(ev) => setEmail(ev.target.value)}
                     placeholder="your@email.com"
-                    className="w-full rounded-xl border border-sa-border bg-sa-surface px-5 py-4 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary"
+                    className="w-full rounded-2xl border border-sa-border bg-sa-surface px-5 py-4 text-base text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary md:text-sm"
                   />
                 </div>
               </div>
@@ -345,7 +345,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
                   value={message}
                   onChange={(ev) => setMessage(ev.target.value)}
                   placeholder="Tell us about your project..."
-                  className="w-full resize-none rounded-xl border border-sa-border bg-sa-surface px-5 py-4 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary"
+                  className="w-full resize-none rounded-2xl border border-sa-border bg-sa-surface px-5 py-4 text-base text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary md:text-sm"
                 />
               </div>
               <button

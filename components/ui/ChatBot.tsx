@@ -100,6 +100,15 @@ export function ChatBot() {
     }
   };
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [isOpen]);
+
   const formatTime = (date: Date) =>
     date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
@@ -118,33 +127,53 @@ export function ChatBot() {
   }
 
   return (
-    <div
-      className={cn(
-        floatingChrome.chat,
-        "flex flex-col overflow-hidden rounded-3xl border border-sa-border bg-sa-bg shadow-2xl transition-all duration-300",
-        isMinimized ? "h-16 w-64" : "h-[min(85vh,580px)] w-[min(calc(100vw-2rem),24rem)]",
-      )}
-      role="dialog"
-      aria-label="OceanCyber chat"
-      data-app-print-hide-chrome
-    >
-      <header className="flex shrink-0 items-center justify-between border-b border-sa-border bg-sa-surface px-5 py-4">
+    <>
+      <div
+        className={cn(
+          "max-md:fixed max-md:inset-0 max-md:z-[160] max-md:bg-black/35 max-md:backdrop-blur-[2px] md:hidden",
+          !isOpen && "max-md:pointer-events-none max-md:opacity-0",
+        )}
+        aria-hidden
+        onClick={() => {
+          setIsOpen(false);
+          setIsMinimized(false);
+        }}
+      />
+
+      <div
+        className={cn(
+          "flex flex-col overflow-hidden border border-sa-border bg-sa-bg shadow-2xl transition-all duration-300",
+          "max-md:fixed max-md:inset-x-0 max-md:bottom-[var(--sa-mobile-tab-bar)] max-md:z-[165] max-md:max-h-[min(78dvh,640px)] max-md:rounded-t-[20px] max-md:border-x-0 max-md:border-b-0",
+          "md:fixed md:bottom-6 md:right-6 md:z-[150] md:rounded-3xl",
+          isMinimized
+            ? "h-16 w-64 max-md:h-14 max-md:w-full"
+            : "h-[min(85vh,580px)] w-[min(calc(100vw-2rem),24rem)] max-md:h-[min(78dvh,640px)] max-md:w-full",
+        )}
+        role="dialog"
+        aria-label="OceanCyber chat"
+        data-app-print-hide-chrome
+      >
+      <header className="flex shrink-0 flex-col border-b border-sa-border bg-sa-surface max-md:bg-[#1c1c1e]/95">
+        <div className="flex justify-center pt-2 md:hidden">
+          <div className="h-1 w-10 rounded-full bg-white/20" aria-hidden />
+        </div>
+        <div className="flex items-center justify-between px-5 py-4">
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sa-primary/10 text-sa-primary ring-1 ring-sa-primary/20">
             <Bot className="h-5 w-5" aria-hidden />
           </div>
           <div className="min-w-0">
-            <h3 className="truncate font-heading text-sm font-bold uppercase tracking-widest text-white">
+            <h3 className="truncate text-base font-semibold text-white md:font-heading md:text-sm md:font-bold md:uppercase md:tracking-widest">
               Assistant
             </h3>
-            {!isMinimized && <p className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">Online</p>}
+            {!isMinimized && <p className="text-xs text-sa-primary md:text-[10px] md:font-bold md:uppercase md:tracking-widest">Online</p>}
           </div>
         </div>
         <div className="flex items-center gap-1">
           <button
             type="button"
             onClick={() => setIsMinimized(!isMinimized)}
-            className="rounded-lg p-2 text-sa-muted transition-colors hover:bg-white/5 hover:text-white"
+            className="sa-pressable hidden rounded-lg p-2 text-sa-muted md:inline-flex"
             aria-label={isMinimized ? "Expand chat" : "Minimize chat"}
           >
             {isMinimized ? (
@@ -159,11 +188,12 @@ export function ChatBot() {
               setIsOpen(false);
               setIsMinimized(false);
             }}
-            className="rounded-lg p-2 text-sa-muted transition-colors hover:bg-white/5 hover:text-white"
+            className="sa-pressable rounded-lg p-2 text-sa-muted"
             aria-label="Close chat"
           >
-            <X className="h-4 w-4" />
+            <X className="h-5 w-5" />
           </button>
+        </div>
         </div>
       </header>
 
@@ -215,7 +245,7 @@ export function ChatBot() {
             </div>
           </div>
 
-          <footer className="shrink-0 border-t border-sa-border bg-sa-surface p-4">
+          <footer className="shrink-0 border-t border-sa-border bg-sa-surface p-4 pb-[max(1rem,env(safe-area-inset-bottom))] max-md:bg-[#1c1c1e]/95">
             <form onSubmit={handleSendMessage} className="flex items-center gap-2">
               <input
                 type="text"
@@ -240,5 +270,6 @@ export function ChatBot() {
         </>
       )}
     </div>
+    </>
   );
 }

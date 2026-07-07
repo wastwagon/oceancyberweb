@@ -135,7 +135,7 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
     <main className="sa-shell relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
       <SaPageAmbient />
 
-      <section className="relative z-10 overflow-hidden border-b border-sa-border pt-28 md:pt-36">
+      <section className="sa-page-intro relative z-10 overflow-hidden border-b border-sa-border">
         <div className="sa-container relative z-10 pb-4 text-center">
           <motion.div
             initial="hidden"

@@ -912,10 +912,19 @@
 
 /* Start-Up Agency template parity helpers */
 @layer components {
+  :root {
+    --sa-mobile-tab-bar: calc(3.25rem + env(safe-area-inset-bottom, 0px));
+    --sa-mobile-header: calc(5.25rem + env(safe-area-inset-top, 0px));
+    --sa-mobile-fab-offset: calc(var(--sa-mobile-tab-bar) + 0.75rem);
+    --sa-mobile-footer-pad: calc(var(--sa-mobile-tab-bar) + 1.5rem);
+    --sa-ios-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
   .sa-shell {
     background: #000;
     color: #e9e9e9;
     letter-spacing: 0;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .sa-workspace-shell {
@@ -930,6 +939,83 @@
 
   .sa-section {
     @apply py-14 md:py-20 lg:py-24;
+  }
+
+  @media (max-width: 767px) {
+    .sa-section {
+      @apply py-12;
+    }
+  }
+
+  .sa-mobile-header-pad {
+    padding-top: var(--sa-mobile-header);
+  }
+
+  .sa-mobile-tab-pad {
+    padding-bottom: var(--sa-mobile-tab-bar);
+  }
+
+  .sa-pressable {
+    @apply transition-[transform,opacity] duration-150 ease-out active:scale-[0.97] active:opacity-85;
+  }
+
+  .sa-ios-material {
+    border-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(28, 28, 30, 0.82);
+    @apply backdrop-blur-2xl backdrop-saturate-150;
+  }
+
+  .sa-ios-tab-bar {
+    @apply fixed inset-x-0 bottom-0 z-[140] border-t border-white/10 backdrop-blur-2xl backdrop-saturate-150 md:hidden;
+    background-color: rgba(28, 28, 30, 0.82);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .sa-ios-group {
+    @apply overflow-hidden rounded-2xl bg-white/[0.06];
+  }
+
+  .sa-ios-row {
+    @apply flex min-h-[44px] w-full items-center justify-between gap-3 px-4 py-3.5 text-left text-[17px] leading-snug text-white transition active:bg-white/[0.08];
+  }
+
+  .sa-ios-link {
+    @apply inline-flex min-h-[44px] items-center py-2;
+  }
+
+  .sa-page-hero {
+    @apply relative z-10 flex min-h-[100dvh] flex-col overflow-hidden border-b border-sa-border;
+    padding-top: var(--sa-mobile-header);
+  }
+
+  @media (min-width: 768px) {
+    .sa-page-hero {
+      min-height: 78vh;
+      padding-top: 9rem;
+    }
+  }
+
+  .sa-page-hero-body {
+    @apply sa-container relative z-10 flex flex-1 flex-col items-center justify-center pb-16 text-center md:pb-20;
+  }
+
+  .sa-page-intro {
+    @apply sa-section border-b border-sa-border;
+    padding-top: var(--sa-mobile-header);
+  }
+
+  .sa-page-top {
+    padding-top: var(--sa-mobile-header);
+  }
+
+  @media (min-width: 768px) {
+    .sa-page-intro {
+      @apply pt-36;
+    }
+
+    .sa-page-top {
+      padding-top: 9rem;
+    }
   }
 
   .sa-eyebrow {
@@ -1002,12 +1088,30 @@
     transform: translateY(-2px);
   }
 
+  @media (hover: none) and (pointer: coarse) {
+    .sa-card:hover {
+      border-color: #414141;
+      transform: none;
+    }
+  }
+
   .sa-btn-primary {
-    @apply inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-sa-primary bg-sa-primary px-8 font-heading text-sm font-bold uppercase tracking-[0.14em] text-sa-bg transition duration-300 hover:bg-transparent hover:text-sa-primary;
+    @apply sa-pressable inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-sa-primary bg-sa-primary px-8 font-heading text-sm font-bold uppercase tracking-[0.14em] text-sa-bg transition duration-300 hover:bg-transparent hover:text-sa-primary;
   }
 
   .sa-btn-outline {
-    @apply inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-white px-8 font-heading text-sm font-bold uppercase tracking-[0.14em] text-white transition duration-300 hover:bg-white hover:text-sa-bg;
+    @apply sa-pressable inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-white px-8 font-heading text-sm font-bold uppercase tracking-[0.14em] text-white transition duration-300 hover:bg-white hover:text-sa-bg;
+  }
+
+  @media (max-width: 767px) {
+    .sa-btn-primary,
+    .sa-btn-outline {
+      @apply rounded-2xl text-[15px] font-semibold normal-case tracking-normal;
+    }
+
+    .sa-eyebrow {
+      @apply text-[11px] tracking-[0.18em];
+    }
   }
 }
 

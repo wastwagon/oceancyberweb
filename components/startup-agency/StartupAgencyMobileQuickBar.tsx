@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Briefcase, Mail, Rocket } from "lucide-react";
 import { useCart } from "@/components/commerce/CartProvider";
+import { cn } from "@/lib/utils";
 
 const quickActions = [
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "Contact", href: "/contact" },
-  { label: "Get started", href: "/get-started", primary: true },
+  { label: "Work", href: "/portfolio", icon: Briefcase },
+  { label: "Contact", href: "/contact", icon: Mail },
+  { label: "Start", href: "/get-started", icon: Rocket, primary: true },
 ] as const;
 
 export function StartupAgencyMobileQuickBar() {
@@ -28,38 +30,52 @@ export function StartupAgencyMobileQuickBar() {
   }
 
   return (
-    <div
-      className="fixed inset-x-0 bottom-0 z-[140] border-t border-sa-border bg-black/95 px-3 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] pt-2 backdrop-blur-sm md:hidden"
+    <nav
+      className="sa-ios-tab-bar"
+      aria-label="Quick navigation"
       data-app-print-hide-chrome
     >
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-3 gap-2">
-        {quickActions.map((action) => (
-          <Link
-            key={action.href}
-            href={action.href}
-            className={`inline-flex min-h-[44px] items-center justify-center rounded-lg border px-2 text-center font-heading text-xs font-semibold uppercase tracking-[0.12em] transition duration-300 md:min-h-[42px] md:text-[10px] ${
-              "primary" in action && action.primary
-                ? "border-sa-primary bg-sa-primary text-sa-bg hover:bg-sa-primary/90"
-                : isActive(action.href)
-                  ? "border-sa-primary bg-sa-primary/15 text-sa-primary"
-                  : "border-sa-border bg-sa-surface/70 text-white hover:border-sa-primary hover:text-sa-primary"
-            }`}
-            aria-current={isActive(action.href) ? "page" : undefined}
-          >
-            {action.label}
-            {action.href === "/get-started" && itemCount > 0 ? (
-              <span
-                className={`ml-1 inline-flex min-w-[18px] items-center justify-center rounded-full bg-sa-bg px-1.5 text-[9px] font-bold leading-4 text-sa-primary transition ${
-                  animateBadge ? "scale-110" : "scale-100"
-                }`}
-                title={`${itemCount} item(s) in cart`}
-              >
-                {itemCount > 99 ? "99+" : itemCount}
+      <div className="mx-auto grid w-full max-w-lg grid-cols-3 px-2 pt-1.5">
+        {quickActions.map((action) => {
+          const active = isActive(action.href);
+          const Icon = action.icon;
+
+          return (
+            <Link
+              key={action.href}
+              href={action.href}
+              className={cn(
+                "sa-pressable relative flex min-h-[44px] flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-1.5 text-[10px] font-medium leading-none transition-colors",
+                active
+                  ? "text-sa-primary"
+                  : "text-white/55",
+                "primary" in action && action.primary && !active && "text-sa-primary/90",
+              )}
+              aria-current={active ? "page" : undefined}
+            >
+              <span className="relative flex h-6 w-6 items-center justify-center">
+                <Icon
+                  className={cn("h-[22px] w-[22px]", active && "stroke-[2.25px]")}
+                  strokeWidth={active ? 2.25 : 1.75}
+                  aria-hidden
+                />
+                {action.href === "/get-started" && itemCount > 0 ? (
+                  <span
+                    className={cn(
+                      "absolute -right-2 -top-1 inline-flex min-w-[16px] items-center justify-center rounded-full bg-sa-primary px-1 text-[9px] font-bold leading-4 text-sa-bg transition",
+                      animateBadge ? "scale-110" : "scale-100",
+                    )}
+                    title={`${itemCount} item(s) in cart`}
+                  >
+                    {itemCount > 99 ? "99+" : itemCount}
+                  </span>
+                ) : null}
               </span>
-            ) : null}
-          </Link>
-        ))}
+              <span>{action.label}</span>
+            </Link>
+          );
+        })}
       </div>
-    </div>
+    </nav>
   );
 }

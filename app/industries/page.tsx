@@ -11,7 +11,6 @@ import {
   revealViewport,
   staggerDelay,
 } from "@/lib/scroll-reveal";
-import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
 import { industryCatalog } from "@/lib/data/industries-catalog";
 
 type IndustryCard = {
@@ -101,7 +100,7 @@ function IndustryGridCard({
     </>
   );
 
-  const className = "sa-card group flex h-full flex-col overflow-hidden text-left";
+  const className = "sa-card sa-pressable group flex h-full flex-col overflow-hidden text-left active:scale-[0.99]";
 
   return (
     <motion.div
@@ -123,7 +122,7 @@ export default function IndustriesPage() {
 
   return (
     <main className="sa-shell relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
-      <section className="sa-section relative z-10 overflow-hidden border-b border-sa-border pt-28 md:pt-36">
+      <section className="sa-page-intro relative z-10 overflow-hidden">
         <div className="sa-container relative z-10 text-center">
           <motion.div
             initial="hidden"
@@ -194,7 +193,6 @@ export default function IndustriesPage() {
           </motion.div>
         </div>
       </section>
-      <StartupAgencyMobileQuickBar />
     </main>
   );
 }

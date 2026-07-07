@@ -22,7 +22,7 @@ export function SaPricingSection() {
           <div className="mt-8 flex justify-center">
             <Link
               href="/tools/project-cost"
-              className="sa-button-outline"
+              className="sa-btn-outline"
             >
               Open project calculator
             </Link>

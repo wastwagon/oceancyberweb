@@ -16,10 +16,28 @@ import {
   PortfolioWorkTypeChips,
   type WorkTypeFilter,
 } from "@/components/portfolio/PortfolioWorkTypeChips";
+import { PortfolioSourceChips } from "@/components/portfolio/PortfolioSourceChips";
+import type { SourceFilter } from "@/lib/types/portfolio-source";
+import {
+  filterByPortfolioSource,
+  resolvePortfolioSource,
+  sortPortfolioForDisplay,
+} from "@/lib/portfolio/portfolio-source";
+import { PORTFOLIO_SOURCE_LABELS } from "@/lib/types/portfolio-source";
 import { fadeUpProps, staggerDelay } from "@/lib/scroll-reveal";
 import { cn } from "@/lib/utils";
 
 const VALID_TYPES = new Set<PortfolioProjectType>(["design", "development", "hybrid"]);
+const VALID_SOURCES = new Set<SourceFilter>(["All", "client", "studio"]);
+
+function ProjectSourceBadge({ project }: { project: PortfolioCaseStudy }) {
+  const source = resolvePortfolioSource(project);
+  return (
+    <span className="rounded-full border border-white/20 bg-black/40 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-widest text-white/80">
+      {PORTFOLIO_SOURCE_LABELS[source]}
+    </span>
+  );
+}
 
 function ProjectTypeBadge({ type }: { type: PortfolioProjectType }) {
   return (
@@ -58,8 +76,9 @@ function PortfolioLibraryCard({
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-sa-surface via-transparent to-transparent" />
-          <div className="absolute left-4 top-4">
+          <div className="absolute left-4 top-4 flex flex-wrap gap-2">
             <ProjectTypeBadge type={type} />
+            <ProjectSourceBadge project={project} />
           </div>
         </div>
         <div className="relative z-10 flex h-full flex-col p-5 md:p-6">
@@ -120,6 +139,7 @@ function PortfolioFilteredLibraryInner({
 }) {
   const searchParams = useSearchParams();
   const [category, setCategory] = useState("All");
+  const [sourceFilter, setSourceFilter] = useState<SourceFilter>("All");
   const [workType, setWorkType] = useState<WorkTypeFilter>("All");
 
   useEffect(() => {
@@ -127,18 +147,23 @@ function PortfolioFilteredLibraryInner({
     if (t && VALID_TYPES.has(t as PortfolioProjectType)) {
       setWorkType(t as PortfolioProjectType);
     }
+    const s = searchParams.get("source");
+    if (s && VALID_SOURCES.has(s as SourceFilter)) {
+      setSourceFilter(s as SourceFilter);
+    }
   }, [searchParams]);
 
   const categories = useMemo(() => getProjectCategories(projects), [projects]);
 
   const filtered = useMemo(() => {
-    return projects.filter((p) => {
+    const sorted = sortPortfolioForDisplay(projects);
+    return filterByPortfolioSource(sorted, sourceFilter).filter((p) => {
       const categoryOk = category === "All" || p.category === category;
       const type = resolveProjectType(p);
       const typeOk = workType === "All" || type === workType;
       return categoryOk && typeOk;
     });
-  }, [projects, category, workType]);
+  }, [projects, category, sourceFilter, workType]);
 
   return (
     <section className="sa-section relative overflow-hidden" id="portfolio-library">
@@ -150,13 +175,14 @@ function PortfolioFilteredLibraryInner({
               Case studies with measurable outcomes
             </h2>
             <p className="sa-subtitle mx-auto">
-              Filter by delivery type or industry — each project includes design process
-              artifacts where applicable.
+              Filter by client delivery or studio concepts, then by delivery type or industry —
+              each project includes design process artifacts where applicable.
             </p>
           </motion.div>
         ) : null}
 
         <div className={cn("space-y-4", showHeader ? "mt-12" : "mt-0")}>
+          <PortfolioSourceChips value={sourceFilter} onChange={setSourceFilter} />
           <PortfolioWorkTypeChips value={workType} onChange={setWorkType} />
 
           <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filter by industry">
@@ -179,6 +205,7 @@ function PortfolioFilteredLibraryInner({
               className="font-bold text-sa-primary underline"
               onClick={() => {
                 setCategory("All");
+                setSourceFilter("All");
                 setWorkType("All");
               }}
             >

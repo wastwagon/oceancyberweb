@@ -11,7 +11,6 @@ import {
   staggerDelay,
 } from "@/lib/scroll-reveal";
 
-import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
 
 export default function DomainsPage() {
   const reduceMotion = useReducedMotion();
@@ -20,7 +19,7 @@ export default function DomainsPage() {
   return (
     <main className="sa-shell relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
       {/* Hero */}
-      <section className="sa-section relative z-10 overflow-hidden border-b border-sa-border pt-28 md:pt-36">
+      <section className="sa-page-intro relative z-10 overflow-hidden">
         <div className="sa-container relative z-10 text-center">
           <motion.div
             initial="hidden"
@@ -123,7 +122,6 @@ export default function DomainsPage() {
           </motion.div>
         </div>
       </section>
-      <StartupAgencyMobileQuickBar />
     </main>
   );
 }

@@ -3,7 +3,9 @@ import { randomUUID } from "crypto";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { caseStudyDesignBySlug } from "../lib/data/case-study-design";
 import { PROJECT_TYPE_BY_SLUG } from "../lib/portfolio/project-type";
+import { FEATURED_CLIENT_SLUGS, resolvePortfolioSource } from "../lib/portfolio/portfolio-source";
 import type { PortfolioProjectType } from "../lib/types/portfolio-project-type";
+import type { PortfolioSource } from "../lib/types/portfolio-source";
 
 type PortfolioDetailsV1 = {
   v: 1;
@@ -17,6 +19,7 @@ type PortfolioDetailsV1 = {
   testimonial?: unknown;
   results?: unknown;
   projectType?: PortfolioProjectType;
+  portfolioSource?: PortfolioSource;
   designArtifacts?: (typeof caseStudyDesignBySlug)[string];
 };
 
@@ -420,6 +423,27 @@ async function main() {
     const p = fallbackPortfolioCaseStudies[i]!;
     const designArtifacts = caseStudyDesignBySlug[p.slug];
     const projectType = PROJECT_TYPE_BY_SLUG[p.slug];
+    const portfolioSource = resolvePortfolioSource({
+      title: p.title,
+      slug: p.slug,
+      category: p.category,
+      description: p.description,
+      tech: p.tech,
+      gradient: p.gradient ?? "from-ocean-500 to-cyan-500",
+      image: p.image ?? "",
+      year: p.year ?? "",
+      client: p.client ?? p.title,
+      rating: p.rating ?? 5,
+    });
+    const featuredRank = FEATURED_CLIENT_SLUGS.indexOf(
+      p.slug as (typeof FEATURED_CLIENT_SLUGS)[number],
+    );
+    const sortOrder =
+      portfolioSource === "studio"
+        ? 900 + i * 10
+        : featuredRank === -1
+          ? 400 + i * 10
+          : featuredRank * 10;
     const details: PortfolioDetailsV1 = {
       v: 1,
       gradient: p.gradient,
@@ -432,6 +456,7 @@ async function main() {
       testimonial: p.testimonial,
       results: p.results,
       ...(projectType ? { projectType } : {}),
+      portfolioSource,
       ...(designArtifacts?.length ? { designArtifacts } : {}),
     };
     const json: Prisma.InputJsonValue = details as unknown as Prisma.InputJsonValue;
@@ -445,8 +470,8 @@ async function main() {
         techStack: p.tech,
         imageUrl: p.image,
         liveUrl: null,
-        featured: true,
-        sortOrder: i * 10,
+        featured: portfolioSource === "client",
+        sortOrder,
         details: json,
       },
       update: {
@@ -455,8 +480,8 @@ async function main() {
         description: p.description,
         techStack: p.tech,
         imageUrl: p.image,
-        featured: true,
-        sortOrder: i * 10,
+        featured: portfolioSource === "client",
+        sortOrder,
         details: json,
       },
     });

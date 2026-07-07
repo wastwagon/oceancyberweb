@@ -1,14 +1,8 @@
-import { notFound } from "next/navigation";
-import { CaseStudyDetailView } from "@/components/portfolio/CaseStudyDetailView";
-import { getCaseStudyNarrativeBySlug } from "@/lib/data/case-studies";
+import { notFound, redirect } from "next/navigation";
 import {
-  getPortfolioCaseStudyBySlug,
-  getPortfolioSlugs,
-  getRelatedPortfolioProjects,
-} from "@/lib/data/portfolio-loader";
-
-/** Always resolve case study from DB / fallback so admin edits show without per-path static rebuild. */
-export const dynamic = "force-dynamic";
+  featuredClientSlugs,
+  getFeaturedClientBySlug,
+} from "@/lib/data/featured-client-work";
 
 interface PortfolioDetailPageProps {
   params: {
@@ -16,42 +10,30 @@ interface PortfolioDetailPageProps {
   };
 }
 
-export default async function PortfolioDetailPage({ params }: PortfolioDetailPageProps) {
-  const project = await getPortfolioCaseStudyBySlug(params.slug);
+const LEGACY_STUDIO_SLUGS = new Set(["creative-hub-template"]);
 
-  if (!project) {
-    notFound();
+export default async function PortfolioDetailPage({ params }: PortfolioDetailPageProps) {
+  if (LEGACY_STUDIO_SLUGS.has(params.slug)) {
+    redirect("/creative-hub");
   }
 
-  const narrative = getCaseStudyNarrativeBySlug(params.slug);
-  const relatedProjects = await getRelatedPortfolioProjects(
-    params.slug,
-    project.category,
-  );
+  const client = getFeaturedClientBySlug(params.slug);
+  if (client) {
+    redirect(client.liveUrl);
+  }
 
-  return (
-    <CaseStudyDetailView
-      project={project}
-      backHref="/portfolio"
-      backLabel="← Back to Portfolio"
-      sidebarTitle="Project Details"
-      detailTitle="View all portfolio"
-      narrative={narrative}
-      relatedProjects={relatedProjects}
-    />
-  );
+  notFound();
 }
 
-/** Pre-render known slugs at build; other slugs resolve at runtime (`dynamicParams` default). */
+/** Only featured client slugs need static paths; others 404. */
 export async function generateStaticParams() {
-  const slugs = await getPortfolioSlugs();
-  return slugs.map((slug) => ({ slug }));
+  return featuredClientSlugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PortfolioDetailPageProps) {
-  const project = await getPortfolioCaseStudyBySlug(params.slug);
+  const client = getFeaturedClientBySlug(params.slug);
 
-  if (!project) {
+  if (!client) {
     return {
       title: "Project Not Found",
       description: "The requested project could not be found.",
@@ -59,8 +41,8 @@ export async function generateMetadata({ params }: PortfolioDetailPageProps) {
   }
 
   return {
-    title: `${project.title} - Portfolio`,
-    description: project.description,
+    title: `${client.title} — Live client work`,
+    description: client.summary,
     alternates: {
       canonical: `/portfolio/${params.slug}`,
     },

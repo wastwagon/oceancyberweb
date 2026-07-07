@@ -49,8 +49,9 @@ export function SaReviewsPageContent({ stats, reviews }: Props) {
   );
 
   return (
-    <main className="pt-24 md:pt-28">
-      <section className="sa-container py-16 md:py-24">
+    <main>
+      <section className="sa-page-intro border-b border-sa-border">
+        <div className="sa-container py-12 md:py-24">
         <div className="mx-auto max-w-3xl text-center">
           <p className="font-heading text-xs font-bold uppercase tracking-[0.25em] text-sa-primary">
             Verified feedback
@@ -74,21 +75,21 @@ export function SaReviewsPageContent({ stats, reviews }: Props) {
           {stats.source === "places-api" ? (
             <p className="mt-2 text-xs text-sa-muted/70">Synced from Google Business Profile</p>
           ) : null}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
             <Link
               href={profileUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-sa-primary/40 bg-sa-primary/10 px-6 py-3 text-xs font-bold uppercase tracking-widest text-sa-primary transition hover:border-sa-primary hover:bg-sa-primary hover:text-black"
+              className="sa-btn-outline w-full sm:w-auto"
             >
               Read on Google
-              <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+              <ExternalLink className="ml-2 h-3.5 w-3.5" aria-hidden />
             </Link>
             <Link
               href={writeReviewUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-sa-border px-6 py-3 text-xs font-bold uppercase tracking-widest text-white transition hover:border-sa-primary/50 hover:text-sa-primary"
+              className="sa-btn-primary w-full sm:w-auto"
             >
               Write a review
             </Link>
@@ -137,6 +138,7 @@ export function SaReviewsPageContent({ stats, reviews }: Props) {
           </Link>
           .
         </p>
+        </div>
       </section>
     </main>
   );

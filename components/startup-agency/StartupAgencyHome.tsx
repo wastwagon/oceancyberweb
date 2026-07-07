@@ -36,7 +36,7 @@ export function StartupAgencyHome({ clientLogos }: StartupAgencyHomeProps) {
       </a>
       <StartupAgencyProgressBar />
 
-      <main id="startup-main-content" className="pb-24 pt-24 md:pb-0 md:pt-28" tabIndex={-1}>
+      <main id="startup-main-content" className="sa-mobile-header-pad sa-mobile-tab-pad md:pb-0 md:pt-28" tabIndex={-1}>
         <h1 className="sr-only">
           OceanCyber — UI/UX design, web and mobile app development in Ghana
         </h1>

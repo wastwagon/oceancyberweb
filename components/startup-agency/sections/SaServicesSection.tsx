@@ -41,7 +41,7 @@ export function SaServicesSection() {
               <SaReveal key={service.title} delay={index * 0.08}>
                 <Link
                   href={service.href}
-                  className="group grid overflow-hidden rounded-3xl border border-white/10 bg-sa-surface/30 transition-colors duration-300 hover:border-sa-primary/30 hover:bg-white/[0.03] md:min-h-[300px] md:grid-cols-2 lg:min-h-[340px]"
+                  className="sa-pressable group grid overflow-hidden rounded-3xl border border-white/10 bg-sa-surface/30 transition-colors duration-300 active:scale-[0.99] hover:border-sa-primary/30 hover:bg-white/[0.03] md:min-h-[300px] md:grid-cols-2 lg:min-h-[340px]"
                 >
                   <div
                     className={`relative aspect-[16/10] w-full md:aspect-auto md:min-h-[300px] lg:min-h-[340px] ${

@@ -228,7 +228,16 @@ export function GoogleReviewsCarousel({ reviews, className, size = "default" }: 
                 animate="center"
                 exit="exit"
                 transition={{ duration: reduceMotion ? 0 : 0.34, ease: [0.22, 1, 0.36, 1] }}
-                className="min-w-0"
+                className="min-w-0 touch-pan-y"
+                drag={slidesPerView === 1 && !reduceMotion ? "x" : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.12}
+                onDragEnd={(_, info) => {
+                  if (slidesPerView !== 1) return;
+                  const swipe = info.offset.x + info.velocity.x * 0.15;
+                  if (swipe < -60) goNext();
+                  else if (swipe > 60) goPrev();
+                }}
               >
                 <CarouselReviewCard review={reviews[reviewIndex]!} size={size} />
               </motion.div>
@@ -239,14 +248,14 @@ export function GoogleReviewsCarousel({ reviews, className, size = "default" }: 
 
       {showNav ? (
         <>
-          <div className="mt-8 flex items-center justify-center gap-3 md:hidden">
+          <div className="mt-8 flex items-center justify-center gap-4 md:hidden">
             <button
               type="button"
               onClick={goPrev}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-sa-border bg-sa-surface/50 text-white transition hover:border-sa-primary/40"
+              className="sa-pressable flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-white"
               aria-label="Previous review"
             >
-              <ChevronLeft className="h-4 w-4" />
+              <ChevronLeft className="h-5 w-5" />
             </button>
 
             <div className="flex items-center gap-2" role="tablist" aria-label="Review slides">
@@ -259,10 +268,10 @@ export function GoogleReviewsCarousel({ reviews, className, size = "default" }: 
                   aria-label={`Review ${i + 1} of ${count} by ${review.name}`}
                   onClick={() => goTo(i, i > active ? 1 : -1)}
                   className={cn(
-                    "h-2 rounded-full transition-all duration-300",
+                    "sa-pressable h-2 rounded-full transition-all duration-300",
                     i === active
                       ? "w-8 bg-sa-primary"
-                      : "w-2 bg-sa-muted/30 hover:bg-sa-muted/50",
+                      : "w-2 bg-sa-muted/30",
                   )}
                 />
               ))}
@@ -271,10 +280,10 @@ export function GoogleReviewsCarousel({ reviews, className, size = "default" }: 
             <button
               type="button"
               onClick={goNext}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-sa-border bg-sa-surface/50 text-white transition hover:border-sa-primary/40"
+              className="sa-pressable flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-white"
               aria-label="Next review"
             >
-              <ChevronRight className="h-4 w-4" />
+              <ChevronRight className="h-5 w-5" />
             </button>
           </div>
 

@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ArrowRight, Smartphone } from "lucide-react";
 import { WebsiteToAppQuoteForm } from "@/components/services/WebsiteToAppQuoteForm";
 import { ServicePageHeroBanner } from "@/components/services/ServicePageHeroBanner";
-import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { serviceImages } from "@/lib/startup-agency/service-images";
 
@@ -27,11 +26,12 @@ export default function WebsiteToMobileAppPage() {
   return (
     <main className="sa-shell relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
       <SaPageAmbient />
-      <section className="relative z-10 overflow-hidden border-b border-sa-border pt-28 md:pt-36">
+      <section className="sa-page-hero">
         <ServicePageHeroBanner image={serviceImages.mobileApps} />
-        <div className="sa-container relative z-10 pb-16 md:pb-20">
+        <div className="sa-page-hero-body !items-stretch !text-left md:!items-center">
+          <div className="sa-container w-full pb-0">
           <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
-            <div className="sa-card p-8 md:p-10 border-sa-border">
+            <div className="sa-card sa-pressable p-8 md:p-10 border-sa-border">
               <span className="sa-eyebrow inline-flex items-center gap-2">
                 <Smartphone className="h-4 w-4" />
                 Website to mobile app
@@ -77,6 +77,7 @@ export default function WebsiteToMobileAppPage() {
               <WebsiteToAppQuoteForm />
             </div>
           </div>
+          </div>
         </div>
       </section>
 
@@ -101,7 +102,6 @@ export default function WebsiteToMobileAppPage() {
           </div>
         </div>
       </section>
-      <StartupAgencyMobileQuickBar />
     </main>
   );
 }

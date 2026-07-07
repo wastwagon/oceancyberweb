@@ -1,53 +1,62 @@
 import type { Metadata } from "next";
-import { PortfolioFilteredLibrary } from "@/components/portfolio/PortfolioFilteredLibrary";
+import Link from "next/link";
+import { ClientWorkGrid } from "@/components/portfolio/ClientWorkGrid";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
-import { getPortfolioCaseStudies } from "@/lib/data/portfolio-loader";
+import { featuredClientWork } from "@/lib/data/featured-client-work";
 import { withCanonical } from "@/lib/seo/canonical";
 
 export const metadata = withCanonical(
   {
     title: "Portfolio",
     description:
-      "Featured OceanCyber projects — scope, stack choices, and measurable outcomes.",
+      "Live client work from OceanCyber — visit deployed websites for Fitch Advisory, Fitch Attorneys, Africa Governance Centre, and ThinQ Shopping.",
   },
   "/portfolio",
 );
 
-export default async function PortfolioPage() {
-  const cases = await getPortfolioCaseStudies();
+export default function PortfolioPage() {
   return (
     <main className="min-h-screen bg-sa-bg text-sa-muted">
       <SaPageAmbient />
-      <section className="sa-section border-b border-sa-border pt-28 md:pt-34">
+      <section className="sa-page-intro border-b border-sa-border">
         <div className="sa-container max-w-5xl text-center">
-          <p className="sa-eyebrow mb-4">
-            Showcase
-          </p>
+          <p className="sa-eyebrow mb-4">Client work</p>
           <h1 className="sa-title-lg text-balance">
-            Digital excellence,
-            <span className="text-sa-primary"> engineered for scale.</span>
+            Live sites we
+            <span className="text-sa-primary"> shipped</span>
           </h1>
           <p className="sa-subtitle mx-auto">
-            Our portfolio represents a bridge between complex technical challenges and 
-            elegant business solutions. Explore how we apply world-class engineering 
-            principles to deliver measurable impact for our partners globally.
+            Featured partner deliveries you can open and explore right now. Each card links to the
+            live website — no fabricated case studies, just real work in production.
           </p>
+        </div>
+      </section>
 
-          <div className="mt-12 grid gap-4 sm:grid-cols-3">
-            {[
-              { label: "Agile Delivery", desc: "Rapid iterations with continuous client feedback loops." },
-              { label: "Security First", desc: "Hardened infrastructure and data protection by design." },
-              { label: "Scalable Core", desc: "Cloud-native architectures built for future growth." }
-            ].map((item, i) => (
-              <div key={i} className="sa-card p-6 text-left border-l-2 border-sa-primary bg-sa-surface/30">
-                <h3 className="font-heading text-sm font-bold text-white uppercase tracking-wider">{item.label}</h3>
-                <p className="mt-2 text-xs text-sa-muted/70">{item.desc}</p>
-              </div>
-            ))}
+      <section className="sa-section border-b border-sa-border">
+        <div className="sa-container max-w-6xl">
+          <ClientWorkGrid items={featuredClientWork} />
+        </div>
+      </section>
+
+      <section className="sa-section">
+        <div className="sa-container max-w-3xl text-center">
+          <p className="sa-eyebrow mb-4">Studio</p>
+          <h2 className="sa-title mb-4">Explore our Creative Hub</h2>
+          <p className="sa-subtitle mx-auto">
+            UI concepts, brand explorations, and illustrative service visuals live separately from
+            client deliveries — so prospects always know what is live versus concept work.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
+            <Link href="/creative-hub" className="sa-btn-primary w-full sm:w-auto">
+              Open Creative Hub
+            </Link>
+            <Link href="/contact" className="sa-btn-outline w-full sm:w-auto">
+              Start a project
+            </Link>
           </div>
         </div>
       </section>
-      <PortfolioFilteredLibrary projects={cases} />
+
     </main>
   );
 }

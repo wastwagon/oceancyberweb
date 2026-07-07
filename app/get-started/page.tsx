@@ -15,8 +15,8 @@ export const metadata: Metadata = withCanonical(
 
 export default function GetStartedPage() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted pt-28 md:pt-32">
-      <section className="sa-section relative z-10 overflow-hidden border-b border-sa-border">
+    <main className="relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
+      <section className="sa-page-intro overflow-hidden border-b border-sa-border">
         <div className="sa-container max-w-3xl pb-8 md:pb-10">
           <p className="sa-eyebrow mb-3 text-center block">Self-serve</p>
           <h1 className="sa-title mt-3 text-center md:text-4xl">

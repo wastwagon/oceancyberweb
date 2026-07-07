@@ -7,7 +7,7 @@ import { fadeUpSoft } from "@/lib/scroll-reveal";
 
 export function SaCostEstimatorSection() {
   return (
-    <section className="sa-section relative z-10 border-t border-sa-border bg-sa-bg py-16 pb-24 md:py-32 md:pb-32">
+    <section className="sa-section relative z-10 border-t border-sa-border bg-sa-bg py-16 pb-[var(--sa-mobile-tab-bar)] md:py-32 md:pb-32">
       <div className="sa-container relative z-10">
         <div className="mx-auto mb-16 max-w-4xl">
           <motion.div {...fadeUpSoft}>

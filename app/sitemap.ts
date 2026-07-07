@@ -20,6 +20,7 @@ const routes = [
   "/hosting",
   "/insights",
   "/portfolio",
+  "/creative-hub",
   "/pricing",
   "/reviews",
   "/privacy",

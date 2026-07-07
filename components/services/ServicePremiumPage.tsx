@@ -13,7 +13,6 @@ import {
   revealViewport,
   staggerDelay,
 } from "@/lib/scroll-reveal";
-import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
 import { ServicePageHeroBanner } from "@/components/services/ServicePageHeroBanner";
 
 export type ServiceCard = { title: string; description: string };
@@ -67,11 +66,11 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
     <main className="sa-shell relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
       <SaPageAmbient />
 
-      <section className="relative z-10 min-h-[72vh] overflow-hidden border-b border-sa-border pt-28 md:min-h-[78vh] md:pt-36">
+      <section className="sa-page-hero">
         {content.heroImage ? (
           <ServicePageHeroBanner image={content.heroImage} />
         ) : null}
-        <div className="sa-container relative z-10 flex min-h-[calc(72vh-7rem)] flex-col items-center justify-center pb-16 text-center md:min-h-[calc(78vh-9rem)] md:pb-20">
+        <div className="sa-page-hero-body">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -113,10 +112,10 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
                 ))}
               </div>
             </motion.div>
-            <motion.div variants={heroMotion.item} className="mt-12">
+            <motion.div variants={heroMotion.item} className="mt-12 w-full max-w-sm sm:max-w-none">
               <Link
                 href={content.heroCtaHref}
-                className="sa-btn-primary"
+                className="sa-btn-primary flex w-full sm:inline-flex sm:w-auto"
               >
                 {content.heroCtaLabel}
               </Link>
@@ -142,7 +141,7 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={staggerDelay(index, 0.06)}
-                className="sa-card p-8 md:p-10"
+                className="sa-card sa-pressable p-8 md:p-10"
               >
                 <h3 className="sa-card-title">
                   {item.title}
@@ -173,7 +172,7 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={staggerDelay(index, 0.05)}
-                className="sa-card flex flex-col p-6"
+                className="sa-card sa-pressable flex flex-col p-6"
               >
                 <span className="font-heading text-sm font-bold text-white">{item.title}</span>
                 <span className="mt-2 text-xs leading-relaxed text-sa-muted/70">
@@ -202,7 +201,7 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={staggerDelay(index, 0.06)}
-                className="sa-card p-8 md:p-10"
+                className="sa-card sa-pressable p-8 md:p-10"
               >
                 <h3 className="sa-card-title">
                   {item.title}
@@ -230,7 +229,6 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
         description={content.ctaDescription}
       />
       
-      <StartupAgencyMobileQuickBar />
     </main>
   );
 }

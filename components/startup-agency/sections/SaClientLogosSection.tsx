@@ -1,10 +1,38 @@
 "use client";
 
-import { useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
 import type { ClientLogoEntry } from "@/lib/startup-agency/client-logos-runtime";
+
+function ClientLogoLink({
+  client,
+  className,
+  children,
+}: {
+  client: ClientLogoEntry;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  if (client.href.startsWith("http")) {
+    return (
+      <a
+        href={client.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={client.href} className={className}>
+      {children}
+    </Link>
+  );
+}
 
 function ClientLogoMark({ client }: { client: ClientLogoEntry }) {
   return (
@@ -25,8 +53,6 @@ type SaClientLogosSectionProps = {
 };
 
 export function SaClientLogosSection({ entries }: SaClientLogosSectionProps) {
-  const loop = useMemo(() => [...entries, ...entries], [entries]);
-
   return (
     <section
       aria-label="Clients and partners"
@@ -40,25 +66,29 @@ export function SaClientLogosSection({ entries }: SaClientLogosSectionProps) {
         <div className="hidden flex-wrap items-center justify-center gap-10 md:flex md:gap-14">
           {entries.map((client) => (
             <SaReveal key={client.name} delay={client.order * 0.05}>
-              <Link href={client.href} className="group flex flex-col items-center gap-3">
+              <ClientLogoLink client={client} className="group flex flex-col items-center gap-3">
                 <ClientLogoMark client={client} />
-              </Link>
+              </ClientLogoLink>
             </SaReveal>
           ))}
         </div>
 
-        <div className="relative overflow-hidden md:hidden">
-          <div className="flex w-max animate-sa-marquee gap-12 px-4">
-            {loop.map((client, i) => (
-              <Link
-                key={`${client.name}-${i}`}
-                href={client.href}
-                className="group flex shrink-0 items-center"
+        <div className="relative md:hidden">
+          <div
+            className="flex snap-x snap-mandatory gap-8 overflow-x-auto overscroll-x-contain px-4 pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            style={{ WebkitOverflowScrolling: "touch" }}
+          >
+            {entries.map((client) => (
+              <ClientLogoLink
+                key={client.name}
+                client={client}
+                className="sa-pressable group flex shrink-0 snap-center items-center"
               >
                 <ClientLogoMark client={client} />
-              </Link>
+              </ClientLogoLink>
             ))}
           </div>
+          <p className="mt-3 text-center text-[11px] text-sa-muted/50">Swipe to browse clients</p>
         </div>
       </div>
     </section>

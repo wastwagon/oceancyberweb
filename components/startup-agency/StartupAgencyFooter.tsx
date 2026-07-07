@@ -37,7 +37,7 @@ const socialLinks = [
 export function StartupAgencyFooter() {
   return (
     <footer
-      className="bg-sa-bg py-12 pb-[calc(env(safe-area-inset-bottom)+6.5rem)] md:pb-12 lg:py-24"
+      className="bg-sa-bg py-12 pb-[var(--sa-mobile-footer-pad)] md:pb-12 lg:py-24"
       data-app-print-hide-chrome
     >
       <div className="sa-container">
@@ -90,7 +90,7 @@ export function StartupAgencyFooter() {
                   <li key={l.label}>
                     <Link
                       href={l.href}
-                      className="text-base font-medium text-white transition-colors duration-300 hover:text-sa-primary"
+                      className="sa-ios-link text-base font-medium text-white transition-colors duration-300 hover:text-sa-primary active:text-sa-primary"
                     >
                       {l.label}
                     </Link>
@@ -109,7 +109,7 @@ export function StartupAgencyFooter() {
                   <li key={l.label}>
                     <Link
                       href={l.href}
-                      className="text-base font-medium text-white transition-colors duration-300 hover:text-sa-primary"
+                      className="sa-ios-link text-base font-medium text-white transition-colors duration-300 hover:text-sa-primary active:text-sa-primary"
                     >
                       {l.label}
                     </Link>
@@ -127,7 +127,7 @@ export function StartupAgencyFooter() {
                   <li key={l.label}>
                     <Link
                       href={l.href}
-                      className="text-base font-medium text-white transition-colors duration-300 hover:text-sa-primary"
+                      className="sa-ios-link text-base font-medium text-white transition-colors duration-300 hover:text-sa-primary active:text-sa-primary"
                     >
                       {l.label}
                     </Link>

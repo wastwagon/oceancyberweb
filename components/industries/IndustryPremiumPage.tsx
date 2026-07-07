@@ -8,7 +8,6 @@ import {
   PremiumFinalCtaSection,
   PremiumStoriesGridSection,
 } from "@/components/shared/PremiumContentSections";
-import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
 import { fadeUpProps, revealViewport, staggerDelay } from "@/lib/scroll-reveal";
 
@@ -82,7 +81,7 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
 
   return (
     <main className="sa-shell relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
-      <section className="sa-section relative z-10 overflow-hidden border-b border-sa-border pt-28 md:pt-36">
+      <section className="sa-page-intro relative z-10 overflow-hidden">
         <div className="sa-container relative z-10 text-center">
           <motion.div
             initial="hidden"
@@ -148,7 +147,7 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={staggerDelay(index, 0.06)}
-                className="sa-card p-6 md:p-7"
+                className="sa-card sa-pressable p-6 md:p-7"
               >
                 <h3 className="font-heading text-lg font-bold text-white md:text-xl">
                   {service.title}
@@ -183,7 +182,7 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={staggerDelay(index, 0.05)}
-                className="sa-card px-5 py-4"
+                className="sa-card sa-pressable px-5 py-4"
               >
                 <span className="font-heading text-sm font-semibold text-white">{tech.title}</span>
                 <span className="mt-1 block text-xs leading-relaxed text-sa-muted/70">
@@ -207,7 +206,6 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
         description={content.ctaDescription}
       />
 
-      <StartupAgencyMobileQuickBar />
     </main>
   );
 }

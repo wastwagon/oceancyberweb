@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
 import { withCanonical } from "@/lib/seo/canonical";
 import { pricingPlans } from "@/lib/startup-agency/content";
 
@@ -15,8 +14,8 @@ export const metadata: Metadata = withCanonical(
 
 export default function PricingPage() {
   return (
-    <main className="sa-shell min-h-screen bg-black pb-24 pt-28 text-white md:pb-0 md:pt-32">
-      <section className="border-b border-sa-border pb-12">
+    <main className="sa-shell min-h-screen bg-black text-white">
+      <section className="sa-page-intro border-b border-sa-border pb-12">
         <div className="sa-container max-w-5xl text-center">
           <p className="sa-eyebrow">Pricing</p>
           <h1 className="sa-title-lg mt-4">Clear starting points for your next build</h1>
@@ -75,7 +74,6 @@ export default function PricingPage() {
           </div>
         </div>
       </section>
-      <StartupAgencyMobileQuickBar />
     </main>
   );
 }

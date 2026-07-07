@@ -30,7 +30,7 @@ export default function PrivacyPage() {
   ];
 
   return (
-    <main className="sa-shell min-h-screen bg-sa-bg pt-28 pb-16 md:py-36">
+    <main className="sa-shell min-h-screen bg-sa-bg sa-page-top pb-16 md:py-36">
       <div className="sa-container max-w-4xl px-6">
         <header className="mb-16">
           <span className="sa-eyebrow inline-flex">Data Sovereignty</span>

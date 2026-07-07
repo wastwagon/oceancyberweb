@@ -14,7 +14,6 @@ import {
   revealViewport,
   staggerDelay,
 } from "@/lib/scroll-reveal";
-import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { ServicePageHeroBanner } from "@/components/services/ServicePageHeroBanner";
 import { serviceImages } from "@/lib/startup-agency/service-images";
@@ -33,9 +32,9 @@ export default function HostingPage({
     <main className="sa-shell relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
       <SaPageAmbient />
       {/* Hero */}
-      <section className="relative z-10 min-h-[72vh] overflow-hidden border-b border-sa-border pt-28 md:min-h-[78vh] md:pt-36">
+      <section className="sa-page-hero">
         <ServicePageHeroBanner image={serviceImages.cloudHosting} />
-        <div className="sa-container relative z-10 flex min-h-[calc(72vh-7rem)] flex-col items-center justify-center pb-16 text-center md:min-h-[calc(78vh-9rem)] md:pb-20">
+        <div className="sa-page-hero-body">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -221,7 +220,6 @@ export default function HostingPage({
           </motion.div>
         </div>
       </section>
-      <StartupAgencyMobileQuickBar />
     </main>
   );
 }

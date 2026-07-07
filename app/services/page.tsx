@@ -127,7 +127,7 @@ function ServiceGridCard({
     >
       <Link
         href={service.href}
-        className="sa-card group flex h-full flex-col overflow-hidden text-left"
+        className="sa-card sa-pressable group flex h-full flex-col overflow-hidden text-left active:scale-[0.99]"
       >
         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-t-xl">
           <Image
@@ -177,9 +177,9 @@ export default function ServicesPage() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
       <SaPageAmbient />
-      <section className="relative z-10 min-h-[72vh] overflow-hidden border-b border-sa-border pt-28 md:min-h-[78vh] md:pt-36">
+      <section className="sa-page-hero">
         <ServicePageHeroBanner image={serviceImages.webDevelopment} />
-        <div className="sa-container relative z-10 flex min-h-[calc(72vh-7rem)] flex-col items-center justify-center pb-16 text-center md:min-h-[calc(78vh-9rem)] md:pb-20">
+        <div className="sa-page-hero-body">
           <motion.div
             initial="hidden"
             animate="visible"

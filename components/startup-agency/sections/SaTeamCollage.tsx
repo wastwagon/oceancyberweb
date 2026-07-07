@@ -122,13 +122,25 @@ export function SaTeamCollage() {
                     {activeItem.category}
                   </p>
                 </div>
-                <Link
-                  href={activeItem.href}
-                  className="inline-flex items-center gap-2 font-heading text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:text-sa-primary"
-                >
-                  View case study
-                  <ArrowUpRight className="h-4 w-4" aria-hidden />
-                </Link>
+                {activeItem.href.startsWith("http") ? (
+                  <a
+                    href={activeItem.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 font-heading text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:text-sa-primary"
+                  >
+                    Visit website
+                    <ArrowUpRight className="h-4 w-4" aria-hidden />
+                  </a>
+                ) : (
+                  <Link
+                    href={activeItem.href}
+                    className="inline-flex items-center gap-2 font-heading text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:text-sa-primary"
+                  >
+                    View project
+                    <ArrowUpRight className="h-4 w-4" aria-hidden />
+                  </Link>
+                )}
               </figcaption>
             </motion.figure>
           </motion.div>

@@ -43,7 +43,7 @@ export function PremiumStoriesGridSection({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={revealViewport}
               transition={staggerDelay(index, 0.07)}
-              className="sa-card flex h-full flex-col p-6 md:p-8"
+              className="sa-card sa-pressable flex h-full flex-col p-6 md:p-8"
             >
               <h3 className="sa-card-title">
                 {story.title}
@@ -56,7 +56,7 @@ export function PremiumStoriesGridSection({
               </p>
               <Link
                 href="/portfolio"
-                className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-sa-primary transition-colors hover:text-white"
+                className="sa-ios-link mt-8 inline-flex items-center gap-2 text-sm font-semibold text-sa-primary transition-colors active:opacity-80"
               >
                 View work
                 <ArrowRight className="h-4 w-4" aria-hidden />
@@ -86,16 +86,16 @@ export function PremiumFinalCtaSection({
           className="sa-card p-10 md:p-14"
         >
           <SaSectionHeader title={title} subtitle={description} />
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
             <Link
               href="/contact"
-              className="sa-btn-primary"
+              className="sa-btn-primary w-full sm:w-auto"
             >
               Talk to our team
             </Link>
             <Link
               href="/portfolio"
-              className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-sa-border px-8 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition hover:border-sa-primary hover:text-white"
+              className="sa-btn-outline w-full sm:w-auto"
             >
               View portfolio
             </Link>

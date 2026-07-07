@@ -186,7 +186,7 @@ export default function CheckoutCartPage() {
   return (
     <main className="sa-shell relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
       {/* Hero */}
-      <section className="sa-section relative z-10 overflow-hidden border-b border-sa-border pt-28 md:pt-36">
+      <section className="sa-page-intro relative z-10 overflow-hidden border-b border-sa-border">
         <div className="sa-container relative z-10">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <motion.div

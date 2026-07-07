@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Minus } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { faqItems } from "@/lib/startup-agency/content";
 import { cn } from "@/lib/utils";
 
@@ -9,55 +9,56 @@ export function StartupAgencyFaq() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <div className="mx-auto max-w-3xl space-y-4">
-      {faqItems.map((item, i) => {
-        const isOpen = open === i;
-        return (
-          <div
-            key={item.q}
-            className={cn(
-              "group overflow-hidden rounded-[20px] border transition-all duration-500",
-              isOpen 
-                ? "border-sa-primary/50 bg-sa-surface shadow-lg shadow-sa-primary/5" 
-                : "border-sa-border bg-sa-surface/30 hover:border-sa-primary/30"
-            )}
-          >
-            <button
-              type="button"
-              className="flex w-full items-center justify-between gap-4 px-6 py-6 text-left"
-              aria-expanded={isOpen}
-              onClick={() => setOpen(isOpen ? null : i)}
-            >
-              <span className="font-heading text-lg font-bold tracking-tight text-white md:text-xl">
-                {item.q}
-              </span>
-              <div className={cn(
-                "flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-500",
-                isOpen 
-                  ? "border-sa-primary bg-sa-primary text-black" 
-                  : "border-sa-border bg-transparent text-white group-hover:border-sa-primary group-hover:text-sa-primary"
-              )}>
-                {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
-              </div>
-            </button>
-            
+    <div className="mx-auto max-w-3xl">
+      <div className="sa-ios-group divide-y divide-white/[0.06] md:space-y-4 md:divide-y-0">
+        {faqItems.map((item, i) => {
+          const isOpen = open === i;
+          return (
             <div
+              key={item.q}
               className={cn(
-                "grid transition-[grid-template-rows] duration-500 ease-in-out",
-                isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                "overflow-hidden transition-colors md:rounded-[20px] md:border md:shadow-lg",
+                isOpen
+                  ? "md:border-sa-primary/50 md:bg-sa-surface md:shadow-sa-primary/5"
+                  : "md:border-sa-border md:bg-sa-surface/30 md:hover:border-sa-primary/30",
               )}
             >
-              <div className="overflow-hidden">
-                <div className="px-6 pb-8 pt-0">
-                  <p className="text-base leading-relaxed text-sa-muted/90">
-                    {item.a}
-                  </p>
+              <button
+                type="button"
+                className="sa-pressable flex w-full min-h-[52px] items-center justify-between gap-4 px-4 py-4 text-left md:px-6 md:py-6"
+                aria-expanded={isOpen}
+                onClick={() => setOpen(isOpen ? null : i)}
+              >
+                <span className="text-[17px] font-semibold leading-snug text-white md:font-heading md:text-lg md:font-bold md:tracking-tight md:text-xl">
+                  {item.q}
+                </span>
+                <ChevronRight
+                  className={cn(
+                    "h-5 w-5 shrink-0 text-sa-muted transition-transform duration-300",
+                    isOpen && "rotate-90 text-sa-primary",
+                  )}
+                  aria-hidden
+                />
+              </button>
+
+              <div
+                className={cn(
+                  "grid transition-[grid-template-rows] duration-300 ease-out",
+                  isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+                )}
+              >
+                <div className="overflow-hidden">
+                  <div className="px-4 pb-5 pt-0 md:px-6 md:pb-8">
+                    <p className="text-[15px] leading-relaxed text-sa-muted/90 md:text-base">
+                      {item.a}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }

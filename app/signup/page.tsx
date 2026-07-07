@@ -47,7 +47,7 @@ function SignUpForm() {
   }
 
   return (
-    <main className="sa-shell min-h-screen bg-sa-bg pt-24 pb-16 md:py-32">
+    <main className="sa-shell min-h-screen bg-sa-bg sa-page-top pb-16 md:py-32">
       <div className="sa-container mx-auto grid w-full max-w-5xl gap-8 lg:grid-cols-[1.05fr_0.95fr]">
         <section className="sa-card p-8 md:p-10 border-sa-border">
           <p className="sa-eyebrow inline-flex">

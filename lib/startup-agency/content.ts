@@ -34,52 +34,74 @@ export const heroServiceSlides = [
 ] as const;
 
 export const clientLogos = [
-  { name: "EGP Ghana", order: 0, thumb: "/images/EGP Ghana.webp", logo: "/images/clients/egp-ghana.svg", href: "/portfolio/egp-ghana" },
-  { name: "Juelle Hair", order: 1, thumb: "/images/Juelle Hair.webp", logo: "/images/clients/juelle-hair.svg", href: "/portfolio/juelle-hair" },
-  { name: "Tour World", order: 2, thumb: "/images/Tour World Tourism.webp", logo: "/images/clients/tour-world.svg", href: "/portfolio/tour-world-tourism" },
-  { name: "Fitch Advisory", order: 3, thumb: "/images/Fitch Advisory.webp", logo: "/images/clients/fitch-advisory.svg", href: "/portfolio/fitch-advisory" },
-  { name: "Fitch Attorneys", order: 4, thumb: "/images/Fitch Attorney.webp", logo: "/images/clients/fitch-attorneys.svg", href: "/portfolio/fitch-attorneys" },
-  { name: "Africa Trade Chamber", order: 5, thumb: "/images/Africa Trade Chamber.webp", logo: "/images/clients/africa-trade-chamber.svg", href: "/portfolio/african-trade-chamber" },
+  {
+    name: "Fitch Advisory",
+    order: 0,
+    thumb: "/images/Fitch Advisory.webp",
+    logo: "/images/clients/fitch-advisory.svg",
+    href: "https://www.fitchadvisory.com/",
+  },
+  {
+    name: "Fitch Attorneys",
+    order: 1,
+    thumb: "/images/Fitch Attorney.webp",
+    logo: "/images/clients/fitch-attorneys.svg",
+    href: "https://www.fitchattorneys.com/",
+  },
+  {
+    name: "Africa Governance Centre",
+    order: 2,
+    thumb: siteImagePaths.portfolio.africaGovernanceCentre,
+    logo: "/images/clients/africa-governance-centre.svg",
+    href: "https://www.africagovernancecentre.org/",
+  },
+  {
+    name: "ThinQ Shopping",
+    order: 3,
+    thumb: siteImagePaths.portfolio.thinqShopping,
+    logo: "/images/clients/thinq-shopping.svg",
+    href: "https://thinqshopping.app/",
+  },
 ] as const;
 
 export const showreelSlides = [
-  { src: "/images/creative-template.png", caption: "OceanCyber Creative Hub" },
-  { src: "/images/EGP Ghana.webp", caption: "EGP Ghana — Financial Services" },
-  { src: "/images/Juelle Hair.webp", caption: "Juelle Hair — E-commerce" },
-  { src: "/images/Tour World Tourism.webp", caption: "Tour World Tourism" },
-  { src: "/images/Fitch Advisory.webp", caption: "Fitch Advisory" },
+  { src: siteImagePaths.portfolio.fitchAdvisory, caption: "Fitch Advisory — Live client" },
+  { src: siteImagePaths.portfolio.fitchAttorneys, caption: "Fitch Attorneys — Live client" },
+  { src: siteImagePaths.portfolio.africaGovernanceCentre, caption: "Africa Governance Centre — Live client" },
+  { src: siteImagePaths.portfolio.thinqShopping, caption: "ThinQ Shopping — Live client" },
+  { src: siteImagePaths.portfolio.creativeHub, caption: "Creative Hub — Studio concepts" },
 ] as const;
 
 export const aboutWorkPreview = [
   {
-    title: "Financial Services Platform",
-    category: "Web · Dashboard",
-    image: siteImagePaths.work.fintechDashboard,
-    href: "/portfolio/egp-ghana",
+    title: "Fitch Advisory",
+    category: "Advisory · Web",
+    image: siteImagePaths.portfolio.fitchAdvisory,
+    href: "https://www.fitchadvisory.com/",
   },
   {
-    title: "Mobile Commerce Experience",
-    category: "E‑commerce · iOS & Android",
-    image: siteImagePaths.work.mobileCommerce,
-    href: "/portfolio/juelle-hair",
+    title: "Africa Governance Centre",
+    category: "Governance · Web",
+    image: siteImagePaths.portfolio.africaGovernanceCentre,
+    href: "https://www.africagovernancecentre.org/",
   },
   {
-    title: "Brand & Design System",
-    category: "UI/UX · Identity",
-    image: siteImagePaths.work.brandSystem,
-    href: "/portfolio/creative-hub-template",
+    title: "ThinQ Shopping",
+    category: "E‑commerce · App",
+    image: siteImagePaths.portfolio.thinqShopping,
+    href: "https://thinqshopping.app/",
   },
   {
-    title: "Travel Booking Platform",
-    category: "Web · Hospitality",
-    image: siteImagePaths.work.travelPlatform,
-    href: "/portfolio/tour-world-tourism",
+    title: "Fitch Attorneys",
+    category: "Legal · Web",
+    image: siteImagePaths.portfolio.fitchAttorneys,
+    href: "https://www.fitchattorneys.com/",
   },
   {
-    title: "Secure Enterprise Portal",
-    category: "Cyber Security · Web",
-    image: siteImagePaths.work.cybersecurityPlatform,
-    href: "/portfolio/fitch-attorneys",
+    title: "Creative Hub",
+    category: "Studio concepts",
+    image: siteImagePaths.portfolio.creativeHub,
+    href: "/creative-hub",
   },
 ] as const;
 
