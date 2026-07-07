@@ -114,7 +114,9 @@ writeFileSync(
         landscape: "Google Display, YouTube, Facebook link ads",
         square: "Facebook & Instagram feed (1:1)",
         portrait: "Instagram feed (4:5 recommended)",
-        stories: "Instagram/Facebook Stories & Reels (9:16)",
+        stories: "Instagram/Facebook Stories & Reels (9:16, cropped from landscape masters)",
+        storiesCloseup:
+          "Single-phone close-ups — run npm run export:industry-stories → stories-closeup/",
       },
       industries: manifest,
     },
