@@ -43,7 +43,7 @@ export function TldPriceChips() {
           </div>
         ))}
       </div>
-      <p className="text-center text-[9px] leading-relaxed text-sa-muted/40">
+      <p className="text-center text-[10px] leading-relaxed text-sa-muted/40 sm:text-[9px]">
         Indicative pricing in Ghana cedis. Live availability and final totals (GHS, Paystack) are
         confirmed at checkout.
       </p>
@@ -196,9 +196,9 @@ export function DomainSearchPanel({
           {rows.map((r) => (
             <li
               key={r.domain}
-              className="flex flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-5"
+              className="flex flex-col gap-3 px-4 py-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:px-5"
             >
-              <div>
+              <div className="min-w-0 flex-1">
                 <p className="font-heading text-base font-bold text-white">
                   {r.domain}
                 </p>
@@ -206,9 +206,9 @@ export function DomainSearchPanel({
                   {r.available ? "Available to register" : "Not available"}
                 </p>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center sm:gap-2">
                 <span
-                  className={`rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider ${
+                  className={`self-start rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider ${
                     r.available
                       ? "bg-sa-primary text-sa-bg"
                       : "bg-sa-border text-sa-muted"
@@ -217,19 +217,19 @@ export function DomainSearchPanel({
                   {r.available ? "Available" : "Taken"}
                 </span>
                 {r.available ? (
-                  <div className="flex items-center gap-2">
+                  <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
                     <Link
                       href={`/checkout/renewal?plan=domain-standard-yearly&label=${encodeURIComponent(
                         r.domain,
                       )}&ref=${encodeURIComponent(`DOMAIN-${r.domain}`)}`}
-                      className="rounded-lg bg-white px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-sa-bg transition hover:bg-sa-primary"
+                      className="inline-flex min-h-[44px] flex-1 items-center justify-center rounded-lg bg-white px-4 py-2 text-xs font-bold uppercase tracking-wider text-sa-bg transition hover:bg-sa-primary sm:min-h-0 sm:flex-none sm:text-[10px]"
                     >
                       Checkout
                     </Link>
                     <button
                       type="button"
                       onClick={() => addDomainToCart(r.domain)}
-                      className="rounded-lg border border-sa-border bg-sa-bg px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-sa-muted transition hover:border-sa-primary hover:text-white"
+                      className="inline-flex min-h-[44px] flex-1 items-center justify-center rounded-lg border border-sa-border bg-sa-bg px-3 py-2 text-xs font-bold uppercase tracking-wider text-sa-muted transition hover:border-sa-primary hover:text-white sm:min-h-0 sm:flex-none sm:text-[10px]"
                     >
                       Add to cart
                     </button>

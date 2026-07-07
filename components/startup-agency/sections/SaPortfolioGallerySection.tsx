@@ -102,7 +102,7 @@ export function SaPortfolioGallerySection() {
   return (
     <section
       id="projects"
-      className="relative overflow-hidden border-b border-sa-border bg-sa-bg py-24 md:py-32"
+      className="relative overflow-hidden border-b border-sa-border bg-sa-bg py-16 md:py-32"
     >
       <div
         aria-hidden
@@ -259,9 +259,9 @@ function PortfolioCard({
         <Link
           href={`/portfolio/${project.slug}`}
           aria-label={`View ${project.category} case study`}
-          className={`group relative flex h-full min-h-[280px] w-full overflow-hidden rounded-3xl border border-white/10 bg-sa-surface text-left transition duration-500 hover:border-sa-primary/40 hover:shadow-[0_0_40px_-12px_rgba(0,255,200,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sa-primary ${
-          featured ? "min-h-[360px]" : ""
-        }`}
+          className={`group relative flex h-full min-h-[220px] w-full overflow-hidden rounded-3xl border border-white/10 bg-sa-surface text-left transition duration-500 hover:border-sa-primary/40 hover:shadow-[0_0_40px_-12px_rgba(0,255,200,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sa-primary md:min-h-[280px] ${
+            featured ? "min-h-[260px] md:min-h-[360px]" : ""
+          }`}
         >
           <Image
             src={project.image}
@@ -302,7 +302,7 @@ function PortfolioCard({
                 {project.description}
               </p>
             ) : null}
-            <span className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-sa-primary opacity-0 transition duration-300 group-hover:opacity-100">
+            <span className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-sa-primary opacity-100 transition duration-300 md:opacity-0 md:group-hover:opacity-100">
               View case study
               <ArrowUpRight className="h-3 w-3" aria-hidden />
             </span>
@@ -312,7 +312,7 @@ function PortfolioCard({
           type="button"
           onClick={onOpen}
           aria-label={`Open ${project.category} visual preview`}
-          className="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/60 text-white opacity-0 backdrop-blur-sm transition duration-300 hover:border-sa-primary hover:text-sa-primary focus:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sa-primary group-hover/card:opacity-100"
+          className="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/60 text-white opacity-100 backdrop-blur-sm transition duration-300 hover:border-sa-primary hover:text-sa-primary focus:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sa-primary md:opacity-0 md:group-hover/card:opacity-100"
         >
           <ZoomIn className="h-4 w-4" aria-hidden />
         </button>

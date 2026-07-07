@@ -29,7 +29,7 @@ export function SaAboutSection() {
               </p>
             </SaReveal>
 
-            <SaReveal delay={0.15} className="mt-10 grid grid-cols-3 gap-4">
+            <SaReveal delay={0.15} className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
               {aboutStats.map((stat) => (
                 <div
                   key={stat.label}
@@ -38,7 +38,7 @@ export function SaAboutSection() {
                   <p className="font-heading text-2xl font-bold text-white md:text-3xl">
                     {stat.value}
                   </p>
-                  <p className="mt-1 text-[10px] font-bold uppercase tracking-widest text-sa-muted/70">
+                  <p className="mt-1 text-xs font-bold uppercase tracking-widest text-sa-muted/70">
                     {stat.label}
                   </p>
                 </div>

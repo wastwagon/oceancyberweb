@@ -14,7 +14,7 @@ function ClientLogoMark({ client }: { client: ClientLogoEntry }) {
         alt={client.name}
         width={144}
         height={48}
-        className="h-auto max-h-8 w-auto max-w-full object-contain opacity-50 transition duration-500 group-hover:opacity-90 brightness-0 invert"
+        className="h-auto max-h-8 w-auto max-w-full object-contain opacity-70 brightness-0 invert transition duration-500 md:opacity-50 md:group-hover:opacity-90"
       />
     </div>
   );

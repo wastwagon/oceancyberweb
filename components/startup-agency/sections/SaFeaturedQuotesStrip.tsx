@@ -9,15 +9,15 @@ export function SaFeaturedQuotesStrip({ cards }: SaFeaturedQuotesStripProps) {
   if (featured.length === 0) return null;
 
   return (
-    <div className="mt-14 border-t border-sa-border/60 pt-12">
-      <p className="mb-8 text-center text-[10px] font-bold uppercase tracking-[0.25em] text-sa-muted/50">
+    <div className="mt-10 border-t border-sa-border/60 pt-10 md:mt-14 md:pt-12">
+      <p className="mb-6 text-center text-[10px] font-bold uppercase tracking-[0.25em] text-sa-muted/50 md:mb-8">
         Featured client quotes
       </p>
-      <div className="grid gap-6 md:grid-cols-3">
-        {featured.map((quote) => (
+      <div className="grid gap-4 md:grid-cols-3 md:gap-6">
+        {featured.map((quote, index) => (
           <blockquote
             key={quote.id}
-            className="sa-card flex h-full flex-col justify-between p-6 md:p-7"
+            className={`sa-card flex h-full flex-col justify-between p-5 md:p-7 ${index > 0 ? "hidden md:flex" : ""}`}
           >
             <div>
               <div className="mb-4 flex gap-0.5">

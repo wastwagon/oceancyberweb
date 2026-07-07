@@ -52,7 +52,7 @@ export function SaTeamCollage() {
                 sizes={index === 0 ? "(max-width: 1024px) 100vw, 50vw" : "(max-width: 1024px) 50vw, 25vw"}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-sa-bg/90 via-sa-bg/20 to-transparent opacity-80 transition group-hover:opacity-100" />
-              <div className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-black/40 text-white opacity-0 backdrop-blur-sm transition group-hover:opacity-100">
+              <div className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-black/40 text-white opacity-100 backdrop-blur-sm transition md:opacity-0 md:group-hover:opacity-100">
                 <ZoomIn className="h-4 w-4" aria-hidden />
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5">

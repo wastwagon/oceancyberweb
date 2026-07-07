@@ -18,7 +18,7 @@ export function SaPromoSection() {
             <h2 className="sa-title mt-4">
               Launch your MVP in <span className="text-sa-primary">4 Weeks</span>
             </h2>
-            <p className="sa-subtitle mt-3 max-w-xl text-left md:text-left">
+            <p className="sa-subtitle mx-auto mt-3 max-w-xl text-center md:mx-0 md:text-left">
               Get a professional and secure digital product ready for your users. 
               We are currently offering a priority launch package for new partners.
             </p>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Play } from "lucide-react";
+import { ServicePageHeroBanner } from "@/components/services/ServicePageHeroBanner";
 import { SaShowreelModal } from "@/components/startup-agency/SaShowreelModal";
 import { heroServiceSlides, heroTagline } from "@/lib/startup-agency/content";
 
@@ -13,16 +14,26 @@ export function SaHeroSection() {
 
   return (
     <>
-      <section id="hero" className="relative min-h-[100dvh] w-full overflow-hidden bg-sa-bg pt-20 md:h-screen md:min-h-[600px]">
+      <section
+        id="hero"
+        className="relative min-h-[72vh] w-full overflow-hidden bg-sa-bg pt-20 md:h-screen md:min-h-[600px]"
+      >
         <div className="hero-grid-cells opacity-20">
           {Array.from({ length: 48 }).map((_, i) => (
             <div key={i} className="hero-grid-cell" />
           ))}
         </div>
 
+        <div className="absolute inset-0 z-0 md:hidden">
+          <ServicePageHeroBanner
+            image={heroServiceSlides[0].image}
+            alt={heroServiceSlides[0].imageAlt}
+          />
+        </div>
+
         <div
-          className={`absolute inset-0 z-10 flex flex-col items-center justify-center px-4 transition-opacity duration-700 pointer-events-none md:px-0 ${
-            hoveredIndex !== null ? "opacity-0" : "opacity-100"
+          className={`absolute inset-0 z-10 flex flex-col items-center justify-center px-4 pb-8 transition-opacity duration-700 pointer-events-none md:px-0 md:pb-0 ${
+            hoveredIndex !== null ? "md:opacity-0" : "opacity-100"
           }`}
         >
           <div className="mb-4 flex items-center gap-3 rounded-full border border-white/20 bg-black/40 px-4 py-2 backdrop-blur-md">
@@ -32,7 +43,7 @@ export function SaHeroSection() {
             </span>
           </div>
           <p
-            className="font-heading text-[14vw] font-bold tracking-tighter uppercase leading-none md:text-[12vw]"
+            className="hidden font-heading text-[12vw] font-bold uppercase leading-none tracking-tighter md:block"
             style={{
               WebkitTextStroke: "2px rgba(255, 255, 255, 0.4)",
               color: "transparent",
@@ -41,10 +52,10 @@ export function SaHeroSection() {
           >
             OceanCyber
           </p>
-          <p className="sa-lead mx-auto max-w-xl text-center text-white/85">
+          <p className="sa-lead mx-auto max-w-xl text-balance text-center text-white/85 md:mt-0">
             {heroTagline}
           </p>
-          <div className="pointer-events-auto mt-8 flex flex-wrap items-center justify-center gap-3">
+          <div className="pointer-events-auto mt-6 flex flex-wrap items-center justify-center gap-3 md:mt-8">
             <button
               type="button"
               onClick={() => setShowreelOpen(true)}
@@ -66,7 +77,7 @@ export function SaHeroSection() {
         </div>
 
         <div
-          className={`absolute inset-0 z-0 transition-opacity duration-1000 ${
+          className={`absolute inset-0 z-0 hidden transition-opacity duration-1000 md:block ${
             hoveredIndex !== null ? "opacity-0" : "opacity-40"
           }`}
         >
@@ -83,7 +94,7 @@ export function SaHeroSection() {
         {heroServiceSlides.map((slide, index) => (
           <div
             key={`bg-${slide.title}`}
-            className={`absolute inset-0 z-0 transition-all duration-1000 ease-in-out ${
+            className={`absolute inset-0 z-0 hidden transition-all duration-1000 ease-in-out md:block ${
               hoveredIndex === index ? "opacity-100 scale-105" : "opacity-0 scale-100"
             }`}
           >
@@ -98,7 +109,7 @@ export function SaHeroSection() {
           </div>
         ))}
 
-        <div className="relative z-20 flex min-h-[280px] w-full flex-col border-t border-white/5 md:h-full md:min-h-0 md:flex-row">
+        <div className="relative z-20 hidden min-h-0 w-full border-t border-white/5 md:flex md:h-full md:flex-row">
           {heroServiceSlides.map((slide, index) => {
             const isHovered = hoveredIndex === index;
 

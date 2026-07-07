@@ -22,7 +22,7 @@ export function SaServicesSection() {
   return (
     <section
       id="services"
-      className="relative overflow-hidden border-b border-sa-border bg-sa-bg py-24 md:py-32"
+      className="relative overflow-hidden border-b border-sa-border bg-sa-bg py-16 md:py-32"
     >
       <div className="sa-container">
         <SaSectionHeader
@@ -32,7 +32,7 @@ export function SaServicesSection() {
           className="mb-16"
         />
 
-        <div className="space-y-6 md:space-y-8">
+        <div className="space-y-4 md:space-y-8">
           {serviceCards.map((service, index) => {
             const Icon = getServiceIcon(service.title);
             const imageFirst = index % 2 === 0;

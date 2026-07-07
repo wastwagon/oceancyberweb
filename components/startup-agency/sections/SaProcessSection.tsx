@@ -27,7 +27,7 @@ export function SaProcessSection() {
           </div>
         </SaReveal>
 
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4 lg:gap-12">
           {processSteps.map((p, i) => (
             <SaReveal key={p.step} delay={i * 0.1} className="flex flex-col">
               <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-sa-border text-2xl font-bold text-sa-primary font-heading transition-colors duration-300 hover:border-sa-primary hover:bg-sa-primary/10">

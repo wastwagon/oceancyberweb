@@ -214,7 +214,7 @@ export function ProjectCostWizard() {
   return (
     <div
       id="estimator-print-root"
-      className="pb-32 print:pb-0 sa-card p-6 print:rounded-lg print:shadow-none"
+      className="sa-card p-6 pb-[calc(env(safe-area-inset-bottom)+9rem)] print:rounded-lg print:pb-0 print:shadow-none md:pb-32"
     >
       {/* Progress */}
       <div className="print:hidden mb-8 flex flex-wrap items-center justify-center gap-1 sm:gap-2">
@@ -620,7 +620,7 @@ function RunningTotal({
 }) {
   return (
     <div
-      className="print:hidden fixed bottom-0 left-0 right-0 z-40 border-t border-sa-border bg-sa-surface/90 px-4 py-4 shadow-[0_-4px_24px_rgba(0,0,0,0.4)] backdrop-blur-md sm:px-6"
+      className="print:hidden fixed bottom-[calc(env(safe-area-inset-bottom)+3.25rem)] left-0 right-0 z-[130] border-t border-sa-border bg-sa-surface/90 px-4 py-3 shadow-[0_-4px_24px_rgba(0,0,0,0.4)] backdrop-blur-md sm:px-6 md:bottom-0 md:z-40 md:py-4"
     >
       <div className="mx-auto flex max-w-4xl flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div className="flex items-center gap-2 text-sa-muted/80">

@@ -33,7 +33,7 @@ export function SaPricingSection() {
           {pricingPlans.map((plan, i) => (
             <SaReveal key={plan.name} delay={i * 0.1}>
               <div
-                className={`group relative flex h-full flex-col overflow-hidden rounded-[24px] border p-8 transition-all duration-500 hover:shadow-2xl hover:shadow-sa-primary/5 ${
+                className={`group relative flex h-full flex-col overflow-hidden rounded-[24px] border p-5 transition-all duration-500 hover:shadow-2xl hover:shadow-sa-primary/5 md:p-8 ${
                   plan.featured
                     ? "border-sa-primary bg-sa-surface/80"
                     : "border-sa-border bg-sa-surface/30 backdrop-blur-sm"
@@ -45,12 +45,12 @@ export function SaPricingSection() {
                 )}
 
                 {plan.featured ? (
-                  <div className="absolute right-8 top-8 rounded-full bg-sa-primary px-3 py-1 font-heading text-[10px] font-bold uppercase tracking-widest text-black">
+                  <div className="mb-3 inline-flex rounded-full bg-sa-primary px-3 py-1 font-heading text-[10px] font-bold uppercase tracking-widest text-black md:absolute md:right-8 md:top-8 md:mb-0">
                     Popular
                   </div>
                 ) : null}
 
-                <div className="mb-8">
+                <div className="mb-6 md:mb-8">
                   <h3 className="font-heading text-2xl font-bold text-white transition-colors duration-300 group-hover:text-sa-primary">
                     {plan.name}
                   </h3>

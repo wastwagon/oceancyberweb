@@ -14,22 +14,22 @@ export function SaCtaStripSection() {
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-sa-muted md:text-base">
             Email or WhatsApp us — we route emergencies to the right lead the same day when possible.
           </p>
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-2 md:justify-start">
+          <div className="mt-4 flex w-full max-w-xs flex-col items-stretch gap-2 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center md:justify-start">
             <Link
               href="/domains"
-              className="rounded-full border border-sa-border px-3 py-1.5 font-heading text-[10px] font-semibold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:border-sa-primary hover:text-sa-primary"
+              className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-sa-border px-4 py-2 font-heading text-xs font-semibold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:border-sa-primary hover:text-sa-primary sm:min-h-0 sm:px-3 sm:py-1.5 sm:text-[10px]"
             >
               Domain search
             </Link>
             <Link
               href="/hosting"
-              className="rounded-full border border-sa-border px-3 py-1.5 font-heading text-[10px] font-semibold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:border-sa-primary hover:text-sa-primary"
+              className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-sa-border px-4 py-2 font-heading text-xs font-semibold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:border-sa-primary hover:text-sa-primary sm:min-h-0 sm:px-3 sm:py-1.5 sm:text-[10px]"
             >
               Hosting plans
             </Link>
             <Link
               href="/checkout/cart"
-              className="rounded-full border border-sa-border px-3 py-1.5 font-heading text-[10px] font-semibold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:border-sa-primary hover:text-sa-primary"
+              className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-sa-border px-4 py-2 font-heading text-xs font-semibold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:border-sa-primary hover:text-sa-primary sm:min-h-0 sm:px-3 sm:py-1.5 sm:text-[10px]"
             >
               Checkout cart
             </Link>

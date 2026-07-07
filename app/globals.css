@@ -904,7 +904,8 @@
     opacity: 0.35 !important;
   }
 
-  .animate-sa-marquee {
+  .animate-sa-marquee,
+  .animate-sa-marquee-reverse {
     animation: none !important;
   }
 }

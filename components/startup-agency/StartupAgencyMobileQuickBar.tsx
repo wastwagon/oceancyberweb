@@ -37,7 +37,7 @@ export function StartupAgencyMobileQuickBar() {
           <Link
             key={action.href}
             href={action.href}
-            className={`inline-flex min-h-[42px] items-center justify-center rounded-lg border px-2 text-center font-heading text-[10px] font-semibold uppercase tracking-[0.12em] transition duration-300 ${
+            className={`inline-flex min-h-[44px] items-center justify-center rounded-lg border px-2 text-center font-heading text-xs font-semibold uppercase tracking-[0.12em] transition duration-300 md:min-h-[42px] md:text-[10px] ${
               "primary" in action && action.primary
                 ? "border-sa-primary bg-sa-primary text-sa-bg hover:bg-sa-primary/90"
                 : isActive(action.href)
