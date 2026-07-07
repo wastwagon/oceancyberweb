@@ -74,49 +74,49 @@ export const showreelSlides = [
 
 export const aboutWorkPreview = [
   {
-    title: "Fitch Advisory",
-    category: "Advisory · Web",
-    image: siteImagePaths.portfolioLive.fitchAdvisory,
-    href: "https://www.fitchadvisory.com/",
+    title: "Financial Services Platform",
+    category: "Web · Dashboard",
+    image: siteImagePaths.work.fintechDashboard,
+    href: "/portfolio?tab=creative",
   },
   {
-    title: "Africa Governance Centre",
-    category: "Governance · Web",
-    image: siteImagePaths.portfolioLive.africaGovernanceCentre,
-    href: "https://www.africagovernancecentre.org/",
+    title: "Mobile Commerce Experience",
+    category: "E-commerce · App",
+    image: siteImagePaths.work.mobileCommerce,
+    href: "/portfolio?tab=creative",
   },
   {
-    title: "ThinQ Shopping",
-    category: "E‑commerce · App",
-    image: siteImagePaths.portfolioLive.thinqShopping,
-    href: "https://thinqshopping.app/",
+    title: "Brand & Design System",
+    category: "UI/UX · Identity",
+    image: siteImagePaths.work.brandSystem,
+    href: "/portfolio?tab=creative",
   },
   {
-    title: "Fitch Attorneys",
-    category: "Legal · Web",
-    image: siteImagePaths.portfolioLive.fitchAttorneys,
-    href: "https://www.fitchattorneys.com/",
+    title: "Travel Booking Platform",
+    category: "Web · Hospitality",
+    image: siteImagePaths.work.travelPlatform,
+    href: "/portfolio?tab=creative",
   },
   {
-    title: "Creative Hub",
-    category: "Studio concepts",
-    image: siteImagePaths.portfolio.creativeHub,
+    title: "Secure Enterprise Portal",
+    category: "Cyber Security · Web",
+    image: siteImagePaths.work.cybersecurityPlatform,
     href: "/portfolio?tab=creative",
   },
 ] as const;
 
 export const aboutStats = [
-  { value: "8+", label: "Years delivering" },
-  { value: "50+", label: "Products launched" },
-  { value: "5", label: "Industry verticals" },
+  { value: "15+", label: "Years delivering" },
+  { value: "500+", label: "Projects launched" },
+  { value: "12", label: "Industry verticals" },
 ] as const;
 
 export const trustSignals = [
   {
     icon: "award" as const,
-    stat: "8+",
-    title: "Years in market",
-    body: "Founded in Accra in 2018 — shipping for startups, SMEs, and enterprise teams.",
+    stat: "15+",
+    title: "Years delivering",
+    body: "Deep delivery experience across software, design, infrastructure, and cybersecurity programs.",
   },
   {
     icon: "star" as const,
