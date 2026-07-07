@@ -1,5 +1,10 @@
 import type { InsightPost } from "@/lib/insights/content";
 import { insightArticlePath } from "@/lib/insights/content";
+import {
+  absoluteSiteImageUrl,
+  geoTaggedImageObject,
+  imageContentLocation,
+} from "@/lib/seo/image-geo";
 
 const site =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
@@ -9,16 +14,19 @@ type Props = { post: InsightPost };
 
 export function InsightArticleJsonLd({ post }: Props) {
   const pageUrl = `${site}${insightArticlePath(post.slug)}`;
-  const imageUrl = post.image.startsWith("http")
-    ? post.image
-    : `${site}${post.image}`;
+  const imageObject = geoTaggedImageObject(post.image, {
+    name: post.title,
+    description: post.excerpt,
+    caption: post.excerpt,
+  });
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: post.title,
     description: post.excerpt,
-    image: [imageUrl],
+    image: [imageObject],
+    contentLocation: imageContentLocation(),
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": pageUrl,
@@ -29,7 +37,7 @@ export function InsightArticleJsonLd({ post }: Props) {
       url: site,
       logo: {
         "@type": "ImageObject",
-        url: `${site}/images/og-image.jpg`,
+        url: absoluteSiteImageUrl("/images/oceancyber-logo.webp"),
       },
     },
   };

@@ -1,5 +1,6 @@
 import { withCanonical } from "@/lib/seo/canonical";
 import type { Metadata } from "next";
+import { ServiceLayoutWithJsonLd } from "@/components/seo/ServiceLayoutWithJsonLd";
 
 export const metadata: Metadata = withCanonical(
   {
@@ -11,5 +12,5 @@ export const metadata: Metadata = withCanonical(
 );
 
 export default function HostingLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return <ServiceLayoutWithJsonLd path="/hosting">{children}</ServiceLayoutWithJsonLd>;
 }

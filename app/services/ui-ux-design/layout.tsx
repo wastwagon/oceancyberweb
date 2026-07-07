@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ServiceLayoutWithJsonLd } from "@/components/seo/ServiceLayoutWithJsonLd";
 
 export const metadata: Metadata = {
   title: "UI/UX Design & Brand Identity",
@@ -8,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <ServiceLayoutWithJsonLd path="/services/ui-ux-design">
+      {children}
+    </ServiceLayoutWithJsonLd>
+  );
 }
