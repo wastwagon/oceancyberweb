@@ -1,6 +1,7 @@
 /**
- * Generates branded editorial cover art for insight articles.
- * Run: node scripts/generate-insight-covers.mjs
+ * Fallback: generates SVG-based covers for insight articles.
+ * Prefer AI editorial art — export PNGs as {slug}.png, then run:
+ *   node scripts/import-insight-cover-pngs.mjs
  */
 import { mkdirSync } from "fs";
 import path from "path";
