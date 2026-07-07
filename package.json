@@ -30,6 +30,8 @@
     "test:e2e:ui": "playwright test --ui",
     "export:gbp-photos": "node scripts/export-gbp-geo-tagged-images.mjs",
     "embed:site-image-geo": "node scripts/embed-site-image-geo.mjs",
+    "import:industry-ui": "node scripts/import-industry-premium-images.mjs",
+    "export:industry-social-ads": "node scripts/export-industry-social-ads.mjs",
     "rename:site-images": "node scripts/rename-site-images-descriptive.mjs",
     "verify:google-places": "node scripts/verify-google-places.mjs"
   },

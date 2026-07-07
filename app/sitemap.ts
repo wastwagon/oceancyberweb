@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { getPortfolioSlugs } from "@/lib/data/portfolio-loader";
 import { getInsightPosts } from "@/lib/data/insights-loader";
 import { insightArticlePath } from "@/lib/insights/content";
+import { industrySitemapPaths } from "@/lib/data/industries-catalog";
 
 const base =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
@@ -35,12 +36,7 @@ const routes = [
   "/tools/project-cost",
   "/tools/proposal",
   "/industries",
-  "/industries/education",
-  "/industries/financial-services",
-  "/industries/healthcare",
-  "/industries/retail",
-  "/industries/tourism",
-  "/industries/legal",
+  ...industrySitemapPaths,
 ];
 
 /** Align with portfolio revalidation so sitemap picks up new projects without redeploy. */

@@ -25,15 +25,7 @@ const serviceLinks = [
   { label: "Cloud Hosting", href: "/hosting" },
 ] as const;
 
-const industryLinks = [
-  { label: "Financial Services", href: "/industries/financial-services" },
-  { label: "Healthcare", href: "/industries/healthcare" },
-  { label: "Education", href: "/industries/education" },
-  { label: "Retail & Commerce", href: "/industries/retail" },
-  { label: "Tourism", href: "/industries/tourism" },
-  { label: "Legal", href: "/industries/legal" },
-  { label: "All Sectors", href: "/industries" },
-] as const;
+import { industryFooterLinks } from "@/lib/data/industries-catalog";
 
 const socialLinks = [
   { icon: Linkedin, href: "https://linkedin.com/company/oceancyber" },
@@ -128,7 +120,7 @@ export function StartupAgencyFooter() {
                 Industries
               </span>
               <ul className="space-y-4">
-                {industryLinks.map((l) => (
+                {industryFooterLinks.map((l) => (
                   <li key={l.label}>
                     <Link
                       href={l.href}

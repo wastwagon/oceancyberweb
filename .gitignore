@@ -14,5 +14,5 @@ docker-compose.override.yml
 /blob-report/
 playwright/.cache/
 
-# Local exports (GBP JPG uploads — regenerate with npm run export:gbp-photos)
+# Local exports (GBP JPG + social ad sizes)
 exports/

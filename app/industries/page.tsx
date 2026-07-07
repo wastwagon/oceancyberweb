@@ -12,95 +12,23 @@ import {
   staggerDelay,
 } from "@/lib/scroll-reveal";
 import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
+import { industryCatalog } from "@/lib/data/industries-catalog";
 
 type IndustryCard = {
   title: string;
   description: string;
   image: string;
   services: string[];
-  href: string | null;
+  href: string;
 };
 
-const industries: IndustryCard[] = [
-  {
-    title: "Financial Services",
-    description:
-      "Banking-grade platforms, payments, and risk tooling designed for Ghana's regulatory reality.",
-    image: "/images/industries/finance.png",
-    services: [
-      "Digital banking platforms",
-      "Payment gateway integration",
-      "Fraud detection systems",
-      "Compliance solutions",
-    ],
-    href: "/industries/financial-services",
-  },
-  {
-    title: "Healthcare",
-    description:
-      "Healthcare technology that improves access and operations while respecting privacy and uptime.",
-    image: "/images/industries/healthcare.png",
-    services: [
-      "Electronic health records",
-      "Telemedicine platforms",
-      "Medical data analytics",
-      "Patient management systems",
-    ],
-    href: "/industries/healthcare",
-  },
-  {
-    title: "Education",
-    description:
-      "E-learning platforms and tools that scale from institutions to national programs.",
-    image: "/images/industries/education.png",
-    services: [
-      "Learning management systems",
-      "Virtual classrooms",
-      "Educational apps",
-      "Student analytics",
-    ],
-    href: "/industries/education",
-  },
-  {
-    title: "Tourism & Hospitality",
-    description:
-      "Booking, guest experience, and operations software for travel brands.",
-    image: "/images/industries/tourism.png",
-    services: [
-      "Booking systems",
-      "Hotel management software",
-      "Travel apps",
-      "Customer experience platforms",
-    ],
-    href: "/industries/tourism",
-  },
-  {
-    title: "Retail & E-commerce",
-    description:
-      "Omnichannel commerce and retail systems that convert and scale.",
-    image: "/images/industries/retail.png",
-    services: [
-      "E-commerce platforms",
-      "Inventory management",
-      "Customer analytics",
-      "Mobile shopping apps",
-    ],
-    href: "/industries/retail",
-  },
-  {
-    title: "Legal Services",
-    description:
-      "Case management, portals, and secure document workflows for modern firms.",
-    image: "/images/industries/legal.png",
-    services: [
-      "Case management systems",
-      "Document automation",
-      "Client portals",
-      "Legal analytics",
-    ],
-    href: "/industries/legal",
-  },
-];
+const industries: IndustryCard[] = industryCatalog.map((item) => ({
+  title: item.title,
+  description: item.description,
+  image: item.image,
+  services: item.services,
+  href: item.href,
+}));
 
 function PageAmbient() {
   return (
@@ -139,7 +67,7 @@ function IndustryGridCard({
           src={industry.image}
           alt=""
           fill
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] grayscale group-hover:grayscale-0"
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
           sizes="(max-width: 768px) 100vw, 33vw"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-sa-surface via-transparent to-transparent" />
@@ -166,7 +94,7 @@ function IndustryGridCard({
           ))}
         </ul>
         <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-sa-primary transition-colors group-hover:text-white">
-          {industry.href ? "Explore vertical" : "Discuss this vertical"}
+          Explore vertical
           <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
         </span>
       </div>
@@ -175,21 +103,6 @@ function IndustryGridCard({
 
   const className = "sa-card group flex h-full flex-col overflow-hidden text-left";
 
-  if (industry.href) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 22 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={revealViewport}
-        transition={staggerDelay(index, 0.07)}
-      >
-        <Link href={industry.href} className={className}>
-          {inner}
-        </Link>
-      </motion.div>
-    );
-  }
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 22 }}
@@ -197,10 +110,7 @@ function IndustryGridCard({
       viewport={revealViewport}
       transition={staggerDelay(index, 0.07)}
     >
-      <Link
-        href={`/contact?topic=${encodeURIComponent(industry.title)}`}
-        className={className}
-      >
+      <Link href={industry.href} className={className}>
         {inner}
       </Link>
     </motion.div>
@@ -271,7 +181,7 @@ export default function IndustriesPage() {
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-sa-muted/80 md:text-base">
               We regularly onboard new verticals when the problem space is
-              clear: logistics, energy, media, and more.
+              clear: manufacturing, nonprofits, telecom, and more.
             </p>
             <div className="mt-8">
               <Link

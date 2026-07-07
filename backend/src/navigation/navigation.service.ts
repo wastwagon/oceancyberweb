@@ -131,38 +131,18 @@ const DEFAULT_CONFIG = {
       description:
         "Proven delivery patterns for regulated and growth-focused sectors.",
       items: [
-        {
-          heading: "Financial Services",
-          description: "Secure banking solutions and fintech innovations.",
-          link: "/industries/financial-services",
-        },
-        {
-          heading: "Healthcare",
-          description: "HIPAA-compliant healthcare technology solutions.",
-          link: "/industries/healthcare",
-        },
-        {
-          heading: "Education",
-          description:
-            "Practical e-learning platforms that improve delivery and outcomes.",
-          link: "/industries/education",
-        },
-        {
-          heading: "Retail & E-commerce",
-          description:
-            "Retail technology to boost online sales and engagement.",
-          link: "/industries/retail",
-        },
-        {
-          heading: "Tourism & Hospitality",
-          description: "Booking and guest experience platforms for travel brands.",
-          link: "/industries/tourism",
-        },
-        {
-          heading: "Legal Services",
-          description: "Case management and secure client portals for law firms.",
-          link: "/industries/legal",
-        },
+        { heading: "Financial Services", description: "Secure banking solutions and fintech innovations.", link: "/industries/financial-services" },
+        { heading: "Healthcare", description: "Compliant healthcare technology solutions.", link: "/industries/healthcare" },
+        { heading: "Education", description: "Practical e-learning platforms that improve delivery and outcomes.", link: "/industries/education" },
+        { heading: "Retail & E-commerce", description: "Retail technology to boost online sales and engagement.", link: "/industries/retail" },
+        { heading: "Tourism & Hospitality", description: "Booking and guest experience platforms for travel brands.", link: "/industries/tourism" },
+        { heading: "Legal Services", description: "Case management and secure client portals for law firms.", link: "/industries/legal" },
+        { heading: "Logistics & Supply Chain", description: "Tracking, dispatch, and fulfillment software for movers of goods.", link: "/industries/logistics" },
+        { heading: "Real Estate & Property", description: "Property listings, CRM, and tenant management platforms.", link: "/industries/real-estate" },
+        { heading: "Agriculture & AgriTech", description: "Agri marketplaces, cooperatives, and field data platforms.", link: "/industries/agriculture" },
+        { heading: "Media & Entertainment", description: "Content platforms, streaming, and digital publishing.", link: "/industries/media-entertainment" },
+        { heading: "Government & Public Sector", description: "Citizen portals, e-services, and secure public platforms.", link: "/industries/government" },
+        { heading: "Energy & Utilities", description: "Utility billing, smart metering, and operations software.", link: "/industries/energy" },
       ],
     },
     resources: {

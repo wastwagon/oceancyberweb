@@ -71,6 +71,8 @@ export const mainHeaderNav: HeaderNavItem[] = [
   },
 ];
 
+import { industryNavItems } from "@/lib/data/industries-catalog";
+
 export const mainHeaderDropdownContent: Record<
   HeaderDropdownKey,
   {
@@ -118,38 +120,7 @@ export const mainHeaderDropdownContent: Record<
   industries: {
     title: "Industries We Serve",
     description: "Proven delivery patterns for regulated and growth-focused sectors.",
-    items: [
-      {
-        heading: "Financial Services",
-        description: "Secure banking solutions and fintech innovations.",
-        link: "/industries/financial-services",
-      },
-      {
-        heading: "Healthcare",
-        description: "HIPAA-compliant healthcare technology solutions.",
-        link: "/industries/healthcare",
-      },
-      {
-        heading: "Education",
-        description: "Practical e-learning platforms that improve delivery and outcomes.",
-        link: "/industries/education",
-      },
-      {
-        heading: "Retail & E-commerce",
-        description: "Retail technology to boost online sales and engagement.",
-        link: "/industries/retail",
-      },
-      {
-        heading: "Tourism & Hospitality",
-        description: "Booking and guest experience platforms for travel brands.",
-        link: "/industries/tourism",
-      },
-      {
-        heading: "Legal Services",
-        description: "Case management and secure client portals for law firms.",
-        link: "/industries/legal",
-      },
-    ],
+    items: industryNavItems,
   },
   resources: {
     title: "Resources",
