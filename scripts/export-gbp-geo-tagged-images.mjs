@@ -16,6 +16,7 @@ import sharp from "sharp";
 import {
   business,
   gbpCatalogs,
+  gbpJpegBaseName,
 } from "./image-geo-config.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -72,9 +73,8 @@ function applyGeoMetadata(imagePath, meta) {
   );
 }
 
-function fileBaseForItem(category, item) {
-  const slug = path.basename(item.input, path.extname(item.input));
-  return `oceancyber-accra-${category}-${slug}`.replace(/-+/g, "-");
+function fileBaseForItem(item) {
+  return gbpJpegBaseName(item);
 }
 
 async function exportCatalog(category, items) {
@@ -83,13 +83,13 @@ async function exportCatalog(category, items) {
   const exported = [];
 
   for (const item of items) {
-    const input = path.join(imagesRoot, item.input);
+    const input = path.join(imagesRoot, item.path);
     if (!existsSync(input)) {
-      console.warn(`Skip (missing): ${item.input}`);
+      console.warn(`Skip (missing): ${item.path}`);
       continue;
     }
 
-    const fileBase = fileBaseForItem(category, item);
+    const fileBase = fileBaseForItem(item);
     const output = path.join(categoryDir, `${fileBase}.jpg`);
 
     await sharp(input)

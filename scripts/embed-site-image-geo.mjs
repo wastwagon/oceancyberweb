@@ -76,9 +76,9 @@ let embedded = 0;
 let skipped = 0;
 
 for (const item of siteImageCatalog) {
-  const imagePath = path.join(imagesRoot, item.input);
+  const imagePath = path.join(imagesRoot, item.path);
   if (!existsSync(imagePath)) {
-    console.warn(`Skip (missing): ${item.input}`);
+    console.warn(`Skip (missing): ${item.path}`);
     skipped += 1;
     continue;
   }
@@ -86,14 +86,14 @@ for (const item of siteImageCatalog) {
   try {
     await normalizeWebp(imagePath);
   } catch (error) {
-    console.warn(`Skip (normalize failed): ${item.input}`, error.message);
+    console.warn(`Skip (normalize failed): ${item.path}`, error.message);
     skipped += 1;
     continue;
   }
 
   if (embedGeoMetadata(imagePath, item)) {
     embedded += 1;
-    console.log(`Embedded geo: ${item.input}`);
+    console.log(`Embedded geo: ${item.path}`);
   } else {
     skipped += 1;
   }

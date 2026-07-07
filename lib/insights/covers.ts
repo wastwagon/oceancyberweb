@@ -1,4 +1,2 @@
-/** Branded editorial cover art for insight articles. */
-export function insightCoverPath(slug: string): string {
-  return `/images/insights/${slug}.webp`;
-}
+/** @deprecated Use insightCoverPath from @/lib/seo/site-image-paths */
+export { insightCoverPath } from "@/lib/seo/site-image-paths";

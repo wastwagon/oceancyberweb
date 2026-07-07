@@ -11,6 +11,7 @@ import {
   PortfolioWorkTypeChips,
   type WorkTypeFilter,
 } from "@/components/portfolio/PortfolioWorkTypeChips";
+import { siteImagePaths } from "@/lib/seo/site-image-paths";
 import { fallbackPortfolioCaseStudies } from "@/lib/data/projects";
 import { getPublicProjects } from "@/lib/auth-client";
 import type { PortfolioCaseStudy } from "@/lib/types/portfolio-case-study";
@@ -65,7 +66,7 @@ export function SaPortfolioGallerySection() {
                 description: p.description,
                 tech: p.techStack,
                 gradient: "from-sa-primary to-sa-bg",
-                image: p.imageUrl || "/images/portfolio-showcase/portfolio-creative-hub.webp",
+                image: p.imageUrl || siteImagePaths.portfolio.creativeHub,
                 slug: p.slug,
                 year: new Date().getFullYear().toString(),
                 client: p.title,

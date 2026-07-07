@@ -1,5 +1,6 @@
 /** Marketing homepage content — structure aligned with Start-Up Agency; copy tailored for OceanCyber. */
 
+import { siteImagePaths } from "@/lib/seo/site-image-paths";
 import { serviceImages } from "./service-images";
 
 export const heroTagline =
@@ -53,31 +54,31 @@ export const aboutWorkPreview = [
   {
     title: "Financial Services Platform",
     category: "Web · Dashboard",
-    image: "/images/agency-bento/agency-bento-fintech-dashboard.webp",
+    image: siteImagePaths.work.fintechDashboard,
     href: "/portfolio/egp-ghana",
   },
   {
     title: "Mobile Commerce Experience",
     category: "E‑commerce · iOS & Android",
-    image: "/images/agency-bento/agency-bento-mobile-commerce.webp",
+    image: siteImagePaths.work.mobileCommerce,
     href: "/portfolio/juelle-hair",
   },
   {
     title: "Brand & Design System",
     category: "UI/UX · Identity",
-    image: "/images/agency-bento/agency-bento-brand-system.webp",
+    image: siteImagePaths.work.brandSystem,
     href: "/portfolio/creative-hub-template",
   },
   {
     title: "Travel Booking Platform",
     category: "Web · Hospitality",
-    image: "/images/agency-bento/agency-bento-travel-platform.webp",
+    image: siteImagePaths.work.travelPlatform,
     href: "/portfolio/tour-world-tourism",
   },
   {
     title: "Secure Enterprise Portal",
     category: "Cyber Security · Web",
-    image: "/images/agency-bento/agency-bento-cybersecurity-platform.webp",
+    image: siteImagePaths.work.cybersecurityPlatform,
     href: "/portfolio/fitch-attorneys",
   },
 ] as const;
@@ -280,7 +281,7 @@ export const blogTeasers = [
     title: "Navigating the GH¢3 Trillion Mobile Money Economy",
     date: "May 2024",
     href: "/insights/ghana-momo-economy",
-    image: "/images/insights/ghana-momo-economy.webp",
+    image: siteImagePaths.insights["ghana-momo-economy"],
     category: "Fintech",
     author: "OceanCyber Research",
   },
@@ -288,7 +289,7 @@ export const blogTeasers = [
     title: "Why Cyberattacks on Ghanaian Businesses Rose 50% in 2024",
     date: "April 2024",
     href: "/insights/ghana-cybersecurity-trends",
-    image: "/images/insights/ghana-cybersecurity-trends.webp",
+    image: siteImagePaths.insights["ghana-cybersecurity-trends"],
     category: "Security",
     author: "OceanCyber Security",
   },
@@ -296,7 +297,7 @@ export const blogTeasers = [
     title: "Preparing for Ghana's US$1 Billion E‑commerce Boom in 2025",
     date: "March 2024",
     href: "/insights/ecommerce-growth-ghana",
-    image: "/images/insights/ecommerce-growth-ghana.webp",
+    image: siteImagePaths.insights["ecommerce-growth-ghana"],
     category: "Growth",
     author: "OceanCyber Product",
   },
