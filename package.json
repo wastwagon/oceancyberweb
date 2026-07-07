@@ -28,7 +28,7 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "verify:google-places": "node scripts/verify-google-places.mjs"
+    "export:gbp-photos": "node scripts/export-gbp-geo-tagged-images.mjs",
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

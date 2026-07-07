@@ -13,3 +13,6 @@ docker-compose.override.yml
 /playwright-report/
 /blob-report/
 playwright/.cache/
+
+# Local exports (geo-tagged GBP JPEGs — regenerate with npm run export:gbp-photos)
+exports/
