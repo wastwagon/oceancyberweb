@@ -1,11 +1,12 @@
 /**
  * Export Google Business Profile–ready JPEGs with geo EXIF + IPTC metadata.
  *
- * Note: Google strips EXIF on GBP upload, so geo tags mainly help website SEO
- * and your own asset catalog. For GBP, descriptive filenames and visual
- * relevance matter more than embedded GPS.
+ * Google Business Profile does not accept WebP — this script converts all
+ * marketing images to high-quality JPG in a dedicated upload folder.
  *
- * Requires: sharp (project dep) + exiftool (brew install exiftool)
+ * Output: exports/google-business-profile-jpg/
+ *
+ * Requires: sharp + exiftool (brew install exiftool)
  * Run: npm run export:gbp-photos
  */
 import { execFileSync } from "child_process";
@@ -17,11 +18,12 @@ import {
   business,
   gbpCatalogs,
   gbpJpegBaseName,
+  siteImageCatalog,
 } from "./image-geo-config.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const imagesRoot = path.join(__dirname, "../public/images");
-const outRoot = path.join(__dirname, "../exports/google-business-profile");
+const outRoot = path.join(__dirname, "../exports/google-business-profile-jpg");
 const fullAddress = `${business.street}, ${business.locality}, ${business.country}`;
 
 const gbpCategoryHints = {
@@ -73,48 +75,39 @@ function applyGeoMetadata(imagePath, meta) {
   );
 }
 
-function fileBaseForItem(item) {
-  return gbpJpegBaseName(item);
-}
-
-async function exportCatalog(category, items) {
-  const categoryDir = path.join(outRoot, category);
-  mkdirSync(categoryDir, { recursive: true });
-  const exported = [];
-
-  for (const item of items) {
-    const input = path.join(imagesRoot, item.path);
-    if (!existsSync(input)) {
-      console.warn(`Skip (missing): ${item.path}`);
-      continue;
-    }
-
-    const fileBase = fileBaseForItem(item);
-    const output = path.join(categoryDir, `${fileBase}.jpg`);
-
-    await sharp(input)
-      .resize(1920, 1080, { fit: "cover", position: "centre" })
-      .jpeg({ quality: 92, mozjpeg: true })
-      .toFile(output);
-
-    applyGeoMetadata(output, item);
-
-    exported.push({
-      file: path.join(category, `${fileBase}.jpg`),
-      category,
-      title: item.title,
-      gbpCategory: category === "services" ? "Services" : "At work",
-      gps: {
-        latitude: business.latitude,
-        longitude: business.longitude,
-      },
-      address: fullAddress,
-    });
-
-    console.log(`Exported [${category}]:`, output);
+async function exportItem(item, outputDir, category) {
+  const input = path.join(imagesRoot, item.path);
+  if (!existsSync(input)) {
+    console.warn(`Skip (missing): ${item.path}`);
+    return null;
   }
 
-  return exported;
+  const fileBase = gbpJpegBaseName(item);
+  const output = path.join(outputDir, `${fileBase}.jpg`);
+
+  await sharp(input)
+    .resize(1920, 1080, { fit: "cover", position: "centre" })
+    .jpeg({ quality: 92, mozjpeg: true })
+    .toFile(output);
+
+  applyGeoMetadata(output, item);
+
+  const gbpCategory =
+    item.gbpCategory ?? (category === "services" ? "Services" : "At work");
+
+  console.log(`Exported: ${path.basename(output)}`);
+
+  return {
+    file: `${fileBase}.jpg`,
+    category,
+    title: item.title,
+    gbpCategory,
+    gps: {
+      latitude: business.latitude,
+      longitude: business.longitude,
+    },
+    address: fullAddress,
+  };
 }
 
 mkdirSync(outRoot, { recursive: true });
@@ -129,17 +122,27 @@ const manifest = {
       longitude: business.longitude,
     },
   },
+  format: "JPEG (.jpg) — for Google Business Profile upload only",
   note:
-    "Google Business Profile strips EXIF on upload. Geo tags help website SEO and asset management; for GBP, use descriptive filenames and relevant visuals.",
+    "Site continues to use WebP. Geo EXIF is embedded for your records; Google may strip it on upload. Descriptive filenames are preserved.",
   uploadGuide: gbpCategoryHints,
   counts: {},
   images: [],
 };
 
+// Flat folder — easiest for drag-and-drop GBP upload
+for (const item of siteImageCatalog) {
+  const category =
+    Object.entries(gbpCatalogs).find(([, items]) => items.includes(item))?.[0] ??
+    "other";
+  const exported = await exportItem(item, outRoot, category);
+  if (exported) manifest.images.push(exported);
+}
+
 for (const [category, items] of Object.entries(gbpCatalogs)) {
-  const exported = await exportCatalog(category, items);
-  manifest.counts[category] = exported.length;
-  manifest.images.push(...exported);
+  manifest.counts[category] = items.filter((item) =>
+    manifest.images.some((img) => img.title === item.title),
+  ).length;
 }
 
 writeFileSync(
@@ -147,6 +150,4 @@ writeFileSync(
   JSON.stringify(manifest, null, 2),
 );
 
-const total = manifest.images.length;
-console.log(`\nDone. ${total} images exported to ${outRoot}`);
-console.log("Counts:", manifest.counts);
+console.log(`\nDone. ${manifest.images.length} JPGs in ${outRoot}`);
