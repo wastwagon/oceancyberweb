@@ -61,15 +61,14 @@ function IndustryGridCard({
 }) {
   const inner = (
     <>
-      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-t-xl">
+      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-t-xl bg-black/50">
         <Image
           src={industry.image}
           alt=""
           fill
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+          className="object-contain object-center p-2 transition-transform duration-700 ease-out group-hover:scale-[1.02]"
           sizes="(max-width: 768px) 100vw, 33vw"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-sa-surface via-transparent to-transparent" />
       </div>
       <div className="border-t border-sa-border p-6 md:p-7">
         <h2 className="font-heading text-xl font-bold tracking-tight text-white md:text-2xl">

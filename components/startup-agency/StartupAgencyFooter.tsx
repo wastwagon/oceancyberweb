@@ -25,7 +25,10 @@ const serviceLinks = [
   { label: "Cloud Hosting", href: "/hosting" },
 ] as const;
 
-import { industryFooterLinks } from "@/lib/data/industries-catalog";
+import {
+  industryFooterLinks,
+  industryFooterViewAllLink,
+} from "@/lib/data/industries-catalog";
 
 const socialLinks = [
   { icon: Linkedin, href: "https://linkedin.com/company/oceancyber" },
@@ -133,6 +136,15 @@ export function StartupAgencyFooter() {
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <Link
+                    href={industryFooterViewAllLink.href}
+                    className="sa-ios-link inline-flex items-center gap-1.5 text-base font-medium text-sa-primary transition-colors duration-300 hover:text-white active:text-white"
+                  >
+                    {industryFooterViewAllLink.label}
+                    <ArrowRight className="h-4 w-4" aria-hidden />
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>

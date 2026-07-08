@@ -1,13 +1,14 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Building2 } from "lucide-react";
-import Link from "next/link";
-import { HeroSectionMotionLayers } from "@/components/layout/HeroSectionMotionLayers";
+import { Building2 } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { ServicePageHeroBanner } from "@/components/services/ServicePageHeroBanner";
 import {
   PremiumFinalCtaSection,
   PremiumStoriesGridSection,
 } from "@/components/shared/PremiumContentSections";
+import { getIndustryBySlug } from "@/lib/data/industries-catalog";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
 import { fadeUpProps, revealViewport, staggerDelay } from "@/lib/scroll-reveal";
 
@@ -47,30 +48,10 @@ export type IndustryPageContent = {
   ctaDescription: string;
 };
 
-function PageAmbient() {
-  return (
-    <div
-      className="pointer-events-none absolute inset-0 opacity-[0.12]"
-      aria-hidden
-    >
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(2, 106, 255, 0.2) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(2, 106, 255, 0.16) 1px, transparent 1px)
-          `,
-          backgroundSize: "56px 56px",
-          maskImage:
-            "radial-gradient(ellipse 100% 72% at 50% 0%, black 0%, transparent 76%)",
-        }}
-      />
-      <div className="absolute left-1/2 top-0 h-[min(420px,52vh)] w-[min(100%,880px)] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(2,106,255,0.1)_0%,transparent_72%)] blur-[88px]" />
-    </div>
-  );
-}
-
 export function IndustryPremiumPage({ content }: { content: IndustryPageContent }) {
+  const pathname = usePathname();
+  const slug = pathname.split("/").filter(Boolean).pop();
+  const heroImage = slug ? getIndustryBySlug(slug)?.image : undefined;
   const reduceMotion = useReducedMotion();
   const heroMotion = getPageHeroMotionVariants(reduceMotion);
   const highlightTone = content.heroHighlightTone ?? "gradient";
@@ -81,8 +62,9 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
 
   return (
     <main className="sa-shell relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
-      <section className="sa-page-intro relative z-10 overflow-hidden">
-        <div className="sa-container relative z-10 text-center">
+      <section className="sa-page-hero">
+        {heroImage ? <ServicePageHeroBanner image={heroImage} /> : null}
+        <div className="sa-page-hero-body">
           <motion.div
             initial="hidden"
             animate="visible"

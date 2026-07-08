@@ -137,30 +137,75 @@ export function StartupAgencyNavbar() {
                   </Link>
 
                   {item.dropdownKey && activeDropdown === item.dropdownKey && mainHeaderDropdownContent[item.dropdownKey] && (
-                    <div
-                      className="absolute left-0 top-[calc(100%+12px)] z-[120] w-[280px] rounded-2xl border border-sa-border bg-[#131317]/95 p-2 shadow-[0_24px_54px_rgba(0,0,0,0.6)] backdrop-blur-xl transition-all duration-300"
-                      role="menu"
-                    >
-                      <div className="flex flex-col gap-1">
-                        {mainHeaderDropdownContent[item.dropdownKey].items.map((subItem) => (
+                    item.dropdownKey === "industries" ? (
+                      <div
+                        className="absolute left-1/2 top-[calc(100%+12px)] z-[120] w-[min(780px,calc(100vw-2rem))] -translate-x-1/2 rounded-2xl border border-sa-border bg-[#131317]/95 shadow-[0_24px_54px_rgba(0,0,0,0.6)] backdrop-blur-xl transition-all duration-300"
+                        role="menu"
+                      >
+                        <div className="border-b border-sa-border px-5 py-4">
+                          <p className="font-heading text-sm font-semibold text-white">
+                            {mainHeaderDropdownContent.industries.title}
+                          </p>
+                          <p className="mt-1 text-xs leading-relaxed text-sa-muted/75">
+                            {mainHeaderDropdownContent.industries.description}
+                          </p>
+                        </div>
+                        <div className="grid grid-cols-3 gap-1 p-2">
+                          {mainHeaderDropdownContent.industries.items.map((subItem) => (
+                            <Link
+                              key={subItem.link}
+                              href={subItem.link}
+                              className="group/link flex flex-col justify-center rounded-xl border border-transparent px-3 py-3 transition-colors hover:border-sa-border hover:bg-black/40"
+                              onClick={() => setActiveDropdown(null)}
+                            >
+                              <p className="font-heading text-[12px] font-semibold leading-snug text-white transition-colors group-hover/link:text-sa-primary">
+                                {subItem.heading}
+                              </p>
+                              {subItem.description && (
+                                <p className="mt-1 text-[10px] leading-relaxed text-sa-muted/75 line-clamp-2">
+                                  {subItem.description}
+                                </p>
+                              )}
+                            </Link>
+                          ))}
+                        </div>
+                        <div className="border-t border-sa-border px-5 py-3">
                           <Link
-                            key={subItem.link}
-                            href={subItem.link}
-                            className="group/link flex flex-col justify-center rounded-xl border border-transparent px-4 py-3 transition-colors hover:border-sa-border hover:bg-black/40"
+                            href="/industries"
+                            className="inline-flex items-center gap-1.5 text-xs font-semibold text-sa-primary transition-colors hover:text-white"
                             onClick={() => setActiveDropdown(null)}
                           >
-                            <p className="font-heading text-[13px] font-semibold text-white transition-colors group-hover/link:text-sa-primary">
-                              {subItem.heading}
-                            </p>
-                            {subItem.description && (
-                              <p className="mt-1 text-[11px] text-sa-muted/80 line-clamp-2 leading-relaxed">
-                                {subItem.description}
-                              </p>
-                            )}
+                            View all industries
+                            <ChevronRight className="h-3.5 w-3.5" aria-hidden />
                           </Link>
-                        ))}
+                        </div>
                       </div>
-                    </div>
+                    ) : (
+                      <div
+                        className="absolute left-0 top-[calc(100%+12px)] z-[120] w-[280px] rounded-2xl border border-sa-border bg-[#131317]/95 p-2 shadow-[0_24px_54px_rgba(0,0,0,0.6)] backdrop-blur-xl transition-all duration-300"
+                        role="menu"
+                      >
+                        <div className="flex flex-col gap-1">
+                          {mainHeaderDropdownContent[item.dropdownKey].items.map((subItem) => (
+                            <Link
+                              key={subItem.link}
+                              href={subItem.link}
+                              className="group/link flex flex-col justify-center rounded-xl border border-transparent px-4 py-3 transition-colors hover:border-sa-border hover:bg-black/40"
+                              onClick={() => setActiveDropdown(null)}
+                            >
+                              <p className="font-heading text-[13px] font-semibold text-white transition-colors group-hover/link:text-sa-primary">
+                                {subItem.heading}
+                              </p>
+                              {subItem.description && (
+                                <p className="mt-1 text-[11px] text-sa-muted/80 line-clamp-2 leading-relaxed">
+                                  {subItem.description}
+                                </p>
+                              )}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )
                   )}
                 </div>
               );

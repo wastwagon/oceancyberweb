@@ -215,12 +215,19 @@ export const industryNavItems = industryCatalog.map((item) => ({
   link: item.href,
 }));
 
-export const industryFooterLinks = [
-  ...industryCatalog.map((item) => ({
+/** Footer shows a short list; full catalog lives on /industries. */
+export const FOOTER_INDUSTRY_LINK_LIMIT = 6;
+
+export const industryFooterLinks = industryCatalog
+  .slice(0, FOOTER_INDUSTRY_LINK_LIMIT)
+  .map((item) => ({
     label: item.shortTitle,
     href: item.href,
-  })),
-  { label: "All Sectors", href: "/industries" as const },
-];
+  }));
+
+export const industryFooterViewAllLink = {
+  label: "View more",
+  href: "/industries" as const,
+};
 
 export const industrySitemapPaths = industryCatalog.map((item) => item.href);
