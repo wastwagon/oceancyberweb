@@ -1,8 +1,18 @@
-import { notFound, redirect } from "next/navigation";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { CaseStudyDetailView } from "@/components/portfolio/CaseStudyDetailView";
+import { CaseStudyPageJsonLd } from "@/components/seo/CaseStudyPageJsonLd";
+import { getCaseStudyNarrativeBySlug } from "@/lib/data/case-studies";
 import {
-  featuredClientSlugs,
-  getFeaturedClientBySlug,
-} from "@/lib/data/featured-client-work";
+  getPortfolioCaseStudyBySlug,
+  getPortfolioSlugs,
+  getRelatedPortfolioProjects,
+} from "@/lib/data/portfolio-loader";
+import { withCanonical } from "@/lib/seo/canonical";
+
+const siteBase =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
+  "https://oceancyber.net";
 
 interface PortfolioDetailPageProps {
   params: {
@@ -10,41 +20,80 @@ interface PortfolioDetailPageProps {
   };
 }
 
-const LEGACY_STUDIO_SLUGS = new Set(["creative-hub-template"]);
+export const revalidate = 300;
 
 export default async function PortfolioDetailPage({ params }: PortfolioDetailPageProps) {
-  if (LEGACY_STUDIO_SLUGS.has(params.slug)) {
-    redirect("/creative-hub");
+  const project = await getPortfolioCaseStudyBySlug(params.slug);
+  if (!project) {
+    notFound();
   }
 
-  const client = getFeaturedClientBySlug(params.slug);
-  if (client) {
-    redirect(client.liveUrl);
-  }
+  const narrative = getCaseStudyNarrativeBySlug(params.slug);
+  const relatedProjects = await getRelatedPortfolioProjects(
+    params.slug,
+    project.category,
+  );
 
-  notFound();
+  return (
+    <>
+      <CaseStudyPageJsonLd project={project} narrative={narrative} />
+      <CaseStudyDetailView
+        project={project}
+        backHref="/portfolio"
+        backLabel="Back to portfolio"
+        sidebarTitle="Project details"
+        detailTitle="View all projects"
+        narrative={narrative}
+        relatedProjects={relatedProjects}
+      />
+    </>
+  );
 }
 
-/** Only featured client slugs need static paths; others 404. */
 export async function generateStaticParams() {
-  return featuredClientSlugs.map((slug) => ({ slug }));
+  const slugs = await getPortfolioSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: PortfolioDetailPageProps) {
-  const client = getFeaturedClientBySlug(params.slug);
+export async function generateMetadata({
+  params,
+}: PortfolioDetailPageProps): Promise<Metadata> {
+  const project = await getPortfolioCaseStudyBySlug(params.slug);
 
-  if (!client) {
+  if (!project) {
     return {
       title: "Project Not Found",
       description: "The requested project could not be found.",
     };
   }
 
-  return {
-    title: `${client.title} — Live client work`,
-    description: client.summary,
-    alternates: {
-      canonical: `/portfolio/${params.slug}`,
+  const narrative = getCaseStudyNarrativeBySlug(params.slug);
+  const description =
+    narrative?.impact ??
+    project.results ??
+    project.description.slice(0, 160);
+
+  const ogImage = project.image.startsWith("http")
+    ? project.image
+    : `${siteBase}${project.image}`;
+
+  return withCanonical(
+    {
+      title: `${project.title} — Case Study`,
+      description,
+      openGraph: {
+        title: `${project.title} | OceanCyber Case Study`,
+        description,
+        type: "article",
+        images: [{ url: ogImage, alt: `${project.title} — OceanCyber client work` }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${project.title} | OceanCyber Case Study`,
+        description,
+        images: [ogImage],
+      },
     },
-  };
+    `/portfolio/${params.slug}`,
+  );
 }

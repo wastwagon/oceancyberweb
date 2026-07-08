@@ -4,6 +4,11 @@ import {
   IndustryPremiumPage,
   type IndustryPageContent,
 } from "@/components/industries/IndustryPremiumPage";
+import {
+  IndustryFeaturedProof,
+  type IndustryProofItem,
+} from "@/components/industries/IndustryFeaturedProof";
+import { LeadMagnetGate } from "@/components/marketing/LeadMagnetGate";
 
 const content: IndustryPageContent = {
   heroEyebrow: "Legal services",
@@ -86,6 +91,43 @@ const content: IndustryPageContent = {
     "Tell us about your practice areas, matter volume, and compliance needs — we'll map a phased delivery plan.",
 };
 
+const legalProof: IndustryProofItem[] = [
+  {
+    slug: "fitch-attorneys",
+    title: "Fitch Attorneys",
+    metric: "180%",
+    metricLabel: "Case management efficiency",
+    summary:
+      "Unified legal platform with client communication hub — live corporate law firm deployment in Ghana.",
+  },
+  {
+    slug: "fitch-advisory",
+    title: "Fitch Advisory",
+    metric: "250%",
+    metricLabel: "Client engagement",
+    summary:
+      "Institutional advisory site with secure portal patterns applicable to professional services firms.",
+  },
+];
+
 export default function LegalIndustryPage() {
-  return <IndustryPremiumPage content={content} />;
+  return (
+    <>
+      <IndustryPremiumPage content={content} />
+      <IndustryFeaturedProof
+        title="Legal platforms we have shipped"
+        subtitle="On-site case studies with measurable outcomes — not generic templates."
+        items={legalProof}
+      />
+      <section className="sa-section relative z-10 border-t border-sa-border bg-sa-bg">
+        <div className="sa-container max-w-4xl">
+          <LeadMagnetGate
+            magnetId="compliance_checklist"
+            page="industries/legal"
+            description="Eight controls for client data, matter files, access, vendors, and breach response — mapped to Ghana's Data Protection Act."
+          />
+        </div>
+      </section>
+    </>
+  );
 }

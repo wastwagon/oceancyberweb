@@ -1,5 +1,61 @@
 [
   {
+    "slug": "agency-vs-hire-ghana",
+    "title": "Agency vs Hiring In-House: A Cost Map for Accra Teams",
+    "excerpt": "When a full-time hire beats a delivery partner — and when a premium agency saves money, time, and rework for Ghanaian product leaders.",
+    "paragraphs": [
+      "Hiring feels like control: one person, one salary, one desk. But a senior full-stack engineer plus designer, DevOps, and security coverage often exceeds GHS 20,000/month before recruitment, devices, and management overhead — and you still wait months to fill the role.",
+      "Agencies win when speed, breadth, and accountability matter: regulated launches, MoMo integrations, brand plus engineering together, or a fixed milestone with a named lead. You buy outcomes and documented handover, not just hours.",
+      "The decision framework: hire in-house for steady product iteration on a stable stack you already own; partner when you need multi-disciplinary delivery, compliance-sensitive launches, or a hard external deadline. Hybrid retainers — agency extends your team — often fit growth-stage Ghanaian companies best."
+    ],
+    "image": "/images/insights/oceancyber-accra-digital-transformation-ghana-insights.webp",
+    "category": "Business",
+    "date": "July 3, 2026",
+    "readTime": "8 min read"
+  },
+  {
+    "slug": "ghana-sme-cybersecurity-baseline",
+    "title": "Cybersecurity Baseline for Ghanaian SMEs in 2026",
+    "excerpt": "Ten controls every SME should have before scaling ads, payments, or customer data — mapped to how attackers actually target Ghanaian businesses.",
+    "paragraphs": [
+      "SME breaches in Ghana still start with the same patterns: stolen email passwords, exposed admin panels, and untested backups. Fancy tools matter less than MFA on email, patched dependencies, and logs you can actually search when something looks wrong.",
+      "Minimum viable programme: MFA everywhere privileged, weekly backup restore test, dependency patching within 30 days of critical CVEs, phishing awareness for finance and HR, and a one-page incident contact list shared with leadership.",
+      "If you process payments or personal data, add vendor inventory, privacy notices that match reality, and payment callback verification. Use our free security self-assessment to score gaps, then prioritise the next 90 days with a partner who understands local rails and regulators."
+    ],
+    "image": "/images/insights/oceancyber-accra-cybersecurity-trends-ghana-insights.webp",
+    "category": "Security",
+    "date": "August 14, 2026",
+    "readTime": "7 min read"
+  },
+  {
+    "slug": "ghana-data-protection-act-2026",
+    "title": "Ghana Data Protection Act: What SaaS and Fintech Teams Must Do in 2026",
+    "excerpt": "A practical compliance checklist for product and engineering leaders building in Ghana — consent, data mapping, breach response, and vendor oversight.",
+    "paragraphs": [
+      "Ghana's Data Protection Act and the Data Protection Commission's evolving guidance apply to more teams than legal counsel alone. If you collect customer data, operate a SaaS product, or process payments, you are likely in scope — regardless of where your servers sit.",
+      "The practical sequence for 2026: map what personal data you hold and why, document lawful bases and retention limits, tighten access controls on production systems, and publish privacy notices that match how data actually flows — not boilerplate copied from a US template.",
+      "Vendor oversight matters as much as internal controls. Subprocessors, telco APIs, payment aggregators, and cloud hosts should appear in your records with clear data-processing terms. Teams that treat privacy as an engineering discipline — audit trails, deletion workflows, breach playbooks — avoid expensive retrofits when regulators or enterprise clients ask hard questions."
+    ],
+    "image": "/images/insights/oceancyber-accra-data-privacy-compliance-insights-ghana.webp",
+    "category": "Compliance",
+    "date": "June 12, 2026",
+    "readTime": "8 min read"
+  },
+  {
+    "slug": "ghana-payment-rails-comparison",
+    "title": "Paystack, Hubtel, or Direct MoMo API: Choosing Payment Rails in Ghana",
+    "excerpt": "An honest comparison for fintech and e-commerce teams — settlement, fees, integration effort, and when each rail makes sense for your volume.",
+    "paragraphs": [
+      "Payment choice in Ghana is rarely about logos on a checkout page. It is about settlement timing, dispute handling, fee structures at your transaction size, and how much engineering capacity you have to maintain integrations when APIs change.",
+      "Aggregators like Paystack and Hubtel reduce time-to-market: hosted flows, reconciliation tooling, and card plus mobile money in one contract. Direct MoMo APIs from telcos can lower per-transaction cost at scale but demand stronger idempotency, callback verification, and ops playbooks for failed or duplicate charges.",
+      "Match the rail to your stage. Early-stage commerce teams usually win with an aggregator while product-market fit is still moving. High-volume operators with dedicated payments engineering should model total cost — fees, engineering hours, chargeback and dispute load — before switching. Whatever you choose, disclose fees before confirmation and log every payment attempt with a traceable reference."
+    ],
+    "image": "/images/insights/oceancyber-accra-mobile-money-ghana-insights.webp",
+    "category": "Fintech",
+    "date": "May 28, 2026",
+    "readTime": "7 min read"
+  },
+  {
     "slug": "future-cybersecurity-africa",
     "title": "The Future of Cybersecurity in Africa",
     "excerpt": "Exploring the evolving cybersecurity landscape across African nations and the unique challenges and opportunities that lie ahead.",

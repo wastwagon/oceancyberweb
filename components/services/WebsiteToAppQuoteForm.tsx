@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { publicApiFetch } from "@/lib/public-api";
+import { trackLeadConversion } from "@/lib/analytics/conversions";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -68,6 +69,7 @@ export function WebsiteToAppQuoteForm() {
       if (!res.ok) {
         setStatus({ ok: false, message: json.error || "Could not send request." });
       } else {
+        trackLeadConversion("website_to_app_quote");
         setStatus({
           ok: true,
           message: "Request received. We will review your website and send a quote shortly.",

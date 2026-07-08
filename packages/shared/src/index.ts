@@ -39,4 +39,6 @@ export enum ContactSource {
   PROPOSAL_REQUEST = "proposal_request",
   WEBSITE_TO_APP_QUOTE = "website_to_app_quote",
   HELP_CENTER_FEEDBACK = "help_center_feedback",
+  NEWSLETTER_SIGNUP = "newsletter_signup",
+  SECURITY_ASSESSMENT = "security_assessment",
 }

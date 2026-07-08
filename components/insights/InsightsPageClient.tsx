@@ -28,6 +28,8 @@ import {
   parseInsightCategoryParam,
   type InsightPost,
 } from "@/lib/insights/content";
+import { NewsletterSignupForm } from "@/components/insights/NewsletterSignupForm";
+import { LeadMagnetGate } from "@/components/marketing/LeadMagnetGate";
 
 function contactHrefForTopic(title: string) {
   return `/contact?topic=${encodeURIComponent(title)}`;
@@ -433,6 +435,12 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
 
       <section className="sa-section relative z-10 border-t border-sa-border">
         <div className="sa-container max-w-4xl">
+          <LeadMagnetGate page="insights" />
+        </div>
+      </section>
+
+      <section className="sa-section relative z-10 border-t border-sa-border">
+        <div className="sa-container max-w-4xl">
           <motion.div {...fadeUpSoft} className="sa-card relative overflow-hidden p-10 md:p-14">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(187,243,64,0.08),transparent_60%)]" />
             <div className="relative">
@@ -441,29 +449,7 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
                 title="Editorial newsletter"
                 subtitle="Long-form notes on security, product, and digital growth in Ghana and Africa. We only write when it's worth your time."
               />
-              <form
-                className="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row sm:items-stretch"
-                onSubmit={(e) => e.preventDefault()}
-              >
-                <label htmlFor="insights-email" className="sr-only">
-                  Email
-                </label>
-                <input
-                  id="insights-email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="you@company.com"
-                  autoComplete="email"
-                  className="min-h-[48px] flex-1 rounded-xl border border-sa-border bg-sa-bg/60 px-4 py-3 text-sm text-white placeholder:text-sa-muted/50 focus:border-sa-primary focus:outline-none"
-                />
-                <button type="submit" className="sa-btn-primary min-h-[48px] shrink-0">
-                  Notify me
-                </button>
-              </form>
-              <p className="mt-4 text-center text-[10px] font-bold uppercase tracking-widest text-sa-muted/40">
-                No spam. Unsubscribe anytime once the program is live.
-              </p>
+              <NewsletterSignupForm />
               <div className="mt-8 flex flex-wrap justify-center gap-3">
                 <Link href="/contact" className="sa-btn-outline !min-h-[42px] text-[10px]">
                   Discuss a topic

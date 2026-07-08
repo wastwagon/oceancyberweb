@@ -11,6 +11,11 @@ export const metadata: Metadata = withCanonical(
     title: "Insights",
     description:
       "Thought leadership on security, platforms, and digital transformation — Ghana and Africa.",
+    alternates: {
+      types: {
+        "application/rss+xml": "/insights/feed.xml",
+      },
+    },
   },
   "/insights",
 );

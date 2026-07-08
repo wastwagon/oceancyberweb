@@ -17,6 +17,8 @@ import {
   revealViewport,
   staggerDelay,
 } from "@/lib/scroll-reveal";
+import { PartnersAndStandardsSection } from "@/components/marketing/PartnersAndStandardsSection";
+import { VideoTestimonialSection } from "@/components/marketing/VideoTestimonialSection";
 
 const teamMembers = [
   {
@@ -428,6 +430,9 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <VideoTestimonialSection variant="about" />
+      <PartnersAndStandardsSection />
 
       {/* CTA */}
       <section className="sa-section relative z-10 border-t border-sa-border">

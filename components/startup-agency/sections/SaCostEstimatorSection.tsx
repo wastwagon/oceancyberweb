@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
 import { ProjectCostWizard } from "@/components/project-calculator/ProjectCostWizard";
@@ -38,6 +39,13 @@ export function SaCostEstimatorSection() {
           </div>
           <p className="mt-8 text-center text-[10px] uppercase tracking-widest text-sa-muted/40">
             * All estimates are indicative and subject to final technical scope approval.
+          </p>
+          <p className="mt-4 text-center text-sm text-sa-muted/60">
+            Regulated or security-sensitive build?{" "}
+            <Link href="/tools/security-assessment" className="text-sa-primary hover:underline">
+              Take the free security assessment
+            </Link>
+            .
           </p>
         </motion.div>
       </div>

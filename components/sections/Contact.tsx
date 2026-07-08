@@ -12,6 +12,7 @@ import {
   type FormEvent,
 } from "react";
 import { useSearchParams } from "next/navigation";
+import { trackLeadConversion } from "@/lib/analytics/conversions";
 import { publicApiFetch } from "@/lib/public-api";
 
 import { HeroSectionMotionLayers } from "@/components/layout/HeroSectionMotionLayers";
@@ -134,6 +135,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
         return;
       }
       setStatus("success");
+      trackLeadConversion("contact_form");
       setName("");
       setEmail("");
       setPhone("");

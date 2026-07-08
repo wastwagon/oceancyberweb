@@ -1,9 +1,25 @@
-import Script from "next/script";
-import { GA_TRACKING_ID } from "@/lib/analytics";
+"use client";
 
-/** Loads GA4 when `NEXT_PUBLIC_GA_ID` is set (Coolify build arg + runtime env). */
+import Script from "next/script";
+import { useEffect, useState } from "react";
+import { GA_TRACKING_ID } from "@/lib/analytics";
+import {
+  COOKIE_CONSENT_EVENT,
+  hasAnalyticsConsent,
+} from "@/lib/analytics/cookie-consent";
+
+/** Loads GA4 after the visitor accepts analytics cookies. */
 export function GoogleAnalytics() {
-  if (!GA_TRACKING_ID) return null;
+  const [consented, setConsented] = useState(false);
+
+  useEffect(() => {
+    setConsented(hasAnalyticsConsent());
+    const onConsent = () => setConsented(hasAnalyticsConsent());
+    window.addEventListener(COOKIE_CONSENT_EVENT, onConsent);
+    return () => window.removeEventListener(COOKIE_CONSENT_EVENT, onConsent);
+  }, []);
+
+  if (!GA_TRACKING_ID || !consented) return null;
 
   return (
     <>

@@ -14,6 +14,7 @@ const routes = [
   "/contact",
   "/cookies",
   "/design-process",
+  "/how-we-work",
   "/domains",
   "/get-started",
   "/help-center",
@@ -36,6 +37,7 @@ const routes = [
   "/team",
   "/tools/project-cost",
   "/tools/proposal",
+  "/tools/security-assessment",
   "/industries",
   ...industrySitemapPaths,
 ];
@@ -50,6 +52,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const highIntent = new Set([
     "/get-started",
     "/tools/project-cost",
+    "/tools/security-assessment",
     "/contact",
     "/hosting",
     "/domains",

@@ -18,6 +18,7 @@ import { downloadProformaPdf } from "@/lib/project-calculator/generate-proforma-
 import type { ComplexityId, DesignId, PlatformId } from "@/lib/project-calculator/config";
 import { cn } from "@/lib/utils";
 import { publicApiFetch } from "@/lib/public-api";
+import { trackLeadConversion } from "@/lib/analytics/conversions";
 
 
 const leadSchema = z.object({
@@ -138,6 +139,7 @@ export function ProjectCostWizard() {
           : "We could not save this estimate. Check your details or try again.";
       throw new Error(msg);
     }
+    trackLeadConversion("calculator_lead", event);
   };
 
   const handleDownloadPdf = async () => {

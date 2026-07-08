@@ -19,6 +19,7 @@ import { SaTechSection } from "@/components/startup-agency/sections/SaTechSectio
 import { SaTestimonialsSectionWithData } from "@/components/startup-agency/sections/SaTestimonialsSectionWithData";
 import { SaTrustSection } from "@/components/startup-agency/sections/SaTrustSection";
 import { SaPromoSection } from "@/components/startup-agency/sections/SaPromoSection";
+import { VideoTestimonialSection } from "@/components/marketing/VideoTestimonialSection";
 import type { ClientLogoEntry } from "@/lib/startup-agency/client-logos-runtime";
 
 type StartupAgencyHomeProps = {
@@ -52,6 +53,7 @@ export function StartupAgencyHome({ clientLogos }: StartupAgencyHomeProps) {
 
         {/* Phase 2: Social proof, pricing, tools */}
         <SaTestimonialsSectionWithData />
+        <VideoTestimonialSection variant="home" />
         <SaTrustSection />
         <SaPricingSection />
         <SaCostEstimatorSection />

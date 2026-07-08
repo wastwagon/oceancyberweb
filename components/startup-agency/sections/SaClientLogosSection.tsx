@@ -61,6 +61,9 @@ export function SaClientLogosSection({ entries }: SaClientLogosSectionProps) {
       <div className="sa-container">
         <SaReveal className="mb-8 text-center">
           <p className="sa-eyebrow">Trusted by teams across Ghana and beyond</p>
+          <p className="mt-2 text-sm text-sa-muted/70">
+            Select a client to read the case study
+          </p>
         </SaReveal>
 
         <div className="hidden flex-wrap items-center justify-center gap-10 md:flex md:gap-14">

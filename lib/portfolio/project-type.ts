@@ -11,6 +11,8 @@ export const PROJECT_TYPE_BY_SLUG: Record<string, PortfolioProjectType> = {
   "tour-world-tourism": "development",
   "fitch-advisory": "hybrid",
   "fitch-attorneys": "hybrid",
+  "africa-governance-centre": "hybrid",
+  "thinq-shopping": "hybrid",
   "africa-trade-awards": "development",
   "african-trade-chamber": "hybrid",
 };

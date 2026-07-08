@@ -39,28 +39,28 @@ export const clientLogos = [
     order: 0,
     thumb: siteImagePaths.portfolioLive.fitchAdvisory,
     logo: "/images/clients/fitch-advisory.svg",
-    href: "https://www.fitchadvisory.com/",
+    href: "/portfolio/fitch-advisory",
   },
   {
     name: "Fitch Attorneys",
     order: 1,
     thumb: siteImagePaths.portfolioLive.fitchAttorneys,
     logo: "/images/clients/fitch-attorneys.svg",
-    href: "https://www.fitchattorneys.com/",
+    href: "/portfolio/fitch-attorneys",
   },
   {
     name: "Africa Governance Centre",
     order: 2,
     thumb: siteImagePaths.portfolioLive.africaGovernanceCentre,
     logo: "/images/clients/africa-governance-centre.svg",
-    href: "https://www.africagovernancecentre.org/",
+    href: "/portfolio/africa-governance-centre",
   },
   {
     name: "ThinQ Shopping",
     order: 3,
     thumb: siteImagePaths.portfolioLive.thinqShopping,
     logo: "/images/clients/thinq-shopping.svg",
-    href: "https://thinqshopping.app/",
+    href: "/portfolio/thinq-shopping",
   },
 ] as const;
 
@@ -129,6 +129,37 @@ export const trustSignals = [
     stat: "100%",
     title: "Security-first builds",
     body: "Every engagement treats performance, privacy, and resilience as product requirements.",
+  },
+] as const;
+
+export const featuredCaseStudies = [
+  {
+    slug: "fitch-advisory",
+    title: "Fitch Advisory",
+    metric: "250%",
+    metricLabel: "Client engagement",
+    sector: "Advisory",
+  },
+  {
+    slug: "fitch-attorneys",
+    title: "Fitch Attorneys",
+    metric: "180%",
+    metricLabel: "Case efficiency",
+    sector: "Legal",
+  },
+  {
+    slug: "africa-governance-centre",
+    title: "Africa Governance Centre",
+    metric: "220%",
+    metricLabel: "Programme visibility",
+    sector: "Governance",
+  },
+  {
+    slug: "thinq-shopping",
+    title: "ThinQ Shopping",
+    metric: "165%",
+    metricLabel: "Mobile conversions",
+    sector: "E-commerce",
   },
 ] as const;
 
@@ -300,27 +331,27 @@ export const faqItems = [
 
 export const blogTeasers = [
   {
-    title: "Navigating the GH¢3 Trillion Mobile Money Economy",
-    date: "May 2024",
-    href: "/insights/ghana-momo-economy",
-    image: siteImagePaths.insights["ghana-momo-economy"],
-    category: "Fintech",
-    author: "OceanCyber Research",
-  },
-  {
-    title: "Why Cyberattacks on Ghanaian Businesses Rose 50% in 2024",
-    date: "April 2024",
-    href: "/insights/ghana-cybersecurity-trends",
-    image: siteImagePaths.insights["ghana-cybersecurity-trends"],
+    title: "Cybersecurity Baseline for Ghanaian SMEs in 2026",
+    date: "August 2026",
+    href: "/insights/ghana-sme-cybersecurity-baseline",
+    image: siteImagePaths.insights["ghana-sme-cybersecurity-baseline"],
     category: "Security",
     author: "OceanCyber Security",
   },
   {
-    title: "Preparing for Ghana's US$1 Billion E‑commerce Boom in 2025",
-    date: "March 2024",
-    href: "/insights/ecommerce-growth-ghana",
-    image: siteImagePaths.insights["ecommerce-growth-ghana"],
-    category: "Growth",
-    author: "OceanCyber Product",
+    title: "Agency vs Hiring In-House: A Cost Map for Accra Teams",
+    date: "July 2026",
+    href: "/insights/agency-vs-hire-ghana",
+    image: siteImagePaths.insights["agency-vs-hire-ghana"],
+    category: "Strategy",
+    author: "OceanCyber",
+  },
+  {
+    title: "Ghana Data Protection Act: What SaaS and Fintech Teams Must Do in 2026",
+    date: "June 2026",
+    href: "/insights/ghana-data-protection-act-2026",
+    image: siteImagePaths.insights["ghana-data-protection-act-2026"],
+    category: "Compliance",
+    author: "OceanCyber Compliance",
   },
 ] as const;

@@ -11,6 +11,7 @@ import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
 import { LocalBusinessJsonLd } from "@/components/seo/LocalBusinessJsonLd";
 import { WebSiteJsonLd } from "@/components/seo/WebSiteJsonLd";
 import { WebVitals } from "@/components/analytics/WebVitals";
+import { CookieConsent } from "@/components/analytics/CookieConsent";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { GoogleAnalyticsRouteTracker } from "@/components/analytics/GoogleAnalyticsRouteTracker";
 import { AppProviders } from "@/components/providers/AppProviders";
@@ -54,7 +55,7 @@ export const metadata: Metadata = {
       "No-fluff engineering for Ghanaian businesses. We build secure, scalable web and mobile platforms that actually work.",
     images: [
       {
-        url: "/images/og-image.jpg",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "OceanCyber Technology Solutions",
@@ -66,7 +67,7 @@ export const metadata: Metadata = {
     title: "OceanCyber | Engineering Digital Products that Scale",
     description:
       "No-fluff engineering for Ghanaian businesses. We build secure, scalable web and mobile platforms that actually work.",
-    images: ["/images/og-image.jpg"],
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
@@ -81,11 +82,6 @@ export const metadata: Metadata = {
   },
   verification: {
     google: process.env.GOOGLE_VERIFICATION_CODE || undefined,
-  },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -122,6 +118,7 @@ export default function RootLayout({
           >
             {children}
           </ConditionalChrome>
+          <CookieConsent />
         </AppProviders>
       </body>
     </html>

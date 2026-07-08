@@ -4,7 +4,7 @@ import { Award, ShieldCheck, Star } from "lucide-react";
 import Link from "next/link";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
 import { SaReviewBadges } from "@/components/startup-agency/sections/SaReviewBadges";
-import { trustSignals } from "@/lib/startup-agency/content";
+import { featuredCaseStudies, trustSignals } from "@/lib/startup-agency/content";
 
 const iconMap = {
   award: Award,
@@ -35,6 +35,35 @@ export function SaTrustSection() {
             );
           })}
         </div>
+
+        <SaReveal delay={0.12} className="mt-10">
+          <p className="text-center font-heading text-[11px] font-bold uppercase tracking-[0.2em] text-sa-muted/60">
+            Flagship outcomes
+          </p>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {featuredCaseStudies.map((study) => (
+              <Link
+                key={study.slug}
+                href={`/portfolio/${study.slug}`}
+                className="sa-card sa-pressable group flex flex-col p-5 transition hover:border-sa-primary/40"
+              >
+                <span className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">
+                  {study.sector}
+                </span>
+                <span className="mt-2 font-heading text-sm font-bold text-white group-hover:text-sa-primary">
+                  {study.title}
+                </span>
+                <span className="mt-3 font-heading text-2xl font-bold text-white">
+                  {study.metric}
+                </span>
+                <span className="text-[11px] font-medium uppercase tracking-wider text-sa-muted/70">
+                  {study.metricLabel}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </SaReveal>
+
         <SaReveal delay={0.15} className="mt-10">
           <SaReviewBadges />
         </SaReveal>
@@ -43,7 +72,7 @@ export function SaTrustSection() {
             href="/portfolio"
             className="text-sm font-medium text-sa-primary underline-offset-4 transition hover:text-white hover:underline"
           >
-            See selected work and outcomes →
+            See all case studies and live client work →
           </Link>
         </SaReveal>
       </div>

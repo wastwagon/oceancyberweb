@@ -57,10 +57,10 @@ export function SaProcessSection() {
               ) : null}
               {p.step === 1 ? (
                 <Link
-                  href="/design-process"
+                  href="/how-we-work"
                   className="mt-6 inline-flex text-xs font-bold uppercase tracking-widest text-sa-muted transition hover:text-sa-primary"
                 >
-                  Full design process →
+                  How we work →
                 </Link>
               ) : null}
             </SaReveal>

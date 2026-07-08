@@ -47,7 +47,7 @@ export const mainHeaderNav: HeaderNavItem[] = [
     href: "/insights",
     label: "Resources",
     dropdownKey: "resources",
-    activeMatch: ["/insights", "/portfolio", "/design-process", "/security-journey"],
+    activeMatch: ["/insights", "/portfolio", "/how-we-work", "/design-process", "/security-journey"],
   },
   {
     href: "/help-center",
@@ -137,14 +137,24 @@ export const mainHeaderDropdownContent: Record<
         link: "/portfolio",
       },
       {
+        heading: "How we work",
+        description: "Discovery, design, phased delivery, and security-aware launch — our full model.",
+        link: "/how-we-work",
+      },
+      {
         heading: "Design Process",
-        description: "How we research, prototype in Figma, and hand off to engineering.",
-        link: "/design-process",
+        description: "Research, Figma prototypes, design systems, and engineering handoff.",
+        link: "/how-we-work#design",
       },
       {
         heading: "Security Journey",
         description: "A practical path to strengthen your security posture.",
         link: "/security-journey",
+      },
+      {
+        heading: "Security self-assessment",
+        description: "Score your maturity in minutes and download a PDF report.",
+        link: "/tools/security-assessment",
       },
     ],
   },
@@ -186,6 +196,11 @@ export const mainHeaderDropdownContent: Record<
         heading: "Get Started",
         description: "Begin your project intake and next steps with our team.",
         link: "/get-started",
+      },
+      {
+        heading: "Security assessment",
+        description: "Free self-assessment with downloadable maturity report.",
+        link: "/tools/security-assessment",
       },
     ],
   },

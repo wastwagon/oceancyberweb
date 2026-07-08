@@ -54,6 +54,8 @@ export const LEAD_SOURCE_OPTIONS = [
   { value: "chat", label: "Chat" },
   { value: "help_center_feedback", label: "Help center feedback" },
   { value: "website_to_app_quote", label: "Website-to-app quote" },
+  { value: "security_assessment", label: "Security self-assessment" },
+  { value: "newsletter_signup", label: "Newsletter signup" },
   { value: "namecheap_unified_checkout", label: "Infrastructure checkout" },
 ] as const;
 

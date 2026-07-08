@@ -326,10 +326,13 @@ export default function SecurityJourneyPage() {
               Book a discovery session, and we&apos;ll map your current posture,
               priorities, and a practical first 90 days.
             </p>
-            <div className="mt-8">
-              <Link href="/contact" className="sa-btn-primary">
-                Schedule security assessment
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Link href="/tools/security-assessment" className="sa-btn-primary">
+                Take the self-assessment
                 <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
+              </Link>
+              <Link href="/contact" className="sa-btn-outline !min-h-[44px]">
+                Talk to security team
               </Link>
             </div>
           </motion.div>

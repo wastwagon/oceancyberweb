@@ -6,6 +6,8 @@ import { CreateIntakeDto } from "./dto/create-intake.dto";
 import { CreateProposalRequestDto } from "./dto/create-proposal-request.dto";
 import { CreateWebsiteToAppQuoteDto } from "./dto/create-website-to-app-quote.dto";
 import { CreateFeedbackDto } from "./dto/create-feedback.dto";
+import { CreateNewsletterSignupDto } from "./dto/create-newsletter-signup.dto";
+import { CreateSecurityAssessmentDto } from "./dto/create-security-assessment.dto";
 import { MailService } from "../mail/mail.service";
 import { ConfigService } from "@nestjs/config";
 
@@ -239,6 +241,94 @@ export class ContactService {
     });
 
     this.logger.log(`New help center feedback for article ${dto.articleId}`);
+
+    return { ok: true };
+  }
+
+  async createNewsletterSignup(dto: CreateNewsletterSignupDto) {
+    const email = dto.email.trim().toLowerCase();
+    const page = dto.page?.trim() || "insights";
+
+    const existing = await this.prisma.contact.findFirst({
+      where: {
+        email,
+        source: ContactSource.NEWSLETTER_SIGNUP,
+      },
+      select: { id: true },
+    });
+
+    if (existing) {
+      return { ok: true, alreadySubscribed: true };
+    }
+
+    await this.prisma.contact.create({
+      data: {
+        name: "Newsletter subscriber",
+        email,
+        phone: null,
+        message: `Newsletter signup from ${page}`,
+        source: dto.source || ContactSource.NEWSLETTER_SIGNUP,
+        metadata: { page } as import("@prisma/client").Prisma.InputJsonValue,
+        status: "new",
+      },
+    });
+
+    this.logger.log(`New newsletter signup from ${email} (${page})`);
+
+    const adminEmail = this.config.get<string>("CONTACT_NOTIFICATION_EMAIL");
+    if (adminEmail && this.mail.isEnabled()) {
+      await this.mail.send(
+        adminEmail,
+        `[Newsletter] New signup — ${email}`,
+        `Email: ${email}\nPage: ${page}\nSource: ${dto.source || ContactSource.NEWSLETTER_SIGNUP}`,
+      );
+    }
+
+    return { ok: true, alreadySubscribed: false };
+  }
+
+  async createSecurityAssessment(dto: CreateSecurityAssessmentDto) {
+    const email = dto.email.trim().toLowerCase();
+    const metadata = {
+      v: 1,
+      company: dto.company || null,
+      scorePercent: dto.scorePercent,
+      tier: dto.tier,
+      domainScores: dto.domainScores ?? [],
+    };
+
+    const message =
+      `Security self-assessment\n\n` +
+      `Email: ${email}\n` +
+      `Company: ${dto.company || "-"}\n` +
+      `Score: ${dto.scorePercent}% (${dto.tier})\n\n` +
+      `Domain scores:\n` +
+      (dto.domainScores ?? [])
+        .map((d) => `- ${d.title}: ${d.percent}% (${d.earned}/${d.max})`)
+        .join("\n");
+
+    await this.prisma.contact.create({
+      data: {
+        name: dto.company?.trim() || "Security assessment",
+        email,
+        phone: null,
+        message,
+        source: ContactSource.SECURITY_ASSESSMENT,
+        metadata: metadata as import("@prisma/client").Prisma.InputJsonValue,
+        status: "new",
+      },
+    });
+
+    this.logger.log(`New security assessment from ${email} (${dto.scorePercent}% ${dto.tier})`);
+
+    const adminEmail = this.config.get<string>("CONTACT_NOTIFICATION_EMAIL");
+    if (adminEmail && this.mail.isEnabled()) {
+      await this.mail.send(
+        adminEmail,
+        `[Security assessment] ${dto.scorePercent}% ${dto.tier} — ${email}`,
+        message,
+      );
+    }
 
     return { ok: true };
   }

@@ -4,6 +4,8 @@ import { useState, type FormEvent } from "react";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { publicApiFetch } from "@/lib/public-api";
+import { trackLeadConversion } from "@/lib/analytics/conversions";
+import { PostSubmitBooking } from "@/components/booking/PostSubmitBooking";
 
 const PROJECT_TYPES = [
   { id: "website", label: "Website" },
@@ -92,6 +94,7 @@ export function ProposalRequestForm({ initialTopic }: ProposalRequestFormProps) 
         return;
       }
       setStatus("success");
+      trackLeadConversion("proposal_request");
     } catch {
       setStatus("error");
       setErrorMessage("Network error. Check your connection and try again.");
@@ -100,12 +103,18 @@ export function ProposalRequestForm({ initialTopic }: ProposalRequestFormProps) 
 
   if (status === "success") {
     return (
-      <div className="sa-card border-sa-primary/50 bg-sa-primary/10 p-6 text-sm text-white">
-        <p className="text-base font-bold text-white">Proposal request received</p>
-        <p className="mt-2 text-sa-muted/80">
-          We will review your requirements and send a formal proposal plan. If you requested a walkthrough, we will
-          suggest meeting slots.
-        </p>
+      <div className="space-y-4">
+        <div className="sa-card border-sa-primary/50 bg-sa-primary/10 p-6 text-sm text-white">
+          <p className="text-base font-bold text-white">Proposal request received</p>
+          <p className="mt-2 text-sa-muted/80">
+            We will review your requirements and send a formal proposal plan. If you requested a walkthrough, book a
+            slot below.
+          </p>
+        </div>
+        <PostSubmitBooking
+          title="Schedule a proposal walkthrough"
+          prefill={`name=${encodeURIComponent(name.trim())}&email=${encodeURIComponent(email.trim())}`}
+        />
       </div>
     );
   }

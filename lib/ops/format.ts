@@ -18,6 +18,8 @@ export function sourceLabel(source: string | null | undefined): string {
   if (source === "help_center_feedback") return "Help center feedback";
   if (source === "namecheap_unified_checkout") return "Namecheap unified checkout";
   if (source === "website_to_app_quote") return "Website-to-Mobile App Conversion Quote";
+  if (source === "security_assessment") return "Security self-assessment";
+  if (source === "newsletter_signup") return "Newsletter signup";
   if (source == null || source === "") return "—";
   return source;
 }

@@ -4,6 +4,11 @@ import {
   IndustryPremiumPage,
   type IndustryPageContent,
 } from "@/components/industries/IndustryPremiumPage";
+import { LeadMagnetGate } from "@/components/marketing/LeadMagnetGate";
+import {
+  IndustryFeaturedProof,
+  type IndustryProofItem,
+} from "@/components/industries/IndustryFeaturedProof";
 
 const content: IndustryPageContent = {
   heroEyebrow: "Financial services",
@@ -87,6 +92,37 @@ const content: IndustryPageContent = {
     "Share your channels, partners, and compliance scope, and we'll map delivery phases and security gates.",
 };
 
+const financeProof: IndustryProofItem[] = [
+  {
+    slug: "thinq-shopping",
+    title: "ThinQ Shopping",
+    metric: "165%",
+    metricLabel: "Mobile conversions",
+    summary: "MoMo-ready e-commerce and services app — payment rails built for Ghana buyers.",
+  },
+  {
+    slug: "egp-ghana",
+    title: "EGP Ghana",
+    metric: "200%",
+    metricLabel: "Online transactions",
+    summary: "Financial platform modernisation with stronger authentication and monitoring.",
+  },
+];
+
 export default function FinancialServicesPage() {
-  return <IndustryPremiumPage content={content} />;
+  return (
+    <>
+      <IndustryPremiumPage content={content} />
+      <IndustryFeaturedProof
+        title="Fintech & commerce platforms we have shipped"
+        subtitle="Live deployments with payment integration and measurable growth."
+        items={financeProof}
+      />
+      <section className="sa-section relative z-10 border-t border-sa-border bg-sa-bg">
+        <div className="sa-container max-w-4xl">
+          <LeadMagnetGate page="industries/financial-services" />
+        </div>
+      </section>
+    </>
+  );
 }

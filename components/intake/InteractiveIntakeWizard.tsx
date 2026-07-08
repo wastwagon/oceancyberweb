@@ -4,8 +4,10 @@ import { useMemo, useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import Link from "next/link";
+import { PostSubmitBooking } from "@/components/booking/PostSubmitBooking";
 import { cn } from "@/lib/utils";
 import { publicApiFetch } from "@/lib/public-api";
+import { trackLeadConversion } from "@/lib/analytics/conversions";
 
 type MeetingType = "discovery_call" | "proposal_walkthrough" | "asynchronous_quote";
 type ContactMethod = "email" | "phone" | "whatsapp";
@@ -97,6 +99,7 @@ export function InteractiveIntakeWizard() {
         return;
       }
       setStatus("success");
+      trackLeadConversion("intake_wizard");
     } catch {
       setStatus("error");
       setErrorMessage("Network error. Check your connection and try again.");
@@ -111,9 +114,12 @@ export function InteractiveIntakeWizard() {
           <div>
             <h2 className="text-xl font-bold text-white">Request received</h2>
             <p className="mt-2 text-sm text-sa-muted">
-              Thanks. We saved your intake and will respond with next steps. If you asked for a call, we will confirm
-              your slot by {contactMethod === "email" ? "email" : contactMethod}.
+              Thanks. We saved your intake and will respond with next steps. If you asked for a call, pick a time
+              below or we will confirm by {contactMethod === "email" ? "email" : contactMethod}.
             </p>
+            <PostSubmitBooking
+              prefill={`name=${encodeURIComponent(name.trim())}&email=${encodeURIComponent(email.trim())}`}
+            />
             <div className="mt-4">
               <Link
                 href="/tools/proposal"

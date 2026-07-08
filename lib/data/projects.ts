@@ -18,6 +18,7 @@ export interface Project {
   services?: string[];
   slug: string;
   results?: string;
+  liveUrl?: string;
 }
 
 export const projects: Project[] = [
@@ -97,6 +98,7 @@ export const projects: Project[] = [
     client: "Fitch Advisory",
     rating: 5,
     slug: "fitch-advisory",
+    liveUrl: "https://www.fitchadvisory.com/",
     services: ["Web Design", "Security", "Client Portal", "Document Management", "SEO"],
     testimonial: "OceanCyber created a sophisticated platform that perfectly represents our brand and enhances our client service capabilities.",
     results: "Increased client engagement and streamlined consultation scheduling process"
@@ -113,9 +115,48 @@ export const projects: Project[] = [
     client: "Fitch Attorneys",
     rating: 5,
     slug: "fitch-attorneys",
+    liveUrl: "https://www.fitchattorneys.com/",
     services: ["Web Design", "Security", "Case Management", "Client Portal", "SEO"],
     testimonial: "The new system has revolutionized how we manage cases and communicate with clients, significantly improving our workflow.",
     results: "Enhanced case management efficiency and improved client communication"
+  },
+  {
+    title: "Africa Governance Centre",
+    category: "Governance & Policy",
+    description:
+      "Continental governance centre platform for programmes, research, events, and policy engagement across Africa.",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL", "Vercel"],
+    gradient: "from-emerald-500 to-teal-500",
+    image: siteImagePaths.portfolioLive.africaGovernanceCentre,
+    metrics: { increase: "220%", metric: "Programme Visibility" },
+    year: "2024",
+    client: "Africa Governance Centre",
+    rating: 5,
+    slug: "africa-governance-centre",
+    liveUrl: "https://www.africagovernancecentre.org/",
+    services: ["Web Design", "Content Architecture", "Event Workflows", "SEO", "Performance"],
+    testimonial:
+      "OceanCyber delivered a platform that reflects our continental mandate and makes our programmes accessible to partners worldwide.",
+    results: "Unified programme and event presence with stronger stakeholder engagement",
+  },
+  {
+    title: "ThinQ Shopping",
+    category: "E-Commerce & Services",
+    description:
+      "Mobile-first e-commerce and services app with product discovery, checkout flows, and merchant operations tooling.",
+    tech: ["React Native", "Next.js", "Node.js", "PostgreSQL", "Paystack", "MoMo"],
+    gradient: "from-violet-500 to-fuchsia-500",
+    image: siteImagePaths.portfolioLive.thinqShopping,
+    metrics: { increase: "165%", metric: "Mobile Conversions" },
+    year: "2024",
+    client: "ThinQ Shopping",
+    rating: 5,
+    slug: "thinq-shopping",
+    liveUrl: "https://thinqshopping.app/",
+    services: ["Mobile Apps", "E-commerce", "Payment Integration", "UI/UX Design"],
+    testimonial:
+      "The app transformed how customers discover products and book services — checkout is fast and the team can manage orders with confidence.",
+    results: "Higher mobile conversion and streamlined order operations",
   },
   {
     title: "Africa Trade Awards",
