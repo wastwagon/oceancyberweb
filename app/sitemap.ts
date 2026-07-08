@@ -3,6 +3,7 @@ import { getPortfolioSlugs } from "@/lib/data/portfolio-loader";
 import { getInsightPosts } from "@/lib/data/insights-loader";
 import { insightArticlePath } from "@/lib/insights/content";
 import { industrySitemapPaths } from "@/lib/data/industries-catalog";
+import { productSitemapPaths } from "@/lib/data/products-catalog";
 
 const base =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
@@ -38,6 +39,7 @@ const routes = [
   "/tools/project-cost",
   "/tools/proposal",
   "/tools/security-assessment",
+  ...productSitemapPaths,
   "/industries",
   ...industrySitemapPaths,
 ];
@@ -56,6 +58,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/contact",
     "/hosting",
     "/domains",
+    "/products",
+    "/products/pos",
   ]);
 
   const legalPaths = new Set(["/privacy", "/terms", "/cookies"]);

@@ -15,7 +15,13 @@ const footerLinks = [
   { label: "Contact", href: "/contact" },
 ] as const;
 
+const productLinks = [
+  { label: "Software Products", href: "/products" },
+  { label: "OceanCyber POS", href: "/products/pos" },
+] as const;
+
 const serviceLinks = [
+  ...productLinks,
   { label: "UI/UX Design", href: "/services/ui-ux-design" },
   { label: "Web Development", href: "/services/web-development" },
   { label: "Mobile Apps", href: "/services/mobile-apps" },

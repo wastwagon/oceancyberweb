@@ -15,6 +15,7 @@ export const startupPagesMenu = [
   { label: "Project Calculator", href: "/tools/project-cost" },
   { label: "Contact", href: "/contact" },
   { label: "Services", href: "/services" },
+  { label: "Products", href: "/products" },
   { label: "Insights", href: "/insights" },
   { label: "Reviews", href: "/reviews" },
   { label: "Portfolio", href: "/portfolio" },
@@ -42,6 +43,11 @@ export type HeaderNavItem = {
 export const mainHeaderNav: HeaderNavItem[] = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services", dropdownKey: "services" },
+  {
+    href: "/products",
+    label: "Products",
+    activeMatch: ["/products"],
+  },
   { href: "/industries", label: "Industries", dropdownKey: "industries" },
   {
     href: "/insights",
@@ -150,6 +156,11 @@ export const mainHeaderDropdownContent: Record<
         heading: "Security Journey",
         description: "A practical path to strengthen your security posture.",
         link: "/security-journey",
+      },
+      {
+        heading: "OceanCyber POS",
+        description: "SaaS point of sale — trial signup, your MoMo keys, offline mode.",
+        link: "/products/pos",
       },
       {
         heading: "Security self-assessment",
