@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ProjectCostWizard } from "@/components/project-calculator/ProjectCostWizard";
+import { PricingPathsLinks } from "@/components/startup-agency/PricingPathsLinks";
 import { withCanonical } from "@/lib/seo/canonical";
 
 export const metadata: Metadata = withCanonical(
@@ -25,6 +26,9 @@ export default function ProjectCostPage() {
             a <span className="font-semibold text-white">rough guide, not a contract</span> (we show a band of
             about plus or minus 10% in cedis). You can download a proforma when you are ready to share the numbers.
           </p>
+          <div className="mt-6">
+            <PricingPathsLinks showQuote />
+          </div>
         </div>
       </section>
 

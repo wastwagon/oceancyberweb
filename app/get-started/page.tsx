@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Smartphone } from "lucide-react";
 import { InteractiveIntakeWizard } from "@/components/intake/InteractiveIntakeWizard";
+import { PricingPathsLinks } from "@/components/startup-agency/PricingPathsLinks";
 import { withCanonical } from "@/lib/seo/canonical";
 
 export const metadata: Metadata = withCanonical(
   {
     title: "Interactive intake and booking",
     description:
-      "Tell us what you need, your budget, and your timeline, then request a discovery call or quote in one guided flow.",
+      "Tell us what you need, your budget, and your timeline. Packages start from GHS 6,000 — compare tiers or request a discovery call in one guided flow.",
   },
   "/get-started",
 );
@@ -26,6 +27,9 @@ export default function GetStartedPage() {
             Share your goals, scope, budget range, and timeline, then choose your preferred next step. We use this to
             respond faster with the right proposal.
           </p>
+          <div className="mt-6">
+            <PricingPathsLinks />
+          </div>
         </div>
       </section>
       <section className="sa-section relative z-10">

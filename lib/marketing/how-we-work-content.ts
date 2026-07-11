@@ -71,16 +71,19 @@ export const engagementModels = [
     title: "Fixed milestone delivery",
     body: "Best for defined products with clear scope — websites, portals, apps with agreed phases and acceptance criteria.",
     fit: "Ideal when you need a launch date and board-visible milestones.",
+    priceHint: "Packages from GHS 6,000",
   },
   {
     title: "Discovery → proposal",
     body: "Start with a paid or complimentary discovery block, then a formal proposal with GHS breakdown, team, and timeline.",
     fit: "Ideal for enterprise, regulated, or multi-stakeholder programmes.",
+    priceHint: "Enterprise from GHS 30,000",
   },
   {
     title: "Retainer & evolution",
     body: "Ongoing product, security, and infrastructure support after launch — tuned to your roadmap.",
     fit: "Ideal when you want a long-term partner, not a one-off vendor.",
+    priceHint: "Care retainers from GHS 850/mo",
   },
 ] as const;
 

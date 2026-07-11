@@ -17,6 +17,8 @@ import { publicApiFetch } from "@/lib/public-api";
 
 import { HeroSectionMotionLayers } from "@/components/layout/HeroSectionMotionLayers";
 import { WhatsAppButton } from "@/components/ghana-specific/WhatsAppButton";
+import { ContactPricingCard } from "@/components/startup-agency/ContactPricingCard";
+import { PricingPathsLinks } from "@/components/startup-agency/PricingPathsLinks";
 import {
   fadeFromLeft,
   fadeFromRight,
@@ -190,6 +192,9 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
             Share your goals, timeline, and constraints — we respond with clear next
             steps and a sensible engagement path.
           </motion.p>
+          <motion.div variants={contactHeaderItem} className="mt-6">
+            <PricingPathsLinks variant="compact" />
+          </motion.div>
         </motion.div>
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-14">
@@ -244,6 +249,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
             </div>
 
             <WhatsAppButton variant="default" size="lg" className="h-14 w-full" />
+            <ContactPricingCard />
             <Link
               href="/services/website-to-mobile-app"
               className="sa-pressable flex min-h-[52px] w-full items-center justify-center rounded-2xl border border-sa-border bg-sa-surface px-4 text-[15px] font-semibold text-white shadow-sm transition active:scale-[0.99] md:rounded-xl md:text-sm"

@@ -5,6 +5,7 @@ import {
   type ServicePageContent,
 } from "@/components/services/ServicePremiumPage";
 import { serviceImages } from "@/lib/startup-agency/service-images";
+import { servicePricingHints } from "@/lib/startup-agency/pricing";
 
 const content: ServicePageContent = {
   heroEyebrow: "Mobile",
@@ -120,6 +121,7 @@ const content: ServicePageContent = {
   ctaTitle: "Ready to ship a mobile product?",
   ctaDescription:
     "Bring your personas, platforms, and timeline, and we will propose a build plan with realistic milestones.",
+  pricing: servicePricingHints.mobileApps,
 };
 
 export default function MobileAppsPage() {

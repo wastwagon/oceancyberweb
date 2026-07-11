@@ -5,13 +5,19 @@ import { ChevronRight } from "lucide-react";
 import { faqItems } from "@/lib/startup-agency/content";
 import { cn } from "@/lib/utils";
 
-export function StartupAgencyFaq() {
+type FaqItem = { q: string; a: string };
+
+type Props = {
+  items?: readonly FaqItem[];
+};
+
+export function StartupAgencyFaq({ items = faqItems }: Props) {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
     <div className="mx-auto max-w-3xl">
       <div className="sa-ios-group divide-y divide-white/[0.06] md:space-y-4 md:divide-y-0">
-        {faqItems.map((item, i) => {
+        {items.map((item, i) => {
           const isOpen = open === i;
           return (
             <div

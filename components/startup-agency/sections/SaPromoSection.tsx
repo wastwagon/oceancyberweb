@@ -36,9 +36,16 @@ export function SaPromoSection() {
             </div>
             <div className="space-y-1">
               <div className="text-sm text-sa-muted/60 line-through">GHS 8,500</div>
-              <div className="text-4xl font-black text-white">GHS 6,000</div>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">Special Q3 Pricing</div>
+              <Link href="/pricing#startup" className="block transition-opacity hover:opacity-90">
+                <div className="text-4xl font-black text-white">GHS 6,000</div>
+              </Link>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">
+                Startup package · Special Q3 pricing
+              </div>
             </div>
+            <Link href="/pricing#startup" className="sa-btn-outline w-full text-center text-xs">
+              See what is included
+            </Link>
             <Link href="/contact?promo=mvp-4-weeks" className="sa-btn-primary group w-full">
               Claim Offer
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

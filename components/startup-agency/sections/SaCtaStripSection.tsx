@@ -22,6 +22,12 @@ export function SaCtaStripSection() {
               Domain search
             </Link>
             <Link
+              href="/pricing"
+              className="sa-pressable inline-flex min-h-[44px] items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-medium text-sa-muted transition active:bg-white/[0.08] md:rounded-full md:text-xs md:font-semibold md:uppercase md:tracking-[0.14em]"
+            >
+              Package pricing
+            </Link>
+            <Link
               href="/hosting"
               className="sa-pressable inline-flex min-h-[44px] items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-medium text-sa-muted transition active:bg-white/[0.08] md:rounded-full md:text-xs md:font-semibold md:uppercase md:tracking-[0.14em]"
             >

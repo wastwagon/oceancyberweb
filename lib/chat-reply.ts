@@ -21,7 +21,7 @@ export function getLocalChatReply(userText: string): string {
   }
 
   if (/\b(price|pricing|cost|quote|budget|how\s*much)\b/.test(t)) {
-    return "Pricing depends on scope and timelines. The fastest path is to tell us about your project on /contact and we will respond with next steps.";
+    return "Packages start from GHS 6,000 for web work and GHS 12,000 for mobile add-ons. Compare tiers at /pricing, estimate scope at /tools/project-cost, or contact us at /contact for a formal quote.";
   }
 
   if (/\b(service|web|website|app|mobile|ecommerce|e-commerce|shop|store|security|cyber|audit)\b/.test(t)) {

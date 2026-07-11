@@ -3,7 +3,9 @@ import { ArrowRight, Smartphone } from "lucide-react";
 import { WebsiteToAppQuoteForm } from "@/components/services/WebsiteToAppQuoteForm";
 import { ServicePageHeroBanner } from "@/components/services/ServicePageHeroBanner";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
+import { ServicePricingStrip } from "@/components/services/ServicePricingStrip";
 import { serviceImages } from "@/lib/startup-agency/service-images";
+import { servicePricingHints } from "@/lib/startup-agency/pricing";
 
 function ConversionClipart() {
   return (
@@ -102,6 +104,8 @@ export default function WebsiteToMobileAppPage() {
           </div>
         </div>
       </section>
+
+      <ServicePricingStrip content={servicePricingHints.websiteToMobile} />
     </main>
   );
 }

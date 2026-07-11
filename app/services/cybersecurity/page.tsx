@@ -5,6 +5,7 @@ import {
   type ServicePageContent,
 } from "@/components/services/ServicePremiumPage";
 import { serviceImages } from "@/lib/startup-agency/service-images";
+import { servicePricingHints } from "@/lib/startup-agency/pricing";
 
 const content: ServicePageContent = {
   heroEyebrow: "Security practice",
@@ -138,6 +139,7 @@ const content: ServicePageContent = {
   ctaTitle: "Ready to tighten your security posture?",
   ctaDescription:
     "Share your stack, obligations, and pain points, and we will propose a sequenced plan with honest tradeoffs.",
+  pricing: servicePricingHints.cybersecurity,
 };
 
 export default function CybersecurityPage() {

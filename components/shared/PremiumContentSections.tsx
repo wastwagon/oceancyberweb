@@ -72,11 +72,17 @@ export function PremiumStoriesGridSection({
 type PremiumFinalCtaSectionProps = {
   title: string;
   description: string;
+  secondaryCtaLabel?: string;
+  secondaryCtaHref?: string;
+  showPricingCta?: boolean;
 };
 
 export function PremiumFinalCtaSection({
   title,
   description,
+  secondaryCtaLabel = "View portfolio",
+  secondaryCtaHref = "/portfolio",
+  showPricingCta = false,
 }: PremiumFinalCtaSectionProps) {
   return (
     <section className="sa-section relative z-10 border-t border-sa-border">
@@ -94,11 +100,16 @@ export function PremiumFinalCtaSection({
               Talk to our team
             </Link>
             <Link
-              href="/portfolio"
+              href={secondaryCtaHref}
               className="sa-btn-outline w-full sm:w-auto"
             >
-              View portfolio
+              {secondaryCtaLabel}
             </Link>
+            {showPricingCta ? (
+              <Link href="/pricing" className="sa-btn-outline w-full sm:w-auto">
+                Compare pricing
+              </Link>
+            ) : null}
           </div>
         </motion.div>
       </div>

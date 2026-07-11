@@ -11,6 +11,7 @@ import {
   staggerDelay,
 } from "@/lib/scroll-reveal";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
+import { PricingQuickSummary } from "@/components/startup-agency/PricingQuickSummary";
 import { ServicePageHeroBanner } from "@/components/services/ServicePageHeroBanner";
 import { serviceImages } from "@/lib/startup-agency/service-images";
 
@@ -220,6 +221,8 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      <PricingQuickSummary />
+
       <section className="sa-section relative z-10 border-t border-sa-border">
         <div className="sa-container max-w-3xl">
           <motion.div
@@ -233,9 +236,12 @@ export default function ServicesPage() {
               Tell us about constraints, timelines, and stakeholders, and we will
               recommend a sequencing plan and team shape that fits.
             </p>
-            <div className="mt-8">
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link href="/contact" className="sa-btn-primary">
                 Talk to our team
+              </Link>
+              <Link href="/pricing" className="sa-btn-outline">
+                Compare packages
               </Link>
             </div>
           </motion.div>

@@ -70,6 +70,12 @@ export function SaHeroSection() {
             >
               View our work
             </Link>
+            <Link
+              href="/pricing"
+              className="sa-pressable inline-flex min-h-[48px] w-full items-center justify-center rounded-2xl border border-white/20 bg-white/10 px-5 py-3 text-[15px] font-semibold text-white backdrop-blur-md sm:w-auto md:rounded-full md:text-[10px] md:font-bold md:uppercase md:tracking-[0.14em]"
+            >
+              View pricing
+            </Link>
           </div>
           <div className="mt-6 text-xs font-medium text-sa-muted/60 md:text-[11px] md:uppercase md:tracking-[0.3em]">
             Accra · London · Global

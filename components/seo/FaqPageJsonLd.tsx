@@ -1,10 +1,20 @@
-import { faqItems } from "@/lib/startup-agency/content";
+type FaqItem = { q: string; a: string };
 
-export function FaqPageJsonLd() {
+type Props = {
+  items?: readonly FaqItem[];
+};
+
+export function FaqPageJsonLd({ items }: Props) {
+  const source = items ?? [];
+
+  if (source.length === 0) {
+    return null;
+  }
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqItems.map((item) => ({
+    mainEntity: source.map((item) => ({
       "@type": "Question",
       name: item.q,
       acceptedAnswer: {

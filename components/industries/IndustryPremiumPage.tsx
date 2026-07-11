@@ -186,6 +186,7 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
       <PremiumFinalCtaSection
         title={content.ctaTitle}
         description={content.ctaDescription}
+        showPricingCta
       />
 
     </main>

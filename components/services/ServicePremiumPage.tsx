@@ -14,6 +14,8 @@ import {
   staggerDelay,
 } from "@/lib/scroll-reveal";
 import { ServicePageHeroBanner } from "@/components/services/ServicePageHeroBanner";
+import { ServicePricingStrip } from "@/components/services/ServicePricingStrip";
+import type { ServicePricingStripContent } from "@/lib/startup-agency/pricing";
 
 export type ServiceCard = { title: string; description: string };
 
@@ -52,6 +54,7 @@ export type ServicePageContent = {
   outcomes?: ServiceStory[];
   ctaTitle: string;
   ctaDescription: string;
+  pricing?: ServicePricingStripContent;
 };
 
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
@@ -112,13 +115,21 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
                 ))}
               </div>
             </motion.div>
-            <motion.div variants={heroMotion.item} className="mt-12 w-full max-w-sm sm:max-w-none">
+            <motion.div variants={heroMotion.item} className="mt-12 flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
               <Link
                 href={content.heroCtaHref}
                 className="sa-btn-primary flex w-full sm:inline-flex sm:w-auto"
               >
                 {content.heroCtaLabel}
               </Link>
+              {content.pricing ? (
+                <Link
+                  href="/pricing"
+                  className="sa-btn-outline flex w-full sm:inline-flex sm:w-auto"
+                >
+                  View pricing
+                </Link>
+              ) : null}
             </motion.div>
           </motion.div>
         </div>
@@ -154,6 +165,8 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
           </div>
         </div>
       </section>
+
+      {content.pricing ? <ServicePricingStrip content={content.pricing} /> : null}
 
       <section className="sa-section relative z-10 border-b border-sa-border">
         <div className="sa-container">
@@ -227,6 +240,8 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
       <PremiumFinalCtaSection
         title={content.ctaTitle}
         description={content.ctaDescription}
+        secondaryCtaLabel={content.pricing ? "Compare pricing" : "View portfolio"}
+        secondaryCtaHref={content.pricing ? "/pricing" : "/portfolio"}
       />
       
     </main>

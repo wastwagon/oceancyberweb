@@ -5,6 +5,7 @@ import {
   type ServicePageContent,
 } from "@/components/services/ServicePremiumPage";
 import { serviceImages } from "@/lib/startup-agency/service-images";
+import { servicePricingHints } from "@/lib/startup-agency/pricing";
 
 const content: ServicePageContent = {
   heroEyebrow: "Commerce",
@@ -120,6 +121,7 @@ const content: ServicePageContent = {
   ctaTitle: "Ready to grow revenue online?",
   ctaDescription:
     "Share catalog complexity, markets, and stack preferences, and we will recommend a pragmatic path to launch.",
+  pricing: servicePricingHints.ecommerce,
 };
 
 export default function EcommercePage() {

@@ -45,6 +45,10 @@ export function SaCostEstimatorSection() {
             <Link href="/tools/security-assessment" className="text-sa-primary hover:underline">
               Take the free security assessment
             </Link>
+            . Prefer fixed tiers?{" "}
+            <Link href="/pricing" className="text-sa-primary hover:underline">
+              Compare our packages
+            </Link>
             .
           </p>
         </motion.div>

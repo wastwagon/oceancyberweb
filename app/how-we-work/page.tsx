@@ -11,6 +11,7 @@ import {
   Shield,
 } from "lucide-react";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
+import { PricingPathsLinks } from "@/components/startup-agency/PricingPathsLinks";
 import { withCanonical } from "@/lib/seo/canonical";
 import {
   clientCommitments,
@@ -22,9 +23,9 @@ import {
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "How we work",
+    title: "How we work — Delivery & pricing in Ghana cedis",
     description:
-      "OceanCyber's premium delivery model — discovery, design, phased build, security-aware launch, and ongoing support for Ghana and West Africa.",
+      "OceanCyber's premium delivery model — discovery, design, phased build, security-aware launch, and GHS-priced packages from GHS 6,000 for Ghana and West Africa.",
   },
   "/how-we-work",
 );
@@ -48,6 +49,9 @@ export default function HowWeWorkPage() {
             <Link href="/get-started" className="sa-btn-primary gap-2">
               Start intake
               <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+            <Link href="/pricing" className="sa-btn-outline">
+              Compare packages
             </Link>
             <Link href="/tools/project-cost" className="sa-btn-outline">
               Project calculator
@@ -129,6 +133,9 @@ export default function HowWeWorkPage() {
             {engagementModels.map((model) => (
               <article key={model.title} className="sa-card flex h-full flex-col p-7">
                 <h3 className="font-heading text-lg font-bold text-white">{model.title}</h3>
+                <p className="mt-2 font-heading text-sm font-bold text-sa-primary">
+                  {model.priceHint}
+                </p>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-sa-muted/85">{model.body}</p>
                 <p className="mt-5 border-t border-sa-border pt-4 text-xs font-medium uppercase tracking-wider text-sa-primary">
                   {model.fit}
@@ -197,6 +204,9 @@ export default function HowWeWorkPage() {
               Get started
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
+            <Link href="/pricing" className="sa-btn-outline !min-h-[44px]">
+              View pricing
+            </Link>
             <Link href="/tools/proposal" className="sa-btn-outline !min-h-[44px]">
               Request proposal
             </Link>
@@ -206,6 +216,9 @@ export default function HowWeWorkPage() {
             >
               Security assessment
             </Link>
+          </div>
+          <div className="mt-8">
+            <PricingPathsLinks variant="compact" />
           </div>
         </div>
       </section>

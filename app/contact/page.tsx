@@ -4,9 +4,9 @@ import { withCanonical } from "@/lib/seo/canonical";
 
 export const metadata = withCanonical(
   {
-    title: "Contact",
+    title: "Contact — Web & Mobile Development in Ghana",
     description:
-      "Reach OceanCyber for web, mobile, cybersecurity, hosting, and transformation projects in Ghana.",
+      "Reach OceanCyber for web, mobile, cybersecurity, and hosting projects in Ghana. Packages from GHS 6,000 — compare tiers or request a formal quote.",
   },
   "/contact",
 );

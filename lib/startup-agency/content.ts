@@ -259,44 +259,22 @@ export const projectChips = [
   "Government Digital Strategy",
 ] as const;
 
-export const pricingPlans = [
-  {
-    name: "Startup",
-    price: "From GHS 6,000",
-    desc: "Perfect for validation and first releases.",
-    featured: false,
-    features: [
-      "Branding & landing experience",
-      "Core integrations",
-      "One SEO/content sprint",
-      "30 days post‑launch support",
-    ],
-  },
-  {
-    name: "Professional",
-    price: "From GHS 14,500",
-    desc: "For teams scaling product and marketing.",
-    featured: true,
-    features: [
-      "Multi‑page product surface",
-      "Analytics & conversion tracking",
-      "Extended QA & performance",
-      "90 days support window",
-    ],
-  },
-  {
-    name: "Enterprise",
-    price: "From GHS 30,000",
-    desc: "Security‑aware and multi‑stakeholder delivery.",
-    featured: false,
-    features: [
-      "Compliance‑friendly workflows",
-      "Dedicated delivery lead",
-      "SLA options",
-      "Ongoing optimization",
-    ],
-  },
-] as const;
+export {
+  formatPlanPrice,
+  pricingAddOns,
+  pricingComparisonCategories,
+  pricingFaqItems,
+  pricingPlans,
+  servicePricingHints,
+  corePackageSummary,
+  pricingOfferCatalog,
+} from "@/lib/startup-agency/pricing";
+export type {
+  PricingComparisonValue,
+  PricingPlan,
+  ServicePricingStripContent,
+  ServicePricingTierHint,
+} from "@/lib/startup-agency/pricing";
 
 export const faqItems = [
   {
@@ -321,7 +299,11 @@ export const faqItems = [
   },
   {
     q: "Can we customize a package?",
-    a: "Packages are starting points; we scope to your constraints and priorities.",
+    a: "Packages are starting points; we scope to your constraints and priorities. See our pricing page for a full feature comparison across Startup, Professional, and Enterprise tiers.",
+  },
+  {
+    q: "What is included in each pricing package?",
+    a: "Startup starts from GHS 6,000 for up to 5 pages. Professional from GHS 14,500 adds custom UI/UX and analytics. Enterprise from GHS 30,000 covers complex platforms with a dedicated delivery lead. Compare details on our pricing page.",
   },
   {
     q: "How do you measure success?",

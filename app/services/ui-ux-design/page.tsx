@@ -5,6 +5,7 @@ import {
   type ServicePageContent,
 } from "@/components/services/ServicePremiumPage";
 import { serviceImages } from "@/lib/startup-agency/service-images";
+import { servicePricingHints } from "@/lib/startup-agency/pricing";
 
 const content: ServicePageContent = {
   heroEyebrow: "Design",
@@ -120,6 +121,7 @@ const content: ServicePageContent = {
   ctaTitle: "Ready to shape your product experience?",
   ctaDescription:
     "Share your audience, goals, and timeline — we'll propose a discovery sprint and design roadmap.",
+  pricing: servicePricingHints.uiUx,
 };
 
 export default function UiUxDesignPage() {

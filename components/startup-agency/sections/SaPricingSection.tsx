@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { Check } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
 import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
-import { pricingPlans } from "@/lib/startup-agency/content";
+import { pricingPlans } from "@/lib/startup-agency/pricing";
 
 export function SaPricingSection() {
   return (
@@ -17,14 +17,14 @@ export function SaPricingSection() {
           <SaSectionHeader
             eyebrow="Investment"
             title="Transparent pricing"
-            subtitle="Indicative tiers in GHS. We ship with clear milestones and fixed-price contracts. Final quotes follow discovery and technical scoping."
+            subtitle="Indicative starting tiers in Ghana cedis. Fixed-price milestones after discovery — use the calculator or compare full packages on our pricing page."
           />
-          <div className="mt-8 flex justify-center">
-            <Link
-              href="/tools/project-cost"
-              className="sa-btn-outline"
-            >
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <Link href="/tools/project-cost" className="sa-btn-outline">
               Open project calculator
+            </Link>
+            <Link href="/pricing" className="sa-btn-outline">
+              Compare all plans
             </Link>
           </div>
         </SaReveal>
@@ -39,7 +39,6 @@ export function SaPricingSection() {
                     : "border-sa-border bg-sa-surface/30 backdrop-blur-sm"
                 }`}
               >
-                {/* Featured Glow Effect */}
                 {plan.featured && (
                   <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-sa-primary/20 blur-[60px]" />
                 )}
@@ -57,17 +56,17 @@ export function SaPricingSection() {
                   <p className="mt-3 text-sm leading-relaxed text-sa-muted">{plan.desc}</p>
                 </div>
 
-                <div className="mb-8 flex items-baseline gap-1">
-                  <span className="font-heading text-4xl font-black tracking-tighter text-white">
-                    {plan.price.split(' ')[1] || plan.price}
-                  </span>
+                <div className="mb-8 flex items-baseline gap-2">
                   <span className="text-xs font-bold uppercase tracking-widest text-sa-muted">
-                    {plan.price.split(' ')[0]}
+                    From
+                  </span>
+                  <span className="font-heading text-4xl font-black tracking-tighter text-white">
+                    GHS {plan.priceGhs.toLocaleString("en-GH")}
                   </span>
                 </div>
 
                 <ul className="flex-1 space-y-4 border-t border-sa-border pt-8">
-                  {plan.features.map((f) => (
+                  {plan.homepageFeatures.map((f) => (
                     <li key={f} className="flex items-start gap-3 text-sm text-sa-muted">
                       <div className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-sa-primary/10 text-sa-primary">
                         <Check className="h-3 w-3 stroke-[3]" />
@@ -78,10 +77,11 @@ export function SaPricingSection() {
                 </ul>
 
                 <Link
-                  href="/contact"
-                  className={`mt-10 sa-btn-${plan.featured ? 'primary' : 'outline'} w-full`}
+                  href={`/pricing#${plan.id}`}
+                  className={`mt-10 sa-btn-${plan.featured ? "primary" : "outline"} group w-full`}
                 >
-                  Start project
+                  View full details
+                  <ArrowRight className="ml-2 inline h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
             </SaReveal>

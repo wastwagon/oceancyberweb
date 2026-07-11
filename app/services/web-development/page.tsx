@@ -5,6 +5,7 @@ import {
   type ServicePageContent,
 } from "@/components/services/ServicePremiumPage";
 import { serviceImages } from "@/lib/startup-agency/service-images";
+import { servicePricingHints } from "@/lib/startup-agency/pricing";
 
 const content: ServicePageContent = {
   heroEyebrow: "Engineering",
@@ -120,6 +121,7 @@ const content: ServicePageContent = {
   ctaTitle: "Ready to build your next web experience?",
   ctaDescription:
     "Tell us about audiences, constraints, and success metrics, and we will shape a roadmap and team rhythm that fits.",
+  pricing: servicePricingHints.webDevelopment,
 };
 
 export default function WebDevelopmentPage() {
