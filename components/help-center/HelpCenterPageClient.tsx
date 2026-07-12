@@ -37,7 +37,7 @@ export function HelpCenterPageClient({ articles }: HelpCenterPageClientProps) {
         steps: [
           "Open Dashboard and check which renewal is past due or suspended.",
           "Top up wallet with enough balance.",
-          "Use 'Charge wallet' on the affected renewal.",
+          "Use “Charge wallet” on the affected renewal.",
         ],
         cta: { label: "Open dashboard", href: "/dashboard" },
       };
@@ -68,10 +68,10 @@ export function HelpCenterPageClient({ articles }: HelpCenterPageClientProps) {
       title: "General support",
       steps: [
         "Search articles first for a quick answer.",
-        "If unresolved, submit contact request with details.",
-        "Use Dashboard > Requests to track status.",
+        "If unresolved, submit a contact request with relevant details.",
+        "Customers can use Dashboard > Requests to track submitted requests.",
       ],
-      cta: { label: "Open requests tracker", href: "/dashboard/requests" },
+      cta: { label: "Contact support", href: "/contact" },
     };
   }, [issue]);
 
@@ -119,7 +119,8 @@ export function HelpCenterPageClient({ articles }: HelpCenterPageClientProps) {
               <span className="text-sa-primary"> guided support</span>
             </h1>
             <p className="sa-lead mx-auto mt-3">
-              Find answers quickly, then follow guided next steps for billing, renewals, and project requests.
+              Find answers for planning a project or managing an existing
+              OceanCyber account, then follow the relevant next step.
             </p>
             <div className="relative mx-auto mt-10 max-w-2xl">
               <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-sa-muted/40" />
@@ -154,9 +155,16 @@ export function HelpCenterPageClient({ articles }: HelpCenterPageClientProps) {
                     transition={staggerDelay(index, 0.05)}
                     className="sa-card group p-6"
                   >
-                    <p className="font-heading text-[10px] font-bold uppercase tracking-widest text-sa-primary">
-                      {a.category}
-                    </p>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <p className="font-heading text-[10px] font-bold uppercase tracking-widest text-sa-primary">
+                        {a.category}
+                      </p>
+                      <span className="rounded-full border border-sa-border px-2 py-1 text-[9px] font-bold uppercase tracking-wider text-sa-muted/60">
+                        {a.audience === "customers"
+                          ? "Customer account"
+                          : "For everyone"}
+                      </span>
+                    </div>
                     <h3 className="mt-2 font-heading text-lg font-bold text-white group-hover:text-sa-primary transition-colors">
                       {a.title}
                     </h3>
@@ -261,7 +269,8 @@ export function HelpCenterPageClient({ articles }: HelpCenterPageClientProps) {
               <div className="sa-card mt-6 p-6 border-sa-primary/20 bg-sa-primary/5">
                 <p className="text-xs font-bold text-sa-primary uppercase tracking-widest">Still stuck?</p>
                 <p className="mt-2 text-sm text-sa-muted/80">
-                  Our engineers are available for direct triage and technical advice.
+                  Send the issue, affected URL, timing, and screenshots where
+                  possible so our team can route it efficiently.
                 </p>
                 <Link
                   href="/contact"

@@ -175,7 +175,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
           >
             Contact
           </motion.span>
-          <motion.h2
+          <motion.h1
             variants={contactHeaderItem}
             className="sa-title mx-auto mb-5 max-w-4xl text-balance text-center"
           >
@@ -184,7 +184,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
             <span className="text-sa-primary">
               About Your Next Release
             </span>
-          </motion.h2>
+          </motion.h1>
           <motion.p
             variants={contactHeaderItem}
             className="sa-subtitle mx-auto"

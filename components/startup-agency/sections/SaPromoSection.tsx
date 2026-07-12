@@ -13,14 +13,14 @@ export function SaPromoSection() {
           <motion.div {...fadeUpSoft} className="flex-1 text-center md:text-left">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-sa-primary px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-black">
               <Zap className="h-3 w-3" />
-              Limited Offer
+              Priority launch
             </div>
             <h2 className="sa-title mt-4">
-              Launch your MVP in <span className="text-sa-primary">4 Weeks</span>
+              Launch your MVP in <span className="text-sa-primary">3–5 weeks</span>
             </h2>
             <p className="sa-subtitle mx-auto mt-3 max-w-xl text-center md:mx-0 md:text-left">
-              Get a professional and secure digital product ready for your users. 
-              We are currently offering a priority launch package for new partners.
+              Our Startup package scopes a professional, secure digital product for new partners —
+              aligned to the timeline and deliverables on our pricing page.
             </p>
           </motion.div>
 
@@ -32,22 +32,21 @@ export function SaPromoSection() {
           >
             <div className="flex items-center gap-2 text-sa-primary">
               <Clock className="h-5 w-5" />
-              <span className="text-sm font-bold uppercase tracking-wider">Offer expires soon</span>
+              <span className="text-sm font-bold uppercase tracking-wider">Startup package</span>
             </div>
             <div className="space-y-1">
-              <div className="text-sm text-sa-muted/60 line-through">GHS 8,500</div>
               <Link href="/pricing#startup" className="block transition-opacity hover:opacity-90">
-                <div className="text-4xl font-black text-white">GHS 6,000</div>
+                <div className="text-4xl font-black text-white">From GHS 6,000</div>
               </Link>
               <div className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">
-                Startup package · Special Q3 pricing
+                Up to 5 pages · 3–5 week delivery
               </div>
             </div>
             <Link href="/pricing#startup" className="sa-btn-outline w-full text-center text-xs">
               See what is included
             </Link>
-            <Link href="/contact?promo=mvp-4-weeks" className="sa-btn-primary group w-full">
-              Claim Offer
+            <Link href="/contact?promo=mvp-launch" className="sa-btn-primary group w-full">
+              Start your project
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </motion.div>

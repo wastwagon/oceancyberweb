@@ -14,7 +14,7 @@ const content: ServicePageContent = {
   heroSuffix: "",
   heroHighlightTone: "white",
   heroDescription:
-    "Protect digital assets with assessments, hardening, monitoring alignment, and response readiness: practical controls, not checkbox theater.",
+    "Protect digital assets with assessments, hardening, monitoring alignment, and response readiness: practical controls, not checkbox theatre.",
   heroCtaLabel: "Secure your business",
   heroCtaHref: "/contact",
   heroImage: serviceImages.cyberSecurity,
@@ -22,7 +22,7 @@ const content: ServicePageContent = {
   focusEyebrow: "Coverage",
   focusTitle: "Defense across people, process, and systems",
   focusSubtitle:
-    "Prioritized risk reduction with clear owners, timelines, and evidence you can hand to auditors or boards.",
+    "Prioritised risk reduction with clear owners, timelines, and evidence you can hand to auditors or boards.",
   focusAreas: [
     {
       title: "Continuous threat monitoring",
@@ -81,7 +81,7 @@ const content: ServicePageContent = {
       description: "Containment, eradication, and recovery with clear decision rights.",
     },
     {
-      title: "Compliance programs",
+      title: "Compliance programmes",
       description: "Operational controls, not binders, mapped to obligations you face.",
     },
   ],
@@ -92,7 +92,7 @@ const content: ServicePageContent = {
   deliverables: [
     {
       title: "Threat detection coverage",
-      description: "Prioritized detections, data sources, and tuning notes for your stack.",
+      description: "Prioritised detections, data sources, and tuning notes for your stack.",
     },
     {
       title: "Data protection blueprint",
@@ -128,7 +128,7 @@ const content: ServicePageContent = {
     {
       title: "Healthcare data protection",
       client: "Medical provider",
-      result: "HIPAA-aligned controls with clearer ownership and audit trails.",
+      result: "DPA-aligned controls with clearer ownership and audit trails.",
     },
     {
       title: "E-commerce security review",

@@ -204,7 +204,7 @@ export default function ServicesPage() {
               variants={heroMotion.item}
               className="sa-lead mx-auto mt-3"
             >
-              Strategy, design, engineering, and security, composed into programs
+              Strategy, design, engineering, and security, composed into programmes
               you can fund, staff, and measure without surprises.
             </motion.p>
           </motion.div>
@@ -242,6 +242,9 @@ export default function ServicesPage() {
               </Link>
               <Link href="/pricing" className="sa-btn-outline">
                 Compare packages
+              </Link>
+              <Link href="/how-we-work" className="sa-btn-outline">
+                How we work
               </Link>
             </div>
           </motion.div>

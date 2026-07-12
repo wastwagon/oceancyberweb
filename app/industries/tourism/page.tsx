@@ -4,6 +4,7 @@ import {
   IndustryPremiumPage,
   type IndustryPageContent,
 } from "@/components/industries/IndustryPremiumPage";
+import { IndustryPageExtras } from "@/components/industries/IndustryPageExtras";
 
 const content: IndustryPageContent = {
   heroEyebrow: "Tourism & hospitality",
@@ -87,5 +88,10 @@ const content: IndustryPageContent = {
 };
 
 export default function TourismIndustryPage() {
-  return <IndustryPremiumPage content={content} />;
+  return (
+    <>
+      <IndustryPremiumPage content={content} />
+      <IndustryPageExtras industrySlug="tourism" />
+    </>
+  );
 }

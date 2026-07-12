@@ -46,7 +46,7 @@ export function ProductsHubPage() {
             <SaSectionHeader
               eyebrow="Available now"
               title="Point of sale for Ghanaian commerce"
-              subtitle="Marketing information here — registration and the live app run on the POS platform."
+              subtitle="Sign up on the POS platform, connect Paystack or Hubtel, and go live — cash and manual MoMo work from day one."
             />
           </motion.div>
           <div className="mt-14 grid gap-8 lg:grid-cols-2">

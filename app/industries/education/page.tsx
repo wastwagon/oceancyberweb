@@ -4,6 +4,7 @@ import {
   IndustryPremiumPage,
   type IndustryPageContent,
 } from "@/components/industries/IndustryPremiumPage";
+import { IndustryPageExtras } from "@/components/industries/IndustryPageExtras";
 
 const content: IndustryPageContent = {
   heroEyebrow: "Education",
@@ -15,7 +16,7 @@ const content: IndustryPageContent = {
     "Learning platforms, virtual classrooms, and analytics that scale from schools to enterprises, accessible, engaging, and built for Africa.",
   pills: ["Interactive learning", "Student engagement", "Future-ready"],
   solutionsEyebrow: "Solutions",
-  solutionsTitle: "Programs we deliver",
+  solutionsTitle: "Programmes we deliver",
   solutionsSubtitle:
     "From LMS rollouts to assessment tooling, engineered for adoption, not shelf-ware.",
   services: [
@@ -89,5 +90,10 @@ const content: IndustryPageContent = {
 };
 
 export default function EducationPage() {
-  return <IndustryPremiumPage content={content} />;
+  return (
+    <>
+      <IndustryPremiumPage content={content} />
+      <IndustryPageExtras industrySlug="education" />
+    </>
+  );
 }

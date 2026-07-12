@@ -4,6 +4,7 @@ import {
   IndustryPremiumPage,
   type IndustryPageContent,
 } from "@/components/industries/IndustryPremiumPage";
+import { IndustryPageExtras } from "@/components/industries/IndustryPageExtras";
 
 const content: IndustryPageContent = {
   heroEyebrow: "Healthcare",
@@ -12,10 +13,10 @@ const content: IndustryPageContent = {
   heroSuffix: "",
   heroHighlightTone: "white",
   heroDescription:
-    "Clinical workflows, telemedicine, and secure data platforms, prioritizing patient safety, uptime, and privacy-by-design.",
+    "Clinical workflows, telemedicine, and secure data platforms — prioritising patient safety, uptime, and privacy-by-design.",
   pills: ["Telemedicine", "Health records", "Medical technology"],
   solutionsEyebrow: "Solutions",
-  solutionsTitle: "Digital health programs",
+  solutionsTitle: "Digital health programmes",
   solutionsSubtitle:
     "Systems clinicians can trust: clear audit trails, role-based access, and resilient operations.",
   services: [
@@ -55,7 +56,7 @@ const content: IndustryPageContent = {
   capabilitiesSubtitle:
     "Security, interoperability, and maintainability, not buzzwords on a slide.",
   technologies: [
-    { title: "HIPAA-style compliance", description: "Controls aligned to sensitive health data" },
+    { title: "DPA-aligned health data controls", description: "Controls aligned to sensitive health data under Ghana law" },
     { title: "Cloud healthcare", description: "Resilient hosting and DR patterns" },
     { title: "AI diagnostics support", description: "Decision support within governance" },
     { title: "IoT integration", description: "Connected devices with clear trust boundaries" },
@@ -89,5 +90,10 @@ const content: IndustryPageContent = {
 };
 
 export default function HealthcarePage() {
-  return <IndustryPremiumPage content={content} />;
+  return (
+    <>
+      <IndustryPremiumPage content={content} />
+      <IndustryPageExtras industrySlug="healthcare" />
+    </>
+  );
 }

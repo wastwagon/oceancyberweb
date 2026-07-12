@@ -276,7 +276,7 @@ export const servicePricingHints = {
       {
         label: "Baseline assessment",
         priceGhs: 4500,
-        note: "Vulnerability review, executive summary, and prioritized fix list",
+        note: "Vulnerability review, executive summary, and prioritised fix list",
       },
       {
         label: "Hardening programme",

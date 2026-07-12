@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { withCanonical } from "@/lib/seo/canonical";
+import { LegalPageFooter } from "@/components/legal/LegalPageFooter";
 
 export const metadata: Metadata = withCanonical(
   {
@@ -12,21 +13,25 @@ export const metadata: Metadata = withCanonical(
 export default function CookiesPage() {
   const cookieTypes = [
     {
-      title: "Essential Cookies",
-      description: "Required for basic site functionality, including authentication, security, and session management."
+      title: "Essential storage",
+      description:
+        "Required for authentication, security, session management, checkout, and other features you request. These technologies cannot be disabled through our consent banner because the service may not work without them.",
     },
     {
-      title: "Performance Cookies",
-      description: "Help us understand how visitors interact with our site by collecting and reporting information anonymously."
+      title: "Analytics",
+      description:
+        "Optional analytics helps us understand visits, navigation, and site performance so we can improve the experience. Analytics is enabled only after you select Accept in our consent banner.",
     },
     {
-      title: "Functional Cookies",
-      description: "Enable the site to provide enhanced functionality and personalization, such as remembering your preferences."
+      title: "Preference storage",
+      description:
+        "Local browser storage may remember choices such as cookie consent and other interface preferences. Clearing site data in your browser removes these saved choices.",
     },
     {
-      title: "Analytical Cookies",
-      description: "Used to track website usage and performance, helping us optimize the platform for all users."
-    }
+      title: "Third-party services",
+      description:
+        "Embedded or linked services, such as payment, scheduling, or external product platforms, may set their own cookies when you use them. Their privacy and cookie notices apply on those services.",
+    },
   ];
 
   return (
@@ -38,7 +43,11 @@ export default function CookiesPage() {
             Cookie <span className="text-sa-primary">Policy</span>
           </h1>
           <p className="sa-subtitle !text-left mt-6 max-w-2xl">
-            We use cookies to ensure the reliability and security of our platform while continuously improving the engineering experience.
+            We use essential browser storage to operate and secure the site.
+            Optional analytics is activated only with your consent.
+          </p>
+          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-sa-muted/60">
+            Last updated: 12 July 2026
           </p>
         </header>
 
@@ -54,11 +63,28 @@ export default function CookiesPage() {
         </div>
 
         <div className="mt-12 sa-card p-8 border-sa-border bg-sa-surface/50">
-          <h2 className="font-heading text-xl font-bold text-white mb-4">Managing Your Preferences</h2>
+          <h2 className="font-heading text-xl font-bold text-white mb-4">Managing your preferences</h2>
           <p className="text-sa-muted/80 text-sm leading-relaxed">
-            Most web browsers allow you to control cookies through their settings. However, if you limit the ability of websites to set cookies, you may worsen your overall user experience, since it will no longer be personalized to you. It may also stop you from saving customized settings like login information.
+            On your first visit, choose Accept or Decline in the consent
+            banner. To reset that choice, clear this site&apos;s local storage
+            in your browser and reload the page. You can also block or delete
+            cookies and site data in your browser settings; doing so may sign
+            you out or prevent requested platform features from working.
+          </p>
+          <p className="mt-4 text-sm leading-relaxed text-sa-muted/80">
+            For questions about these technologies or your personal data,
+            email{" "}
+            <a
+              href="mailto:privacy@oceancyber.net"
+              className="font-semibold text-sa-primary underline-offset-4 hover:underline"
+            >
+              privacy@oceancyber.net
+            </a>
+            .
           </p>
         </div>
+
+        <LegalPageFooter current="cookies" />
       </div>
     </main>
   );

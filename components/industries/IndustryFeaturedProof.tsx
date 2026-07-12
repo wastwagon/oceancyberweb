@@ -31,6 +31,9 @@ export function IndustryFeaturedProof({
           <p className="sa-eyebrow">{eyebrow}</p>
           <h2 className="sa-title mt-3">{title}</h2>
           <p className="sa-subtitle mx-auto mt-3">{subtitle}</p>
+          <p className="mx-auto mt-2 max-w-xl text-center text-xs text-sa-muted/60">
+            Client-reported improvements; methodology varies by engagement.
+          </p>
         </div>
         <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
           {items.map((item) => (

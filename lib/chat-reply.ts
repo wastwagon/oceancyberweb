@@ -41,7 +41,7 @@ export function getLocalChatReply(userText: string): string {
   }
 
   return (
-    "Thanks for your message. For web, mobile, commerce, or security programs, the team can help on /contact. " +
+    "Thanks for your message. For web, mobile, commerce, or security programmes, the team can help on /contact. " +
     "You can also say “services”, “portfolio”, or “pricing” for quick pointers."
   );
 }

@@ -4,6 +4,7 @@ import {
   IndustryPremiumPage,
   type IndustryPageContent,
 } from "@/components/industries/IndustryPremiumPage";
+import { IndustryPageExtras } from "@/components/industries/IndustryPageExtras";
 
 const content: IndustryPageContent = {
   heroEyebrow: "Retail",
@@ -89,5 +90,10 @@ const content: IndustryPageContent = {
 };
 
 export default function RetailPage() {
-  return <IndustryPremiumPage content={content} />;
+  return (
+    <>
+      <IndustryPremiumPage content={content} />
+      <IndustryPageExtras industrySlug="retail" />
+    </>
+  );
 }

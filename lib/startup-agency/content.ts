@@ -20,7 +20,7 @@ export const heroServiceSlides = [
     image: serviceImages.mobileApps,
   },
   {
-    title: "Cyber Security",
+    title: "Cybersecurity",
     href: "/services/cybersecurity",
     imageAlt: "Secure enterprise monitoring and protection systems by OceanCyber",
     image: serviceImages.cyberSecurity,
@@ -99,24 +99,24 @@ export const aboutWorkPreview = [
   },
   {
     title: "Secure Enterprise Portal",
-    category: "Cyber Security · Web",
+    category: "Cybersecurity · Web",
     image: siteImagePaths.work.cybersecurityPlatform,
     href: "/portfolio?tab=creative",
   },
 ] as const;
 
 export const aboutStats = [
-  { value: "15+", label: "Years delivering" },
-  { value: "500+", label: "Projects launched" },
+  { value: "Since 2018", label: "Accra-based studio" },
+  { value: "100+", label: "Clients served" },
   { value: "12", label: "Industry verticals" },
 ] as const;
 
 export const trustSignals = [
   {
     icon: "award" as const,
-    stat: "15+",
+    stat: "8+",
     title: "Years delivering",
-    body: "Deep delivery experience across software, design, infrastructure, and cybersecurity programs.",
+    body: "Founded in Accra in 2018 — software, design, infrastructure, and cybersecurity programmes across Ghana and beyond.",
   },
   {
     icon: "star" as const,
@@ -202,7 +202,7 @@ export const serviceCards = [
     image: serviceImages.ecommerce,
   },
   {
-    title: "Cyber Security",
+    title: "Cybersecurity",
     desc: "Find vulnerabilities before attackers do — audits, hardening, and monitoring that protect your reputation and revenue.",
     href: "/services/cybersecurity",
     image: serviceImages.cyberSecurity,
@@ -298,7 +298,7 @@ export const faqItems = [
     a: "Most engagements use phased billing aligned to milestones — we’ll spell this out in the proposal.",
   },
   {
-    q: "Can we customize a package?",
+    q: "Can we customise a package?",
     a: "Packages are starting points; we scope to your constraints and priorities. See our pricing page for a full feature comparison across Startup, Professional, and Enterprise tiers.",
   },
   {

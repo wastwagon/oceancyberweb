@@ -40,6 +40,9 @@ export function SaTrustSection() {
           <p className="text-center font-heading text-[11px] font-bold uppercase tracking-[0.2em] text-sa-muted/60">
             Flagship outcomes
           </p>
+          <p className="mt-2 text-center text-xs text-sa-muted/60">
+            Client-reported improvements; methodology varies by engagement — see each portfolio case for context.
+          </p>
           <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {featuredCaseStudies.map((study) => (
               <Link

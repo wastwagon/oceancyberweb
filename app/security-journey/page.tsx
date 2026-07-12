@@ -44,7 +44,7 @@ const journeySteps = [
     phase: "Implementation",
     title: "Solution deployment",
     description:
-      "Controlled rollout of controls and tooling, minimizing disruption while hardening identity, network, and endpoints.",
+      "Controlled rollout of controls and tooling, minimising disruption while hardening identity, network, and endpoints.",
     features: [
       "Firewall configuration",
       "Endpoint protection",
@@ -77,7 +77,7 @@ const journeySteps = [
     ],
   },
   {
-    phase: "Optimization",
+    phase: "Optimisation",
     title: "Enhancement & training",
     description:
       "Iterate controls as threats evolve, with metrics-driven improvements plus security culture through targeted enablement.",
@@ -85,7 +85,7 @@ const journeySteps = [
       "Security awareness training",
       "Policy updates",
       "Technology upgrades",
-      "Performance optimization",
+      "Performance optimisation",
     ],
   },
 ] as const;
@@ -104,7 +104,7 @@ const stats = [
   {
     value: "60%+",
     label: "Typical risk reduction",
-    detail: "After remediation cycles on comparable programs.",
+    detail: "After remediation cycles on comparable programmes.",
   },
 ] as const;
 
@@ -152,7 +152,7 @@ export default function SecurityJourneyPage() {
               className="sa-eyebrow mb-6 inline-flex items-center justify-center gap-2"
             >
               <Shield className="h-4 w-4" aria-hidden />
-              Security program
+              Security programme
             </motion.span>
             <motion.h1
               variants={heroMotion.item}
@@ -200,7 +200,7 @@ export default function SecurityJourneyPage() {
               Phased delivery
             </p>
             <h2 className="font-heading text-3xl font-bold tracking-tight text-white md:text-4xl">
-              How we run the program
+              How we run the programme
             </h2>
             <p className="mt-4 max-w-xl text-sa-muted/80 md:text-lg">
               Each phase has clear outcomes, artifacts, and handoffs, so
@@ -283,7 +283,7 @@ export default function SecurityJourneyPage() {
               Security by the numbers
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-sa-muted/80 md:text-lg">
-              Targets we design programs around: measured, reviewed, and
+              Targets we design programmes around: measured, reviewed, and
               reported in language your board understands.
             </p>
           </motion.div>
@@ -323,16 +323,17 @@ export default function SecurityJourneyPage() {
               Start your security journey
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-sa-muted/80 md:text-base">
-              Book a discovery session, and we&apos;ll map your current posture,
-              priorities, and a practical first 90 days.
+              Start with the self-assessment to benchmark your posture, or book a
+              discovery session and we&apos;ll map priorities and a practical first
+              90 days.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link href="/tools/security-assessment" className="sa-btn-primary">
-                Take the self-assessment
+              <Link href="/contact" className="sa-btn-primary">
+                Book a discovery session
                 <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
               </Link>
-              <Link href="/contact" className="sa-btn-outline !min-h-[44px]">
-                Talk to security team
+              <Link href="/tools/security-assessment" className="sa-btn-outline !min-h-[44px]">
+                Take the self-assessment
               </Link>
             </div>
           </motion.div>

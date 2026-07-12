@@ -17,6 +17,7 @@ export const insightCategories = [
   "Security",
   "Technology",
   "Finance",
+  "Fintech",
   "Business",
   "Innovation",
   "Compliance",
@@ -35,9 +36,9 @@ export const insightPosts: InsightPost[] = [
     excerpt:
       "Exploring the evolving cybersecurity landscape across African nations and the unique challenges and opportunities that lie ahead.",
     paragraphs: [
-      "Africa’s digital economies are expanding faster than many legacy security programs can absorb. That gap shows up as phishing-driven fraud, ransomware targeting SMEs, and inconsistent visibility into cloud and mobile-first stacks.",
+      "Africa’s digital economies are expanding faster than many legacy security programmes can absorb. That gap shows up as phishing-driven fraud, ransomware targeting SMEs, and inconsistent visibility into cloud and mobile-first stacks.",
       "National frameworks and sector regulators are maturing, but execution still varies by industry and company size. The teams that win treat security as a product discipline: measurable controls, incident playbooks, and executive-level accountability—not checkbox audits alone.",
-      "For leaders shipping software or operating critical services, the practical sequence is risk prioritization, identity and endpoint hygiene, logging that supports investigation, and vendor oversight that matches how data actually flows.",
+      "For leaders shipping software or operating critical services, the practical sequence is risk prioritisation, identity and endpoint hygiene, logging that supports investigation, and vendor oversight that matches how data actually flows.",
     ],
     image: insightCoverPath("future-cybersecurity-africa"),
     category: "Security",
@@ -67,7 +68,7 @@ export const insightPosts: InsightPost[] = [
     paragraphs: [
       "Mobile money demonstrated that reliable rails plus simple UX can move inclusion faster than traditional branch expansion. The next wave layers credit, savings, and business tools on those same habits—often with stricter fraud expectations.",
       "Building for underserved users means designing for intermittent connectivity, shared devices, and support channels that do not assume desktop literacy. Interfaces must build trust step by step.",
-      "Compliance and partnership governance are not overhead—they protect users and keep programs durable when volumes spike or regulation shifts.",
+      "Compliance and partnership governance are not overhead—they protect users and keep programmes durable when volumes spike or regulation shifts.",
     ],
     image: insightCoverPath("fintech-banking-unbanked"),
     category: "Finance",
@@ -158,11 +159,13 @@ export const insightPosts: InsightPost[] = [
       "Privacy expectations have converged globally even where statutes differ: collect less, explain clearly, secure storage and transfers, and respond to individuals without friction.",
       "Engineering teams implement privacy through data inventories, retention limits, access controls, and breach procedures—not through policy PDFs alone.",
       "For cross-border services, vendor contracts and subprocessors must match where data is processed and who can access it. Early mapping prevents emergency redesigns.",
+      "In Ghana, the Data Protection Act and Data Protection Commission guidance mean product and engineering leaders should be involved early. Consent banners, privacy notices, and actual data flows must align — especially for SaaS, fintech, and customer portals.",
+      "A practical operating model is to maintain a living data register, assign owners for each system that stores personal data, and rehearse breach response before regulators or enterprise clients ask for evidence.",
     ],
     image: insightCoverPath("data-privacy-compliance"),
     category: "Compliance",
     date: "February 15, 2024",
-    readTime: "4 min read",
+    readTime: "7 min read",
   },
 ];
 

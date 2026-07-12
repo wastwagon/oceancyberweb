@@ -69,7 +69,10 @@ export default function WebsiteToMobileAppPage() {
               </Link>
             </div>
 
-            <div className="sa-card p-8 md:p-10 border-sa-border h-fit lg:sticky lg:top-32">
+            <div
+              id="website-to-app-quote"
+              className="sa-card h-fit scroll-mt-32 border-sa-border p-8 md:p-10 lg:sticky lg:top-32"
+            >
               <h2 className="font-heading text-xl font-bold tracking-tight text-white md:text-2xl">
                 Request your conversion quote
               </h2>
@@ -106,6 +109,30 @@ export default function WebsiteToMobileAppPage() {
       </section>
 
       <ServicePricingStrip content={servicePricingHints.websiteToMobile} />
+
+      <section className="sa-section relative z-10 border-t border-sa-border">
+        <div className="sa-container max-w-3xl">
+          <div className="sa-card p-10 text-center md:p-14">
+            <h2 className="font-heading text-2xl font-bold tracking-tight text-white md:text-4xl">
+              Ready to assess your website?
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-sa-muted/80 md:text-base">
+              Send your live URL and the mobile journeys that matter most. We
+              will review technical fit and respond with a practical conversion
+              path, budget band, and delivery milestones.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Link href="#website-to-app-quote" className="sa-btn-primary">
+                Request a conversion quote
+                <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
+              </Link>
+              <Link href="/services/mobile-apps" className="sa-btn-outline">
+                Explore custom mobile apps
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

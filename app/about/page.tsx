@@ -25,7 +25,7 @@ const teamMembers = [
     name: "Marcus Owusu",
     role: "Founder & CEO",
     image: "/images/team/marcus.png",
-    bio: "Technology leader with 15+ years of experience in product delivery and cybersecurity programs across Africa.",
+    bio: "Technology leader with 15+ years of experience in product delivery and cybersecurity programmes across Africa.",
     expertise: [
       "Strategic Leadership",
       "Digital Transformation",
@@ -100,7 +100,7 @@ const milestones = [
 ];
 
 const stats = [
-  { label: "Years of craft", value: "15+" },
+  { label: "Founded", value: "2018" },
   { label: "Clients served", value: "100+" },
   { label: "Industries", value: "12+" },
   { label: "SOC coverage", value: "24/7" },
@@ -262,7 +262,7 @@ export default function AboutPage() {
                 <div className="relative aspect-[16/10] w-full">
                   <Image
                     src="/images/Africa Trade Chamber.webp"
-                    alt="OceanCyber, vision for a digitally empowered Africa"
+                    alt="OceanCyber's vision for a digitally empowered Africa"
                     fill
                     className="object-cover grayscale"
                     sizes="(max-width: 1024px) 100vw, 60vw"
@@ -282,8 +282,8 @@ export default function AboutPage() {
                   <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                     {[
                       "100+ African businesses supported",
-                      "99.9% client satisfaction focus",
-                      "15+ countries served",
+                      "Ghana, Nigeria, and Kenya delivery footprint",
+                      "12 industry verticals served",
                       "24/7 security operations mindset",
                     ].map((line) => (
                       <li
@@ -314,7 +314,13 @@ export default function AboutPage() {
             </h2>
             <p className="sa-subtitle mx-auto mt-3">
               A multidisciplinary team blending strategy, engineering, and
-              design, built for ambitious African brands.
+              design, built for ambitious African brands.{" "}
+              <Link
+                href="/team"
+                className="font-medium text-sa-primary underline-offset-4 transition hover:text-white hover:underline"
+              >
+                View full team roster →
+              </Link>
             </p>
           </motion.div>
 
@@ -331,7 +337,7 @@ export default function AboutPage() {
                 <div className="relative h-44 w-full shrink-0 overflow-hidden md:h-auto md:w-[42%] md:min-h-[260px]">
                   <Image
                     src={member.image}
-                    alt={`Showcase work, ${member.name}`}
+                    alt={`${member.name}, ${member.role}`}
                     fill
                     className="object-cover object-top transition-transform duration-700 ease-out grayscale group-hover:scale-[1.03] group-hover:grayscale-0"
                     sizes="(max-width: 1024px) 100vw, 38vw"

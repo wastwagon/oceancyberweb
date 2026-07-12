@@ -39,7 +39,7 @@ export function SaHeroSection() {
           <div className="mb-4 flex items-center gap-3 rounded-full border border-white/20 bg-black/40 px-4 py-2 backdrop-blur-md">
             <span className="h-1.5 w-1.5 rounded-full bg-sa-primary animate-pulse" />
             <span className="text-[11px] font-medium text-white/80 md:text-[10px] md:font-bold md:uppercase md:tracking-[0.2em]">
-              Engineered for results
+              Engineered for Results
             </span>
           </div>
           <p
