@@ -18,8 +18,9 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Coolify/small VPS: parallel web+backend builds can OOM during `next build`
-ENV NODE_OPTIONS="--max-old-space-size=3072"
+# Coolify/small VPS: parallel web+backend builds can OOM during `next build`.
+# Set COMPOSE_PARALLEL_LIMIT=1 in Coolify env if deploy still exits 255.
+ENV NODE_OPTIONS="--max-old-space-size=2048"
 
 ARG NEXT_PUBLIC_SITE_URL=http://localhost:3020
 ARG NEXT_PUBLIC_API_URL=http://localhost:4100
@@ -41,7 +42,8 @@ ENV GOOGLE_VERIFICATION_CODE=$GOOGLE_VERIFICATION_CODE
 RUN npm run build:shared
 RUN npx prisma generate
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN npm run build
+# `npm run build` would rerun build:shared + prisma — duplicate work and higher peak RAM.
+RUN npx next build
 
 FROM node:20-bookworm-slim AS runner
 WORKDIR /app
