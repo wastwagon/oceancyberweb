@@ -6,6 +6,7 @@ import { PROJECT_TYPE_BY_SLUG } from "../lib/portfolio/project-type";
 import { FEATURED_CLIENT_SLUGS, resolvePortfolioSource } from "../lib/portfolio/portfolio-source";
 import type { PortfolioProjectType } from "../lib/types/portfolio-project-type";
 import type { PortfolioSource } from "../lib/types/portfolio-source";
+import { defaultNavigationConfig } from "../lib/navigation/menu";
 
 type PortfolioDetailsV1 = {
   v: 1;
@@ -59,92 +60,9 @@ const navDefaults = {
     { label: "Services", sectionId: "services" },
     { label: "Portfolio", sectionId: "projects" },
   ],
-  startupPagesMenu: [
-    { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
-    { label: "Team", href: "/team" },
-    { label: "Pricing", href: "/pricing" },
-    { label: "Project calculator", href: "/tools/project-cost" },
-    { label: "Contact", href: "/contact" },
-    { label: "Services", href: "/services" },
-    { label: "Insights", href: "/insights" },
-    { label: "Portfolio", href: "/portfolio" },
-    { label: "Domains & SSL", href: "/domains" },
-    { label: "Hosting", href: "/hosting" },
-    { label: "Checkout", href: "/checkout/cart" },
-    { label: "Get started", href: "/get-started" },
-  ],
-  mainHeaderNav: [
-    { label: "Home", href: "/" },
-    { label: "Services", href: "/services", dropdownKey: "services", activeMatch: [] },
-    { label: "Industries", href: "/industries", dropdownKey: "industries", activeMatch: [] },
-    {
-      label: "Infrastructure",
-      href: "/domains",
-      dropdownKey: "infrastructure",
-      activeMatch: ["/domains", "/hosting"],
-    },
-    {
-      label: "Resources",
-      href: "/insights",
-      dropdownKey: "resources",
-      activeMatch: ["/insights", "/portfolio", "/security-journey", "/help-center"],
-    },
-    {
-      label: "Company",
-      href: "/about",
-      dropdownKey: "company",
-      activeMatch: ["/about", "/portfolio", "/contact"],
-    },
-  ],
-  mainHeaderDropdownContent: {
-    services: {
-      items: [
-        { heading: "Web Development", link: "/services/web-development" },
-        { heading: "Mobile apps", link: "/services/mobile-apps" },
-        { heading: "Website to App Conversion", link: "/services/website-to-mobile-app" },
-        { heading: "E-commerce", link: "/services/ecommerce" },
-        { heading: "Cybersecurity", link: "/services/cybersecurity" },
-      ],
-    },
-    industries: {
-      items: [
-        { heading: "Financial Services", link: "/industries/financial-services" },
-        { heading: "Healthcare", link: "/industries/healthcare" },
-        { heading: "Education", link: "/industries/education" },
-        { heading: "Retail & E-commerce", link: "/industries/retail" },
-        { heading: "Tourism & Hospitality", link: "/industries/tourism" },
-        { heading: "Legal Services", link: "/industries/legal" },
-        { heading: "Logistics & Supply Chain", link: "/industries/logistics" },
-        { heading: "Real Estate & Property", link: "/industries/real-estate" },
-        { heading: "Agriculture & AgriTech", link: "/industries/agriculture" },
-        { heading: "Media & Entertainment", link: "/industries/media-entertainment" },
-        { heading: "Government & Public Sector", link: "/industries/government" },
-        { heading: "Energy & Utilities", link: "/industries/energy" },
-      ],
-    },
-    infrastructure: {
-      items: [
-        { heading: "Domains & SSL", link: "/domains" },
-        { heading: "Hosting", link: "/hosting" },
-      ],
-    },
-    resources: {
-      items: [
-        { heading: "Insights", link: "/insights" },
-        { heading: "Portfolio", link: "/portfolio" },
-        { heading: "Security journey", link: "/security-journey" },
-        { heading: "Help center", link: "/help-center" },
-      ],
-    },
-    company: {
-      items: [
-        { heading: "About", link: "/about" },
-        { heading: "Portfolio", link: "/portfolio" },
-        { heading: "Contact", link: "/contact" },
-      ],
-    },
-  },
+  startupPagesMenu: defaultNavigationConfig.startupPagesMenu,
+  mainHeaderNav: defaultNavigationConfig.mainHeaderNav,
+  mainHeaderDropdownContent: defaultNavigationConfig.mainHeaderDropdownContent,
 };
 
 async function loadPortfolioFallbacks(): Promise<PortfolioFallback[]> {
@@ -210,19 +128,16 @@ async function seedNavigationConfig() {
     );
   }
 
+  const allNavMenuIds = [
+    startupPrimaryId,
+    startupPagesId,
+    mainHeaderId,
+    ...Object.values(dropdownMenuIds),
+  ];
+
   await prisma.$executeRaw`
     DELETE FROM "NavigationMenuItem"
-    WHERE "menuId" IN (
-      ${startupPrimaryId},
-      ${startupPagesId},
-      ${mainHeaderId},
-      ${dropdownMenuIds.services},
-      ${dropdownMenuIds.industries},
-      ${dropdownMenuIds.infrastructure},
-      ${dropdownMenuIds.resources},
-      ${dropdownMenuIds.support},
-      ${dropdownMenuIds.company}
-    )
+    WHERE "menuId" IN (${Prisma.join(allNavMenuIds)})
   `;
 
   for (let i = 0; i < navDefaults.startupPrimaryNav.length; i++) {
@@ -310,7 +225,7 @@ async function seedNavigationConfig() {
           ${menuId},
           ${i * 10},
           ${item.heading},
-          NULL,
+          ${item.description ?? null},
           ${item.link},
           '{}'::jsonb,
           true,

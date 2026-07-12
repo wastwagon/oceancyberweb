@@ -27,6 +27,7 @@ export const startupPagesMenu = [
 
 export type HeaderDropdownKey =
   | "services"
+  | "products"
   | "industries"
   | "infrastructure"
   | "resources"
@@ -42,10 +43,16 @@ export type HeaderNavItem = {
 
 export const mainHeaderNav: HeaderNavItem[] = [
   { href: "/", label: "Home" },
-  { href: "/services", label: "Services", dropdownKey: "services" },
+  {
+    href: "/services",
+    label: "Services",
+    dropdownKey: "services",
+    activeMatch: ["/services", "/pricing", "/how-we-work", "/design-process"],
+  },
   {
     href: "/products",
     label: "Products",
+    dropdownKey: "products",
     activeMatch: ["/products"],
   },
   { href: "/industries", label: "Industries", dropdownKey: "industries" },
@@ -53,7 +60,14 @@ export const mainHeaderNav: HeaderNavItem[] = [
     href: "/insights",
     label: "Resources",
     dropdownKey: "resources",
-    activeMatch: ["/insights", "/portfolio", "/how-we-work", "/design-process", "/security-journey"],
+    activeMatch: [
+      "/insights",
+      "/portfolio",
+      "/how-we-work",
+      "/design-process",
+      "/security-journey",
+      "/tools/security-assessment",
+    ],
   },
   {
     href: "/help-center",
@@ -64,16 +78,18 @@ export const mainHeaderNav: HeaderNavItem[] = [
       "/contact",
       "/reviews",
       "/tools/project-cost",
+      "/tools/proposal",
       "/domains",
       "/hosting",
       "/get-started",
+      "/pricing",
     ],
   },
   {
     href: "/about",
     label: "Company",
     dropdownKey: "company",
-    activeMatch: ["/about", "/team", "/portfolio", "/pricing"],
+    activeMatch: ["/about", "/team", "/portfolio", "/pricing", "/reviews"],
   },
 ];
 
@@ -91,6 +107,21 @@ export const mainHeaderDropdownContent: Record<
     title: "Our Services",
     description: "Build, secure, and scale digital products with one delivery partner.",
     items: [
+      {
+        heading: "All services",
+        description: "Overview of web, mobile, commerce, design, and security delivery.",
+        link: "/services",
+      },
+      {
+        heading: "Pricing & packages",
+        description: "Transparent GHS tiers for Startup, Professional, and Enterprise.",
+        link: "/pricing",
+      },
+      {
+        heading: "How we work",
+        description: "Discovery, design, phased delivery, and security-aware launch.",
+        link: "/how-we-work",
+      },
       {
         heading: "UI/UX & Brand Design",
         description: "Research, Figma prototypes, and design systems ready for engineering.",
@@ -120,6 +151,22 @@ export const mainHeaderDropdownContent: Record<
         heading: "Cybersecurity",
         description: "Comprehensive security solutions to protect your business.",
         link: "/services/cybersecurity",
+      },
+    ],
+  },
+  products: {
+    title: "Products",
+    description: "Subscription software and SaaS platforms from OceanCyber.",
+    items: [
+      {
+        heading: "Software products",
+        description: "Explore OceanCyber subscription products for African operators.",
+        link: "/products",
+      },
+      {
+        heading: "OceanCyber POS",
+        description: "Ghana-ready point of sale — MoMo, offline mode, and multi-branch.",
+        link: "/products/pos",
       },
     ],
   },
@@ -174,6 +221,26 @@ export const mainHeaderDropdownContent: Record<
     description: "Get help, read reviews, estimate projects, and launch with confidence.",
     items: [
       {
+        heading: "Get Started",
+        description: "Begin your project intake and next steps with our team.",
+        link: "/get-started",
+      },
+      {
+        heading: "Pricing",
+        description: "Compare packages and indicative investment ranges in GHS.",
+        link: "/pricing",
+      },
+      {
+        heading: "Project Calculator",
+        description: "Estimate scope and investment for your next build.",
+        link: "/tools/project-cost",
+      },
+      {
+        heading: "Request Proposal",
+        description: "Formal scope, timeline, and pricing sections for your project.",
+        link: "/tools/proposal",
+      },
+      {
         heading: "Google Reviews",
         description: "Verified client ratings and recent feedback from Google.",
         link: "/reviews",
@@ -189,11 +256,6 @@ export const mainHeaderDropdownContent: Record<
         link: "/contact",
       },
       {
-        heading: "Project Calculator",
-        description: "Estimate scope and investment for your next build.",
-        link: "/tools/project-cost",
-      },
-      {
         heading: "Domains & SSL",
         description: "Search domain availability and add SSL with secure checkout.",
         link: "/domains",
@@ -202,11 +264,6 @@ export const mainHeaderDropdownContent: Record<
         heading: "Hosting",
         description: "Launch cPanel and WHM hosting plans with local support.",
         link: "/hosting",
-      },
-      {
-        heading: "Get Started",
-        description: "Begin your project intake and next steps with our team.",
-        link: "/get-started",
       },
       {
         heading: "Security assessment",
@@ -254,6 +311,11 @@ export const mainHeaderDropdownContent: Record<
         heading: "Pricing",
         description: "Transparent tiers and indicative investment ranges in GHS.",
         link: "/pricing",
+      },
+      {
+        heading: "Reviews",
+        description: "Verified Google ratings and client feedback.",
+        link: "/reviews",
       },
     ],
   },

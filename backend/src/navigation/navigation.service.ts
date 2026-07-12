@@ -41,25 +41,45 @@ const DEFAULT_CONFIG = {
     { label: "About", href: "/about" },
     { label: "Team", href: "/team" },
     { label: "Pricing", href: "/pricing" },
-    { label: "Project calculator", href: "/tools/project-cost" },
+    { label: "Project Calculator", href: "/tools/project-cost" },
     { label: "Contact", href: "/contact" },
     { label: "Services", href: "/services" },
+    { label: "Products", href: "/products" },
     { label: "Insights", href: "/insights" },
+    { label: "Reviews", href: "/reviews" },
     { label: "Portfolio", href: "/portfolio" },
     { label: "Domains & SSL", href: "/domains" },
     { label: "Hosting", href: "/hosting" },
     { label: "Checkout", href: "/checkout/cart" },
-    { label: "Get started", href: "/get-started" },
+    { label: "Get Started", href: "/get-started" },
   ],
   mainHeaderNav: [
     { href: "/", label: "Home" },
-    { href: "/services", label: "Services", dropdownKey: "services" },
+    {
+      href: "/services",
+      label: "Services",
+      dropdownKey: "services",
+      activeMatch: ["/services", "/pricing", "/how-we-work", "/design-process"],
+    },
+    {
+      href: "/products",
+      label: "Products",
+      dropdownKey: "products",
+      activeMatch: ["/products"],
+    },
     { href: "/industries", label: "Industries", dropdownKey: "industries" },
     {
       href: "/insights",
       label: "Resources",
       dropdownKey: "resources",
-      activeMatch: ["/insights", "/portfolio", "/design-process", "/security-journey"],
+      activeMatch: [
+        "/insights",
+        "/portfolio",
+        "/how-we-work",
+        "/design-process",
+        "/security-journey",
+        "/tools/security-assessment",
+      ],
     },
     {
       href: "/help-center",
@@ -70,24 +90,44 @@ const DEFAULT_CONFIG = {
         "/contact",
         "/reviews",
         "/tools/project-cost",
+        "/tools/proposal",
         "/domains",
         "/hosting",
         "/get-started",
+        "/pricing",
       ],
     },
     {
       href: "/about",
       label: "Company",
       dropdownKey: "company",
-      activeMatch: ["/about", "/team", "/portfolio", "/pricing"],
+      activeMatch: ["/about", "/team", "/portfolio", "/pricing", "/reviews"],
     },
   ],
   mainHeaderDropdownContent: {
     services: {
-      title: "Our services",
+      title: "Our Services",
       description:
         "Build, secure, and scale digital products with one delivery partner.",
       items: [
+        {
+          heading: "All services",
+          description:
+            "Overview of web, mobile, commerce, design, and security delivery.",
+          link: "/services",
+        },
+        {
+          heading: "Pricing & packages",
+          description:
+            "Transparent GHS tiers for Startup, Professional, and Enterprise.",
+          link: "/pricing",
+        },
+        {
+          heading: "How we work",
+          description:
+            "Discovery, design, phased delivery, and security-aware launch.",
+          link: "/how-we-work",
+        },
         {
           heading: "UI/UX & Brand Design",
           description:
@@ -101,7 +141,7 @@ const DEFAULT_CONFIG = {
           link: "/services/web-development",
         },
         {
-          heading: "Mobile apps",
+          heading: "Mobile Apps",
           description:
             "Native and cross-platform applications designed for reliable user experiences.",
           link: "/services/mobile-apps",
@@ -123,6 +163,22 @@ const DEFAULT_CONFIG = {
           description:
             "Comprehensive security solutions to protect your business.",
           link: "/services/cybersecurity",
+        },
+      ],
+    },
+    products: {
+      title: "Products",
+      description: "Subscription software and SaaS platforms from OceanCyber.",
+      items: [
+        {
+          heading: "Software products",
+          description: "Explore OceanCyber subscription products for African operators.",
+          link: "/products",
+        },
+        {
+          heading: "OceanCyber POS",
+          description: "Ghana-ready point of sale — MoMo, offline mode, and multi-branch.",
+          link: "/products/pos",
         },
       ],
     },
@@ -157,20 +213,36 @@ const DEFAULT_CONFIG = {
           link: "/insights",
         },
         {
-          heading: "Case studies",
+          heading: "Case Studies",
           description: "Delivery outcomes across sectors in Ghana and beyond.",
           link: "/portfolio",
         },
         {
-          heading: "Design process",
+          heading: "How we work",
           description:
-            "How we research, prototype in Figma, and hand off to engineering.",
-          link: "/design-process",
+            "Discovery, design, phased delivery, and security-aware launch — our full model.",
+          link: "/how-we-work",
         },
         {
-          heading: "Security journey",
+          heading: "Design Process",
+          description:
+            "Research, Figma prototypes, design systems, and engineering handoff.",
+          link: "/how-we-work#design",
+        },
+        {
+          heading: "Security Journey",
           description: "A practical path to strengthen your security posture.",
           link: "/security-journey",
+        },
+        {
+          heading: "OceanCyber POS",
+          description: "SaaS point of sale — trial signup, your MoMo keys, offline mode.",
+          link: "/products/pos",
+        },
+        {
+          heading: "Security self-assessment",
+          description: "Score your maturity in minutes and download a PDF report.",
+          link: "/tools/security-assessment",
         },
       ],
     },
@@ -180,12 +252,32 @@ const DEFAULT_CONFIG = {
         "Get help, read reviews, estimate projects, and launch with confidence.",
       items: [
         {
+          heading: "Get Started",
+          description: "Begin your project intake and next steps with our team.",
+          link: "/get-started",
+        },
+        {
+          heading: "Pricing",
+          description: "Compare packages and indicative investment ranges in GHS.",
+          link: "/pricing",
+        },
+        {
+          heading: "Project Calculator",
+          description: "Estimate scope and investment for your next build.",
+          link: "/tools/project-cost",
+        },
+        {
+          heading: "Request Proposal",
+          description: "Formal scope, timeline, and pricing sections for your project.",
+          link: "/tools/proposal",
+        },
+        {
           heading: "Google Reviews",
           description: "Verified client ratings and recent feedback from Google.",
           link: "/reviews",
         },
         {
-          heading: "Help center",
+          heading: "Help Center",
           description:
             "Answers to common questions about onboarding and delivery.",
           link: "/help-center",
@@ -194,11 +286,6 @@ const DEFAULT_CONFIG = {
           heading: "Contact",
           description: "Talk to our team about your project or requirements.",
           link: "/contact",
-        },
-        {
-          heading: "Project calculator",
-          description: "Estimate scope and investment for your next build.",
-          link: "/tools/project-cost",
         },
         {
           heading: "Domains & SSL",
@@ -213,9 +300,9 @@ const DEFAULT_CONFIG = {
           link: "/hosting",
         },
         {
-          heading: "Get started",
-          description: "Begin your project intake and next steps with our team.",
-          link: "/get-started",
+          heading: "Security assessment",
+          description: "Free self-assessment with downloadable maturity report.",
+          link: "/tools/security-assessment",
         },
       ],
     },
@@ -263,10 +350,43 @@ const DEFAULT_CONFIG = {
           description: "Transparent tiers and indicative investment ranges in GHS.",
           link: "/pricing",
         },
+        {
+          heading: "Reviews",
+          description: "Verified Google ratings and client feedback.",
+          link: "/reviews",
+        },
       ],
     },
   },
 };
+
+function mergeMainHeaderNav<T extends { href: string; label: string; dropdownKey?: string; activeMatch?: string[] }>(
+  dbNav: T[],
+  defaultNav: T[],
+): T[] {
+  const dbByHref = new Map(dbNav.map((item) => [item.href, item]));
+  const order = new Map(defaultNav.map((item, index) => [item.href, index]));
+  const merged: T[] = [];
+
+  for (const item of defaultNav) {
+    const dbItem = dbByHref.get(item.href);
+    merged.push(
+      dbItem
+        ? {
+            ...dbItem,
+            dropdownKey: item.dropdownKey ?? dbItem.dropdownKey,
+            activeMatch: item.activeMatch?.length ? item.activeMatch : dbItem.activeMatch,
+          }
+        : item,
+    );
+  }
+
+  for (const item of dbNav) {
+    if (!order.has(item.href)) merged.push(item);
+  }
+
+  return merged;
+}
 
 @Injectable()
 export class NavigationService {
@@ -449,34 +569,60 @@ export class NavigationService {
       const mainHeader = (byKey.get("main-header") ?? []).map((r) => ({
         href: r.href,
         label: r.heading,
-        dropdownKey: r.metadata?.dropdownKey,
-        activeMatch: r.metadata?.activeMatch,
+        dropdownKey:
+          typeof r.metadata?.dropdownKey === "string"
+            ? r.metadata.dropdownKey
+            : undefined,
+        activeMatch: Array.isArray(r.metadata?.activeMatch)
+          ? (r.metadata.activeMatch as string[])
+          : undefined,
       }));
 
       const dropdowns = JSON.parse(
         JSON.stringify(DEFAULT_CONFIG.mainHeaderDropdownContent),
-      );
+      ) as typeof DEFAULT_CONFIG.mainHeaderDropdownContent;
       Object.keys(dropdowns).forEach((key) => {
         const dbItems = byKey.get(`main-dropdown-${key}`);
         if (dbItems && dbItems.length > 0) {
           const first = dbItems[0];
-          dropdowns[key] = {
-            title: first.menuLabel,
-            description: first.menuDescription ?? "",
-            items: dbItems.map((item) => ({
+          const defaultItems = DEFAULT_CONFIG.mainHeaderDropdownContent[
+            key as keyof typeof DEFAULT_CONFIG.mainHeaderDropdownContent
+          ]?.items ?? [];
+          const dbLinks = new Set(dbItems.map((item) => item.href));
+          const mergedItems = [
+            ...dbItems.map((item) => ({
               heading: item.heading,
               description: item.description ?? "",
               link: item.href,
             })),
+            ...defaultItems.filter((item) => !dbLinks.has(item.link)),
+          ];
+          dropdowns[key as keyof typeof dropdowns] = {
+            title: first.menuLabel,
+            description: first.menuDescription ?? "",
+            items: mergedItems,
           };
         }
       });
+
+      const mergedMainHeader =
+        mainHeader.length > 0
+          ? mergeMainHeaderNav(
+              mainHeader,
+              DEFAULT_CONFIG.mainHeaderNav as Array<{
+                href: string;
+                label: string;
+                dropdownKey?: string;
+                activeMatch?: string[];
+              }>,
+            )
+          : undefined;
 
       return {
         startupPrimaryNav:
           startupPrimary.length > 0 ? startupPrimary : undefined,
         startupPagesMenu: startupPages.length > 0 ? startupPages : undefined,
-        mainHeaderNav: mainHeader.length > 0 ? mainHeader : undefined,
+        mainHeaderNav: mergedMainHeader,
         mainHeaderDropdownContent: dropdowns,
       };
     } catch (e) {

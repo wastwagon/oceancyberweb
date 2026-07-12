@@ -93,7 +93,14 @@ export function buildMenuPreset(kind: string): AdminNavMenu {
           ...createEmptyNavItem(10),
           heading: "Services",
           href: "/services",
-          metadataInput: '{"dropdownKey":"services"}',
+          metadataInput:
+            '{"dropdownKey":"services","activeMatch":["/services","/pricing","/how-we-work","/design-process"]}',
+        },
+        {
+          ...createEmptyNavItem(15),
+          heading: "Products",
+          href: "/products",
+          metadataInput: '{"dropdownKey":"products","activeMatch":["/products"]}',
         },
         {
           ...createEmptyNavItem(20),
@@ -105,19 +112,22 @@ export function buildMenuPreset(kind: string): AdminNavMenu {
           ...createEmptyNavItem(30),
           heading: "Resources",
           href: "/insights",
-          metadataInput: '{"dropdownKey":"resources","activeMatch":["/insights","/portfolio","/design-process","/security-journey"]}',
+          metadataInput:
+            '{"dropdownKey":"resources","activeMatch":["/insights","/portfolio","/how-we-work","/design-process","/security-journey","/tools/security-assessment"]}',
         },
         {
           ...createEmptyNavItem(40),
           heading: "Support",
           href: "/help-center",
-          metadataInput: '{"dropdownKey":"support","activeMatch":["/help-center","/contact","/reviews","/tools/project-cost","/domains","/hosting","/get-started"]}',
+          metadataInput:
+            '{"dropdownKey":"support","activeMatch":["/help-center","/contact","/reviews","/tools/project-cost","/tools/proposal","/domains","/hosting","/get-started","/pricing"]}',
         },
         {
           ...createEmptyNavItem(50),
           heading: "Company",
           href: "/about",
-          metadataInput: '{"dropdownKey":"company","activeMatch":["/about","/team","/portfolio","/pricing"]}',
+          metadataInput:
+            '{"dropdownKey":"company","activeMatch":["/about","/team","/portfolio","/pricing","/reviews"]}',
         },
       ],
     };
