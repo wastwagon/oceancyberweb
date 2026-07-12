@@ -3,7 +3,6 @@ import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/Startup
 import { StartupAgencyNavbar } from "@/components/startup-agency/StartupAgencyNavbar";
 import { StartupAgencyProgressBar } from "@/components/startup-agency/StartupAgencyProgressBar";
 import { SaAboutSection } from "@/components/startup-agency/sections/SaAboutSection";
-import { SaClientLogosSection } from "@/components/startup-agency/sections/SaClientLogosSection";
 import { SaCtaStripSection } from "@/components/startup-agency/sections/SaCtaStripSection";
 import { SaDomainSearchSection } from "@/components/startup-agency/sections/SaDomainSearchSection";
 import { SaCostEstimatorSection } from "@/components/startup-agency/sections/SaCostEstimatorSection";
@@ -20,13 +19,8 @@ import { SaTestimonialsSectionWithData } from "@/components/startup-agency/secti
 import { SaTrustSection } from "@/components/startup-agency/sections/SaTrustSection";
 import { SaPromoSection } from "@/components/startup-agency/sections/SaPromoSection";
 import { VideoTestimonialSection } from "@/components/marketing/VideoTestimonialSection";
-import type { ClientLogoEntry } from "@/lib/startup-agency/client-logos-runtime";
 
-type StartupAgencyHomeProps = {
-  clientLogos: ClientLogoEntry[];
-};
-
-export function StartupAgencyHome({ clientLogos }: StartupAgencyHomeProps) {
+export function StartupAgencyHome() {
   return (
     <div
       className="sa-shell relative min-h-screen bg-sa-bg text-sa-muted antialiased"
@@ -42,10 +36,9 @@ export function StartupAgencyHome({ clientLogos }: StartupAgencyHomeProps) {
           OceanCyber — UI/UX design, web and mobile app development in Ghana
         </h1>
 
-        {/* Phase 1: Hero → trust → story → services → work */}
+        {/* Phase 1: Hero → story → services → work */}
         <SaHeroSection />
         <SaMarqueeSection />
-        <SaClientLogosSection entries={clientLogos} />
         <SaAboutSection />
         <SaServicesSection />
         <SaPortfolioGallerySection />
