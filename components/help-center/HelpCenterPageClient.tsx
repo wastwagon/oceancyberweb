@@ -7,6 +7,10 @@ import { Search, HelpCircle, ArrowRight, MessageSquare, Check, X } from "lucide-
 import { publicApiFetch } from "@/lib/public-api";
 import { fadeUpProps, revealViewport, staggerDelay } from "@/lib/scroll-reveal";
 import type { HelpArticle } from "@/lib/help-center/content";
+import { SaField } from "@/components/ui/SaField";
+import { SaSelect } from "@/components/ui/SaSelect";
+import { SaInput } from "@/components/ui/SaInput";
+import { SaBadge } from "@/components/ui/SaBadge";
 
 type GuidedIssue = "payment_failed" | "need_quote" | "site_issue" | "other";
 
@@ -123,12 +127,13 @@ export function HelpCenterPageClient({ articles }: HelpCenterPageClientProps) {
               OceanCyber account, then follow the relevant next step.
             </p>
             <div className="relative mx-auto mt-10 max-w-2xl">
-              <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-sa-muted/40" />
-              <input
+              <Search className="pointer-events-none absolute left-4 top-1/2 z-10 h-5 w-5 -translate-y-1/2 text-sa-muted/40" />
+              <SaInput
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Search help articles..."
-                className="h-14 w-full rounded-2xl border border-sa-border bg-sa-surface pl-12 pr-4 text-white outline-none ring-sa-primary/50 transition placeholder:text-sa-muted/30 focus:border-sa-primary focus:ring-1"
+                className="h-14 rounded-2xl pl-12 pr-4"
+                aria-label="Search help articles"
               />
             </div>
           </motion.div>
@@ -159,11 +164,11 @@ export function HelpCenterPageClient({ articles }: HelpCenterPageClientProps) {
                       <p className="font-heading text-[10px] font-bold uppercase tracking-widest text-sa-primary">
                         {a.category}
                       </p>
-                      <span className="rounded-full border border-sa-border px-2 py-1 text-[9px] font-bold uppercase tracking-wider text-sa-muted/60">
+                      <SaBadge variant="muted">
                         {a.audience === "customers"
                           ? "Customer account"
                           : "For everyone"}
-                      </span>
+                      </SaBadge>
                     </div>
                     <h3 className="mt-2 font-heading text-lg font-bold text-white group-hover:text-sa-primary transition-colors">
                       {a.title}
@@ -228,22 +233,19 @@ export function HelpCenterPageClient({ articles }: HelpCenterPageClientProps) {
                   Select your issue type for a step-by-step resolution path.
                 </p>
 
-                <div className="mt-8 space-y-6">
-                  <div>
-                    <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/50">
-                      I need help with
-                    </label>
-                    <select
+                <div className="mt-8 space-y-sa-2xl">
+                  <SaField id="help-issue" label="I need help with" labelTone="caps">
+                    <SaSelect
+                      id="help-issue"
                       value={issue}
                       onChange={(e) => setIssue(e.target.value as GuidedIssue)}
-                      className="mt-2 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm text-white outline-none focus:border-sa-primary transition"
                     >
                       <option value="payment_failed">Payment or renewal failed</option>
                       <option value="need_quote">Need quote or proposal</option>
                       <option value="site_issue">Website issue</option>
                       <option value="other">Something else</option>
-                    </select>
-                  </div>
+                    </SaSelect>
+                  </SaField>
 
                   <div className="rounded-2xl border border-sa-border bg-sa-bg/50 p-6">
                     <h3 className="font-heading text-base font-bold text-white">{guided.title}</h3>

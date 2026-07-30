@@ -33,6 +33,7 @@ import { SubscriptionNode } from "@/components/dashboard/SubscriptionNode";
 import { ActivityHub } from "@/components/dashboard/ActivityHub";
 import { DashboardSkeleton } from "@/components/dashboard/DashboardSkeleton";
 import { AppAlert } from "@/components/ui/AppAlert";
+import { SaSelect } from "@/components/ui/SaSelect";
 
 type DashboardData = Awaited<ReturnType<typeof getBillingDashboard>>;
 
@@ -291,11 +292,13 @@ export default function DashboardPage() {
                     />
                     Auto-renew from wallet
                   </label>
-                  <select
+                  <SaSelect
+                    density="compact"
                     value={selectedPlanCode}
                     onChange={(e) => setSelectedPlanCode(e.target.value)}
-                    className="rounded-xl border-none bg-transparent px-4 py-2 text-sm font-semibold text-white focus:ring-0 cursor-pointer"
+                    className="cursor-pointer border-none bg-transparent font-semibold"
                     disabled={creating || plans.length === 0}
+                    aria-label="Renewal plan"
                   >
                     {plans.length === 0 ? (
                       <option value="">No plans available</option>
@@ -306,7 +309,7 @@ export default function DashboardPage() {
                         </option>
                       ))
                     )}
-                  </select>
+                  </SaSelect>
                   
                   <button
                     type="button"

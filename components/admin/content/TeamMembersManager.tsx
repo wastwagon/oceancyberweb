@@ -5,6 +5,10 @@ import Image from "next/image";
 import type { TeamMember } from "@/lib/data/team";
 import { MediaUploadField } from "@/components/admin/MediaUploadField";
 import { AppAlert } from "@/components/ui/AppAlert";
+import { SaButton } from "@/components/ui/SaButton";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput, SaTextarea } from "@/components/ui/SaInput";
+import { SaSelect } from "@/components/ui/SaSelect";
 
 const ACCENT_PRESETS = [
   "from-lime-300/30 to-emerald-500/20",
@@ -80,14 +84,15 @@ export function TeamMembersManager() {
             bios without code changes.
           </p>
         </div>
-        <button
+        <SaButton
           type="button"
+          size="sm"
           disabled={saving || loading}
           onClick={() => void save()}
-          className="rounded-lg bg-sa-primary px-4 py-2 text-sm font-semibold text-black disabled:opacity-50"
+          className="rounded-lg normal-case tracking-normal"
         >
           {saving ? "Saving…" : "Save team"}
-        </button>
+        </SaButton>
       </div>
 
       {toast ? <AppAlert variant="success" className="mt-4">{toast}</AppAlert> : null}
@@ -132,35 +137,35 @@ export function TeamMembersManager() {
                 </div>
 
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <label className="text-xs text-sa-muted/80 sm:col-span-2">
-                    Name
-                    <input
-                      className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+                  <SaField id={`team-name-${index}`} label="Name" labelTone="cms" className="sm:col-span-2">
+                    <SaInput
+                      id={`team-name-${index}`}
+                      density="micro"
                       value={member.name}
                       onChange={(e) => updateMember(index, { name: e.target.value })}
                     />
-                  </label>
-                  <label className="text-xs text-sa-muted/80">
-                    Role
-                    <input
-                      className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+                  </SaField>
+                  <SaField id={`team-role-${index}`} label="Role" labelTone="cms">
+                    <SaInput
+                      id={`team-role-${index}`}
+                      density="micro"
                       value={member.role}
                       onChange={(e) => updateMember(index, { role: e.target.value })}
                     />
-                  </label>
-                  <label className="text-xs text-sa-muted/80">
-                    Initials
-                    <input
-                      className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+                  </SaField>
+                  <SaField id={`team-initials-${index}`} label="Initials" labelTone="cms">
+                    <SaInput
+                      id={`team-initials-${index}`}
+                      density="micro"
                       value={member.initials}
                       maxLength={4}
                       onChange={(e) => updateMember(index, { initials: e.target.value.toUpperCase() })}
                     />
-                  </label>
-                  <label className="text-xs text-sa-muted/80 sm:col-span-2">
-                    Card accent (Tailwind gradient)
-                    <select
-                      className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+                  </SaField>
+                  <SaField id={`team-accent-${index}`} label="Card accent (Tailwind gradient)" labelTone="cms" className="sm:col-span-2">
+                    <SaSelect
+                      id={`team-accent-${index}`}
+                      density="micro"
                       value={member.accent}
                       onChange={(e) => updateMember(index, { accent: e.target.value })}
                     >
@@ -169,17 +174,17 @@ export function TeamMembersManager() {
                           {accent}
                         </option>
                       ))}
-                    </select>
-                  </label>
-                  <label className="text-xs text-sa-muted/80 sm:col-span-2">
-                    Bio
-                    <textarea
-                      className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+                    </SaSelect>
+                  </SaField>
+                  <SaField id={`team-bio-${index}`} label="Bio" labelTone="cms" className="sm:col-span-2">
+                    <SaTextarea
+                      id={`team-bio-${index}`}
+                      density="micro"
                       rows={3}
                       value={member.bio}
                       onChange={(e) => updateMember(index, { bio: e.target.value })}
                     />
-                  </label>
+                  </SaField>
                 </div>
               </div>
             </div>

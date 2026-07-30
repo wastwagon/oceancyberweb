@@ -4,6 +4,8 @@ import { useState, type FormEvent } from "react";
 import { Loader2 } from "lucide-react";
 import { publicApiFetch } from "@/lib/public-api";
 import { trackLeadConversion } from "@/lib/analytics/conversions";
+import { SaButton } from "@/components/ui/SaButton";
+import { SaInput } from "@/components/ui/SaInput";
 
 type NewsletterSignupFormProps = {
   page?: string;
@@ -68,7 +70,7 @@ export function NewsletterSignupForm({
         <label htmlFor="insights-email" className="sr-only">
           Email
         </label>
-        <input
+        <SaInput
           id="insights-email"
           name="email"
           type="email"
@@ -78,12 +80,12 @@ export function NewsletterSignupForm({
           disabled={status === "loading" || status === "success"}
           placeholder="you@company.com"
           autoComplete="email"
-          className="min-h-[48px] flex-1 rounded-xl border border-sa-border bg-sa-bg/60 px-4 py-3 text-sm text-white placeholder:text-sa-muted/50 focus:border-sa-primary focus:outline-none disabled:opacity-60"
+          className="min-h-[48px] flex-1 bg-sa-bg/60 py-3"
         />
-        <button
+        <SaButton
           type="submit"
           disabled={status === "loading" || status === "success"}
-          className="sa-btn-primary min-h-[48px] shrink-0 disabled:opacity-60"
+          className="shrink-0"
         >
           {status === "loading" ? (
             <>
@@ -95,11 +97,15 @@ export function NewsletterSignupForm({
           ) : (
             "Notify me"
           )}
-        </button>
+        </SaButton>
       </form>
       <p
         className={`mt-4 text-center text-[10px] font-bold uppercase tracking-widest ${
-          status === "error" ? "text-red-400" : status === "success" ? "text-sa-primary" : "text-sa-muted/40"
+          status === "error"
+            ? "text-sa-danger"
+            : status === "success"
+              ? "text-sa-success"
+              : "text-sa-fg-subtle"
         }`}
         role={status === "error" ? "alert" : status === "success" ? "status" : undefined}
       >

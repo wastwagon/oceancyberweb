@@ -1,13 +1,13 @@
-import type { ReactNode } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 export type AppAlertVariant = "success" | "error" | "warning" | "info";
 
 const VARIANT_STYLES: Record<AppAlertVariant, string> = {
-  success: "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
-  error: "border-rose-500/30 bg-rose-500/10 text-rose-400",
+  success: "border-sa-success/30 bg-sa-success-muted text-sa-success",
+  error: "border-sa-danger/40 bg-sa-danger-muted text-sa-danger",
   warning: "border-amber-500/30 bg-amber-500/10 text-amber-400",
-  info: "border-sa-primary/30 bg-sa-primary/10 text-sa-primary",
+  info: "border-sa-primary/30 bg-sa-success-muted text-sa-primary",
 };
 
 type AppAlertProps = {
@@ -15,13 +15,21 @@ type AppAlertProps = {
   title?: string;
   children: ReactNode;
   className?: string;
-};
+} & Omit<HTMLAttributes<HTMLDivElement>, "title" | "children">;
 
-export function AppAlert({ variant = "info", title, children, className }: AppAlertProps) {
+export function AppAlert({
+  variant = "info",
+  title,
+  children,
+  className,
+  role = "alert",
+  ...props
+}: AppAlertProps) {
   return (
     <div
-      className={cn("rounded-xl border px-4 py-3 text-sm", VARIANT_STYLES[variant], className)}
-      role="alert"
+      className={cn("rounded-sa-lg border px-4 py-3 text-sm", VARIANT_STYLES[variant], className)}
+      role={role}
+      {...props}
     >
       {title ? <p className="mb-1 text-xs font-bold uppercase tracking-widest">{title}</p> : null}
       <div className="leading-relaxed">{children}</div>

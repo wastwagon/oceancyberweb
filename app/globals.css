@@ -40,6 +40,45 @@
     --hero-spacing-md: clamp(1rem, 3vw, 4rem);
     --hero-spacing-sm: clamp(0.75rem, 2vw, 3rem);
     --hero-spacing-xs: clamp(0.5rem, 1.5vw, 2rem);
+
+    /*
+     * Untitled UI Pro–inspired semantic tokens (OceanCyber brand values).
+     * Primitives (bg/surface/primary) stay in Tailwind `sa.*`; these map roles.
+     */
+    --sa-fg: #ffffff;
+    --sa-fg-muted: #e9e9e9;
+    --sa-fg-subtle: rgba(233, 233, 233, 0.5);
+    --sa-border-strong: rgba(255, 255, 255, 0.2);
+    --sa-focus: #bbf340;
+    --sa-ring: rgba(187, 243, 64, 0.35);
+    --sa-danger: #fb7185;
+    --sa-danger-muted: rgba(244, 63, 94, 0.12);
+    --sa-success: #bbf340;
+    --sa-success-muted: rgba(187, 243, 64, 0.12);
+
+    /* Untitled UI input-field aliases → OceanCyber dark surfaces */
+    --input-field-label: var(--sa-fg-muted);
+    --input-field-border: #414141;
+    --input-field-bg-default: #131317;
+    --input-field-hint-text: var(--sa-fg-subtle);
+    --input-field-text-placeholder: var(--sa-fg-subtle);
+    --input-field-fg: var(--sa-fg);
+    --input-field-border-focus: var(--sa-focus);
+
+    /* Spacing scale (Untitled UI spacing-md → 3xl parity) */
+    --sa-space-xs: 0.25rem; /* 4px */
+    --sa-space-sm: 0.5rem; /* 8px */
+    --sa-space-md: 0.75rem; /* 12px */
+    --sa-space-lg: 1rem; /* 16px — UU spacing-2xl */
+    --sa-space-xl: 1.25rem; /* 20px */
+    --sa-space-2xl: 1.5rem; /* 24px — UU spacing-3xl */
+    --sa-space-3xl: 2rem; /* 32px */
+
+    /* Radius scale (UU radius-2xl = 16px) */
+    --sa-radius-sm: 0.5rem; /* 8px */
+    --sa-radius-md: 0.75rem; /* 12px */
+    --sa-radius-lg: 1rem; /* 16px */
+    --sa-radius-xl: 1.5rem; /* 24px */
   }
 
   .dark {
@@ -1096,16 +1135,96 @@
   }
 
   .sa-btn-primary {
-    @apply sa-pressable inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-sa-primary bg-sa-primary px-8 font-heading text-sm font-bold uppercase tracking-[0.14em] text-sa-bg transition duration-300 hover:bg-transparent hover:text-sa-primary;
+    @apply sa-pressable inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-sa-primary bg-sa-primary px-8 font-heading text-sm font-bold uppercase tracking-[0.14em] text-sa-bg transition duration-300 hover:bg-transparent hover:text-sa-primary disabled:pointer-events-none disabled:opacity-60;
   }
 
   .sa-btn-outline {
-    @apply sa-pressable inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-white px-8 font-heading text-sm font-bold uppercase tracking-[0.14em] text-white transition duration-300 hover:bg-white hover:text-sa-bg;
+    @apply sa-pressable inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-white px-8 font-heading text-sm font-bold uppercase tracking-[0.14em] text-white transition duration-300 hover:bg-white hover:text-sa-bg disabled:pointer-events-none disabled:opacity-60;
+  }
+
+  .sa-btn-secondary {
+    @apply sa-pressable inline-flex min-h-[48px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-8 font-heading text-sm font-bold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:border-sa-border-strong hover:text-white disabled:pointer-events-none disabled:opacity-60;
+  }
+
+  /* Form field primitives — Untitled UI roles, OceanCyber surfaces */
+  .sa-label {
+    @apply ml-1 block text-sm font-medium text-sa-fg-muted/80;
+  }
+
+  .sa-label-caps {
+    @apply mb-1.5 block text-[10px] font-bold uppercase tracking-widest text-sa-fg-subtle;
+  }
+
+  .sa-label-cms {
+    @apply block text-xs text-sa-fg-muted/80;
+  }
+
+  .sa-hint {
+    @apply text-xs text-sa-fg-subtle;
+  }
+
+  .sa-input {
+    @apply w-full rounded-sa-xl border border-sa-border bg-sa-surface px-5 py-4 text-base text-sa-fg placeholder:text-sa-fg-subtle transition-all focus:border-sa-focus focus:outline-none focus:ring-1 focus:ring-sa-focus disabled:cursor-not-allowed disabled:opacity-60 md:text-sm;
+  }
+
+  .sa-input-compact {
+    @apply w-full rounded-sa-lg border border-sa-border bg-sa-surface px-4 py-2.5 text-sm text-sa-fg placeholder:text-sa-fg-subtle outline-none transition focus:border-sa-focus disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .sa-input-micro {
+    @apply w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-sa-fg placeholder:text-sa-fg-subtle outline-none transition focus:border-sa-focus disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .sa-textarea {
+    @apply sa-input resize-none;
+  }
+
+  .sa-select {
+    @apply w-full appearance-none rounded-sa-lg border border-sa-border bg-sa-surface px-4 py-3 text-sm text-sa-fg transition-all focus:border-sa-focus focus:outline-none focus:ring-1 focus:ring-sa-focus disabled:cursor-not-allowed disabled:opacity-60 [&>option]:bg-sa-surface [&>option]:text-sa-fg;
+  }
+
+  .sa-select-compact {
+    @apply sa-select h-11 py-0;
+  }
+
+  .sa-select-micro {
+    @apply sa-select h-auto rounded-lg px-2 py-1.5;
+  }
+
+  .sa-badge {
+    @apply inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest;
+  }
+
+  .sa-badge-primary {
+    @apply sa-badge border-sa-primary/40 bg-sa-success-muted text-sa-primary;
+  }
+
+  .sa-badge-muted {
+    @apply sa-badge border-sa-border bg-sa-surface text-sa-fg-subtle;
+  }
+
+  .sa-badge-danger {
+    @apply sa-badge border-sa-danger/40 bg-sa-danger-muted text-sa-danger;
+  }
+
+  .sa-input[aria-invalid="true"],
+  .sa-input-compact[aria-invalid="true"],
+  .sa-input-micro[aria-invalid="true"],
+  .sa-textarea[aria-invalid="true"],
+  .sa-select[aria-invalid="true"],
+  .sa-select-compact[aria-invalid="true"],
+  .sa-select-micro[aria-invalid="true"] {
+    @apply border-sa-danger focus:border-sa-danger focus:ring-sa-danger;
+  }
+
+  .sa-field-error {
+    @apply text-xs text-sa-danger;
   }
 
   @media (max-width: 767px) {
     .sa-btn-primary,
-    .sa-btn-outline {
+    .sa-btn-outline,
+    .sa-btn-secondary {
       @apply rounded-2xl text-[15px] font-semibold normal-case tracking-normal;
     }
 

@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Bot, Send, MessageSquare, X, Minimize2, Maximize2 } from "lucide-react";
 import { getApiBaseUrl } from "@/lib/api-config";
 import { floatingChrome } from "@/components/ui/floating-chrome";
+import { SaInput } from "@/components/ui/SaInput";
 import { cn } from "@/lib/utils";
 
 interface Message {
@@ -247,12 +248,13 @@ export function ChatBot() {
 
           <footer className="shrink-0 border-t border-sa-border bg-sa-surface p-4 pb-[max(1rem,env(safe-area-inset-bottom))] max-md:bg-[#1c1c1e]/95">
             <form onSubmit={handleSendMessage} className="flex items-center gap-2">
-              <input
+              <SaInput
                 type="text"
+                density="compact"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Type your message…"
-                className="h-12 flex-1 rounded-xl border border-sa-border bg-sa-bg px-4 text-sm text-white outline-none ring-sa-primary/50 transition placeholder:text-sa-muted/30 focus:border-sa-primary focus:ring-1"
+                className="h-12 flex-1 bg-sa-bg px-4"
               />
               <button
                 type="submit"

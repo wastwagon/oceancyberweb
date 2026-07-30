@@ -38,6 +38,7 @@ import { ProjectCard } from "@/components/admin/ProjectCard";
 import { LeadPipeline } from "@/components/admin/LeadPipeline";
 import { UserRegistry } from "@/components/admin/UserRegistry";
 import { AdminSkeleton } from "@/components/admin/AdminSkeleton";
+import { SaInput } from "@/components/ui/SaInput";
 import { ProjectDeploymentForm } from "@/components/admin/ProjectDeploymentForm";
 
 import { LEAD_FILTER_PRESETS } from "@/lib/ops/lead-filters";
@@ -439,12 +440,13 @@ export default function AdminPage() {
               <div className="space-y-4">
                 <div className="flex flex-wrap items-center gap-3">
                   <div className="relative flex-1 max-w-md">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-sa-muted/40" size={16} />
-                    <input
+                    <Search className="absolute left-4 top-1/2 z-10 -translate-y-1/2 text-sa-muted/40" size={16} />
+                    <SaInput
                       value={projectSearch}
                       onChange={(e) => setProjectSearch(e.target.value)}
                       placeholder="Filter by Project ID, Title, or Email..."
-                      className="w-full rounded-full border border-sa-border bg-sa-surface/50 px-12 py-3 text-sm text-white focus:border-sa-primary/50 focus:ring-0 transition-all"
+                      className="rounded-full bg-sa-surface/50 pl-12"
+                      aria-label="Filter projects"
                     />
                   </div>
                   {projectSearch && (

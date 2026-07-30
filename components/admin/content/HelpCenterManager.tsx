@@ -7,6 +7,10 @@ import {
   type HelpArticleCategory,
 } from "@/lib/help-center/content";
 import { AppAlert } from "@/components/ui/AppAlert";
+import { SaButton } from "@/components/ui/SaButton";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput, SaTextarea } from "@/components/ui/SaInput";
+import { SaSelect } from "@/components/ui/SaSelect";
 
 function emptyArticle(): HelpArticle {
   return {
@@ -96,21 +100,24 @@ export function HelpCenterManager() {
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <button
+          <SaButton
             type="button"
-            className="rounded-lg border border-sa-border px-4 py-2 text-sm font-semibold text-white"
+            variant="secondary"
+            size="sm"
+            className="rounded-lg normal-case tracking-normal"
             onClick={() => setArticles((prev) => [...prev, emptyArticle()])}
           >
             Add article
-          </button>
-          <button
+          </SaButton>
+          <SaButton
             type="button"
+            size="sm"
             disabled={saving || loading}
             onClick={() => void save()}
-            className="rounded-lg bg-sa-primary px-4 py-2 text-sm font-semibold text-black disabled:opacity-50"
+            className="rounded-lg normal-case tracking-normal"
           >
             {saving ? "Saving…" : "Save help center"}
-          </button>
+          </SaButton>
         </div>
       </div>
 
@@ -133,7 +140,7 @@ export function HelpCenterManager() {
                 </p>
                 <button
                   type="button"
-                  className="rounded border border-red-200 px-2 py-1 text-xs font-semibold text-red-700"
+                  className="rounded border border-sa-danger/40 px-2 py-1 text-xs font-semibold text-sa-danger"
                   onClick={() => {
                     if (!confirm(`Remove "${article.title || "this article"}"?`)) return;
                     setArticles((prev) => prev.filter((_, i) => i !== index));
@@ -143,18 +150,18 @@ export function HelpCenterManager() {
                 </button>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
-                <label className="text-xs text-sa-muted/80">
-                  ID (slug)
-                  <input
-                    className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+                <SaField id={`help-id-${index}`} label="ID (slug)" labelTone="cms">
+                  <SaInput
+                    id={`help-id-${index}`}
+                    density="micro"
                     value={article.id}
                     onChange={(e) => updateArticle(index, { id: e.target.value })}
                   />
-                </label>
-                <label className="text-xs text-sa-muted/80">
-                  Category
-                  <select
-                    className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+                </SaField>
+                <SaField id={`help-cat-${index}`} label="Category" labelTone="cms">
+                  <SaSelect
+                    id={`help-cat-${index}`}
+                    density="micro"
                     value={article.category}
                     onChange={(e) =>
                       updateArticle(index, { category: e.target.value as HelpArticleCategory })
@@ -165,25 +172,25 @@ export function HelpCenterManager() {
                         {c}
                       </option>
                     ))}
-                  </select>
-                </label>
-                <label className="text-xs text-sa-muted/80 sm:col-span-2">
-                  Title
-                  <input
-                    className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+                  </SaSelect>
+                </SaField>
+                <SaField id={`help-title-${index}`} label="Title" labelTone="cms" className="sm:col-span-2">
+                  <SaInput
+                    id={`help-title-${index}`}
+                    density="micro"
                     value={article.title}
                     onChange={(e) => updateArticle(index, { title: e.target.value })}
                   />
-                </label>
-                <label className="text-xs text-sa-muted/80 sm:col-span-2">
-                  Body
-                  <textarea
-                    className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+                </SaField>
+                <SaField id={`help-body-${index}`} label="Body" labelTone="cms" className="sm:col-span-2">
+                  <SaTextarea
+                    id={`help-body-${index}`}
+                    density="micro"
                     rows={3}
                     value={article.body}
                     onChange={(e) => updateArticle(index, { body: e.target.value })}
                   />
-                </label>
+                </SaField>
               </div>
 
               <div className="mt-4 space-y-2">
@@ -191,9 +198,11 @@ export function HelpCenterManager() {
                   <p className="text-xs font-semibold uppercase tracking-wider text-sa-muted/60">
                     Action links
                   </p>
-                  <button
+                  <SaButton
                     type="button"
-                    className="rounded border border-sa-border px-2 py-1 text-xs font-semibold text-white"
+                    variant="outline"
+                    size="sm"
+                    className="rounded-lg normal-case tracking-normal"
                     onClick={() =>
                       updateArticle(index, {
                         actions: [...article.actions, { label: "", href: "" }],
@@ -201,25 +210,25 @@ export function HelpCenterManager() {
                     }
                   >
                     Add link
-                  </button>
+                  </SaButton>
                 </div>
                 {article.actions.map((action, actionIndex) => (
                   <div key={actionIndex} className="grid gap-2 sm:grid-cols-[1fr_1fr_auto]">
-                    <input
-                      className="rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+                    <SaInput
+                      density="micro"
                       placeholder="Label"
                       value={action.label}
                       onChange={(e) => updateAction(index, actionIndex, "label", e.target.value)}
                     />
-                    <input
-                      className="rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+                    <SaInput
+                      density="micro"
                       placeholder="/dashboard"
                       value={action.href}
                       onChange={(e) => updateAction(index, actionIndex, "href", e.target.value)}
                     />
                     <button
                       type="button"
-                      className="rounded border border-red-200 px-2 py-1 text-xs font-semibold text-red-700"
+                      className="rounded border border-sa-danger/40 px-2 py-1 text-xs font-semibold text-sa-danger"
                       onClick={() =>
                         updateArticle(index, {
                           actions: article.actions.filter((_, j) => j !== actionIndex),

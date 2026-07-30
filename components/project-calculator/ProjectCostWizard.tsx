@@ -19,6 +19,10 @@ import type { ComplexityId, DesignId, PlatformId } from "@/lib/project-calculato
 import { cn } from "@/lib/utils";
 import { publicApiFetch } from "@/lib/public-api";
 import { trackLeadConversion } from "@/lib/analytics/conversions";
+import { AppAlert } from "@/components/ui/AppAlert";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput } from "@/components/ui/SaInput";
+import { SaSelect } from "@/components/ui/SaSelect";
 
 
 const leadSchema = z.object({
@@ -332,21 +336,19 @@ export function ProjectCostWizard() {
             </p>
 
             <div className="max-w-md">
-              <label htmlFor="complexity" className="text-sm font-medium text-sa-muted/80 ml-1">
-                Project complexity
-              </label>
-              <select
-                id="complexity"
-                value={complexityId}
-                onChange={(e) => setComplexityId(e.target.value as ComplexityId)}
-                className="mt-1.5 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm font-medium text-white focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary [&>option]:bg-sa-surface [&>option]:text-white"
-              >
-                {COMPLEXITY_OPTIONS.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.label} ({c.multiplier}× on labour)
-                  </option>
-                ))}
-              </select>
+              <SaField id="complexity" label="Project complexity">
+                <SaSelect
+                  id="complexity"
+                  value={complexityId}
+                  onChange={(e) => setComplexityId(e.target.value as ComplexityId)}
+                >
+                  {COMPLEXITY_OPTIONS.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.label} ({c.multiplier}× on labour)
+                    </option>
+                  ))}
+                </SaSelect>
+              </SaField>
             </div>
 
             {Array.from(grouped.entries())
@@ -403,81 +405,76 @@ export function ProjectCostWizard() {
               <span className="text-sa-muted/50">Indicative only, not a binding quote.</span>
             </p>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div>
-                <label htmlFor="c-name" className="text-sm font-medium text-sa-muted/80 ml-1">
-                  Name
-                </label>
-                <input
+            <div className="grid gap-sa-lg sm:grid-cols-2">
+              <SaField id="c-name" label="Name" required>
+                <SaInput
                   id="c-name"
+                  density="compact"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   onBlur={() => setLeadTouched(true)}
-                  className="mt-1.5 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm text-white placeholder:text-sa-muted/50 focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary"
+                  className="py-3"
                   autoComplete="name"
                   placeholder="Your name"
                 />
-              </div>
-              <div>
-                <label htmlFor="c-email" className="text-sm font-medium text-sa-muted/80 ml-1">
-                  Work email
-                </label>
-                <input
+              </SaField>
+              <SaField id="c-email" label="Work email" required>
+                <SaInput
                   id="c-email"
+                  density="compact"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   onBlur={() => setLeadTouched(true)}
-                  className="mt-1.5 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm text-white placeholder:text-sa-muted/50 focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary"
+                  className="py-3"
                   autoComplete="email"
                   placeholder="you@company.com"
                 />
-              </div>
+              </SaField>
             </div>
             <div className="max-w-md">
-              <label htmlFor="c-timeline" className="text-sm font-medium text-sa-muted/80 ml-1">
-                Target timeline
-              </label>
-              <select
+              <SaField
                 id="c-timeline"
-                value={timeline}
-                onChange={(e) => {
-                  setTimeline(e.target.value);
-                  setLeadTouched(true);
-                }}
-                className="mt-1.5 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm text-white focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary [&>option]:bg-sa-surface [&>option]:text-white"
+                label="Target timeline"
+                hint={
+                  <>
+                    Timeline applies a <span className="font-medium text-sa-muted/90">rush or flexibility factor</span> to
+                    labour, after complexity, matching common agency calculators.
+                  </>
+                }
               >
-                <option value="">Select…</option>
-                {TIMELINE_OPTIONS.map((t) => (
-                  <option key={t.value} value={t.value}>
-                    {t.rushLabourMultiplier === 1
-                      ? t.label
-                      : t.rushLabourMultiplier > 1
-                        ? `${t.label} (rush ≈ +${Math.round((t.rushLabourMultiplier - 1) * 100)}% on labour)`
-                        : `${t.label} (≈ ${Math.round((1 - t.rushLabourMultiplier) * 100)}% off labour, flexible start)`}
-                  </option>
-                ))}
-              </select>
-              <p className="mt-2 ml-1 text-[11px] text-sa-muted/60">
-                Timeline applies a <span className="font-medium text-sa-muted/90">rush or flexibility factor</span> to
-                labour, after complexity, matching common agency calculators.
-              </p>
+                <SaSelect
+                  id="c-timeline"
+                  value={timeline}
+                  onChange={(e) => {
+                    setTimeline(e.target.value);
+                    setLeadTouched(true);
+                  }}
+                >
+                  <option value="">Select…</option>
+                  {TIMELINE_OPTIONS.map((t) => (
+                    <option key={t.value} value={t.value}>
+                      {t.rushLabourMultiplier === 1
+                        ? t.label
+                        : t.rushLabourMultiplier > 1
+                          ? `${t.label} (rush ≈ +${Math.round((t.rushLabourMultiplier - 1) * 100)}% on labour)`
+                          : `${t.label} (≈ ${Math.round((1 - t.rushLabourMultiplier) * 100)}% off labour, flexible start)`}
+                    </option>
+                  ))}
+                </SaSelect>
+              </SaField>
             </div>
 
             {leadTouched && !leadParsed.success && (
-              <p className="text-sm text-red-400 border border-red-500/50 bg-red-500/10 px-4 py-3 rounded-xl">
+              <AppAlert variant="error">
                 {leadParsed.error.issues.map((e) => e.message).join(" · ")}
-              </p>
+              </AppAlert>
             )}
 
             {exportError && (
-              <p
-                role="alert"
-                aria-live="assertive"
-                className="text-sm text-red-400 border border-red-500/50 bg-red-500/10 px-4 py-3 rounded-xl print:hidden"
-              >
+              <AppAlert variant="error" className="print:hidden" aria-live="assertive">
                 {exportError}
-              </p>
+              </AppAlert>
             )}
 
             {leadSaveWarning && (

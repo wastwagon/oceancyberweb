@@ -15,6 +15,10 @@ import {
   updateAdminClientProjectStatus, 
   addAdminClientProjectActivity 
 } from "@/lib/auth-client";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput } from "@/components/ui/SaInput";
+import { SaSelect } from "@/components/ui/SaSelect";
+import { SaButton } from "@/components/ui/SaButton";
 
 interface ProjectCardProps {
   project: any;
@@ -148,12 +152,12 @@ export function ProjectCard({
           </div>
 
           <div className="flex flex-col gap-4 min-w-[240px] lg:items-end">
-             <div className="space-y-1.5 w-full">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 px-1">Phase Control</label>
+             <SaField id={`phase-${p.id}`} label="Phase Control" labelTone="caps" className="w-full">
                 <div className="relative">
-                  <select
+                  <SaSelect
+                    id={`phase-${p.id}`}
                     value={p.status}
-                    className="w-full appearance-none rounded-xl border border-sa-border bg-sa-bg px-4 py-3 text-xs font-bold uppercase tracking-widest text-white focus:border-sa-primary focus:ring-0 transition-all cursor-pointer"
+                    className="appearance-none py-3 pr-10 text-xs font-bold uppercase tracking-widest cursor-pointer bg-sa-bg"
                     onChange={async (e) => {
                       try {
                         setProjectBusy(true);
@@ -170,10 +174,10 @@ export function ProjectCard({
                     {["planning", "active", "in_review", "ready_for_launch", "launched", "on_hold", "cancelled"].map((s) => (
                       <option key={s} value={s}>{s.replace(/_/g, " ")}</option>
                     ))}
-                  </select>
-                  <ChevronDown size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-sa-muted/40 pointer-events-none" />
+                  </SaSelect>
+                  <ChevronDown size={14} className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-sa-muted/40" />
                 </div>
-             </div>
+             </SaField>
 
              <div className="flex gap-2 w-full">
                {hasBlocker ? (
@@ -232,23 +236,26 @@ export function ProjectCard({
                 </h4>
               </div>
               <div className="flex gap-2">
-                <select
+                <SaSelect
                   value={activityCategoryDraft}
                   onChange={(e) => setActivityCategoryDraft(e.target.value)}
-                  className="rounded-xl border border-sa-border bg-sa-bg px-3 text-[11px] font-bold text-white focus:ring-0"
+                  density="compact"
+                  className="w-auto bg-sa-bg px-3 text-[11px] font-bold"
                 >
                   {PROJECT_ACTIVITY_CATEGORIES.map((cat: any) => (
                     <option key={cat.id} value={cat.id}>{cat.label}</option>
                   ))}
-                </select>
-                <input
+                </SaSelect>
+                <SaInput
+                  density="compact"
                   value={activityDraft}
                   onChange={(e) => setActivityDraft(e.target.value)}
                   placeholder="Add secure system note..."
-                  className="flex-1 rounded-xl border border-sa-border bg-sa-bg px-4 py-3 text-xs text-white focus:border-sa-primary/50 focus:ring-0"
+                  className="flex-1 bg-sa-bg py-3 text-xs"
                 />
-                <button
+                <SaButton
                   type="button"
+                  size="sm"
                   disabled={projectBusy || !activityDraft.trim()}
                   onClick={async () => {
                     const note = activityDraft.trim();
@@ -265,10 +272,10 @@ export function ProjectCard({
                       setProjectBusy(false);
                     }
                   }}
-                  className="sa-btn-primary min-h-[44px] px-5 text-[10px]"
+                  className="px-5 text-[10px]"
                 >
                   Post
-                </button>
+                </SaButton>
               </div>
            </div>
 
@@ -277,16 +284,18 @@ export function ProjectCard({
                 <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-sa-muted/60 flex items-center gap-2">
                   <Clock size={12} /> Node History
                 </h4>
-                <select
+                <SaSelect
+                  density="micro"
                   value={activityFilter}
                   onChange={(e) => setActivityFilter(e.target.value)}
-                  className="bg-transparent border-none text-[9px] font-black uppercase tracking-widest text-sa-primary cursor-pointer focus:ring-0"
+                  className="w-auto cursor-pointer border-none bg-transparent font-black uppercase tracking-widest text-sa-primary"
+                  aria-label="Filter activity"
                 >
                   <option value="all">ALL_EVENTS</option>
                   {PROJECT_ACTIVITY_CATEGORIES.map((cat: any) => (
                     <option key={cat.id} value={cat.id}>{cat.label.toUpperCase()}</option>
                   ))}
-                </select>
+                </SaSelect>
               </div>
               <div className="max-h-[160px] overflow-y-auto space-y-2 pr-2 custom-scrollbar">
                 {p.activities?.length ? (

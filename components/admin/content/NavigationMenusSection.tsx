@@ -11,6 +11,9 @@ import {
   createEmptyNavItem,
   createEmptyNavMenu,
 } from "@/lib/admin/navigation-editor";
+import { SaButton } from "@/components/ui/SaButton";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput, SaTextarea } from "@/components/ui/SaInput";
 
 type NavigationMenusSectionProps = {
   menus: AdminNavMenu[];
@@ -43,9 +46,11 @@ export function NavigationMenusSection({
           </p>
 
           <div className="mt-4 flex flex-wrap gap-3">
-            <button
+            <SaButton
               type="button"
-              className="rounded-lg border border-sa-border bg-sa-surface px-4 py-2 text-sm font-semibold text-white"
+              variant="secondary"
+              size="sm"
+              className="rounded-lg normal-case tracking-normal"
               onClick={async () => {
                 setNavLoading(true);
                 try {
@@ -68,11 +73,12 @@ export function NavigationMenusSection({
               }}
             >
               {navLoading ? "Loading…" : "Reload navigation"}
-            </button>
-            <button
+            </SaButton>
+            <SaButton
               type="button"
+              size="sm"
               disabled={navSaving || navLoading}
-              className="rounded-lg bg-sa-primary px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
+              className="rounded-lg normal-case tracking-normal"
               onClick={async () => {
                 setNavSaving(true);
                 try {
@@ -111,7 +117,7 @@ export function NavigationMenusSection({
               }}
             >
               {navSaving ? "Saving…" : "Save navigation"}
-            </button>
+            </SaButton>
           </div>
 
           <div className="mt-6 space-y-4">
@@ -191,21 +197,23 @@ export function NavigationMenusSection({
               >
                 Reset to defaults
               </button>
-              <button
+              <SaButton
                 type="button"
-                className="rounded-lg border border-sa-border bg-sa-surface px-4 py-2 text-sm font-semibold text-white"
+                variant="secondary"
+                size="sm"
+                className="rounded-lg normal-case tracking-normal"
                 onClick={() => setMenus((prev) => [...prev, createEmptyNavMenu()])}
               >
                 Add menu
-              </button>
+              </SaButton>
             </div>
             {menus.map((menu, menuIndex) => (
               <div key={menu.key} className="rounded-xl border border-sa-border bg-sa-bg/80 p-4">
                 <div className="grid gap-3 sm:grid-cols-4">
-                  <label className="text-xs text-sa-muted/80">
-                    Menu key
-                    <input
-                      className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+                  <SaField id={`nav-key-${menuIndex}`} label="Menu key" labelTone="cms">
+                    <SaInput
+                      id={`nav-key-${menuIndex}`}
+                      density="micro"
                       value={menu.key}
                       onChange={(e) =>
                         setMenus((prev) =>
@@ -213,11 +221,11 @@ export function NavigationMenusSection({
                         )
                       }
                     />
-                  </label>
-                  <label className="text-xs text-sa-muted/80">
-                    Label
-                    <input
-                      className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+                  </SaField>
+                  <SaField id={`nav-label-${menuIndex}`} label="Label" labelTone="cms">
+                    <SaInput
+                      id={`nav-label-${menuIndex}`}
+                      density="micro"
                       value={menu.label}
                       onChange={(e) =>
                         setMenus((prev) =>
@@ -225,11 +233,11 @@ export function NavigationMenusSection({
                         )
                       }
                     />
-                  </label>
-                  <label className="text-xs text-sa-muted/80">
-                    Description
-                    <input
-                      className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+                  </SaField>
+                  <SaField id={`nav-desc-${menuIndex}`} label="Description" labelTone="cms">
+                    <SaInput
+                      id={`nav-desc-${menuIndex}`}
+                      density="micro"
                       value={menu.description ?? ""}
                       onChange={(e) =>
                         setMenus((prev) =>
@@ -239,7 +247,7 @@ export function NavigationMenusSection({
                         )
                       }
                     />
-                  </label>
+                  </SaField>
                   <label className="flex items-center gap-2 self-end text-xs text-sa-muted">
                     <input
                       type="checkbox"
@@ -322,8 +330,8 @@ export function NavigationMenusSection({
                 <div className="mt-3 space-y-2">
                   {menu.items.map((item, itemIndex) => (
                     <div key={`${menu.key}-${itemIndex}`} className="grid gap-2 sm:grid-cols-4">
-                      <input
-                        className="rounded-lg border border-sa-border px-2 py-1.5 text-xs"
+                      <SaInput
+                        density="micro"
                         placeholder="Heading"
                         value={item.heading}
                         onChange={(e) =>
@@ -341,8 +349,8 @@ export function NavigationMenusSection({
                           )
                         }
                       />
-                      <input
-                        className="rounded-lg border border-sa-border px-2 py-1.5 text-xs"
+                      <SaInput
+                        density="micro"
                         placeholder="Href"
                         value={item.href}
                         onChange={(e) =>
@@ -360,8 +368,8 @@ export function NavigationMenusSection({
                           )
                         }
                       />
-                      <input
-                        className="rounded-lg border border-sa-border px-2 py-1.5 text-xs"
+                      <SaInput
+                        density="micro"
                         placeholder="Description"
                         value={item.description ?? ""}
                         onChange={(e) =>
@@ -381,8 +389,8 @@ export function NavigationMenusSection({
                           )
                         }
                       />
-                      <input
-                        className="rounded-lg border border-sa-border px-2 py-1.5 text-xs"
+                      <SaInput
+                        density="micro"
                         placeholder="Sort order"
                         value={String(item.sortOrder)}
                         onChange={(e) =>
@@ -402,8 +410,9 @@ export function NavigationMenusSection({
                           )
                         }
                       />
-                      <textarea
-                        className="rounded-lg border border-sa-border px-2 py-1.5 font-mono text-[11px]"
+                      <SaTextarea
+                        density="micro"
+                        className="font-mono text-[11px]"
                         rows={3}
                         placeholder='{"dropdownKey":"services","activeMatch":["/services"]}'
                         value={item.metadataInput}

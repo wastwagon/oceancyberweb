@@ -6,6 +6,7 @@ import { getAdminUsers, updateAdminUserRole } from "@/lib/auth-client";
 import { formatMoney } from "@/lib/ops/format";
 import { cn } from "@/lib/utils";
 import { AppAlert } from "@/components/ui/AppAlert";
+import { SaInput } from "@/components/ui/SaInput";
 
 type AdminUserRow = {
   id: string;
@@ -104,12 +105,14 @@ export function UserRegistry({ onViewProjects }: UserRegistryProps) {
             </p>
           </div>
           <div className="relative min-w-[220px] flex-1 max-w-sm">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-sa-muted/40" />
-            <input
+            <Search className="absolute left-3 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-sa-muted/40" />
+            <SaInput
+              density="compact"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search email or name…"
-              className="w-full rounded-full border border-sa-border bg-sa-surface/50 py-2.5 pl-10 pr-4 text-sm text-white focus:border-sa-primary/50 focus:ring-0"
+              className="rounded-full bg-sa-surface/50 pl-10"
+              aria-label="Search users"
             />
           </div>
         </div>

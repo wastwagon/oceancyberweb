@@ -9,6 +9,9 @@ import { useCart } from "@/components/commerce/CartProvider";
 import { publicApiFetch } from "@/lib/public-api";
 import { fadeUpProps, revealViewport, staggerDelay } from "@/lib/scroll-reveal";
 import { cn } from "@/lib/utils";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput } from "@/components/ui/SaInput";
+import { AppAlert } from "@/components/ui/AppAlert";
 
 function intervalLabel(interval: "month" | "year") {
   return interval === "month" ? "/mo" : "/yr";
@@ -261,33 +264,42 @@ export default function CheckoutCartPage() {
                     <p className="mt-3 text-sm text-sa-muted/70">
                       Required by ICANN for domain registration. Use valid details.
                     </p>
-                    <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                    <div className="mt-8 grid gap-sa-lg sm:grid-cols-2">
                       {[
-                        { label: "First name", key: "firstName" },
-                        { label: "Last name", key: "lastName" },
-                        { label: "Email address", key: "emailAddress", type: "email" },
-                        { label: "Phone (+233...)", key: "phone" },
-                        { label: "Organization (optional)", key: "organizationName", colSpan: "sm:col-span-2" },
-                        { label: "Address line 1", key: "address1", colSpan: "sm:col-span-2" },
-                        { label: "City", key: "city" },
-                        { label: "State / Province", key: "stateProvince" },
-                        { label: "Postal code", key: "postalCode" },
-                        { label: "Country code (e.g. GH)", key: "country" },
+                        { label: "First name", key: "firstName", required: true },
+                        { label: "Last name", key: "lastName", required: true },
+                        { label: "Email address", key: "emailAddress", type: "email", required: true },
+                        { label: "Phone (+233...)", key: "phone", required: true },
+                        { label: "Organization", key: "organizationName", colSpan: "sm:col-span-2", optional: true },
+                        { label: "Address line 1", key: "address1", colSpan: "sm:col-span-2", required: true },
+                        { label: "City", key: "city", required: true },
+                        { label: "State / Province", key: "stateProvince", required: true },
+                        { label: "Postal code", key: "postalCode", required: true },
+                        { label: "Country code (e.g. GH)", key: "country", required: true },
                       ].map((field) => (
-                        <div key={field.key} className={field.colSpan}>
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 mb-1.5 block">
-                            {field.label}
-                          </label>
-                          <input
+                        <SaField
+                          key={field.key}
+                          id={`domain-${field.key}`}
+                          label={field.label}
+                          labelTone="caps"
+                          required={field.required}
+                          optional={field.optional}
+                          className={field.colSpan}
+                        >
+                          <SaInput
+                            id={`domain-${field.key}`}
+                            density="compact"
                             value={domainContact[field.key as keyof typeof domainContact]}
                             onChange={(e) =>
-                              onDomainContactChange(field.key as keyof typeof domainContact, field.key === "country" ? e.target.value.toUpperCase() : e.target.value)
+                              onDomainContactChange(
+                                field.key as keyof typeof domainContact,
+                                field.key === "country" ? e.target.value.toUpperCase() : e.target.value,
+                              )
                             }
                             type={field.type || "text"}
                             maxLength={field.key === "country" ? 2 : undefined}
-                            className="w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-2.5 text-sm text-white outline-none focus:border-sa-primary transition"
                           />
-                        </div>
+                        </SaField>
                       ))}
                     </div>
                   </motion.div>
@@ -431,9 +443,11 @@ export default function CheckoutCartPage() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mt-6 rounded-xl border border-rose-500/20 bg-rose-500/5 p-4 text-xs font-medium text-rose-500"
+                    className="mt-6"
                   >
-                    {submitError}
+                    <AppAlert variant="error" className="text-xs font-medium">
+                      {submitError}
+                    </AppAlert>
                   </motion.div>
                 )}
 

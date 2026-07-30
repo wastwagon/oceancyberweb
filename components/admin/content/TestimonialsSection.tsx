@@ -6,6 +6,9 @@ import {
   type AdminSiteTestimonialRow,
 } from "@/lib/auth-client";
 import { QuoteEditor } from "@/components/admin/content/QuoteEditor";
+import { SaButton } from "@/components/ui/SaButton";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput, SaTextarea } from "@/components/ui/SaInput";
 
 export type NewQuoteForm = {
   name: string;
@@ -51,66 +54,68 @@ export function TestimonialsSection({
           <div className="mt-6 space-y-3 rounded-xl border border-dashed border-sa-border bg-sa-bg/80 p-4">
             <p className="text-xs font-semibold uppercase tracking-wider text-sa-muted/60">Add testimonial</p>
             <div className="grid gap-3 sm:grid-cols-2">
-              <label className="text-xs text-sa-muted/80">
-                Name
-                <input
-                  className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+              <SaField id="new-quote-name" label="Name" labelTone="cms">
+                <SaInput
+                  id="new-quote-name"
+                  density="micro"
                   value={newQuote.name}
                   onChange={(e) => setNewQuote((s) => ({ ...s, name: e.target.value }))}
                 />
-              </label>
-              <label className="text-xs text-sa-muted/80">
-                Company
-                <input
-                  className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+              </SaField>
+              <SaField id="new-quote-company" label="Company" labelTone="cms">
+                <SaInput
+                  id="new-quote-company"
+                  density="micro"
                   value={newQuote.company}
                   onChange={(e) => setNewQuote((s) => ({ ...s, company: e.target.value }))}
                 />
-              </label>
-              <label className="text-xs text-sa-muted/80">
-                Role
-                <input
-                  className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+              </SaField>
+              <SaField id="new-quote-role" label="Role" labelTone="cms">
+                <SaInput
+                  id="new-quote-role"
+                  density="micro"
                   value={newQuote.role}
                   onChange={(e) => setNewQuote((s) => ({ ...s, role: e.target.value }))}
                 />
-              </label>
-              <label className="text-xs text-sa-muted/80">
-                Sort order
-                <input
-                  className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+              </SaField>
+              <SaField id="new-quote-sort" label="Sort order" labelTone="cms">
+                <SaInput
+                  id="new-quote-sort"
+                  density="micro"
                   value={newQuote.sortOrder}
                   onChange={(e) => setNewQuote((s) => ({ ...s, sortOrder: e.target.value }))}
                 />
-              </label>
+              </SaField>
             </div>
-            <label className="block text-xs text-sa-muted/80">
-              Quote
-              <textarea
-                className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+            <SaField id="new-quote-content" label="Quote" labelTone="cms">
+              <SaTextarea
+                id="new-quote-content"
+                density="micro"
                 rows={3}
                 value={newQuote.content}
                 onChange={(e) => setNewQuote((s) => ({ ...s, content: e.target.value }))}
               />
-            </label>
+            </SaField>
             <div className="flex flex-wrap gap-4">
-              <label className="text-xs text-sa-muted/80">
-                Rating (1–5)
-                <input
-                  className="mt-1 w-20 rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+              <SaField id="new-quote-rating" label="Rating (1–5)" labelTone="cms">
+                <SaInput
+                  id="new-quote-rating"
+                  density="micro"
+                  className="w-20"
                   value={newQuote.rating}
                   onChange={(e) => setNewQuote((s) => ({ ...s, rating: e.target.value }))}
                 />
-              </label>
-              <label className="text-xs text-sa-muted/80">
-                Initials (optional)
-                <input
-                  className="mt-1 w-20 rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+              </SaField>
+              <SaField id="new-quote-initials" label="Initials (optional)" labelTone="cms">
+                <SaInput
+                  id="new-quote-initials"
+                  density="micro"
+                  className="w-20"
                   value={newQuote.initials}
                   onChange={(e) => setNewQuote((s) => ({ ...s, initials: e.target.value }))}
                 />
-              </label>
-              <label className="flex items-center gap-2 text-sm text-sa-muted">
+              </SaField>
+              <label className="flex items-center gap-2 self-end text-sm text-sa-muted">
                 <input
                   type="checkbox"
                   checked={newQuote.featured}
@@ -119,9 +124,10 @@ export function TestimonialsSection({
                 Featured on homepage
               </label>
             </div>
-            <button
+            <SaButton
               type="button"
-              className="rounded-lg bg-sa-primary px-4 py-2 text-sm font-semibold text-white hover:bg-sa-primary/80"
+              size="sm"
+              className="rounded-lg normal-case tracking-normal"
               onClick={async () => {
                 try {
                   await createAdminSiteTestimonial({
@@ -153,7 +159,7 @@ export function TestimonialsSection({
               }}
             >
               Create testimonial
-            </button>
+            </SaButton>
           </div>
 
           {!loading ? (
@@ -182,16 +188,18 @@ export function TestimonialsSection({
                         <p className="mt-2 max-w-prose text-sm text-sa-muted/80 line-clamp-3">{row.content}</p>
                       </div>
                       <div className="flex gap-2">
-                        <button
+                        <SaButton
                           type="button"
-                          className="rounded-lg border border-sa-border px-3 py-1 text-xs font-semibold text-white"
+                          variant="secondary"
+                          size="sm"
+                          className="rounded-lg px-3 py-1 text-xs normal-case tracking-normal"
                           onClick={() => setEditQuote(row)}
                         >
                           Edit
-                        </button>
+                        </SaButton>
                         <button
                           type="button"
-                          className="rounded-lg border border-red-200 px-3 py-1 text-xs font-semibold text-red-800"
+                          className="rounded-lg border border-sa-danger/40 px-3 py-1 text-xs font-semibold text-sa-danger"
                           onClick={async () => {
                             if (!confirm(`Delete quote from ${row.name}?`)) return;
                             try {

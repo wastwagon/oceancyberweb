@@ -19,6 +19,9 @@ import {
   createAdminClientProject,
   AdminContactRow
 } from "@/lib/auth-client";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput, SaTextarea } from "@/components/ui/SaInput";
+import { SaSelect } from "@/components/ui/SaSelect";
 
 interface LeadPipelineProps {
   contacts: AdminContactRow[];
@@ -84,12 +87,13 @@ function ContactNotesField({
 
   return (
     <div className="flex flex-col gap-1">
-      <textarea
+      <SaTextarea
+        density="micro"
         value={text}
         onChange={(e) => setText(e.target.value)}
         rows={2}
         disabled={disabled}
-        className="w-full min-w-[140px] rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-xs text-white"
+        className="min-w-[140px]"
         placeholder="Internal note…"
         aria-label="Team note"
       />
@@ -236,13 +240,12 @@ export function LeadPipeline({
                 </button>
              </div>
 
-             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-                <div className="space-y-1.5">
-                  <label className="px-1 text-[10px] font-black uppercase tracking-widest text-sa-muted/40">
-                    Phase
-                  </label>
-                  <select
-                    className="w-full rounded-xl border border-sa-border bg-sa-workspace px-4 py-2.5 text-xs font-bold uppercase text-white focus:ring-0"
+             <div className="mt-8 grid gap-sa-lg sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+                <SaField id="lead-phase" label="Phase" labelTone="caps">
+                  <SaSelect
+                    id="lead-phase"
+                    density="compact"
+                    className="bg-sa-workspace text-xs font-bold uppercase"
                     value={leadStatusFilter}
                     onChange={(e) => {
                       setLeadStatusFilter(e.target.value);
@@ -254,14 +257,13 @@ export function LeadPipeline({
                         {o.label}
                       </option>
                     ))}
-                  </select>
-                </div>
-                <div className="space-y-1.5 lg:col-span-2">
-                  <label className="px-1 text-[10px] font-black uppercase tracking-widest text-sa-muted/40">
-                    Source
-                  </label>
-                  <select
-                    className="w-full rounded-xl border border-sa-border bg-sa-workspace px-4 py-2.5 text-xs font-bold uppercase text-white focus:ring-0"
+                  </SaSelect>
+                </SaField>
+                <SaField id="lead-source" label="Source" labelTone="caps" className="lg:col-span-2">
+                  <SaSelect
+                    id="lead-source"
+                    density="compact"
+                    className="bg-sa-workspace text-xs font-bold uppercase"
                     value={leadSourceFilter}
                     onChange={(e) => {
                       setLeadSourceFilter(e.target.value);
@@ -273,14 +275,13 @@ export function LeadPipeline({
                         {o.label}
                       </option>
                     ))}
-                  </select>
-                </div>
-                <div className="space-y-1.5">
-                  <label className="px-1 text-[10px] font-black uppercase tracking-widest text-sa-muted/40">
-                    Date range
-                  </label>
-                  <select
-                    className="w-full rounded-xl border border-sa-border bg-sa-workspace px-4 py-2.5 text-xs font-bold uppercase text-white focus:ring-0"
+                  </SaSelect>
+                </SaField>
+                <SaField id="lead-date" label="Date range" labelTone="caps">
+                  <SaSelect
+                    id="lead-date"
+                    density="compact"
+                    className="bg-sa-workspace text-xs font-bold uppercase"
                     value={leadDateRange}
                     onChange={(e) => {
                       setLeadDateRange(e.target.value);
@@ -292,14 +293,13 @@ export function LeadPipeline({
                         {o.label}
                       </option>
                     ))}
-                  </select>
-                </div>
-                <div className="space-y-1.5">
-                  <label className="px-1 text-[10px] font-black uppercase tracking-widest text-sa-muted/40">
-                    Sort
-                  </label>
-                  <select
-                    className="w-full rounded-xl border border-sa-border bg-sa-workspace px-4 py-2.5 text-xs font-bold uppercase text-white focus:ring-0"
+                  </SaSelect>
+                </SaField>
+                <SaField id="lead-sort" label="Sort" labelTone="caps">
+                  <SaSelect
+                    id="lead-sort"
+                    density="compact"
+                    className="bg-sa-workspace text-xs font-bold uppercase"
                     value={leadSort}
                     onChange={(e) => {
                       setLeadSort(e.target.value);
@@ -311,25 +311,29 @@ export function LeadPipeline({
                         {o.label}
                       </option>
                     ))}
-                  </select>
-                </div>
-                <div className="space-y-1.5 sm:col-span-2 lg:col-span-6 xl:col-span-2">
-                  <label className="px-1 text-[10px] font-black uppercase tracking-widest text-sa-muted/40">
-                    Search
-                  </label>
+                  </SaSelect>
+                </SaField>
+                <SaField
+                  id="lead-search"
+                  label="Search"
+                  labelTone="caps"
+                  className="sm:col-span-2 lg:col-span-6 xl:col-span-2"
+                >
                   <div className="relative">
-                    <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-sa-muted/30" />
-                    <input
+                    <Search size={14} className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 text-sa-muted/30" />
+                    <SaInput
+                      id="lead-search"
+                      density="compact"
                       value={leadSearch}
                       onChange={(e) => {
                         setLeadSearch(e.target.value);
                         setActivePresetId(null);
                       }}
                       placeholder="Search identity or message..."
-                      className="w-full rounded-xl border border-sa-border bg-sa-workspace py-2.5 pl-10 pr-4 text-xs font-bold text-white focus:ring-0"
+                      className="bg-sa-workspace py-2.5 pl-10 pr-4 text-xs font-bold"
                     />
                   </div>
-                </div>
+                </SaField>
              </div>
           </div>
 
@@ -368,9 +372,11 @@ export function LeadPipeline({
                               </div>
                            </td>
                            <td className="px-6 py-6">
-                              <select
-                                className="rounded-lg border border-sa-border bg-sa-bg px-3 py-2 text-[10px] font-black uppercase tracking-widest text-white transition-all focus:border-sa-primary"
+                              <SaSelect
+                                density="micro"
+                                className="bg-sa-bg font-black uppercase tracking-widest"
                                 value={c.status || "new"}
+                                aria-label={`Status for ${c.name}`}
                                 onChange={async (e) => {
                                   try {
                                     await patchAdminContact(c.id, { status: e.target.value });
@@ -382,7 +388,7 @@ export function LeadPipeline({
                                 }}
                               >
                                 {["new", "contacted", "won", "lost"].map(s => <option key={s} value={s}>{s}</option>)}
-                              </select>
+                              </SaSelect>
                            </td>
                            <td className="px-6 py-6 min-w-[300px]">
                               <ContactNotesField

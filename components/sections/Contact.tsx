@@ -26,6 +26,10 @@ import {
   staggerDelay,
 } from "@/lib/scroll-reveal";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
+import { AppAlert } from "@/components/ui/AppAlert";
+import { SaButton } from "@/components/ui/SaButton";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput, SaTextarea } from "@/components/ui/SaInput";
 
 const contactItems = [
   {
@@ -263,32 +267,18 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
             transition={{ ...fadeFromRight.transition, delay: 0.15 }}
             className="sa-card p-6 md:p-8 lg:mt-8"
           >
-            <form className="space-y-6" onSubmit={handleSubmit} noValidate>
+            <form className="space-y-sa-2xl" onSubmit={handleSubmit} noValidate>
               {status === "success" ? (
-                <p
-                  className="rounded-xl border border-sa-primary/50 bg-sa-primary/10 px-4 py-3 text-sm text-sa-primary"
-                  role="status"
-                >
+                <AppAlert variant="success">
                   Thank you. Your message was sent. We&apos;ll get back to you soon.
-                </p>
+                </AppAlert>
               ) : null}
               {status === "error" && errorMessage ? (
-                <p
-                  className="rounded-xl border border-red-500/50 bg-red-500/10 px-4 py-3 text-sm text-red-400"
-                  role="alert"
-                >
-                  {errorMessage}
-                </p>
+                <AppAlert variant="error">{errorMessage}</AppAlert>
               ) : null}
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                <div className="space-y-2">
-                  <label
-                    className="ml-1 text-sm font-medium text-sa-muted/80"
-                    htmlFor="contact-name"
-                  >
-                    Name
-                  </label>
-                  <input
+              <div className="grid grid-cols-1 gap-sa-2xl md:grid-cols-2">
+                <SaField id="contact-name" label="Name" required>
+                  <SaInput
                     id="contact-name"
                     name="name"
                     type="text"
@@ -297,17 +287,10 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
                     value={name}
                     onChange={(ev) => setName(ev.target.value)}
                     placeholder="Your name"
-                    className="w-full rounded-2xl border border-sa-border bg-sa-surface px-5 py-4 text-base text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary md:text-sm"
                   />
-                </div>
-                <div className="space-y-2">
-                  <label
-                    className="ml-1 text-sm font-medium text-sa-muted/80"
-                    htmlFor="contact-email"
-                  >
-                    Email
-                  </label>
-                  <input
+                </SaField>
+                <SaField id="contact-email" label="Email" required>
+                  <SaInput
                     id="contact-email"
                     name="email"
                     type="email"
@@ -316,18 +299,11 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
                     value={email}
                     onChange={(ev) => setEmail(ev.target.value)}
                     placeholder="your@email.com"
-                    className="w-full rounded-2xl border border-sa-border bg-sa-surface px-5 py-4 text-base text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary md:text-sm"
                   />
-                </div>
+                </SaField>
               </div>
-              <div className="space-y-2">
-                <label
-                  className="ml-1 text-sm font-medium text-sa-muted/80"
-                  htmlFor="contact-phone"
-                >
-                  Phone <span className="font-normal text-sa-muted/50">(optional)</span>
-                </label>
-                <input
+              <SaField id="contact-phone" label="Phone" optional>
+                <SaInput
                   id="contact-phone"
                   name="phone"
                   type="tel"
@@ -335,17 +311,10 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
                   value={phone}
                   onChange={(ev) => setPhone(ev.target.value)}
                   placeholder="+233 XX XXX XXXX"
-                  className="w-full rounded-xl border border-sa-border bg-sa-surface px-5 py-4 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary"
                 />
-              </div>
-              <div className="space-y-2">
-                <label
-                  className="ml-1 text-sm font-medium text-sa-muted/80"
-                  htmlFor="contact-message"
-                >
-                  Message
-                </label>
-                <textarea
+              </SaField>
+              <SaField id="contact-message" label="Message" required>
+                <SaTextarea
                   id="contact-message"
                   name="message"
                   rows={4}
@@ -353,16 +322,16 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
                   value={message}
                   onChange={(ev) => setMessage(ev.target.value)}
                   placeholder="Tell us about your project..."
-                  className="w-full resize-none rounded-2xl border border-sa-border bg-sa-surface px-5 py-4 text-base text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary md:text-sm"
                 />
-              </div>
-              <button
+              </SaField>
+              <SaButton
                 type="submit"
+                size="lg"
                 disabled={status === "loading"}
-                className="sa-btn-primary w-full min-h-[56px] disabled:opacity-60"
+                className="w-full"
               >
                 {status === "loading" ? "Sending…" : "Send Message"}
-              </button>
+              </SaButton>
             </form>
           </motion.div>
         </div>

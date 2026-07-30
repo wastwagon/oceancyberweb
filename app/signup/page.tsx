@@ -5,6 +5,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, Suspense, useState } from "react";
 import { signUp } from "@/lib/auth-client";
 import { Loader2 } from "lucide-react";
+import { AppAlert } from "@/components/ui/AppAlert";
+import { SaButton } from "@/components/ui/SaButton";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput } from "@/components/ui/SaInput";
 
 function AuthIllustration() {
   return (
@@ -79,51 +83,50 @@ function SignUpForm() {
             Set up secure access in less than a minute.
           </p>
 
-          <form onSubmit={onSubmit} className="mt-8 space-y-5">
-            <div>
-              <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 mb-2 block">Full name</label>
-              <input
+          <form onSubmit={onSubmit} className="mt-8 space-y-sa-xl">
+            <SaField id="signup-name" label="Full name" labelTone="caps">
+              <SaInput
+                id="signup-name"
+                density="compact"
                 type="text"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                className="w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm text-white outline-none focus:border-sa-primary transition"
+                className="py-3"
                 placeholder="e.g. Ama Owusu"
               />
-            </div>
+            </SaField>
 
-            <div>
-              <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 mb-2 block">Email</label>
-              <input
+            <SaField id="signup-email" label="Email" labelTone="caps" required>
+              <SaInput
+                id="signup-email"
+                density="compact"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm text-white outline-none focus:border-sa-primary transition"
+                className="py-3"
                 required
               />
-            </div>
+            </SaField>
 
-            <div>
-              <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 mb-2 block">Password</label>
-              <input
+            <SaField id="signup-password" label="Password" labelTone="caps" required>
+              <SaInput
+                id="signup-password"
+                density="compact"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 minLength={10}
-                className="w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm text-white outline-none focus:border-sa-primary transition"
+                className="py-3"
                 required
               />
-            </div>
+            </SaField>
 
-            {error ? (
-              <p className="rounded-xl border border-rose-500/50 bg-rose-500/10 px-4 py-3 text-sm text-rose-400">
-                {error}
-              </p>
-            ) : null}
+            {error ? <AppAlert variant="error">{error}</AppAlert> : null}
 
-            <button
+            <SaButton
               type="submit"
               disabled={loading}
-              className="sa-btn-primary w-full min-h-[48px] justify-center mt-2"
+              className="mt-2 w-full justify-center"
             >
               {loading ? (
                 <>
@@ -133,7 +136,7 @@ function SignUpForm() {
               ) : (
                 "Create account"
               )}
-            </button>
+            </SaButton>
           </form>
 
           <p className="mt-6 text-sm text-sa-muted/80 text-center">

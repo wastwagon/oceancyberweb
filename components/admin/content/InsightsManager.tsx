@@ -3,6 +3,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { insightCategories, type InsightPost } from "@/lib/insights/content";
 import { AppAlert } from "@/components/ui/AppAlert";
+import { SaButton } from "@/components/ui/SaButton";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput, SaTextarea } from "@/components/ui/SaInput";
+import { SaSelect } from "@/components/ui/SaSelect";
 
 const CATEGORY_OPTIONS = insightCategories.filter((c) => c !== "All");
 
@@ -101,21 +105,24 @@ export function InsightsManager() {
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <button
+          <SaButton
             type="button"
-            className="rounded-lg border border-sa-border px-4 py-2 text-sm font-semibold text-white"
+            variant="secondary"
+            size="sm"
+            className="rounded-lg normal-case tracking-normal"
             onClick={() => setPosts((prev) => [...prev, emptyPost()])}
           >
             Add article
-          </button>
-          <button
+          </SaButton>
+          <SaButton
             type="button"
+            size="sm"
             disabled={saving || loading}
             onClick={() => void save()}
-            className="rounded-lg bg-sa-primary px-4 py-2 text-sm font-semibold text-black disabled:opacity-50"
+            className="rounded-lg normal-case tracking-normal"
           >
             {saving ? "Saving…" : "Save insights"}
-          </button>
+          </SaButton>
         </div>
       </div>
 
@@ -138,7 +145,7 @@ export function InsightsManager() {
                 </p>
                 <button
                   type="button"
-                  className="rounded border border-red-200 px-2 py-1 text-xs font-semibold text-red-700"
+                  className="rounded border border-sa-danger/40 px-2 py-1 text-xs font-semibold text-sa-danger"
                   onClick={() => {
                     if (!confirm(`Remove "${post.title || "this article"}"?`)) return;
                     setPosts((prev) => prev.filter((_, i) => i !== index));
@@ -148,27 +155,27 @@ export function InsightsManager() {
                 </button>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
-                <label className="text-xs text-sa-muted/80">
-                  Title
-                  <input
-                    className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+                <SaField id={`insight-title-${index}`} label="Title" labelTone="cms">
+                  <SaInput
+                    id={`insight-title-${index}`}
+                    density="micro"
                     value={post.title}
                     onChange={(e) => updatePost(index, { title: e.target.value })}
                   />
-                </label>
-                <label className="text-xs text-sa-muted/80">
-                  Slug
-                  <input
-                    className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+                </SaField>
+                <SaField id={`insight-slug-${index}`} label="Slug" labelTone="cms">
+                  <SaInput
+                    id={`insight-slug-${index}`}
+                    density="micro"
                     placeholder="my-article-slug"
                     value={post.slug}
                     onChange={(e) => updatePost(index, { slug: e.target.value })}
                   />
-                </label>
-                <label className="text-xs text-sa-muted/80">
-                  Category
-                  <select
-                    className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+                </SaField>
+                <SaField id={`insight-cat-${index}`} label="Category" labelTone="cms">
+                  <SaSelect
+                    id={`insight-cat-${index}`}
+                    density="micro"
                     value={post.category}
                     onChange={(e) => updatePost(index, { category: e.target.value })}
                   >
@@ -177,52 +184,62 @@ export function InsightsManager() {
                         {c}
                       </option>
                     ))}
-                  </select>
-                </label>
-                <label className="text-xs text-sa-muted/80">
-                  Hero image path
-                  <input
-                    className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+                  </SaSelect>
+                </SaField>
+                <SaField id={`insight-image-${index}`} label="Hero image path" labelTone="cms">
+                  <SaInput
+                    id={`insight-image-${index}`}
+                    density="micro"
                     value={post.image}
                     onChange={(e) => updatePost(index, { image: e.target.value })}
                   />
-                </label>
-                <label className="text-xs text-sa-muted/80">
-                  Date label
-                  <input
-                    className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+                </SaField>
+                <SaField id={`insight-date-${index}`} label="Date label" labelTone="cms">
+                  <SaInput
+                    id={`insight-date-${index}`}
+                    density="micro"
                     value={post.date}
                     onChange={(e) => updatePost(index, { date: e.target.value })}
                   />
-                </label>
-                <label className="text-xs text-sa-muted/80">
-                  Read time
-                  <input
-                    className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+                </SaField>
+                <SaField id={`insight-read-${index}`} label="Read time" labelTone="cms">
+                  <SaInput
+                    id={`insight-read-${index}`}
+                    density="micro"
                     value={post.readTime}
                     onChange={(e) => updatePost(index, { readTime: e.target.value })}
                   />
-                </label>
-                <label className="text-xs text-sa-muted/80 sm:col-span-2">
-                  Excerpt
-                  <textarea
-                    className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+                </SaField>
+                <SaField
+                  id={`insight-excerpt-${index}`}
+                  label="Excerpt"
+                  labelTone="cms"
+                  className="sm:col-span-2"
+                >
+                  <SaTextarea
+                    id={`insight-excerpt-${index}`}
+                    density="micro"
                     rows={2}
                     value={post.excerpt}
                     onChange={(e) => updatePost(index, { excerpt: e.target.value })}
                   />
-                </label>
-                <label className="text-xs text-sa-muted/80 sm:col-span-2">
-                  Body paragraphs
-                  <textarea
-                    className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+                </SaField>
+                <SaField
+                  id={`insight-body-${index}`}
+                  label="Body paragraphs"
+                  labelTone="cms"
+                  className="sm:col-span-2"
+                >
+                  <SaTextarea
+                    id={`insight-body-${index}`}
+                    density="micro"
                     rows={6}
                     value={paragraphsToText(post.paragraphs)}
                     onChange={(e) =>
                       updatePost(index, { paragraphs: textToParagraphs(e.target.value) })
                     }
                   />
-                </label>
+                </SaField>
               </div>
             </div>
           ))}

@@ -5,6 +5,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { PostSubmitBooking } from "@/components/booking/PostSubmitBooking";
+import { AppAlert } from "@/components/ui/AppAlert";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput, SaTextarea } from "@/components/ui/SaInput";
+import { SaSelect } from "@/components/ui/SaSelect";
 import { cn } from "@/lib/utils";
 import { publicApiFetch } from "@/lib/public-api";
 import { trackLeadConversion } from "@/lib/analytics/conversions";
@@ -161,45 +165,49 @@ export function InteractiveIntakeWizard() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className="grid gap-4 sm:grid-cols-2"
+            className="grid gap-sa-lg sm:grid-cols-2"
           >
-            <div>
-              <label className="text-sm font-medium text-sa-muted/80 ml-1">Name</label>
-              <input
+            <SaField id="intake-name" label="Name" required>
+              <SaInput
+                id="intake-name"
+                density="compact"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm"
+                className="py-3"
                 placeholder="Your full name"
               />
-            </div>
-            <div>
-              <label className="text-sm font-medium text-sa-muted/80 ml-1">Work email</label>
-              <input
+            </SaField>
+            <SaField id="intake-email" label="Work email" required>
+              <SaInput
+                id="intake-email"
+                density="compact"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm"
+                className="py-3"
                 placeholder="you@company.com"
               />
-            </div>
-            <div>
-              <label className="text-sm font-medium text-sa-muted/80 ml-1">Phone (optional)</label>
-              <input
+            </SaField>
+            <SaField id="intake-phone" label="Phone" optional>
+              <SaInput
+                id="intake-phone"
+                density="compact"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm"
+                className="py-3"
                 placeholder="+233..."
               />
-            </div>
-            <div>
-              <label className="text-sm font-medium text-sa-muted/80 ml-1">Company (optional)</label>
-              <input
+            </SaField>
+            <SaField id="intake-company" label="Company" optional>
+              <SaInput
+                id="intake-company"
+                density="compact"
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm"
+                className="py-3"
                 placeholder="Company name"
               />
-            </div>
+            </SaField>
           </motion.div>
         )}
 
@@ -209,10 +217,10 @@ export function InteractiveIntakeWizard() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className="space-y-4"
+            className="space-y-sa-lg"
           >
             <div>
-              <p className="text-sm font-medium text-sa-muted/80 ml-1">What do you need?</p>
+              <p className="sa-label">What do you need?</p>
               <div className="mt-2 grid gap-2 sm:grid-cols-2">
                 {SERVICE_OPTIONS.map((opt) => {
                   const on = serviceNeeds.has(opt);
@@ -222,7 +230,7 @@ export function InteractiveIntakeWizard() {
                       key={opt}
                       onClick={() => toggleService(opt)}
                       className={cn(
-                        "rounded-xl border px-4 py-3 text-left text-sm transition-all",
+                        "rounded-sa-lg border px-4 py-3 text-left text-sm transition-all",
                         on
                           ? "border-sa-primary bg-sa-primary/10 text-sa-primary"
                           : "border-sa-border bg-sa-surface text-sa-muted hover:border-sa-primary/50",
@@ -234,16 +242,17 @@ export function InteractiveIntakeWizard() {
                 })}
               </div>
             </div>
-            <div>
-              <label className="text-sm font-medium text-sa-muted/80 ml-1">Main goals</label>
-              <textarea
+            <SaField id="intake-goals" label="Main goals">
+              <SaTextarea
+                id="intake-goals"
+                density="compact"
                 value={goals}
                 onChange={(e) => setGoals(e.target.value)}
                 rows={4}
-                className="mt-1 w-full resize-none rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm"
+                className="py-3"
                 placeholder="Example: Increase qualified leads, launch online payments, and let customers book without calling."
               />
-            </div>
+            </SaField>
           </motion.div>
         )}
 
@@ -253,37 +262,35 @@ export function InteractiveIntakeWizard() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className="grid gap-4 sm:grid-cols-2"
+            className="grid gap-sa-lg sm:grid-cols-2"
           >
-            <div>
-              <label className="text-sm font-medium text-sa-muted/80 ml-1">Budget range</label>
-              <select
+            <SaField id="intake-budget" label="Budget range">
+              <SaSelect
+                id="intake-budget"
                 value={budgetBand}
                 onChange={(e) => setBudgetBand(e.target.value as (typeof BUDGET_OPTIONS)[number])}
-                className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm [&>option]:bg-sa-surface [&>option]:text-white"
               >
                 {BUDGET_OPTIONS.map((b) => (
                   <option key={b} value={b}>
                     {b}
                   </option>
                 ))}
-              </select>
-            </div>
-            <div>
-              <label className="text-sm font-medium text-sa-muted/80 ml-1">Target timeline</label>
-              <select
+              </SaSelect>
+            </SaField>
+            <SaField id="intake-timeline" label="Target timeline">
+              <SaSelect
+                id="intake-timeline"
                 value={timelineBand}
                 onChange={(e) => setTimelineBand(e.target.value as (typeof TIMELINE_OPTIONS)[number])}
-                className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm [&>option]:bg-sa-surface [&>option]:text-white"
               >
                 {TIMELINE_OPTIONS.map((t) => (
                   <option key={t} value={t}>
                     {t}
                   </option>
                 ))}
-              </select>
-            </div>
-            <label className="sm:col-span-2 flex items-start gap-3 rounded-xl border border-sa-border bg-sa-surface p-4 text-sm text-sa-muted">
+              </SaSelect>
+            </SaField>
+            <label className="sm:col-span-2 flex items-start gap-3 rounded-sa-lg border border-sa-border bg-sa-surface p-4 text-sm text-sa-muted">
               <input
                 type="checkbox"
                 checked={hasExistingSite}
@@ -301,44 +308,43 @@ export function InteractiveIntakeWizard() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className="space-y-4"
+            className="space-y-sa-lg"
           >
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div>
-                <label className="text-sm font-medium text-sa-muted/80 ml-1">Preferred contact</label>
-                <select
+            <div className="grid gap-sa-lg sm:grid-cols-2">
+              <SaField id="intake-contact" label="Preferred contact">
+                <SaSelect
+                  id="intake-contact"
                   value={contactMethod}
                   onChange={(e) => setContactMethod(e.target.value as ContactMethod)}
-                  className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm [&>option]:bg-sa-surface [&>option]:text-white"
                 >
                   <option value="email">Email</option>
                   <option value="phone">Phone</option>
                   <option value="whatsapp">WhatsApp</option>
-                </select>
-              </div>
-              <div>
-                <label className="text-sm font-medium text-sa-muted/80 ml-1">Next step</label>
-                <select
+                </SaSelect>
+              </SaField>
+              <SaField id="intake-meeting" label="Next step">
+                <SaSelect
+                  id="intake-meeting"
                   value={meetingType}
                   onChange={(e) => setMeetingType(e.target.value as MeetingType)}
-                  className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm [&>option]:bg-sa-surface [&>option]:text-white"
                 >
                   <option value="discovery_call">Discovery call</option>
                   <option value="proposal_walkthrough">Proposal walkthrough</option>
                   <option value="asynchronous_quote">Asynchronous quote (no call)</option>
-                </select>
-              </div>
+                </SaSelect>
+              </SaField>
             </div>
-            <div>
-              <label className="text-sm font-medium text-sa-muted/80 ml-1">Preferred date/time (optional)</label>
-              <input
+            <SaField id="intake-datetime" label="Preferred date/time" optional>
+              <SaInput
+                id="intake-datetime"
+                density="compact"
                 type="datetime-local"
                 value={preferredDate}
                 onChange={(e) => setPreferredDate(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm"
+                className="py-3"
               />
-            </div>
-            <div className="rounded-xl border border-sa-border bg-sa-surface p-4 text-sm text-sa-muted/80">
+            </SaField>
+            <div className="rounded-sa-lg border border-sa-border bg-sa-surface p-4 text-sm text-sa-muted/80">
               <p className="mb-1">
                 <span className="font-semibold text-white">Scope:</span> {Array.from(serviceNeeds).join(", ") || "—"}
               </p>
@@ -354,9 +360,9 @@ export function InteractiveIntakeWizard() {
       </AnimatePresence>
 
       {status === "error" && errorMessage ? (
-        <p className="mt-4 rounded-xl border border-red-500/50 bg-red-500/10 px-4 py-3 text-sm text-red-400" role="alert">
+        <AppAlert variant="error" className="mt-4">
           {errorMessage}
-        </p>
+        </AppAlert>
       ) : null}
 
       <div className="mt-8 flex items-center justify-between gap-2 border-t border-sa-border pt-6">

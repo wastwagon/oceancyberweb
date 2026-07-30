@@ -8,6 +8,9 @@ import { useCart } from "@/components/commerce/CartProvider";
 import { HERO_TLD_PRICING } from "@/lib/domain-tld-pricing";
 import { cn } from "@/lib/utils";
 import { publicApiFetch } from "@/lib/public-api";
+import { SaInput } from "@/components/ui/SaInput";
+import { SaButton } from "@/components/ui/SaButton";
+import { AppAlert } from "@/components/ui/AppAlert";
 
 
 type CheckRow = { domain: string; available: boolean };
@@ -152,20 +155,20 @@ export function DomainSearchPanel({
             className="pointer-events-none absolute left-4 h-5 w-5 text-sa-muted/50"
             aria-hidden
           />
-          <input
+          <SaInput
             id="domain-search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search a name or full domain"
-            className="h-full w-full rounded-xl border border-sa-border bg-sa-bg py-3 pl-12 pr-4 text-base text-white outline-none ring-sa-primary/50 transition placeholder:text-sa-muted/30 focus:border-sa-primary focus:ring-1"
+            className="h-full rounded-xl bg-sa-bg py-3 pl-12 pr-4 text-base"
             autoComplete="off"
             maxLength={200}
           />
         </div>
-        <button
+        <SaButton
           type="submit"
           disabled={loading || !query.trim()}
-          className="sa-btn-primary min-h-[52px] shrink-0"
+          className="min-h-[52px] shrink-0"
         >
           {loading ? (
             <>
@@ -178,17 +181,13 @@ export function DomainSearchPanel({
               Search
             </>
           )}
-        </button>
+        </SaButton>
       </form>
 
       {error ? (
-        <div
-          className="mt-4 rounded-xl border border-sa-primary/20 bg-sa-primary/5 px-4 py-3 text-sm text-sa-primary"
-          role="alert"
-        >
-          <p className="font-bold">Check failed</p>
-          <p className="mt-1 opacity-90">{error}</p>
-        </div>
+        <AppAlert variant="info" className="mt-4" title="Check failed">
+          {error}
+        </AppAlert>
       ) : null}
 
       {rows && rows.length > 0 ? (

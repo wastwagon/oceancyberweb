@@ -1,0 +1,16 @@
+{
+  "codeConnect": {
+    "parser": "react",
+    "include": ["figma/code-connect/**/*.figma.ts", "components/ui/**/*.figma.ts"],
+    "exclude": ["node_modules/**", ".next/**", "backend/**"],
+    "importPaths": {
+      "@/components/ui/*": "./components/ui/"
+    },
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "documentUrlSubstitutions": {
+    "https://www.figma.com/design/Pk5GjBdlET8oOcvoNGsjb1/*": "https://www.figma.com/design/Pk5GjBdlET8oOcvoNGsjb1/"
+  }
+}

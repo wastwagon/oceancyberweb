@@ -8,6 +8,11 @@ import { cn } from "@/lib/utils";
 import { publicApiFetch } from "@/lib/public-api";
 import { trackLeadConversion } from "@/lib/analytics/conversions";
 import { PostSubmitBooking } from "@/components/booking/PostSubmitBooking";
+import { AppAlert } from "@/components/ui/AppAlert";
+import { SaButton } from "@/components/ui/SaButton";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput } from "@/components/ui/SaInput";
+import { SaBadge } from "@/components/ui/SaBadge";
 import { SECURITY_DOMAINS } from "@/lib/security-assessment/config";
 import { downloadSecurityAssessmentPdf } from "@/lib/security-assessment/generate-report-pdf";
 import {
@@ -116,7 +121,7 @@ export function SecurityAssessmentWizard() {
 
   if (phase === "email") {
     return (
-      <form onSubmit={submitEmail} className="sa-card space-y-5 p-6 md:p-8">
+      <form onSubmit={submitEmail} className="sa-card space-y-sa-xl p-6 md:p-8">
         <div>
           <h2 className="text-xl font-bold text-white">Get your full report</h2>
           <p className="mt-2 text-sm text-sa-muted/85">
@@ -124,32 +129,30 @@ export function SecurityAssessmentWizard() {
             book a review call.
           </p>
         </div>
-        <div>
-          <label className="text-sm font-medium text-sa-muted/80">Work email</label>
-          <input
+        <SaField id="security-email" label="Work email" required>
+          <SaInput
+            id="security-email"
+            density="compact"
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm text-white focus:border-sa-primary focus:outline-none"
+            className="py-3"
             placeholder="you@company.com"
           />
-        </div>
-        <div>
-          <label className="text-sm font-medium text-sa-muted/80">Company (optional)</label>
-          <input
+        </SaField>
+        <SaField id="security-company" label="Company" optional>
+          <SaInput
+            id="security-company"
+            density="compact"
             value={company}
             onChange={(e) => setCompany(e.target.value)}
-            className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm text-white focus:border-sa-primary focus:outline-none"
+            className="py-3"
             placeholder="Organisation"
           />
-        </div>
-        {errorMessage ? (
-          <p className="text-sm text-red-400" role="alert">
-            {errorMessage}
-          </p>
-        ) : null}
-        <button type="submit" disabled={status === "loading"} className="sa-btn-primary min-h-[48px] w-full">
+        </SaField>
+        {errorMessage ? <AppAlert variant="error">{errorMessage}</AppAlert> : null}
+        <SaButton type="submit" disabled={status === "loading"} className="w-full">
           {status === "loading" ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden />
@@ -158,7 +161,7 @@ export function SecurityAssessmentWizard() {
           ) : (
             "Download report"
           )}
-        </button>
+        </SaButton>
       </form>
     );
   }
@@ -167,7 +170,7 @@ export function SecurityAssessmentWizard() {
     return (
       <div className="space-y-6">
         <div className="sa-card border-l-4 border-sa-primary p-6 md:p-8">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">Your maturity score</p>
+          <SaBadge>Your maturity score</SaBadge>
           <p className="mt-2 font-heading text-5xl font-black text-white">{result.percent}%</p>
           <p className="mt-1 font-heading text-lg font-bold text-sa-primary">{result.tier.label}</p>
           <p className="mt-4 text-sm leading-relaxed text-sa-muted/85">{result.tier.summary}</p>

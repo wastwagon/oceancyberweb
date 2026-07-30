@@ -4,6 +4,9 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Plus } from "lucide-react";
 import { createAdminClientProject } from "@/lib/auth-client";
+import { SaButton } from "@/components/ui/SaButton";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput } from "@/components/ui/SaInput";
 
 interface ProjectDeploymentFormProps {
   load: () => Promise<void>;
@@ -50,61 +53,70 @@ export function ProjectDeploymentForm({ load, setToast }: ProjectDeploymentFormP
       className="sa-card p-6 md:p-8"
     >
       <form
-        className="grid gap-4 sm:grid-cols-4"
+        className="grid gap-sa-lg sm:grid-cols-4"
         onSubmit={handleSubmit}
       >
-        <div className="space-y-1.5">
-          <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60 px-1">Identity</label>
-          <input
+        <SaField id="deploy-email" label="Identity" labelTone="caps" required>
+          <SaInput
+            id="deploy-email"
+            density="compact"
             value={projectForm.userEmail}
             onChange={(e) => setProjectForm((p) => ({ ...p, userEmail: e.target.value }))}
             placeholder="Client Email"
             type="email"
             required
-            className="w-full rounded-xl border border-sa-border bg-sa-bg px-4 py-3 text-sm text-white focus:border-sa-primary focus:ring-0 transition-all"
+            className="bg-sa-bg py-3"
           />
-        </div>
-        <div className="space-y-1.5">
-          <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60 px-1">Objective</label>
-          <input
+        </SaField>
+        <SaField id="deploy-title" label="Objective" labelTone="caps" required>
+          <SaInput
+            id="deploy-title"
+            density="compact"
             value={projectForm.title}
             onChange={(e) => setProjectForm((p) => ({ ...p, title: e.target.value }))}
             placeholder="Project Title"
             required
-            className="w-full rounded-xl border border-sa-border bg-sa-bg px-4 py-3 text-sm text-white focus:border-sa-primary focus:ring-0 transition-all"
+            className="bg-sa-bg py-3"
           />
-        </div>
-        <div className="space-y-1.5">
-          <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60 px-1">Capital (GHS)</label>
-          <input
+        </SaField>
+        <SaField id="deploy-capital" label="Capital (GHS)" labelTone="caps" required>
+          <SaInput
+            id="deploy-capital"
+            density="compact"
             value={projectForm.totalAmountGhs}
             onChange={(e) => setProjectForm((p) => ({ ...p, totalAmountGhs: e.target.value }))}
             placeholder="Total GHS"
             type="number"
             min={100}
             required
-            className="w-full rounded-xl border border-sa-border bg-sa-bg px-4 py-3 text-sm text-white focus:border-sa-primary focus:ring-0 transition-all"
+            className="bg-sa-bg py-3"
           />
-        </div>
+        </SaField>
         <div className="flex items-end">
-          <button
+          <SaButton
             type="submit"
             disabled={projectBusy}
-            className="sa-btn-primary w-full min-h-[48px] px-6 text-[10px]"
+            className="w-full gap-2 px-6 text-[10px]"
           >
             <Plus size={16} className={projectBusy ? "animate-spin" : ""} />
             {projectBusy ? "DEPLOYING..." : "DEPLOY PROJECT"}
-          </button>
+          </SaButton>
         </div>
-        <div className="sm:col-span-4 space-y-1.5">
-          <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60 px-1">Scope Documentation</label>
-          <input
+        <SaField
+          id="deploy-scope"
+          label="Scope Documentation"
+          labelTone="caps"
+          className="sm:col-span-4"
+        >
+          <SaInput
+            id="deploy-scope"
+            density="compact"
             value={projectForm.description}
             onChange={(e) => setProjectForm((p) => ({ ...p, description: e.target.value }))}
             placeholder="Primary project objectives and scope constraints..."
-            className="w-full rounded-xl border border-sa-border bg-sa-bg px-4 py-3 text-sm text-white focus:border-sa-primary focus:ring-0 transition-all"
+            className="bg-sa-bg py-3"
           />
-        </div>
+        </SaField>
       </form>
     </motion.div>
   );

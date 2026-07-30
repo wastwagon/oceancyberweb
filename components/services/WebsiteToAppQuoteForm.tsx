@@ -5,6 +5,11 @@ import { publicApiFetch } from "@/lib/public-api";
 import { trackLeadConversion } from "@/lib/analytics/conversions";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { AppAlert } from "@/components/ui/AppAlert";
+import { SaButton } from "@/components/ui/SaButton";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput, SaTextarea } from "@/components/ui/SaInput";
+import { SaSelect } from "@/components/ui/SaSelect";
 
 
 type FormState = {
@@ -93,104 +98,110 @@ export function WebsiteToAppQuoteForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4">
-      <div className="grid gap-4 md:grid-cols-2">
-        <div>
-          <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 mb-1.5 block">Full name</label>
-          <input
+    <form onSubmit={onSubmit} className="space-y-sa-lg">
+      <div className="grid gap-sa-lg md:grid-cols-2">
+        <SaField id="w2a-name" label="Full name" labelTone="caps" required>
+          <SaInput
+            id="w2a-name"
+            density="compact"
             required
             value={form.name}
             onChange={(e) => setForm((s) => ({ ...s, name: e.target.value }))}
             placeholder="Your name"
-            className="h-11 w-full rounded-xl border border-sa-border bg-sa-surface px-4 text-sm text-white outline-none focus:border-sa-primary transition"
+            className="h-11"
           />
-        </div>
-        <div>
-          <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 mb-1.5 block">Email address</label>
-          <input
+        </SaField>
+        <SaField id="w2a-email" label="Email address" labelTone="caps" required>
+          <SaInput
+            id="w2a-email"
+            density="compact"
             required
             type="email"
             value={form.email}
             onChange={(e) => setForm((s) => ({ ...s, email: e.target.value }))}
             placeholder="you@company.com"
-            className="h-11 w-full rounded-xl border border-sa-border bg-sa-surface px-4 text-sm text-white outline-none focus:border-sa-primary transition"
+            className="h-11"
           />
-        </div>
+        </SaField>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <div>
-          <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 mb-1.5 block">Phone (optional)</label>
-          <input
+      <div className="grid gap-sa-lg md:grid-cols-2">
+        <SaField id="w2a-phone" label="Phone" labelTone="caps" optional>
+          <SaInput
+            id="w2a-phone"
+            density="compact"
             value={form.phone}
             onChange={(e) => setForm((s) => ({ ...s, phone: e.target.value }))}
             placeholder="+233..."
-            className="h-11 w-full rounded-xl border border-sa-border bg-sa-surface px-4 text-sm text-white outline-none focus:border-sa-primary transition"
+            className="h-11"
           />
-        </div>
-        <div>
-          <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 mb-1.5 block">Company (optional)</label>
-          <input
+        </SaField>
+        <SaField id="w2a-company" label="Company" labelTone="caps" optional>
+          <SaInput
+            id="w2a-company"
+            density="compact"
             value={form.company}
             onChange={(e) => setForm((s) => ({ ...s, company: e.target.value }))}
             placeholder="Company Name"
-            className="h-11 w-full rounded-xl border border-sa-border bg-sa-surface px-4 text-sm text-white outline-none focus:border-sa-primary transition"
+            className="h-11"
           />
-        </div>
+        </SaField>
       </div>
 
-      <div>
-        <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 mb-1.5 block">Existing website URL</label>
-        <input
+      <SaField id="w2a-url" label="Existing website URL" labelTone="caps" required>
+        <SaInput
+          id="w2a-url"
+          density="compact"
           required
           type="url"
           value={form.websiteUrl}
           onChange={(e) => setForm((s) => ({ ...s, websiteUrl: e.target.value }))}
           placeholder="https://..."
-          className="h-11 w-full rounded-xl border border-sa-border bg-sa-surface px-4 text-sm text-white outline-none focus:border-sa-primary transition"
+          className="h-11"
         />
-      </div>
+      </SaField>
 
-      <div>
-        <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 mb-1.5 block">Current stack</label>
-        <input
+      <SaField id="w2a-stack" label="Current stack" labelTone="caps">
+        <SaInput
+          id="w2a-stack"
+          density="compact"
           value={form.currentStack}
           onChange={(e) => setForm((s) => ({ ...s, currentStack: e.target.value }))}
           placeholder="WordPress, Shopify, custom, etc."
-          className="h-11 w-full rounded-xl border border-sa-border bg-sa-surface px-4 text-sm text-white outline-none focus:border-sa-primary transition"
+          className="h-11"
         />
-      </div>
+      </SaField>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <div>
-          <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 mb-1.5 block">Target Timeline</label>
-          <select
+      <div className="grid gap-sa-lg md:grid-cols-2">
+        <SaField id="w2a-timeline" label="Target Timeline" labelTone="caps">
+          <SaSelect
+            id="w2a-timeline"
+            density="compact"
             value={form.timelineBand}
             onChange={(e) => setForm((s) => ({ ...s, timelineBand: e.target.value }))}
-            className="h-11 w-full rounded-xl border border-sa-border bg-sa-surface px-4 text-sm text-white outline-none focus:border-sa-primary transition [&>option]:bg-sa-surface [&>option]:text-white"
           >
             <option>2-4 weeks</option>
             <option>4-8 weeks</option>
             <option>2-3 months</option>
             <option>3+ months</option>
-          </select>
-        </div>
-        <div>
-          <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 mb-1.5 block">Budget Range</label>
-          <select
+          </SaSelect>
+        </SaField>
+        <SaField id="w2a-budget" label="Budget Range" labelTone="caps">
+          <SaSelect
+            id="w2a-budget"
+            density="compact"
             value={form.budgetBand}
             onChange={(e) => setForm((s) => ({ ...s, budgetBand: e.target.value }))}
-            className="h-11 w-full rounded-xl border border-sa-border bg-sa-surface px-4 text-sm text-white outline-none focus:border-sa-primary transition [&>option]:bg-sa-surface [&>option]:text-white"
           >
             <option>Below GHS 15,000</option>
             <option>GHS 15,000 - 30,000</option>
             <option>GHS 30,000 - 60,000</option>
             <option>GHS 60,000+</option>
-          </select>
-        </div>
+          </SaSelect>
+        </SaField>
       </div>
 
-      <div className="rounded-xl border border-sa-border bg-sa-bg/50 p-4">
+      <div className="rounded-sa-lg border border-sa-border bg-sa-bg/50 p-4">
         <p className="text-sm font-semibold text-white">Target platform</p>
         <p className="mt-0.5 text-xs text-sa-muted/60">Choose where the converted app should launch first.</p>
         <div className="mt-4 flex flex-wrap gap-2">
@@ -213,9 +224,9 @@ export function WebsiteToAppQuoteForm() {
       </div>
 
       <div>
-        <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 mb-2 block">App Features</label>
+        <p className="sa-label-caps mb-2">App Features</p>
         <div className="grid gap-3 sm:grid-cols-3">
-          <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-sa-border bg-sa-surface p-3 transition hover:border-sa-primary/50">
+          <label className="flex cursor-pointer items-center gap-3 rounded-sa-lg border border-sa-border bg-sa-surface p-3 transition hover:border-sa-primary/50">
             <input
               type="checkbox"
               checked={form.needsAuth}
@@ -224,7 +235,7 @@ export function WebsiteToAppQuoteForm() {
             />
             <span className="text-sm text-sa-muted">User auth</span>
           </label>
-          <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-sa-border bg-sa-surface p-3 transition hover:border-sa-primary/50">
+          <label className="flex cursor-pointer items-center gap-3 rounded-sa-lg border border-sa-border bg-sa-surface p-3 transition hover:border-sa-primary/50">
             <input
               type="checkbox"
               checked={form.needsPayments}
@@ -233,7 +244,7 @@ export function WebsiteToAppQuoteForm() {
             />
             <span className="text-sm text-sa-muted">Payments</span>
           </label>
-          <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-sa-border bg-sa-surface p-3 transition hover:border-sa-primary/50">
+          <label className="flex cursor-pointer items-center gap-3 rounded-sa-lg border border-sa-border bg-sa-surface p-3 transition hover:border-sa-primary/50">
             <input
               type="checkbox"
               checked={form.needsPushNotifications}
@@ -243,25 +254,28 @@ export function WebsiteToAppQuoteForm() {
             <span className="text-sm text-sa-muted">Push alerts</span>
           </label>
         </div>
-        <p className="mt-2 text-xs text-sa-muted/50">
+        <p className="sa-hint mt-2">
           Select features you want included in the first app release.
         </p>
       </div>
 
-      <div>
-        <label className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 mb-1.5 block">Additional notes</label>
-        <textarea
+      <SaField id="w2a-notes" label="Additional notes" labelTone="caps">
+        <SaTextarea
+          id="w2a-notes"
+          density="compact"
           value={form.notes}
           onChange={(e) => setForm((s) => ({ ...s, notes: e.target.value }))}
           rows={5}
+          className="py-3"
           placeholder="Share key flows and screens to convert (checkout, bookings, dashboard, etc.)"
-          className="w-full resize-none rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-sm text-white outline-none focus:border-sa-primary transition"
         />
-      </div>
+      </SaField>
 
-      <button
+      <SaButton
+        type="submit"
+        size="sm"
         disabled={!canSubmit || isSubmitting}
-        className="sa-btn-primary w-full min-h-[44px] justify-center"
+        className="w-full justify-center"
       >
         {isSubmitting ? (
           <>
@@ -271,13 +285,9 @@ export function WebsiteToAppQuoteForm() {
         ) : (
           "Request conversion quote"
         )}
-      </button>
+      </SaButton>
 
-      {status && !status.ok && (
-        <p className="rounded-xl border border-rose-500/50 bg-rose-500/10 p-3 text-sm text-rose-400">
-          {status.message}
-        </p>
-      )}
+      {status && !status.ok ? <AppAlert variant="error">{status.message}</AppAlert> : null}
     </form>
   );
 }

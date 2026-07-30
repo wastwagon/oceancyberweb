@@ -1,0 +1,101 @@
+{
+  "fileKey": "Pk5GjBdlET8oOcvoNGsjb1",
+  "fileName": "Untitled UI Figma – PRO VARIABLES",
+  "connection": {
+    "mcp": "user-figma",
+    "account": "OceanCyber (oceancyberit@gmail.com)",
+    "plan": "Pro — Gilbert Amidu's team (Full seat)",
+    "verified": true,
+    "readsWorking": ["whoami", "get_metadata", "get_screenshot", "get_design_context", "get_libraries"],
+    "codeConnectBlocked": "Requires Figma Organization or Enterprise — not available on Pro"
+  },
+  "status": "local_ready_blocked_on_plan",
+  "blocker": "Code Connect publish APIs require Org/Enterprise. Local .figma.ts templates + mappings are ready.",
+  "publishWhen": "Upgrade team to Organization/Enterprise, publish Untitled UI components to a team library, then run: npx figma connect publish (or MCP send_code_connect_mappings).",
+  "localTemplates": [
+    "components/ui/SaButton.figma.ts",
+    "components/ui/SaInput.figma.ts",
+    "components/ui/SaField.figma.ts",
+    "components/ui/SaSelect.figma.ts",
+    "components/ui/SaBadge.figma.ts",
+    "components/ui/AppAlert.figma.ts"
+  ],
+  "mappings": [
+    {
+      "figmaHint": "Buttons / Button",
+      "exampleNodeId": null,
+      "codeComponent": "SaButton",
+      "source": "components/ui/SaButton.tsx",
+      "import": "import { SaButton } from \"@/components/ui/SaButton\"",
+      "propMap": {
+        "Variant": { "Primary": "primary", "Secondary": "secondary", "Secondary gray": "outline" },
+        "Size": { "sm": "sm", "md": "default", "lg": "lg", "xl": "lg" },
+        "State": { "Disabled": "disabled" }
+      }
+    },
+    {
+      "figmaHint": "Inputs / Input field",
+      "exampleNodeId": "13036:555637",
+      "codeComponent": "SaInput",
+      "source": "components/ui/SaInput.tsx",
+      "import": "import { SaInput } from \"@/components/ui/SaInput\"",
+      "propMap": {
+        "Size": { "sm": "micro", "md": "compact", "lg": "default" },
+        "State": { "Placeholder": "placeholder", "Filled": "value", "Disabled": "disabled", "Destructive": "invalid" }
+      }
+    },
+    {
+      "figmaHint": "Inputs / Textarea",
+      "exampleNodeId": "13036:555637",
+      "codeComponent": "SaTextarea",
+      "source": "components/ui/SaInput.tsx",
+      "import": "import { SaTextarea } from \"@/components/ui/SaInput\"",
+      "propMap": {
+        "State": { "Disabled": "disabled", "Destructive": "invalid" }
+      }
+    },
+    {
+      "figmaHint": "Inputs / Select",
+      "exampleNodeId": null,
+      "codeComponent": "SaSelect",
+      "source": "components/ui/SaSelect.tsx",
+      "import": "import { SaSelect } from \"@/components/ui/SaSelect\"",
+      "propMap": {
+        "Size": { "sm": "micro", "md": "compact", "lg": "default" }
+      }
+    },
+    {
+      "figmaHint": "Badges / Badge",
+      "exampleNodeId": "6643:131928",
+      "codeComponent": "SaBadge",
+      "source": "components/ui/SaBadge.tsx",
+      "import": "import { SaBadge } from \"@/components/ui/SaBadge\"",
+      "propMap": {
+        "Color": { "Brand": "primary", "Gray": "muted", "Error": "danger", "Warning": "muted", "Success": "primary" }
+      }
+    },
+    {
+      "figmaHint": "Feedback / Alert",
+      "exampleNodeId": null,
+      "codeComponent": "AppAlert",
+      "source": "components/ui/AppAlert.tsx",
+      "import": "import { AppAlert } from \"@/components/ui/AppAlert\"",
+      "propMap": {
+        "Color": { "Success": "success", "Error": "error", "Warning": "warning", "Gray": "info", "Brand": "info" }
+      }
+    },
+    {
+      "figmaHint": "Form field / Label + control",
+      "exampleNodeId": "13036:555610",
+      "codeComponent": "SaField",
+      "source": "components/ui/SaField.tsx",
+      "import": "import { SaField } from \"@/components/ui/SaField\"",
+      "propMap": {
+        "Label style": { "Default": "default", "Caps": "caps", "CMS": "cms" },
+        "Required": "required",
+        "Hint": "hint",
+        "Error": "error"
+      }
+    }
+  ]
+}

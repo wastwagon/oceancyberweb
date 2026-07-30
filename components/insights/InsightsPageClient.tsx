@@ -28,6 +28,8 @@ import {
   parseInsightCategoryParam,
   type InsightPost,
 } from "@/lib/insights/content";
+import { SaInput } from "@/components/ui/SaInput";
+import { SaButton } from "@/components/ui/SaButton";
 import { NewsletterSignupForm } from "@/components/insights/NewsletterSignupForm";
 import { LeadMagnetGate } from "@/components/marketing/LeadMagnetGate";
 
@@ -204,7 +206,7 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
                 className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-sa-muted/50"
                 aria-hidden
               />
-              <input
+              <SaInput
                 id="insights-search"
                 name="q"
                 type="search"
@@ -212,17 +214,17 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
                 onChange={(e) => setDraft(e.target.value)}
                 placeholder="Search articles…"
                 autoComplete="off"
-                className="min-h-[48px] w-full rounded-xl border border-sa-border bg-sa-surface/80 py-3 pl-11 pr-4 text-sm text-white placeholder:text-sa-muted/50 backdrop-blur-sm transition focus:border-sa-primary focus:outline-none"
+                className="min-h-[48px] bg-sa-surface/80 py-3 pl-11 pr-4 backdrop-blur-sm"
               />
             </div>
             <div className="flex shrink-0 gap-2">
-              <button type="submit" className="sa-btn-primary min-h-[48px] px-6">
+              <SaButton type="submit" className="min-h-[48px] px-6">
                 Search
-              </button>
+              </SaButton>
               {q ? (
                 <Link
                   href={buildInsightsHref("", category)}
-                  className="inline-flex min-h-[48px] items-center justify-center rounded-xl border border-sa-border bg-sa-surface px-5 text-sm font-semibold text-sa-muted transition-colors hover:border-sa-primary/50 hover:text-white"
+                  className="sa-btn-secondary px-5 text-sm font-semibold normal-case tracking-normal"
                 >
                   Clear
                 </Link>

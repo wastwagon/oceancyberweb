@@ -12,6 +12,9 @@ import {
 import { techSplit } from "@/lib/admin/content-form-utils";
 import { ProjectDesignFields } from "@/components/admin/ProjectDesignFields";
 import { MediaUploadField } from "@/components/admin/MediaUploadField";
+import { SaButton } from "@/components/ui/SaButton";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput, SaTextarea } from "@/components/ui/SaInput";
 
 export function ProjectEditor({
   row,
@@ -40,58 +43,58 @@ export function ProjectEditor({
   return (
     <div className="space-y-3 rounded-xl border border-sa-primary/20 bg-sa-primary/10/40 p-4">
       <div className="grid gap-3 sm:grid-cols-2">
-        <label className="text-xs text-sa-muted/80">
-          Title
-          <input
-            className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+        <SaField id={`proj-title-${row.id}`} label="Title" labelTone="cms">
+          <SaInput
+            id={`proj-title-${row.id}`}
+            density="micro"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-        </label>
-        <label className="text-xs text-sa-muted/80">
-          Slug
-          <input
-            className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+        </SaField>
+        <SaField id={`proj-slug-${row.id}`} label="Slug" labelTone="cms">
+          <SaInput
+            id={`proj-slug-${row.id}`}
+            density="micro"
             value={slug}
             onChange={(e) => setSlug(e.target.value)}
           />
-        </label>
-        <label className="text-xs text-sa-muted/80">
-          Category
-          <input
-            className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+        </SaField>
+        <SaField id={`proj-cat-${row.id}`} label="Category" labelTone="cms">
+          <SaInput
+            id={`proj-cat-${row.id}`}
+            density="micro"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           />
-        </label>
-        <label className="text-xs text-sa-muted/80">
-          Sort order
-          <input
-            className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+        </SaField>
+        <SaField id={`proj-sort-${row.id}`} label="Sort order" labelTone="cms">
+          <SaInput
+            id={`proj-sort-${row.id}`}
+            density="micro"
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value)}
           />
-        </label>
+        </SaField>
       </div>
-      <label className="block text-xs text-sa-muted/80">
-        Description
-        <textarea
-          className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+      <SaField id={`proj-desc-${row.id}`} label="Description" labelTone="cms">
+        <SaTextarea
+          id={`proj-desc-${row.id}`}
+          density="micro"
           rows={2}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-      </label>
-      <label className="block text-xs text-sa-muted/80">
-        Tech (comma-separated)
-        <input
-          className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+      </SaField>
+      <SaField id={`proj-tech-${row.id}`} label="Tech (comma-separated)" labelTone="cms">
+        <SaInput
+          id={`proj-tech-${row.id}`}
+          density="micro"
           value={tech}
           onChange={(e) => setTech(e.target.value)}
         />
-      </label>
-      <label className="block text-xs text-sa-muted/80">
-        Cover image
+      </SaField>
+      <div>
+        <p className="sa-label-cms">Cover image</p>
         <div className="mt-1">
           <MediaUploadField
             label="Project cover"
@@ -100,7 +103,7 @@ export function ProjectEditor({
             onChange={setImageUrl}
           />
         </div>
-      </label>
+      </div>
 
       <ProjectDesignFields
         projectType={projectType}
@@ -114,15 +117,16 @@ export function ProjectEditor({
         Edit raw details JSON
       </label>
       {showRawJson ? (
-        <label className="block text-xs text-sa-muted/80">
-          Details JSON
-          <textarea
-            className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 font-mono text-xs"
+        <SaField id={`proj-json-${row.id}`} label="Details JSON" labelTone="cms">
+          <SaTextarea
+            id={`proj-json-${row.id}`}
+            density="micro"
+            className="font-mono text-xs"
             rows={5}
             value={detailsJson}
             onChange={(e) => setDetailsJson(e.target.value)}
           />
-        </label>
+        </SaField>
       ) : null}
 
       <label className="flex items-center gap-2 text-sm">
@@ -130,10 +134,11 @@ export function ProjectEditor({
         Featured
       </label>
       <div className="flex gap-2">
-        <button
+        <SaButton
           type="button"
+          size="sm"
           disabled={saving}
-          className="rounded-lg bg-sa-primary px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
+          className="rounded-lg normal-case tracking-normal"
           onClick={async () => {
             let details: Record<string, unknown>;
             if (showRawJson && detailsJson.trim()) {
@@ -170,10 +175,16 @@ export function ProjectEditor({
           }}
         >
           {saving ? "Saving…" : "Save"}
-        </button>
-        <button type="button" className="rounded-lg border border-sa-border px-4 py-2 text-sm" onClick={onCancel}>
+        </SaButton>
+        <SaButton
+          type="button"
+          variant="secondary"
+          size="sm"
+          className="rounded-lg normal-case tracking-normal"
+          onClick={onCancel}
+        >
           Cancel
-        </button>
+        </SaButton>
       </div>
     </div>
   );

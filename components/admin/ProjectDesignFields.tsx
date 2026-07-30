@@ -11,6 +11,9 @@ import {
   type ProjectDetailsFormState,
 } from "@/lib/admin/portfolio-details-form";
 import { MediaUploadField } from "@/components/admin/MediaUploadField";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput, SaTextarea } from "@/components/ui/SaInput";
+import { SaSelect } from "@/components/ui/SaSelect";
 
 const WIREFRAME_PRESETS = [
   { label: "Discovery wireframe", path: "/images/design/wireframe-discovery.svg" },
@@ -41,10 +44,10 @@ export function ProjectDesignFields({
         Portfolio metadata
       </p>
 
-      <label className="block text-xs text-sa-muted/80">
-        Work type (portfolio filter)
-        <select
-          className="mt-1 w-full rounded-lg border border-sa-border bg-sa-surface px-2 py-1.5 text-sm text-white"
+      <SaField id="proj-work-type" label="Work type (portfolio filter)" labelTone="cms">
+        <SaSelect
+          id="proj-work-type"
+          density="micro"
           value={projectType}
           onChange={(e) => onProjectTypeChange(e.target.value as PortfolioProjectType)}
         >
@@ -53,8 +56,8 @@ export function ProjectDesignFields({
               {getProjectTypeLabel(t)}
             </option>
           ))}
-        </select>
-      </label>
+        </SaSelect>
+      </SaField>
 
       <div className="space-y-3">
         <div className="flex items-center justify-between gap-2">
@@ -95,21 +98,22 @@ export function ProjectDesignFields({
               ) : null}
             </div>
             <div className="grid gap-2 sm:grid-cols-4">
-              <input
-                className="rounded border border-sa-border px-2 py-1 text-xs"
+              <SaInput
+                density="micro"
                 placeholder="01"
                 value={artifact.phase}
                 onChange={(e) => updateArtifact(index, { phase: e.target.value })}
               />
-              <input
-                className="rounded border border-sa-border px-2 py-1 text-xs sm:col-span-3"
+              <SaInput
+                density="micro"
+                className="sm:col-span-3"
                 placeholder="Phase title"
                 value={artifact.title}
                 onChange={(e) => updateArtifact(index, { title: e.target.value })}
               />
             </div>
-            <textarea
-              className="w-full rounded border border-sa-border px-2 py-1 text-xs"
+            <SaTextarea
+              density="micro"
               rows={2}
               placeholder="Description"
               value={artifact.description}

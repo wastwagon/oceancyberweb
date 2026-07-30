@@ -6,6 +6,11 @@ import { cn } from "@/lib/utils";
 import { publicApiFetch } from "@/lib/public-api";
 import { trackLeadConversion } from "@/lib/analytics/conversions";
 import { PostSubmitBooking } from "@/components/booking/PostSubmitBooking";
+import { AppAlert } from "@/components/ui/AppAlert";
+import { SaButton } from "@/components/ui/SaButton";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput, SaTextarea } from "@/components/ui/SaInput";
+import { SaSelect } from "@/components/ui/SaSelect";
 
 const PROJECT_TYPES = [
   { id: "website", label: "Website" },
@@ -120,55 +125,106 @@ export function ProposalRequestForm({ initialTopic }: ProposalRequestFormProps) 
   }
 
   return (
-    <form onSubmit={onSubmit} className="sa-card space-y-5 p-5 md:p-6">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div>
-          <label className="text-sm font-medium text-sa-muted/80 ml-1">Name</label>
-          <input value={name} onChange={(e) => setName(e.target.value)} className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm" placeholder="Your full name" />
-        </div>
-        <div>
-          <label className="text-sm font-medium text-sa-muted/80 ml-1">Work email</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm" placeholder="you@company.com" />
-        </div>
-        <div>
-          <label className="text-sm font-medium text-sa-muted/80 ml-1">Phone (optional)</label>
-          <input value={phone} onChange={(e) => setPhone(e.target.value)} className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm" placeholder="+233..." />
-        </div>
-        <div>
-          <label className="text-sm font-medium text-sa-muted/80 ml-1">Company (optional)</label>
-          <input value={company} onChange={(e) => setCompany(e.target.value)} className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm" placeholder="Company name" />
-        </div>
+    <form onSubmit={onSubmit} className="sa-card space-y-sa-xl p-5 md:p-6">
+      <div className="grid gap-sa-lg sm:grid-cols-2">
+        <SaField id="proposal-name" label="Name" required>
+          <SaInput
+            id="proposal-name"
+            density="compact"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="py-3"
+            placeholder="Your full name"
+          />
+        </SaField>
+        <SaField id="proposal-email" label="Work email" required>
+          <SaInput
+            id="proposal-email"
+            density="compact"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="py-3"
+            placeholder="you@company.com"
+          />
+        </SaField>
+        <SaField id="proposal-phone" label="Phone" optional>
+          <SaInput
+            id="proposal-phone"
+            density="compact"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            className="py-3"
+            placeholder="+233..."
+          />
+        </SaField>
+        <SaField id="proposal-company" label="Company" optional>
+          <SaInput
+            id="proposal-company"
+            density="compact"
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+            className="py-3"
+            placeholder="Company name"
+          />
+        </SaField>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div>
-          <label className="text-sm font-medium text-sa-muted/80 ml-1">Project type</label>
-          <select value={projectType} onChange={(e) => setProjectType(e.target.value as (typeof PROJECT_TYPES)[number]["id"])} className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm [&>option]:bg-sa-surface [&>option]:text-white">
+      <div className="grid gap-sa-lg sm:grid-cols-2">
+        <SaField id="proposal-type" label="Project type">
+          <SaSelect
+            id="proposal-type"
+            value={projectType}
+            onChange={(e) => setProjectType(e.target.value as (typeof PROJECT_TYPES)[number]["id"])}
+          >
             {PROJECT_TYPES.map((pt) => (
               <option key={pt.id} value={pt.id}>
                 {pt.label}
               </option>
             ))}
-          </select>
-        </div>
-        <div>
-          <label className="text-sm font-medium text-sa-muted/80 ml-1">Decision deadline (optional)</label>
-          <input type="date" value={decisionDeadline} onChange={(e) => setDecisionDeadline(e.target.value)} className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm" />
-        </div>
+          </SaSelect>
+        </SaField>
+        <SaField id="proposal-deadline" label="Decision deadline" optional>
+          <SaInput
+            id="proposal-deadline"
+            density="compact"
+            type="date"
+            value={decisionDeadline}
+            onChange={(e) => setDecisionDeadline(e.target.value)}
+            className="py-3"
+          />
+        </SaField>
       </div>
 
-      <div>
-        <label className="text-sm font-medium text-sa-muted/80 ml-1">Current situation and objectives</label>
-        <textarea value={currentSituation} onChange={(e) => setCurrentSituation(e.target.value)} rows={4} className="mt-1 w-full resize-none rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white placeholder:text-sa-muted/50 transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm" placeholder="Explain your current setup, pain points, and what the proposal should solve." />
-      </div>
+      <SaField id="proposal-situation" label="Current situation and objectives" required>
+        <SaTextarea
+          id="proposal-situation"
+          density="compact"
+          value={currentSituation}
+          onChange={(e) => setCurrentSituation(e.target.value)}
+          rows={4}
+          className="py-3"
+          placeholder="Explain your current setup, pain points, and what the proposal should solve."
+        />
+      </SaField>
 
       <div>
-        <p className="text-sm font-medium text-sa-muted/80 ml-1">What should the proposal include?</p>
+        <p className="sa-label">What should the proposal include?</p>
         <div className="mt-2 grid gap-2 sm:grid-cols-2">
           {SCOPE_OPTIONS.map((item) => {
             const on = requiredScope.has(item);
             return (
-              <button type="button" key={item} onClick={() => toggleScope(item)} className={cn("rounded-xl border px-4 py-3 text-left text-sm transition-all", on ? "border-sa-primary bg-sa-primary/10 text-sa-primary" : "border-sa-border bg-sa-surface text-sa-muted hover:border-sa-primary/50")}>
+              <button
+                type="button"
+                key={item}
+                onClick={() => toggleScope(item)}
+                className={cn(
+                  "rounded-sa-lg border px-4 py-3 text-left text-sm transition-all",
+                  on
+                    ? "border-sa-primary bg-sa-primary/10 text-sa-primary"
+                    : "border-sa-border bg-sa-surface text-sa-muted hover:border-sa-primary/50",
+                )}
+              >
                 {item}
               </button>
             );
@@ -176,46 +232,60 @@ export function ProposalRequestForm({ initialTopic }: ProposalRequestFormProps) 
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div>
-          <label className="text-sm font-medium text-sa-muted/80 ml-1">Budget range</label>
-          <select value={budgetBand} onChange={(e) => setBudgetBand(e.target.value as (typeof BUDGET_OPTIONS)[number])} className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm [&>option]:bg-sa-surface [&>option]:text-white">
+      <div className="grid gap-sa-lg sm:grid-cols-2">
+        <SaField id="proposal-budget" label="Budget range">
+          <SaSelect
+            id="proposal-budget"
+            value={budgetBand}
+            onChange={(e) => setBudgetBand(e.target.value as (typeof BUDGET_OPTIONS)[number])}
+          >
             {BUDGET_OPTIONS.map((b) => (
               <option key={b} value={b}>
                 {b}
               </option>
             ))}
-          </select>
-        </div>
-        <div>
-          <label className="text-sm font-medium text-sa-muted/80 ml-1">Target timeline</label>
-          <select value={timelineBand} onChange={(e) => setTimelineBand(e.target.value as (typeof TIMELINE_OPTIONS)[number])} className="mt-1 w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white transition-all focus:border-sa-primary focus:outline-none focus:ring-1 focus:ring-sa-primary text-sm [&>option]:bg-sa-surface [&>option]:text-white">
+          </SaSelect>
+        </SaField>
+        <SaField id="proposal-timeline" label="Target timeline">
+          <SaSelect
+            id="proposal-timeline"
+            value={timelineBand}
+            onChange={(e) => setTimelineBand(e.target.value as (typeof TIMELINE_OPTIONS)[number])}
+          >
             {TIMELINE_OPTIONS.map((t) => (
               <option key={t} value={t}>
                 {t}
               </option>
             ))}
-          </select>
-        </div>
+          </SaSelect>
+        </SaField>
       </div>
 
       <div className="grid gap-2 sm:grid-cols-2">
-        <label className="flex items-start gap-3 rounded-xl border border-sa-border bg-sa-surface p-4 text-sm text-sa-muted">
-          <input type="checkbox" checked={needsNda} onChange={(e) => setNeedsNda(e.target.checked)} className="mt-0.5 h-4 w-4 accent-sa-primary" />
+        <label className="flex items-start gap-3 rounded-sa-lg border border-sa-border bg-sa-surface p-4 text-sm text-sa-muted">
+          <input
+            type="checkbox"
+            checked={needsNda}
+            onChange={(e) => setNeedsNda(e.target.checked)}
+            className="mt-0.5 h-4 w-4 accent-sa-primary"
+          />
           We need an NDA before sharing more details.
         </label>
-        <label className="flex items-start gap-3 rounded-xl border border-sa-border bg-sa-surface p-4 text-sm text-sa-muted">
-          <input type="checkbox" checked={wantsProposalWalkthrough} onChange={(e) => setWantsProposalWalkthrough(e.target.checked)} className="mt-0.5 h-4 w-4 accent-sa-primary" />
+        <label className="flex items-start gap-3 rounded-sa-lg border border-sa-border bg-sa-surface p-4 text-sm text-sa-muted">
+          <input
+            type="checkbox"
+            checked={wantsProposalWalkthrough}
+            onChange={(e) => setWantsProposalWalkthrough(e.target.checked)}
+            className="mt-0.5 h-4 w-4 accent-sa-primary"
+          />
           We want a proposal walkthrough call.
         </label>
       </div>
 
-      {status === "error" && errorMessage ? (
-        <p className="rounded-xl border border-red-500/50 bg-red-500/10 px-4 py-3 text-sm text-red-400">{errorMessage}</p>
-      ) : null}
+      {status === "error" && errorMessage ? <AppAlert variant="error">{errorMessage}</AppAlert> : null}
 
       <div className="pt-2">
-        <button type="submit" disabled={!isValid || status === "loading"} className="sa-btn-primary w-full sm:w-auto min-h-[44px] px-8 disabled:opacity-50">
+        <SaButton type="submit" size="sm" disabled={!isValid || status === "loading"} className="w-full px-8 sm:w-auto">
           {status === "loading" ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -224,7 +294,7 @@ export function ProposalRequestForm({ initialTopic }: ProposalRequestFormProps) 
           ) : (
             "Request formal proposal"
           )}
-        </button>
+        </SaButton>
       </div>
     </form>
   );

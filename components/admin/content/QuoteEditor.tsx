@@ -5,6 +5,9 @@ import {
   patchAdminSiteTestimonial,
   type AdminSiteTestimonialRow,
 } from "@/lib/auth-client";
+import { SaButton } from "@/components/ui/SaButton";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput, SaTextarea } from "@/components/ui/SaInput";
 
 export function QuoteEditor({
   row,
@@ -28,75 +31,78 @@ export function QuoteEditor({
   return (
     <div className="space-y-3 rounded-xl border border-sa-primary/20 bg-sa-primary/10/40 p-4">
       <div className="grid gap-3 sm:grid-cols-2">
-        <label className="text-xs text-sa-muted/80">
-          Name
-          <input
-            className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+        <SaField id={`quote-name-${row.id}`} label="Name" labelTone="cms">
+          <SaInput
+            id={`quote-name-${row.id}`}
+            density="micro"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-        </label>
-        <label className="text-xs text-sa-muted/80">
-          Company
-          <input
-            className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+        </SaField>
+        <SaField id={`quote-company-${row.id}`} label="Company" labelTone="cms">
+          <SaInput
+            id={`quote-company-${row.id}`}
+            density="micro"
             value={company}
             onChange={(e) => setCompany(e.target.value)}
           />
-        </label>
-        <label className="text-xs text-sa-muted/80">
-          Role
-          <input
-            className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+        </SaField>
+        <SaField id={`quote-role-${row.id}`} label="Role" labelTone="cms">
+          <SaInput
+            id={`quote-role-${row.id}`}
+            density="micro"
             value={role}
             onChange={(e) => setRole(e.target.value)}
           />
-        </label>
-        <label className="text-xs text-sa-muted/80">
-          Sort order
-          <input
-            className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+        </SaField>
+        <SaField id={`quote-sort-${row.id}`} label="Sort order" labelTone="cms">
+          <SaInput
+            id={`quote-sort-${row.id}`}
+            density="micro"
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value)}
           />
-        </label>
+        </SaField>
       </div>
-      <label className="block text-xs text-sa-muted/80">
-        Quote
-        <textarea
-          className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+      <SaField id={`quote-content-${row.id}`} label="Quote" labelTone="cms">
+        <SaTextarea
+          id={`quote-content-${row.id}`}
+          density="micro"
           rows={4}
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
-      </label>
+      </SaField>
       <div className="flex flex-wrap gap-4">
-        <label className="text-xs text-sa-muted/80">
-          Rating
-          <input
-            className="mt-1 w-16 rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+        <SaField id={`quote-rating-${row.id}`} label="Rating" labelTone="cms">
+          <SaInput
+            id={`quote-rating-${row.id}`}
+            density="micro"
+            className="w-16"
             value={rating}
             onChange={(e) => setRating(e.target.value)}
           />
-        </label>
-        <label className="text-xs text-sa-muted/80">
-          Initials
-          <input
-            className="mt-1 w-16 rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+        </SaField>
+        <SaField id={`quote-initials-${row.id}`} label="Initials" labelTone="cms">
+          <SaInput
+            id={`quote-initials-${row.id}`}
+            density="micro"
+            className="w-16"
             value={initials}
             onChange={(e) => setInitials(e.target.value)}
           />
-        </label>
-        <label className="flex items-center gap-2 text-sm">
+        </SaField>
+        <label className="flex items-center gap-2 self-end text-sm">
           <input type="checkbox" checked={featured} onChange={(e) => setFeatured(e.target.checked)} />
           Featured
         </label>
       </div>
       <div className="flex gap-2">
-        <button
+        <SaButton
           type="button"
+          size="sm"
           disabled={saving}
-          className="rounded-lg bg-sa-primary px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
+          className="rounded-lg normal-case tracking-normal"
           onClick={async () => {
             setSaving(true);
             try {
@@ -117,10 +123,16 @@ export function QuoteEditor({
           }}
         >
           {saving ? "Saving…" : "Save"}
-        </button>
-        <button type="button" className="rounded-lg border border-sa-border px-4 py-2 text-sm" onClick={onCancel}>
+        </SaButton>
+        <SaButton
+          type="button"
+          variant="secondary"
+          size="sm"
+          className="rounded-lg normal-case tracking-normal"
+          onClick={onCancel}
+        >
           Cancel
-        </button>
+        </SaButton>
       </div>
     </div>
   );

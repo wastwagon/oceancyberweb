@@ -11,6 +11,8 @@ import {
   LEAD_MAGNET_PRESETS,
   type LeadMagnetId,
 } from "@/lib/lead-magnets/presets";
+import { SaButton } from "@/components/ui/SaButton";
+import { SaInput } from "@/components/ui/SaInput";
 
 type LeadMagnetGateProps = {
   magnetId?: LeadMagnetId;
@@ -109,7 +111,7 @@ export function LeadMagnetGate({
             <label htmlFor={`lead-magnet-${magnetId}`} className="sr-only">
               Work email
             </label>
-            <input
+            <SaInput
               id={`lead-magnet-${magnetId}`}
               type="email"
               required
@@ -118,12 +120,12 @@ export function LeadMagnetGate({
               disabled={status === "loading"}
               placeholder="you@company.com"
               autoComplete="email"
-              className="min-h-[48px] w-full rounded-xl border border-sa-border bg-sa-bg/60 px-4 py-3 text-sm text-white placeholder:text-sa-muted/50 focus:border-sa-primary focus:outline-none disabled:opacity-60"
+              className="min-h-[48px] bg-sa-bg/60 py-3"
             />
-            <button
+            <SaButton
               type="submit"
               disabled={status === "loading"}
-              className="sa-btn-primary mt-3 min-h-[48px] w-full disabled:opacity-60"
+              className="mt-3 w-full"
             >
               {status === "loading" ? (
                 <>
@@ -136,10 +138,10 @@ export function LeadMagnetGate({
                   Email me the PDF
                 </>
               )}
-            </button>
+            </SaButton>
             <p
               className={`mt-3 text-center text-[10px] font-bold uppercase tracking-widest ${
-                status === "error" ? "text-red-400" : "text-sa-muted/45"
+                status === "error" ? "text-sa-danger" : "text-sa-fg-subtle"
               }`}
               role={status === "error" ? "alert" : undefined}
             >

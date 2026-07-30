@@ -8,6 +8,9 @@ import { DashboardNav } from "@/components/dashboard/DashboardNav";
 import { PaystackReturnBanner } from "@/components/payments/PaystackReturnBanner";
 import { usePaystackReturn } from "@/hooks/usePaystackReturn";
 import { AppAlert } from "@/components/ui/AppAlert";
+import { SaButton } from "@/components/ui/SaButton";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput } from "@/components/ui/SaInput";
 import { Loader2, RefreshCcw, Wallet } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -103,18 +106,17 @@ function WalletTopupContent() {
       />
 
       <div className="sa-card border-sa-border p-6 md:p-8">
-        <form onSubmit={onSubmit} className="space-y-6">
-          <div>
-            <label className="mb-3 block text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">
-              Amount (₵)
-            </label>
-            <input
+        <form onSubmit={onSubmit} className="space-y-sa-2xl">
+          <SaField id="wallet-amount" label="Amount (₵)" labelTone="caps">
+            <SaInput
+              id="wallet-amount"
+              density="compact"
               type="number"
               min={1}
               step={1}
               value={amount}
               onChange={(e) => setAmount(Number(e.target.value || 0))}
-              className="w-full rounded-xl border border-sa-border bg-sa-surface px-4 py-3 text-white transition-colors focus:border-sa-primary focus:outline-none"
+              className="py-3"
               required
               disabled={payState === "verifying"}
             />
@@ -136,15 +138,15 @@ function WalletTopupContent() {
                 </button>
               ))}
             </div>
-          </div>
+          </SaField>
 
           {error ? <AppAlert variant="error">{error}</AppAlert> : null}
 
           <div className="flex flex-wrap gap-4 pt-2">
-            <button
+            <SaButton
               type="submit"
               disabled={loading || payState === "verifying" || amount < 1}
-              className="sa-btn-primary min-h-[48px] px-8 disabled:opacity-60"
+              className="px-8"
             >
               {loading ? (
                 <>
@@ -154,10 +156,10 @@ function WalletTopupContent() {
               ) : (
                 "Continue to Paystack"
               )}
-            </button>
+            </SaButton>
             <Link
               href="/dashboard"
-              className="inline-flex min-h-[48px] items-center justify-center rounded-xl border border-sa-border bg-sa-surface px-6 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition-colors hover:border-sa-primary hover:text-white"
+              className="sa-btn-secondary px-6 text-[10px]"
             >
               Back to dashboard
             </Link>

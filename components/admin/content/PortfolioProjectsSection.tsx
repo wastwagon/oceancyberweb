@@ -7,6 +7,9 @@ import {
 } from "@/lib/auth-client";
 import { ProjectEditor } from "@/components/admin/content/ProjectEditor";
 import { techSplit } from "@/lib/admin/content-form-utils";
+import { SaButton } from "@/components/ui/SaButton";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput, SaTextarea } from "@/components/ui/SaInput";
 
 export type NewProjectForm = {
   title: string;
@@ -55,76 +58,81 @@ export function PortfolioProjectsSection({
           <div className="mt-6 space-y-3 rounded-xl border border-dashed border-sa-border bg-sa-bg/80 p-4">
             <p className="text-xs font-semibold uppercase tracking-wider text-sa-muted/60">Add project</p>
             <div className="grid gap-3 sm:grid-cols-2">
-              <label className="text-xs text-sa-muted/80">
-                Title
-                <input
-                  className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+              <SaField id="new-proj-title" label="Title" labelTone="cms">
+                <SaInput
+                  id="new-proj-title"
+                  density="micro"
                   value={newProj.title}
                   onChange={(e) => setNewProj((s) => ({ ...s, title: e.target.value }))}
                 />
-              </label>
-              <label className="text-xs text-sa-muted/80">
-                Slug (URL)
-                <input
-                  className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+              </SaField>
+              <SaField id="new-proj-slug" label="Slug (URL)" labelTone="cms">
+                <SaInput
+                  id="new-proj-slug"
+                  density="micro"
                   placeholder="my-case-study"
                   value={newProj.slug}
                   onChange={(e) => setNewProj((s) => ({ ...s, slug: e.target.value }))}
                 />
-              </label>
-              <label className="text-xs text-sa-muted/80">
-                Category
-                <input
-                  className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+              </SaField>
+              <SaField id="new-proj-cat" label="Category" labelTone="cms">
+                <SaInput
+                  id="new-proj-cat"
+                  density="micro"
                   value={newProj.category}
                   onChange={(e) => setNewProj((s) => ({ ...s, category: e.target.value }))}
                 />
-              </label>
-              <label className="text-xs text-sa-muted/80">
-                Sort order
-                <input
-                  className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+              </SaField>
+              <SaField id="new-proj-sort" label="Sort order" labelTone="cms">
+                <SaInput
+                  id="new-proj-sort"
+                  density="micro"
                   value={newProj.sortOrder}
                   onChange={(e) => setNewProj((s) => ({ ...s, sortOrder: e.target.value }))}
                 />
-              </label>
+              </SaField>
             </div>
-            <label className="block text-xs text-sa-muted/80">
-              Short description
-              <textarea
-                className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+            <SaField id="new-proj-desc" label="Short description" labelTone="cms">
+              <SaTextarea
+                id="new-proj-desc"
+                density="micro"
                 rows={2}
                 value={newProj.description}
                 onChange={(e) => setNewProj((s) => ({ ...s, description: e.target.value }))}
               />
-            </label>
-            <label className="block text-xs text-sa-muted/80">
-              Tech stack (comma-separated)
-              <input
-                className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+            </SaField>
+            <SaField id="new-proj-tech" label="Tech stack (comma-separated)" labelTone="cms">
+              <SaInput
+                id="new-proj-tech"
+                density="micro"
                 placeholder="Next.js, PostgreSQL"
                 value={newProj.tech}
                 onChange={(e) => setNewProj((s) => ({ ...s, tech: e.target.value }))}
               />
-            </label>
-            <label className="block text-xs text-sa-muted/80">
-              Image URL (optional)
-              <input
-                className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 text-sm"
+            </SaField>
+            <SaField id="new-proj-image" label="Image URL (optional)" labelTone="cms">
+              <SaInput
+                id="new-proj-image"
+                density="micro"
                 value={newProj.imageUrl}
                 onChange={(e) => setNewProj((s) => ({ ...s, imageUrl: e.target.value }))}
               />
-            </label>
-            <label className="block text-xs text-sa-muted/80">
-              Details JSON (optional — or configure after create in the editor)
-              <textarea
-                className="mt-1 w-full rounded-lg border border-sa-border px-2 py-1.5 font-mono text-xs"
+            </SaField>
+            <SaField
+              id="new-proj-json"
+              label="Details JSON (optional — or configure after create in the editor)"
+              labelTone="cms"
+            >
+              <SaTextarea
+                id="new-proj-json"
+                density="micro"
+                className="font-mono text-xs"
                 rows={4}
                 placeholder='{"v":1,"image":"/images/...","projectType":"hybrid","designArtifacts":[]}'
                 value={newProj.detailsJson}
                 onChange={(e) => setNewProj((s) => ({ ...s, detailsJson: e.target.value }))}
               />
-            </label>
+            </SaField>
             <label className="flex items-center gap-2 text-sm text-sa-muted">
               <input
                 type="checkbox"
@@ -133,9 +141,10 @@ export function PortfolioProjectsSection({
               />
               Featured
             </label>
-            <button
+            <SaButton
               type="button"
-              className="rounded-lg bg-sa-primary px-4 py-2 text-sm font-semibold text-white hover:bg-sa-primary/80"
+              size="sm"
+              className="rounded-lg normal-case tracking-normal"
               onClick={async () => {
                 let details: Record<string, unknown> | undefined;
                 if (newProj.detailsJson.trim()) {
@@ -178,7 +187,7 @@ export function PortfolioProjectsSection({
               }}
             >
               Create project
-            </button>
+            </SaButton>
           </div>
 
           {loading ? (
@@ -208,16 +217,18 @@ export function PortfolioProjectsSection({
                         </p>
                       </div>
                       <div className="flex gap-2">
-                        <button
+                        <SaButton
                           type="button"
-                          className="rounded-lg border border-sa-border px-3 py-1 text-xs font-semibold text-white"
+                          variant="secondary"
+                          size="sm"
+                          className="rounded-lg px-3 py-1 text-xs normal-case tracking-normal"
                           onClick={() => setEditProj(row)}
                         >
                           Edit
-                        </button>
+                        </SaButton>
                         <button
                           type="button"
-                          className="rounded-lg border border-red-200 px-3 py-1 text-xs font-semibold text-red-800"
+                          className="rounded-lg border border-sa-danger/40 px-3 py-1 text-xs font-semibold text-sa-danger"
                           onClick={async () => {
                             if (!confirm(`Delete “${row.title}”?`)) return;
                             try {

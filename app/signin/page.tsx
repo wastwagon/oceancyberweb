@@ -5,6 +5,11 @@ import { useSearchParams } from "next/navigation";
 import { FormEvent, Suspense, useState } from "react";
 import { signIn } from "@/lib/auth-client";
 import { Eye, EyeOff, Loader2, ShieldCheck, Zap } from "lucide-react";
+import { AppAlert } from "@/components/ui/AppAlert";
+import { SaButton } from "@/components/ui/SaButton";
+import { SaField } from "@/components/ui/SaField";
+import { SaInput } from "@/components/ui/SaInput";
+import { SaBadge } from "@/components/ui/SaBadge";
 
 function SignInForm() {
   const params = useSearchParams();
@@ -45,9 +50,11 @@ function SignInForm() {
           
           {/* Brand/Value Proposition (Startup Agency Theme) */}
           <section className="hidden lg:block">
-            <div className="inline-flex items-center gap-3 rounded-full border border-sa-primary/20 bg-sa-primary/5 px-4 py-2 text-[10px] font-black uppercase tracking-[0.3em] text-sa-primary">
-              <ShieldCheck className="h-4 w-4" />
-              Secure Login
+            <div className="inline-flex items-center gap-3 rounded-full border border-sa-primary/20 bg-sa-primary/5 px-4 py-2">
+              <SaBadge variant="primary" className="border-0 bg-transparent px-0 py-0 tracking-[0.3em]">
+                <ShieldCheck className="mr-2 h-4 w-4" />
+                Secure Login
+              </SaBadge>
             </div>
             <h1 className="mt-8 font-heading text-6xl font-black leading-[1.05] tracking-tight text-white xl:text-7xl">
               Welcome <br />
@@ -90,63 +97,50 @@ function SignInForm() {
                 </p>
               </div>
 
-              <form onSubmit={onSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-sa-primary/70">
-                    Email Address
-                  </label>
-                  <input
+              <form onSubmit={onSubmit} className="space-y-sa-2xl">
+                <SaField id="signin-email" label="Email Address" labelTone="caps">
+                  <SaInput
+                    id="signin-email"
                     type="email"
                     placeholder="admin@oceancyber.net"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full rounded-2xl border border-sa-border bg-sa-bg/50 px-5 py-4 text-sm text-white outline-none ring-sa-primary/10 transition-all focus:border-sa-primary focus:ring-4 placeholder:text-sa-muted/20"
+                    className="rounded-2xl border-sa-border bg-sa-bg/50 ring-sa-primary/10 focus:ring-4"
                     required
                   />
-                </div>
+                </SaField>
 
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-sa-primary/70">
-                      Password
-                    </label>
-                  </div>
+                <SaField id="signin-password" label="Password" labelTone="caps">
                   <div className="relative">
-                    <input
+                    <SaInput
+                      id="signin-password"
                       type={showPassword ? "text" : "password"}
                       placeholder="••••••••••••"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full rounded-2xl border border-sa-border bg-sa-bg/50 px-5 py-4 text-sm text-white outline-none ring-sa-primary/10 transition-all focus:border-sa-primary focus:ring-4 placeholder:text-sa-muted/20"
+                      className="rounded-2xl border-sa-border bg-sa-bg/50 pr-12 ring-sa-primary/10 focus:ring-4"
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 text-sa-muted/30 hover:text-sa-primary transition-colors"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-sa-muted/30 transition-colors hover:text-sa-primary"
+                      aria-label={showPassword ? "Hide password" : "Show password"}
                     >
                       {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                     </button>
                   </div>
-                </div>
+                </SaField>
 
-                {error && (
-                  <div className="animate-in fade-in slide-in-from-top-1 rounded-2xl border border-rose-500/20 bg-rose-500/5 px-4 py-4 text-sm font-medium text-rose-400">
-                    {error}
-                  </div>
-                )}
+                {error ? <AppAlert variant="error">{error}</AppAlert> : null}
 
-                <button
+                <SaButton
                   type="submit"
                   disabled={loading}
-                  className="sa-btn-primary group w-full justify-center py-5 text-base font-bold tracking-wide"
+                  className="group w-full justify-center py-5 text-base font-bold tracking-wide"
                 >
-                  {loading ? (
-                    <Loader2 className="h-6 w-6 animate-spin" />
-                  ) : (
-                    "Sign In"
-                  )}
-                </button>
+                  {loading ? <Loader2 className="h-6 w-6 animate-spin" /> : "Sign In"}
+                </SaButton>
               </form>
 
               <div className="mt-10 border-t border-sa-border pt-8 text-center">
