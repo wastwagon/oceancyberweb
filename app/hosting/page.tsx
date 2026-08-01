@@ -176,8 +176,8 @@ export default function HostingPage({
             <motion.div {...fadeFromRight} className="sa-card overflow-hidden !rounded-3xl">
               <div className="relative aspect-square md:aspect-video lg:aspect-square">
                 <Image
-                  src="/images/oceancyber-setup.webp"
-                  alt="OceanCyber hosting setup"
+                  src="/images/hero-services/oceancyber-accra-cloud-hosting-services-ghana.webp"
+                  alt="OceanCyber cloud hosting infrastructure"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover grayscale opacity-60"

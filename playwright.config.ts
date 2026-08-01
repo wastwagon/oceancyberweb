@@ -18,7 +18,7 @@ export default defineConfig({
   webServer: process.env.PLAYWRIGHT_SKIP_WEBSERVER
     ? undefined
     : {
-        command: `FRONTEND_PORT=${webPort} npm run start`,
+        command: `FRONTEND_PORT=${webPort} npm run start:standalone`,
         url: baseURL,
         reuseExistingServer: !process.env.CI,
         timeout: 120_000,

@@ -19,7 +19,7 @@ test.describe("public smoke", () => {
   test("contact page loads", async ({ page }) => {
     await page.goto("/contact");
     await expect(
-      page.getByRole("heading", { level: 2, name: /Start a Conversation/i }),
+      page.getByRole("heading", { level: 1, name: /Start a Conversation/i }),
     ).toBeVisible();
   });
 });

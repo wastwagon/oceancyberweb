@@ -12,6 +12,7 @@
     "build:shared": "npm run build --workspace=@oceancyber/shared",
     "build:api": "npm run build --workspace=@oceancyber/api",
     "start": "next start -p ${FRONTEND_PORT:-3020}",
+    "start:standalone": "node -e \"const fs=require('fs');const p=require('path');const s=p.join('.next','static');const d=p.join('.next','standalone','.next','static');fs.mkdirSync(p.dirname(d),{recursive:true});fs.cpSync(s,d,{recursive:true});\" && PORT=${FRONTEND_PORT:-3020} HOSTNAME=127.0.0.1 node .next/standalone/server.js",
     "lint": "next lint",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
