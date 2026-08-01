@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { Prisma } from "@prisma/client";
 import { BillingService } from "../billing/billing.service";
@@ -286,11 +290,20 @@ export class AdminService {
     };
   }
 
-  async updateUserRole(userId: string, role: "user" | "admin", actorEmail: string) {
+  async updateUserRole(
+    userId: string,
+    role: "user" | "admin",
+    actorEmail: string,
+  ) {
     const user = await this.prisma.user.findUnique({ where: { id: userId } });
     if (!user) throw new NotFoundException("User not found");
-    if (user.email.toLowerCase() === actorEmail.toLowerCase() && role === "user") {
-      throw new BadRequestException("You cannot demote your own admin account.");
+    if (
+      user.email.toLowerCase() === actorEmail.toLowerCase() &&
+      role === "user"
+    ) {
+      throw new BadRequestException(
+        "You cannot demote your own admin account.",
+      );
     }
     const row = await this.prisma.user.update({
       where: { id: userId },
@@ -490,8 +503,14 @@ export class AdminService {
     dateRange?: string;
   }) {
     const base = this.buildContactWhere(filters);
-    const [all, newOnly, projectCalc, chat, namecheapCheckout, websiteToAppQuote] =
-      await Promise.all([
+    const [
+      all,
+      newOnly,
+      projectCalc,
+      chat,
+      namecheapCheckout,
+      websiteToAppQuote,
+    ] = await Promise.all([
       this.prisma.contact.count({ where: { ...base } }),
       this.prisma.contact.count({ where: { ...base, status: "new" } }),
       this.prisma.contact.count({

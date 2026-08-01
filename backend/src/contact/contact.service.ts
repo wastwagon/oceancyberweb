@@ -319,7 +319,9 @@ export class ContactService {
       },
     });
 
-    this.logger.log(`New security assessment from ${email} (${dto.scorePercent}% ${dto.tier})`);
+    this.logger.log(
+      `New security assessment from ${email} (${dto.scorePercent}% ${dto.tier})`,
+    );
 
     const adminEmail = this.config.get<string>("CONTACT_NOTIFICATION_EMAIL");
     if (adminEmail && this.mail.isEnabled()) {

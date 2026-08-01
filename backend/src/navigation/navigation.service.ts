@@ -172,12 +172,14 @@ const DEFAULT_CONFIG = {
       items: [
         {
           heading: "Software products",
-          description: "Explore OceanCyber subscription products for African operators.",
+          description:
+            "Explore OceanCyber subscription products for African operators.",
           link: "/products",
         },
         {
           heading: "OceanCyber POS",
-          description: "Ghana-ready point of sale — MoMo, offline mode, and multi-branch.",
+          description:
+            "Ghana-ready point of sale — MoMo, offline mode, and multi-branch.",
           link: "/products/pos",
         },
       ],
@@ -187,18 +189,75 @@ const DEFAULT_CONFIG = {
       description:
         "Proven delivery patterns for regulated and growth-focused sectors.",
       items: [
-        { heading: "Financial Services", description: "Secure banking solutions and fintech innovations.", link: "/industries/financial-services" },
-        { heading: "Healthcare", description: "Compliant healthcare technology solutions.", link: "/industries/healthcare" },
-        { heading: "Education", description: "Practical e-learning platforms that improve delivery and outcomes.", link: "/industries/education" },
-        { heading: "Retail & E-commerce", description: "Retail technology to boost online sales and engagement.", link: "/industries/retail" },
-        { heading: "Tourism & Hospitality", description: "Booking and guest experience platforms for travel brands.", link: "/industries/tourism" },
-        { heading: "Legal Services", description: "Case management and secure client portals for law firms.", link: "/industries/legal" },
-        { heading: "Logistics & Supply Chain", description: "Tracking, dispatch, and fulfillment software for movers of goods.", link: "/industries/logistics" },
-        { heading: "Real Estate & Property", description: "Property listings, CRM, and tenant management platforms.", link: "/industries/real-estate" },
-        { heading: "Agriculture & AgriTech", description: "Agri marketplaces, cooperatives, and field data platforms.", link: "/industries/agriculture" },
-        { heading: "Media & Entertainment", description: "Content platforms, streaming, and digital publishing.", link: "/industries/media-entertainment" },
-        { heading: "Government & Public Sector", description: "Citizen portals, e-services, and secure public platforms.", link: "/industries/government" },
-        { heading: "Energy & Utilities", description: "Utility billing, smart metering, and operations software.", link: "/industries/energy" },
+        {
+          heading: "Financial Services",
+          description: "Secure banking solutions and fintech innovations.",
+          link: "/industries/financial-services",
+        },
+        {
+          heading: "Healthcare",
+          description: "Compliant healthcare technology solutions.",
+          link: "/industries/healthcare",
+        },
+        {
+          heading: "Education",
+          description:
+            "Practical e-learning platforms that improve delivery and outcomes.",
+          link: "/industries/education",
+        },
+        {
+          heading: "Retail & E-commerce",
+          description:
+            "Retail technology to boost online sales and engagement.",
+          link: "/industries/retail",
+        },
+        {
+          heading: "Tourism & Hospitality",
+          description:
+            "Booking and guest experience platforms for travel brands.",
+          link: "/industries/tourism",
+        },
+        {
+          heading: "Legal Services",
+          description:
+            "Case management and secure client portals for law firms.",
+          link: "/industries/legal",
+        },
+        {
+          heading: "Logistics & Supply Chain",
+          description:
+            "Tracking, dispatch, and fulfillment software for movers of goods.",
+          link: "/industries/logistics",
+        },
+        {
+          heading: "Real Estate & Property",
+          description:
+            "Property listings, CRM, and tenant management platforms.",
+          link: "/industries/real-estate",
+        },
+        {
+          heading: "Agriculture & AgriTech",
+          description:
+            "Agri marketplaces, cooperatives, and field data platforms.",
+          link: "/industries/agriculture",
+        },
+        {
+          heading: "Media & Entertainment",
+          description: "Content platforms, streaming, and digital publishing.",
+          link: "/industries/media-entertainment",
+        },
+        {
+          heading: "Government & Public Sector",
+          description:
+            "Citizen portals, e-services, and secure public platforms.",
+          link: "/industries/government",
+        },
+        {
+          heading: "Energy & Utilities",
+          description:
+            "Utility billing, smart metering, and operations software.",
+          link: "/industries/energy",
+        },
       ],
     },
     resources: {
@@ -236,12 +295,14 @@ const DEFAULT_CONFIG = {
         },
         {
           heading: "OceanCyber POS",
-          description: "SaaS point of sale — trial signup, your MoMo keys, offline mode.",
+          description:
+            "SaaS point of sale — trial signup, your MoMo keys, offline mode.",
           link: "/products/pos",
         },
         {
           heading: "Security self-assessment",
-          description: "Score your maturity in minutes and download a PDF report.",
+          description:
+            "Score your maturity in minutes and download a PDF report.",
           link: "/tools/security-assessment",
         },
       ],
@@ -253,12 +314,14 @@ const DEFAULT_CONFIG = {
       items: [
         {
           heading: "Get Started",
-          description: "Begin your project intake and next steps with our team.",
+          description:
+            "Begin your project intake and next steps with our team.",
           link: "/get-started",
         },
         {
           heading: "Pricing",
-          description: "Compare packages and indicative investment ranges in GHS.",
+          description:
+            "Compare packages and indicative investment ranges in GHS.",
           link: "/pricing",
         },
         {
@@ -268,12 +331,14 @@ const DEFAULT_CONFIG = {
         },
         {
           heading: "Request Proposal",
-          description: "Formal scope, timeline, and pricing sections for your project.",
+          description:
+            "Formal scope, timeline, and pricing sections for your project.",
           link: "/tools/proposal",
         },
         {
           heading: "Google Reviews",
-          description: "Verified client ratings and recent feedback from Google.",
+          description:
+            "Verified client ratings and recent feedback from Google.",
           link: "/reviews",
         },
         {
@@ -301,7 +366,8 @@ const DEFAULT_CONFIG = {
         },
         {
           heading: "Security assessment",
-          description: "Free self-assessment with downloadable maturity report.",
+          description:
+            "Free self-assessment with downloadable maturity report.",
           link: "/tools/security-assessment",
         },
       ],
@@ -337,7 +403,8 @@ const DEFAULT_CONFIG = {
         },
         {
           heading: "Team",
-          description: "Meet the people behind design, engineering, and delivery.",
+          description:
+            "Meet the people behind design, engineering, and delivery.",
           link: "/team",
         },
         {
@@ -347,7 +414,8 @@ const DEFAULT_CONFIG = {
         },
         {
           heading: "Pricing",
-          description: "Transparent tiers and indicative investment ranges in GHS.",
+          description:
+            "Transparent tiers and indicative investment ranges in GHS.",
           link: "/pricing",
         },
         {
@@ -360,10 +428,14 @@ const DEFAULT_CONFIG = {
   },
 };
 
-function mergeMainHeaderNav<T extends { href: string; label: string; dropdownKey?: string; activeMatch?: string[] }>(
-  dbNav: T[],
-  defaultNav: T[],
-): T[] {
+function mergeMainHeaderNav<
+  T extends {
+    href: string;
+    label: string;
+    dropdownKey?: string;
+    activeMatch?: string[];
+  },
+>(dbNav: T[], defaultNav: T[]): T[] {
   const dbByHref = new Map(dbNav.map((item) => [item.href, item]));
   const order = new Map(defaultNav.map((item, index) => [item.href, index]));
   const merged: T[] = [];
@@ -375,7 +447,9 @@ function mergeMainHeaderNav<T extends { href: string; label: string; dropdownKey
         ? {
             ...dbItem,
             dropdownKey: item.dropdownKey ?? dbItem.dropdownKey,
-            activeMatch: item.activeMatch?.length ? item.activeMatch : dbItem.activeMatch,
+            activeMatch: item.activeMatch?.length
+              ? item.activeMatch
+              : dbItem.activeMatch,
           }
         : item,
     );
@@ -585,9 +659,10 @@ export class NavigationService {
         const dbItems = byKey.get(`main-dropdown-${key}`);
         if (dbItems && dbItems.length > 0) {
           const first = dbItems[0];
-          const defaultItems = DEFAULT_CONFIG.mainHeaderDropdownContent[
-            key as keyof typeof DEFAULT_CONFIG.mainHeaderDropdownContent
-          ]?.items ?? [];
+          const defaultItems =
+            DEFAULT_CONFIG.mainHeaderDropdownContent[
+              key as keyof typeof DEFAULT_CONFIG.mainHeaderDropdownContent
+            ]?.items ?? [];
           const dbLinks = new Set(dbItems.map((item) => item.href));
           const mergedItems = [
             ...dbItems.map((item) => ({

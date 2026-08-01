@@ -1,4 +1,13 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, Min, Max } from "class-validator";
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  MaxLength,
+  Min,
+  Max,
+} from "class-validator";
 
 export class CreateSecurityAssessmentDto {
   @IsEmail()
