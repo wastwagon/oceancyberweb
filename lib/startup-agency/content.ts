@@ -76,31 +76,43 @@ export const aboutWorkPreview = [
   {
     title: "Financial Services Platform",
     category: "Web · Dashboard",
+    tags: ["Web"] as const,
     image: siteImagePaths.work.fintechDashboard,
     href: "/portfolio?tab=creative",
   },
   {
     title: "Mobile Commerce Experience",
     category: "E-commerce · App",
+    tags: ["Mobile"] as const,
     image: siteImagePaths.work.mobileCommerce,
     href: "/portfolio?tab=creative",
   },
   {
     title: "Brand & Design System",
     category: "UI/UX · Identity",
+    tags: ["Brand"] as const,
     image: siteImagePaths.work.brandSystem,
     href: "/portfolio?tab=creative",
   },
   {
     title: "Travel Booking Platform",
     category: "Web · Hospitality",
+    tags: ["Web"] as const,
     image: siteImagePaths.work.travelPlatform,
     href: "/portfolio?tab=creative",
   },
   {
     title: "Secure Enterprise Portal",
     category: "Cybersecurity · Web",
+    tags: ["Security", "Web"] as const,
     image: siteImagePaths.work.cybersecurityPlatform,
+    href: "/portfolio?tab=creative",
+  },
+  {
+    title: "Creative Hub Concepts",
+    category: "UI/UX · Brand",
+    tags: ["Brand"] as const,
+    image: siteImagePaths.portfolio.creativeHub,
     href: "/portfolio?tab=creative",
   },
 ] as const;
