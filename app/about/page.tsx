@@ -149,7 +149,7 @@ const aboutHeroItem = {
 
 export default function AboutPage() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
+    <main className="relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
 
       {/* Hero */}
       <section className="sa-page-intro relative z-10 overflow-hidden border-b border-sa-border">
@@ -454,14 +454,17 @@ export default function AboutPage() {
               Tell us about your product, security posture, or growth goals, and
               we&apos;ll respond with a clear path forward.
             </p>
-            <div className="mt-8">
-              <Link href="/contact" className="sa-btn-primary">
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Link href="/get-started" className="sa-btn-primary">
+                Get started
+              </Link>
+              <Link href="/contact" className="sa-btn-outline">
                 Talk to our team
               </Link>
             </div>
           </motion.div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

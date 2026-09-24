@@ -35,7 +35,7 @@ export function SaPortfolioGallerySection() {
 
         <div className="mx-auto mt-10 text-center md:mt-12">
           <Link href="/portfolio" className="sa-btn-outline">
-            Open full portfolio
+            View portfolio
           </Link>
           <Link href="/portfolio?tab=creative" className="sa-btn-primary ml-0 mt-3 inline-flex sm:ml-3 sm:mt-0">
             Creative Hub

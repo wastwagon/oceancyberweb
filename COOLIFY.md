@@ -104,7 +104,6 @@ Set in Coolify **before rebuilding `web`**. `NEXT_PUBLIC_*` values are baked in 
 | `NEXT_PUBLIC_GOOGLE_PLACE_ID` | `ChIJ…` | Direct “Write a review” URL ([Place ID Finder](https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder)). |
 | `GOOGLE_MAPS_API_KEY` | server API key | Sync live rating/count from Google Places API. Enable **Places API** in Google Cloud; restrict key to Places + your server IP. |
 | `GOOGLE_PLACE_ID` | `ChIJ…` | Same as above; server-side Places lookup (optional if text search finds your listing). |
-| `NEXT_PUBLIC_CLUTCH_PROFILE_URL` | `https://clutch.co/profile/…` | Clutch badge on `/reviews` and trust section. |
 | `GOOGLE_VERIFICATION_CODE` | meta tag `content` value | Search Console HTML-tag verification. **Skip if you verified via** `public/google4aca0206ad5fa02e.html`. |
 | `NEXT_PUBLIC_GA_ID` | `G-XXXXXXXX` | Google Analytics. |
 | `NEXT_PUBLIC_SHOWREEL_URL` | CDN MP4 URL | Hero showreel video (optional). |
@@ -117,7 +116,6 @@ NEXT_PUBLIC_GOOGLE_REVIEWS_URL=https://maps.app.goo.gl/yWiB5pNhev2rgZSx7
 # GOOGLE_MAPS_API_KEY=
 # GOOGLE_PLACE_ID=
 # NEXT_PUBLIC_GOOGLE_PLACE_ID=
-# NEXT_PUBLIC_CLUTCH_PROFILE_URL=
 # NEXT_PUBLIC_GA_ID=
 ```
 

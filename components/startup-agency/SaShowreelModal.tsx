@@ -159,7 +159,7 @@ export function SaShowreelModal({ open, onClose }: SaShowreelModalProps) {
                 className="sa-btn-primary w-full text-center sm:w-auto"
                 onClick={onClose}
               >
-                View live client work
+                View portfolio
               </Link>
             </div>
           </motion.div>

@@ -20,8 +20,8 @@ export default function GetStartedPage() {
       <section className="sa-page-intro overflow-hidden border-b border-sa-border">
         <div className="sa-container max-w-3xl pb-8 md:pb-10">
           <p className="sa-eyebrow mb-3 text-center block">Self-serve</p>
-          <h1 className="sa-title mt-3 text-center md:text-4xl">
-            Start your project in one guided flow
+          <h1 className="sa-title mt-3 text-center">
+            Get started in one guided flow
           </h1>
           <p className="sa-lead mx-auto mt-3 text-center">
             Share your goals, scope, budget range, and timeline, then choose your preferred next step. We use this to

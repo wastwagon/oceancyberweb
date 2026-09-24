@@ -15,8 +15,8 @@ const content: ServicePageContent = {
   heroHighlightTone: "white",
   heroDescription:
     "Fast, accessible marketing sites and robust web products, with performance budgets, SEO foundations, and maintainable systems your team can extend.",
-  heroCtaLabel: "Talk to our team",
-  heroCtaHref: "/contact",
+  heroCtaLabel: "Get started",
+  heroCtaHref: "/get-started",
   heroImage: serviceImages.webDevelopment,
   pills: ["Next.js", "Performance", "Design systems"],
   focusEyebrow: "Product surfaces",

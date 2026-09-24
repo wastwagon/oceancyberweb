@@ -15,9 +15,9 @@ export type ReviewBadge = {
   external: boolean;
 };
 
+/** Homepage / reviews trust badges — Google Business Profile only. */
 export function getReviewBadges(): ReviewBadge[] {
   const googleUrl = getGoogleBusinessProfileUrl();
-  const clutchUrl = process.env.NEXT_PUBLIC_CLUTCH_PROFILE_URL?.trim();
 
   return [
     {
@@ -27,14 +27,6 @@ export function getReviewBadges(): ReviewBadge[] {
       label: formatGoogleReviewCountLabel(),
       href: googleUrl,
       external: true,
-    },
-    {
-      id: "clutch",
-      provider: "Clutch",
-      rating: "Top rated",
-      label: clutchUrl ? "View Clutch profile" : "See portfolio outcomes",
-      href: clutchUrl || "/portfolio",
-      external: Boolean(clutchUrl),
     },
   ];
 }

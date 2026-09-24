@@ -297,7 +297,7 @@ export default function SecurityJourneyPage() {
                 transition={staggerDelay(index, 0.07)}
                 className="sa-card p-8 text-center"
               >
-                <div className="font-heading text-4xl font-bold tracking-tight text-white md:text-5xl">
+                <div className="font-heading text-3xl font-bold tracking-tight text-white md:text-4xl">
                   {s.value}
                 </div>
                 <div className="mt-2 font-heading text-[10px] font-semibold uppercase tracking-widest text-sa-primary">

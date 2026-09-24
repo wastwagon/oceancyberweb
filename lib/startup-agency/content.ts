@@ -144,37 +144,6 @@ export const trustSignals = [
   },
 ] as const;
 
-export const featuredCaseStudies = [
-  {
-    slug: "fitch-advisory",
-    title: "Fitch Advisory",
-    metric: "250%",
-    metricLabel: "Client engagement",
-    sector: "Advisory",
-  },
-  {
-    slug: "fitch-attorneys",
-    title: "Fitch Attorneys",
-    metric: "180%",
-    metricLabel: "Case efficiency",
-    sector: "Legal",
-  },
-  {
-    slug: "africa-governance-centre",
-    title: "Africa Governance Centre",
-    metric: "220%",
-    metricLabel: "Programme visibility",
-    sector: "Governance",
-  },
-  {
-    slug: "thinq-shopping",
-    title: "ThinQ Shopping",
-    metric: "165%",
-    metricLabel: "Mobile conversions",
-    sector: "E-commerce",
-  },
-] as const;
-
 export const marqueeTags = [
   "Solid Software Engineering",
   "Trusted Payment Systems",

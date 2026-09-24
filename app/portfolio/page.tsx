@@ -46,11 +46,11 @@ export default function PortfolioPage() {
             Want something similar shipped for your team? We scope from discovery through launch.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
-            <Link href="/contact" className="sa-btn-primary w-full sm:w-auto">
-              Start a project
+            <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">
+              Get started
             </Link>
-            <Link href="/get-started" className="sa-btn-outline w-full sm:w-auto">
-              Guided intake
+            <Link href="/contact" className="sa-btn-outline w-full sm:w-auto">
+              Talk to our team
             </Link>
           </div>
         </div>

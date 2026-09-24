@@ -167,7 +167,7 @@ export default function HowWeWorkPage() {
         <div className="sa-container">
           <h2 className="sa-title mb-4 text-center">Proof, not promises</h2>
           <p className="sa-subtitle mx-auto mb-10 max-w-xl text-center">
-            Named clients, measurable outcomes — read the case studies behind the metrics.
+            Named clients, measurable outcomes — browse the portfolio behind the metrics.
           </p>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {proofLinks.map((proof) => (

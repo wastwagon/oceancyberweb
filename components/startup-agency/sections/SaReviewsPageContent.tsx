@@ -56,7 +56,7 @@ export function SaReviewsPageContent({ stats, reviews }: Props) {
           <p className="font-heading text-xs font-bold uppercase tracking-[0.25em] text-sa-primary">
             Verified feedback
           </p>
-          <h1 className="mt-4 font-heading text-4xl font-bold text-white md:text-5xl lg:text-6xl">
+          <h1 className="sa-title-lg mt-4 text-center">
             What clients say on Google
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-sa-muted">
@@ -66,7 +66,7 @@ export function SaReviewsPageContent({ stats, reviews }: Props) {
 
         <div className="mx-auto mt-14 max-w-2xl rounded-[32px] border border-sa-border bg-sa-surface/50 p-8 text-center md:p-12">
           <StarRow rating={stats.rating} />
-          <p className="mt-6 font-heading text-5xl font-bold text-white md:text-6xl">
+          <p className="mt-6 font-heading text-3xl font-bold text-white md:text-4xl">
             {stats.rating.toFixed(1)}
           </p>
           <p className="mt-3 text-sa-muted">

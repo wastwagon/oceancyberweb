@@ -17,8 +17,8 @@ export function SaReviewBadges() {
           rel={badge.external ? "noopener noreferrer" : undefined}
           className="group flex min-w-[200px] items-center gap-4 rounded-2xl border border-sa-border bg-sa-surface/40 px-5 py-4 transition duration-300 hover:border-sa-primary/50 hover:bg-sa-surface/70"
         >
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-sa-border bg-black/40 font-heading text-[10px] font-bold uppercase tracking-wider text-white">
-            {badge.provider.slice(0, 2)}
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-sa-border bg-black/40 font-heading text-sm font-bold text-white">
+            {badge.id === "google" ? "G" : badge.provider.slice(0, 1)}
           </div>
             <div className="text-left">
             <div className="flex items-center gap-1.5">

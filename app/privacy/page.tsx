@@ -49,7 +49,7 @@ export default function PrivacyPage() {
       <div className="sa-container max-w-4xl px-6">
         <header className="mb-16">
           <span className="sa-eyebrow inline-flex">Data Sovereignty</span>
-          <h1 className="sa-title !text-left mt-5 text-4xl md:text-5xl lg:text-6xl">
+          <h1 className="sa-title-lg !text-left mt-5">
             Privacy <span className="text-sa-primary">Policy</span>
           </h1>
           <p className="sa-subtitle !text-left mt-6 max-w-2xl">

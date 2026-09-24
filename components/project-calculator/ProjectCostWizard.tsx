@@ -220,7 +220,7 @@ export function ProjectCostWizard() {
   return (
     <div
       id="estimator-print-root"
-      className="sa-card p-6 pb-[calc(var(--sa-mobile-tab-bar)+5rem)] print:rounded-lg print:pb-0 print:shadow-none md:pb-32"
+      className="sa-card p-6 print:rounded-lg print:shadow-none"
     >
       {/* Progress */}
       <div className="print:hidden mb-8 flex flex-wrap items-center justify-center gap-1 sm:gap-2">
@@ -577,7 +577,15 @@ export function ProjectCostWizard() {
         )}
       </AnimatePresence>
 
-      <div className="print:hidden mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-sa-border pt-6">
+      <RunningTotal
+        step={step}
+        pricing={pricing}
+        featureCount={featureIds.size}
+        onSummaryStep={step === 3}
+        leadReady={isLeadValid}
+      />
+
+      <div className="print:hidden mt-6 flex flex-wrap items-center justify-between gap-3">
         <button
           type="button"
           onClick={goBack}
@@ -598,8 +606,6 @@ export function ProjectCostWizard() {
           </button>
         )}
       </div>
-
-      <RunningTotal step={step} pricing={pricing} featureCount={featureIds.size} onSummaryStep={step === 3} leadReady={isLeadValid} />
     </div>
   );
 }
@@ -618,33 +624,33 @@ function RunningTotal({
   leadReady: boolean;
 }) {
   return (
-    <div
-      className="sa-ios-material print:hidden fixed bottom-[var(--sa-mobile-tab-bar)] left-0 right-0 z-[130] px-4 py-3 shadow-[0_-4px_24px_rgba(0,0,0,0.4)] sm:px-6 md:bottom-0 md:z-40 md:py-4"
-    >
-      <div className="mx-auto flex max-w-4xl flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-        <div className="flex items-center gap-2 text-sa-muted/80">
-          <Calculator className="h-4 w-4 shrink-0 text-sa-primary" />
+    <div className="print:hidden mt-8 rounded-2xl border border-sa-border bg-sa-surface/50 px-4 py-4 sm:px-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+        <div className="flex min-w-0 items-center gap-2 text-sa-muted/80">
+          <Calculator className="h-4 w-4 shrink-0 text-sa-primary" aria-hidden />
           <span className="text-sm font-bold text-white">Running total</span>
-          <span className="text-xs text-sa-muted/60">
-            {step < 3 ? `Step ${step + 1}/4` : "Summary"} · {featureCount} feature{featureCount === 1 ? "" : "s"}
+          <span className="truncate text-xs text-sa-muted/60">
+            {step < 3 ? `Step ${step + 1}/4` : "Summary"} · {featureCount} feature
+            {featureCount === 1 ? "" : "s"}
           </span>
         </div>
-        <div className="text-right sm:text-left">
+        <div className="sm:text-right">
           {onSummaryStep && !leadReady && (
-            <p className="mb-1.5 text-[11px] text-sa-primary sm:max-w-sm sm:ml-auto sm:text-right">
+            <p className="mb-1.5 text-[11px] text-sa-primary">
               Add your name, email, and timeline to unlock the line item table and proforma download.
             </p>
           )}
-          <div>
-            <p className="text-sm font-bold text-white sm:text-right">
-              Range: {formatGhs(pricing.rangeLowGhs)} – {formatGhs(pricing.rangeHighGhs)}
-              <span className="ml-1.5 font-normal text-sa-muted/60">(mid {formatGhs(pricing.totalMidGhs)})</span>
-            </p>
-            <p className="text-[11px] text-sa-muted/60 sm:text-right mt-1">
-              {pricing.totalHours}h total · {formatGhs(pricing.hourlyRateGhs)}/h ×{pricing.complexityMultiplier} complex · ×
-              {pricing.rushLabourMultiplier} timeline · ±10% band
-            </p>
-          </div>
+          <p className="text-sm font-bold text-white">
+            Range: {formatGhs(pricing.rangeLowGhs)} – {formatGhs(pricing.rangeHighGhs)}
+            <span className="ml-1.5 font-normal text-sa-muted/60">
+              (mid {formatGhs(pricing.totalMidGhs)})
+            </span>
+          </p>
+          <p className="mt-1 text-[11px] text-sa-muted/60">
+            {pricing.totalHours}h total · {formatGhs(pricing.hourlyRateGhs)}/h ×
+            {pricing.complexityMultiplier} complex · ×{pricing.rushLabourMultiplier} timeline · ±10%
+            band
+          </p>
         </div>
       </div>
     </div>

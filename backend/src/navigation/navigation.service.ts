@@ -41,9 +41,12 @@ const DEFAULT_CONFIG = {
     { label: "About", href: "/about" },
     { label: "Team", href: "/team" },
     { label: "Pricing", href: "/pricing" },
-    { label: "Project Calculator", href: "/tools/project-cost" },
+    { label: "Get started", href: "/get-started" },
+    { label: "Project cost calculator", href: "/tools/project-cost" },
     { label: "Contact", href: "/contact" },
     { label: "Services", href: "/services" },
+    { label: "Web design in Ghana", href: "/services/web-design-in-ghana" },
+    { label: "Web design in Accra", href: "/services/web-design-in-accra" },
     { label: "Products", href: "/products" },
     { label: "Insights", href: "/insights" },
     { label: "Reviews", href: "/reviews" },
@@ -51,7 +54,6 @@ const DEFAULT_CONFIG = {
     { label: "Domains & SSL", href: "/domains" },
     { label: "Hosting", href: "/hosting" },
     { label: "Checkout", href: "/checkout/cart" },
-    { label: "Get Started", href: "/get-started" },
   ],
   mainHeaderNav: [
     { href: "/", label: "Home" },
@@ -101,20 +103,32 @@ const DEFAULT_CONFIG = {
       href: "/about",
       label: "Company",
       dropdownKey: "company",
-      activeMatch: ["/about", "/team", "/portfolio", "/pricing", "/reviews"],
+      activeMatch: ["/about", "/team", "/pricing", "/reviews", "/get-started"],
     },
   ],
   mainHeaderDropdownContent: {
     services: {
       title: "Our Services",
       description:
-        "Build, secure, and scale digital products with one delivery partner.",
+        "Web design, development, apps, and security for businesses across Ghana—from Accra nationwide.",
       items: [
         {
           heading: "All services",
           description:
-            "Overview of web, mobile, commerce, design, and security delivery.",
+            "Web design, development, mobile apps, commerce, and cybersecurity.",
           link: "/services",
+        },
+        {
+          heading: "Web design in Ghana",
+          description:
+            "Web designers and website developers for businesses nationwide.",
+          link: "/services/web-design-in-ghana",
+        },
+        {
+          heading: "Web design in Accra",
+          description:
+            "Accra studio on Nii Kwashiefio Avenue—local meetings, same delivery team.",
+          link: "/services/web-design-in-accra",
         },
         {
           heading: "Pricing & packages",
@@ -129,39 +143,39 @@ const DEFAULT_CONFIG = {
           link: "/how-we-work",
         },
         {
-          heading: "UI/UX & Brand Design",
+          heading: "UI/UX & brand design",
           description:
             "Research, Figma prototypes, and design systems ready for engineering.",
           link: "/services/ui-ux-design",
         },
         {
-          heading: "Web Development",
+          heading: "Web development",
           description:
-            "Modern, high-performance websites built with proven technologies.",
+            "Marketing sites and web apps built for speed, search, and maintenance.",
           link: "/services/web-development",
         },
         {
-          heading: "Mobile Apps",
+          heading: "Mobile apps",
           description:
-            "Native and cross-platform applications designed for reliable user experiences.",
+            "iOS and Android apps, including converting an existing website.",
           link: "/services/mobile-apps",
         },
         {
-          heading: "Website to App Conversion",
+          heading: "Website to app",
           description:
-            "Convert your existing website into a scoped mobile app build.",
+            "Scoped quotes to turn your current website into a mobile app.",
           link: "/services/website-to-mobile-app",
         },
         {
           heading: "E-commerce",
           description:
-            "Scalable online stores with dependable checkout and payment flows.",
+            "Online stores with catalog, checkout, and local payment flows.",
           link: "/services/ecommerce",
         },
         {
           heading: "Cybersecurity",
           description:
-            "Comprehensive security solutions to protect your business.",
+            "Hardening and reviews for the sites and apps we ship.",
           link: "/services/cybersecurity",
         },
       ],
@@ -272,8 +286,9 @@ const DEFAULT_CONFIG = {
           link: "/insights",
         },
         {
-          heading: "Case Studies",
-          description: "Delivery outcomes across sectors in Ghana and beyond.",
+          heading: "Portfolio",
+          description:
+            "Selected websites and platforms for clients across Ghana.",
           link: "/portfolio",
         },
         {
@@ -283,21 +298,15 @@ const DEFAULT_CONFIG = {
           link: "/how-we-work",
         },
         {
-          heading: "Design Process",
+          heading: "Design process",
           description:
             "Research, Figma prototypes, design systems, and engineering handoff.",
           link: "/how-we-work#design",
         },
         {
-          heading: "Security Journey",
+          heading: "Security journey",
           description: "A practical path to strengthen your security posture.",
           link: "/security-journey",
-        },
-        {
-          heading: "OceanCyber POS",
-          description:
-            "SaaS point of sale — trial signup, your MoMo keys, offline mode.",
-          link: "/products/pos",
         },
         {
           heading: "Security self-assessment",
@@ -310,13 +319,17 @@ const DEFAULT_CONFIG = {
     support: {
       title: "Support",
       description:
-        "Get help, read reviews, estimate projects, and launch with confidence.",
+        "Start with guided intake. Use pricing or the estimator to plan — talk to us anytime.",
       items: [
         {
-          heading: "Get Started",
-          description:
-            "Begin your project intake and next steps with our team.",
+          heading: "Get started",
+          description: "Primary path — share goals, budget, and timeline.",
           link: "/get-started",
+        },
+        {
+          heading: "Talk to our team",
+          description: "Questions or a quick call before you start.",
+          link: "/contact",
         },
         {
           heading: "Pricing",
@@ -325,32 +338,26 @@ const DEFAULT_CONFIG = {
           link: "/pricing",
         },
         {
-          heading: "Project Calculator",
-          description: "Estimate scope and investment for your next build.",
+          heading: "Project cost calculator",
+          description: "Optional tool — estimate scope and a GHS range.",
           link: "/tools/project-cost",
         },
         {
-          heading: "Request Proposal",
-          description:
-            "Formal scope, timeline, and pricing sections for your project.",
+          heading: "Request a proposal",
+          description: "Formal RFQ after you know approximate scope.",
           link: "/tools/proposal",
         },
         {
-          heading: "Google Reviews",
-          description:
-            "Verified client ratings and recent feedback from Google.",
-          link: "/reviews",
-        },
-        {
-          heading: "Help Center",
+          heading: "Help center",
           description:
             "Answers to common questions about onboarding and delivery.",
           link: "/help-center",
         },
         {
-          heading: "Contact",
-          description: "Talk to our team about your project or requirements.",
-          link: "/contact",
+          heading: "Google reviews",
+          description:
+            "Verified client ratings and recent feedback from Google.",
+          link: "/reviews",
         },
         {
           heading: "Domains & SSL",
@@ -360,22 +367,15 @@ const DEFAULT_CONFIG = {
         },
         {
           heading: "Hosting",
-          description:
-            "Launch cPanel and WHM hosting plans with local support.",
+          description: "cPanel hosting plans priced in Ghana cedis.",
           link: "/hosting",
-        },
-        {
-          heading: "Security assessment",
-          description:
-            "Free self-assessment with downloadable maturity report.",
-          link: "/tools/security-assessment",
         },
       ],
     },
     infrastructure: {
       title: "Infrastructure",
       description:
-        "Domains, SSL, and hosting foundations for reliable digital operations.",
+        "Domains, SSL, and hosting for reliable digital operations.",
       items: [
         {
           heading: "Domains & SSL",
@@ -385,20 +385,18 @@ const DEFAULT_CONFIG = {
         },
         {
           heading: "Hosting",
-          description:
-            "Launch cPanel and WHM hosting plans with local support.",
+          description: "cPanel hosting plans priced in Ghana cedis.",
           link: "/hosting",
         },
       ],
     },
     company: {
       title: "Company",
-      description:
-        "Who we are, the work we ship, and how we partner with clients.",
+      description: "Who we are and how we partner with clients.",
       items: [
         {
           heading: "About",
-          description: "Our mission, team, and operating principles.",
+          description: "Accra studio delivering websites and apps across Ghana.",
           link: "/about",
         },
         {
@@ -406,11 +404,6 @@ const DEFAULT_CONFIG = {
           description:
             "Meet the people behind design, engineering, and delivery.",
           link: "/team",
-        },
-        {
-          heading: "Portfolio",
-          description: "Delivery examples across sectors and product types.",
-          link: "/portfolio",
         },
         {
           heading: "Pricing",
@@ -422,6 +415,11 @@ const DEFAULT_CONFIG = {
           heading: "Reviews",
           description: "Verified Google ratings and client feedback.",
           link: "/reviews",
+        },
+        {
+          heading: "Get started",
+          description: "Guided intake for your next project.",
+          link: "/get-started",
         },
       ],
     },

@@ -15,8 +15,8 @@ const content: ServicePageContent = {
   heroHighlightTone: "white",
   heroDescription:
     "Interfaces and brand systems that convert — researched with real users, prototyped in Figma, and handed off ready for engineering.",
-  heroCtaLabel: "Book a design discovery call",
-  heroCtaHref: "/contact?topic=UI%2FUX%20design",
+  heroCtaLabel: "Get started",
+  heroCtaHref: "/get-started",
   heroImage: serviceImages.uiUxBrand,
   pills: ["Figma", "Design systems", "User research"],
   focusEyebrow: "Experience design",

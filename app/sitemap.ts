@@ -33,6 +33,8 @@ const routes = [
   "/services/mobile-apps",
   "/services/ui-ux-design",
   "/services/web-development",
+  "/services/web-design-in-ghana",
+  "/services/web-design-in-accra",
   "/services/website-to-mobile-app",
   "/terms",
   "/team",

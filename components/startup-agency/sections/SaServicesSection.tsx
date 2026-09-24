@@ -71,7 +71,7 @@ export function SaServicesSection() {
                         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-sa-primary text-black transition-colors duration-300 group-hover:bg-white md:h-14 md:w-14">
                           <Icon className="h-5 w-5 md:h-6 md:w-6" />
                         </div>
-                        <h3 className="font-heading text-xl font-bold uppercase tracking-wide text-white md:text-2xl lg:text-3xl">
+                        <h3 className="font-heading text-lg font-bold uppercase tracking-wide text-white md:text-xl">
                           {service.title}
                         </h3>
                       </div>

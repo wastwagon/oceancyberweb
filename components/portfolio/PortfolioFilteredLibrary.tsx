@@ -102,7 +102,7 @@ function PortfolioLibraryCard({
           ) : null}
           <div className="mt-5 border-t border-sa-border pt-4">
             <span className="inline-flex items-center text-sm font-semibold text-sa-primary transition-colors group-hover:text-white">
-              View case study →
+              View project →
             </span>
           </div>
         </div>

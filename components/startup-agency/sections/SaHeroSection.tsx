@@ -43,9 +43,9 @@ export function SaHeroSection() {
             </span>
           </div>
           <p
-            className="hidden font-heading text-[12vw] font-bold uppercase leading-none tracking-tighter md:block"
+            className="hidden font-heading text-[clamp(2.5rem,6vw,4.5rem)] font-bold uppercase leading-none tracking-tighter md:block"
             style={{
-              WebkitTextStroke: "2px rgba(255, 255, 255, 0.4)",
+              WebkitTextStroke: "1.5px rgba(255, 255, 255, 0.35)",
               color: "transparent",
             }}
             aria-hidden
@@ -56,27 +56,33 @@ export function SaHeroSection() {
             {heroTagline}
           </p>
           <div className="pointer-events-auto mt-6 flex w-full max-w-sm flex-col gap-3 px-2 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center md:mt-8">
-            <button
-              type="button"
-              onClick={() => setShowreelOpen(true)}
-              className="sa-pressable inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-5 py-3 text-[15px] font-semibold text-white backdrop-blur-md sm:w-auto md:rounded-full md:text-[10px] md:font-bold md:uppercase md:tracking-[0.14em]"
-            >
-              <Play className="h-4 w-4 fill-current" aria-hidden />
-              Watch showreel
-            </button>
             <Link
-              href="/portfolio"
+              href="/get-started"
               className="sa-pressable inline-flex min-h-[48px] w-full items-center justify-center rounded-2xl border border-sa-primary bg-sa-primary px-5 py-3 text-[15px] font-semibold text-sa-bg sm:w-auto md:rounded-full md:text-[10px] md:font-bold md:uppercase md:tracking-[0.14em]"
             >
-              View our work
+              Get started
             </Link>
             <Link
-              href="/pricing"
+              href="/contact"
               className="sa-pressable inline-flex min-h-[48px] w-full items-center justify-center rounded-2xl border border-white/20 bg-white/10 px-5 py-3 text-[15px] font-semibold text-white backdrop-blur-md sm:w-auto md:rounded-full md:text-[10px] md:font-bold md:uppercase md:tracking-[0.14em]"
             >
-              View pricing
+              Talk to our team
+            </Link>
+            <Link
+              href="/portfolio"
+              className="sa-pressable inline-flex min-h-[48px] w-full items-center justify-center rounded-2xl border border-white/20 bg-white/10 px-5 py-3 text-[15px] font-semibold text-white backdrop-blur-md sm:w-auto md:rounded-full md:text-[10px] md:font-bold md:uppercase md:tracking-[0.14em]"
+            >
+              View portfolio
             </Link>
           </div>
+          <button
+            type="button"
+            onClick={() => setShowreelOpen(true)}
+            className="pointer-events-auto mt-4 inline-flex items-center gap-2 text-sm font-medium text-white/70 underline-offset-4 transition hover:text-sa-primary hover:underline"
+          >
+            <Play className="h-3.5 w-3.5 fill-current" aria-hidden />
+            Watch showreel
+          </button>
           <div className="mt-6 text-xs font-medium text-sa-muted/60 md:text-[11px] md:uppercase md:tracking-[0.3em]">
             Accra · London · Global
           </div>

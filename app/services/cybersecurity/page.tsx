@@ -15,8 +15,8 @@ const content: ServicePageContent = {
   heroHighlightTone: "white",
   heroDescription:
     "Protect digital assets with assessments, hardening, monitoring alignment, and response readiness: practical controls, not checkbox theatre.",
-  heroCtaLabel: "Secure your business",
-  heroCtaHref: "/contact",
+  heroCtaLabel: "Get started",
+  heroCtaHref: "/get-started",
   heroImage: serviceImages.cyberSecurity,
   pills: ["Threat detection", "Data protection", "Compliance"],
   focusEyebrow: "Coverage",

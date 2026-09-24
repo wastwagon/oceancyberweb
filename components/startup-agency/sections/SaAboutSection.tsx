@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
 import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
-import { SaReviewBadges } from "@/components/startup-agency/sections/SaReviewBadges";
 import { SaTeamCollage } from "@/components/startup-agency/sections/SaTeamCollage";
 import { aboutStats } from "@/lib/startup-agency/content";
 
@@ -51,7 +50,7 @@ export function SaAboutSection() {
                 <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
               <Link href="/contact" className="sa-btn-outline">
-                Start a project
+                Talk to our team
               </Link>
             </SaReveal>
           </div>

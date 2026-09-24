@@ -20,11 +20,14 @@ export function SaPricingSection() {
             subtitle="Indicative starting tiers in Ghana cedis. Fixed-price milestones after discovery — use the calculator or compare full packages on our pricing page."
           />
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link href="/tools/project-cost" className="sa-btn-outline">
-              Open project calculator
+            <Link href="/get-started" className="sa-btn-primary">
+              Get started
             </Link>
             <Link href="/pricing" className="sa-btn-outline">
               Compare all plans
+            </Link>
+            <Link href="/tools/project-cost" className="sa-btn-outline">
+              Open project calculator
             </Link>
           </div>
         </SaReveal>
@@ -60,7 +63,7 @@ export function SaPricingSection() {
                   <span className="text-xs font-bold uppercase tracking-widest text-sa-muted">
                     From
                   </span>
-                  <span className="font-heading text-4xl font-black tracking-tighter text-white">
+                  <span className="font-heading text-3xl font-bold tracking-tight text-white md:text-4xl">
                     GHS {plan.priceGhs.toLocaleString("en-GH")}
                   </span>
                 </div>

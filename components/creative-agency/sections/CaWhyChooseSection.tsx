@@ -18,7 +18,7 @@ export function CaWhyChooseSection() {
           {trustSignals.map((item, i) => (
             <SaReveal key={item.title} delay={i * 0.08}>
               <article className="flex h-full min-h-[280px] flex-col rounded-[10px] border border-[var(--ae-line-light)] bg-white/50 p-8 md:p-10">
-                <p className="font-heading text-5xl font-extrabold text-[var(--ae-primary)] md:text-6xl">
+                <p className="font-heading text-3xl font-extrabold text-[var(--ae-primary)] md:text-4xl">
                   {item.stat}
                 </p>
                 <h3 className="mt-6 font-heading text-xl font-bold uppercase tracking-wide text-[var(--ae-ink)]">

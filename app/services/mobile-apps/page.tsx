@@ -15,8 +15,8 @@ const content: ServicePageContent = {
   heroHighlightTone: "white",
   heroDescription:
     "Native-quality experiences on iOS and Android: offline-aware flows, push engagement, and release discipline your users feel.",
-  heroCtaLabel: "Build your app",
-  heroCtaHref: "/contact",
+  heroCtaLabel: "Get started",
+  heroCtaHref: "/get-started",
   heroImage: serviceImages.mobileApps,
   pills: ["iOS", "Android", "Cross-platform"],
   focusEyebrow: "Experiences",

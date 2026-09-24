@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Briefcase, Mail, Rocket } from "lucide-react";
+import { Briefcase, Rocket, Tags } from "lucide-react";
 import { useCart } from "@/components/commerce/CartProvider";
 import { cn } from "@/lib/utils";
 
+/** Mobile tab bar — Work · Pricing · Start (Get started is the conversion primary). */
 const quickActions = [
   { label: "Work", href: "/portfolio", icon: Briefcase },
-  { label: "Contact", href: "/contact", icon: Mail },
+  { label: "Pricing", href: "/pricing", icon: Tags },
   { label: "Start", href: "/get-started", icon: Rocket, primary: true },
 ] as const;
 
@@ -46,9 +47,7 @@ export function StartupAgencyMobileQuickBar() {
               href={action.href}
               className={cn(
                 "sa-pressable relative flex min-h-[44px] flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-1.5 text-[10px] font-medium leading-none transition-colors",
-                active
-                  ? "text-sa-primary"
-                  : "text-white/55",
+                active ? "text-sa-primary" : "text-white/55",
                 "primary" in action && action.primary && !active && "text-sa-primary/90",
               )}
               aria-current={active ? "page" : undefined}

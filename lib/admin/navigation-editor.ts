@@ -203,21 +203,27 @@ export function buildMenuPreset(kind: string): AdminNavMenu {
         items: [
           {
             ...createEmptyNavItem(0),
-            heading: "Google Reviews",
-            href: "/reviews",
-            description: "Verified client ratings and recent feedback from Google.",
+            heading: "Get started",
+            href: "/get-started",
+            description: "Primary path — share goals, budget, and timeline.",
           },
           {
             ...createEmptyNavItem(10),
-            heading: "Help Center",
-            href: "/help-center",
-            description: "Answers to common questions about onboarding and delivery.",
+            heading: "Talk to our team",
+            href: "/contact",
+            description: "Questions or a quick call before you start.",
           },
           {
             ...createEmptyNavItem(20),
-            heading: "Contact",
-            href: "/contact",
-            description: "Talk to our team about your project or requirements.",
+            heading: "Pricing",
+            href: "/pricing",
+            description: "Compare packages and indicative investment ranges in GHS.",
+          },
+          {
+            ...createEmptyNavItem(30),
+            heading: "Help center",
+            href: "/help-center",
+            description: "Answers to common questions about onboarding and delivery.",
           },
         ],
       };
@@ -230,7 +236,7 @@ export function buildMenuPreset(kind: string): AdminNavMenu {
             ...createEmptyNavItem(0),
             heading: "About",
             href: "/about",
-            description: "Our mission, team, and operating principles.",
+            description: "Accra studio delivering websites and apps across Ghana.",
           },
           {
             ...createEmptyNavItem(10),
@@ -240,15 +246,15 @@ export function buildMenuPreset(kind: string): AdminNavMenu {
           },
           {
             ...createEmptyNavItem(20),
-            heading: "Portfolio",
-            href: "/portfolio",
-            description: "Delivery examples across sectors and product types.",
-          },
-          {
-            ...createEmptyNavItem(30),
             heading: "Pricing",
             href: "/pricing",
             description: "Transparent tiers and indicative investment ranges in GHS.",
+          },
+          {
+            ...createEmptyNavItem(30),
+            heading: "Get started",
+            href: "/get-started",
+            description: "Guided intake for your next project.",
           },
         ],
       };

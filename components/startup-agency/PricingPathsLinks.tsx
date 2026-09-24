@@ -4,9 +4,14 @@ import { cn } from "@/lib/utils";
 type Props = {
   variant?: "inline" | "stack" | "compact";
   className?: string;
+  /** When true, show Get started as the primary action. */
   showQuote?: boolean;
 };
 
+/**
+ * Shared pricing → next-step links.
+ * Hierarchy: Get started (primary) → packages → estimator → talk to team.
+ */
 export function PricingPathsLinks({
   variant = "inline",
   className,
@@ -27,12 +32,28 @@ export function PricingPathsLinks({
         <Link href="/tools/project-cost" className="text-sa-primary hover:underline">
           Estimate scope
         </Link>
+        {" · "}
+        <Link href="/get-started" className="text-sa-primary hover:underline">
+          Get started
+        </Link>
       </p>
     );
   }
 
   const links = (
     <>
+      {showQuote ? (
+        <Link
+          href="/get-started"
+          className={
+            variant === "stack"
+              ? "sa-btn-primary w-full min-h-[44px]"
+              : "sa-btn-primary min-h-[44px] px-5 text-xs"
+          }
+        >
+          Get started
+        </Link>
+      ) : null}
       <Link
         href="/pricing"
         className={
@@ -58,11 +79,11 @@ export function PricingPathsLinks({
           href="/contact"
           className={
             variant === "stack"
-              ? "sa-btn-primary w-full min-h-[44px]"
-              : "sa-btn-primary min-h-[44px] px-5 text-xs"
+              ? "sa-btn-outline w-full min-h-[44px]"
+              : "sa-btn-outline min-h-[44px] px-5 text-xs"
           }
         >
-          Request formal quote
+          Talk to our team
         </Link>
       ) : null}
     </>

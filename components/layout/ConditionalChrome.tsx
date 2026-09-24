@@ -9,8 +9,13 @@ import { cn } from "@/lib/utils";
 
 const MOBILE_QUICK_BAR_EXCLUDED = ["/signin", "/signup"] as const;
 
-function shouldShowMobileQuickBar(pathname: string, appRoute: boolean, homepage: boolean) {
-  if (appRoute || homepage) return false;
+/** Pages that own their own footer + tab bar (avoid double chrome). */
+function ownsOwnChrome(pathname: string) {
+  return pathname === "/" || pathname === "/home-creative";
+}
+
+function shouldShowMobileQuickBar(pathname: string, appRoute: boolean, selfChrome: boolean) {
+  if (appRoute || selfChrome) return false;
   return !MOBILE_QUICK_BAR_EXCLUDED.some(
     (route) => pathname === route || pathname.startsWith(`${route}/`),
   );
@@ -18,7 +23,7 @@ function shouldShowMobileQuickBar(pathname: string, appRoute: boolean, homepage:
 
 /**
  * Marketing chrome on public pages; minimal workspace shell on `/dashboard` and `/admin`.
- * Homepage (`/`) hides footer only — it renders its own footer in-page.
+ * `/` and `/home-creative` render their own footer + tab bar — layout skips those.
  */
 export function ConditionalChrome({
   header,
@@ -35,23 +40,24 @@ export function ConditionalChrome({
 }) {
   const pathname = usePathname();
   const appRoute = isAppRoute(pathname);
-  const homepage = pathname === "/";
-  const showMobileQuickBar = shouldShowMobileQuickBar(pathname, appRoute, homepage);
+  const selfChrome = ownsOwnChrome(pathname);
+  const showMobileQuickBar = shouldShowMobileQuickBar(pathname, appRoute, selfChrome);
 
   if (appRoute) {
     return (
       <div className="sa-workspace-shell flex min-h-screen flex-col">
         <AppTopBar />
-        <main className="flex-1">{children}</main>
+        <div className="flex-1">{children}</div>
       </div>
     );
   }
 
-  if (homepage) {
+  if (selfChrome) {
+    // Shell pages own `<main>` — do not wrap again (avoids nested landmarks).
     return (
       <>
         {header}
-        <main className="flex w-full min-h-0 flex-1 flex-col">{children}</main>
+        {children}
         {scrollToTop}
         {chatBot}
       </>
@@ -61,14 +67,15 @@ export function ConditionalChrome({
   return (
     <>
       {header}
-      <main
+      {/* Pages/components own `<main>` when they need a landmark; avoid nesting. */}
+      <div
         className={cn(
           "flex-1 md:pt-36",
           showMobileQuickBar && "sa-mobile-tab-pad md:pb-0",
         )}
       >
         {children}
-      </main>
+      </div>
       {footer}
       {scrollToTop}
       {chatBot}

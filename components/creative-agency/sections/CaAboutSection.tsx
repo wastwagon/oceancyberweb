@@ -68,16 +68,16 @@ export function CaAboutSection() {
 
           <div className="mt-10 flex flex-wrap gap-3">
             <Link
-              href="/about"
+              href="/get-started"
               className="sa-pressable inline-flex min-h-12 items-center rounded-full bg-[var(--ae-primary)] px-7 text-sm font-bold uppercase tracking-wider text-black"
             >
-              Our story
+              Get started
             </Link>
             <Link
               href="/contact"
               className="sa-pressable inline-flex min-h-12 items-center rounded-full border border-[var(--ae-ink)]/20 px-7 text-sm font-bold uppercase tracking-wider text-[var(--ae-ink)]"
             >
-              Start a project
+              Talk to our team
             </Link>
           </div>
         </SaReveal>

@@ -153,7 +153,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
   }
 
   return (
-    <section
+    <main
       id="contact"
       className="sa-section sa-page-top relative overflow-hidden"
     >
@@ -183,20 +183,21 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
             variants={contactHeaderItem}
             className="sa-title mx-auto mb-5 max-w-4xl text-balance text-center"
           >
-            Start a Conversation
+            Talk to our team
             <br />
-            <span className="text-sa-primary">
-              About Your Next Release
-            </span>
+            <span className="text-sa-primary">About your next release</span>
           </motion.h1>
           <motion.p
             variants={contactHeaderItem}
             className="sa-subtitle mx-auto"
           >
-            Share your goals, timeline, and constraints — we respond with clear next
-            steps and a sensible engagement path.
+            Prefer a short message or call first? Share goals and timeline here —
+            or use guided intake if you already know scope and budget.
           </motion.p>
-          <motion.div variants={contactHeaderItem} className="mt-6">
+          <motion.div variants={contactHeaderItem} className="mt-6 flex flex-col items-center gap-4">
+            <Link href="/get-started" className="sa-btn-primary min-h-[44px] px-6 text-xs">
+              Get started
+            </Link>
             <PricingPathsLinks variant="compact" />
           </motion.div>
         </motion.div>
@@ -337,6 +338,6 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
         </div>
       </div>
 
-    </section>
+    </main>
   );
 }

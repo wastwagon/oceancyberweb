@@ -74,7 +74,7 @@ export function CaHeroSection() {
             </div>
 
             <div className="flex min-w-0 flex-1 flex-col justify-center">
-              <h2 className="ae-display text-[clamp(3.25rem,12vw,11.625rem)]">
+              <h2 className="ae-display text-[clamp(2.25rem,7vw,3.75rem)]">
                 <span className="block">Design</span>
                 <span className="mt-1 flex flex-wrap items-baseline gap-x-4 gap-y-1 md:mt-2">
                   <span className="ae-display-fade">Driven</span>
@@ -91,7 +91,7 @@ export function CaHeroSection() {
                       <Play className="ml-0.5 h-6 w-6 fill-current md:h-8 md:w-8" aria-hidden />
                     </span>
                   </button>
-                  <span className="ae-display-fade block text-[clamp(3.25rem,12vw,11.625rem)]">
+                  <span className="ae-display-fade block text-[clamp(2.25rem,7vw,3.75rem)]">
                     Agency
                   </span>
                 </span>

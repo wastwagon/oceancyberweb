@@ -5,12 +5,23 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, ChevronRight, Menu, Search, X } from "lucide-react";
 import {
-  type HeaderDropdownKey,
-} from "@/lib/navigation/menu";
+  ChevronDown,
+  ChevronRight,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  Menu,
+  Phone,
+  Search,
+  Twitter,
+  UserRound,
+  X,
+} from "lucide-react";
+import { type HeaderDropdownKey } from "@/lib/navigation/menu";
 import { useNavigationConfig } from "@/lib/navigation/useNavigationConfig";
-import { cn } from "@/lib/utils";
+import { cn, formatWhatsAppLink } from "@/lib/utils";
 import { getBrowserSession } from "@/lib/auth-client";
 import {
   NavCompactMenu,
@@ -21,6 +32,13 @@ import {
 const navLinkClass =
   "group relative inline-flex min-h-[42px] items-center gap-1 px-3 py-2 font-heading text-[13px] font-medium uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary";
 
+const HEADER_SOCIAL_LINKS = [
+  { Icon: Facebook, href: "https://facebook.com/oceancyber", label: "Facebook" },
+  { Icon: Twitter, href: "https://twitter.com/oceancyber", label: "Twitter" },
+  { Icon: Instagram, href: "https://instagram.com/oceancyber", label: "Instagram" },
+  { Icon: Linkedin, href: "https://linkedin.com/company/oceancyber", label: "LinkedIn" },
+] as const;
+
 export function StartupAgencyNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -28,10 +46,12 @@ export function StartupAgencyNavbar() {
   const [expandedMobileSection, setExpandedMobileSection] = useState<HeaderDropdownKey | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const { mainHeaderNav, mainHeaderDropdownContent } = useNavigationConfig();
   const pathname = usePathname();
+  const whatsappHref = formatWhatsAppLink("+233242565695");
 
   useEffect(() => {
     let cancelled = false;
@@ -46,6 +66,13 @@ export function StartupAgencyNavbar() {
       cancelled = true;
     };
   }, [pathname]);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -93,11 +120,105 @@ export function StartupAgencyNavbar() {
   return (
     <>
       <header
-        className="fixed left-0 right-0 top-[max(0.75rem,env(safe-area-inset-top))] z-[100] px-3 sm:px-4 md:px-6"
+        className="fixed left-0 right-0 top-0 z-[100] flex flex-col items-center px-3 pt-[max(0.5rem,env(safe-area-inset-top))] sm:px-4 md:px-6"
         role="banner"
         data-app-print-hide-chrome
       >
-        <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-3 rounded-[18px] border border-white/10 bg-[#1c1c1e]/82 px-4 py-3 shadow-[0_18px_48px_rgba(0,0,0,0.45)] backdrop-blur-2xl backdrop-saturate-150 md:px-6">
+        {/* Utility top bar — light-header pattern, dark skin */}
+        <div
+          className={cn(
+            "hidden w-full max-w-[1400px] overflow-hidden transition-all duration-400 lg:block",
+            scrolled ? "h-0 translate-y-[-100%] opacity-0" : "h-9 translate-y-0 opacity-100",
+          )}
+        >
+          <div className="flex h-full items-center justify-between gap-3 rounded-t-[16px] border border-b-0 border-white/10 bg-[#141416]/90 px-4 backdrop-blur-xl sm:px-5">
+            <div className="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-1 text-[10px] font-bold uppercase tracking-[0.16em] text-sa-muted/80">
+              <a
+                href="tel:+233242565695"
+                className="flex min-w-0 items-center gap-2 text-sa-muted transition-colors hover:text-sa-primary"
+              >
+                <Phone className="h-3 w-3 shrink-0 text-sa-primary" aria-hidden />
+                <span className="truncate">+233 242 565 695</span>
+              </a>
+              <a
+                href="mailto:info@oceancyber.net"
+                className="flex min-w-0 items-center gap-2 text-sa-muted transition-colors hover:text-sa-primary"
+              >
+                <Mail className="h-3 w-3 shrink-0 text-sa-primary" aria-hidden />
+                <span className="truncate">info@oceancyber.net</span>
+              </a>
+              <span className="hidden min-w-0 text-sa-muted/55 2xl:inline">
+                232 Nii Kwashiefio Avenue, Accra, Ghana
+              </span>
+            </div>
+
+            <div className="ml-auto flex shrink-0 items-center gap-2">
+              {isLoggedIn ? (
+                <>
+                  {isAdmin ? (
+                    <Link
+                      href="/admin"
+                      className="px-2.5 py-1 font-heading text-[10px] font-bold uppercase tracking-[0.14em] text-sa-primary transition hover:text-white"
+                    >
+                      Admin
+                    </Link>
+                  ) : null}
+                  <Link
+                    href="/dashboard"
+                    className="inline-flex h-7 items-center rounded-full border border-white/10 px-3 font-heading text-[10px] font-bold uppercase tracking-[0.14em] text-sa-muted transition hover:border-sa-primary/50 hover:text-sa-primary"
+                  >
+                    Dashboard
+                  </Link>
+                </>
+              ) : (
+                <Link
+                  href="/signin"
+                  className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-white/10 text-sa-muted transition hover:border-sa-primary/50 hover:text-sa-primary"
+                  aria-label="Account — sign in or create account"
+                  title="Sign in / Create account"
+                >
+                  <UserRound className="h-3.5 w-3.5" strokeWidth={2} aria-hidden />
+                </Link>
+              )}
+              <Link
+                href="/get-started"
+                className="inline-flex h-7 items-center rounded-full border border-sa-primary bg-sa-primary px-3.5 font-heading text-[10px] font-bold uppercase tracking-[0.14em] text-sa-bg transition hover:bg-sa-primary/90"
+              >
+                Get started
+              </Link>
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden h-7 items-center rounded-full border border-white/10 px-3 font-heading text-[10px] font-bold uppercase tracking-[0.14em] text-sa-muted transition hover:border-sa-primary/40 hover:text-sa-primary xl:inline-flex"
+              >
+                WhatsApp
+              </a>
+              {HEADER_SOCIAL_LINKS.map(({ Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sa-muted/60 transition-colors hover:text-sa-primary"
+                  aria-label={label}
+                >
+                  <Icon size={13} />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Primary nav pill */}
+        <div
+          className={cn(
+            "mx-auto flex w-full max-w-[1400px] items-center justify-between gap-3 border border-white/10 bg-[#1c1c1e]/82 px-4 py-3 shadow-[0_18px_48px_rgba(0,0,0,0.45)] backdrop-blur-2xl backdrop-saturate-150 transition-all duration-400 md:px-6",
+            scrolled
+              ? "mt-2 rounded-[18px]"
+              : "max-lg:mt-0 max-lg:rounded-[18px] rounded-b-[18px] rounded-t-none",
+          )}
+        >
           <Link href="/" className="relative z-10 flex shrink-0 items-center gap-2">
             <Image
               src="/images/oceancyber-logo.webp"
@@ -135,14 +256,16 @@ export function StartupAgencyNavbar() {
                       <ChevronDown className={cn("h-4 w-4 transition-transform", isDropdownOpen && "rotate-180")} />
                     )}
                     <span
-                      className={`absolute bottom-1 left-3 right-3 h-px origin-left transition bg-sa-primary ${
+                      className={`absolute bottom-1 left-3 right-3 h-px origin-left bg-sa-primary transition ${
                         isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                       }`}
                     />
                   </Link>
 
-                  {item.dropdownKey && activeDropdown === item.dropdownKey && mainHeaderDropdownContent[item.dropdownKey] && (
-                    shouldUseMegaMenu(mainHeaderDropdownContent[item.dropdownKey].items.length) ? (
+                  {item.dropdownKey &&
+                    activeDropdown === item.dropdownKey &&
+                    mainHeaderDropdownContent[item.dropdownKey] &&
+                    (shouldUseMegaMenu(mainHeaderDropdownContent[item.dropdownKey].items.length) ? (
                       <NavMegaMenu
                         dropdownKey={item.dropdownKey}
                         panel={mainHeaderDropdownContent[item.dropdownKey]}
@@ -153,14 +276,41 @@ export function StartupAgencyNavbar() {
                         panel={mainHeaderDropdownContent[item.dropdownKey]}
                         onNavigate={() => setActiveDropdown(null)}
                       />
-                    )
-                  )}
+                    ))}
                 </div>
               );
             })}
           </nav>
 
-          <div className="flex items-center gap-2 z-10">
+          <div className="z-10 flex items-center gap-2">
+            {scrolled ? (
+              <div className="hidden items-center gap-2 lg:flex">
+                {!isLoggedIn ? (
+                  <Link
+                    href="/signin"
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-sa-muted transition hover:border-sa-primary/50 hover:text-sa-primary"
+                    aria-label="Account — sign in or create account"
+                    title="Sign in / Create account"
+                  >
+                    <UserRound className="h-4 w-4" strokeWidth={2} aria-hidden />
+                  </Link>
+                ) : (
+                  <Link
+                    href="/dashboard"
+                    className="px-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-sa-muted transition hover:text-sa-primary"
+                  >
+                    Dashboard
+                  </Link>
+                )}
+                <Link
+                  href="/get-started"
+                  className="inline-flex min-h-[36px] items-center rounded-xl border border-sa-primary bg-sa-primary px-3.5 font-heading text-[11px] font-semibold uppercase tracking-[0.14em] text-sa-bg transition hover:bg-sa-primary/90"
+                >
+                  Get started
+                </Link>
+              </div>
+            ) : null}
+
             <button
               type="button"
               className="sa-pressable rounded-xl border border-white/10 p-2.5 text-white transition duration-300 hover:border-sa-primary hover:text-sa-primary"
@@ -171,44 +321,9 @@ export function StartupAgencyNavbar() {
               <Search className="h-5 w-5" />
             </button>
 
-            <div className="hidden items-center gap-1 sm:flex">
-              {isLoggedIn ? (
-                <>
-                  {isAdmin ? (
-                    <Link
-                      href="/admin"
-                      className="px-3 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-sa-primary transition duration-300 hover:text-white"
-                    >
-                      Admin
-                    </Link>
-                  ) : null}
-                  <Link
-                    href="/dashboard"
-                    className="px-3 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:text-sa-primary"
-                  >
-                    Dashboard
-                  </Link>
-                </>
-              ) : (
-                <Link
-                  href="/signin"
-                  className="px-3 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:text-white"
-                >
-                  Client login
-                </Link>
-              )}
-            </div>
-
-            <Link
-              href="/get-started"
-              className="hidden min-h-[42px] items-center rounded-xl border border-sa-primary bg-sa-primary px-4 py-2.5 font-heading text-[11px] font-semibold uppercase tracking-[0.14em] text-sa-bg transition duration-300 hover:bg-sa-primary/90 sm:inline-flex"
-            >
-              Get started
-            </Link>
-
             <button
               type="button"
-              className="sa-pressable inline-flex touch-target items-center justify-center rounded-xl border border-white/10 p-2.5 text-white lg:hidden"
+              className="sa-pressable touch-target inline-flex items-center justify-center rounded-xl border border-white/10 p-2.5 text-white lg:hidden"
               aria-expanded={mobileOpen}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               onClick={() => setMobileOpen((v) => !v)}
@@ -219,8 +334,12 @@ export function StartupAgencyNavbar() {
         </div>
 
         {searchOpen ? (
-          <div className="mx-auto mt-2 max-w-xl px-3 sm:px-4">
-            <form action="/insights" className="flex overflow-hidden rounded-2xl border border-white/10 bg-[#1c1c1e]/95 shadow-lg backdrop-blur-xl" method="get">
+          <div className="mx-auto mt-2 w-full max-w-xl">
+            <form
+              action="/insights"
+              className="flex overflow-hidden rounded-2xl border border-white/10 bg-[#1c1c1e]/95 shadow-lg backdrop-blur-xl"
+              method="get"
+            >
               <input
                 type="search"
                 name="q"
@@ -259,7 +378,7 @@ export function StartupAgencyNavbar() {
               exit={{ y: "100%" }}
               transition={{ type: "spring", damping: 34, stiffness: 380 }}
             >
-              <div className="flex shrink-0 justify-center pt-2.5 pb-1">
+              <div className="flex shrink-0 justify-center pb-1 pt-2.5">
                 <div className="h-1 w-10 rounded-full bg-white/25" aria-hidden />
               </div>
 
@@ -343,22 +462,14 @@ export function StartupAgencyNavbar() {
                       </Link>
                     </>
                   ) : (
-                    <div className="grid grid-cols-2 gap-2">
-                      <Link
-                        href="/signin"
-                        className="sa-btn-outline flex w-full justify-center px-4"
-                        onClick={closeMobileMenu}
-                      >
-                        Sign in
-                      </Link>
-                      <Link
-                        href="/signup"
-                        className="sa-btn-outline flex w-full justify-center px-4"
-                        onClick={closeMobileMenu}
-                      >
-                        Sign up
-                      </Link>
-                    </div>
+                    <Link
+                      href="/signin"
+                      className="sa-btn-outline flex w-full items-center justify-center gap-2"
+                      onClick={closeMobileMenu}
+                    >
+                      <UserRound className="h-4 w-4" aria-hidden />
+                      Account
+                    </Link>
                   )}
                   <Link
                     href="/get-started"

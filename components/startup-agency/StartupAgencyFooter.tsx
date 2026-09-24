@@ -3,34 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Instagram, Linkedin, Twitter, Facebook, ArrowRight, ShieldAlert } from "lucide-react";
-
-const footerLinks = [
-  { label: "About Us", href: "/about" },
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "Team", href: "/team" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "How we work", href: "/how-we-work" },
-  { label: "Insights", href: "/insights" },
-  { label: "Reviews", href: "/reviews" },
-  { label: "Contact", href: "/contact" },
-] as const;
-
-const productLinks = [
-  { label: "Software Products", href: "/products" },
-  { label: "OceanCyber POS", href: "/products/pos" },
-] as const;
-
-const serviceLinks = [
-  ...productLinks,
-  { label: "UI/UX Design", href: "/services/ui-ux-design" },
-  { label: "Web Development", href: "/services/web-development" },
-  { label: "Mobile Apps", href: "/services/mobile-apps" },
-  { label: "Website to App", href: "/services/website-to-mobile-app" },
-  { label: "Cybersecurity", href: "/services/cybersecurity" },
-  { label: "E-commerce", href: "/services/ecommerce" },
-  { label: "Cloud Hosting", href: "/hosting" },
-] as const;
-
+import {
+  footerCompanyLinks,
+  footerServiceLinks,
+} from "@/lib/navigation/menu";
 import {
   industryFooterLinks,
   industryFooterViewAllLink,
@@ -50,11 +26,8 @@ export function StartupAgencyFooter() {
       data-app-print-hide-chrome
     >
       <div className="sa-container">
-        {/* Main Floating Container */}
         <div className="relative overflow-hidden rounded-[40px] border border-sa-border bg-sa-surface p-10 lg:p-20">
           <div className="grid gap-16 lg:grid-cols-12 lg:items-start">
-            
-            {/* Left: Branding & Connect */}
             <div className="lg:col-span-5">
               <Link href="/" className="group inline-block">
                 <Image
@@ -73,7 +46,7 @@ export function StartupAgencyFooter() {
                 <p className="mb-4 font-heading text-xs font-bold uppercase tracking-[0.2em] text-sa-primary">
                   Need immediate help?
                 </p>
-                <div className="flex items-center gap-4 rounded-2xl border border-sa-primary/20 bg-sa-primary/5 p-4 max-w-sm group">
+                <div className="flex max-w-sm items-center gap-4 rounded-2xl border border-sa-primary/20 bg-sa-primary/5 p-4 group">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sa-primary text-black">
                     <ShieldAlert className="h-5 w-5" />
                   </div>
@@ -81,7 +54,10 @@ export function StartupAgencyFooter() {
                     <p className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">
                       Technical & Security Ops
                     </p>
-                    <a href="tel:+233242565695" className="font-heading text-sm font-bold text-white transition-colors group-hover:text-sa-primary">
+                    <a
+                      href="tel:+233242565695"
+                      className="font-heading text-sm font-bold text-white transition-colors group-hover:text-sa-primary"
+                    >
                       +233 242 565 695
                     </a>
                   </div>
@@ -89,13 +65,12 @@ export function StartupAgencyFooter() {
               </div>
             </div>
 
-            {/* Middle: Navigation */}
             <div className="lg:col-span-2">
               <span className="mb-8 block font-heading text-xs font-bold uppercase tracking-[0.2em] text-sa-primary">
                 Company
               </span>
               <ul className="space-y-4">
-                {footerLinks.map((l) => (
+                {footerCompanyLinks.map((l) => (
                   <li key={l.label}>
                     <Link
                       href={l.href}
@@ -108,13 +83,12 @@ export function StartupAgencyFooter() {
               </ul>
             </div>
 
-            {/* Right: Services & Industries */}
             <div className="lg:col-span-3">
               <span className="mb-8 block font-heading text-xs font-bold uppercase tracking-[0.2em] text-sa-primary">
                 Services
               </span>
               <ul className="space-y-4">
-                {serviceLinks.map((l) => (
+                {footerServiceLinks.map((l) => (
                   <li key={l.label}>
                     <Link
                       href={l.href}
@@ -155,20 +129,24 @@ export function StartupAgencyFooter() {
             </div>
           </div>
 
-          {/* Bottom Bar */}
           <div className="mt-20 flex flex-col gap-10 border-t border-sa-border pt-12 lg:flex-row lg:items-center lg:justify-between">
             <div className="space-y-3">
               <p className="text-sm text-sa-muted">
                 © {new Date().getFullYear()} OceanCyber Platform. Delivering excellence in Africa.
               </p>
               <div className="flex gap-6 text-xs font-bold uppercase tracking-widest text-sa-muted/60">
-                <Link href="/privacy" className="hover:text-white">Privacy</Link>
-                <Link href="/terms" className="hover:text-white">Terms</Link>
-                <Link href="/cookies" className="hover:text-white">Cookies</Link>
+                <Link href="/privacy" className="hover:text-white">
+                  Privacy
+                </Link>
+                <Link href="/terms" className="hover:text-white">
+                  Terms
+                </Link>
+                <Link href="/cookies" className="hover:text-white">
+                  Cookies
+                </Link>
               </div>
             </div>
 
-            {/* Social Links */}
             <div className="flex gap-4">
               {socialLinks.map((social, i) => (
                 <Link
@@ -184,7 +162,6 @@ export function StartupAgencyFooter() {
             </div>
           </div>
 
-          {/* Background Glow Overlay */}
           <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-sa-primary/5 blur-[100px]" />
           <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-sa-primary/5 blur-[100px]" />
         </div>

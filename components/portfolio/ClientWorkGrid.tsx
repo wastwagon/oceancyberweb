@@ -55,7 +55,7 @@ export function ClientWorkGrid({ items, className = "" }: ClientWorkGridProps) {
                 href={`/portfolio/${item.slug}`}
                 className="inline-flex items-center gap-2 text-sm font-semibold text-sa-primary transition-colors hover:text-white"
               >
-                Read case study
+                View project
                 <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
               <a

@@ -113,7 +113,7 @@ export function VideoTestimonialSection({ variant = "home" }: VideoTestimonialSe
               </footer>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link href="/portfolio/fitch-advisory" className="sa-btn-outline !min-h-[40px] text-[10px]">
-                  Read case study
+                  View project
                 </Link>
                 <Link href="/reviews" className="text-sm font-semibold text-sa-primary underline-offset-2 hover:underline">
                   Google reviews →

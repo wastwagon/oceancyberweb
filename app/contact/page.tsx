@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Contact } from "@/components/sections/Contact";
+import { Contact } from "@/components/startup-agency/ContactPageContent";
 import { withCanonical } from "@/lib/seo/canonical";
 
 export const metadata = withCanonical(

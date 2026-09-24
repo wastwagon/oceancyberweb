@@ -88,7 +88,7 @@ export const defaultHelpArticles: HelpArticle[] = [
     audience: "everyone",
     body:
       "Our team reviews your goals, timeline, constraints, and contact details. We then respond with clarifying questions or recommend the most suitable discovery, estimate, or proposal path.",
-    actions: [{ label: "Start a project request", href: "/get-started" }],
+    actions: [{ label: "Get started", href: "/get-started" }],
   },
   {
     id: "pricing-scope",

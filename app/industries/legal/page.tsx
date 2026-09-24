@@ -116,7 +116,7 @@ export default function LegalIndustryPage() {
       <IndustryPremiumPage content={content} />
       <IndustryFeaturedProof
         title="Legal platforms we have shipped"
-        subtitle="On-site case studies with measurable outcomes — not generic templates."
+        subtitle="On-site portfolio projects with measurable outcomes — not generic templates."
         items={legalProof}
       />
       <section className="sa-section relative z-10 border-t border-sa-border bg-sa-bg">

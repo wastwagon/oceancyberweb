@@ -51,7 +51,7 @@ export function IndustryFeaturedProof({
               </h3>
               <p className="mt-2 flex-1 text-sm leading-relaxed text-sa-muted/80">{item.summary}</p>
               <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-sa-primary">
-                Read case study
+                View project
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
               </span>
             </Link>

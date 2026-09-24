@@ -187,7 +187,7 @@ function GridProjectCard({
         </div>
 
         <div className="mt-6 flex items-center justify-between border-t border-sa-border pt-4 text-[10px] font-bold uppercase tracking-widest text-sa-primary">
-          <span>Open case study</span>
+          <span>View project</span>
           <span aria-hidden className="text-base transition-transform duration-300 group-hover/card:translate-x-2">→</span>
         </div>
       </div>
@@ -270,7 +270,7 @@ function HomeVerticalImageSlide({
       <Link
         href={`/portfolio/${project.slug}`}
         className="group/vslide relative block w-full max-w-full outline-none focus-visible:ring-2 focus-visible:ring-sa-primary focus-visible:ring-offset-2 focus-visible:ring-offset-sa-bg sm:max-w-[min(100%,30rem)] lg:max-w-[min(100%,34rem)] xl:max-w-[min(100%,38rem)]"
-        aria-label={`${project.title} — view case study`}
+        aria-label={`${project.title} — view project`}
       >
         <div className="rounded-3xl border border-sa-border bg-sa-surface p-2 sm:p-3 transition-colors hover:border-sa-primary/50">
           <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-sa-bg border border-sa-border">

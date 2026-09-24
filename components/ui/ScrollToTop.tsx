@@ -5,6 +5,7 @@ import { ArrowUp } from "lucide-react";
 import { floatingChrome } from "@/components/ui/floating-chrome";
 import { cn } from "@/lib/utils";
 
+/** Desktop-only — mobile relies on the tab bar; avoids FAB stack clutter. */
 export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -18,10 +19,6 @@ export function ScrollToTop() {
     return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   if (!isVisible) {
     return null;
   }
@@ -29,8 +26,8 @@ export function ScrollToTop() {
   return (
     <button
       type="button"
-      onClick={scrollToTop}
-      className={cn(floatingChrome.scrollToTop, floatingChrome.fab)}
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      className={cn(floatingChrome.scrollToTop, floatingChrome.fab, "hidden md:flex")}
       aria-label="Scroll to top"
       data-app-print-hide-chrome
     >

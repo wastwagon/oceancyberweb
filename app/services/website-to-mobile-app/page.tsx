@@ -38,7 +38,7 @@ export default function WebsiteToMobileAppPage() {
                 <Smartphone className="h-4 w-4" />
                 Website to mobile app
               </span>
-              <h1 className="sa-title !text-left mt-5 text-3xl md:text-4xl lg:text-5xl">
+              <h1 className="sa-title-lg !text-left mt-5">
                 Convert your existing website into a <span className="text-sa-primary">production-ready app</span>
               </h1>
               <p className="sa-subtitle !text-left mt-4 max-w-2xl">

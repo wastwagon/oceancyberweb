@@ -27,7 +27,7 @@ export function CaBlogSection() {
                 >
                   <div className="flex flex-col justify-between p-6 md:p-8 lg:p-10">
                     <div className="flex items-start gap-3">
-                      <span className="font-heading text-5xl font-extrabold leading-none text-[var(--ae-ink)] md:text-6xl">
+                      <span className="font-heading text-3xl font-extrabold leading-none text-[var(--ae-ink)] md:text-4xl">
                         {day}
                       </span>
                       <span className="pt-1 text-xs font-bold uppercase leading-tight tracking-widest text-[var(--ae-ink-subtle)]">

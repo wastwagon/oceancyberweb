@@ -15,8 +15,8 @@ const content: ServicePageContent = {
   heroHighlightTone: "white",
   heroDescription:
     "Stores that convert: catalog modeling, checkout trust, payments, and operations tooling sized from launch to scale.",
-  heroCtaLabel: "Launch your store",
-  heroCtaHref: "/contact",
+  heroCtaLabel: "Get started",
+  heroCtaHref: "/get-started",
   heroImage: serviceImages.ecommerce,
   pills: ["Checkout", "Payments", "Operations"],
   focusEyebrow: "Capabilities",

@@ -164,7 +164,7 @@ export function CaPortfolioSection() {
                         <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--ae-primary)]">
                           {item.category}
                         </p>
-                        <h3 className="mt-2 font-heading text-xl font-extrabold uppercase leading-tight text-white md:text-3xl lg:text-4xl">
+                        <h3 className="mt-2 font-heading text-lg font-extrabold uppercase leading-tight text-white md:text-xl">
                           {item.title}
                         </h3>
                       </div>
@@ -181,7 +181,7 @@ export function CaPortfolioSection() {
             href="/portfolio?tab=creative"
             className="sa-pressable inline-flex min-h-12 items-center rounded-full border border-[var(--ae-ink)]/25 px-8 text-sm font-bold uppercase tracking-wider text-[var(--ae-ink)] hover:border-[var(--ae-primary)] hover:text-[var(--ae-primary)]"
           >
-            Open full portfolio
+            View portfolio
           </Link>
         </div>
       </div>

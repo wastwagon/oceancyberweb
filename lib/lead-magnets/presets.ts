@@ -17,7 +17,7 @@ export const LEAD_MAGNET_PRESETS: Record<LeadMagnetId, LeadMagnetPreset> = {
       "Seven practical steps for MoMo-ready checkout, reconciliation, and dispute handling — written for Ghana product and engineering teams.",
     successMessage: "Your playbook is downloading. Check your inbox for future editions.",
     footer: {
-      label: "See our ThinQ Shopping case study",
+      label: "See our ThinQ Shopping project",
       href: "/portfolio/thinq-shopping",
     },
   },

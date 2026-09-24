@@ -9,6 +9,20 @@ export type ServicePageSeoEntry = {
 
 export const servicePageSeoEntries: ServicePageSeoEntry[] = [
   {
+    path: "/services/web-design-in-ghana",
+    name: "Web designer in Ghana",
+    description:
+      "Web designer and website developer in Ghana. Company websites, online stores, and web apps for Accra, Kumasi, Tema, Takoradi, and nationwide.",
+    image: serviceImages.webDevelopment,
+  },
+  {
+    path: "/services/web-design-in-accra",
+    name: "Web designer in Accra",
+    description:
+      "Web designer in Accra for company websites and web apps — Accra studio on Nii Kwashiefio Avenue, nationwide delivery available.",
+    image: serviceImages.webDevelopment,
+  },
+  {
     path: "/services/ui-ux-design",
     name: "UI/UX & brand design",
     description:
