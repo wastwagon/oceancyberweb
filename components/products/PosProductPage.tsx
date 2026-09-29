@@ -5,7 +5,6 @@ import {
   ArrowRight,
   CheckCircle2,
   ChevronDown,
-  ExternalLink,
   Package,
   Store,
 } from "lucide-react";
@@ -103,23 +102,25 @@ export function PosProductPage({ product }: { product: ProductCatalogEntry }) {
             </motion.div>
             <motion.div
               variants={heroMotion.item}
-              className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
+              className="mt-10 flex flex-col items-center gap-3"
             >
               <a
                 href={product.trialSignupHref}
-                className="sa-btn-primary inline-flex w-full items-center justify-center gap-2 sm:w-auto"
+                className="sa-btn-primary w-full sm:w-auto"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Start free trial
-                <ExternalLink className="h-4 w-4" aria-hidden />
               </a>
-              <Link href={contactHref} className="sa-btn-outline w-full sm:w-auto">
+              <Link
+                href={contactHref}
+                className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
+              >
                 Book a demo
               </Link>
               <a
                 href={posSigninUrl()}
-                className="sa-ios-link text-sm font-semibold"
+                className="inline-flex min-h-11 items-center text-sm font-medium text-sa-muted"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -296,21 +297,26 @@ export function PosProductPage({ product }: { product: ProductCatalogEntry }) {
               Start a trial on the POS platform, or talk to us for Enterprise rollout and assisted
               onboarding.
             </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <div className="mt-10 flex flex-col items-center gap-3">
               <a
                 href={product.trialSignupHref}
-                className="sa-btn-primary inline-flex w-full items-center justify-center gap-2 sm:w-auto"
+                className="sa-btn-primary w-full sm:w-auto"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Start free trial
-                <ExternalLink className="h-4 w-4" aria-hidden />
               </a>
-              <Link href={contactHref} className="sa-btn-outline w-full sm:w-auto">
+              <Link
+                href={contactHref}
+                className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
+              >
                 Book a demo
               </Link>
-              <Link href={proposalHref} className="sa-btn-outline w-full sm:w-auto">
-                Request proposal
+              <Link
+                href={proposalHref}
+                className="inline-flex min-h-11 items-center text-sm font-medium text-sa-muted"
+              >
+                Request a proposal
               </Link>
             </div>
           </motion.div>

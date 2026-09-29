@@ -48,9 +48,9 @@ export function CaAboutSection() {
             engineering discipline
           </h2>
           <p className="ae-body-light mt-6 max-w-xl text-base leading-relaxed md:text-lg">
-            OceanCyber is an Accra-based product studio. We partner with ambitious teams to
-            shape brands, design intuitive experiences, and ship software that performs under
-            real-world pressure — across Ghana, London, and global markets.
+            OceanCyber is an Accra-based company. We partner with ambitious teams to
+            shape brands, design intuitive experiences, and ship software that holds up in real use
+            across Ghana and for clients abroad.
           </p>
 
           <div className="mt-10 grid grid-cols-3 gap-4 border-t border-[var(--ae-line-light)] pt-8 md:gap-8">
@@ -59,23 +59,23 @@ export function CaAboutSection() {
                 <p className="font-heading text-[clamp(1.75rem,3vw,3rem)] font-extrabold leading-none text-[var(--ae-primary)]">
                   {stat.value}
                 </p>
-                <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--ae-ink-subtle)] md:text-xs">
+                <p className="mt-2 text-sm font-medium text-[var(--ae-ink-subtle)]">
                   {stat.label}
                 </p>
               </div>
             ))}
           </div>
 
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-10 flex w-full flex-col items-start gap-3">
             <Link
               href="/get-started"
-              className="sa-pressable inline-flex min-h-12 items-center rounded-full bg-[var(--ae-primary)] px-7 text-sm font-bold uppercase tracking-wider text-black"
+              className="sa-pressable inline-flex min-h-12 w-full items-center justify-center rounded-2xl bg-[var(--ae-primary)] px-7 text-[15px] font-semibold text-black sm:w-auto sm:rounded-full"
             >
               Get started
             </Link>
             <Link
               href="/contact"
-              className="sa-pressable inline-flex min-h-12 items-center rounded-full border border-[var(--ae-ink)]/20 px-7 text-sm font-bold uppercase tracking-wider text-[var(--ae-ink)]"
+              className="inline-flex min-h-11 items-center text-sm font-medium text-[var(--ae-ink)] underline-offset-4 hover:text-[var(--ae-primary)] hover:underline"
             >
               Talk to our team
             </Link>

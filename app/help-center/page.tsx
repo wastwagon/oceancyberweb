@@ -7,9 +7,9 @@ export const revalidate = 60;
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "Help Center",
+    title: "Help centre",
     description:
-      "Answers on billing, renewals, project requests, and security — plus guided support paths.",
+      "Answers on billing, renewals, project requests, and security, plus guided support.",
   },
   "/help-center",
 );

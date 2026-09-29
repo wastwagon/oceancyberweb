@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, X, ZoomIn } from "lucide-react";
 import Image from "next/image";
+import { SaWhenVisibleImage } from "@/components/startup-agency/SaWhenVisibleImage";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { aboutWorkPreview } from "@/lib/startup-agency/content";
@@ -44,7 +45,7 @@ export function SaTeamCollage() {
                 index === 0 ? "col-span-2 aspect-[21/9]" : "aspect-square"
               }`}
             >
-              <Image
+              <SaWhenVisibleImage
                 src={item.image}
                 alt={item.title}
                 fill
@@ -57,7 +58,7 @@ export function SaTeamCollage() {
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5">
                 <p className="font-heading text-sm font-bold text-white md:text-base">{item.title}</p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-sa-primary md:text-xs">
+                <p className="text-sm font-medium text-sa-primary">
                   {item.category}
                 </p>
               </div>
@@ -118,7 +119,7 @@ export function SaTeamCollage() {
               <figcaption className="flex flex-col gap-4 border-t border-sa-border px-5 py-4 md:flex-row md:items-center md:justify-between md:px-6 md:py-5">
                 <div>
                   <p className="font-heading text-base font-bold text-white md:text-lg">{activeItem.title}</p>
-                  <p className="mt-1 text-xs font-bold uppercase tracking-widest text-sa-primary">
+                  <p className="mt-1 text-sm font-medium text-sa-primary">
                     {activeItem.category}
                   </p>
                 </div>
@@ -127,7 +128,7 @@ export function SaTeamCollage() {
                     href={activeItem.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 font-heading text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:text-sa-primary"
+                    className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-white transition-colors hover:text-sa-primary"
                   >
                     Visit website
                     <ArrowUpRight className="h-4 w-4" aria-hidden />
@@ -135,7 +136,7 @@ export function SaTeamCollage() {
                 ) : (
                   <Link
                     href={activeItem.href}
-                    className="inline-flex items-center gap-2 font-heading text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:text-sa-primary"
+                    className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-white transition-colors hover:text-sa-primary"
                   >
                     View project
                     <ArrowUpRight className="h-4 w-4" aria-hidden />

@@ -62,7 +62,7 @@ export function PaystackReturnBanner({
           <p className="text-sm font-bold">{config.title}</p>
           <p className="text-sm opacity-90">{config.message}</p>
           {state === "paid" && backHref ? (
-            <Link href={backHref} className="mt-2 inline-block text-xs font-bold uppercase tracking-widest underline underline-offset-4">
+            <Link href={backHref} className="mt-2 inline-flex min-h-11 items-center text-sm font-medium underline underline-offset-4">
               {backLabel}
             </Link>
           ) : null}

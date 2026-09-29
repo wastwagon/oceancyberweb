@@ -5,5 +5,5 @@ export type SourceFilter = "All" | PortfolioSource;
 
 export const PORTFOLIO_SOURCE_LABELS: Record<PortfolioSource, string> = {
   client: "Client work",
-  studio: "Studio showcase",
+  studio: "Concept work",
 };

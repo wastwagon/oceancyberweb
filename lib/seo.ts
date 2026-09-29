@@ -2,9 +2,9 @@ import { DefaultSeoProps } from "next-seo";
 
 export const defaultSEO: DefaultSeoProps = {
   titleTemplate: "%s | OceanCyber",
-  defaultTitle: "OceanCyber - Ghana's Premier Tech Partner",
+  defaultTitle: "OceanCyber | Web, mobile, and cybersecurity in Ghana",
   description:
-    "Ghana's leading technology solutions provider. We deliver cutting-edge web design, mobile app development, IT consulting, and digital transformation services across 12+ industries.",
+    "OceanCyber designs and builds websites, mobile apps, and secure digital products for businesses in Accra and across Africa.",
   openGraph: {
     type: "website",
     locale: "en_GH",
@@ -31,7 +31,7 @@ export const defaultSEO: DefaultSeoProps = {
     },
     {
       name: "theme-color",
-      content: "#0066CC",
+      content: "#0c0c10",
     },
     {
       name: "geo.region",

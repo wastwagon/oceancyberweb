@@ -4,9 +4,9 @@ import { withCanonical } from "@/lib/seo/canonical";
 
 export const metadata = withCanonical(
   {
-    title: "Creative Hub",
+    title: "Concept work",
     description:
-      "OceanCyber studio concepts and illustrative UI — browse via the Creative Hub tab on our portfolio.",
+      "OceanCyber concept work and illustrative UI — browse via the Creative Hub tab on our portfolio.",
   },
   "/creative-hub",
 );

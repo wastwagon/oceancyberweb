@@ -4,6 +4,7 @@ import { getInsightPosts } from "@/lib/data/insights-loader";
 import { insightArticlePath } from "@/lib/insights/content";
 import { industrySitemapPaths } from "@/lib/data/industries-catalog";
 import { productSitemapPaths } from "@/lib/data/products-catalog";
+import { intentSitemapPaths } from "@/lib/seo/intent-pages";
 
 const base =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
@@ -42,6 +43,7 @@ const routes = [
   "/tools/proposal",
   "/tools/security-assessment",
   ...productSitemapPaths,
+  ...intentSitemapPaths(),
   "/industries",
   ...industrySitemapPaths,
 ];

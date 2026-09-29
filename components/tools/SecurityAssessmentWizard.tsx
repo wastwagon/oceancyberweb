@@ -171,7 +171,7 @@ export function SecurityAssessmentWizard() {
       <div className="space-y-6">
         <div className="sa-card border-l-4 border-sa-primary p-6 md:p-8">
           <SaBadge>Your maturity score</SaBadge>
-          <p className="mt-2 font-heading text-5xl font-black text-white">{result.percent}%</p>
+          <p className="mt-2 font-heading text-5xl font-bold text-white">{result.percent}%</p>
           <p className="mt-1 font-heading text-lg font-bold text-sa-primary">{result.tier.label}</p>
           <p className="mt-4 text-sm leading-relaxed text-sa-muted/85">{result.tier.summary}</p>
         </div>
@@ -186,7 +186,7 @@ export function SecurityAssessmentWizard() {
         </div>
 
         <div className="sa-card p-6">
-          <p className="font-heading text-sm font-bold uppercase tracking-widest text-white">Priority actions</p>
+          <p className="text-sm font-semibold text-white">Priority actions</p>
           <ul className="mt-4 space-y-2 text-sm text-sa-muted/85">
             {result.tier.recommendations.map((rec) => (
               <li key={rec} className="flex gap-2">
@@ -197,11 +197,11 @@ export function SecurityAssessmentWizard() {
           </ul>
         </div>
 
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-col items-start gap-2">
           <button
             type="button"
             onClick={() => setPhase("email")}
-            className="sa-btn-primary min-h-[48px] px-6"
+            className="sa-btn-primary w-full sm:w-auto"
           >
             Email me the PDF report
           </button>
@@ -211,7 +211,7 @@ export function SecurityAssessmentWizard() {
               setPhase("questions");
               setDomainIndex(0);
             }}
-            className="inline-flex min-h-[48px] items-center rounded-full border border-sa-border px-6 text-sm font-semibold text-white hover:border-sa-primary"
+            className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
           >
             Retake assessment
           </button>
@@ -223,8 +223,8 @@ export function SecurityAssessmentWizard() {
   return (
     <div className="sa-card p-4 sm:p-6">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-        <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">
-          Domain {domainIndex + 1} of {SECURITY_DOMAINS.length}
+        <p className="text-sm text-sa-muted">
+          Section {domainIndex + 1} of {SECURITY_DOMAINS.length}
         </p>
         <p className="font-heading text-sm font-bold text-sa-primary">{domain.title}</p>
       </div>

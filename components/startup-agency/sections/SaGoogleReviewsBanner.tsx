@@ -47,7 +47,7 @@ export function SaGoogleReviewsBanner({ stats }: Props) {
         href={profileUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-6 inline-flex items-center gap-2 rounded-full border border-sa-primary/40 bg-sa-primary/10 px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-sa-primary transition hover:border-sa-primary hover:bg-sa-primary hover:text-black"
+        className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
       >
         Read reviews on Google
         <ExternalLink className="h-3.5 w-3.5" aria-hidden />

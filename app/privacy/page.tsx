@@ -4,7 +4,7 @@ import { LegalPageFooter } from "@/components/legal/LegalPageFooter";
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "Privacy Policy",
+    title: "Privacy policy",
     description: "How OceanCyber collects, uses, and protects your information.",
   },
   "/privacy",
@@ -40,7 +40,7 @@ export default function PrivacyPage() {
     {
       title: "Cookies and international processing",
       content:
-        "Essential storage supports security and platform functions. Optional analytics runs only after consent; see our Cookie Policy for details. Some service providers may process data outside Ghana. Where this occurs, we take reasonable steps to use providers with appropriate privacy and security protections.",
+        "The public site does not set analytics cookies. A session cookie is used only after you sign in, so the workspace stays secure. See our Cookie Policy for details. Some service providers may process data outside Ghana. Where this occurs, we take reasonable steps to use providers with appropriate privacy and security protections.",
     },
   ];
 
@@ -48,15 +48,15 @@ export default function PrivacyPage() {
     <main className="sa-shell min-h-screen bg-sa-bg sa-page-top pb-16 md:py-36">
       <div className="sa-container max-w-4xl px-6">
         <header className="mb-16">
-          <span className="sa-eyebrow inline-flex">Data Sovereignty</span>
+          <span className="sa-eyebrow inline-flex">Privacy</span>
           <h1 className="sa-title-lg !text-left mt-5">
-            Privacy <span className="text-sa-primary">Policy</span>
+            Privacy policy
           </h1>
           <p className="sa-subtitle !text-left mt-6 max-w-2xl">
             This policy explains what personal information we collect, why we
             use it, who may process it, and the choices available to you.
           </p>
-          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-sa-muted/60">
+          <p className="mt-4 text-sm text-sa-muted">
             Last updated: 12 July 2026
           </p>
         </header>
@@ -66,7 +66,7 @@ export default function PrivacyPage() {
             <div key={policy.title} className="sa-card p-8 border-sa-border">
               <div className="flex flex-col md:flex-row md:items-start gap-6">
                 <div className="md:w-1/3">
-                  <h2 className="font-heading text-lg font-bold text-white uppercase tracking-widest">{policy.title}</h2>
+                  <h2 className="font-heading text-lg font-bold text-white">{policy.title}</h2>
                 </div>
                 <div className="md:w-2/3">
                   <p className="text-sa-muted/80 text-sm leading-relaxed">

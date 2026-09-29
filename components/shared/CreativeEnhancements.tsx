@@ -15,7 +15,7 @@ export function CreativeEnhancements() {
 function NoiseOverlay() {
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-[999] opacity-[0.03] mix-blend-overlay"
+      className="pointer-events-none fixed inset-0 z-[999] hidden opacity-[0.03] mix-blend-overlay md:block"
       data-app-print-hide-chrome
     >
       <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="h-full w-full">
@@ -44,6 +44,8 @@ function CustomCursor() {
 
   useEffect(() => {
     if (reduceMotion) return;
+    const desktop = window.matchMedia("(min-width: 768px)");
+    if (!desktop.matches) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({ x: e.clientX, y: e.clientY });

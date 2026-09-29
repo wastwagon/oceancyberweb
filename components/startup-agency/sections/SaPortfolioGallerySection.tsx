@@ -24,8 +24,8 @@ export function SaPortfolioGallerySection() {
         <SaSectionHeader
           align="center"
           eyebrow="Portfolio"
-          title="Live sites & Creative Hub"
-          subtitle="Tab between production partner sites and studio concept work — always know what's live versus illustrative."
+          title="Live sites and concept work"
+          subtitle="Switch between client sites that are live and concept work that is still illustrative."
           className="mb-10 md:mb-12"
         />
 
@@ -33,12 +33,15 @@ export function SaPortfolioGallerySection() {
           <PortfolioTabbedGallery variant="section" className="mx-auto max-w-6xl" />
         </Suspense>
 
-        <div className="mx-auto mt-10 text-center md:mt-12">
-          <Link href="/portfolio" className="sa-btn-outline">
+        <div className="mx-auto mt-10 flex flex-col items-center gap-3 md:mt-12">
+          <Link href="/portfolio" className="sa-btn-primary w-full sm:w-auto">
             View portfolio
           </Link>
-          <Link href="/portfolio?tab=creative" className="sa-btn-primary ml-0 mt-3 inline-flex sm:ml-3 sm:mt-0">
-            Creative Hub
+          <Link
+            href="/portfolio?tab=creative"
+            className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+          >
+            Concept work
           </Link>
         </div>
       </div>

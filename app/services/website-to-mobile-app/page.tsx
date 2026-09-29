@@ -33,7 +33,7 @@ export default function WebsiteToMobileAppPage() {
         <div className="sa-page-hero-body !items-stretch !text-left md:!items-center">
           <div className="sa-container w-full pb-0">
           <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
-            <div className="sa-card sa-pressable p-8 md:p-10 border-sa-border">
+            <div className="order-2 lg:order-1 sa-card sa-pressable p-5 md:p-10 border-sa-border">
               <span className="sa-eyebrow inline-flex items-center gap-2">
                 <Smartphone className="h-4 w-4" />
                 Website to mobile app
@@ -51,11 +51,11 @@ export default function WebsiteToMobileAppPage() {
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
                 <div className="rounded-2xl border border-sa-border bg-sa-surface p-5">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">What we review</p>
+                  <p className="text-sm font-semibold text-sa-primary">What we review</p>
                   <p className="mt-2 text-sm text-sa-muted/80">Current website stack, API readiness, key user journeys, and backend integrations.</p>
                 </div>
                 <div className="rounded-2xl border border-sa-border bg-sa-surface p-5">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">What you receive</p>
+                  <p className="text-sm font-semibold text-sa-primary">What you receive</p>
                   <p className="mt-2 text-sm text-sa-muted/80">Scope recommendation, platform path, estimated budget band, and staged delivery plan.</p>
                 </div>
               </div>
@@ -71,7 +71,7 @@ export default function WebsiteToMobileAppPage() {
 
             <div
               id="website-to-app-quote"
-              className="sa-card h-fit scroll-mt-32 border-sa-border p-8 md:p-10 lg:sticky lg:top-32"
+              className="sa-card order-1 h-fit scroll-mt-32 border-sa-border p-5 md:p-10 lg:sticky lg:top-32 lg:order-2"
             >
               <h2 className="font-heading text-xl font-bold tracking-tight text-white md:text-2xl">
                 Request your conversion quote
@@ -91,17 +91,17 @@ export default function WebsiteToMobileAppPage() {
           <div className="grid gap-4 rounded-3xl border border-sa-border bg-sa-surface/50 p-6 sm:grid-cols-3 md:p-8">
             <div className="rounded-2xl border border-sa-border bg-sa-surface p-6 relative overflow-hidden group">
               <div className="absolute top-0 right-0 -mr-4 -mt-4 text-7xl font-black text-sa-primary/[0.03] group-hover:text-sa-primary/[0.05] transition-colors pointer-events-none">01</div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40">Step 01</p>
+              <p className="text-sm font-medium text-sa-muted">Step 1</p>
               <p className="mt-2 text-sm font-bold text-white relative z-10">Audit your existing website</p>
             </div>
             <div className="rounded-2xl border border-sa-border bg-sa-surface p-6 relative overflow-hidden group">
               <div className="absolute top-0 right-0 -mr-4 -mt-4 text-7xl font-black text-sa-primary/[0.03] group-hover:text-sa-primary/[0.05] transition-colors pointer-events-none">02</div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40">Step 02</p>
+              <p className="text-sm font-medium text-sa-muted">Step 2</p>
               <p className="mt-2 text-sm font-bold text-white relative z-10">Define mobile feature scope</p>
             </div>
             <div className="rounded-2xl border border-sa-border bg-sa-surface p-6 relative overflow-hidden group">
               <div className="absolute top-0 right-0 -mr-4 -mt-4 text-7xl font-black text-sa-primary/[0.03] group-hover:text-sa-primary/[0.05] transition-colors pointer-events-none">03</div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40">Step 03</p>
+              <p className="text-sm font-medium text-sa-muted">Step 3</p>
               <p className="mt-2 text-sm font-bold text-white relative z-10">Receive quote and milestones</p>
             </div>
           </div>
@@ -121,12 +121,14 @@ export default function WebsiteToMobileAppPage() {
               will review technical fit and respond with a practical conversion
               path, budget band, and delivery milestones.
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link href="#website-to-app-quote" className="sa-btn-primary">
+            <div className="mt-8 flex flex-col items-center gap-3">
+              <Link href="#website-to-app-quote" className="sa-btn-primary w-full sm:w-auto">
                 Request a conversion quote
-                <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
               </Link>
-              <Link href="/services/mobile-apps" className="sa-btn-outline">
+              <Link
+                href="/services/mobile-apps"
+                className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
+              >
                 Explore custom mobile apps
               </Link>
             </div>

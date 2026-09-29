@@ -113,7 +113,7 @@ export function buildMenuPreset(kind: string): AdminNavMenu {
           heading: "Resources",
           href: "/insights",
           metadataInput:
-            '{"dropdownKey":"resources","activeMatch":["/insights","/portfolio","/how-we-work","/design-process","/security-journey","/tools/security-assessment"]}',
+            '{"dropdownKey":"resources","activeMatch":["/insights","/guides","/compare","/alternatives","/portfolio","/how-we-work","/design-process","/security-journey","/tools/security-assessment"]}',
         },
         {
           ...createEmptyNavItem(40),
@@ -236,7 +236,7 @@ export function buildMenuPreset(kind: string): AdminNavMenu {
             ...createEmptyNavItem(0),
             heading: "About",
             href: "/about",
-            description: "Accra studio delivering websites and apps across Ghana.",
+            description: "Accra company delivering websites and apps across Ghana.",
           },
           {
             ...createEmptyNavItem(10),

@@ -4,9 +4,9 @@ import { ServiceLayoutWithJsonLd } from "@/components/seo/ServiceLayoutWithJsonL
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "cPanel & WHM hosting",
+    title: "Web hosting in Ghana",
     description:
-      "cPanel hosting in Ghana cedis on our Namecheap reseller + WHM stack—optional currency preview, Paystack checkout in GHS, local support from Accra.",
+      "cPanel hosting with SSL, backups, and support from Accra. Pay in Ghana cedis with Paystack.",
   },
   "/hosting",
 );

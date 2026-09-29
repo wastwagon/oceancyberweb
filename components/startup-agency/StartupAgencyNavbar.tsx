@@ -30,7 +30,7 @@ import {
 } from "@/components/startup-agency/NavDropdownPanels";
 
 const navLinkClass =
-  "group relative inline-flex min-h-[42px] items-center gap-1 px-3 py-2 font-heading text-[13px] font-medium uppercase tracking-[0.14em] text-white transition duration-300 hover:text-sa-primary";
+  "group relative inline-flex min-h-11 items-center gap-1 px-3 py-2 text-sm font-medium tracking-normal text-white transition duration-300 hover:text-sa-primary";
 
 const HEADER_SOCIAL_LINKS = [
   { Icon: Facebook, href: "https://facebook.com/oceancyber", label: "Facebook" },
@@ -132,7 +132,7 @@ export function StartupAgencyNavbar() {
           )}
         >
           <div className="flex h-full items-center justify-between gap-3 rounded-t-[16px] border border-b-0 border-white/10 bg-[#141416]/90 px-4 backdrop-blur-xl sm:px-5">
-            <div className="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-1 text-[10px] font-bold uppercase tracking-[0.16em] text-sa-muted/80">
+            <div className="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-1 text-xs font-medium text-sa-muted/80">
               <a
                 href="tel:+233242565695"
                 className="flex min-w-0 items-center gap-2 text-sa-muted transition-colors hover:text-sa-primary"
@@ -158,14 +158,14 @@ export function StartupAgencyNavbar() {
                   {isAdmin ? (
                     <Link
                       href="/admin"
-                      className="px-2.5 py-1 font-heading text-[10px] font-bold uppercase tracking-[0.14em] text-sa-primary transition hover:text-white"
+                      className="px-2.5 py-1 text-xs font-medium text-sa-primary transition hover:text-white"
                     >
                       Admin
                     </Link>
                   ) : null}
                   <Link
                     href="/dashboard"
-                    className="inline-flex h-7 items-center rounded-full border border-white/10 px-3 font-heading text-[10px] font-bold uppercase tracking-[0.14em] text-sa-muted transition hover:border-sa-primary/50 hover:text-sa-primary"
+                    className="inline-flex h-7 items-center rounded-full border border-white/10 px-3 text-xs font-medium text-sa-muted transition hover:border-sa-primary/50 hover:text-sa-primary"
                   >
                     Dashboard
                   </Link>
@@ -182,7 +182,7 @@ export function StartupAgencyNavbar() {
               )}
               <Link
                 href="/get-started"
-                className="inline-flex h-7 items-center rounded-full border border-sa-primary bg-sa-primary px-3.5 font-heading text-[10px] font-bold uppercase tracking-[0.14em] text-sa-bg transition hover:bg-sa-primary/90"
+                className="inline-flex h-7 items-center rounded-full border border-sa-primary bg-sa-primary px-3.5 text-xs font-semibold text-sa-bg transition hover:bg-sa-primary/90"
               >
                 Get started
               </Link>
@@ -190,7 +190,7 @@ export function StartupAgencyNavbar() {
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden h-7 items-center rounded-full border border-white/10 px-3 font-heading text-[10px] font-bold uppercase tracking-[0.14em] text-sa-muted transition hover:border-sa-primary/40 hover:text-sa-primary xl:inline-flex"
+                className="hidden h-7 items-center rounded-full border border-white/10 px-3 text-xs font-medium text-sa-muted transition hover:border-sa-primary/40 hover:text-sa-primary xl:inline-flex"
               >
                 WhatsApp
               </a>
@@ -297,14 +297,14 @@ export function StartupAgencyNavbar() {
                 ) : (
                   <Link
                     href="/dashboard"
-                    className="px-2 font-heading text-[11px] font-bold uppercase tracking-[0.14em] text-sa-muted transition hover:text-sa-primary"
+                    className="px-2 text-sm font-medium text-sa-muted transition hover:text-sa-primary"
                   >
                     Dashboard
                   </Link>
                 )}
                 <Link
                   href="/get-started"
-                  className="inline-flex min-h-[36px] items-center rounded-xl border border-sa-primary bg-sa-primary px-3.5 font-heading text-[11px] font-semibold uppercase tracking-[0.14em] text-sa-bg transition hover:bg-sa-primary/90"
+                  className="inline-flex min-h-11 items-center rounded-2xl border border-sa-primary bg-sa-primary px-4 text-sm font-semibold text-sa-bg transition hover:bg-sa-primary/90"
                 >
                   Get started
                 </Link>
@@ -343,7 +343,7 @@ export function StartupAgencyNavbar() {
               <input
                 type="search"
                 name="q"
-                placeholder="Search insights…"
+                placeholder="Search guides and articles…"
                 className="min-h-[48px] flex-1 bg-transparent px-4 text-base text-white placeholder:text-sa-muted/70 focus:outline-none"
               />
               <button type="submit" className="sa-pressable bg-sa-primary px-5 text-sm font-semibold text-sa-bg">
@@ -383,7 +383,7 @@ export function StartupAgencyNavbar() {
               </div>
 
               <div className="min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-4 pb-[calc(env(safe-area-inset-bottom)+1rem)]">
-                <p className="px-1 pb-3 text-[13px] font-semibold uppercase tracking-wide text-sa-muted/60">
+                <p className="px-1 pb-3 text-sm font-medium text-sa-muted">
                   Menu
                 </p>
 
@@ -441,34 +441,29 @@ export function StartupAgencyNavbar() {
                   })}
                 </div>
 
-                <div className="mt-5 space-y-3">
+                <div className="mt-4 space-y-2">
+                  <p className="px-1 pb-2 text-[13px] font-semibold text-white/55">Account</p>
                   {isLoggedIn ? (
-                    <>
+                    <div className="sa-ios-group divide-y divide-white/[0.06]">
                       {isAdmin ? (
-                        <Link
-                          href="/admin"
-                          className="sa-btn-primary flex w-full"
-                          onClick={closeMobileMenu}
-                        >
+                        <Link href="/admin" className="sa-ios-row sa-pressable" onClick={closeMobileMenu}>
                           Admin
                         </Link>
                       ) : null}
-                      <Link
-                        href="/dashboard"
-                        className="sa-btn-outline flex w-full"
-                        onClick={closeMobileMenu}
-                      >
+                      <Link href="/dashboard" className="sa-ios-row sa-pressable" onClick={closeMobileMenu}>
                         Dashboard
                       </Link>
-                    </>
+                    </div>
                   ) : (
                     <Link
                       href="/signin"
-                      className="sa-btn-outline flex w-full items-center justify-center gap-2"
+                      className="sa-ios-group sa-ios-row sa-pressable"
                       onClick={closeMobileMenu}
                     >
-                      <UserRound className="h-4 w-4" aria-hidden />
-                      Account
+                      <span className="flex items-center gap-3">
+                        <UserRound className="h-5 w-5 text-sa-primary" aria-hidden />
+                        Sign in
+                      </span>
                     </Link>
                   )}
                   <Link

@@ -12,7 +12,7 @@ export type PortfolioTab = "live" | "creative";
 
 const TABS: { id: PortfolioTab; label: string; shortLabel: string }[] = [
   { id: "live", label: "Live client sites", shortLabel: "Live" },
-  { id: "creative", label: "Creative Hub", shortLabel: "Studio" },
+  { id: "creative", label: "Creative Hub", shortLabel: "Concepts" },
 ];
 
 type PortfolioTabbedGalleryProps = {
@@ -73,7 +73,7 @@ export function PortfolioTabbedGallery({
                 id={`portfolio-tab-${tab.id}`}
                 onClick={() => onSelect(tab.id)}
                 className={cn(
-                  "sa-pressable flex-1 rounded-xl px-3 py-2.5 text-center text-sm font-semibold transition-colors md:py-3 md:text-[15px]",
+                  "sa-pressable min-h-11 flex-1 rounded-xl px-3 py-2.5 text-center text-sm font-semibold transition-colors",
                   selected
                     ? "bg-sa-primary text-sa-bg shadow-sm"
                     : "text-sa-muted/80",
@@ -89,7 +89,7 @@ export function PortfolioTabbedGallery({
         <p className="text-center text-sm text-sa-muted/75">
           {activeTab === "live"
             ? "Production websites you can open right now — screenshots captured from each live URL."
-            : "Studio concepts and illustrative UI — not live client deployments."}
+            : "Concept work and illustrative UI — not live client deployments."}
         </p>
       </div>
 

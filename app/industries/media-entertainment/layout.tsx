@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { getIndustryBySlug } from "@/lib/data/industries-catalog";
+
+const industry = getIndustryBySlug("media-entertainment");
 
 export const metadata: Metadata = {
-  title: "Media & Entertainment",
-  description:
-    "Streaming, content platforms, and fan apps for media brands — OceanCyber, Accra.",
+  title: industry ? `${industry.title} software in Ghana` : "media-entertainment",
+  description: industry?.description,
   alternates: { canonical: "/industries/media-entertainment" },
 };
 

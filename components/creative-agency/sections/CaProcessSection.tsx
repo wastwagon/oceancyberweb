@@ -11,12 +11,12 @@ export function CaProcessSection() {
         <SaReveal className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
             <p className="ae-eyebrow">Work process</p>
-            <h2 className="mt-4 max-w-2xl font-heading text-[clamp(2rem,4vw,3.25rem)] font-extrabold uppercase leading-[1.1] tracking-tight text-white">
+            <h2 className="mt-4 max-w-2xl font-heading text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[1.1] tracking-tight text-white">
               From brief to launch
             </h2>
           </div>
-          <p className="font-heading text-sm font-bold uppercase tracking-[0.2em] text-white/50">
-            Steps <span className="text-[var(--ae-primary)]">01–04</span>
+          <p className="text-sm font-medium text-white/60">
+            Steps <span className="text-[var(--ae-primary)]">1–4</span>
           </p>
         </SaReveal>
 
@@ -42,13 +42,13 @@ export function CaProcessSection() {
                     </span>
                   </div>
                   <div className="flex flex-1 flex-col p-6 md:p-7">
-                    <h3 className="font-heading text-xl font-bold uppercase tracking-wide text-white">
+                    <h3 className="font-heading text-xl font-bold text-white">
                       {step.title}
                     </h3>
                     <p className="mt-3 text-sm leading-relaxed text-white/65">{step.body}</p>
                     <ul className="mt-5 space-y-2 border-t border-white/10 pt-5">
                       {step.bullets.map((b) => (
-                        <li key={b} className="flex gap-2 text-xs text-white/55">
+                        <li key={b} className="flex gap-2 text-sm text-white/65">
                           <span className="text-[var(--ae-primary)]">•</span>
                           {b}
                         </li>
@@ -64,7 +64,7 @@ export function CaProcessSection() {
         <SaReveal delay={0.2} className="mt-12 text-center">
           <Link
             href="/how-we-work"
-            className="sa-pressable inline-flex min-h-12 items-center rounded-full border border-white/25 px-8 text-sm font-bold uppercase tracking-wider text-white"
+            className="inline-flex min-h-11 items-center text-sm font-medium text-white underline-offset-4 hover:text-[var(--ae-primary)] hover:underline"
           >
             See how we work
           </Link>

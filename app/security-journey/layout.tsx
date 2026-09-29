@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Security journey",
+  title: "Security programmes in Ghana",
   description:
-    "A phased approach to assessing risk, hardening systems, and sustaining secure operations.",
+    "A phased way to assess risk, harden systems, and keep them secure. Based in Accra.",
   alternates: { canonical: "/security-journey" },
 };
 

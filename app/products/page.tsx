@@ -4,9 +4,9 @@ import { withCanonical } from "@/lib/seo/canonical";
 
 export const metadata = withCanonical(
   {
-    title: "Products",
+    title: "OceanCyber POS and software",
     description:
-      "OceanCyber subscription software — OceanCyber POS for Ghanaian retail and hospitality. Self-serve signup, your own MoMo keys, or offline payments.",
+      "OceanCyber POS is subscription software for retail and hospitality in Ghana. Start a trial, or ask the company to build a custom platform.",
   },
   "/products",
 );

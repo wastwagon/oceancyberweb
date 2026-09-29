@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { withCanonical } from "@/lib/seo/canonical";
 
 const SITE_URL =
@@ -11,7 +11,7 @@ const ghanaUrl = `${SITE_URL}/services/web-design-in-ghana`;
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "Web Designer in Accra",
+    title: "Web designer in Accra",
     description:
       "Web designer in Accra for company websites, online stores, and web apps. Part of OceanCyber's nationwide Ghana web design service, based on Nii Kwashiefio Avenue.",
   },
@@ -76,14 +76,14 @@ export default function WebDesignAccraPage() {
             </ol>
           </nav>
 
-          <p className="mt-8 text-[11px] font-medium uppercase tracking-[0.18em] text-sa-primary">
-            Accra studio
+          <p className="mt-8 text-sm font-semibold text-sa-primary">
+            Accra company
           </p>
           <h1 className="sa-title-lg mt-3">
             Web designer in Accra
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-sa-muted/80">
-            Local studio on Nii Kwashiefio Avenue for Accra businesses that want design and
+            Local company on Nii Kwashiefio Avenue for Accra businesses that want design and
             build in one place. Nationwide delivery uses the same team—see our{" "}
             <Link href="/services/web-design-in-ghana" className="text-sa-primary hover:underline">
               web designer in Ghana
@@ -96,15 +96,42 @@ export default function WebDesignAccraPage() {
             232 Nii Kwashiefio Avenue, Accra, Ghana
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/get-started" className="sa-btn-primary inline-flex items-center gap-2">
+          <div className="mt-8 flex flex-col items-start gap-3">
+            <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">
               Get started
-              <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
-            <Link href="/contact" className="sa-btn-outline inline-flex items-center gap-2">
+            <Link
+              href="/contact"
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
+            >
               Talk to our team
             </Link>
           </div>
+        </div>
+      </section>
+
+      <section className="py-14 md:py-20">
+        <div className="sa-container max-w-3xl">
+          <h2 className="font-heading text-2xl font-semibold text-white md:text-3xl">
+            Plan the project
+          </h2>
+          <ul className="mt-6 space-y-3 text-sm">
+            <li>
+              <Link href="/guides/website-cost-in-ghana" className="font-semibold text-sa-primary hover:underline">
+                How much a website costs in Ghana
+              </Link>
+            </li>
+            <li>
+              <Link href="/compare/agency-vs-freelancer-vs-in-house-ghana" className="font-semibold text-sa-primary hover:underline">
+                Agency, freelancer, or an in-house hire
+              </Link>
+            </li>
+            <li>
+              <Link href="/pricing" className="font-semibold text-sa-primary hover:underline">
+                Package pricing
+              </Link>
+            </li>
+          </ul>
         </div>
       </section>
     </div>

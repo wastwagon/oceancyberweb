@@ -88,37 +88,26 @@ export function HostingPackagesSection({
             <strong className="text-white">GHS via Paystack</strong>.
           </p>
 
-          <div className="mt-8 inline-flex items-center rounded-full border border-sa-border bg-sa-surface p-1">
+          <div className="mt-8 flex justify-center gap-2" role="tablist" aria-label="Billing cycle">
             <button
               type="button"
+              role="tab"
               onClick={() => setBillingCycle("monthly")}
-              aria-pressed={billingCycle === "monthly"}
-              className={cn(
-                "rounded-full px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all",
-                billingCycle === "monthly"
-                  ? "bg-sa-primary text-sa-bg"
-                  : "text-sa-muted hover:text-white",
-              )}
+              aria-selected={billingCycle === "monthly"}
+              className="sa-tab"
             >
               Monthly
             </button>
             <button
               type="button"
+              role="tab"
               onClick={() => setBillingCycle("annual")}
-              aria-pressed={billingCycle === "annual"}
-              className={cn(
-                "rounded-full px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all",
-                billingCycle === "annual"
-                  ? "bg-sa-primary text-sa-bg"
-                  : "text-sa-muted hover:text-white",
-              )}
+              aria-selected={billingCycle === "annual"}
+              className="sa-tab"
             >
               Annual
-              <span className={cn(
-                "ml-2 rounded-full px-2 py-0.5 text-[9px] font-black uppercase tracking-tighter",
-                billingCycle === "annual" ? "bg-black/20 text-sa-bg" : "bg-sa-primary/20 text-sa-primary"
-              )}>
-                -{maxAnnualDiscount}%
+              <span className="ml-2 rounded-full bg-sa-primary/20 px-2 py-0.5 text-xs font-semibold text-sa-primary">
+                Save {maxAnnualDiscount}%
               </span>
             </button>
           </div>
@@ -136,12 +125,12 @@ export function HostingPackagesSection({
             <li
               key={pkg.id}
               className={cn(
-                "sa-card relative flex flex-col p-7 md:p-8",
+                "sa-card relative flex flex-col p-5 md:p-8",
                 pkg.popular && "border-sa-primary ring-1 ring-sa-primary/30 shadow-xl shadow-sa-primary/5"
               )}
             >
               {pkg.popular ? (
-                <p className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-sa-primary px-3 py-1 font-heading text-[10px] font-bold uppercase tracking-wider text-sa-bg">
+                <p className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-sa-primary px-3 py-1 text-sm font-semibold text-sa-bg">
                   Most popular
                 </p>
               ) : null}
@@ -181,7 +170,7 @@ export function HostingPackagesSection({
                   <p className="mt-2 text-xs text-sa-muted">{pkg.billingNote}</p>
                 )}
               </div>
-              <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-sa-muted/50">
+              <p className="mb-4 text-sm font-medium text-sa-muted">
                 Includes
               </p>
               <ul className="mb-8 flex-1 space-y-3.5 text-sm text-sa-muted/90">
@@ -208,58 +197,47 @@ export function HostingPackagesSection({
                   )}&ref=${encodeURIComponent(
                     `HOST-${pkg.id.toUpperCase()}-${billingCycle === "annual" ? "YEARLY" : "MONTHLY"}`,
                   )}`}
-                  className={cn(
-                    "sa-btn-primary min-h-[48px] w-full",
-                    !pkg.popular && "bg-transparent border border-sa-border hover:border-sa-primary text-white hover:text-sa-primary"
-                  )}
+                  className={pkg.popular ? "sa-btn-primary w-full" : "sa-btn-outline w-full"}
                 >
                   Start {billingCycle === "annual" ? "annual" : "monthly"} checkout
                 </Link>
-                <div className="mt-4 grid grid-cols-2 gap-3">
-                  <button
-                    type="button"
-                    onClick={() =>
-                      addItem({
-                        id: `hosting-${pkg.id}-${billingCycle}-${Date.now()}`,
-                        kind: "hosting",
-                        label: `${pkg.name} (${billingCycle === "annual" ? "Annual" : "Monthly"})`,
-                        planCode: planCheckoutCodeByCycle(pkg, billingCycle),
-                        priceGhs:
-                          billingCycle === "monthly"
-                            ? pkg.priceMonthlyGhs
-                            : annualMonthlyEquivalent * 12,
-                        interval: billingCycle === "monthly" ? "month" : "year",
-                        reference: `HOST-${pkg.id.toUpperCase()}-${billingCycle.toUpperCase()}`,
-                        addons: [
-                          {
-                            id: "ssl-basic",
-                            label: "PositiveSSL (1 domain)",
-                            priceGhs: 45,
-                            selected: false,
-                          },
-                          {
-                            id: "daily-backup-plus",
-                            label: "Backup Plus",
-                            priceGhs: 30,
-                            selected: false,
-                          },
-                        ],
-                      })
-                    }
-                    className="flex min-h-[40px] items-center justify-center rounded-xl border border-sa-border px-4 text-[10px] font-bold uppercase tracking-wider text-sa-muted transition hover:border-sa-primary hover:text-white"
-                  >
-                    Add to cart
-                  </button>
-                  <Link
-                    href="/checkout/cart"
-                    className="flex min-h-[40px] items-center justify-center rounded-xl border border-sa-border px-4 text-[10px] font-bold uppercase tracking-wider text-sa-muted transition hover:border-sa-primary hover:text-white"
-                  >
-                    View cart
-                  </Link>
-                </div>
+                <button
+                  type="button"
+                  onClick={() =>
+                    addItem({
+                      id: `hosting-${pkg.id}-${billingCycle}-${Date.now()}`,
+                      kind: "hosting",
+                      label: `${pkg.name} (${billingCycle === "annual" ? "Annual" : "Monthly"})`,
+                      planCode: planCheckoutCodeByCycle(pkg, billingCycle),
+                      priceGhs:
+                        billingCycle === "monthly"
+                          ? pkg.priceMonthlyGhs
+                          : annualMonthlyEquivalent * 12,
+                      interval: billingCycle === "monthly" ? "month" : "year",
+                      reference: `HOST-${pkg.id.toUpperCase()}-${billingCycle.toUpperCase()}`,
+                      addons: [
+                        {
+                          id: "ssl-basic",
+                          label: "PositiveSSL (1 domain)",
+                          priceGhs: 45,
+                          selected: false,
+                        },
+                        {
+                          id: "daily-backup-plus",
+                          label: "Backup Plus",
+                          priceGhs: 30,
+                          selected: false,
+                        },
+                      ],
+                    })
+                  }
+                  className="mt-3 inline-flex min-h-11 w-full items-center justify-center text-sm font-semibold text-sa-primary"
+                >
+                  Add to cart
+                </button>
                 <Link
                   href={planContactHref(pkg)}
-                  className="mt-4 flex min-h-[32px] items-center justify-center text-[10px] font-bold uppercase tracking-widest text-sa-muted/50 transition hover:text-sa-primary"
+                  className="inline-flex min-h-11 w-full items-center justify-center text-sm font-semibold text-sa-muted"
                 >
                   Talk to our team
                 </Link>

@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Smartphone } from "lucide-react";
 import { InteractiveIntakeWizard } from "@/components/intake/InteractiveIntakeWizard";
 import { PricingPathsLinks } from "@/components/startup-agency/PricingPathsLinks";
 import { withCanonical } from "@/lib/seo/canonical";
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "Interactive intake and booking",
+    title: "Start a project",
     description:
-      "Tell us what you need, your budget, and your timeline. Packages start from GHS 6,000 — compare tiers or request a discovery call in one guided flow.",
+      "Share your goals, budget, and timeline in one guided flow. Packages start from GHS 6,000, and we reply with the right next step.",
   },
   "/get-started",
 );
@@ -19,7 +18,7 @@ export default function GetStartedPage() {
     <main className="relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
       <section className="sa-page-intro overflow-hidden border-b border-sa-border">
         <div className="sa-container max-w-3xl pb-8 md:pb-10">
-          <p className="sa-eyebrow mb-3 text-center block">Self-serve</p>
+          <p className="sa-eyebrow mb-3 text-center block">Project brief</p>
           <h1 className="sa-title mt-3 text-center">
             Get started in one guided flow
           </h1>
@@ -28,32 +27,22 @@ export default function GetStartedPage() {
             respond faster with the right proposal.
           </p>
           <div className="mt-6">
-            <PricingPathsLinks />
+            <PricingPathsLinks variant="compact" omitStart />
           </div>
         </div>
       </section>
       <section className="sa-section relative z-10">
         <div className="sa-container max-w-3xl">
-          <div className="sa-card mb-6 p-4">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <p className="inline-flex items-center gap-2 font-heading text-[10px] font-semibold uppercase tracking-[0.2em] text-sa-primary">
-                  <Smartphone className="h-3.5 w-3.5" aria-hidden />
-                  New service
-                </p>
-                <p className="mt-1 text-sm font-semibold text-white">
-                  Convert your existing website into a mobile app.
-                </p>
-              </div>
-              <Link
-                href="/services/website-to-mobile-app"
-                className="sa-btn-primary py-2 px-3 min-h-[40px] text-sm"
-              >
-                Request conversion quote
-                <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
-              </Link>
-            </div>
-          </div>
+          <p className="mb-6 text-sm text-white/80">
+            Already have a site?{" "}
+            <Link
+              href="/services/website-to-mobile-app"
+              className="font-medium text-sa-primary underline-offset-4 hover:underline"
+            >
+              Turn it into a mobile app
+            </Link>
+            .
+          </p>
           <InteractiveIntakeWizard />
         </div>
       </section>

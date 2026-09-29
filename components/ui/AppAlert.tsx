@@ -31,7 +31,7 @@ export function AppAlert({
       role={role}
       {...props}
     >
-      {title ? <p className="mb-1 text-xs font-bold uppercase tracking-widest">{title}</p> : null}
+      {title ? <p className="mb-1 text-sm font-semibold">{title}</p> : null}
       <div className="leading-relaxed">{children}</div>
     </div>
   );

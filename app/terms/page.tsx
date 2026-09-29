@@ -4,7 +4,7 @@ import { LegalPageFooter } from "@/components/legal/LegalPageFooter";
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "Terms of Service",
+    title: "Terms of service",
     description: "Terms governing the use of OceanCyber services and website.",
   },
   "/terms",
@@ -68,16 +68,16 @@ export default function TermsPage() {
     <main className="sa-shell min-h-screen bg-sa-bg sa-page-top pb-16 md:py-36">
       <div className="sa-container max-w-4xl px-6">
         <header className="mb-16">
-          <span className="sa-eyebrow inline-flex">Legal Framework</span>
+          <span className="sa-eyebrow inline-flex">Terms</span>
           <h1 className="sa-title-lg !text-left mt-5">
-            Terms of <span className="text-sa-primary">Service</span>
+            Terms of service
           </h1>
           <p className="sa-subtitle !text-left mt-6 max-w-2xl">
             These general terms set expectations for using our website,
             subscriptions, and professional services. A signed proposal or
             service agreement may contain additional terms.
           </p>
-          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-sa-muted/60">
+          <p className="mt-4 text-sm text-sa-muted">
             Last updated: 12 July 2026
           </p>
         </header>

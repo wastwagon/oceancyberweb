@@ -140,7 +140,7 @@ export function SaShowreelModal({ open, onClose }: SaShowreelModalProps) {
                       </div>
                     ))}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
-                    <p className="absolute bottom-6 left-6 right-6 text-sm font-medium text-white md:font-heading md:text-base md:font-bold md:uppercase md:tracking-widest">
+                    <p className="absolute bottom-6 left-6 right-6 text-sm font-medium text-white md:text-base">
                       {slide.caption}
                     </p>
                   </>

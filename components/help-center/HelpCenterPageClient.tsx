@@ -146,8 +146,8 @@ export function HelpCenterPageClient({ articles }: HelpCenterPageClientProps) {
             <motion.div {...fadeUpProps}>
               <div className="flex items-center justify-between border-b border-sa-border pb-6">
                 <h2 className="font-heading text-xl font-bold text-white">Knowledge base</h2>
-                <span className="text-xs font-bold uppercase tracking-widest text-sa-muted/50">
-                  {results.length} article(s)
+                <span className="text-sm text-sa-muted">
+                  {results.length} {results.length === 1 ? "article" : "articles"}
                 </span>
               </div>
               <div className="mt-8 space-y-6">
@@ -161,7 +161,7 @@ export function HelpCenterPageClient({ articles }: HelpCenterPageClientProps) {
                     className="sa-card group p-6"
                   >
                     <div className="flex flex-wrap items-center gap-2">
-                      <p className="font-heading text-[10px] font-bold uppercase tracking-widest text-sa-primary">
+                      <p className="text-sm font-medium text-sa-primary">
                         {a.category}
                       </p>
                       <SaBadge variant="muted">
@@ -179,34 +179,34 @@ export function HelpCenterPageClient({ articles }: HelpCenterPageClientProps) {
                         <Link
                           key={x.href + x.label}
                           href={x.href}
-                          className="flex h-10 items-center justify-center rounded-xl border border-sa-border bg-sa-surface px-5 text-[10px] font-bold uppercase tracking-wider text-sa-muted transition hover:border-sa-primary hover:text-white"
+                          className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
                         >
                           {x.label}
                         </Link>
                       ))}
                     </div>
                     <div className="mt-6 flex items-center gap-4 border-t border-sa-border/50 pt-6">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40">
+                      <span className="text-sm text-sa-muted">
                         Helpful?
                       </span>
                       <div className="flex gap-2">
                         <button
                           type="button"
                           onClick={() => sendFeedback(a.id, true)}
-                          className="flex h-8 w-8 items-center justify-center rounded-lg border border-sa-border bg-sa-surface text-sa-muted transition hover:border-sa-primary hover:text-white"
+                          className="flex h-11 w-11 items-center justify-center rounded-xl border border-sa-border bg-sa-surface text-sa-muted transition hover:border-sa-primary hover:text-white"
                         >
                           <Check className="h-4 w-4" />
                         </button>
                         <button
                           type="button"
                           onClick={() => sendFeedback(a.id, false)}
-                          className="flex h-8 w-8 items-center justify-center rounded-lg border border-sa-border bg-sa-surface text-sa-muted transition hover:border-rose-500/50 hover:text-white"
+                          className="flex h-11 w-11 items-center justify-center rounded-xl border border-sa-border bg-sa-surface text-sa-muted transition hover:border-rose-500/50 hover:text-white"
                         >
                           <X className="h-4 w-4" />
                         </button>
                       </div>
                       {feedbackState[a.id] === "saved" && (
-                        <span className="text-[10px] font-bold text-sa-primary uppercase tracking-widest">
+                        <span className="text-sm font-medium text-sa-primary">
                           Thank you
                         </span>
                       )}
@@ -252,7 +252,7 @@ export function HelpCenterPageClient({ articles }: HelpCenterPageClientProps) {
                     <ol className="mt-4 space-y-3">
                       {guided.steps.map((s, idx) => (
                         <li key={s} className="flex gap-3 text-sm text-sa-muted/80">
-                          <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sa-surface border border-sa-border text-[10px] font-bold text-sa-primary">
+                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-sa-surface border border-sa-border text-xs font-semibold text-sa-primary">
                             {idx + 1}
                           </span>
                           {s}
@@ -269,14 +269,14 @@ export function HelpCenterPageClient({ articles }: HelpCenterPageClientProps) {
               </div>
 
               <div className="sa-card mt-6 p-6 border-sa-primary/20 bg-sa-primary/5">
-                <p className="text-xs font-bold text-sa-primary uppercase tracking-widest">Still stuck?</p>
+                <p className="text-sm font-semibold text-sa-primary">Still stuck?</p>
                 <p className="mt-2 text-sm text-sa-muted/80">
                   Send the issue, affected URL, timing, and screenshots where
                   possible so our team can route it efficiently.
                 </p>
                 <Link
                   href="/contact"
-                  className="mt-4 inline-flex text-sm font-bold text-white hover:text-sa-primary transition-colors"
+                  className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
                 >
                   Contact technical team →
                 </Link>

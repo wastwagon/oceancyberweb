@@ -230,7 +230,7 @@ export function ProjectCostWizard() {
               type="button"
               onClick={() => i < step && setStep(i)}
               className={cn(
-                "flex h-8 min-w-[2rem] items-center justify-center rounded-full text-xs font-bold transition sm:h-9 sm:min-w-[2.25rem] sm:text-sm",
+                "flex h-11 min-w-11 items-center justify-center rounded-full text-sm font-semibold transition",
                 i === step
                   ? "bg-sa-primary text-sa-bg"
                   : i < step
@@ -243,7 +243,7 @@ export function ProjectCostWizard() {
             </button>
             <span
               className={cn(
-                "ml-1.5 hidden text-xs font-medium uppercase tracking-widest sm:ml-2 sm:inline",
+                "ml-1.5 text-sm font-medium",
                 i === step ? "text-sa-primary" : "text-sa-muted/50",
               )}
             >
@@ -355,7 +355,7 @@ export function ProjectCostWizard() {
               .sort((a, b) => getCategoryOrder(a[0]) - getCategoryOrder(b[0]))
               .map(([cat, feats]) => (
                 <div key={cat}>
-                  <h3 className="mb-2 text-[10px] font-bold uppercase tracking-widest text-sa-muted/50 ml-1">
+                  <h3 className="mb-2 text-sm font-medium text-sa-muted">
                     {CATEGORY_LABEL[cat] ?? cat}
                   </h3>
                   <div className="space-y-2">
@@ -548,7 +548,7 @@ export function ProjectCostWizard() {
                   {PROFORMA_DISCLAIMER}
                 </p>
 
-                <p className="text-[11px] text-sa-muted/60 ml-1 print:hidden">
+                <p className="ml-1 text-sm text-sa-muted print:hidden">
                   Tip: add contingency for content, sign-off, and post-launch work in a formal SOW.
                 </p>
                 <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center print:hidden">
@@ -636,7 +636,7 @@ function RunningTotal({
         </div>
         <div className="sm:text-right">
           {onSummaryStep && !leadReady && (
-            <p className="mb-1.5 text-[11px] text-sa-primary">
+            <p className="mb-1.5 text-sm text-sa-primary">
               Add your name, email, and timeline to unlock the line item table and proforma download.
             </p>
           )}
@@ -646,7 +646,7 @@ function RunningTotal({
               (mid {formatGhs(pricing.totalMidGhs)})
             </span>
           </p>
-          <p className="mt-1 text-[11px] text-sa-muted/60">
+          <p className="mt-1 text-sm text-sa-muted">
             {pricing.totalHours}h total · {formatGhs(pricing.hourlyRateGhs)}/h ×
             {pricing.complexityMultiplier} complex · ×{pricing.rushLabourMultiplier} timeline · ±10%
             band

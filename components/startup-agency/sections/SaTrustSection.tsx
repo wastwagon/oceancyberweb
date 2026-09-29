@@ -26,7 +26,7 @@ export function SaTrustSection() {
                     <Icon className="h-5 w-5" aria-hidden />
                   </div>
                   <p className="font-heading text-3xl font-bold text-white">{signal.stat}</p>
-                  <h3 className="mt-2 font-heading text-sm font-bold uppercase tracking-widest text-white">
+                  <h3 className="mt-2 font-heading text-base font-semibold text-white">
                     {signal.title}
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-sa-muted">{signal.body}</p>

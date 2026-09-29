@@ -5,7 +5,7 @@ import { withCanonical } from "@/lib/seo/canonical";
 
 export const metadata = withCanonical(
   {
-    title: "OceanCyber POS",
+    title: "OceanCyber POS in Ghana",
     description:
       "Ghana-ready SaaS point of sale — self-register, connect Paystack or Hubtel, or use cash and manual MoMo. From GHS 99/mo with 14-day trial.",
   },

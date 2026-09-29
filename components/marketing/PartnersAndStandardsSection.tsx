@@ -33,7 +33,7 @@ export function PartnersAndStandardsSection() {
         </div>
 
         <SaReveal delay={0.15} className="mt-14">
-          <p className="text-center font-heading text-[11px] font-bold uppercase tracking-[0.2em] text-sa-muted/60">
+          <p className="text-center text-sm font-medium text-sa-muted/80">
             How we deliver
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -43,7 +43,7 @@ export function PartnersAndStandardsSection() {
                 <div key={item.title} className="sa-card flex h-full flex-col p-5">
                   <Icon className="h-5 w-5 text-sa-primary" aria-hidden />
                   <p className="mt-3 font-heading text-sm font-bold text-white">{item.title}</p>
-                  <p className="mt-2 flex-1 text-xs leading-relaxed text-sa-muted/75">{item.description}</p>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-sa-muted/80">{item.description}</p>
                 </div>
               );
             })}

@@ -4,6 +4,7 @@
  * Alternate / WIP home: Aeolla Creative Agency at `/home-creative`
  * (`CreativeAgencyHome`).
  */
+import { Suspense } from "react";
 import { StartupAgencyFooter } from "@/components/startup-agency/StartupAgencyFooter";
 import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
 import { StartupAgencyProgressBar } from "@/components/startup-agency/StartupAgencyProgressBar";
@@ -33,11 +34,7 @@ export function StartupAgencyHomeClassic() {
       </a>
       <StartupAgencyProgressBar />
 
-      <main id="startup-main-content" className="sa-mobile-header-pad sa-mobile-tab-pad md:pb-0 md:pt-28" tabIndex={-1}>
-        <h1 className="sr-only">
-          OceanCyber — UI/UX design, web and mobile app development in Ghana
-        </h1>
-
+      <main id="startup-main-content" className="sa-mobile-tab-pad md:pb-0" tabIndex={-1}>
         <SaHeroSection />
         <SaMarqueeSection />
         <SaAboutSection />
@@ -45,7 +42,21 @@ export function StartupAgencyHomeClassic() {
         <SaPortfolioGallerySection />
         <SaProcessSection />
 
-        <SaTestimonialsSectionWithData />
+        <Suspense
+          fallback={
+            <section
+              id="testimonials"
+              className="sa-section border-b border-sa-border bg-sa-bg"
+              aria-busy="true"
+            >
+              <div className="sa-container">
+                <p className="text-sm text-sa-muted">Loading reviews…</p>
+              </div>
+            </section>
+          }
+        >
+          <SaTestimonialsSectionWithData />
+        </Suspense>
         <SaTrustSection />
         <SaPricingSection />
         <SaTechSection />

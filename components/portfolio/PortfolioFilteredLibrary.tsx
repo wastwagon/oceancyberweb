@@ -33,17 +33,13 @@ const VALID_SOURCES = new Set<SourceFilter>(["All", "client", "studio"]);
 function ProjectSourceBadge({ project }: { project: PortfolioCaseStudy }) {
   const source = resolvePortfolioSource(project);
   return (
-    <span className="rounded-full border border-white/20 bg-black/40 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-widest text-white/80">
-      {PORTFOLIO_SOURCE_LABELS[source]}
-    </span>
+    <span className="sa-chip">{PORTFOLIO_SOURCE_LABELS[source]}</span>
   );
 }
 
 function ProjectTypeBadge({ type }: { type: PortfolioProjectType }) {
   return (
-    <span className="rounded-full border border-sa-primary/30 bg-sa-primary/10 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-widest text-sa-primary">
-      {getProjectTypeLabel(type)}
-    </span>
+    <span className="sa-chip">{getProjectTypeLabel(type)}</span>
   );
 }
 
@@ -82,7 +78,7 @@ function PortfolioLibraryCard({
           </div>
         </div>
         <div className="relative z-10 flex h-full flex-col p-5 md:p-6">
-          <p className="font-heading text-[11px] font-semibold uppercase tracking-wide text-sa-primary">
+          <p className="text-sm font-medium text-sa-primary">
             {project.category} · {project.year}
           </p>
           <h3 className="mt-2 font-heading text-lg font-bold tracking-tight text-white md:text-xl">
@@ -175,7 +171,7 @@ function PortfolioFilteredLibraryInner({
               Case studies with measurable outcomes
             </h2>
             <p className="sa-subtitle mx-auto">
-              Filter by client delivery or studio concepts, then by delivery type or industry —
+              Filter by client delivery or concept work, then by delivery type or industry —
               each project includes design process artifacts where applicable.
             </p>
           </motion.div>
@@ -185,7 +181,7 @@ function PortfolioFilteredLibraryInner({
           <PortfolioSourceChips value={sourceFilter} onChange={setSourceFilter} />
           <PortfolioWorkTypeChips value={workType} onChange={setWorkType} />
 
-          <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filter by industry">
+          <div className="sa-chip-scroller" role="tablist" aria-label="Filter by industry">
             <FilterPill active={category === "All"} onClick={() => setCategory("All")}>
               All industries
             </FilterPill>
@@ -257,13 +253,10 @@ function FilterPill({
   return (
     <button
       type="button"
+      role="tab"
+      aria-selected={active}
       onClick={onClick}
-      className={cn(
-        "rounded-full border px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-colors",
-        active
-          ? "border-sa-primary bg-sa-primary/20 text-sa-primary"
-          : "border-sa-border bg-sa-surface text-sa-muted hover:border-sa-primary/50 hover:text-white",
-      )}
+      className="sa-tab"
     >
       {children}
     </button>

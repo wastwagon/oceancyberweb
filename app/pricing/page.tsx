@@ -10,9 +10,9 @@ import { formatPlanPrice, pricingAddOns, pricingFaqItems, pricingPlans } from "@
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "Pricing — Web & Mobile App Development in Ghana",
+    title: "Web and mobile pricing in Ghana",
     description:
-      "Transparent GHS starting tiers for web, mobile app, and cybersecurity projects in Ghana. Compare Startup, Professional, and Enterprise packages with full feature breakdowns.",
+      "Starting prices in Ghana cedis for web, mobile, and cybersecurity work. Compare Startup, Professional, and Enterprise, then get a formal quote.",
     keywords: [
       "web development pricing Ghana",
       "mobile app development cost Accra",
@@ -32,18 +32,16 @@ export default function PricingPage() {
       <section className="sa-page-intro border-b border-sa-border pb-12">
         <div className="sa-container max-w-5xl text-center">
           <p className="sa-eyebrow">Pricing</p>
-          <h1 className="sa-title-lg mt-4">Web & mobile app packages for Ghana teams</h1>
+          <h1 className="sa-title-lg mt-4">Web and mobile packages for teams in Ghana</h1>
           <p className="sa-subtitle mx-auto">
-            Starting tiers in Ghana cedis (GHS). Every engagement is scoped in discovery, then
-            delivered on fixed-price milestones. Use our calculator for a tailored estimate, or
-            compare packages below.
+            Starting prices are in Ghana cedis. We confirm scope in discovery, then deliver on fixed-price milestones.
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link href="/tools/project-cost" className="sa-btn-primary min-h-[44px] px-6 text-xs">
-              Open project calculator
+          <div className="mx-auto mt-8 flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
+            <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">
+              Get started
             </Link>
-            <Link href="/contact" className="sa-btn-outline min-h-[44px] px-6 text-xs">
-              Request a formal quote
+            <Link href="/tools/project-cost" className="sa-btn-outline w-full sm:w-auto">
+              Estimate in cedis
             </Link>
           </div>
         </div>
@@ -63,7 +61,7 @@ export default function PricingPage() {
                 }`}
               >
                 {plan.featured ? (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-sa-primary px-3 py-1 font-heading text-[10px] font-bold uppercase tracking-wider text-sa-bg">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-sa-primary px-3 py-1 text-sm font-semibold text-sa-bg">
                     Most popular
                   </span>
                 ) : null}
@@ -75,7 +73,7 @@ export default function PricingPage() {
                 <p className="mt-6 font-heading text-3xl font-bold text-sa-primary">
                   {formatPlanPrice(plan.priceGhs)}
                 </p>
-                <p className="mt-2 text-xs uppercase tracking-wider text-sa-muted">
+                <p className="mt-2 text-sm text-sa-muted">
                   Typical delivery: {plan.timeline}
                 </p>
                 <ul className="mt-6 flex-1 space-y-3 border-t border-sa-border pt-6 text-sm text-sa-muted">
@@ -87,14 +85,10 @@ export default function PricingPage() {
                   ))}
                 </ul>
                 <Link
-                  href="/contact"
-                  className={`mt-8 inline-flex min-h-[44px] items-center justify-center rounded-full px-6 font-heading text-sm font-semibold uppercase tracking-[0.14em] transition duration-300 ${
-                    plan.featured
-                      ? "bg-sa-primary text-black hover:bg-sa-primary/90"
-                      : "border border-sa-border text-white hover:border-sa-primary hover:text-sa-primary"
-                  }`}
+                  href="/get-started"
+                  className={`mt-8 w-full ${plan.featured ? "sa-btn-primary" : "sa-btn-outline"}`}
                 >
-                  Start {plan.name.toLowerCase()} project
+                  Choose {plan.name}
                 </Link>
               </article>
             ))}
@@ -141,14 +135,18 @@ export default function PricingPage() {
 
           <div className="mt-12 rounded-2xl border border-sa-border bg-sa-surface/40 p-6 text-center text-sm text-sa-muted md:p-8">
             <p>
-              All prices are indicative starting points in Ghana cedis. Discovery, technical
-              complexity, compliance requirements, and timeline urgency affect the final statement
-              of work. We align with local payment rails (Paystack, MoMo) and publish ranges
-              transparently so Accra and regional teams can budget with confidence.
+              Prices are starting points in Ghana cedis. Discovery, complexity, compliance, and
+              timeline change the final statement of work. We accept Paystack and Mobile Money, and
+              we publish ranges so teams can budget with confidence.
             </p>
             <Link href="/tools/project-cost" className="sa-btn-outline mt-6 inline-flex min-h-[44px]">
               Estimate your project in GHS
             </Link>
+            <p className="mt-4">
+              <Link href="/guides/website-cost-in-ghana" className="font-semibold text-sa-primary hover:underline">
+                How website pricing works in Ghana
+              </Link>
+            </p>
           </div>
         </div>
       </section>

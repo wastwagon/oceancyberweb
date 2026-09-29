@@ -127,7 +127,7 @@ export function InteractiveIntakeWizard() {
             <div className="mt-4">
               <Link
                 href="/tools/proposal"
-                className="sa-btn-primary min-h-[40px] px-3 py-2 text-sm"
+                className="sa-btn-primary w-full sm:w-auto"
               >
                 Continue to formal proposal request
               </Link>
@@ -145,7 +145,7 @@ export function InteractiveIntakeWizard() {
           <li
             key={label}
             className={cn(
-              "rounded-xl border px-3 py-2 font-heading text-[10px] font-semibold uppercase tracking-widest",
+              "flex min-h-11 items-center rounded-xl border px-3 py-2 text-sm font-medium",
               idx === step
                 ? "border-sa-primary bg-sa-primary/10 text-sa-primary"
                 : idx < step

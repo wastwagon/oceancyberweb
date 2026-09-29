@@ -100,7 +100,7 @@ export function NewsletterSignupForm({
         </SaButton>
       </form>
       <p
-        className={`mt-4 text-center text-[10px] font-bold uppercase tracking-widest ${
+        className={`mt-4 text-center text-sm ${
           status === "error"
             ? "text-sa-danger"
             : status === "success"

@@ -68,11 +68,11 @@ function SignUpForm() {
             <AuthIllustration />
           </div>
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-2xl border border-sa-border bg-sa-surface p-4 text-[10px] font-bold uppercase tracking-widest text-sa-primary text-center">
-              Fast onboarding flow
+            <div className="rounded-2xl border border-sa-border bg-sa-surface p-4 text-center text-sm font-medium text-sa-primary">
+              Fast onboarding
             </div>
-            <div className="rounded-2xl border border-sa-border bg-sa-surface p-4 text-[10px] font-bold uppercase tracking-widest text-sa-primary text-center">
-              Dashboard + payments
+            <div className="rounded-2xl border border-sa-border bg-sa-surface p-4 text-center text-sm font-medium text-sa-primary">
+              Dashboard and payments
             </div>
           </div>
         </section>

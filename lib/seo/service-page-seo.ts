@@ -19,7 +19,7 @@ export const servicePageSeoEntries: ServicePageSeoEntry[] = [
     path: "/services/web-design-in-accra",
     name: "Web designer in Accra",
     description:
-      "Web designer in Accra for company websites and web apps — Accra studio on Nii Kwashiefio Avenue, nationwide delivery available.",
+      "Web designer in Accra for company websites and web apps — Accra company on Nii Kwashiefio Avenue, nationwide delivery available.",
     image: serviceImages.webDevelopment,
   },
   {

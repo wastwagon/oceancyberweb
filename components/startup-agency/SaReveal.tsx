@@ -1,10 +1,15 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
+/**
+ * Content in the first screen stays visible in the HTML. Fading it in after
+ * hydration keeps the viewport visually unfinished and inflates Speed Index.
+ * Sections that start below the fold can still ease in.
+ */
 export function SaReveal({
   children,
   className,
@@ -15,18 +20,31 @@ export function SaReveal({
   delay?: number;
 }) {
   const reduceMotion = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const [animate, setAnimate] = useState(false);
 
-  if (reduceMotion) {
-    return <div className={className}>{children}</div>;
+  useEffect(() => {
+    if (reduceMotion) return;
+    const el = ref.current;
+    if (!el) return;
+    if (el.getBoundingClientRect().top < window.innerHeight) return;
+    setAnimate(true);
+  }, [reduceMotion]);
+
+  if (!animate) {
+    return (
+      <div ref={ref} className={className}>
+        {children}
+      </div>
+    );
   }
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 26 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-12% 0px" }}
-      transition={{ duration: 0.62, ease, delay }}
       className={className}
+      initial={{ opacity: 0, y: 26 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.62, ease, delay }}
     >
       {children}
     </motion.div>

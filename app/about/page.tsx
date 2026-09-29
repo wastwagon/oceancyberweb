@@ -181,6 +181,11 @@ export default function AboutPage() {
               first sketch to production-grade infrastructure, with a team
               obsessed with clarity, performance, and trust.
             </motion.p>
+            <motion.div variants={aboutHeroItem} className="mt-8">
+              <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">
+                Get started
+              </Link>
+            </motion.div>
           </motion.div>
 
           <motion.div
@@ -195,7 +200,7 @@ export default function AboutPage() {
                 <div className="font-heading text-2xl font-bold tracking-tight text-white md:text-3xl">
                   {s.value}
                 </div>
-                <div className="mt-1 font-heading text-[10px] font-semibold uppercase tracking-widest text-sa-muted/70">
+                <div className="mt-1 text-sm font-medium text-sa-muted">
                   {s.label}
                 </div>
               </div>
@@ -347,7 +352,7 @@ export default function AboutPage() {
 
                 <div className="flex min-w-0 flex-1 flex-col justify-between p-6 md:p-8 md:pl-7">
                   <div>
-                    <p className="font-heading text-[10px] font-semibold uppercase tracking-[0.22em] text-sa-primary">
+                    <p className="text-sm font-semibold text-sa-primary">
                       {member.role}
                     </p>
                     <h3 className="mt-2 font-heading text-xl font-bold tracking-tight text-white md:text-2xl">
@@ -358,19 +363,16 @@ export default function AboutPage() {
                     </p>
                   </div>
                   <div className="mt-6 border-t border-sa-border pt-5">
-                    <p className="mb-2.5 font-heading text-[10px] font-semibold uppercase tracking-widest text-sa-muted/50">
+                    <p className="mb-2.5 text-sm font-medium text-sa-muted">
                       Focus areas
                     </p>
-                    <div className="flex flex-wrap gap-2">
+                    <ul className="sa-chip-scroller">
                       {member.expertise.map((skill) => (
-                        <span
-                          key={skill}
-                          className="rounded-full border border-sa-border bg-black/40 px-2.5 py-1 text-[11px] font-medium leading-none text-sa-muted transition-colors group-hover:border-sa-primary"
-                        >
+                        <li key={skill} className="sa-chip">
                           {skill}
-                        </span>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                   </div>
                 </div>
               </motion.article>
@@ -390,7 +392,7 @@ export default function AboutPage() {
               Our journey
             </h2>
             <p className="sa-subtitle mx-auto mt-3 max-w-xl">
-              From a focused Accra studio to a regional partner: milestones
+              From a focused Accra company to a regional partner: milestones
               that mark how we scale responsibility with growth.
             </p>
           </motion.div>
@@ -416,11 +418,8 @@ export default function AboutPage() {
                   />
                   <div className="sa-card min-w-0 flex-1 p-5 md:p-6">
                     <div className="flex flex-wrap items-baseline justify-between gap-2">
-                      <span className="font-heading text-xs font-semibold uppercase tracking-widest text-sa-primary">
+                      <span className="text-sm font-semibold text-sa-primary">
                         {milestone.year}
-                      </span>
-                      <span className="font-heading text-[10px] font-semibold uppercase tracking-widest text-sa-muted/50">
-                        Milestone
                       </span>
                     </div>
                     <h3 className="mt-2 font-heading text-lg font-semibold text-white md:text-xl">
@@ -454,11 +453,8 @@ export default function AboutPage() {
               Tell us about your product, security posture, or growth goals, and
               we&apos;ll respond with a clear path forward.
             </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link href="/get-started" className="sa-btn-primary">
-                Get started
-              </Link>
-              <Link href="/contact" className="sa-btn-outline">
+            <div className="mt-8 flex flex-col items-center gap-3">
+              <Link href="/contact" className="sa-btn-primary w-full sm:w-auto">
                 Talk to our team
               </Link>
             </div>

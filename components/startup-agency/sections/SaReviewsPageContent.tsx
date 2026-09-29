@@ -53,7 +53,7 @@ export function SaReviewsPageContent({ stats, reviews }: Props) {
       <section className="sa-page-intro border-b border-sa-border">
         <div className="sa-container py-12 md:py-24">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="font-heading text-xs font-bold uppercase tracking-[0.25em] text-sa-primary">
+          <p className="sa-eyebrow">
             Verified feedback
           </p>
           <h1 className="sa-title-lg mt-4 text-center">
@@ -75,16 +75,7 @@ export function SaReviewsPageContent({ stats, reviews }: Props) {
           {stats.source === "places-api" ? (
             <p className="mt-2 text-xs text-sa-muted/70">Synced from Google Business Profile</p>
           ) : null}
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
-            <Link
-              href={profileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="sa-btn-outline w-full sm:w-auto"
-            >
-              Read on Google
-              <ExternalLink className="ml-2 h-3.5 w-3.5" aria-hidden />
-            </Link>
+          <div className="mt-8 flex flex-col items-center gap-3">
             <Link
               href={writeReviewUrl}
               target="_blank"
@@ -92,6 +83,15 @@ export function SaReviewsPageContent({ stats, reviews }: Props) {
               className="sa-btn-primary w-full sm:w-auto"
             >
               Write a review
+            </Link>
+            <Link
+              href={profileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-sa-primary"
+            >
+              Read on Google
+              <ExternalLink className="h-4 w-4" aria-hidden />
             </Link>
           </div>
         </div>
@@ -105,7 +105,7 @@ export function SaReviewsPageContent({ stats, reviews }: Props) {
               rel={badge.external ? "noopener noreferrer" : undefined}
               className="rounded-2xl border border-sa-border bg-sa-surface/30 px-5 py-4 text-center transition hover:border-sa-primary/40"
             >
-              <p className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">
+              <p className="text-sm font-medium text-sa-primary">
                 {badge.provider}
               </p>
               <p className="mt-1 font-heading text-xl font-bold text-white">{badge.rating}</p>

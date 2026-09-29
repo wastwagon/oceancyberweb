@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowUpRight, Code, Smartphone, Shield, ShoppingCart, Cloud, Palette } from "lucide-react";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
+import { SaWhenVisibleImage } from "@/components/startup-agency/SaWhenVisibleImage";
 import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
 import { serviceCards } from "@/lib/startup-agency/content";
 
@@ -48,13 +48,12 @@ export function SaServicesSection() {
                       imageFirst ? "md:order-1" : "md:order-2"
                     }`}
                   >
-                    <Image
+                    <SaWhenVisibleImage
                       src={service.image}
                       alt={service.title}
                       fill
                       className="object-cover transition duration-700 group-hover:scale-[1.03]"
                       sizes="(max-width: 768px) 100vw, 50vw"
-                      priority={index < 2}
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-black/10" />
                   </div>
@@ -71,7 +70,7 @@ export function SaServicesSection() {
                         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-sa-primary text-black transition-colors duration-300 group-hover:bg-white md:h-14 md:w-14">
                           <Icon className="h-5 w-5 md:h-6 md:w-6" />
                         </div>
-                        <h3 className="font-heading text-lg font-bold uppercase tracking-wide text-white md:text-xl">
+                        <h3 className="font-heading text-lg font-bold text-white md:text-xl">
                           {service.title}
                         </h3>
                       </div>
@@ -84,7 +83,7 @@ export function SaServicesSection() {
                       {service.desc}
                     </p>
 
-                    <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-sa-primary transition group-hover:text-white">
+                    <span className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-sa-primary">
                       Explore service
                       <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
                     </span>

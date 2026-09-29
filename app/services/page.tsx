@@ -147,7 +147,7 @@ function ServiceGridCard({
           <p className="mt-3 text-sm leading-relaxed text-sa-muted/80">
             {service.description}
           </p>
-          <p className="mt-6 text-[10px] font-semibold uppercase tracking-widest text-sa-muted/50">
+          <p className="mt-6 text-sm font-medium text-sa-muted">
             Typical scope
           </p>
           <ul className="mt-2 space-y-2">
@@ -236,15 +236,15 @@ export default function ServicesPage() {
               Tell us about constraints, timelines, and stakeholders, and we will
               recommend a sequencing plan and team shape that fits.
             </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link href="/contact" className="sa-btn-primary">
+            <div className="mt-8 flex flex-col items-center gap-3">
+              <Link href="/contact" className="sa-btn-primary w-full sm:w-auto">
                 Talk to our team
               </Link>
-              <Link href="/pricing" className="sa-btn-outline">
+              <Link
+                href="/pricing"
+                className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
+              >
                 Compare packages
-              </Link>
-              <Link href="/how-we-work" className="sa-btn-outline">
-                How we work
               </Link>
             </div>
           </motion.div>

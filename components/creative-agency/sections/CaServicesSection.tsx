@@ -8,12 +8,12 @@ import { SaReveal } from "@/components/startup-agency/SaReveal";
 import { serviceCards } from "@/lib/startup-agency/content";
 
 const TAGS: Record<string, string[]> = {
-  "UI/UX & Brand": ["ART DIRECTION", "BRANDING", "LOGO DESIGN"],
-  "Web Development": ["NEXT.JS", "PERFORMANCE", "SEO"],
-  "Mobile Apps": ["IOS", "ANDROID", "PRODUCT"],
-  "E‑commerce": ["STOREFRONT", "CHECKOUT", "GROWTH"],
-  Cybersecurity: ["AUDITS", "HARDENING", "MONITORING"],
-  "Cloud Hosting": ["DOMAINS", "SSL", "UPTIME"],
+  "UI/UX & Brand": ["Art direction", "Branding", "Logo design"],
+  "Web Development": ["Next.js", "Performance", "SEO"],
+  "Mobile Apps": ["iOS", "Android", "Product"],
+  "E‑commerce": ["Storefront", "Checkout", "Growth"],
+  Cybersecurity: ["Audits", "Hardening", "Monitoring"],
+  "Cloud Hosting": ["Domains", "SSL", "Uptime"],
 };
 
 /** Aeolla services: full-width editorial rows; OC serviceCards content + images. */
@@ -64,7 +64,7 @@ export function CaServicesSection() {
                     >
                       {String(index + 1).padStart(2, "0")}.
                     </span>
-                    <h3 className="font-heading text-[clamp(1.75rem,4.5vw,4.5rem)] font-bold uppercase leading-none tracking-tight">
+                    <h3 className="font-heading text-[clamp(1.75rem,4.5vw,4.5rem)] font-bold leading-none tracking-tight">
                       {service.title}
                     </h3>
                   </div>
@@ -73,7 +73,7 @@ export function CaServicesSection() {
                     {tags.map((tag) => (
                       <span
                         key={tag}
-                        className={`inline-flex h-9 items-center rounded-full border px-5 text-[11px] font-medium uppercase tracking-wider md:h-9 md:text-[15px] ${
+                        className={`inline-flex min-h-11 items-center rounded-full border px-5 text-sm font-medium ${
                           isHot ? "border-black text-black" : "border-white/15 text-white"
                         }`}
                       >

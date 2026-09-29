@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, MapPin, Mail, Phone } from "lucide-react";
+import { MapPin, Mail, Phone } from "lucide-react";
 import { withCanonical } from "@/lib/seo/canonical";
 
 const SITE_URL =
@@ -10,7 +10,7 @@ const pageUrl = `${SITE_URL}${path}`;
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "Web Designer in Ghana",
+    title: "Web designer in Ghana",
     description:
       "Web designer and website developer in Ghana. OceanCyber designs and builds company websites, online stores, and web apps for Accra, Kumasi, Tema, Takoradi, and businesses nationwide.",
   },
@@ -21,15 +21,15 @@ const faqs = [
   {
     question: "Do you serve all of Ghana?",
     answer:
-      "Yes. We design and build websites for businesses anywhere in Ghana. The studio is in Accra. Clients in Kumasi, Tema, Takoradi, Cape Coast, Tamale, and other cities work with us by call and screen-share when an in-person meeting is not needed.",
+      "Yes. We design and build websites for businesses anywhere in Ghana. The company is in Accra. Clients in Kumasi, Tema, Takoradi, Cape Coast, Tamale, and other cities work with us by call and screen-share when an in-person meeting is not needed.",
   },
   {
     question: "Are you web designers or web developers?",
     answer:
-      "Both. As web designers we shape the look, structure, and messaging. As website developers we build the working site: pages, forms, speed, and the technical setup Google needs. Most Ghana businesses hire one studio for both.",
+      "Both. As web designers we shape the look, structure, and messaging. As website developers we build the working site: pages, forms, speed, and the technical setup Google needs. Most Ghana businesses hire one company for both.",
   },
   {
-    question: "Where is the studio?",
+    question: "Where is the company?",
     answer:
       "232 Nii Kwashiefio Avenue, Accra. Accra clients can meet locally. The same team, phone number, and delivery process cover the rest of the country.",
   },
@@ -75,7 +75,7 @@ export default function WebDesignGhanaPage() {
         url: pageUrl,
         areaServed: { "@type": "Country", name: "Ghana" },
         description:
-          "Web designers and website developers for businesses across Ghana, delivered from OceanCyber's Accra studio.",
+          "Web designers and website developers for businesses across Ghana, delivered from OceanCyber in Accra.",
       },
       {
         "@type": "FAQPage",
@@ -115,7 +115,7 @@ export default function WebDesignGhanaPage() {
             </ol>
           </nav>
 
-          <p className="mt-8 text-[11px] font-medium uppercase tracking-[0.18em] text-sa-primary">
+          <p className="mt-8 text-sm font-semibold text-sa-primary">
             Nationwide Ghana
           </p>
           <h1 className="sa-title-lg mt-3">
@@ -123,16 +123,18 @@ export default function WebDesignGhanaPage() {
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-sa-muted/80">
             OceanCyber designs and builds websites for businesses across Ghana—from Accra and
-            Kumasi to Tema, Takoradi, and remote teams nationwide. One Accra studio, one phone
+            Kumasi to Tema, Takoradi, and remote teams nationwide. One Accra company, one phone
             number, clear delivery.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/get-started" className="sa-btn-primary inline-flex items-center gap-2">
+          <div className="mt-8 flex flex-col items-start gap-3">
+            <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">
               Get started
-              <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
-            <Link href="/contact" className="sa-btn-outline inline-flex items-center gap-2">
+            <Link
+              href="/contact"
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
+            >
               Talk to our team
             </Link>
           </div>
@@ -161,6 +163,31 @@ export default function WebDesignGhanaPage() {
             </Link>
             .
           </p>
+        </div>
+      </section>
+
+      <section className="border-b border-sa-border py-14 md:py-20">
+        <div className="sa-container max-w-3xl">
+          <h2 className="font-heading text-2xl font-semibold text-white md:text-3xl">
+            Before you brief us
+          </h2>
+          <ul className="mt-6 space-y-3 text-sm">
+            <li>
+              <Link href="/guides/website-cost-in-ghana" className="font-semibold text-sa-primary hover:underline">
+                How much a website costs in Ghana
+              </Link>
+            </li>
+            <li>
+              <Link href="/compare/wix-vs-custom-website-ghana" className="font-semibold text-sa-primary hover:underline">
+                Wix or a custom website
+              </Link>
+            </li>
+            <li>
+              <Link href="/compare/agency-vs-freelancer-vs-in-house-ghana" className="font-semibold text-sa-primary hover:underline">
+                Agency, freelancer, or an in-house hire
+              </Link>
+            </li>
+          </ul>
         </div>
       </section>
 

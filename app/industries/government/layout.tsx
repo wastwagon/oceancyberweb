@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { getIndustryBySlug } from "@/lib/data/industries-catalog";
+
+const industry = getIndustryBySlug("government");
 
 export const metadata: Metadata = {
-  title: "Government & Public Sector",
-  description:
-    "Citizen portals, e-services, and secure public sector platforms — OceanCyber.",
+  title: industry ? `${industry.title} software in Ghana` : "government",
+  description: industry?.description,
   alternates: { canonical: "/industries/government" },
 };
 

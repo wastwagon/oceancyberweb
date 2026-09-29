@@ -51,12 +51,12 @@ function SignInForm() {
           {/* Brand/Value Proposition (Startup Agency Theme) */}
           <section className="hidden lg:block">
             <div className="inline-flex items-center gap-3 rounded-full border border-sa-primary/20 bg-sa-primary/5 px-4 py-2">
-              <SaBadge variant="primary" className="border-0 bg-transparent px-0 py-0 tracking-[0.3em]">
+              <SaBadge variant="primary" className="border-0 bg-transparent px-0 py-0 text-sm font-medium">
                 <ShieldCheck className="mr-2 h-4 w-4" />
                 Secure Login
               </SaBadge>
             </div>
-            <h1 className="mt-8 font-heading text-6xl font-black leading-[1.05] tracking-tight text-white xl:text-7xl">
+            <h1 className="mt-8 font-heading text-5xl font-bold leading-[1.05] tracking-tight text-white xl:text-6xl">
               Welcome <br />
               <span className="text-sa-primary">Back</span>
             </h1>
@@ -71,8 +71,8 @@ function SignInForm() {
                   <Zap className="h-6 w-6 text-sa-primary" />
                 </div>
                 <div>
-                  <div className="text-sm font-bold text-white">Project Visibility</div>
-                  <div className="text-xs text-sa-muted/40">Real-time status</div>
+                  <div className="text-sm font-semibold text-white">Project updates</div>
+                  <div className="text-sm text-sa-muted/70">Live status</div>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -80,8 +80,8 @@ function SignInForm() {
                   <ShieldCheck className="h-6 w-6 text-sa-primary" />
                 </div>
                 <div>
-                  <div className="text-sm font-bold text-white">Secure Access</div>
-                  <div className="text-xs text-sa-muted/40">Zero-trust protocols</div>
+                  <div className="text-sm font-semibold text-white">Secure access</div>
+                  <div className="text-sm text-sa-muted/70">Signed-in workspace</div>
                 </div>
               </div>
             </div>
@@ -91,7 +91,7 @@ function SignInForm() {
           <section className="w-full">
             <div className="relative overflow-hidden rounded-[40px] border border-sa-border bg-[#0d0d10]/90 p-8 shadow-2xl backdrop-blur-2xl md:p-12">
               <div className="mb-10 text-center lg:text-left">
-                <h2 className="font-heading text-4xl font-bold text-white">Sign In</h2>
+                <h2 className="font-heading text-3xl font-bold text-white">Sign in</h2>
                 <p className="mt-3 text-sa-muted/50">
                   Enter your credentials to continue to your dashboard.
                 </p>
@@ -150,7 +150,7 @@ function SignInForm() {
                     href={`/signup${nextPath ? `?next=${encodeURIComponent(nextPath)}` : ""}`}
                     className="font-bold text-sa-primary hover:underline underline-offset-8"
                   >
-                    Register Organization
+                    Create an account
                   </Link>
                 </p>
               </div>
@@ -158,8 +158,8 @@ function SignInForm() {
 
             {/* Mobile Footer Branding */}
             <div className="mt-12 text-center lg:hidden">
-              <p className="text-[10px] font-black uppercase tracking-[0.5em] text-sa-muted/20">
-                OceanCyber Infrastructure
+              <p className="text-sm text-sa-muted">
+                OceanCyber
               </p>
             </div>
           </section>
@@ -171,7 +171,7 @@ function SignInForm() {
 
 export default function SignInPage() {
   return (
-    <Suspense fallback={<main className="min-h-screen bg-black flex items-center justify-center text-sa-primary font-heading uppercase tracking-widest">Initialising Security Protocol...</main>}>
+    <Suspense fallback={<main className="flex min-h-screen items-center justify-center bg-black text-sm font-medium text-sa-primary">Loading sign in…</main>}>
       <SignInForm />
     </Suspense>
   );

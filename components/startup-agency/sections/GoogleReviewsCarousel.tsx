@@ -78,7 +78,7 @@ function CarouselReviewCard({
 
       <div className="relative flex items-start justify-between gap-4">
         <StarRow rating={review.rating} className={large ? "origin-left scale-110" : undefined} />
-        <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-sa-border/60 bg-sa-bg/50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-sa-muted">
+        <span className="inline-flex min-h-8 shrink-0 items-center gap-1.5 rounded-full border border-sa-border/60 bg-sa-bg/50 px-3 text-sm font-medium text-sa-muted">
           <FcGoogle className="h-3.5 w-3.5" aria-hidden />
           Google
         </span>

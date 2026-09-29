@@ -22,8 +22,8 @@ export function TldPriceChips() {
       role="region"
       aria-label="Example domain extension pricing per year, Ghana cedis first"
     >
-      <p className="text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-sa-muted/50">
-        Popular extensions · cedis/year
+      <p className="text-center text-sm font-medium text-sa-muted">
+        Popular extensions, priced per year in cedis
       </p>
       <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
         {HERO_TLD_PRICING.map(({ tld, priceAnnualGhs, highlight }) => (
@@ -36,17 +36,17 @@ export function TldPriceChips() {
                 : "border-sa-border bg-sa-surface/50",
             )}
           >
-            <span className="font-heading text-xs font-bold text-white sm:text-sm">{tld}</span>
+            <span className="font-heading text-sm font-semibold text-white">{tld}</span>
             <FxPrice
               amountGhs={priceAnnualGhs}
               suffix="/yr"
               compactGhsSymbol
-              className="text-[10px] text-sa-primary sm:text-xs [&>span]:font-bold"
+              className="text-sm text-sa-primary [&>span]:font-semibold"
             />
           </div>
         ))}
       </div>
-      <p className="text-center text-[10px] leading-relaxed text-sa-muted/40 sm:text-[9px]">
+      <p className="text-center text-sm leading-relaxed text-sa-muted">
         Indicative pricing in Ghana cedis. Live availability and final totals (GHS, Paystack) are
         confirmed at checkout.
       </p>
@@ -207,7 +207,7 @@ export function DomainSearchPanel({
               </div>
               <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center sm:gap-2">
                 <span
-                  className={`self-start rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider ${
+                  className={`self-start rounded-full px-3 py-1 text-sm font-semibold ${
                     r.available
                       ? "bg-sa-primary text-sa-bg"
                       : "bg-sa-border text-sa-muted"
@@ -216,19 +216,19 @@ export function DomainSearchPanel({
                   {r.available ? "Available" : "Taken"}
                 </span>
                 {r.available ? (
-                  <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
+                  <div className="flex w-full flex-col items-stretch gap-1 sm:w-auto sm:items-end">
                     <Link
                       href={`/checkout/renewal?plan=domain-standard-yearly&label=${encodeURIComponent(
                         r.domain,
                       )}&ref=${encodeURIComponent(`DOMAIN-${r.domain}`)}`}
-                      className="inline-flex min-h-[44px] flex-1 items-center justify-center rounded-lg bg-white px-4 py-2 text-xs font-bold uppercase tracking-wider text-sa-bg transition hover:bg-sa-primary sm:min-h-0 sm:flex-none sm:text-[10px]"
+                      className="sa-btn-primary w-full sm:w-auto"
                     >
-                      Checkout
+                      Register
                     </Link>
                     <button
                       type="button"
                       onClick={() => addDomainToCart(r.domain)}
-                      className="inline-flex min-h-[44px] flex-1 items-center justify-center rounded-lg border border-sa-border bg-sa-bg px-3 py-2 text-xs font-bold uppercase tracking-wider text-sa-muted transition hover:border-sa-primary hover:text-white sm:min-h-0 sm:flex-none sm:text-[10px]"
+                      className="inline-flex min-h-11 w-full items-center justify-center text-sm font-semibold text-sa-primary sm:w-auto"
                     >
                       Add to cart
                     </button>

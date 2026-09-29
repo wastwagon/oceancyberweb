@@ -203,10 +203,10 @@ export default function CheckoutCartPage() {
               </span>
               <h1 className="sa-title !text-left">
                 Review your
-                <span className="text-sa-primary"> digital cart</span>
+                <span className="text-sa-primary"> cart</span>
               </h1>
               <p className="sa-subtitle mt-4 !text-left">
-                Configure your domain, hosting, and security services before finalization.
+                Set domain, hosting, and security options before you pay.
               </p>
             </motion.div>
             {items.length > 0 && (
@@ -215,7 +215,7 @@ export default function CheckoutCartPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 type="button"
                 onClick={clearCart}
-                className="mb-2 flex h-10 items-center justify-center rounded-xl border border-sa-border bg-sa-surface px-5 text-[10px] font-bold uppercase tracking-wider text-sa-muted transition hover:border-rose-500/50 hover:text-white"
+                className="mb-2 inline-flex min-h-11 items-center justify-center rounded-xl px-4 text-sm font-semibold text-sa-muted"
               >
                 Clear cart
               </motion.button>
@@ -232,16 +232,13 @@ export default function CheckoutCartPage() {
                 <ShoppingCart className="h-8 w-8" />
               </div>
               <p className="mt-6 text-sa-muted">Your cart is currently empty.</p>
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                <Link
-                  href="/domains"
-                  className="sa-btn-primary"
-                >
-                  Search domain
+              <div className="mt-8 flex flex-col items-center gap-3">
+                <Link href="/domains" className="sa-btn-primary w-full sm:w-auto">
+                  Search a domain
                 </Link>
                 <Link
                   href="/hosting"
-                  className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-sa-border px-8 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition hover:border-sa-primary hover:text-white"
+                  className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
                 >
                   Browse hosting
                 </Link>
@@ -249,7 +246,7 @@ export default function CheckoutCartPage() {
             </motion.div>
           ) : (
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_360px]">
-              <div className="space-y-10">
+              <div className="order-2 space-y-10 lg:order-1">
                 {/* Contact Form */}
                 {hasDomainItems && (
                   <motion.div {...fadeUpProps} className="sa-card p-8">
@@ -258,7 +255,7 @@ export default function CheckoutCartPage() {
                         <User className="h-5 w-5" />
                       </div>
                       <h3 className="font-heading text-lg font-bold text-white">
-                        Domain Registrant Contact
+                        Domain contact
                       </h3>
                     </div>
                     <p className="mt-3 text-sm text-sa-muted/70">
@@ -318,7 +315,7 @@ export default function CheckoutCartPage() {
                     >
                       <div className="flex flex-wrap items-start justify-between gap-4 border-b border-sa-border/50 p-6 md:p-8">
                         <div>
-                          <p className="font-heading text-[10px] font-bold uppercase tracking-widest text-sa-primary">
+                          <p className="text-sm font-medium text-sa-primary">
                             {item.kind}
                           </p>
                           <h2 className="mt-2 font-heading text-xl font-bold text-white">{item.label}</h2>
@@ -329,7 +326,7 @@ export default function CheckoutCartPage() {
                         <button
                           type="button"
                           onClick={() => removeItem(item.id)}
-                          className="flex h-10 w-10 items-center justify-center rounded-xl border border-sa-border bg-sa-surface text-sa-muted transition hover:border-rose-500/50 hover:text-white"
+                          className="flex h-11 w-11 items-center justify-center rounded-xl border border-sa-border bg-sa-surface text-sa-muted transition hover:border-rose-500/50 hover:text-white"
                         >
                           <Trash2 className="h-4 w-4" aria-hidden />
                         </button>
@@ -337,8 +334,8 @@ export default function CheckoutCartPage() {
 
                       <div className="grid gap-8 p-6 md:grid-cols-[1fr,240px] md:p-8">
                         <div>
-                          <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40 mb-4">
-                            Optional Add-ons
+                          <p className="mb-4 text-sm font-medium text-sa-muted">
+                            Optional add-ons
                           </p>
                           <div className="space-y-3">
                             {item.addons.length === 0 ? (
@@ -386,7 +383,7 @@ export default function CheckoutCartPage() {
                               <FxPrice amountGhs={item.addOnsTotal} className="font-bold text-white" />
                             </div>
                             <div className="pt-3 border-t border-sa-border flex justify-between items-end">
-                              <span className="text-[10px] font-bold uppercase tracking-wider text-sa-muted/40">Item Total</span>
+                              <span className="text-sm text-sa-muted">Item total</span>
                               <FxPrice
                                 amountGhs={item.total}
                                 suffix={intervalLabel(item.interval)}
@@ -396,9 +393,9 @@ export default function CheckoutCartPage() {
                           </div>
                           <Link
                             href={`/checkout/renewal?plan=${encodeURIComponent(item.planCode)}&label=${encodeURIComponent(item.label)}&ref=${encodeURIComponent(item.reference)}`}
-                            className="mt-6 flex h-11 w-full items-center justify-center rounded-xl bg-white text-[10px] font-bold uppercase tracking-wider text-sa-bg transition hover:bg-sa-primary"
+                            className="sa-btn-outline mt-6 w-full"
                           >
-                            Single item pay
+                            Pay this item
                           </Link>
                         </div>
                       </div>
@@ -408,7 +405,7 @@ export default function CheckoutCartPage() {
               </div>
 
               {/* Order Summary */}
-              <aside className="lg:sticky lg:top-32 h-fit">
+              <aside className="order-1 h-fit lg:sticky lg:top-32 lg:order-2">
                 <motion.div {...fadeUpProps} className="sa-card p-8">
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-sa-border bg-sa-surface text-sa-primary">
                     <CreditCard className="h-5 w-5" />
@@ -423,7 +420,7 @@ export default function CheckoutCartPage() {
                         className="text-2xl font-bold text-sa-primary"
                       />
                     </div>
-                    <p className="text-[10px] leading-relaxed text-sa-muted/40">
+                    <p className="text-sm leading-relaxed text-sa-muted">
                       Final totals and local taxes are confirmed at the payment step. Checkout is processed in GHS via Paystack.
                     </p>
 
@@ -433,7 +430,7 @@ export default function CheckoutCartPage() {
                       disabled={submitting}
                       className="sa-btn-primary w-full mt-4"
                     >
-                      {submitting ? "Processing..." : "Checkout all now"}
+                      {submitting ? "Processing…" : "Pay now"}
                       {!submitting && <ArrowRight className="ml-2 h-4 w-4" />}
                     </button>
                   </div>
@@ -457,14 +454,14 @@ export default function CheckoutCartPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="sa-card mt-6 p-6"
                   >
-                    <h4 className="text-[10px] font-bold uppercase tracking-widest text-white mb-4">Checkout Log</h4>
+                    <h4 className="mb-4 text-sm font-semibold text-white">Payment status</h4>
                     <ul className="space-y-3">
                       {submitResults.map((row, i) => (
-                        <li key={i} className="rounded-lg border border-sa-border bg-sa-bg/50 p-3 text-[10px]">
+                        <li key={i} className="rounded-lg border border-sa-border bg-sa-bg/50 p-3 text-sm">
                           <div className="flex items-center justify-between">
                             <span className="font-bold text-white">{row.label}</span>
                             <span className={cn(
-                              "font-black uppercase",
+                              "font-semibold",
                               row.status.toLowerCase() === "success" ? "text-sa-primary" : "text-rose-500"
                             )}>{row.status}</span>
                           </div>

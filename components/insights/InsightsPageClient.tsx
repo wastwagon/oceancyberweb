@@ -32,6 +32,7 @@ import { SaInput } from "@/components/ui/SaInput";
 import { SaButton } from "@/components/ui/SaButton";
 import { NewsletterSignupForm } from "@/components/insights/NewsletterSignupForm";
 import { LeadMagnetGate } from "@/components/marketing/LeadMagnetGate";
+import { searchIntentPages } from "@/lib/seo/intent-pages";
 
 function contactHrefForTopic(title: string) {
   return `/contact?topic=${encodeURIComponent(title)}`;
@@ -87,7 +88,7 @@ function InsightCover({
 
 function ArticleMeta({ post }: { post: InsightPost }) {
   return (
-    <div className="flex flex-wrap items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">
+    <div className="flex flex-wrap items-center gap-2 text-sm text-white/60">
       <time dateTime={post.date}>{post.date}</time>
       <span className="text-sa-border">·</span>
       <span>{post.readTime}</span>
@@ -128,6 +129,8 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
         p.category.toLowerCase().includes(ql),
     );
   }, [byCategory, q]);
+
+  const guideMatches = useMemo(() => searchIntentPages(q), [q]);
 
   const [featured, ...rest] = filtered;
   const topicCount = new Set(posts.map((p) => p.category)).size;
@@ -178,7 +181,7 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
                   <p className="font-heading text-lg font-bold text-white md:text-xl">
                     {stat.value}
                   </p>
-                  <p className="mt-1 text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">
+                  <p className="mt-1 text-sm text-sa-muted">
                     {stat.label}
                   </p>
                 </div>
@@ -199,7 +202,7 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
             }}
           >
             <label htmlFor="insights-search" className="sr-only">
-              Search insights
+              Search guides and articles
             </label>
             <div className="relative flex-1">
               <Search
@@ -212,7 +215,7 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
                 type="search"
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
-                placeholder="Search articles…"
+                placeholder="Search guides and articles…"
                 autoComplete="off"
                 className="min-h-[48px] bg-sa-surface/80 py-3 pl-11 pr-4 backdrop-blur-sm"
               />
@@ -234,7 +237,7 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
 
           <motion.div
             {...fadeUpSoft}
-            className="mt-8 flex flex-wrap justify-center gap-2"
+            className="sa-chip-scroller mt-8"
             role="tablist"
             aria-label="Filter by category"
           >
@@ -251,11 +254,7 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
                   role="tab"
                   aria-selected={active}
                   onClick={() => router.replace(buildInsightsHref(q, cat))}
-                  className={`rounded-full border px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-colors ${
-                    active
-                      ? "border-sa-primary bg-sa-primary/20 text-sa-primary"
-                      : "border-sa-border bg-sa-surface/60 text-sa-muted hover:border-sa-primary/50 hover:text-white"
-                  }`}
+                  className={`sa-tab ${active ? "border-sa-primary bg-sa-primary/15 text-sa-primary" : ""}`}
                 >
                   {cat}
                   <span className="ml-2 opacity-60">{count}</span>
@@ -265,6 +264,23 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
           </motion.div>
         </div>
       </section>
+
+      {guideMatches.length > 0 ? (
+        <section className="relative z-10 border-b border-sa-border py-8">
+          <div className="sa-container">
+            <h2 className="font-heading text-lg font-semibold text-white">Guides and comparisons</h2>
+            <ul className="mt-4 space-y-2">
+              {guideMatches.map((match) => (
+                <li key={match.href}>
+                  <Link href={match.href} className="text-sm font-semibold text-sa-primary hover:underline">
+                    {match.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null}
 
       <section className="sa-section relative z-10">
         <div className="sa-container">
@@ -293,7 +309,7 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
           </div>
 
           {filtered.length > 0 ? (
-            <p className="mb-8 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-sa-muted/50">
+            <p className="mb-8 text-center text-sm text-sa-muted">
               Showing {filtered.length} article{filtered.length === 1 ? "" : "s"}
               {category !== "All" ? ` in ${category}` : ""}
               {q ? ` matching “${q}”` : ""}
@@ -342,11 +358,9 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
                         sizes="(max-width: 1024px) 100vw, 50vw"
                       />
                       <div className="pointer-events-none absolute left-4 top-4 flex flex-wrap gap-2">
-                        <span className="rounded-full border border-sa-primary/30 bg-sa-bg/85 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-sa-primary backdrop-blur-md">
-                          {featured.category}
-                        </span>
-                        <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-sa-bg/85 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white backdrop-blur-md">
-                          <Sparkles className="h-3 w-3 text-sa-primary" aria-hidden />
+                        <span className="sa-chip">{featured.category}</span>
+                        <span className="sa-chip">
+                          <Sparkles className="mr-1 h-3.5 w-3.5 text-sa-primary" aria-hidden />
                           Featured
                         </span>
                       </div>
@@ -364,17 +378,17 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
                       <p className="sa-subtitle mt-4 max-w-xl text-left">
                         {featured.excerpt}
                       </p>
-                      <div className="mt-8 flex flex-wrap gap-3">
+                      <div className="mt-8 flex flex-col gap-3">
                         <Link
                           href={insightArticlePath(featured.slug)}
-                          className="sa-btn-primary gap-2"
+                          className="sa-btn-primary w-full gap-2 sm:w-auto"
                         >
                           Read article
                           <ArrowRight className="h-4 w-4" aria-hidden />
                         </Link>
                         <Link
                           href={contactHrefForTopic(featured.title)}
-                          className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-6 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition-colors hover:border-sa-primary hover:text-white"
+                          className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
                         >
                           Talk to our team
                         </Link>
@@ -399,7 +413,7 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
                       className="relative block aspect-[16/10] w-full shrink-0 overflow-hidden border-b border-sa-border"
                     >
                       <InsightCover post={post} sizes="(max-width: 768px) 100vw, 33vw" />
-                      <span className="pointer-events-none absolute left-4 top-4 rounded-full border border-sa-primary/30 bg-sa-bg/85 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-sa-primary backdrop-blur-md">
+                      <span className="sa-chip pointer-events-none absolute left-4 top-4">
                         {post.category}
                       </span>
                     </Link>
@@ -418,7 +432,7 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
                       </p>
                       <Link
                         href={insightArticlePath(post.slug)}
-                        className="group/link mt-6 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-sa-primary transition-colors hover:text-white"
+                        className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
                       >
                         Read article
                         <ArrowRight
@@ -452,17 +466,14 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
                 subtitle="Long-form notes on security, product, and digital growth in Ghana and Africa. We only write when it's worth your time."
               />
               <NewsletterSignupForm />
-              <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <Link href="/contact" className="sa-btn-outline !min-h-[42px] text-[10px]">
-                  Discuss a topic
-                </Link>
+              <p className="mt-8 text-center">
                 <Link
                   href="/portfolio"
-                  className="inline-flex min-h-[42px] items-center justify-center rounded-full border border-sa-primary/30 bg-sa-primary/10 px-6 text-[10px] font-bold uppercase tracking-widest text-sa-primary transition hover:border-sa-primary hover:bg-sa-primary/20"
+                  className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
                 >
                   See our work
                 </Link>
-              </div>
+              </p>
             </div>
           </motion.div>
         </div>

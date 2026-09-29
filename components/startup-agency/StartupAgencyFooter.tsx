@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Instagram, Linkedin, Twitter, Facebook, ArrowRight, ShieldAlert } from "lucide-react";
+import { Instagram, Linkedin, Twitter, Facebook, ArrowRight } from "lucide-react";
 import {
   footerCompanyLinks,
   footerServiceLinks,
@@ -13,10 +13,10 @@ import {
 } from "@/lib/data/industries-catalog";
 
 const socialLinks = [
-  { icon: Linkedin, href: "https://linkedin.com/company/oceancyber" },
-  { icon: Twitter, href: "https://twitter.com/oceancyber" },
-  { icon: Facebook, href: "https://facebook.com/oceancyber" },
-  { icon: Instagram, href: "https://instagram.com/oceancyber" },
+  { icon: Linkedin, href: "https://linkedin.com/company/oceancyber", label: "LinkedIn" },
+  { icon: Twitter, href: "https://twitter.com/oceancyber", label: "X" },
+  { icon: Facebook, href: "https://facebook.com/oceancyber", label: "Facebook" },
+  { icon: Instagram, href: "https://instagram.com/oceancyber", label: "Instagram" },
 ] as const;
 
 export function StartupAgencyFooter() {
@@ -26,8 +26,8 @@ export function StartupAgencyFooter() {
       data-app-print-hide-chrome
     >
       <div className="sa-container">
-        <div className="relative overflow-hidden rounded-[40px] border border-sa-border bg-sa-surface p-10 lg:p-20">
-          <div className="grid gap-16 lg:grid-cols-12 lg:items-start">
+        <div className="relative overflow-hidden rounded-3xl border border-sa-border bg-sa-surface p-6 sm:p-10 lg:p-16">
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-start lg:gap-16">
             <div className="lg:col-span-5">
               <Link href="/" className="group inline-block">
                 <Image
@@ -38,35 +38,40 @@ export function StartupAgencyFooter() {
                   className="h-10 w-auto object-contain brightness-0 invert transition-transform duration-300 group-hover:scale-[1.02]"
                 />
               </Link>
-              <p className="mt-8 max-w-md text-lg leading-relaxed text-sa-muted/80">
-                The partner for teams that need to ship reliable code. We focus on professional software delivery, clear milestones, and regional support for ambitious African products.
+              <p className="mt-6 max-w-md text-base leading-relaxed text-white/75">
+                We design and build websites, apps, and secure systems for teams in Ghana and across Africa.
               </p>
 
-              <div className="mt-12">
-                <p className="mb-4 font-heading text-xs font-bold uppercase tracking-[0.2em] text-sa-primary">
-                  Need immediate help?
-                </p>
-                <div className="flex max-w-sm items-center gap-4 rounded-2xl border border-sa-primary/20 bg-sa-primary/5 p-4 group">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sa-primary text-black">
-                    <ShieldAlert className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">
-                      Technical & Security Ops
-                    </p>
-                    <a
-                      href="tel:+233242565695"
-                      className="font-heading text-sm font-bold text-white transition-colors group-hover:text-sa-primary"
-                    >
-                      +233 242 565 695
-                    </a>
-                  </div>
-                </div>
-              </div>
+              <ul className="sa-ios-group mt-8 divide-y divide-white/10">
+                <li>
+                  <a href="tel:+233242565695" className="sa-ios-row sa-pressable">
+                    <span>
+                      <span className="block text-xs text-white/55">Call</span>
+                      <span className="block text-[15px] text-white">+233 242 565 695</span>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="mailto:info@oceancyber.net" className="sa-ios-row sa-pressable">
+                    <span>
+                      <span className="block text-xs text-white/55">Email</span>
+                      <span className="block text-[15px] text-white">info@oceancyber.net</span>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <span className="sa-ios-row">
+                    <span>
+                      <span className="block text-xs text-white/55">Office</span>
+                      <span className="block text-[15px] text-white">232 Nii Kwashiefio Avenue, Accra</span>
+                    </span>
+                  </span>
+                </li>
+              </ul>
             </div>
 
             <div className="lg:col-span-2">
-              <span className="mb-8 block font-heading text-xs font-bold uppercase tracking-[0.2em] text-sa-primary">
+              <span className="mb-4 block text-sm font-semibold text-sa-primary">
                 Company
               </span>
               <ul className="space-y-4">
@@ -84,7 +89,7 @@ export function StartupAgencyFooter() {
             </div>
 
             <div className="lg:col-span-3">
-              <span className="mb-8 block font-heading text-xs font-bold uppercase tracking-[0.2em] text-sa-primary">
+              <span className="mb-4 block text-sm font-semibold text-sa-primary">
                 Services
               </span>
               <ul className="space-y-4">
@@ -102,7 +107,7 @@ export function StartupAgencyFooter() {
             </div>
 
             <div className="lg:col-span-2">
-              <span className="mb-8 block font-heading text-xs font-bold uppercase tracking-[0.2em] text-sa-primary">
+              <span className="mb-4 block text-sm font-semibold text-sa-primary">
                 Industries
               </span>
               <ul className="space-y-4">
@@ -129,35 +134,36 @@ export function StartupAgencyFooter() {
             </div>
           </div>
 
-          <div className="mt-20 flex flex-col gap-10 border-t border-sa-border pt-12 lg:flex-row lg:items-center lg:justify-between">
-            <div className="space-y-3">
-              <p className="text-sm text-sa-muted">
-                © {new Date().getFullYear()} OceanCyber Platform. Delivering excellence in Africa.
+          <div className="mt-12 flex flex-col gap-6 border-t border-sa-border pt-8 lg:mt-16 lg:flex-row lg:items-center lg:justify-between">
+            <div className="space-y-1">
+              <p className="text-sm text-white/70">
+                © {new Date().getFullYear()} OceanCyber. Accra, Ghana.
               </p>
-              <div className="flex gap-6 text-xs font-bold uppercase tracking-widest text-sa-muted/60">
-                <Link href="/privacy" className="hover:text-white">
+              <div className="flex flex-wrap gap-x-1 text-sm">
+                <Link href="/privacy" className="inline-flex min-h-11 items-center pr-4 text-white/70 hover:text-white">
                   Privacy
                 </Link>
-                <Link href="/terms" className="hover:text-white">
+                <Link href="/terms" className="inline-flex min-h-11 items-center pr-4 text-white/70 hover:text-white">
                   Terms
                 </Link>
-                <Link href="/cookies" className="hover:text-white">
+                <Link href="/cookies" className="inline-flex min-h-11 items-center pr-4 text-white/70 hover:text-white">
                   Cookies
                 </Link>
               </div>
             </div>
 
             <div className="flex gap-4">
-              {socialLinks.map((social, i) => (
-                <Link
-                  key={i}
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex h-14 w-14 touch-target items-center justify-center rounded-full border border-sa-border bg-transparent text-white transition-all duration-500 hover:border-sa-primary hover:bg-sa-primary hover:text-black"
+                  aria-label={social.label}
+                  className="sa-pressable flex h-11 w-11 items-center justify-center rounded-full border border-sa-border text-white transition hover:border-sa-primary hover:text-sa-primary"
                 >
-                  <social.icon className="h-6 w-6 transition-transform duration-500 group-hover:scale-110" />
-                </Link>
+                  <social.icon className="h-5 w-5" aria-hidden />
+                </a>
               ))}
             </div>
           </div>

@@ -8,9 +8,9 @@ export const revalidate = 60;
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "Team",
+    title: "The OceanCyber team",
     description:
-      "Meet the OceanCyber leadership team behind web, mobile, and cybersecurity delivery.",
+      "Meet the people who design, build, and secure digital products at OceanCyber in Accra.",
   },
   "/team",
 );
@@ -60,7 +60,7 @@ export default async function TeamPage() {
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
                 </div>
                 <div className="p-6">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-sa-primary">
+                  <p className="text-sm font-semibold text-sa-primary">
                     {member.role}
                   </p>
                   <h2 className="mt-2 font-heading text-xl font-semibold text-white">{member.name}</h2>
@@ -73,7 +73,7 @@ export default async function TeamPage() {
           <div className="mt-10 text-center">
             <Link
               href="/contact"
-              className="sa-btn-primary"
+              className="sa-btn-primary w-full sm:w-auto"
             >
               Work with our team
             </Link>

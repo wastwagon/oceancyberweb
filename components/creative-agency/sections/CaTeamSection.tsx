@@ -19,7 +19,7 @@ export function CaTeamSection() {
           </div>
           <Link
             href="/team"
-            className="sa-pressable inline-flex min-h-11 items-center rounded-full border border-[var(--ae-ink)]/20 px-6 text-xs font-bold uppercase tracking-wider text-[var(--ae-ink)]"
+            className="inline-flex min-h-11 items-center text-sm font-medium text-[var(--ae-ink)] underline-offset-4 hover:text-[var(--ae-primary)] hover:underline"
           >
             View all
           </Link>
@@ -47,10 +47,10 @@ export function CaTeamSection() {
                     )}
                   </div>
                   <div className="p-5 md:p-6">
-                    <h3 className="font-heading text-lg font-bold uppercase tracking-wide text-[var(--ae-ink)]">
+                    <h3 className="font-heading text-lg font-bold text-[var(--ae-ink)]">
                       {member.name}
                     </h3>
-                    <p className="mt-1 text-xs font-bold uppercase tracking-[0.16em] text-[var(--ae-primary)]">
+                    <p className="mt-1 text-sm font-medium text-[var(--ae-primary)]">
                       {member.role}
                     </p>
                     <p className="ae-body-light mt-3 text-sm leading-relaxed">{member.bio}</p>

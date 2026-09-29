@@ -396,7 +396,7 @@ export const pricingFaqItems = [
   },
   {
     q: "Do you accept Paystack or mobile money for project payments?",
-    a: "Yes. We bill in GHS and align milestone invoices with Paystack and local payment rails your finance team already uses.",
+    a: "Yes. We bill in Ghana cedis and can take milestone payments through Paystack and Mobile Money.",
   },
   {
     q: "How does this compare to hiring in-house in Accra?",

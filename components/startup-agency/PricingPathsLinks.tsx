@@ -6,6 +6,8 @@ type Props = {
   className?: string;
   /** When true, show Get started as the primary action. */
   showQuote?: boolean;
+  /** Hide the Get started text link. Use on the intake page itself. */
+  omitStart?: boolean;
 };
 
 /**
@@ -16,6 +18,7 @@ export function PricingPathsLinks({
   variant = "inline",
   className,
   showQuote = false,
+  omitStart = false,
 }: Props) {
   if (variant === "compact") {
     return (
@@ -32,10 +35,14 @@ export function PricingPathsLinks({
         <Link href="/tools/project-cost" className="text-sa-primary hover:underline">
           Estimate scope
         </Link>
-        {" · "}
-        <Link href="/get-started" className="text-sa-primary hover:underline">
-          Get started
-        </Link>
+        {omitStart ? null : (
+          <>
+            {" · "}
+            <Link href="/get-started" className="text-sa-primary hover:underline">
+              Get started
+            </Link>
+          </>
+        )}
       </p>
     );
   }
@@ -48,7 +55,7 @@ export function PricingPathsLinks({
           className={
             variant === "stack"
               ? "sa-btn-primary w-full min-h-[44px]"
-              : "sa-btn-primary min-h-[44px] px-5 text-xs"
+              : "sa-btn-primary min-h-11 px-5 text-sm"
           }
         >
           Get started
@@ -59,7 +66,7 @@ export function PricingPathsLinks({
         className={
           variant === "stack"
             ? "sa-btn-outline w-full min-h-[44px]"
-            : "sa-btn-outline min-h-[44px] px-5 text-xs"
+            : "inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
         }
       >
         Compare packages
@@ -69,7 +76,7 @@ export function PricingPathsLinks({
         className={
           variant === "stack"
             ? "sa-btn-outline w-full min-h-[44px]"
-            : "sa-btn-outline min-h-[44px] px-5 text-xs"
+            : "inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
         }
       >
         Estimate in GHS
@@ -80,7 +87,7 @@ export function PricingPathsLinks({
           className={
             variant === "stack"
               ? "sa-btn-outline w-full min-h-[44px]"
-              : "sa-btn-outline min-h-[44px] px-5 text-xs"
+              : "inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
           }
         >
           Talk to our team

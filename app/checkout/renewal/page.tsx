@@ -144,26 +144,26 @@ function RenewalCheckoutContent() {
   }
 
   return (
-    <main className="sa-shell relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
-      <div className="sa-container relative z-10 flex min-h-[calc(100vh-80px)] items-center justify-center py-20">
-        <motion.div {...fadeUpProps} className="sa-card w-full max-w-xl p-8 md:p-12">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-sa-border bg-sa-surface text-sa-primary mb-8">
+    <main className="sa-shell sa-mobile-tab-pad relative min-h-screen bg-sa-bg text-sa-muted">
+      <div className="sa-container relative z-10 flex items-start justify-center pb-6 pt-24 md:min-h-[calc(100vh-80px)] md:items-center md:py-20">
+        <motion.div {...fadeUpProps} className="sa-card w-full max-w-xl p-5 md:p-12">
+          <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl border border-sa-border bg-sa-surface text-sa-primary md:mb-8">
             <CreditCard className="h-6 w-6" />
           </div>
           <span className="sa-eyebrow mb-4">Checkout</span>
           <h1 className="font-heading text-2xl font-bold text-white md:text-3xl">
             Confirm your <span className="text-sa-primary">subscription</span>
           </h1>
-          <p className="mt-4 text-sm leading-relaxed text-sa-muted/70">
-            Secure your digital services. Pay now with Paystack for immediate activation, or add to your dashboard to settle via wallet later.
+          <p className="mt-4 text-sm leading-relaxed text-sa-muted/80">
+            Pay now with Paystack, or add the plan to your dashboard and pay from your wallet later.
           </p>
 
           {/* Status Alerts */}
-          <div className="mt-8 space-y-4">
+          <div className="mt-6 space-y-4">
             {payState === "verifying" && (
               <div className="flex gap-3 rounded-xl border border-sa-primary/20 bg-sa-primary/5 p-4 text-sm text-sa-primary">
                 <Clock className="h-5 w-5 shrink-0" />
-                <p>Verifying payment with Paystack... This usually takes a few seconds.</p>
+                <p>Verifying payment with Paystack. This usually takes a few seconds.</p>
               </div>
             )}
             {payState === "paid" && (
@@ -176,7 +176,7 @@ function RenewalCheckoutContent() {
                   href="/dashboard"
                   className="sa-btn-primary w-full"
                 >
-                  Go to Dashboard
+                  Go to dashboard
                 </Link>
               </div>
             )}
@@ -199,45 +199,45 @@ function RenewalCheckoutContent() {
           </div>
 
           {/* Product Details */}
-          <div className="mt-8 space-y-4 rounded-2xl border border-sa-border bg-sa-bg/50 p-6">
+          <div className="mt-6 space-y-4 rounded-2xl border border-sa-border bg-sa-bg/50 p-5">
             <div className="flex justify-between text-sm">
               <span className="text-sa-muted/50">Product</span>
               <span className="font-bold text-white">{displayLabel}</span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-sa-muted/50">Plan Code</span>
+              <span className="text-sa-muted/70">Plan code</span>
               <span className="font-mono text-white/80">{planCode || "—"}</span>
             </div>
             {price && (
               <div className="flex justify-between items-end border-t border-sa-border pt-4 mt-4">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/40">Amount due</span>
+                <span className="text-sm text-sa-muted/70">Amount due</span>
                 <span className="text-xl font-bold text-sa-primary">
                   ₵{price.amount} <span className="text-xs text-sa-muted/50">/ {price.every}</span>
                 </span>
               </div>
             )}
-            <div className="flex justify-between text-[10px]">
-              <span className="text-sa-muted/40 uppercase tracking-widest">Reference</span>
+            <div className="flex justify-between gap-4 text-sm">
+              <span className="text-sa-muted/70">Reference</span>
               <span className="font-mono text-sa-muted/60">{externalRef || "—"}</span>
             </div>
           </div>
 
           {!hasSession ? (
-            <div className="mt-10 p-6 rounded-2xl border border-sa-primary/20 bg-sa-primary/5 text-center">
-              <p className="text-sm font-bold text-white">Action Required</p>
-              <p className="mt-2 text-xs text-sa-muted/70">Sign in to complete your purchase securely.</p>
-              <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-6 p-5 rounded-2xl border border-sa-primary/20 bg-sa-primary/5 text-center">
+              <p className="text-base font-semibold text-white">Sign in to pay</p>
+              <p className="mt-2 text-sm text-sa-muted/80">Sign in to complete this purchase.</p>
+              <div className="mt-4 flex flex-col items-stretch gap-1">
                 <Link
                   href={`/signin?next=${encodeURIComponent(nextTarget)}`}
-                  className="sa-btn-primary flex-1"
+                  className="sa-btn-primary w-full"
                 >
-                  Sign In
+                  Sign in
                 </Link>
                 <Link
                   href={`/signup?next=${encodeURIComponent(nextTarget)}`}
-                  className="flex-1 flex h-11 items-center justify-center rounded-xl border border-sa-border bg-sa-surface text-[10px] font-bold uppercase tracking-widest text-white transition hover:border-sa-primary"
+                  className="inline-flex min-h-11 items-center justify-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
                 >
-                  Register
+                  Create an account
                 </Link>
               </div>
             </div>
@@ -252,21 +252,21 @@ function RenewalCheckoutContent() {
                 {payBusy ? "Redirecting..." : "Pay with Paystack"}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </button>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="mt-3 flex flex-col items-start gap-1">
                 <button
                   type="button"
                   onClick={onAddSubscriptionOnly}
                   disabled={busy || !knownPlan}
-                  className="flex h-11 items-center justify-center rounded-xl border border-sa-border bg-sa-surface text-[10px] font-bold uppercase tracking-widest text-white transition hover:border-sa-primary disabled:opacity-50"
+                  className="inline-flex min-h-11 items-center text-sm font-medium text-white underline-offset-4 hover:text-sa-primary hover:underline disabled:opacity-50"
                 >
-                  {busy ? "Working..." : "Add to Dashboard"}
+                  {busy ? "Working…" : "Add to dashboard"}
                 </button>
                 <Link
                   href="/dashboard/wallet"
-                  className="flex h-11 items-center justify-center rounded-xl border border-sa-border bg-sa-bg text-[10px] font-bold uppercase tracking-widest text-sa-muted transition hover:border-sa-primary hover:text-white"
+                  className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-sa-muted underline-offset-4 hover:text-sa-primary hover:underline"
                 >
-                  <Wallet className="mr-2 h-3.5 w-3.5" />
-                  Top Up Wallet
+                  <Wallet className="h-4 w-4" aria-hidden />
+                  Top up wallet
                 </Link>
               </div>
             </div>
@@ -276,7 +276,7 @@ function RenewalCheckoutContent() {
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-6 text-center text-xs font-medium text-rose-500"
+              className="mt-6 text-center text-sm font-medium text-rose-400"
             >
               {error}
             </motion.p>
@@ -291,8 +291,8 @@ export default function RenewalCheckoutPage() {
   return (
     <Suspense fallback={
       <main className="sa-shell bg-sa-bg flex items-center justify-center min-h-screen">
-        <div className="text-sa-muted animate-pulse font-heading font-bold uppercase tracking-widest text-xs">
-          Loading checkout...
+        <div className="text-sm font-medium text-sa-muted">
+          Loading checkout…
         </div>
       </main>
     }>

@@ -27,13 +27,43 @@ function ComparisonCell({ value }: { value: PricingComparisonValue }) {
 
 export function PricingComparisonTable() {
   return (
-    <div className="overflow-x-auto rounded-2xl border border-sa-border">
+    <>
+      <div className="space-y-4 md:hidden">
+        {pricingPlans.map((plan) => (
+          <article
+            key={plan.id}
+            className={`rounded-2xl border p-5 ${
+              plan.featured ? "border-sa-primary bg-sa-surface" : "border-sa-border bg-sa-surface/40"
+            }`}
+          >
+            <h3 className="font-heading text-lg font-bold text-white">{plan.name}</h3>
+            <p className="mt-1 text-sm text-sa-primary">
+              From GHS {plan.priceGhs.toLocaleString("en-GH")}
+            </p>
+            <dl className="mt-4">
+              {pricingComparisonCategories.map((category) => (
+                <div
+                  key={category.key}
+                  className="flex items-start justify-between gap-4 border-t border-white/10 py-3"
+                >
+                  <dt className="text-sm text-white/70">{category.label}</dt>
+                  <dd className="max-w-[58%] text-right text-sm text-white">
+                    <ComparisonCell value={plan.comparison[category.key]} />
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </article>
+        ))}
+      </div>
+
+      <div className="hidden overflow-x-auto rounded-2xl border border-sa-border md:block">
       <table className="w-full min-w-[720px] border-collapse text-left">
         <thead>
           <tr className="border-b border-sa-border bg-sa-surface/60">
             <th
               scope="col"
-              className="sticky left-0 z-10 bg-sa-surface/95 px-5 py-4 font-heading text-xs font-bold uppercase tracking-wider text-sa-muted"
+              className="sticky left-0 z-10 bg-sa-surface/95 px-5 py-4 text-sm font-medium text-sa-muted"
             >
               What you get
             </th>
@@ -77,6 +107,7 @@ export function PricingComparisonTable() {
           ))}
         </tbody>
       </table>
-    </div>
+      </div>
+    </>
   );
 }

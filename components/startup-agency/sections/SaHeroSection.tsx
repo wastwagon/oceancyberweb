@@ -4,122 +4,98 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Play } from "lucide-react";
-import { ServicePageHeroBanner } from "@/components/services/ServicePageHeroBanner";
 import { SaShowreelModal } from "@/components/startup-agency/SaShowreelModal";
 import { heroServiceSlides, heroTagline } from "@/lib/startup-agency/content";
 
 export function SaHeroSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [showreelOpen, setShowreelOpen] = useState(false);
+  const hoveredSlide = hoveredIndex === null ? null : heroServiceSlides[hoveredIndex];
 
   return (
     <>
       <section
         id="hero"
-        className="relative min-h-[100dvh] w-full overflow-hidden bg-sa-bg pt-[max(5rem,env(safe-area-inset-top))] md:h-screen md:min-h-[600px] md:pt-20"
+        className="relative w-full overflow-hidden bg-sa-bg md:h-screen md:min-h-[600px] md:pt-28"
       >
-        <div className="hero-grid-cells opacity-20">
+        <div className="hero-grid-cells hidden opacity-20 md:flex">
           {Array.from({ length: 48 }).map((_, i) => (
             <div key={i} className="hero-grid-cell" />
           ))}
         </div>
 
-        <div className="absolute inset-0 z-0 md:hidden">
-          <ServicePageHeroBanner
-            image={heroServiceSlides[0].image}
-            alt={heroServiceSlides[0].imageAlt}
-          />
-        </div>
-
         <div
-          className={`absolute inset-0 z-10 flex flex-col items-center justify-center px-4 pb-8 transition-opacity duration-700 pointer-events-none md:px-0 md:pb-0 ${
+          className={`relative z-10 flex min-h-[calc(100svh-var(--sa-mobile-tab-bar))] flex-col items-center justify-center px-4 pb-8 pt-[max(4.5rem,env(safe-area-inset-top))] pointer-events-none md:absolute md:inset-0 md:min-h-0 md:px-0 md:py-0 md:transition-opacity md:duration-700 ${
             hoveredIndex !== null ? "md:opacity-0" : "opacity-100"
           }`}
         >
           <div className="mb-4 flex items-center gap-3 rounded-full border border-white/20 bg-black/40 px-4 py-2 backdrop-blur-md">
-            <span className="h-1.5 w-1.5 rounded-full bg-sa-primary animate-pulse" />
-            <span className="text-[11px] font-medium text-white/80 md:text-[10px] md:font-bold md:uppercase md:tracking-[0.2em]">
-              Engineered for Results
+            <span className="h-1.5 w-1.5 rounded-full bg-sa-primary" />
+            <span className="text-sm font-medium text-white/80">
+              Accra company · since 2018
             </span>
           </div>
-          <p
-            className="hidden font-heading text-[clamp(2.5rem,6vw,4.5rem)] font-bold uppercase leading-none tracking-tighter md:block"
-            style={{
-              WebkitTextStroke: "1.5px rgba(255, 255, 255, 0.35)",
-              color: "transparent",
-            }}
-            aria-hidden
-          >
-            OceanCyber
-          </p>
-          <p className="sa-lead mx-auto max-w-xl text-balance text-center text-white/85 md:mt-0">
+          <h1 className="sa-title-lg mx-auto max-w-xl text-balance text-center">
+            Web, mobile, and security for growing businesses
+          </h1>
+          <p className="sa-lead mx-auto mt-3 max-w-xl text-balance text-center text-white/85">
             {heroTagline}
           </p>
-          <div className="pointer-events-auto mt-6 flex w-full max-w-sm flex-col gap-3 px-2 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center md:mt-8">
-            <Link
-              href="/get-started"
-              className="sa-pressable inline-flex min-h-[48px] w-full items-center justify-center rounded-2xl border border-sa-primary bg-sa-primary px-5 py-3 text-[15px] font-semibold text-sa-bg sm:w-auto md:rounded-full md:text-[10px] md:font-bold md:uppercase md:tracking-[0.14em]"
-            >
+          <div className="pointer-events-auto mt-6 flex w-full max-w-sm flex-col items-center gap-3 sm:max-w-none">
+            <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">
               Get started
             </Link>
             <Link
               href="/contact"
-              className="sa-pressable inline-flex min-h-[48px] w-full items-center justify-center rounded-2xl border border-white/20 bg-white/10 px-5 py-3 text-[15px] font-semibold text-white backdrop-blur-md sm:w-auto md:rounded-full md:text-[10px] md:font-bold md:uppercase md:tracking-[0.14em]"
+              className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline-offset-4 hover:text-sa-primary hover:underline"
             >
               Talk to our team
             </Link>
+          </div>
+          <div className="pointer-events-auto mt-4 hidden flex-wrap items-center justify-center gap-x-5 gap-y-2 md:flex">
             <Link
               href="/portfolio"
-              className="sa-pressable inline-flex min-h-[48px] w-full items-center justify-center rounded-2xl border border-white/20 bg-white/10 px-5 py-3 text-[15px] font-semibold text-white backdrop-blur-md sm:w-auto md:rounded-full md:text-[10px] md:font-bold md:uppercase md:tracking-[0.14em]"
+              className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline-offset-4 hover:text-sa-primary hover:underline"
             >
               View portfolio
             </Link>
-          </div>
-          <button
-            type="button"
-            onClick={() => setShowreelOpen(true)}
-            className="pointer-events-auto mt-4 inline-flex items-center gap-2 text-sm font-medium text-white/70 underline-offset-4 transition hover:text-sa-primary hover:underline"
-          >
-            <Play className="h-3.5 w-3.5 fill-current" aria-hidden />
-            Watch showreel
-          </button>
-          <div className="mt-6 text-xs font-medium text-sa-muted/60 md:text-[11px] md:uppercase md:tracking-[0.3em]">
-            Accra · London · Global
+            <button
+              type="button"
+              onClick={() => setShowreelOpen(true)}
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-white/80 underline-offset-4 hover:text-sa-primary hover:underline"
+            >
+              <Play className="h-3.5 w-3.5 fill-current" aria-hidden />
+              Watch showreel
+            </button>
           </div>
         </div>
 
-        <div
-          className={`absolute inset-0 z-0 hidden transition-opacity duration-1000 md:block ${
-            hoveredIndex !== null ? "opacity-0" : "opacity-40"
+        <picture
+          className={`absolute inset-0 z-0 hidden md:block ${
+            hoveredSlide ? "opacity-0" : "opacity-40"
           }`}
         >
-          <Image
-            src={heroServiceSlides[0].image}
+          <source media="(min-width: 768px)" srcSet={heroServiceSlides[0].image} />
+          <img
             alt=""
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
+            className="h-full w-full object-cover"
+            fetchPriority="high"
+            decoding="async"
           />
-        </div>
+        </picture>
 
-        {heroServiceSlides.map((slide, index) => (
-          <div
-            key={`bg-${slide.title}`}
-            className={`absolute inset-0 z-0 hidden transition-all duration-1000 ease-in-out md:block ${
-              hoveredIndex === index ? "opacity-100 scale-105" : "opacity-0 scale-100"
-            }`}
-          >
+        {hoveredSlide ? (
+          <div className="absolute inset-0 z-0 hidden md:block">
             <Image
-              src={slide.image}
-              alt={slide.imageAlt}
+              src={hoveredSlide.image}
+              alt={hoveredSlide.imageAlt}
               fill
               className="object-cover"
               sizes="100vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
           </div>
-        ))}
+        ) : null}
 
         <div className="relative z-20 hidden min-h-0 w-full border-t border-white/5 md:flex md:h-full md:flex-row">
           {heroServiceSlides.map((slide, index) => {
@@ -135,14 +111,14 @@ export function SaHeroSection() {
               >
                 <div className="flex w-full flex-col items-start md:mb-20 md:items-center md:text-center">
                   <div className="mb-1 hidden items-center justify-center gap-2 md:mb-4 md:flex">
-                    <span className="h-1.5 w-1.5 rounded-full bg-sa-primary animate-pulse" />
-                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80">
-                      Engineered for Results
+                    <span className="h-1.5 w-1.5 rounded-full bg-sa-primary" />
+                    <span className="text-sm font-medium text-white/80">
+                      Built for results
                     </span>
                   </div>
 
                   <h2
-                    className={`font-heading text-sm font-bold uppercase tracking-widest text-white transition-all duration-500 md:text-2xl ${
+                    className={`font-heading text-base font-bold text-white transition-all duration-500 md:text-2xl ${
                       isHovered ? "text-sa-primary" : ""
                     }`}
                   >

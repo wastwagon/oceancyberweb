@@ -4,193 +4,737 @@
     "title": "Agency vs Hiring In-House: A Cost Map for Accra Teams",
     "excerpt": "When a full-time hire beats a delivery partner — and when a premium agency saves money, time, and rework for Ghanaian product leaders.",
     "paragraphs": [
-      "Hiring feels like control: one person, one salary, one desk. But a senior full-stack engineer plus designer, DevOps, and security coverage often exceeds GHS 20,000/month before recruitment, devices, and management overhead — and you still wait months to fill the role.",
-      "Agencies win when speed, breadth, and accountability matter: regulated launches, MoMo integrations, brand plus engineering together, or a fixed milestone with a named lead. You buy outcomes and documented handover, not just hours.",
-      "The decision framework: hire in-house for steady product iteration on a stable stack you already own; partner when you need multi-disciplinary delivery, compliance-sensitive launches, or a hard external deadline. Hybrid retainers — agency extends your team — often fit growth-stage Ghanaian companies best."
+      "A full-time hire in Accra feels like control. It is also a monthly cost before anyone ships. Our planning figure for a senior engineer plus design and security coverage is above GHS 20,000 a month, before recruitment, a laptop, and the manager who reviews the work. Filling the seat often takes months.",
+      "A fixed OceanCyber package is the other number. Startup starts at GHS 6,000 for a five-page site. Professional starts at GHS 14,500 when you need custom design and Paystack or Mobile Money reconciliation. Enterprise starts at GHS 30,000 for a portal, a security review, or a dedicated lead. Those are build prices, not salaries."
     ],
+    "sections": [
+      {
+        "heading": "Hire in-house when the product is already live",
+        "paragraphs": [
+          "Hire when you own the stack and the next year is weekly iteration: bug fixes, small features, and someone in the standup. One hire still does not cover design, content, and security. Budget the GHS 20,000-class monthly cost only if that person will be busy every week.",
+          "Recruitment is part of the price. A role that sits open for a quarter is a launch date you do not have."
+        ]
+      },
+      {
+        "heading": "Use an agency for a dated launch",
+        "paragraphs": [
+          "Use a package when the work has an end: a company site, a store, or a milestone with design and engineering together. You are buying a scope, a handover, and a support window — 30 days on Startup, 90 days on Professional, six months on Enterprise.",
+          "A freelancer fits when you can direct one discipline yourself. The agency comparison spells out that split, including the freelancer column, so this article does not pretend a package is the only honest choice."
+        ],
+        "links": [
+          {
+            "href": "/compare/agency-vs-freelancer-vs-in-house-ghana",
+            "label": "Agency, freelancer, or in-house"
+          },
+          {
+            "href": "/guides/website-cost-in-ghana",
+            "label": "Website cost, including the first-year total"
+          }
+        ]
+      },
+      {
+        "heading": "Hybrid is the usual growth path",
+        "paragraphs": [
+          "Launch with a package, keep the handover notes, then hire once users are on the product. A care retainer from GHS 850 a month covers minor fixes between those two stages. The hire inherits a system instead of a blank brief."
+        ],
+        "links": [
+          {
+            "href": "/pricing",
+            "label": "Package prices in cedis"
+          },
+          {
+            "href": "/how-we-work",
+            "label": "How a milestone is delivered"
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "href": "/compare/agency-vs-freelancer-vs-in-house-ghana",
+        "label": "Full comparison"
+      },
+      {
+        "href": "/team",
+        "label": "Who delivers the work"
+      }
+    ],
+    "readTime": "2 min read",
     "image": "/images/insights/oceancyber-accra-digital-transformation-ghana-insights.webp",
     "category": "Business",
-    "date": "July 3, 2026",
-    "readTime": "8 min read"
+    "date": "July 3, 2026"
   },
   {
     "slug": "ghana-sme-cybersecurity-baseline",
     "title": "Cybersecurity Baseline for Ghanaian SMEs in 2026",
     "excerpt": "Ten controls every SME should have before scaling ads, payments, or customer data — mapped to how attackers actually target Ghanaian businesses.",
     "paragraphs": [
-      "SME breaches in Ghana still start with the same patterns: stolen email passwords, exposed admin panels, and untested backups. Fancy tools matter less than MFA on email, patched dependencies, and logs you can actually search when something looks wrong.",
-      "Minimum viable programme: MFA everywhere privileged, weekly backup restore test, dependency patching within 30 days of critical CVEs, phishing awareness for finance and HR, and a one-page incident contact list shared with leadership.",
-      "If you process payments or personal data, add vendor inventory, privacy notices that match reality, and payment callback verification. Use our free security self-assessment to score gaps, then prioritise the next 90 days with a partner who understands local rails and regulators."
+      "The title is a list, so here is the list. These ten controls are the baseline before a Ghana SME spends on ads, stores customer records, or takes Mobile Money. Tools come after the list is true."
+    ],
+    "sections": [
+      {
+        "heading": "The ten controls",
+        "paragraphs": [
+          "Do these in order. The first four stop the incidents we see most often: a stolen mailbox, an open admin panel, and a backup nobody has restored."
+        ],
+        "bullets": [
+          "MFA on email and on every admin account, including the host and the domain registrar.",
+          "A password manager, so staff stop reusing the same password on mail and the website.",
+          "The public site and its dependencies patched, with critical fixes inside 30 days.",
+          "A backup you have restored once, not only a backup job that says it ran.",
+          "Admin panels locked to named people. Remove freelancer access after launch.",
+          "Payment webhooks verified, so a refresh cannot double-charge or mark an unpaid order as paid.",
+          "A privacy notice that names the forms, Paystack if you use it, and the host.",
+          "A one-page list of vendors who can see customer data: host, email, payments, analytics.",
+          "An incident card: who is called, how customers are told, where the backup lives.",
+          "A short briefing for finance and HR on phishing, because that is where the payment fraud starts."
+        ],
+        "links": [
+          {
+            "href": "/tools/security-assessment",
+            "label": "Score the ten controls"
+          },
+          {
+            "href": "/services/cybersecurity",
+            "label": "Cybersecurity services"
+          }
+        ]
+      },
+      {
+        "heading": "The next 90 days",
+        "paragraphs": [
+          "Week one is MFA and the access list. The first month is the restore test and the patch pass. By day 90 the privacy notice matches the forms and finance can reconcile a test Mobile Money payment. That sequence is the programme. A slide deck is not.",
+          "If the site already takes payments, webhook verification outranks a new dashboard. ThinQ Shopping is an example of checkout that records Paystack and Mobile Money instead of hoping the customer closed the tab on a successful prompt."
+        ],
+        "links": [
+          {
+            "href": "/guides/accept-mobile-money-paystack",
+            "label": "How a payment is confirmed"
+          },
+          {
+            "href": "/portfolio/thinq-shopping",
+            "label": "ThinQ Shopping project"
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "href": "/guides/ghana-data-protection-act-for-websites",
+        "label": "Data Protection Act for websites"
+      },
+      {
+        "href": "/security-journey",
+        "label": "Security journey"
+      }
     ],
     "image": "/images/insights/oceancyber-accra-cybersecurity-trends-ghana-insights.webp",
     "category": "Security",
     "date": "August 14, 2026",
-    "readTime": "7 min read"
+    "readTime": "2 min read"
   },
   {
     "slug": "ghana-data-protection-act-2026",
     "title": "Ghana Data Protection Act: What SaaS and Fintech Teams Must Do in 2026",
     "excerpt": "A practical compliance checklist for product and engineering leaders building in Ghana — consent, data mapping, breach response, and vendor oversight.",
     "paragraphs": [
-      "Ghana's Data Protection Act and the Data Protection Commission's evolving guidance apply to more teams than legal counsel alone. If you collect customer data, operate a SaaS product, or process payments, you are likely in scope — regardless of where your servers sit.",
-      "The practical sequence for 2026: map what personal data you hold and why, document lawful bases and retention limits, tighten access controls on production systems, and publish privacy notices that match how data actually flows — not boilerplate copied from a US template.",
-      "Vendor oversight matters as much as internal controls. Subprocessors, telco APIs, payment aggregators, and cloud hosts should appear in your records with clear data-processing terms. Teams that treat privacy as an engineering discipline — audit trails, deletion workflows, breach playbooks — avoid expensive retrofits when regulators or enterprise clients ask hard questions."
+      "Ghana's Data Protection Act, 2012 (Act 843) applies when you collect names, phone numbers, emails, or payment details from people in Ghana. The Data Protection Commission oversees registration and complaints. This is an engineering checklist, not legal advice.",
+      "A notice copied from a US template fails when it describes data you do not collect, or skips Mobile Money numbers and delivery addresses you do collect."
     ],
     "image": "/images/insights/oceancyber-accra-data-privacy-compliance-insights-ghana.webp",
     "category": "Compliance",
     "date": "June 12, 2026",
-    "readTime": "8 min read"
+    "readTime": "2 min read",
+    "sections": [
+      {
+        "heading": "What to write before launch",
+        "paragraphs": [
+          "Start from the systems on the site, then write the notice to match them."
+        ],
+        "bullets": [
+          "List every form and the fields it stores, plus how long you keep the record.",
+          "Name Paystack if you take cards or Mobile Money, and say settlement data sits with them too.",
+          "Name the host and the analytics tool. Say who can open the admin.",
+          "Limit production access to named people and confirm HTTPS on every form.",
+          "Write the breach path on one page: who is called, how customers are told, where the backup is.",
+          "Ask the Data Protection Commission or Ghana counsel whether you must register as a data controller."
+        ],
+        "links": [
+          {
+            "href": "/guides/ghana-data-protection-act-for-websites",
+            "label": "Website checklist for the Act"
+          }
+        ]
+      },
+      {
+        "heading": "Vendors are in scope",
+        "paragraphs": [
+          "Hosting, email, Paystack, analytics, and SMS gateways process personal data for you. Enterprise delivery includes Ghana DPA–aligned data-handling guidance. A five-page Startup site still needs the notice and the access list on day one.",
+          "Fitch Advisory's client portal is the kind of system where this stops being a footer link: documents, scheduling, and client records. The notice has to describe that portal, not a generic brochure."
+        ],
+        "links": [
+          {
+            "href": "/portfolio/fitch-advisory",
+            "label": "Fitch Advisory project"
+          },
+          {
+            "href": "/services/cybersecurity",
+            "label": "Security review"
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "href": "/insights/data-privacy-compliance",
+        "label": "Privacy as an engineering practice"
+      },
+      {
+        "href": "/tools/security-assessment",
+        "label": "Security self-assessment"
+      }
+    ]
   },
   {
     "slug": "ghana-payment-rails-comparison",
     "title": "Paystack, Hubtel, or Direct MoMo API: Choosing Payment Rails in Ghana",
     "excerpt": "An honest comparison for fintech and e-commerce teams — settlement, fees, integration effort, and when each rail makes sense for your volume.",
     "paragraphs": [
-      "Payment choice in Ghana is rarely about logos on a checkout page. It is about settlement timing, dispute handling, fee structures at your transaction size, and how much engineering capacity you have to maintain integrations when APIs change.",
-      "Aggregators like Paystack and Hubtel reduce time-to-market: hosted flows, reconciliation tooling, and card plus mobile money in one contract. Direct MoMo APIs from telcos can lower per-transaction cost at scale but demand stronger idempotency, callback verification, and ops playbooks for failed or duplicate charges.",
-      "Match the rail to your stage. Early-stage commerce teams usually win with an aggregator while product-market fit is still moving. High-volume operators with dedicated payments engineering should model total cost — fees, engineering hours, chargeback and dispute load — before switching. Whatever you choose, disclose fees before confirmation and log every payment attempt with a traceable reference."
+      "Choose the rail for settlement, disputes, and the engineers you actually have. Logos on the checkout do not settle the wallet.",
+      "OceanCyber store work uses Paystack or Mobile Money with webhook reconciliation on Professional, from GHS 14,500. The fee Paystack charges on a successful payment is theirs. It is not inside the build price. Confirm the live percentage on Paystack's pricing page when you open the account."
     ],
     "image": "/images/insights/oceancyber-accra-mobile-money-ghana-insights.webp",
     "category": "Fintech",
     "date": "May 28, 2026",
-    "readTime": "7 min read"
+    "readTime": "2 min read",
+    "sections": [
+      {
+        "heading": "Paystack",
+        "paragraphs": [
+          "Paystack is the default for a Ghana website that needs cards and mobile money in one contract. Coverage commonly includes MTN Mobile Money, Telecel Cash, and AirtelTigo Money. Confirm the live list when you apply, because wallet brands change.",
+          "You still have to verify the webhook, ignore duplicates, and give finance a list that matches the settlement. A redirect button does not do that. The payments guide walks a GHS 200 charge through the prompt and the server call."
+        ],
+        "links": [
+          {
+            "href": "/guides/accept-mobile-money-paystack",
+            "label": "Accept Mobile Money and Paystack"
+          }
+        ]
+      },
+      {
+        "heading": "Hubtel",
+        "paragraphs": [
+          "Hubtel is a Ghana collections platform many businesses already know from bills, USSD, and merchant payments. Choose it when your customers already pay you there, or when the product is collections rather than a new online catalog.",
+          "The same engineering duties apply: show the fee before confirm, record the result only after a verified callback, and reconcile to the statement. Do not switch rails to chase a logo if Hubtel is already how finance closes the day."
+        ]
+      },
+      {
+        "heading": "Direct Mobile Money APIs",
+        "paragraphs": [
+          "A direct telco integration can make sense when volume is high and you have people whose job is payments operations. You own idempotency, duplicate callbacks, simulator tests, and the dispute path when a wallet prompt succeeds and your order does not.",
+          "Early stores should not start here. Professional on Paystack gets you a reconciled checkout in the 6–10 week store window. Revisit a direct API when the aggregator's fee, at your real volume, is larger than the team required to run the telco integration."
+        ],
+        "links": [
+          {
+            "href": "/portfolio/thinq-shopping",
+            "label": "A store on Paystack and Mobile Money"
+          },
+          {
+            "href": "/compare/shopify-woocommerce-custom-ghana",
+            "label": "Where checkout sits in the platform choice"
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "href": "/insights/ghana-momo-economy",
+        "label": "Mobile Money as infrastructure"
+      },
+      {
+        "href": "/guides/ecommerce-website-timeline-ghana",
+        "label": "Store timeline"
+      }
+    ]
   },
   {
     "slug": "future-cybersecurity-africa",
     "title": "The Future of Cybersecurity in Africa",
     "excerpt": "Exploring the evolving cybersecurity landscape across African nations and the unique challenges and opportunities that lie ahead.",
     "paragraphs": [
-      "Africa's digital economies are expanding faster than many legacy security programmes can absorb. That gap shows up as phishing-driven fraud, ransomware targeting SMEs, and inconsistent visibility into cloud and mobile-first stacks.",
-      "National frameworks and sector regulators are maturing, but execution still varies by industry and company size. The teams that win treat security as a product discipline: measurable controls, incident playbooks, and executive-level accountability — not checkbox audits alone.",
-      "For leaders shipping software or operating critical services, the practical sequence is risk prioritisation, identity and endpoint hygiene, logging that supports investigation, and vendor oversight that matches how data actually flows.",
-      "Africa's threat landscape is also shaped by mobile-first users, agent networks, and third-party payment dependencies. Controls that work in a desktop-heavy enterprise do not always translate to field teams, shared devices, or lightly staffed operations centres.",
-      "The opportunity is to build security into delivery cadence: baseline assessments before major launches, quarterly control reviews, and executive reporting that ties risk reduction to revenue, trust, and continuity — not fear-based slide decks."
+      "Security programmes in many African countries are behind the speed of the businesses. That shows up as phishing, ransomware on small companies, and little visibility into phones and cloud tools.",
+      "Rules are getting clearer. What still varies is whether a company actually does the work: a short list of controls, a page that says who to call, and a manager who looks at it.",
+      "If you are launching a site, start with the risk that can stop the business, then logins, then a backup you have restored, then who else can see the data.",
+      "A control written for an office full of desktops often fails for a team on phones, shared devices, or a small staff.",
+      "Put the check before the launch, then look again each quarter. Tie it to whether the shop can still take money, not to a slide about fear."
     ],
     "image": "/images/insights/oceancyber-accra-cybersecurity-africa-insights-ghana.webp",
     "category": "Security",
     "date": "March 15, 2024",
-    "readTime": "7 min read"
+    "readTime": "3 min read",
+    "sections": [
+      {
+        "heading": "What to do on the next launch",
+        "paragraphs": [
+          "A continental essay does not change this week's site. Before a Ghana launch, turn on MFA, restore a backup, and name who is called if customer data is exposed. That is the SME baseline. The Data Protection notice has to match the forms you actually ship."
+        ],
+        "links": [
+          {
+            "href": "/insights/ghana-sme-cybersecurity-baseline",
+            "label": "SME baseline"
+          },
+          {
+            "href": "/guides/ghana-data-protection-act-for-websites",
+            "label": "Data Protection Act for websites"
+          }
+        ]
+      },
+      {
+        "heading": "Thirty days for a company site",
+        "paragraphs": [
+          "Identity, a backup you have restored, and a named incident contact cover the failures that hit company sites in Accra. Do this before a campaign, not after the first phishing mail to finance."
+        ],
+        "bullets": [
+          "Turn on MFA for email, the host, and the domain registrar.",
+          "Remove freelancer admin access after launch.",
+          "Restore one backup to a staging copy and record the date.",
+          "Write a one-page incident card: who to call, who tells customers, and who can change DNS.",
+          "If the site takes payment, verify the webhook before you call the order paid."
+        ],
+        "links": [
+          {
+            "href": "/tools/security-assessment",
+            "label": "Score the current posture"
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "href": "/security-journey",
+        "label": "Security journey"
+      },
+      {
+        "href": "/services/cybersecurity",
+        "label": "Cybersecurity services"
+      }
+    ]
   },
   {
     "slug": "digital-transformation-ghana",
     "title": "Digital Transformation: A Ghanaian Perspective",
     "excerpt": "How businesses in Ghana are embracing digital transformation to stay competitive in the global market.",
     "paragraphs": [
-      "Transformation in Ghana often begins with customer-facing channels — payments, ordering, and service delivery — while back-office systems catch up. That sequencing is sensible when revenue pressure is immediate, but it can create integration debt if core data models stay fragmented.",
-      "High-performing teams align roadmaps around a few measurable outcomes: shorter fulfilment cycles, fewer manual reconciliations, and clearer ownership between business and engineering.",
-      "Partnerships matter. Local regulatory context, telco and banking rails, and real-world connectivity constraints should inform architecture choices early — not after launch.",
-      "A common failure mode is treating digital transformation as a website refresh. Lasting change usually requires workflow redesign, staff training, and reporting that leadership can inspect weekly rather than once a year.",
-      "For Ghanaian operators, the strongest programmes sequence quick revenue wins with durable foundations: customer identity, order history, inventory truth, and finance reconciliation in systems that can grow without a full rebuild."
+      "In Ghana, the first digital change is usually the part the customer sees: payments, orders, and how you reply. The back office catches up later. That is sensible when you need revenue now. It becomes a mess if the orders, the stock, and the accounts never meet.",
+      "The teams that stay with it pick a few numbers: fewer days to deliver, fewer payments matched by hand, and a named person who owns the system.",
+      "Local payments, the network, and the rules should shape the build at the start.",
+      "A new website on its own is not a transformation. The work is the process, the staff who use it, and a report a manager can look at every week.",
+      "Start with the channel that takes the money. Then make sure finance can match it. A customer record, an order history, stock that is true, and a payment list will last longer than a new homepage."
     ],
     "image": "/images/insights/oceancyber-accra-digital-transformation-ghana-insights.webp",
     "category": "Technology",
     "date": "March 10, 2024",
-    "readTime": "7 min read"
+    "readTime": "3 min read",
+    "sections": [
+      {
+        "heading": "A sequence that survives the first year",
+        "paragraphs": [
+          "Start with the channel that takes money or bookings, then make finance able to reconcile it. A website refresh without that loop is a new brochure. Startup is GHS 6,000 for the brochure. Professional, from GHS 14,500, is where payments reconcile and the team can edit."
+        ],
+        "links": [
+          {
+            "href": "/guides/website-cost-in-ghana",
+            "label": "Website cost in Ghana"
+          },
+          {
+            "href": "/how-we-work",
+            "label": "How delivery is sequenced"
+          }
+        ]
+      },
+      {
+        "heading": "Three numbers leadership can check",
+        "paragraphs": [
+          "A transformation programme in Ghana is working when these three are visible every week. A new homepage that does not move them is still a brochure."
+        ],
+        "bullets": [
+          "Enquiries or orders that arrive in one place, not a personal WhatsApp chat.",
+          "Payments that finance can match to a settlement, including Mobile Money.",
+          "A named person on the team who can edit a page without calling the original freelancer."
+        ],
+        "links": [
+          {
+            "href": "/services/web-development",
+            "label": "Web development"
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "href": "/guides/accept-mobile-money-paystack",
+        "label": "Mobile Money checkout"
+      },
+      {
+        "href": "/pricing",
+        "label": "Packages"
+      }
+    ]
   },
   {
     "slug": "fintech-banking-unbanked",
     "title": "Fintech Revolution: Banking the Unbanked",
     "excerpt": "Examining how fintech solutions are bringing financial services to underserved communities across Africa.",
     "paragraphs": [
-      "Mobile money demonstrated that reliable rails plus simple UX can move inclusion faster than traditional branch expansion. The next wave layers credit, savings, and business tools on those same habits — often with stricter fraud expectations.",
-      "Building for underserved users means designing for intermittent connectivity, shared devices, and support channels that do not assume desktop literacy. Interfaces must build trust step by step.",
-      "Compliance and partnership governance are not overhead — they protect users and keep programmes durable when volumes spike or regulation shifts.",
-      "Product teams should design for recovery, not only happy-path transfers: dispute flows, statement references, agent support scripts, and clear status messaging when a transaction is pending or reversed.",
-      "The best inclusion products combine low-friction onboarding with proportionate controls. That balance is especially important when serving first-time digital finance users across Ghana and the wider continent."
+      "MoMo showed that a simple screen and a payment that works can reach people faster than new bank branches. The next products add credit, savings, and tools for the shop, and they have to watch fraud more closely.",
+      "Design for a phone that drops off the network, a handset more than one person uses, and help that does not assume the customer has a laptop.",
+      "The rules and the partners are part of the product. They keep it standing when the volume jumps.",
+      "Plan for the payment that fails. Show a status, a reference an agent can read, and a clear line when the money is pending or reversed.",
+      "The useful products are easy to start and still have a check that fits the risk. That matters most for someone using a wallet for the first time."
     ],
     "image": "/images/insights/oceancyber-accra-fintech-banking-unbanked-insights-ghana.webp",
     "category": "Finance",
     "date": "March 5, 2024",
-    "readTime": "6 min read"
+    "readTime": "3 min read",
+    "sections": [
+      {
+        "heading": "Design for the failed prompt",
+        "paragraphs": [
+          "A pending or reversed Mobile Money transfer is the normal case, not the exception. Show status, give a reference the agent can read, and do not fulfil an order until the callback is verified. That is the same rule a store uses, and it matters more when the customer is on a shared phone."
+        ],
+        "links": [
+          {
+            "href": "/guides/accept-mobile-money-paystack",
+            "label": "Webhook and failure paths"
+          },
+          {
+            "href": "/insights/ghana-momo-economy",
+            "label": "Mobile Money as infrastructure"
+          }
+        ]
+      },
+      {
+        "heading": "A shared phone still needs a clear payer",
+        "paragraphs": [
+          "First-time wallet users often share a handset. The screen should say whose account is paying, show the amount before the prompt, and offer a status an agent can repeat aloud. Fulfilment still waits for a verified callback. Professional website work that includes that reconciliation starts at GHS 14,500."
+        ],
+        "links": [
+          {
+            "href": "/services/ecommerce",
+            "label": "Ecommerce with local payments"
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "href": "/insights/ghana-payment-rails-comparison",
+        "label": "Choosing a payment rail"
+      }
+    ]
   },
   {
     "slug": "ecommerce-emerging-markets",
     "title": "E-commerce Growth in Emerging Markets",
     "excerpt": "Strategies for success in the rapidly growing e-commerce sector across emerging African economies.",
     "paragraphs": [
-      "Growth is rarely limited by storefront templates—it is constrained by logistics, returns, payments acceptance, and honest merchandising. Operators who map the full journey beat those who optimize ads alone.",
-      "Checkout friction remains the silent killer: carrier-defined delivery expectations, cash versus digital incentives, and clear duty or fee disclosure matter more than marginal conversion tweaks.",
-      "Inventory and supplier coordination systems become the bottleneck at scale. Investing early in operational visibility pays off when traffic spikes during campaigns."
+      "A shop does not stall because the theme is old. It stalls because delivery, returns, payments, and the product list are unclear.",
+      "The order dies when the customer does not know the delivery date, the fee, or how to pay.",
+      "Stock and suppliers become the limit once the ads work. See the stock before you buy the campaign."
     ],
     "image": "/images/insights/oceancyber-accra-ecommerce-emerging-markets-insights-ghana.webp",
     "category": "Business",
     "date": "February 28, 2024",
-    "readTime": "8 min read"
+    "readTime": "3 min read",
+    "sections": [
+      {
+        "heading": "What actually stops the order",
+        "paragraphs": [
+          "Across emerging markets the storefront theme is rarely the constraint. The order fails when delivery dates are vague, the return rule is hidden, or the customer cannot pay the way they already pay. Map that path before you buy ads."
+        ],
+        "bullets": [
+          "State the delivery window in days, and name who carries the parcel.",
+          "Write the return rule on the product page, including who pays the rider back.",
+          "Show Mobile Money and card before the customer reaches the last step.",
+          "Keep stock counts in one place so a campaign does not oversell."
+        ]
+      },
+      {
+        "heading": "Ghana, applied",
+        "paragraphs": [
+          "Delivery windows, returns language, and Mobile Money at checkout decide the order. A theme does not. If you sell in Ghana, budget the store as Professional from GHS 14,500 and read the timeline before you book a campaign."
+        ],
+        "links": [
+          {
+            "href": "/guides/ecommerce-website-timeline-ghana",
+            "label": "Ecommerce timeline in Ghana"
+          },
+          {
+            "href": "/services/ecommerce",
+            "label": "Ecommerce development"
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "href": "/insights/ecommerce-growth-ghana",
+        "label": "What Ghana merchants should fund"
+      }
+    ]
   },
   {
     "slug": "ai-ml-practical",
     "title": "AI and Machine Learning: Practical Applications",
     "excerpt": "Real-world applications of AI and ML technologies that are transforming industries today.",
     "paragraphs": [
-      "Useful ML deployments start with a decision pipeline: what input data exists, what decision it supports, and how errors show up to customers or staff. Without that clarity, models become demos.",
-      "Document extraction, support triage, forecasting, and ranking are common early wins because evaluation is straightforward and humans remain in the loop during rollout.",
-      "Responsible rollout includes monitoring drift, documenting limitations, and avoiding features that infer sensitive attributes without governance. Shipping fast still requires audit trails.",
-      "In African operating environments, data quality and connectivity constraints matter as much as model choice. Teams that invest in labelling standards, fallback workflows, and offline-safe UX avoid expensive false confidence.",
-      "The best AI roadmap ties each use case to a business owner, a success metric, and a rollback plan. That discipline keeps experimentation valuable instead of ornamental."
+      "Start with a decision a person already makes. What information goes in, what decision comes out, and what the customer sees when it is wrong. Without that, a model is a demo.",
+      "Reading invoices, sorting support mail, and ranking a catalog are sensible first jobs, because a person can still check the answer.",
+      "Write down what the system must not guess. Keep a record of the inputs. Shipping fast still needs that record.",
+      "In Ghana, the quality of the data and the network matter as much as the model. A fallback when the phone is offline saves you from a confident wrong answer.",
+      "Give each job an owner, a number that says it worked, and a way to turn it off."
     ],
     "image": "/images/insights/oceancyber-accra-ai-machine-learning-insights-ghana.webp",
     "category": "Innovation",
     "date": "February 20, 2024",
-    "readTime": "10 min read"
+    "readTime": "3 min read",
+    "sections": [
+      {
+        "heading": "A first use that can be audited",
+        "paragraphs": [
+          "Start where a person already makes a repetitive decision: sorting support mail, reading invoices, or ranking a catalog. Keep a human check, write down what the system must not infer, and store the inputs you would need to explain a bad answer. Do not put a model on a payment decision until the webhook path and the privacy notice are already true."
+        ],
+        "links": [
+          {
+            "href": "/guides/ghana-data-protection-act-for-websites",
+            "label": "What the privacy notice has to name"
+          }
+        ]
+      },
+      {
+        "heading": "Leave payments and personal data on the existing path",
+        "paragraphs": [
+          "A model can sort mail or read an invoice. It should not decide that a Paystack or Mobile Money order is paid, and it should not infer sensitive facts about a customer. The privacy notice has to name the tools that actually see the data. This is engineering guidance, not legal advice."
+        ],
+        "links": [
+          {
+            "href": "/insights/ghana-payment-rails-comparison",
+            "label": "How a paid order is confirmed"
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "href": "/insights/data-privacy-compliance",
+        "label": "Privacy as engineering"
+      }
+    ]
   },
   {
     "slug": "ghana-momo-economy",
     "title": "Navigating the GH¢3 Trillion Mobile Money Economy",
     "excerpt": "How Ghana's mobile money volume reshapes product design, fraud controls, and partnership strategy for fintech and commerce teams.",
     "paragraphs": [
-      "Ghana's mobile money rails now move volumes that rival many traditional banking segments. For product teams, that scale changes the baseline: users expect instant transfers, agent-network fallbacks, and reconciliation that survives end-of-day spikes.",
-      "Winning operators treat MoMo as infrastructure—not a checkout checkbox. That means clear fee disclosure, idempotent payment callbacks, dispute flows tied to telco statements, and fraud monitoring tuned to SIM-swap and social-engineering patterns common in high-velocity wallets.",
-      "Partnership governance matters as much as UX. API uptime, settlement timing, and KYC handoffs between aggregators and merchants should be contracted early. Teams that map money movement before marketing spend avoid painful retrofits when volume grows."
+      "MoMo in Ghana now moves enough money that people expect a transfer to be instant, and they expect the books to still match at the end of the day.",
+      "Treat MoMo as the payment system. Show the fee. Save the payment only after Paystack or the wallet confirms it. Give finance a list in the morning that matches the statement.",
+      "Agree uptime, settlement time, and who does the KYC before you spend on ads."
     ],
     "image": "/images/insights/oceancyber-accra-mobile-money-ghana-insights.webp",
     "category": "Finance",
     "date": "May 12, 2024",
-    "readTime": "6 min read"
+    "readTime": "3 min read",
+    "sections": [
+      {
+        "heading": "What to build because the volume is this large",
+        "paragraphs": [
+          "Treat Mobile Money as the payment system, not a badge under the card form. Fee disclosure, a verified callback, and a dispute note that matches the wallet statement are the product."
+        ],
+        "bullets": [
+          "Show the amount and the fee before the customer approves the prompt.",
+          "Store the order as paid only after the webhook checks out.",
+          "Test a timeout and an insufficient-funds prompt before launch.",
+          "Give finance a morning list that matches the provider settlement."
+        ],
+        "links": [
+          {
+            "href": "/guides/accept-mobile-money-paystack",
+            "label": "The checkout sequence we ship"
+          }
+        ]
+      },
+      {
+        "heading": "Cite the current volume, then build the failure path",
+        "paragraphs": [
+          "When a proposal needs a volume figure, use the Bank of Ghana mobile money summary for that period. The product rules do not wait on the headline. The checkout still has to show the fee, survive a timeout, and give finance a settlement list in the morning."
+        ]
+      }
+    ],
+    "related": [
+      {
+        "href": "/insights/ghana-payment-rails-comparison",
+        "label": "Paystack, Hubtel, or a direct API"
+      },
+      {
+        "href": "/portfolio/thinq-shopping",
+        "label": "ThinQ Shopping"
+      }
+    ]
   },
   {
     "slug": "ghana-cybersecurity-trends",
     "title": "Why Cyberattacks on Ghanaian Businesses Rose 50% in 2024",
     "excerpt": "The threat patterns driving higher incident rates for Ghanaian SMEs—and the controls that reduce exposure without slowing delivery.",
     "paragraphs": [
-      "Rising attack rates against Ghanaian businesses reflect a familiar mix: phishing aimed at finance and HR inboxes, exposed admin panels on hastily launched sites, and credential reuse across business email and cloud tools.",
-      "SMEs are hit hardest because security is often deferred until after launch. The practical fix is sequencing: MFA on email and admin accounts, patched dependencies on public-facing apps, backups that are tested — not just scheduled — and an incident contact list before campaigns go live.",
-      "Leaders should align security spend with revenue risk. Payment flows, customer data, and brand-facing properties deserve earlier hardening than internal experiments. Measurable baselines — patch age, MFA coverage, phishing simulation results — beat generic awareness slides.",
-      "Ghanaian teams also need vendor discipline: who hosts the site, who can publish DNS changes, and which freelancers still hold admin credentials after a launch weekend. Attackers routinely exploit forgotten access rather than novel exploits.",
-      "Treat the next 90 days as a programme, not a one-off cleanup. Score your current posture, close the highest-risk gaps first, and document what was changed so future audits and client due diligence are easier to pass."
+      "The attacks we see on Ghana businesses are familiar: phishing aimed at finance and HR, an admin page left open on a new site, and the same password on email and the host.",
+      "Small companies get hit because security waits until after launch. Turn on MFA, patch the public site, restore a backup once, and write down who to call before you run ads.",
+      "Spend first on the things that take money or hold customer data. Count MFA coverage and how old the patches are. A slide about awareness does less.",
+      "Also write down who hosts the site, who can change the domain, and which freelancer still has admin after launch. Forgotten logins are a common way in.",
+      "Treat the next 90 days as a list you finish, not a one-off cleanup."
     ],
     "image": "/images/insights/oceancyber-accra-cybersecurity-trends-ghana-insights.webp",
     "category": "Security",
     "date": "April 18, 2024",
-    "readTime": "7 min read"
+    "readTime": "3 min read",
+    "sections": [
+      {
+        "heading": "The sequence that matches the pattern",
+        "paragraphs": [
+          "Phishing of finance inboxes, open admin panels, and reused passwords are the incidents to close first. The SME baseline lists ten controls in that order, including a restore test and webhook verification if you take payments."
+        ],
+        "links": [
+          {
+            "href": "/insights/ghana-sme-cybersecurity-baseline",
+            "label": "Ten controls for Ghanaian SMEs"
+          }
+        ]
+      },
+      {
+        "heading": "Put a source next to any percentage",
+        "paragraphs": [
+          "A rise in attacks belongs in a client deck only with the report it came from. The work does not wait on that citation. Close finance phishing, open admin panels, and leftover freelancer logins first, then measure patch age and MFA coverage."
+        ]
+      }
+    ],
+    "related": [
+      {
+        "href": "/tools/security-assessment",
+        "label": "Security self-assessment"
+      },
+      {
+        "href": "/services/cybersecurity",
+        "label": "Cybersecurity services"
+      }
+    ]
   },
   {
     "slug": "ecommerce-growth-ghana",
     "title": "Preparing for Ghana's US$1 Billion E‑commerce Boom in 2025",
     "excerpt": "What merchants and marketplaces should invest in now—logistics, payments, and ops systems—to capture Ghana's accelerating online retail growth.",
     "paragraphs": [
-      "Ghana's e-commerce trajectory is less about storefront aesthetics and more about fulfillment truth: accurate delivery windows, returns policies customers trust, and payment options that match how people actually pay on mobile.",
-      "Operators preparing for the next growth wave should prioritise inventory visibility, carrier integrations with realistic SLA messaging, and checkout flows that surface fees before confirmation. Campaign traffic amplifies weak ops faster than it fixes them.",
-      "Platform choices should support scale without re-platforming every year—catalog tooling, promo engines, and reporting that finance and marketing both trust. Teams that build operational muscle early compound gains when demand spikes."
+      "A Ghana shop grows when the delivery date is true, the return rule is clear, and people can pay the way they already pay on the phone.",
+      "Before the next campaign, see the stock, state a delivery time you can keep, and show the fee before the customer confirms. Ads make a weak shop fail faster.",
+      "Pick tools your finance team and your marketing team can both read. Build that before the demand arrives."
     ],
     "image": "/images/insights/oceancyber-accra-ecommerce-growth-ghana-insights.webp",
     "category": "Business",
     "date": "March 22, 2024",
-    "readTime": "7 min read"
+    "readTime": "3 min read",
+    "sections": [
+      {
+        "heading": "What to fund before the next campaign",
+        "paragraphs": [
+          "A catalog, a checkout that reconciles, and a delivery promise you can keep will outrank a new theme. Professional stores start at GHS 14,500 and usually take 6–10 weeks. Grow hosting at GHS 129 a month is the plan we use when the shop is more than one small site."
+        ],
+        "links": [
+          {
+            "href": "/guides/ecommerce-website-timeline-ghana",
+            "label": "Eight-week store schedule"
+          },
+          {
+            "href": "/alternatives/shopify-ghana",
+            "label": "When to leave Shopify"
+          }
+        ]
+      },
+      {
+        "heading": "What the build quote leaves out",
+        "paragraphs": [
+          "The website price does not include ads, riders, or packaging. Professional, from GHS 14,500, covers the store, the checkout, and reconciliation. Carrier contracts and campaign spend stay with the merchant. Read the cost guide before you treat the build as the whole first-year budget."
+        ],
+        "links": [
+          {
+            "href": "/guides/website-cost-in-ghana",
+            "label": "What the build does not include"
+          }
+        ]
+      }
+    ],
+    "related": [
+      {
+        "href": "/services/ecommerce",
+        "label": "Ecommerce development"
+      },
+      {
+        "href": "/guides/website-cost-in-ghana",
+        "label": "What the build does not include"
+      }
+    ]
   },
   {
     "slug": "data-privacy-compliance",
     "title": "Data Privacy and Compliance in the Digital Age",
     "excerpt": "Understanding data protection regulations and implementing effective privacy measures for your business.",
     "paragraphs": [
-      "Privacy expectations have converged globally even where statutes differ: collect less, explain clearly, secure storage and transfers, and respond to individuals without friction.",
-      "Engineering teams implement privacy through data inventories, retention limits, access controls, and breach procedures — not through policy PDFs alone.",
-      "For cross-border services, vendor contracts and subprocessors must match where data is processed and who can access it. Early mapping prevents emergency redesigns.",
-      "In Ghana, the Data Protection Act and Data Protection Commission guidance mean product and engineering leaders should be involved early. Consent banners, privacy notices, and actual data flows must align — especially for SaaS, fintech, and customer portals.",
-      "A practical operating model is to maintain a living data register, assign owners for each system that stores personal data, and rehearse breach response before regulators or enterprise clients ask for evidence."
+      "Collect less. Say what you collect. Keep it safe. Answer the person when they ask.",
+      "The work is a list of the data, how long you keep it, who can open it, and what you do if it leaks. A PDF policy on its own does not do that.",
+      "If another company processes the data, write down who they are and where it goes.",
+      "In Ghana, the Data Protection Act and the Data Protection Commission are the local frame. The notice has to match the forms, especially on a shop, a fintech product, or a client login.",
+      "Keep the list current, name an owner for each system, and practise the breach call before a client asks for it. This is a build checklist, not legal advice."
     ],
     "image": "/images/insights/oceancyber-accra-data-privacy-compliance-insights-ghana.webp",
     "category": "Compliance",
     "date": "February 15, 2024",
-    "readTime": "7 min read"
+    "readTime": "3 min read",
+    "sections": [
+      {
+        "heading": "Ghana, specifically",
+        "paragraphs": [
+          "Act 843 and the Data Protection Commission are the local frame. Map the forms, name Paystack and the host in the notice, and confirm registration with the Commission or counsel. The website guide is the short version of that work."
+        ],
+        "links": [
+          {
+            "href": "/guides/ghana-data-protection-act-for-websites",
+            "label": "Data Protection Act for websites"
+          },
+          {
+            "href": "/insights/ghana-data-protection-act-2026",
+            "label": "2026 checklist for product teams"
+          }
+        ]
+      },
+      {
+        "heading": "A register the team can keep",
+        "paragraphs": [
+          "This is engineering guidance for a company site, not legal advice. Registration with the Data Protection Commission is a question for the Commission or for counsel."
+        ],
+        "bullets": [
+          "List each form and each vendor that receives the submission.",
+          "Record how long the record is kept, and who can export it.",
+          "Keep a breach card with a named owner.",
+          "Make the privacy notice match that list."
+        ]
+      }
+    ],
+    "related": [
+      {
+        "href": "/services/cybersecurity",
+        "label": "Cybersecurity"
+      },
+      {
+        "href": "/tools/security-assessment",
+        "label": "Security self-assessment"
+      }
+    ]
   }
 ]

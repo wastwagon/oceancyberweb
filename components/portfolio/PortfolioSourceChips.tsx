@@ -19,7 +19,7 @@ export function PortfolioSourceChips({
 }) {
   return (
     <div
-      className={cn("flex flex-wrap items-center gap-2", className)}
+      className={cn("sa-chip-scroller", className)}
       role="tablist"
       aria-label="Filter by project source"
     >
@@ -51,12 +51,7 @@ function FilterChip({
       role="tab"
       aria-selected={active}
       onClick={onClick}
-      className={cn(
-        "rounded-full border px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-colors",
-        active
-          ? "border-sa-primary bg-sa-primary/20 text-sa-primary"
-          : "border-sa-border bg-sa-surface text-sa-muted hover:border-sa-primary/50 hover:text-white",
-      )}
+      className="sa-tab"
     >
       {children}
     </button>

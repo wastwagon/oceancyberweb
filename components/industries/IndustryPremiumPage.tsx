@@ -91,18 +91,14 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
             >
               {content.heroDescription}
             </motion.p>
-            <motion.div
-              variants={heroMotion.item}
-              className="mx-auto mt-10 flex max-w-2xl flex-wrap justify-center gap-2 md:gap-3"
-            >
-              {content.pills.map((pill) => (
-                <span
-                  key={pill}
-                  className="rounded-full border border-sa-border bg-sa-surface px-4 py-2 text-xs font-medium text-sa-muted"
-                >
-                  {pill}
-                </span>
-              ))}
+            <motion.div variants={heroMotion.item} className="mt-8">
+              <div className="sa-chip-scroller justify-start sm:justify-center">
+                {content.pills.map((pill) => (
+                  <span key={pill} className="sa-chip">
+                    {pill}
+                  </span>
+                ))}
+              </div>
             </motion.div>
           </motion.div>
         </div>
@@ -186,7 +182,8 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
       <PremiumFinalCtaSection
         title={content.ctaTitle}
         description={content.ctaDescription}
-        showPricingCta
+        secondaryCtaLabel="Compare pricing"
+        secondaryCtaHref="/pricing"
       />
 
     </main>

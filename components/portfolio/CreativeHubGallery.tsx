@@ -112,7 +112,7 @@ export function CreativeHubGallery({ items }: CreativeHubGalleryProps) {
                   {activeItem.title}
                 </p>
                 <p className="mt-1 text-sm text-sa-muted/80">
-                  Studio concept — illustrative work by OceanCyber, not a live client deployment.
+                  Concept work — illustrative work by OceanCyber, not a live client deployment.
                 </p>
               </figcaption>
             </motion.figure>

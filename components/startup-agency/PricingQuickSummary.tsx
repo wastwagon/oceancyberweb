@@ -24,22 +24,25 @@ export function PricingQuickSummary() {
               <h3 className="font-heading text-lg font-bold text-white group-hover:text-sa-primary">
                 {plan.name}
               </h3>
-              <p className="mt-3 font-heading text-2xl font-black text-sa-primary">
+              <p className="mt-3 font-heading text-2xl font-bold text-sa-primary">
                 From GHS {plan.priceGhs.toLocaleString("en-GH")}
               </p>
               <p className="mt-3 flex-1 text-sm text-sa-muted">{plan.desc}</p>
-              <span className="mt-4 text-xs font-bold uppercase tracking-widest text-sa-primary">
-                Compare inclusions →
+              <span className="mt-4 text-sm font-medium text-sa-primary">
+                Compare inclusions
               </span>
             </Link>
           ))}
         </div>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <Link href="/pricing" className="sa-btn-primary min-h-[44px] px-6 text-xs">
+        <div className="mt-8 flex flex-col items-center gap-3">
+          <Link href="/pricing" className="sa-btn-primary w-full sm:w-auto">
             Full feature comparison
           </Link>
-          <Link href="/tools/project-cost" className="sa-btn-outline min-h-[44px] px-6 text-xs">
+          <Link
+            href="/tools/project-cost"
+            className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+          >
             Estimate your project
           </Link>
         </div>

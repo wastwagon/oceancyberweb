@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import Link from "next/link";
 import {
   Suspense,
@@ -14,16 +14,14 @@ import {
 import { useSearchParams } from "next/navigation";
 import { trackLeadConversion } from "@/lib/analytics/conversions";
 import { publicApiFetch } from "@/lib/public-api";
+import { formatWhatsAppLink } from "@/lib/utils";
 
-import { HeroSectionMotionLayers } from "@/components/layout/HeroSectionMotionLayers";
-import { WhatsAppButton } from "@/components/ghana-specific/WhatsAppButton";
 import { ContactPricingCard } from "@/components/startup-agency/ContactPricingCard";
 import { PricingPathsLinks } from "@/components/startup-agency/PricingPathsLinks";
 import {
   fadeFromLeft,
   fadeFromRight,
   revealViewport,
-  staggerDelay,
 } from "@/lib/scroll-reveal";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { AppAlert } from "@/components/ui/AppAlert";
@@ -33,21 +31,32 @@ import { SaInput, SaTextarea } from "@/components/ui/SaInput";
 
 const contactItems = [
   {
-    title: "Address",
-    content: "232 Nii Kwashiefio Avenue, Accra, Ghana",
-    icon: MapPin,
-  },
-  {
-    title: "Phone",
+    title: "Call",
     content: "+233 242 565 695",
-    link: "tel:+233242565695",
+    href: "tel:+233242565695",
+    external: false,
     icon: Phone,
   },
   {
     title: "Email",
     content: "info@oceancyber.net",
-    link: "mailto:info@oceancyber.net",
+    href: "mailto:info@oceancyber.net",
+    external: false,
     icon: Mail,
+  },
+  {
+    title: "WhatsApp",
+    content: "Message us on WhatsApp",
+    href: formatWhatsAppLink("+233242565695"),
+    external: true,
+    icon: MessageCircle,
+  },
+  {
+    title: "Visit",
+    content: "232 Nii Kwashiefio Avenue, Accra, Ghana",
+    href: "https://maps.google.com/?q=232+Nii+Kwashiefio+Avenue,+Accra",
+    external: true,
+    icon: MapPin,
   },
 ] as const;
 
@@ -191,82 +200,62 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
             variants={contactHeaderItem}
             className="sa-subtitle mx-auto"
           >
-            Prefer a short message or call first? Share goals and timeline here —
-            or use guided intake if you already know scope and budget.
+            Send your goals and timeline. If you already know the scope and budget, use the guided intake instead.
           </motion.p>
-          <motion.div variants={contactHeaderItem} className="mt-6 flex flex-col items-center gap-4">
-            <Link href="/get-started" className="sa-btn-primary min-h-[44px] px-6 text-xs">
-              Get started
-            </Link>
+          <motion.div variants={contactHeaderItem} className="mt-6">
             <PricingPathsLinks variant="compact" />
           </motion.div>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-14">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-14">
           <motion.div
             {...fadeFromLeft}
             transition={{ ...fadeFromLeft.transition, delay: 0.1 }}
-            className="space-y-10"
+            className="order-2 space-y-8 lg:order-1"
           >
             <div>
-              <h3 className="font-heading mb-8 border-l-4 border-sa-primary pl-4 text-2xl font-bold text-white md:text-3xl">
-                Contact Information
-              </h3>
-              <div className="space-y-6">
-                {contactItems.map((item, index) => {
+              <h2 className="mb-4 font-heading text-xl font-bold text-white">
+                How to reach us
+              </h2>
+              <ul className="sa-ios-group divide-y divide-white/10">
+                {contactItems.map((item) => {
                   const Icon = item.icon;
                   return (
-                    <motion.div
-                      key={item.title}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={revealViewport}
-                      transition={staggerDelay(index, 0.08)}
-                      className="sa-card sa-pressable group flex items-start gap-5 p-4 transition-all duration-300"
-                    >
-                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-sa-border bg-black/40 transition-all group-hover:border-sa-primary group-hover:bg-sa-primary/10">
-                        <Icon
-                          className="h-5 w-5 text-sa-primary transition-colors group-hover:text-sa-primary"
-                          aria-hidden
-                        />
-                      </div>
-                      <div className="min-w-0 py-1">
-                        <div className="font-heading mb-1 text-sm font-semibold uppercase tracking-widest text-sa-muted/50">
-                          {item.title}
-                        </div>
-                        {"link" in item && item.link ? (
-                          <a
-                            href={item.link}
-                            className="font-heading text-lg text-white transition-colors hover:text-sa-primary"
-                          >
-                            {item.content}
-                          </a>
-                        ) : (
-                          <div className="font-heading text-lg text-white">
-                            {item.content}
-                          </div>
-                        )}
-                      </div>
-                    </motion.div>
+                    <li key={item.title}>
+                      <a
+                        href={item.href}
+                        {...(item.external
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
+                        className="sa-ios-row sa-pressable"
+                      >
+                        <span className="flex min-w-0 items-center gap-3">
+                          <Icon className="h-5 w-5 shrink-0 text-sa-primary" aria-hidden />
+                          <span className="min-w-0">
+                            <span className="block text-xs text-white/55">{item.title}</span>
+                            <span className="block truncate text-[15px] text-white">{item.content}</span>
+                          </span>
+                        </span>
+                      </a>
+                    </li>
                   );
                 })}
-              </div>
+              </ul>
             </div>
 
-            <WhatsAppButton variant="default" size="lg" className="h-14 w-full" />
             <ContactPricingCard />
             <Link
               href="/services/website-to-mobile-app"
-              className="sa-pressable flex min-h-[52px] w-full items-center justify-center rounded-2xl border border-sa-border bg-sa-surface px-4 text-[15px] font-semibold text-white shadow-sm transition active:scale-[0.99] md:rounded-xl md:text-sm"
+              className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
             >
-              Convert your existing website into a mobile app
+              Turn an existing website into a mobile app
             </Link>
           </motion.div>
 
           <motion.div
             {...fadeFromRight}
             transition={{ ...fadeFromRight.transition, delay: 0.15 }}
-            className="sa-card p-6 md:p-8 lg:mt-8"
+            className="sa-card order-1 p-5 md:p-8 lg:order-2"
           >
             <form className="space-y-sa-2xl" onSubmit={handleSubmit} noValidate>
               {status === "success" ? (
@@ -312,6 +301,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
                   value={phone}
                   onChange={(ev) => setPhone(ev.target.value)}
                   placeholder="+233 XX XXX XXXX"
+                  inputMode="tel"
                 />
               </SaField>
               <SaField id="contact-message" label="Message" required>
@@ -331,7 +321,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
                 disabled={status === "loading"}
                 className="w-full"
               >
-                {status === "loading" ? "Sending…" : "Send Message"}
+                {status === "loading" ? "Sending…" : "Send message"}
               </SaButton>
             </form>
           </motion.div>

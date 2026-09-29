@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
@@ -6,31 +7,37 @@ import { StartupAgencyNavbar } from "@/components/startup-agency/StartupAgencyNa
 import { StartupAgencyFooter } from "@/components/startup-agency/StartupAgencyFooter";
 import { ConditionalChrome } from "@/components/layout/ConditionalChrome";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
-import { ChatBot } from "@/components/ui/ChatBot";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
 import { LocalBusinessJsonLd } from "@/components/seo/LocalBusinessJsonLd";
 import { WebSiteJsonLd } from "@/components/seo/WebSiteJsonLd";
 import { WebVitals } from "@/components/analytics/WebVitals";
-import { CookieConsent } from "@/components/analytics/CookieConsent";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { GoogleAnalyticsRouteTracker } from "@/components/analytics/GoogleAnalyticsRouteTracker";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { CreativeEnhancements } from "@/components/shared/CreativeEnhancements";
 
+const ChatBot = dynamic(
+  () => import("@/components/ui/ChatBot").then((mod) => mod.ChatBot),
+  { ssr: false },
+);
+
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-heading",
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["500", "600", "700"],
+  display: "swap",
+  adjustFontFallback: true,
+  preload: true,
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "OceanCyber | Engineering Digital Products that Scale",
+    default: "OceanCyber | Web, mobile, and cybersecurity in Ghana",
     template: "%s | OceanCyber",
   },
   description:
-    "We build and secure high-performance digital products for teams across Ghana. From GH¢3T MoMo ecosystems to zero-trust security — we ship solid code with zero fluff.",
+    "OceanCyber designs and builds websites, mobile apps, and secure digital products for businesses in Accra and across Africa.",
   keywords: [
     "web development Ghana",
     "mobile app development Accra",
@@ -50,9 +57,9 @@ export const metadata: Metadata = {
     locale: "en_GH",
     url: "https://oceancyber.net",
     siteName: "OceanCyber",
-    title: "OceanCyber | Engineering Digital Products that Scale",
+    title: "OceanCyber | Web, mobile, and cybersecurity in Ghana",
     description:
-      "No-fluff engineering for Ghanaian businesses. We build secure, scalable web and mobile platforms that actually work.",
+      "Websites, mobile apps, and cybersecurity for teams in Ghana. Clear scope, secure delivery, and local support from Accra.",
     images: [
       {
         url: "/opengraph-image",
@@ -64,9 +71,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "OceanCyber | Engineering Digital Products that Scale",
+    title: "OceanCyber | Web, mobile, and cybersecurity in Ghana",
     description:
-      "No-fluff engineering for Ghanaian businesses. We build secure, scalable web and mobile platforms that actually work.",
+      "Websites, mobile apps, and cybersecurity for teams in Ghana. Clear scope, secure delivery, and local support from Accra.",
     images: ["/opengraph-image"],
   },
   robots: {
@@ -98,8 +105,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
-      <body className="sa-shell min-h-screen font-sans antialiased">
+    <html lang="en" className={`${inter.variable} ${outfit.variable}`} style={{ backgroundColor: "#000000" }}>
+      <body className="sa-shell min-h-screen font-sans antialiased" style={{ backgroundColor: "#000000", color: "#e9e9e9" }}>
         <GoogleAnalytics />
         <AppProviders>
           <Suspense fallback={null}>
@@ -118,7 +125,6 @@ export default function RootLayout({
           >
             {children}
           </ConditionalChrome>
-          <CookieConsent />
         </AppProviders>
       </body>
     </html>

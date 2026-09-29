@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
-import { Globe2, ShieldCheck, ArrowRight } from "lucide-react";
+import { Globe2 } from "lucide-react";
 import { DomainSearchPanel, RegistrarValueProps } from "@/components/domains/DomainSearchPanel";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
 import {
@@ -86,7 +86,7 @@ export default function DomainsPage() {
             </div>
             <Link
               href="/hosting"
-              className="sa-btn-primary shrink-0"
+              className="sa-btn-primary w-full shrink-0 md:w-auto"
             >
               View hosting packages
             </Link>
@@ -104,19 +104,15 @@ export default function DomainsPage() {
               Registration, SSL issuance, and renewals are handled with professional
               oversight. Tell us your target domains and we wire the full flow.
             </p>
-            <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <Link
-                href="/contact"
-                className="sa-btn-primary"
-              >
+            <div className="mt-10 flex flex-col items-center gap-3">
+              <Link href="/contact" className="sa-btn-primary w-full sm:w-auto">
                 Talk to our team
               </Link>
               <Link
                 href="/services/website-to-mobile-app"
-                className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-sa-border px-8 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition hover:border-sa-primary hover:text-white"
+                className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
               >
-                Convert site to app
-                <ArrowRight className="ml-2 h-3 w-3" />
+                Turn a website into an app
               </Link>
             </div>
           </motion.div>

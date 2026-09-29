@@ -8,9 +8,9 @@ export const revalidate = 60;
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "Insights",
+    title: "Insights on software and security",
     description:
-      "Thought leadership on security, platforms, and digital transformation — Ghana and Africa.",
+      "Notes from OceanCyber on cybersecurity, product delivery, and building software for teams in Ghana.",
     alternates: {
       types: {
         "application/rss+xml": "/insights/feed.xml",

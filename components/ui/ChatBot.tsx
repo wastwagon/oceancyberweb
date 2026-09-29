@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Bot, Send, MessageSquare, X, Minimize2, Maximize2 } from "lucide-react";
 import { getApiBaseUrl } from "@/lib/api-config";
 import { floatingChrome } from "@/components/ui/floating-chrome";
@@ -15,6 +16,7 @@ interface Message {
 }
 
 export function ChatBot() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
@@ -113,6 +115,8 @@ export function ChatBot() {
   const formatTime = (date: Date) =>
     date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
+  if (pathname === "/contact") return null;
+
   if (!isOpen) {
     return (
       <button
@@ -167,7 +171,7 @@ export function ChatBot() {
             <h3 className="truncate text-base font-semibold text-white md:font-heading md:text-sm md:font-bold md:uppercase md:tracking-widest">
               Assistant
             </h3>
-            {!isMinimized && <p className="text-xs text-sa-primary md:text-[10px] md:font-bold md:uppercase md:tracking-widest">Online</p>}
+            {!isMinimized && <p className="text-sm text-sa-primary">Online</p>}
           </div>
         </div>
         <div className="flex items-center gap-1">
@@ -220,7 +224,7 @@ export function ChatBot() {
                   >
                     {message.text}
                   </div>
-                  <span className="mt-1.5 px-1 text-[9px] font-bold uppercase tracking-widest text-sa-muted/40">
+                  <span className="mt-1.5 px-1 text-xs text-sa-muted/60">
                     {formatTime(message.timestamp)}
                   </span>
                 </div>
@@ -265,7 +269,7 @@ export function ChatBot() {
                 <Send className="h-5 w-5" />
               </button>
             </form>
-            <p className="mt-3 text-center text-[10px] font-bold uppercase tracking-widest text-sa-muted/40">
+            <p className="mt-3 text-center text-sm text-sa-muted">
               Need help? <a href="mailto:info@oceancyber.net" className="text-sa-primary hover:underline">info@oceancyber.net</a>
             </p>
           </footer>

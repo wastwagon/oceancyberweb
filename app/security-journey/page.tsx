@@ -2,7 +2,6 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import {
-  ArrowRight,
   CheckCircle2,
   Shield,
 } from "lucide-react";
@@ -180,7 +179,7 @@ export default function SecurityJourneyPage() {
             {journeySteps.map((step, i) => (
               <span
                 key={step.phase}
-                className="inline-flex items-center gap-2 rounded-full border border-sa-border bg-black/40 px-3 py-1.5 text-[11px] font-medium text-sa-muted shadow-sm md:text-xs"
+                className="inline-flex min-h-8 items-center rounded-full border border-sa-border bg-black/40 px-3 text-sm text-sa-muted"
               >
                 <span className="font-mono text-sa-primary">
                   {String(i + 1).padStart(2, "0")}
@@ -233,7 +232,7 @@ export default function SecurityJourneyPage() {
                         <p className="font-mono text-4xl font-bold leading-none text-white/10 md:text-5xl">
                           {String(index + 1).padStart(2, "0")}
                         </p>
-                        <p className="mt-2 font-heading text-[10px] font-semibold uppercase tracking-[0.2em] text-sa-primary">
+                        <p className="mt-2 text-sm font-semibold text-sa-primary">
                           Phase {index + 1}
                         </p>
                         <p className="mt-1 text-sm font-semibold text-white">
@@ -300,9 +299,9 @@ export default function SecurityJourneyPage() {
                 <div className="font-heading text-3xl font-bold tracking-tight text-white md:text-4xl">
                   {s.value}
                 </div>
-                <div className="mt-2 font-heading text-[10px] font-semibold uppercase tracking-widest text-sa-primary">
+                <p className="mt-2 text-sm font-medium text-sa-primary">
                   {s.label}
-                </div>
+                </p>
                 <p className="mt-3 text-sm leading-relaxed text-sa-muted/80">
                   {s.detail}
                 </p>
@@ -327,12 +326,14 @@ export default function SecurityJourneyPage() {
               discovery session and we&apos;ll map priorities and a practical first
               90 days.
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link href="/contact" className="sa-btn-primary">
+            <div className="mt-8 flex flex-col items-center gap-3">
+              <Link href="/contact" className="sa-btn-primary w-full sm:w-auto">
                 Book a discovery session
-                <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
               </Link>
-              <Link href="/tools/security-assessment" className="sa-btn-outline !min-h-[44px]">
+              <Link
+                href="/tools/security-assessment"
+                className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
+              >
                 Take the self-assessment
               </Link>
             </div>

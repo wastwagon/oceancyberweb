@@ -77,7 +77,7 @@ function IndustryGridCard({
         <p className="mt-3 text-sm leading-relaxed text-sa-muted/80">
           {industry.description}
         </p>
-        <p className="mt-6 text-[10px] font-semibold uppercase tracking-widest text-sa-muted/50">
+        <p className="mt-6 text-sm font-medium text-sa-muted">
           Typical scope
         </p>
         <ul className="mt-2 space-y-2">
@@ -184,7 +184,7 @@ export default function IndustriesPage() {
             <div className="mt-8">
               <Link
                 href="/contact"
-                className="sa-btn-primary"
+                className="sa-btn-primary w-full sm:w-auto"
               >
                 Talk to our team
               </Link>

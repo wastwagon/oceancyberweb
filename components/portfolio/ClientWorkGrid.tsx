@@ -30,16 +30,16 @@ export function ClientWorkGrid({ items, className = "" }: ClientWorkGridProps) {
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-sa-surface via-transparent to-transparent" />
-              <span className="absolute left-4 top-4 rounded-full border border-sa-primary/40 bg-black/50 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-sa-primary backdrop-blur-sm">
+              <span className="sa-chip absolute left-4 top-4">
                 Case study
               </span>
-              <span className="absolute right-4 top-4 rounded-full border border-white/15 bg-black/50 px-2.5 py-1 text-[9px] font-medium text-white/70 backdrop-blur-sm">
+              <span className="sa-chip absolute right-4 top-4">
                 Live client
               </span>
             </div>
           </Link>
           <div className="flex flex-1 flex-col p-5 md:p-6">
-            <p className="font-heading text-[11px] font-semibold uppercase tracking-wide text-sa-primary">
+            <p className="text-sm font-medium text-sa-primary">
               {item.category}
             </p>
             <Link href={`/portfolio/${item.slug}`}>
@@ -53,7 +53,7 @@ export function ClientWorkGrid({ items, className = "" }: ClientWorkGridProps) {
             <div className="mt-5 flex flex-wrap items-center gap-4 border-t border-sa-border pt-4">
               <Link
                 href={`/portfolio/${item.slug}`}
-                className="inline-flex items-center gap-2 text-sm font-semibold text-sa-primary transition-colors hover:text-white"
+                className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-sa-primary"
               >
                 View project
                 <ArrowRight className="h-4 w-4" aria-hidden />
@@ -62,7 +62,7 @@ export function ClientWorkGrid({ items, className = "" }: ClientWorkGridProps) {
                 href={item.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm font-medium text-sa-muted/70 transition-colors hover:text-white"
+                className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-sa-muted"
               >
                 Visit live site
                 <ExternalLink className="h-3.5 w-3.5" aria-hidden />

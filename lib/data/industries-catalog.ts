@@ -48,7 +48,7 @@ export const industryCatalog: IndustryCatalogEntry[] = [
     title: "Education",
     shortTitle: "Education",
     description:
-      "E-learning platforms and tools that scale from institutions to national programs.",
+      "E-learning platforms and tools that scale from institutions to national programmes.",
     navDescription: "E-learning platforms that improve delivery and outcomes.",
     image: "/images/industries/education.png",
     services: [

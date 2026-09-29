@@ -3,7 +3,9 @@ import path from "path";
 import {
   insightPosts as defaultInsightPosts,
   insightCategories,
+  type InsightLink,
   type InsightPost,
+  type InsightSection,
 } from "@/lib/insights/content";
 
 const INSIGHTS_JSON = path.join(process.cwd(), "public", "data", "insights.json");
@@ -18,6 +20,49 @@ function slugify(value: string): string {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+}
+
+function sanitizeLinks(raw: unknown): InsightLink[] | undefined {
+  if (!Array.isArray(raw)) return undefined;
+  const links = raw.flatMap((item) => {
+    if (!item || typeof item !== "object") return [];
+    const row = item as Record<string, unknown>;
+    const href = typeof row.href === "string" ? row.href.trim() : "";
+    const label = typeof row.label === "string" ? row.label.trim() : "";
+    if (!href.startsWith("/") || !label) return [];
+    return [{ href, label }];
+  });
+  return links.length > 0 ? links : undefined;
+}
+
+function sanitizeSections(raw: unknown): InsightSection[] | undefined {
+  if (!Array.isArray(raw)) return undefined;
+  const sections = raw.flatMap((item) => {
+    if (!item || typeof item !== "object") return [];
+    const row = item as Record<string, unknown>;
+    const heading = typeof row.heading === "string" ? row.heading.trim() : "";
+    const paragraphs = Array.isArray(row.paragraphs)
+      ? row.paragraphs
+          .filter((p): p is string => typeof p === "string" && p.trim().length > 0)
+          .map((p) => p.trim())
+      : [];
+    if (!heading || paragraphs.length === 0) return [];
+    const bullets = Array.isArray(row.bullets)
+      ? row.bullets
+          .filter((b): b is string => typeof b === "string" && b.trim().length > 0)
+          .map((b) => b.trim())
+      : undefined;
+    const links = sanitizeLinks(row.links);
+    return [
+      {
+        heading,
+        paragraphs,
+        ...(bullets && bullets.length > 0 ? { bullets } : {}),
+        ...(links ? { links } : {}),
+      },
+    ];
+  });
+  return sections.length > 0 ? sections : undefined;
 }
 
 function sanitizePost(raw: unknown, index: number): InsightPost | null {
@@ -43,11 +88,16 @@ function sanitizePost(raw: unknown, index: number): InsightPost | null {
         .map((p) => p.trim())
     : [];
 
+  const sections = sanitizeSections(row.sections);
+  const related = sanitizeLinks(row.related);
+
   return {
     slug,
     title,
     excerpt: typeof row.excerpt === "string" ? row.excerpt.trim() : "",
     paragraphs: paragraphs.length > 0 ? paragraphs : [""],
+    ...(sections ? { sections } : {}),
+    ...(related ? { related } : {}),
     image: typeof row.image === "string" && row.image.trim() ? row.image.trim() : "/images/EGP Ghana.webp",
     category,
     date: typeof row.date === "string" ? row.date.trim() : "January 1, 2024",

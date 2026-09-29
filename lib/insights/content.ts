@@ -1,11 +1,26 @@
 import { insightCoverPath } from "@/lib/insights/covers";
 
+export type InsightLink = {
+  href: string;
+  label: string;
+};
+
+export type InsightSection = {
+  heading: string;
+  paragraphs: string[];
+  bullets?: string[];
+  links?: InsightLink[];
+};
+
 export type InsightPost = {
   slug: string;
   title: string;
   excerpt: string;
   /** Editorial body shown on the article page. */
   paragraphs: string[];
+  /** Optional headed sections. When present, they render after the opening paragraphs. */
+  sections?: InsightSection[];
+  related?: InsightLink[];
   image: string;
   category: string;
   date: string;

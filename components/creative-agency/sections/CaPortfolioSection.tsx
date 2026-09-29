@@ -98,7 +98,7 @@ export function CaPortfolioSection() {
                   aria-selected={active}
                   disabled={disabled}
                   onClick={() => setFilter(f)}
-                  className={`sa-pressable inline-flex h-10 items-center gap-2 rounded-full px-5 text-xs font-bold uppercase tracking-wider transition ${
+                  className={`sa-pressable inline-flex min-h-11 items-center gap-2 rounded-full px-5 text-sm font-medium transition ${
                     active
                       ? "bg-[var(--ae-primary)] text-black"
                       : "border border-[var(--ae-ink)]/20 text-[var(--ae-ink)] hover:border-[var(--ae-primary)] hover:text-[var(--ae-primary)]"
@@ -106,7 +106,7 @@ export function CaPortfolioSection() {
                 >
                   {f}
                   <span
-                    className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
+                    className={`rounded-full px-1.5 py-0.5 text-xs font-semibold ${
                       active ? "bg-black/15 text-black" : "bg-[var(--ae-ink)]/8 text-[var(--ae-ink-subtle)]"
                     }`}
                   >
@@ -121,7 +121,7 @@ export function CaPortfolioSection() {
         <div className="mt-12 min-h-[220px]">
           {filtered.length === 0 ? (
             <div className="rounded-[10px] border border-[var(--ae-line-light)] bg-white/50 px-6 py-16 text-center">
-              <p className="font-heading text-lg font-bold uppercase tracking-wide text-[var(--ae-ink)]">
+              <p className="font-heading text-lg font-bold text-[var(--ae-ink)]">
                 No projects in this filter
               </p>
               <p className="ae-body-light mt-2 text-sm">
@@ -130,7 +130,7 @@ export function CaPortfolioSection() {
               <button
                 type="button"
                 onClick={() => setFilter("All")}
-                className="sa-pressable mt-6 inline-flex min-h-11 items-center rounded-full bg-[var(--ae-primary)] px-6 text-xs font-bold uppercase tracking-wider text-black"
+                className="sa-pressable mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-2xl bg-[var(--ae-primary)] px-6 text-[15px] font-semibold text-black sm:w-auto sm:rounded-full"
               >
                 Reset filters
               </button>
@@ -161,10 +161,10 @@ export function CaPortfolioSection() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
                       <div className="absolute inset-x-0 bottom-0 p-5 md:p-7">
-                        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--ae-primary)]">
+                        <p className="text-sm font-medium text-[var(--ae-primary)]">
                           {item.category}
                         </p>
-                        <h3 className="mt-2 font-heading text-lg font-extrabold uppercase leading-tight text-white md:text-xl">
+                        <h3 className="mt-2 font-heading text-lg font-bold leading-tight text-white md:text-xl">
                           {item.title}
                         </h3>
                       </div>
@@ -179,7 +179,7 @@ export function CaPortfolioSection() {
         <div className="mt-12 text-center">
           <Link
             href="/portfolio?tab=creative"
-            className="sa-pressable inline-flex min-h-12 items-center rounded-full border border-[var(--ae-ink)]/25 px-8 text-sm font-bold uppercase tracking-wider text-[var(--ae-ink)] hover:border-[var(--ae-primary)] hover:text-[var(--ae-primary)]"
+            className="sa-pressable inline-flex min-h-12 w-full items-center justify-center rounded-2xl border border-[var(--ae-ink)]/25 px-8 text-[15px] font-semibold text-[var(--ae-ink)] hover:border-[var(--ae-primary)] hover:text-[var(--ae-primary)] sm:w-auto sm:rounded-full"
           >
             View portfolio
           </Link>

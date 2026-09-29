@@ -4,7 +4,7 @@ import { withCanonical } from "@/lib/seo/canonical";
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "Formal proposal request",
+    title: "Request a proposal",
     description:
       "Request a structured project proposal with scope, timeline, and budget alignment in one clear form.",
   },

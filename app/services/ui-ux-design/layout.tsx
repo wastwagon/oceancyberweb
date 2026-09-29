@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { ServiceLayoutWithJsonLd } from "@/components/seo/ServiceLayoutWithJsonLd";
 
 export const metadata: Metadata = {
-  title: "UI/UX Design & Brand Identity",
+  title: "UI and brand design in Ghana",
   description:
-    "Human-centered UI/UX design, brand identity, and Figma prototypes from OceanCyber — Accra's product design and engineering studio.",
+    "Human-centered UI/UX design, brand identity, and Figma prototypes from OceanCyber — an Accra website company.",
   alternates: { canonical: "/services/ui-ux-design" },
 };
 

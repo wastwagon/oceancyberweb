@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Industries",
+  title: {
+    default: "Industries we build for",
+    template: "%s | OceanCyber",
+  },
   description:
-    "How OceanCyber serves financial services, healthcare, retail, education, and more.",
+    "How OceanCyber builds software for financial services, healthcare, retail, education, and other industries in Ghana.",
   alternates: { canonical: "/industries" },
 };
 

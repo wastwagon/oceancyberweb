@@ -100,16 +100,10 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
             >
               {content.heroDescription}
             </motion.p>
-            <motion.div
-              variants={heroMotion.item}
-              className="mx-auto mt-10 flex max-w-2xl flex-col items-center justify-center gap-4 sm:flex-row"
-            >
-              <div className="flex flex-wrap justify-center gap-3">
+            <motion.div variants={heroMotion.item} className="mt-8">
+              <div className="sa-chip-scroller justify-start sm:justify-center">
                 {content.pills.map((pill) => (
-                  <span
-                    key={pill}
-                    className="rounded-full border border-sa-border bg-sa-surface px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-sa-muted/80"
-                  >
+                  <span key={pill} className="sa-chip">
                     {pill}
                   </span>
                 ))}
@@ -152,7 +146,7 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={staggerDelay(index, 0.06)}
-                className="sa-card sa-pressable p-8 md:p-10"
+                className="sa-card sa-pressable p-5 md:p-8"
               >
                 <h3 className="sa-card-title">
                   {item.title}
@@ -214,7 +208,7 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={staggerDelay(index, 0.06)}
-                className="sa-card sa-pressable p-8 md:p-10"
+                className="sa-card sa-pressable p-5 md:p-8"
               >
                 <h3 className="sa-card-title">
                   {item.title}

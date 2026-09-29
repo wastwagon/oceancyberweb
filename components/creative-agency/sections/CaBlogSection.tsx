@@ -16,8 +16,7 @@ export function CaBlogSection() {
         <div className="mt-10 space-y-5">
           {blogTeasers.map((post, i) => {
             const day = String(13 - i).padStart(2, "0");
-            const month = post.date.split(" ")[0]?.slice(0, 4).toUpperCase() ?? "JULY";
-            const year = post.date.split(" ")[1] ?? "2026";
+            const [month = "July", year = "2026"] = post.date.split(" ");
 
             return (
               <SaReveal key={post.title} delay={i * 0.06}>
@@ -30,7 +29,7 @@ export function CaBlogSection() {
                       <span className="font-heading text-3xl font-extrabold leading-none text-[var(--ae-ink)] md:text-4xl">
                         {day}
                       </span>
-                      <span className="pt-1 text-xs font-bold uppercase leading-tight tracking-widest text-[var(--ae-ink-subtle)]">
+                      <span className="pt-1 text-sm font-medium leading-tight text-[var(--ae-ink-subtle)]">
                         {month}
                         <br />
                         {year}
@@ -38,14 +37,14 @@ export function CaBlogSection() {
                     </div>
                     <div className="mt-8">
                       <div className="flex flex-wrap gap-2">
-                        <span className="rounded-full bg-[var(--ae-ink)]/8 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-[var(--ae-ink)]">
+                        <span className="rounded-full bg-[var(--ae-ink)]/8 px-3 py-1 text-sm font-medium text-[var(--ae-ink)]">
                           by {post.author}
                         </span>
-                        <span className="rounded-full bg-[var(--ae-primary)] px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-black">
+                        <span className="rounded-full bg-[var(--ae-primary)] px-3 py-1 text-sm font-medium text-black">
                           {post.category}
                         </span>
                       </div>
-                      <h3 className="mt-5 font-heading text-xl font-bold uppercase leading-snug tracking-tight text-[var(--ae-ink)] transition group-hover:text-[var(--ae-primary)] md:text-2xl lg:text-[28px] lg:leading-9">
+                      <h3 className="mt-5 font-heading text-xl font-bold leading-snug tracking-tight text-[var(--ae-ink)] transition group-hover:text-[var(--ae-primary)] md:text-2xl lg:text-[28px] lg:leading-9">
                         {post.title}
                       </h3>
                     </div>
@@ -63,7 +62,7 @@ export function CaBlogSection() {
 
                   <div className="flex flex-col justify-between p-6 md:p-8 lg:p-10">
                     <p className="ae-body-light text-sm leading-relaxed md:text-base">
-                      Practical notes from the OceanCyber studio — strategy, security, and product
+                      Practical notes from OceanCyber — strategy, security, and product
                       delivery for teams building in Ghana and beyond.
                     </p>
                     <span className="mt-8 inline-flex h-[60px] w-[60px] items-center justify-center rounded-full border border-[var(--ae-ink)]/20 text-[var(--ae-ink)] transition group-hover:border-[var(--ae-primary)] group-hover:bg-[var(--ae-primary)] group-hover:text-black">
@@ -79,7 +78,7 @@ export function CaBlogSection() {
         <div className="mt-12 text-center">
           <Link
             href="/insights"
-            className="sa-pressable inline-flex min-h-12 items-center rounded-full border border-[var(--ae-ink)]/25 px-8 text-sm font-bold uppercase tracking-wider text-[var(--ae-ink)]"
+            className="sa-pressable inline-flex min-h-12 w-full items-center justify-center rounded-2xl border border-[var(--ae-ink)]/25 px-8 text-[15px] font-semibold text-[var(--ae-ink)] sm:w-auto sm:rounded-full"
           >
             View all insights
           </Link>

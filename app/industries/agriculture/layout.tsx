@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { getIndustryBySlug } from "@/lib/data/industries-catalog";
+
+const industry = getIndustryBySlug("agriculture");
 
 export const metadata: Metadata = {
-  title: "Agriculture & AgriTech",
-  description:
-    "Farmer apps, agri marketplaces, and traceability platforms for Africa — OceanCyber.",
+  title: industry ? `${industry.title} software in Ghana` : "agriculture",
+  description: industry?.description,
   alternates: { canonical: "/industries/agriculture" },
 };
 

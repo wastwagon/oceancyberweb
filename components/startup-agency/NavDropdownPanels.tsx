@@ -65,7 +65,7 @@ export function NavMegaMenu({ dropdownKey, panel, onNavigate }: Props) {
               {subItem.heading}
             </p>
             {subItem.description ? (
-              <p className="mt-1 line-clamp-2 text-[10px] leading-relaxed text-sa-muted/75">
+              <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-sa-muted">
                 {subItem.description}
               </p>
             ) : null}
@@ -108,7 +108,7 @@ export function NavCompactMenu({ panel, onNavigate }: Omit<Props, "dropdownKey">
               {subItem.heading}
             </p>
             {subItem.description ? (
-              <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed text-sa-muted/80">
+              <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-sa-muted">
                 {subItem.description}
               </p>
             ) : null}

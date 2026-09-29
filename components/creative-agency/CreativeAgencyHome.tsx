@@ -33,13 +33,9 @@ export function CreativeAgencyHome() {
 
       <main
         id="creative-main-content"
-        className="sa-mobile-header-pad sa-mobile-tab-pad md:pb-0 md:pt-0"
+        className="sa-mobile-tab-pad md:pb-0"
         tabIndex={-1}
       >
-        <h1 className="sr-only">
-          OceanCyber — design-driven impact agency in Ghana
-        </h1>
-
         {/* Dark */}
         <CaHeroSection />
         {/* Light */}

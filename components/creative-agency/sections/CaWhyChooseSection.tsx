@@ -21,7 +21,7 @@ export function CaWhyChooseSection() {
                 <p className="font-heading text-3xl font-extrabold text-[var(--ae-primary)] md:text-4xl">
                   {item.stat}
                 </p>
-                <h3 className="mt-6 font-heading text-xl font-bold uppercase tracking-wide text-[var(--ae-ink)]">
+                <h3 className="mt-6 font-heading text-xl font-bold text-[var(--ae-ink)]">
                   {item.title}
                 </h3>
                 <p className="ae-body-light mt-4 flex-1 text-sm leading-relaxed md:text-base">
@@ -35,7 +35,7 @@ export function CaWhyChooseSection() {
         <SaReveal delay={0.2} className="mt-10">
           <Link
             href="/how-we-work"
-            className="sa-pressable inline-flex min-h-12 items-center rounded-full bg-[var(--ae-primary)] px-7 text-sm font-bold uppercase tracking-wider text-black"
+            className="sa-pressable inline-flex min-h-12 w-full items-center justify-center rounded-2xl bg-[var(--ae-primary)] px-7 text-[15px] font-semibold text-black sm:w-auto sm:rounded-full"
           >
             How we work
           </Link>

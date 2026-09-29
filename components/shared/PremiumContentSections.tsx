@@ -48,7 +48,7 @@ export function PremiumStoriesGridSection({
               <h3 className="sa-card-title">
                 {story.title}
               </h3>
-              <p className="mt-2 text-[10px] font-bold uppercase tracking-widest text-sa-primary">
+              <p className="mt-2 text-sm font-medium text-sa-primary">
                 {story.client}
               </p>
               <p className="mt-4 flex-1 text-sm leading-relaxed text-sa-muted/80">
@@ -74,7 +74,6 @@ type PremiumFinalCtaSectionProps = {
   description: string;
   secondaryCtaLabel?: string;
   secondaryCtaHref?: string;
-  showPricingCta?: boolean;
 };
 
 export function PremiumFinalCtaSection({
@@ -82,7 +81,6 @@ export function PremiumFinalCtaSection({
   description,
   secondaryCtaLabel = "View portfolio",
   secondaryCtaHref = "/portfolio",
-  showPricingCta = false,
 }: PremiumFinalCtaSectionProps) {
   return (
     <section className="sa-section relative z-10 border-t border-sa-border">
@@ -92,24 +90,13 @@ export function PremiumFinalCtaSection({
           className="sa-card p-10 md:p-14"
         >
           <SaSectionHeader title={title} subtitle={description} />
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
-            <Link
-              href="/contact"
-              className="sa-btn-primary w-full sm:w-auto"
-            >
+          <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:justify-center">
+            <Link href="/contact" className="sa-btn-primary w-full sm:w-auto">
               Talk to our team
             </Link>
-            <Link
-              href={secondaryCtaHref}
-              className="sa-btn-outline w-full sm:w-auto"
-            >
+            <Link href={secondaryCtaHref} className="sa-btn-outline w-full sm:w-auto">
               {secondaryCtaLabel}
             </Link>
-            {showPricingCta ? (
-              <Link href="/pricing" className="sa-btn-outline w-full sm:w-auto">
-                Compare pricing
-              </Link>
-            ) : null}
           </div>
         </motion.div>
       </div>

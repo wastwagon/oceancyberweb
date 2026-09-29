@@ -4,7 +4,7 @@ export function SaMarqueeSection() {
   return (
     <section
       id="highlights"
-      className="border-b border-sa-border bg-sa-bg overflow-hidden py-6 md:py-10"
+      className="hidden overflow-hidden border-b border-sa-border bg-sa-bg py-6 md:block md:py-10"
       aria-hidden="true"
     >
       <div className="flex flex-col gap-4 md:gap-12 md:[perspective:1000px]">
@@ -21,7 +21,7 @@ export function SaMarqueeSection() {
         </div>
 
         {/* Primary Green Row */}
-        <div className="relative overflow-hidden bg-sa-primary py-4 shadow-[0_20px_50px_rgba(0,0,0,0.5)] md:py-8 md:[transform:rotateX(-10deg)_rotateZ(1deg)]">
+        <div className="relative hidden overflow-hidden bg-sa-primary py-4 shadow-[0_20px_50px_rgba(0,0,0,0.5)] md:block md:py-8 md:[transform:rotateX(-10deg)_rotateZ(1deg)]">
           <div className="flex w-max animate-sa-marquee-reverse gap-8 px-5 font-heading text-base font-bold uppercase tracking-[0.16em] text-black md:gap-14 md:px-6 md:text-2xl">
             {[...marqueeTags, ...marqueeTags, ...marqueeTags].map((t, i) => (
               <span key={`green-${t}-${i}`} className="whitespace-nowrap flex items-center">

@@ -61,6 +61,11 @@ export default function HostingPage({
               Built on a Namecheap reseller stack with WHM isolation, LiteSpeed
               performance, and local GHS billing via Paystack.
             </motion.p>
+            <motion.div variants={heroMotion.item} className="mt-8">
+              <Link href="#packages" className="sa-btn-primary w-full sm:w-auto">
+                Compare packages
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -162,7 +167,7 @@ export default function HostingPage({
                 {HOSTING_TRUST_POINTS.map((item, index) => (
                   <div key={item.title} className="flex gap-4">
                     <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-sa-primary bg-sa-primary/10 text-sa-primary">
-                      <span className="text-[10px] font-bold">{index + 1}</span>
+                      <span className="text-xs font-semibold">{index + 1}</span>
                     </div>
                     <div>
                       <h3 className="text-base font-bold text-white">{item.title}</h3>
@@ -212,9 +217,9 @@ export default function HostingPage({
             <div className="mt-8">
               <Link
                 href="/contact?topic=Custom VPS and Dedicated Server"
-                className="sa-btn-primary"
+                className="sa-btn-primary w-full sm:w-auto"
               >
-                Talk to an architect
+                Talk to our team
               </Link>
             </div>
           </motion.div>

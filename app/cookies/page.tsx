@@ -4,7 +4,7 @@ import { LegalPageFooter } from "@/components/legal/LegalPageFooter";
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "Cookie Policy",
+    title: "Cookie policy",
     description: "How OceanCyber uses cookies and related technologies.",
   },
   "/cookies",
@@ -13,24 +13,19 @@ export const metadata: Metadata = withCanonical(
 export default function CookiesPage() {
   const cookieTypes = [
     {
-      title: "Essential storage",
+      title: "Public site",
       description:
-        "Required for authentication, security, session management, checkout, and other features you request. These technologies cannot be disabled through our consent banner because the service may not work without them.",
+        "Browsing the marketing site does not set an analytics cookie and does not ask you to accept one. We are not running a visit tracker on these pages.",
     },
     {
-      title: "Analytics",
+      title: "Signed-in session",
       description:
-        "Optional analytics helps us understand visits, navigation, and site performance so we can improve the experience. Analytics is enabled only after you select Accept in our consent banner.",
+        "After you sign in, the browser stores a session cookie so the workspace can recognise you and stay secure. Signing out or clearing site data removes it.",
     },
     {
-      title: "Preference storage",
+      title: "Payments and other services",
       description:
-        "Local browser storage may remember choices such as cookie consent and other interface preferences. Clearing site data in your browser removes these saved choices.",
-    },
-    {
-      title: "Third-party services",
-      description:
-        "Embedded or linked services, such as payment, scheduling, or external product platforms, may set their own cookies when you use them. Their privacy and cookie notices apply on those services.",
+        "Checkout, scheduling, or a linked product may set cookies on its own service when you use it. That provider’s notice applies there.",
     },
   ];
 
@@ -38,16 +33,16 @@ export default function CookiesPage() {
     <main className="sa-shell min-h-screen bg-sa-bg sa-page-top pb-16 md:py-36">
       <div className="sa-container max-w-4xl px-6">
         <header className="mb-16">
-          <span className="sa-eyebrow inline-flex">Digital Experience</span>
+          <span className="sa-eyebrow inline-flex">Cookies</span>
           <h1 className="sa-title-lg !text-left mt-5">
-            Cookie <span className="text-sa-primary">Policy</span>
+            Cookie policy
           </h1>
           <p className="sa-subtitle !text-left mt-6 max-w-2xl">
-            We use essential browser storage to operate and secure the site.
-            Optional analytics is activated only with your consent.
+            The marketing site does not use an analytics cookie. A session cookie
+            is set only after you sign in.
           </p>
-          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-sa-muted/60">
-            Last updated: 12 July 2026
+          <p className="mt-4 text-sm text-sa-muted">
+            Last updated: 29 September 2026
           </p>
         </header>
 
@@ -65,11 +60,9 @@ export default function CookiesPage() {
         <div className="mt-12 sa-card p-8 border-sa-border bg-sa-surface/50">
           <h2 className="font-heading text-xl font-bold text-white mb-4">Managing your preferences</h2>
           <p className="text-sa-muted/80 text-sm leading-relaxed">
-            On your first visit, choose Accept or Decline in the consent
-            banner. To reset that choice, clear this site&apos;s local storage
-            in your browser and reload the page. You can also block or delete
-            cookies and site data in your browser settings; doing so may sign
-            you out or prevent requested platform features from working.
+            You can block or delete cookies in your browser settings. Doing so
+            signs you out of the workspace. It does not change anything about
+            browsing the public pages.
           </p>
           <p className="mt-4 text-sm leading-relaxed text-sa-muted/80">
             For questions about these technologies or your personal data,

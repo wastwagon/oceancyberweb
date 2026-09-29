@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About OceanCyber in Accra",
   description:
-    "Meet the OceanCyber team, our approach to delivery, and how we support teams in Ghana and the region.",
+    "OceanCyber is an Accra company. See how the team designs, builds, and supports web, mobile, and security work.",
   alternates: { canonical: "/about" },
 };
 

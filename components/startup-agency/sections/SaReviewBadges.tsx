@@ -26,12 +26,12 @@ export function SaReviewBadges() {
               {badge.id === "google" ? (
                 <>
                   <Star className="h-4 w-4 fill-sa-primary text-sa-primary" aria-hidden />
-                  <span className="font-heading text-xs font-bold uppercase tracking-widest text-sa-muted">
+                  <span className="font-heading text-sm font-medium text-sa-muted">
                     {badge.provider}
                   </span>
                 </>
               ) : (
-                <span className="font-heading text-xs font-bold uppercase tracking-widest text-sa-muted">
+                <span className="font-heading text-sm font-medium text-sa-muted">
                   {badge.provider}
                 </span>
               )}

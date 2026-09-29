@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
 import type { ServicePricingStripContent } from "@/lib/startup-agency/pricing";
 import { fadeUpProps, revealViewport, staggerDelay } from "@/lib/scroll-reveal";
@@ -34,31 +33,36 @@ export function ServicePricingStrip({ content }: Props) {
               className="sa-card flex flex-col p-6 md:p-8"
             >
               <h3 className="font-heading text-lg font-bold text-white">{tier.label}</h3>
-              <p className="mt-4 font-heading text-2xl font-black text-sa-primary">
+              <p className="mt-4 font-heading text-2xl font-bold text-sa-primary">
                 From GHS {tier.priceGhs.toLocaleString("en-GH")}
               </p>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-sa-muted">{tier.note}</p>
               {tier.planId ? (
                 <Link
                   href={`/pricing#${tier.planId}`}
-                  className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-sa-primary transition-colors hover:text-white"
+                  className="mt-6 inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
                 >
-                  View package details
-                  <ArrowRight className="h-3.5 w-3.5" />
+                  View package
                 </Link>
               ) : null}
             </motion.div>
           ))}
         </div>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <Link href="/pricing" className="sa-btn-outline min-h-[44px] px-6 text-xs">
-            Compare all packages
+        <p className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2">
+          <Link
+            href="/pricing"
+            className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
+          >
+            Compare packages
           </Link>
-          <Link href="/tools/project-cost" className="sa-btn-outline min-h-[44px] px-6 text-xs">
-            Estimate in GHS
+          <Link
+            href="/tools/project-cost"
+            className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-muted"
+          >
+            Estimate in cedis
           </Link>
-        </div>
+        </p>
       </div>
     </section>
   );

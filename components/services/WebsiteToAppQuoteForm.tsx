@@ -211,13 +211,13 @@ export function WebsiteToAppQuoteForm() {
               type="button"
               onClick={() => setForm((s) => ({ ...s, desiredPlatforms: [platform] }))}
               className={cn(
-                "rounded-lg border px-4 py-2 text-xs font-semibold uppercase tracking-wide transition",
+                "inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-medium transition",
                 form.desiredPlatforms.includes(platform)
                   ? "border-sa-primary bg-sa-primary/20 text-sa-primary"
                   : "border-sa-border bg-sa-surface text-sa-muted hover:border-sa-primary/50"
               )}
             >
-              {platform}
+              {platform === "ios" ? "iOS" : platform === "android" ? "Android" : "Both"}
             </button>
           ))}
         </div>

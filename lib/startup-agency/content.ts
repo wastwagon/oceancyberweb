@@ -69,7 +69,7 @@ export const showreelSlides = [
   { src: siteImagePaths.portfolioLive.fitchAttorneys, caption: "Fitch Attorneys — Live client" },
   { src: siteImagePaths.portfolioLive.africaGovernanceCentre, caption: "Africa Governance Centre — Live client" },
   { src: siteImagePaths.portfolioLive.thinqShopping, caption: "ThinQ Shopping — Live client" },
-  { src: siteImagePaths.portfolio.creativeHub, caption: "Creative Hub — Studio concepts" },
+  { src: siteImagePaths.portfolio.creativeHub, caption: "Creative Hub — Concept work" },
 ] as const;
 
 export const aboutWorkPreview = [
@@ -118,7 +118,7 @@ export const aboutWorkPreview = [
 ] as const;
 
 export const aboutStats = [
-  { value: "Since 2018", label: "Accra-based studio" },
+  { value: "Since 2018", label: "Accra-based company" },
   { value: "100+", label: "Clients served" },
   { value: "12", label: "Industry verticals" },
 ] as const;

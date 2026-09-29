@@ -11,7 +11,6 @@ import {
   Shield,
 } from "lucide-react";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
-import { PricingPathsLinks } from "@/components/startup-agency/PricingPathsLinks";
 import { withCanonical } from "@/lib/seo/canonical";
 import {
   clientCommitments,
@@ -23,9 +22,9 @@ import {
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "How we work — Delivery & pricing in Ghana cedis",
+    title: "How OceanCyber delivers projects",
     description:
-      "OceanCyber's premium delivery model — discovery, design, phased build, security-aware launch, and GHS-priced packages from GHS 6,000 for Ghana and West Africa.",
+      "Discovery, design, build, and launch with fixed milestones. Packages start from GHS 6,000 for teams in Ghana.",
   },
   "/how-we-work",
 );
@@ -40,22 +39,23 @@ export default function HowWeWorkPage() {
       <section className="sa-page-intro border-b border-sa-border">
         <div className="sa-container text-center">
           <p className="sa-eyebrow">Delivery</p>
-          <h1 className="sa-title mt-6">How we work with premium clients</h1>
+          <h1 className="sa-title mt-6">How we deliver a project</h1>
           <p className="sa-lead mx-auto mt-3 max-w-2xl">
-            Structured discovery, visible milestones, and security-aware engineering — built for
-            teams in legal, fintech, governance, and commerce who cannot afford surprises at launch.
+            We start with discovery, show progress at each milestone, and launch with security in mind. That suits teams in legal, fintech, governance, and commerce.
           </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link href="/get-started" className="sa-btn-primary gap-2">
-              Start intake
+          <div className="mx-auto mt-8 flex w-full max-w-sm flex-col items-center gap-3">
+            <Link href="/get-started" className="sa-btn-primary w-full gap-2 sm:w-auto">
+              Get started
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
-            <Link href="/pricing" className="sa-btn-outline">
-              Compare packages
-            </Link>
-            <Link href="/tools/project-cost" className="sa-btn-outline">
-              Project calculator
-            </Link>
+            <div className="flex flex-wrap items-center justify-center gap-x-5">
+              <Link href="/pricing" className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline">
+                Compare packages
+              </Link>
+              <Link href="/tools/project-cost" className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline-offset-4 hover:underline">
+                Estimate in cedis
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -69,8 +69,8 @@ export default function HowWeWorkPage() {
           </p>
           <div className="grid gap-6 md:grid-cols-2">
             {deliveryPhases.map((phase) => (
-              <article key={phase.step} className="sa-card p-7 md:p-8">
-                <span className="font-heading text-3xl font-black text-sa-primary">
+              <article key={phase.step} className="sa-card p-5 md:p-8">
+                <span className="font-heading text-3xl font-bold text-sa-primary">
                   0{phase.step}
                 </span>
                 <h3 className="mt-3 font-heading text-xl font-bold text-white">{phase.title}</h3>
@@ -107,10 +107,10 @@ export default function HowWeWorkPage() {
                   <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-sa-primary/30 bg-sa-primary/10 text-sa-primary">
                     <Icon className="h-5 w-5" aria-hidden />
                   </div>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/50">
-                    0{i + 1}
+                  <p className="text-sm font-medium text-sa-primary">
+                    Step {i + 1}
                   </p>
-                  <h3 className="mt-2 font-heading text-sm font-bold uppercase tracking-widest text-white">
+                  <h3 className="mt-2 font-heading text-base font-bold text-white">
                     {phase.title}
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-sa-muted/80">{phase.body}</p>
@@ -120,7 +120,7 @@ export default function HowWeWorkPage() {
           </div>
           <p className="mt-10 text-center">
             <Link href="/services/ui-ux-design" className="text-sm font-semibold text-sa-primary hover:underline">
-              UI/UX & brand design services →
+              UI and brand design
             </Link>
           </p>
         </div>
@@ -137,7 +137,7 @@ export default function HowWeWorkPage() {
                   {model.priceHint}
                 </p>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-sa-muted/85">{model.body}</p>
-                <p className="mt-5 border-t border-sa-border pt-4 text-xs font-medium uppercase tracking-wider text-sa-primary">
+                <p className="mt-5 border-t border-sa-border pt-4 text-sm font-medium text-sa-primary">
                   {model.fit}
                 </p>
               </article>
@@ -153,7 +153,7 @@ export default function HowWeWorkPage() {
             {clientCommitments.map((item) => (
               <div key={item.title} className="sa-card p-6">
                 <Shield className="mb-4 h-5 w-5 text-sa-primary" aria-hidden />
-                <h3 className="font-heading text-sm font-bold uppercase tracking-widest text-white">
+                <h3 className="font-heading text-base font-semibold text-white">
                   {item.title}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-sa-muted/80">{item.body}</p>
@@ -176,14 +176,14 @@ export default function HowWeWorkPage() {
                 href={`/portfolio/${proof.slug}`}
                 className="sa-card sa-pressable group p-5 transition hover:border-sa-primary/40"
               >
-                <span className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">
+                <span className="text-sm font-medium text-sa-primary">
                   {proof.sector}
                 </span>
                 <p className="mt-2 font-heading text-sm font-bold text-white group-hover:text-sa-primary">
                   {proof.title}
                 </p>
                 <p className="mt-3 font-heading text-2xl font-bold text-white">{proof.metric}</p>
-                <p className="text-[11px] uppercase tracking-wider text-sa-muted/70">
+                <p className="text-sm text-sa-muted">
                   {proof.metricLabel}
                 </p>
               </Link>
@@ -194,31 +194,18 @@ export default function HowWeWorkPage() {
 
       <section className="sa-section">
         <div className="sa-container max-w-3xl text-center">
-          <h2 className="sa-title">Ready to scope your programme?</h2>
+          <h2 className="sa-title">Ready to scope your project?</h2>
           <p className="sa-subtitle mx-auto mt-4 max-w-lg">
-            Start with intake, request a formal proposal, or estimate investment in Ghana cedis — we
-            respond with clear next steps, not a generic brochure.
+            Share your goals in the intake. We reply with the next step and a clear range.
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link href="/get-started" className="sa-btn-primary gap-2">
+          <div className="mx-auto mt-8 flex w-full max-w-sm flex-col items-center gap-3">
+            <Link href="/get-started" className="sa-btn-primary w-full gap-2 sm:w-auto">
               Get started
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
-            <Link href="/pricing" className="sa-btn-outline !min-h-[44px]">
+            <Link href="/pricing" className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline">
               View pricing
             </Link>
-            <Link href="/tools/proposal" className="sa-btn-outline !min-h-[44px]">
-              Request proposal
-            </Link>
-            <Link
-              href="/tools/security-assessment"
-              className="inline-flex min-h-[44px] items-center rounded-full border border-sa-primary/30 bg-sa-primary/10 px-6 text-xs font-bold uppercase tracking-widest text-sa-primary transition hover:border-sa-primary"
-            >
-              Security assessment
-            </Link>
-          </div>
-          <div className="mt-8">
-            <PricingPathsLinks variant="compact" />
           </div>
         </div>
       </section>

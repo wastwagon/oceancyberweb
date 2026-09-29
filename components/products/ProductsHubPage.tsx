@@ -33,9 +33,30 @@ export function ProductsHubPage() {
               <span className="text-sa-primary">African operators</span>
             </motion.h1>
             <motion.p variants={heroMotion.item} className="sa-lead mx-auto mt-3 max-w-2xl">
-              OceanCyber POS is a self-serve SaaS platform — sign up, configure your payments, and
-              go live. Custom agency builds remain available separately.
+              OceanCyber POS is software you can start yourself. Sign up, connect payments, and go live. Custom builds are still available from the company.
             </motion.p>
+            {productCatalog[0] ? (
+              <motion.div
+                variants={heroMotion.item}
+                className="mx-auto mt-8 flex w-full max-w-sm flex-col gap-3"
+              >
+                <a
+                  href={productCatalog[0].trialSignupHref}
+                  className="sa-btn-primary w-full gap-2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Start free trial
+                  <ExternalLink className="h-4 w-4" aria-hidden />
+                </a>
+                <Link
+                  href={`/products/${productCatalog[0].slug}`}
+                  className="inline-flex min-h-11 items-center justify-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+                >
+                  View features
+                </Link>
+              </motion.div>
+            ) : null}
           </motion.div>
         </div>
       </section>
@@ -68,41 +89,38 @@ export function ProductsHubPage() {
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                 </div>
-                <div className="p-8 md:p-10">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">
+                <div className="p-5 md:p-8">
+                  <p className="text-sm font-medium text-sa-primary">
                     {product.pricingFrom} · 14-day trial
                   </p>
-                  <h2 className="mt-2 font-heading text-2xl font-bold text-white md:text-3xl">
+                  <h2 className="mt-2 font-heading text-2xl font-bold text-white">
                     {product.name}
                   </h2>
                   <p className="mt-4 text-sm leading-relaxed text-sa-muted/80">{product.tagline}</p>
-                  <ul className="mt-6 flex flex-wrap gap-2">
+                  <ul className="sa-chip-scroller mt-6">
                     {product.pills.slice(0, 4).map((pill) => (
-                      <li
-                        key={pill}
-                        className="rounded-full border border-sa-border px-3 py-1 text-xs text-sa-muted/80"
-                      >
+                      <li key={pill} className="sa-chip">
                         {pill}
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                    <Link
-                      href={`/products/${product.slug}`}
-                      className="sa-ios-link inline-flex items-center gap-2 text-sm font-semibold text-sa-primary"
-                    >
-                      View features
-                      <ArrowRight className="h-4 w-4" aria-hidden />
-                    </Link>
+                  <div className="mt-8 flex flex-col gap-3">
                     <a
                       href={product.trialSignupHref}
-                      className="sa-ios-link inline-flex items-center gap-2 text-sm font-semibold text-white"
+                      className="sa-btn-primary w-full gap-2"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       Start free trial
                       <ExternalLink className="h-4 w-4" aria-hidden />
                     </a>
+                    <Link
+                      href={`/products/${product.slug}`}
+                      className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+                    >
+                      View features
+                      <ArrowRight className="h-4 w-4" aria-hidden />
+                    </Link>
                   </div>
                 </div>
               </motion.article>
@@ -118,12 +136,15 @@ export function ProductsHubPage() {
               title="Need a custom platform instead?"
               subtitle="OceanCyber still designs and builds bespoke web, mobile, and security programmes."
             />
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <div className="mt-8 flex flex-col items-center gap-3">
               <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">
                 Get started
               </Link>
-              <Link href="/tools/project-cost" className="sa-btn-outline w-full sm:w-auto">
-                Project calculator
+              <Link
+                href="/tools/project-cost"
+                className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+              >
+                Estimate in cedis
               </Link>
             </div>
           </motion.div>

@@ -137,12 +137,8 @@ function GridProjectCard({
         
         <div className="absolute left-4 right-4 top-4 flex items-start justify-between gap-2">
           <div className="flex flex-wrap gap-2">
-            <span className="rounded-full border border-sa-primary/20 bg-sa-bg/80 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-sa-primary backdrop-blur-md">
-              {project.category}
-            </span>
-            <span className="rounded-full border border-white/10 bg-sa-bg/80 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white backdrop-blur-md">
-              {project.year}
-            </span>
+            <span className="sa-chip">{project.category}</span>
+            <span className="sa-chip">{project.year}</span>
           </div>
           <StarRow n={project.rating} />
         </div>
@@ -153,7 +149,7 @@ function GridProjectCard({
           <h3 className="font-heading text-lg font-bold text-white md:text-xl">
             {project.title}
           </h3>
-          <p className="mt-1 text-[10px] font-bold uppercase tracking-widest text-sa-primary">{project.client}</p>
+          <p className="mt-1 text-sm font-medium text-sa-primary">{project.client}</p>
         </div>
         <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-sa-muted/80">
           {project.description}
@@ -164,29 +160,24 @@ function GridProjectCard({
             <span className="font-heading text-xl font-bold text-white sm:text-2xl">
               {project.metrics.increase}
             </span>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">
+            <span className="text-sm text-sa-muted">
               {project.metrics.metric}
             </span>
           </div>
         ) : null}
 
-        <div className="mt-6 flex flex-wrap gap-2">
+        <ul className="sa-chip-scroller mt-6">
           {project.tech.slice(0, 3).map((tech) => (
-            <span
-              key={tech}
-              className="rounded-full border border-sa-border bg-sa-bg px-3 py-1 text-[10px] font-bold tracking-widest text-sa-muted uppercase"
-            >
+            <li key={tech} className="sa-chip">
               {tech}
-            </span>
+            </li>
           ))}
           {project.tech.length > 3 ? (
-            <span className="self-center text-[10px] font-bold text-sa-muted/50 uppercase">
-              +{project.tech.length - 3}
-            </span>
+            <li className="sa-chip">+{project.tech.length - 3}</li>
           ) : null}
-        </div>
+        </ul>
 
-        <div className="mt-6 flex items-center justify-between border-t border-sa-border pt-4 text-[10px] font-bold uppercase tracking-widest text-sa-primary">
+        <div className="mt-6 flex items-center justify-between border-t border-sa-border pt-4 text-sm font-semibold text-sa-primary">
           <span>View project</span>
           <span aria-hidden className="text-base transition-transform duration-300 group-hover/card:translate-x-2">→</span>
         </div>
@@ -214,7 +205,7 @@ function CategoryFilter({
 }) {
   return (
     <div
-      className="mb-8 flex flex-wrap items-center gap-2 md:mb-12"
+      className="sa-chip-scroller mb-8 md:mb-12"
       role="tablist"
       aria-label="Filter by industry"
     >
@@ -223,12 +214,7 @@ function CategoryFilter({
         role="tab"
         aria-selected={value === "All"}
         onClick={() => onChange("All")}
-        className={cn(
-          "rounded-full border px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-colors",
-          value === "All"
-            ? "border-sa-primary bg-sa-primary/20 text-sa-primary"
-            : "border-sa-border bg-sa-surface text-sa-muted hover:border-sa-primary/50 hover:text-white"
-        )}
+        className="sa-tab"
       >
         All work
       </button>
@@ -239,12 +225,7 @@ function CategoryFilter({
           role="tab"
           aria-selected={value === c}
           onClick={() => onChange(c)}
-          className={cn(
-            "max-w-full truncate rounded-full border px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-colors",
-            value === c
-              ? "border-sa-primary bg-sa-primary/20 text-sa-primary"
-              : "border-sa-border bg-sa-surface text-sa-muted hover:border-sa-primary/50 hover:text-white"
-          )}
+          className="sa-tab"
         >
           {c}
         </button>
@@ -390,7 +371,7 @@ function PortfolioHomeVerticalSplit({ projects }: { projects: PortfolioCaseStudy
                 aria-hidden
               />
               <p className="sa-eyebrow">
-                Studio portfolio
+                Portfolio
               </p>
             </div>
             <h2 className="sa-title !text-left text-4xl lg:text-5xl">
@@ -411,7 +392,7 @@ function PortfolioHomeVerticalSplit({ projects }: { projects: PortfolioCaseStudy
               transition={{ duration: reduceMotion ? 0 : 0.32, ease: [0.22, 1, 0.36, 1] }}
               className="min-w-0"
             >
-              <p className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">
+              <p className="text-sm font-medium text-sa-primary">
                 {active.category}
                 <span className="mx-2 font-normal text-sa-border">·</span>
                 {active.year}
@@ -422,7 +403,7 @@ function PortfolioHomeVerticalSplit({ projects }: { projects: PortfolioCaseStudy
               <p className="mt-2 text-sm text-sa-muted">{active.client}</p>
               <Link
                 href={`/portfolio/${active.slug}`}
-                className="mt-6 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-sa-primary transition-all hover:text-white"
+                className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-sa-primary"
               >
                 Case study
                 <span aria-hidden className="text-base leading-none">
@@ -576,17 +557,17 @@ export function PortfolioWork({
                 ? "Tell us about goals, users, and timeline. We will respond with a focused proposal."
                 : "Tell us what you're building—we'll follow up with next steps."}
             </p>
-            <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <div className="mt-10 flex flex-col items-center gap-3">
               <Link
                 href="/contact?topic=Project%20from%20portfolio"
-                className="sa-btn-primary"
+                className="sa-btn-primary w-full sm:w-auto"
               >
                 Talk to our team
               </Link>
               {isPage ? null : (
                 <Link
                   href="/portfolio"
-                  className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-sa-border px-8 text-[10px] font-bold uppercase tracking-widest text-sa-muted transition hover:border-sa-primary hover:text-white"
+                  className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
                 >
                   Full portfolio
                 </Link>

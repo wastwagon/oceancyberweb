@@ -31,7 +31,7 @@ export function CaseStudyDetailView({
   backHref,
   backLabel,
   sidebarTitle,
-  detailTitle,
+  detailTitle: _detailTitle,
   narrative,
   relatedProjects = [],
 }: Props) {
@@ -62,7 +62,7 @@ export function CaseStudyDetailView({
                     {project.category}
                   </span>
                   <span className="h-1 w-1 rounded-full bg-sa-border" />
-                  <span className="text-xs font-bold uppercase tracking-widest text-sa-muted/60">
+                  <span className="text-sm font-medium text-sa-muted/70">
                     {project.year}
                   </span>
                 </div>
@@ -95,10 +95,10 @@ export function CaseStudyDetailView({
               {/* Quick Metrics */}
               {project.metrics ? (
                 <div className="sa-card p-8 border-l-4 border-sa-primary">
-                  <div className="text-4xl font-black text-white md:text-5xl">
+                  <div className="text-4xl font-bold text-white md:text-5xl">
                     {project.metrics.increase}
                   </div>
-                  <div className="mt-2 text-sm font-bold uppercase tracking-[0.2em] text-sa-primary">
+                  <div className="mt-2 text-sm font-semibold text-sa-primary">
                     {project.metrics.metric}
                   </div>
                 </div>
@@ -188,8 +188,8 @@ export function CaseStudyDetailView({
                         <div className="font-bold text-white">
                           {project.client}
                         </div>
-                        <div className="text-xs font-bold uppercase tracking-widest text-sa-muted/60">
-                          Verified Client Partner
+                        <div className="text-sm text-sa-muted/70">
+                          Verified client
                         </div>
                       </div>
                     </div>
@@ -201,32 +201,32 @@ export function CaseStudyDetailView({
             <div className="lg:col-span-1">
               <div className="sticky top-32 space-y-8">
                 <div className="sa-card p-8">
-                  <h3 className="font-heading mb-8 text-sm font-bold uppercase tracking-[0.2em] text-sa-primary">
+                  <h3 className="font-heading mb-8 text-sm font-semibold text-sa-primary">
                     {sidebarTitle}
                   </h3>
                   <div className="space-y-6">
                     <div className="flex flex-col gap-1">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/50">Client</span>
+                      <span className="text-sm text-sa-muted">Client</span>
                       <span className="font-bold text-white">{project.client}</span>
                     </div>
                     <div className="flex flex-col gap-1">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/50">Industry</span>
+                      <span className="text-sm text-sa-muted">Industry</span>
                       <span className="font-bold text-white">{project.category}</span>
                     </div>
                     <div className="flex flex-col gap-1">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/50">Delivery type</span>
+                      <span className="text-sm text-sa-muted">Delivery type</span>
                       <span className="font-bold text-white">
                         {getProjectTypeLabel(projectType)}
                       </span>
                     </div>
                     <div className="flex flex-col gap-1">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/50">Year</span>
+                      <span className="text-sm text-sa-muted">Year</span>
                       <span className="font-bold text-white">{project.year}</span>
                     </div>
                   </div>
 
                   <div className="mt-10 pt-8 border-t border-sa-border">
-                    <h4 className="text-[10px] font-bold uppercase tracking-widest text-sa-muted/50 mb-4">Core Stack</h4>
+                    <h4 className="mb-4 text-sm font-medium text-sa-muted">Core stack</h4>
                     <div className="flex flex-wrap gap-2">
                       {project.tech.map((t) => (
                         <span key={t} className="text-xs font-medium text-white/70 bg-white/5 px-2 py-1 rounded">
@@ -237,13 +237,13 @@ export function CaseStudyDetailView({
                   </div>
                 </div>
 
-                <div className="space-y-4">
+                <div className="flex flex-col items-start gap-3">
                   {project.liveUrl ? (
                     <a
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="sa-btn-primary w-full justify-center"
+                      className="sa-btn-primary w-full justify-center sm:w-auto"
                     >
                       Visit live site
                       <ExternalLink className="ml-2 h-4 w-4" />
@@ -251,12 +251,9 @@ export function CaseStudyDetailView({
                   ) : null}
                   <Link
                     href={`/contact?topic=${encodeURIComponent(project.title)}`}
-                    className={project.liveUrl ? "sa-btn-outline w-full justify-center" : "sa-btn-primary w-full justify-center"}
+                    className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
                   >
                     Discuss this project
-                  </Link>
-                  <Link href={backHref} className="sa-btn-outline w-full justify-center">
-                    {detailTitle}
                   </Link>
                 </div>
               </div>
@@ -283,7 +280,7 @@ export function CaseStudyDetailView({
                       />
                     </div>
                     <div className="p-5">
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">
+                      <p className="text-sm font-medium text-sa-primary">
                         {item.category}
                       </p>
                       <h3 className="mt-2 font-heading text-lg font-bold text-white group-hover:text-sa-primary">

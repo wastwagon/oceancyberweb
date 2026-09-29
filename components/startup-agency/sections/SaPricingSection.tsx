@@ -19,15 +19,21 @@ export function SaPricingSection() {
             title="Transparent pricing"
             subtitle="Indicative starting tiers in Ghana cedis. Fixed-price milestones after discovery — use the calculator or compare full packages on our pricing page."
           />
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link href="/get-started" className="sa-btn-primary">
+          <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+            <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">
               Get started
             </Link>
-            <Link href="/pricing" className="sa-btn-outline">
-              Compare all plans
+            <Link
+              href="/pricing"
+              className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+            >
+              Compare plans
             </Link>
-            <Link href="/tools/project-cost" className="sa-btn-outline">
-              Open project calculator
+            <Link
+              href="/tools/project-cost"
+              className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline-offset-4 hover:underline"
+            >
+              Estimate in cedis
             </Link>
           </div>
         </SaReveal>
@@ -47,7 +53,7 @@ export function SaPricingSection() {
                 )}
 
                 {plan.featured ? (
-                  <div className="mb-3 inline-flex rounded-full bg-sa-primary px-3 py-1 font-heading text-[10px] font-bold uppercase tracking-widest text-black md:absolute md:right-8 md:top-8 md:mb-0">
+                  <div className="mb-3 inline-flex rounded-full bg-sa-primary px-3 py-1 text-sm font-semibold text-black md:absolute md:right-8 md:top-8 md:mb-0">
                     Popular
                   </div>
                 ) : null}
@@ -60,7 +66,7 @@ export function SaPricingSection() {
                 </div>
 
                 <div className="mb-8 flex items-baseline gap-2">
-                  <span className="text-xs font-bold uppercase tracking-widest text-sa-muted">
+                  <span className="text-sm font-medium text-sa-muted">
                     From
                   </span>
                   <span className="font-heading text-3xl font-bold tracking-tight text-white md:text-4xl">

@@ -64,6 +64,9 @@ export const mainHeaderNav: HeaderNavItem[] = [
     dropdownKey: "resources",
     activeMatch: [
       "/insights",
+      "/guides",
+      "/compare",
+      "/alternatives",
       "/portfolio",
       "/how-we-work",
       "/design-process",
@@ -122,7 +125,7 @@ export const mainHeaderDropdownContent: Record<
       },
       {
         heading: "Web design in Accra",
-        description: "Accra studio on Nii Kwashiefio Avenue—local meetings, same delivery team.",
+        description: "Accra company on Nii Kwashiefio Avenue—local meetings, same delivery team.",
         link: "/services/web-design-in-accra",
       },
       {
@@ -196,6 +199,11 @@ export const mainHeaderDropdownContent: Record<
         heading: "Insights",
         description: "Strategy notes, platform updates, and practical guides.",
         link: "/insights",
+      },
+      {
+        heading: "Buyer guides",
+        description: "Website cost, Mobile Money, timelines, and comparisons.",
+        link: "/guides",
       },
       {
         heading: "Portfolio",
@@ -298,7 +306,7 @@ export const mainHeaderDropdownContent: Record<
     items: [
       {
         heading: "About",
-        description: "Accra studio delivering websites and apps across Ghana.",
+        description: "Accra company delivering websites and apps across Ghana.",
         link: "/about",
       },
       {
@@ -334,6 +342,7 @@ export const footerCompanyLinks = [
   { label: "How we work", href: "/how-we-work" },
   { label: "Get started", href: "/get-started" },
   { label: "Insights", href: "/insights" },
+  { label: "Guides", href: "/guides" },
   { label: "Reviews", href: "/reviews" },
   { label: "Contact", href: "/contact" },
 ] as const;

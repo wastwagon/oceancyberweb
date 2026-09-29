@@ -38,14 +38,14 @@ export function WhatsAppButton({
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-heading font-bold uppercase tracking-widest transition-all duration-300 active:scale-95",
+        "inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-2xl font-heading text-[15px] font-semibold tracking-normal transition-all duration-300 active:scale-95 sm:rounded-full sm:text-base",
         sizeClasses[size],
         variantClasses[variant],
         className
       )}
     >
       <MessageCircle className="w-5 h-5 animate-pulse" />
-      <span>WhatsApp Us</span>
+      <span>Message us on WhatsApp</span>
     </a>
   );
 }

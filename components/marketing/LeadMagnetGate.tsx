@@ -85,7 +85,7 @@ export function LeadMagnetGate({
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(187,243,64,0.06),transparent_60%)]" />
       <div className="relative flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
         <div className="max-w-xl">
-          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-sa-primary/30 bg-sa-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-sa-primary">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-sa-primary/30 bg-sa-primary/10 px-3 py-1 text-sm font-medium text-sa-primary">
             <ShieldCheck className="h-3.5 w-3.5" aria-hidden />
             Free resource
           </div>
@@ -140,12 +140,12 @@ export function LeadMagnetGate({
               )}
             </SaButton>
             <p
-              className={`mt-3 text-center text-[10px] font-bold uppercase tracking-widest ${
+              className={`mt-3 text-center text-sm ${
                 status === "error" ? "text-sa-danger" : "text-sa-fg-subtle"
               }`}
               role={status === "error" ? "alert" : undefined}
             >
-              {message ?? "No spam · Unsubscribe anytime"}
+              {message ?? "No spam. Unsubscribe anytime."}
             </p>
           </form>
         )}

@@ -7,11 +7,11 @@ import { Briefcase, Rocket, Tags } from "lucide-react";
 import { useCart } from "@/components/commerce/CartProvider";
 import { cn } from "@/lib/utils";
 
-/** Mobile tab bar — Work · Pricing · Start (Get started is the conversion primary). */
+/** Mobile tab bar — Work · Pricing · Get started. */
 const quickActions = [
   { label: "Work", href: "/portfolio", icon: Briefcase },
   { label: "Pricing", href: "/pricing", icon: Tags },
-  { label: "Start", href: "/get-started", icon: Rocket, primary: true },
+  { label: "Get started", href: "/get-started", icon: Rocket, primary: true },
 ] as const;
 
 export function StartupAgencyMobileQuickBar() {
@@ -46,9 +46,12 @@ export function StartupAgencyMobileQuickBar() {
               key={action.href}
               href={action.href}
               className={cn(
-                "sa-pressable relative flex min-h-[44px] flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-1.5 text-[10px] font-medium leading-none transition-colors",
-                active ? "text-sa-primary" : "text-white/55",
-                "primary" in action && action.primary && !active && "text-sa-primary/90",
+                "sa-pressable relative flex min-h-[44px] flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-1.5 text-xs font-medium leading-none transition-colors",
+                "primary" in action && action.primary
+                  ? "mx-1 rounded-2xl bg-sa-primary text-sa-bg"
+                  : active
+                    ? "text-sa-primary"
+                    : "text-white/55",
               )}
               aria-current={active ? "page" : undefined}
             >
@@ -61,7 +64,7 @@ export function StartupAgencyMobileQuickBar() {
                 {action.href === "/get-started" && itemCount > 0 ? (
                   <span
                     className={cn(
-                      "absolute -right-2 -top-1 inline-flex min-w-[16px] items-center justify-center rounded-full bg-sa-primary px-1 text-[9px] font-bold leading-4 text-sa-bg transition",
+                      "absolute -right-2 -top-1 inline-flex min-w-[16px] items-center justify-center rounded-full bg-sa-bg px-1 text-[9px] font-bold leading-4 text-sa-primary transition",
                       animateBadge ? "scale-110" : "scale-100",
                     )}
                     title={`${itemCount} item(s) in cart`}

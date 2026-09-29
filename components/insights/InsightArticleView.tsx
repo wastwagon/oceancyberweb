@@ -20,11 +20,11 @@ export function InsightArticleView({ post }: Props) {
       <InsightArticleJsonLd post={post} />
 
       <article className="relative z-10 pt-20">
-        <div className="border-b border-sa-border bg-sa-bg/80 backdrop-blur-sm sticky top-0 z-20">
-          <div className="sa-container max-w-3xl py-4 md:py-6">
+        <div className="sticky top-[var(--sa-mobile-header)] z-20 border-b border-sa-border bg-sa-bg/80 backdrop-blur-sm lg:top-28">
+          <div className="sa-container max-w-3xl py-3 md:py-4">
             <Link
               href={buildInsightsHref("", "All")}
-              className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-sa-primary transition-colors hover:text-white"
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-sa-primary transition-colors hover:text-white"
             >
               <ArrowLeft className="h-4 w-4" aria-hidden />
               Back to insights
@@ -45,13 +45,13 @@ export function InsightArticleView({ post }: Props) {
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-sa-bg via-sa-bg/50 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
               <div className="sa-container max-w-3xl px-0 md:px-0">
-                <span className="inline-block rounded-full border border-sa-primary/20 bg-sa-bg/80 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-sa-primary backdrop-blur-md">
+                <span className="inline-flex min-h-8 items-center rounded-full border border-sa-primary/20 bg-sa-bg/80 px-3 text-sm font-medium text-sa-primary backdrop-blur-md">
                   {post.category}
                 </span>
                 <h1 className="sa-title-lg !text-left mt-4 text-white">
                   {post.title}
                 </h1>
-                <div className="mt-6 flex flex-wrap items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-sa-muted/60">
+                <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-sa-muted/80">
                   <time dateTime={post.date}>{post.date}</time>
                   <span className="text-sa-border">·</span>
                   <span>{post.readTime}</span>
@@ -72,6 +72,50 @@ export function InsightArticleView({ post }: Props) {
             ))}
           </div>
 
+          {post.sections?.map((section) => (
+            <section key={section.heading} className="mt-12">
+              <h2 className="font-heading text-2xl font-semibold text-white">{section.heading}</h2>
+              <div className="mt-4 space-y-4 text-base leading-relaxed text-sa-muted/90">
+                {section.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+              {section.bullets ? (
+                <ul className="mt-4 list-disc space-y-2 pl-5 text-base leading-relaxed text-sa-muted/90">
+                  {section.bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
+              ) : null}
+              {section.links ? (
+                <ul className="mt-4 space-y-2">
+                  {section.links.map((link) => (
+                    <li key={link.href}>
+                      <Link href={link.href} className="text-sm font-semibold text-sa-primary hover:underline">
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </section>
+          ))}
+
+          {post.related && post.related.length > 0 ? (
+            <nav className="mt-14 border-t border-sa-border pt-8" aria-label="Related reading">
+              <h2 className="font-heading text-xl font-semibold text-white">Related reading</h2>
+              <ul className="mt-4 space-y-2">
+                {post.related.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-sm font-semibold text-sa-primary hover:underline">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ) : null}
+
           <div className="mt-16 sa-card p-8 md:p-10">
             <h2 className="font-heading text-xl font-bold text-white md:text-2xl">
               Want to explore this for your team?
@@ -81,7 +125,7 @@ export function InsightArticleView({ post }: Props) {
             </p>
             <Link
               href={contactHrefForTopic(post.title)}
-              className="sa-btn-primary mt-8 gap-2"
+              className="sa-btn-primary mt-8 w-full gap-2 sm:w-auto"
             >
               Talk to our team
               <ArrowRight className="h-4 w-4" aria-hidden />

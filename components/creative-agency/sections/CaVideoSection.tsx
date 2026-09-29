@@ -32,7 +32,7 @@ export function CaVideoSection() {
             <Play className="ml-1 h-10 w-10 fill-current md:h-14 md:w-14" aria-hidden />
           </button>
         </div>
-        <p className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center text-sm font-semibold uppercase tracking-[0.2em] text-white/80">
+        <p className="absolute bottom-8 left-1/2 max-w-[90%] -translate-x-1/2 text-center text-sm font-medium text-white/80">
           {slide.caption}
         </p>
       </section>

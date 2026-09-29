@@ -19,7 +19,7 @@ export function SaAboutSection() {
                 align="left"
                 eyebrow="Our Agency"
                 title="Design craft meets engineering discipline"
-                subtitle="OceanCyber is an Accra-based product studio. We partner with ambitious teams to shape brands, design intuitive experiences, and ship software that performs under real-world pressure — across Ghana, London, and global markets."
+                subtitle="OceanCyber is an Accra-based company. We partner with ambitious teams to shape brands, design intuitive experiences, and ship software that holds up in real use across Ghana and for clients abroad."
               />
               <p className="mt-4 max-w-2xl text-sm leading-relaxed text-sa-muted">
                 From fintech and e-commerce to professional services, we combine UX
@@ -37,20 +37,20 @@ export function SaAboutSection() {
                   <p className="font-heading text-2xl font-bold text-white md:text-3xl">
                     {stat.value}
                   </p>
-                  <p className="mt-1 text-xs font-bold uppercase tracking-widest text-sa-muted/70">
+                  <p className="mt-1 text-sm font-medium text-sa-muted/80">
                     {stat.label}
                   </p>
                 </div>
               ))}
             </SaReveal>
 
-            <SaReveal delay={0.25} className="mt-10 flex flex-wrap gap-4">
-              <Link href="/about" className="sa-btn-primary gap-2">
+            <SaReveal delay={0.25} className="mt-8">
+              <Link
+                href="/about"
+                className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+              >
                 Our story
                 <ArrowRight className="h-4 w-4" aria-hidden />
-              </Link>
-              <Link href="/contact" className="sa-btn-outline">
-                Talk to our team
               </Link>
             </SaReveal>
           </div>

@@ -9,8 +9,8 @@ export function SaFeaturedQuotesStrip({ cards }: SaFeaturedQuotesStripProps) {
   if (featured.length === 0) return null;
 
   return (
-    <div className="mt-10 border-t border-sa-border/60 pt-10 md:mt-14 md:pt-12">
-      <p className="mb-6 text-center text-[10px] font-bold uppercase tracking-[0.25em] text-sa-muted/50 md:mb-8">
+    <div className="mt-10 hidden border-t border-sa-border/60 pt-10 md:mt-14 md:block md:pt-12">
+      <p className="mb-6 text-center text-sm font-medium text-sa-muted/70 md:mb-8">
         Featured client quotes
       </p>
       <div className="grid gap-4 md:grid-cols-3 md:gap-6">
@@ -35,7 +35,7 @@ export function SaFeaturedQuotesStrip({ cards }: SaFeaturedQuotesStripProps) {
             </div>
             <footer className="mt-6 border-t border-sa-border/50 pt-4">
               <p className="font-heading text-sm font-bold text-white">{quote.name}</p>
-              <p className="mt-1 text-[11px] font-medium uppercase tracking-wider text-sa-muted/60">
+              <p className="mt-1 text-sm text-sa-muted/70">
                 {quote.role}
                 {quote.company ? ` · ${quote.company}` : ""}
               </p>

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Help center",
+  title: "Help centre",
   description:
-    "Billing, renewals, hosting, and account help for OceanCyber customers.",
+    "Billing, renewals, hosting, and account help for OceanCyber customers in Ghana.",
   alternates: { canonical: "/help-center" },
 };
 

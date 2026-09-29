@@ -888,7 +888,6 @@
 .hero-grid-cells {
   position: absolute;
   inset: 0;
-  display: flex;
   flex-wrap: wrap;
   gap: 2px;
   overflow: hidden;
@@ -905,7 +904,6 @@
     rgba(214, 252, 57, 0.32),
     rgba(5, 5, 8, 0.96)
   );
-  animation: hero-grid-scan 5.5s linear infinite;
   z-index: 1;
 }
 
@@ -1083,7 +1081,7 @@
   }
 
   .sa-eyebrow {
-    @apply font-heading text-[10px] font-medium uppercase tracking-[0.28em] text-sa-primary;
+    @apply font-heading text-sm font-semibold text-sa-primary;
   }
 
   /*
@@ -1140,7 +1138,31 @@
   }
 
   .sa-kicker {
-    @apply inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white/85;
+    @apply inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-1.5 text-sm font-medium text-white/85;
+  }
+
+  /* Decorative pills — readable on a phone, not 10px tracked caps. */
+  .sa-chip {
+    @apply inline-flex min-h-8 shrink-0 items-center rounded-full border border-white/15 bg-white/[0.06] px-3.5 text-sm font-medium text-white/80;
+  }
+
+  /* Filter tabs — 44px touch target, one horizontal row on small screens. */
+  .sa-chip-scroller {
+    @apply -mx-4 flex gap-2 overflow-x-auto px-4 pb-1;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .sa-chip-scroller::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sa-tab {
+    @apply sa-pressable inline-flex min-h-11 shrink-0 items-center rounded-full border border-sa-border bg-sa-surface px-4 text-sm font-medium text-sa-muted;
+  }
+
+  .sa-tab[aria-selected="true"] {
+    @apply border-sa-primary bg-sa-primary/15 text-sa-primary;
   }
 
   .sa-card {
@@ -1160,15 +1182,15 @@
   }
 
   .sa-btn-primary {
-    @apply sa-pressable inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-sa-primary bg-sa-primary px-8 font-heading text-sm font-bold uppercase tracking-[0.14em] text-sa-bg transition duration-300 hover:bg-transparent hover:text-sa-primary disabled:pointer-events-none disabled:opacity-60;
+    @apply sa-pressable inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-sa-primary bg-sa-primary px-8 font-heading text-sm font-semibold tracking-normal text-sa-bg transition duration-300 hover:bg-transparent hover:text-sa-primary disabled:pointer-events-none disabled:opacity-60;
   }
 
   .sa-btn-outline {
-    @apply sa-pressable inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-white px-8 font-heading text-sm font-bold uppercase tracking-[0.14em] text-white transition duration-300 hover:bg-white hover:text-sa-bg disabled:pointer-events-none disabled:opacity-60;
+    @apply sa-pressable inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-white px-8 font-heading text-sm font-semibold tracking-normal text-white transition duration-300 hover:bg-white hover:text-sa-bg disabled:pointer-events-none disabled:opacity-60;
   }
 
   .sa-btn-secondary {
-    @apply sa-pressable inline-flex min-h-[48px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-8 font-heading text-sm font-bold uppercase tracking-[0.14em] text-sa-muted transition duration-300 hover:border-sa-border-strong hover:text-white disabled:pointer-events-none disabled:opacity-60;
+    @apply sa-pressable inline-flex min-h-[48px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-8 font-heading text-sm font-semibold tracking-normal text-sa-muted transition duration-300 hover:border-sa-border-strong hover:text-white disabled:pointer-events-none disabled:opacity-60;
   }
 
   /* Form field primitives — Untitled UI roles, OceanCyber surfaces */
@@ -1177,7 +1199,7 @@
   }
 
   .sa-label-caps {
-    @apply mb-1.5 block text-[10px] font-bold uppercase tracking-widest text-sa-fg-subtle;
+    @apply mb-1.5 block text-sm font-medium text-sa-fg-subtle;
   }
 
   .sa-label-cms {
@@ -1217,7 +1239,7 @@
   }
 
   .sa-badge {
-    @apply inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest;
+    @apply inline-flex min-h-8 items-center gap-1 rounded-full border px-3 text-sm font-medium;
   }
 
   .sa-badge-primary {
@@ -1253,10 +1275,6 @@
     .sa-btn-outline,
     .sa-btn-secondary {
       @apply rounded-2xl text-[15px] font-semibold normal-case tracking-normal;
-    }
-
-    .sa-eyebrow {
-      @apply text-[11px] tracking-[0.18em];
     }
   }
 }

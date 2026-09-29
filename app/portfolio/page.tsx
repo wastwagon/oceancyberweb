@@ -7,9 +7,9 @@ import { withCanonical } from "@/lib/seo/canonical";
 
 export const metadata = withCanonical(
   {
-    title: "Portfolio",
+    title: "Web and app portfolio",
     description:
-      "Live client websites and OceanCyber Creative Hub studio work — switch tabs to browse production sites or illustrative concepts.",
+      "Live client websites and concept work from OceanCyber. Open a production site, or browse illustrative work in the Creative Hub.",
   },
   "/portfolio",
 );
@@ -22,12 +22,10 @@ export default function PortfolioPage() {
         <div className="sa-container max-w-5xl text-center">
           <p className="sa-eyebrow mb-4">Portfolio</p>
           <h1 className="sa-title-lg text-balance">
-            Live deliveries &
-            <span className="text-sa-primary"> studio work</span>
+            Live client sites and concept work
           </h1>
           <p className="sa-subtitle mx-auto">
-            Use the tabs below to switch between partner sites in production and our Creative Hub
-            concepts. Live cards link to real URLs — studio work is clearly labeled illustrative.
+            Switch between partner sites you can open now and Creative Hub concepts. Concept work is labelled as illustrative.
           </p>
         </div>
       </section>
@@ -45,11 +43,14 @@ export default function PortfolioPage() {
           <p className="sa-subtitle mx-auto">
             Want something similar shipped for your team? We scope from discovery through launch.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
+          <div className="mt-8 flex flex-col items-center gap-3">
             <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">
               Get started
             </Link>
-            <Link href="/contact" className="sa-btn-outline w-full sm:w-auto">
+            <Link
+              href="/contact"
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
+            >
               Talk to our team
             </Link>
           </div>

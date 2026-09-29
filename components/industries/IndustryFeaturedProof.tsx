@@ -42,8 +42,8 @@ export function IndustryFeaturedProof({
               href={`/portfolio/${item.slug}`}
               className="sa-card sa-pressable group flex flex-col p-6 transition hover:border-sa-primary/40"
             >
-              <span className="font-heading text-3xl font-black text-white">{item.metric}</span>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-sa-primary">
+              <span className="font-heading text-3xl font-bold text-white">{item.metric}</span>
+              <span className="text-sm font-medium text-sa-primary">
                 {item.metricLabel}
               </span>
               <h3 className="mt-3 font-heading text-lg font-bold text-white group-hover:text-sa-primary">

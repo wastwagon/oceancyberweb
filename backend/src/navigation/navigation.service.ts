@@ -76,6 +76,9 @@ const DEFAULT_CONFIG = {
       dropdownKey: "resources",
       activeMatch: [
         "/insights",
+        "/guides",
+        "/compare",
+        "/alternatives",
         "/portfolio",
         "/how-we-work",
         "/design-process",
@@ -127,7 +130,7 @@ const DEFAULT_CONFIG = {
         {
           heading: "Web design in Accra",
           description:
-            "Accra studio on Nii Kwashiefio Avenue—local meetings, same delivery team.",
+            "Accra company on Nii Kwashiefio Avenue—local meetings, same delivery team.",
           link: "/services/web-design-in-accra",
         },
         {
@@ -286,6 +289,11 @@ const DEFAULT_CONFIG = {
           link: "/insights",
         },
         {
+          heading: "Buyer guides",
+          description: "Website cost, Mobile Money, timelines, and comparisons.",
+          link: "/guides",
+        },
+        {
           heading: "Portfolio",
           description:
             "Selected websites and platforms for clients across Ghana.",
@@ -396,7 +404,7 @@ const DEFAULT_CONFIG = {
       items: [
         {
           heading: "About",
-          description: "Accra studio delivering websites and apps across Ghana.",
+          description: "Accra company delivering websites and apps across Ghana.",
           link: "/about",
         },
         {
