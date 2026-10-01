@@ -38,6 +38,16 @@ const nextConfig = {
         destination: "/",
         permanent: true,
       },
+      {
+        source: "/oceancyber",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/oceancyber/:path*",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
 };

@@ -63,7 +63,7 @@ export function CaBlogSection() {
                   <div className="flex flex-col justify-between p-6 md:p-8 lg:p-10">
                     <p className="ae-body-light text-sm leading-relaxed md:text-base">
                       Practical notes from OceanCyber — strategy, security, and product
-                      delivery for teams building in Ghana and beyond.
+                      delivery for teams in Ghana and for clients abroad, from Accra.
                     </p>
                     <span className="mt-8 inline-flex h-[60px] w-[60px] items-center justify-center rounded-full border border-[var(--ae-ink)]/20 text-[var(--ae-ink)] transition group-hover:border-[var(--ae-primary)] group-hover:bg-[var(--ae-primary)] group-hover:text-black">
                       <ArrowUpRight className="h-5 w-5" aria-hidden />

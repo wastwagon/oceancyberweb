@@ -15,7 +15,7 @@ const ROOT = path.resolve(__dirname, "..");
 const COMPANY = {
   name: "Ocean Cyber",
   tagline: "ICT Solutions Provider",
-  addressLines: ["232 Nii Kwashiefo Avenue", "Abofu – Achimota, Accra", "Ghana"],
+  addressLines: ["47 Nii Kwashiefio Avenue", "Accra", "Ghana"],
   email: "info@oceancyber.net",
   phone: "+233 242 565 695",
   website: "oceancyber.net",

@@ -6,7 +6,7 @@ const site =
 
 /** Full street address used in image IPTC / EXIF metadata. */
 export const imageGeoAddress = {
-  street: "232 Nii Kwashiefio Avenue",
+  street: googleBusinessProfile.address.street,
   locality: googleBusinessProfile.address.locality,
   region: "Greater Accra",
   country: googleBusinessProfile.address.country,

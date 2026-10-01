@@ -1,4 +1,7 @@
-import { getGoogleBusinessProfileUrl } from "@/lib/startup-agency/google-business";
+import {
+  googleBusinessProfile,
+  organizationSameAs,
+} from "@/lib/startup-agency/google-business";
 
 const site =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
@@ -9,15 +12,25 @@ const jsonLd = {
   "@type": "Organization",
   name: "OceanCyber",
   url: site,
+  foundingDate: String(googleBusinessProfile.foundedYear),
   logo: `${site}/images/og-image.jpg`,
-  description:
-    "Ghana's leading technology solutions provider for web, mobile, cybersecurity, and digital transformation.",
+  description: `Best web, mobile, and cybersecurity company in Accra and Ghana. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}, rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews. One office at ${googleBusinessProfile.address.street}, Accra.`,
+  founder: {
+    "@type": "Person",
+    name: googleBusinessProfile.founderName,
+    jobTitle: googleBusinessProfile.founderRole,
+  },
+  numberOfEmployees: {
+    "@type": "QuantitativeValue",
+    value: googleBusinessProfile.teamSize,
+  },
   address: {
     "@type": "PostalAddress",
-    addressCountry: "GH",
-    addressLocality: "Accra",
+    streetAddress: googleBusinessProfile.address.street,
+    addressLocality: googleBusinessProfile.address.locality,
+    addressCountry: googleBusinessProfile.address.countryCode,
   },
-  sameAs: [getGoogleBusinessProfileUrl(), "https://twitter.com/oceancyber"],
+  sameAs: organizationSameAs(),
 };
 
 export function OrganizationJsonLd() {

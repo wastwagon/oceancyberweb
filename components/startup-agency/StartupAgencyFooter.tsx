@@ -11,12 +11,13 @@ import {
   industryFooterLinks,
   industryFooterViewAllLink,
 } from "@/lib/data/industries-catalog";
+import { googleBusinessProfile, socialProfiles } from "@/lib/startup-agency/google-business";
 
 const socialLinks = [
-  { icon: Linkedin, href: "https://linkedin.com/company/oceancyber", label: "LinkedIn" },
-  { icon: Twitter, href: "https://twitter.com/oceancyber", label: "X" },
-  { icon: Facebook, href: "https://facebook.com/oceancyber", label: "Facebook" },
-  { icon: Instagram, href: "https://instagram.com/oceancyber", label: "Instagram" },
+  { icon: Linkedin, href: socialProfiles.linkedin, label: "LinkedIn" },
+  { icon: Twitter, href: socialProfiles.twitter, label: "X" },
+  { icon: Facebook, href: socialProfiles.facebook, label: "Facebook" },
+  { icon: Instagram, href: socialProfiles.instagram, label: "Instagram" },
 ] as const;
 
 export function StartupAgencyFooter() {
@@ -39,7 +40,7 @@ export function StartupAgencyFooter() {
                 />
               </Link>
               <p className="mt-6 max-w-md text-base leading-relaxed text-white/75">
-                We design and build websites, apps, and secure systems for teams in Ghana and across Africa.
+                Best web design company in Accra and Ghana. Websites, apps, and security. A team of {googleBusinessProfile.teamSize}, founded in {googleBusinessProfile.foundedYear}.
               </p>
 
               <ul className="sa-ios-group mt-8 divide-y divide-white/10">
@@ -63,7 +64,7 @@ export function StartupAgencyFooter() {
                   <span className="sa-ios-row">
                     <span>
                       <span className="block text-xs text-white/55">Office</span>
-                      <span className="block text-[15px] text-white">232 Nii Kwashiefio Avenue, Accra</span>
+                      <span className="block text-[15px] text-white">{googleBusinessProfile.address.street}, Accra</span>
                     </span>
                   </span>
                 </li>

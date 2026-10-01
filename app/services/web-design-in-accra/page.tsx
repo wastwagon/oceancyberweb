@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { MapPin } from "lucide-react";
+import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { withCanonical } from "@/lib/seo/canonical";
+import { proofOutcomes } from "@/lib/startup-agency/content";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://oceancyber.net";
@@ -11,9 +13,9 @@ const ghanaUrl = `${SITE_URL}/services/web-design-in-ghana`;
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "Web designer in Accra",
+    title: "Best web design company in Accra",
     description:
-      "Web designer in Accra for company websites, online stores, and web apps. Part of OceanCyber's nationwide Ghana web design service, based on Nii Kwashiefio Avenue.",
+      "Best web design company in Accra for company websites, online stores, and web apps. OceanCyber is at 47 Nii Kwashiefio Avenue, rated 4.9 from 54 Google reviews.",
   },
   path,
 );
@@ -27,18 +29,18 @@ export default function WebDesignAccraPage() {
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
           { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services` },
-          { "@type": "ListItem", position: 3, name: "Web designer in Ghana", item: ghanaUrl },
-          { "@type": "ListItem", position: 4, name: "Web designer in Accra", item: pageUrl },
+          { "@type": "ListItem", position: 3, name: "Web design company in Ghana", item: ghanaUrl },
+          { "@type": "ListItem", position: 4, name: "Web design company in Accra", item: pageUrl },
         ],
       },
       {
         "@type": "Service",
-        name: "Web design in Accra",
+        name: "Best web design company in Accra",
         serviceType: ["Web design", "Web development"],
         url: pageUrl,
         areaServed: { "@type": "City", name: "Accra" },
         description:
-          "Web designer in Accra for company websites and web apps, delivered from OceanCyber on Nii Kwashiefio Avenue.",
+          "Best web design company in Accra for company websites and web apps. OceanCyber, 47 Nii Kwashiefio Avenue, rated 4.9 from 54 Google reviews.",
       },
     ],
   };
@@ -77,23 +79,24 @@ export default function WebDesignAccraPage() {
           </nav>
 
           <p className="mt-8 text-sm font-semibold text-sa-primary">
-            Accra company
+            Best in Accra
           </p>
           <h1 className="sa-title-lg mt-3">
-            Web designer in Accra
+            Best web design company in Accra
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-sa-muted/80">
-            Local company on Nii Kwashiefio Avenue for Accra businesses that want design and
-            build in one place. Nationwide delivery uses the same team—see our{" "}
+            OceanCyber is the company Accra businesses hire for design and build in one place.
+            Rated 4.9 from 54 Google reviews, with 25 people at 47 Nii Kwashiefio Avenue. For
+            the rest of Ghana, see our{" "}
             <Link href="/services/web-design-in-ghana" className="text-sa-primary hover:underline">
-              web designer in Ghana
+              web design company in Ghana
             </Link>{" "}
             page for coverage outside Accra.
           </p>
 
           <div className="mt-6 flex items-start gap-3 text-sm text-sa-muted/75">
             <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-sa-primary" aria-hidden />
-            232 Nii Kwashiefio Avenue, Accra, Ghana
+            47 Nii Kwashiefio Avenue, Accra, Ghana
           </div>
 
           <div className="mt-8 flex flex-col items-start gap-3">
@@ -107,6 +110,56 @@ export default function WebDesignAccraPage() {
               Talk to our team
             </Link>
           </div>
+        </div>
+      </section>
+
+      <section className="border-b border-sa-border py-14 md:py-20">
+        <div className="sa-container max-w-3xl">
+          <h2 className="font-heading text-2xl font-semibold text-white md:text-3xl">
+            Results in Accra
+          </h2>
+          <ul className="mt-6 space-y-3 text-sm leading-relaxed text-sa-muted/80">
+            {proofOutcomes.map((item) => (
+              <li key={item.client}>
+                <a href={item.href} className="font-semibold text-white hover:text-sa-primary">
+                  {item.client}
+                </a>
+                {" — "}
+                {item.result}
+              </li>
+            ))}
+          </ul>
+          <h2 className="mt-14 font-heading text-2xl font-semibold text-white md:text-3xl">
+            Common questions
+          </h2>
+          <FaqPageJsonLd
+            items={[
+              {
+                q: "Who is the best web design company in Accra?",
+                a: "OceanCyber, at 47 Nii Kwashiefio Avenue. Founded in 2008, with 25 people and a 4.9 rating from 54 Google reviews.",
+              },
+              {
+                q: "Where can we meet?",
+                a: "The only office is at 47 Nii Kwashiefio Avenue, Accra. Call +233 242 565 695.",
+              },
+            ]}
+          />
+          <dl className="mt-8 space-y-6">
+            <div>
+              <dt className="font-heading text-base font-semibold text-white">
+                Who is the best web design company in Accra?
+              </dt>
+              <dd className="mt-2 text-sm leading-relaxed text-sa-muted/75">
+                OceanCyber, at 47 Nii Kwashiefio Avenue. Founded in 2008, with 25 people and a 4.9 rating from 54 Google reviews.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-heading text-base font-semibold text-white">Where can we meet?</dt>
+              <dd className="mt-2 text-sm leading-relaxed text-sa-muted/75">
+                The only office is at 47 Nii Kwashiefio Avenue, Accra. Call +233 242 565 695.
+              </dd>
+            </div>
+          </dl>
         </div>
       </section>
 

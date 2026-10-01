@@ -25,6 +25,22 @@ type ServiceCard = {
 
 const services: ServiceCard[] = [
   {
+    title: "Best web design company in Accra",
+    description:
+      "Company websites and web apps from 47 Nii Kwashiefio Avenue. Rated 4.9 from 54 Google reviews.",
+    image: serviceImages.webDevelopment,
+    services: ["Local meetings in Accra", "Design and build in one team", "From GHS 6,000"],
+    href: "/services/web-design-in-accra",
+  },
+  {
+    title: "Best web design company in Ghana",
+    description:
+      "The same Accra team for Kumasi, Tema, Takoradi, and businesses nationwide.",
+    image: serviceImages.webDevelopment,
+    services: ["Nationwide delivery", "Websites, stores, and web apps", "From GHS 6,000"],
+    href: "/services/web-design-in-ghana",
+  },
+  {
     title: "UI/UX & Brand Design",
     description:
       "Research, wireframes, and Figma prototypes — brand systems and interfaces that convert and hand off cleanly to engineering.",

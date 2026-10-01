@@ -1,10 +1,11 @@
 import { DefaultSeoProps } from "next-seo";
+import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 
 export const defaultSEO: DefaultSeoProps = {
   titleTemplate: "%s | OceanCyber",
-  defaultTitle: "OceanCyber | Web, mobile, and cybersecurity in Ghana",
+  defaultTitle: "Best web design company in Accra and Ghana | OceanCyber",
   description:
-    "OceanCyber designs and builds websites, mobile apps, and secure digital products for businesses in Accra and across Africa.",
+    `Best web design company in Accra and Ghana for websites, mobile apps, and cybersecurity. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}, rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`,
   openGraph: {
     type: "website",
     locale: "en_GH",
@@ -43,11 +44,11 @@ export const defaultSEO: DefaultSeoProps = {
     },
     {
       name: "geo.position",
-      content: "5.6037;-0.1870",
+      content: `${googleBusinessProfile.geo.latitude};${googleBusinessProfile.geo.longitude}`,
     },
     {
       name: "ICBM",
-      content: "5.6037, -0.1870",
+      content: `${googleBusinessProfile.geo.latitude}, ${googleBusinessProfile.geo.longitude}`,
     },
   ],
 };

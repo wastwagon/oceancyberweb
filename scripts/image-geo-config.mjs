@@ -6,7 +6,7 @@ import path from "path";
 
 export const business = {
   name: "OceanCyber",
-  street: "232 Nii Kwashiefio Avenue",
+  street: "47 Nii Kwashiefio Avenue",
   locality: "Accra",
   country: "Ghana",
   countryCode: "GH",

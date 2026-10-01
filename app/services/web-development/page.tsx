@@ -14,7 +14,7 @@ const content: ServicePageContent = {
   heroSuffix: "",
   heroHighlightTone: "white",
   heroDescription:
-    "Fast, accessible marketing sites and robust web products, with performance budgets, SEO foundations, and maintainable systems your team can extend.",
+    "Web development in Accra and across Ghana. Fast marketing sites and web apps, with SEO and speed built in, from a team of 25 at 47 Nii Kwashiefio Avenue.",
   heroCtaLabel: "Get started",
   heroCtaHref: "/get-started",
   heroImage: serviceImages.webDevelopment,

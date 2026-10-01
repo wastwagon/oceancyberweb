@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Play } from "lucide-react";
 import { SaShowreelModal } from "@/components/startup-agency/SaShowreelModal";
 import { heroServiceSlides, heroTagline } from "@/lib/startup-agency/content";
+import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 
 export function SaHeroSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -32,11 +33,11 @@ export function SaHeroSection() {
           <div className="mb-4 flex items-center gap-3 rounded-full border border-white/20 bg-black/40 px-4 py-2 backdrop-blur-md">
             <span className="h-1.5 w-1.5 rounded-full bg-sa-primary" />
             <span className="text-sm font-medium text-white/80">
-              Accra company · since 2018
+              Best in Accra and Ghana · since {googleBusinessProfile.foundedYear}
             </span>
           </div>
-          <h1 className="sa-title-lg mx-auto max-w-xl text-balance text-center">
-            Web, mobile, and security for growing businesses
+          <h1 className="sa-title-lg mx-auto max-w-2xl text-balance text-center">
+            Best web design company in Accra and Ghana
           </h1>
           <p className="sa-lead mx-auto mt-3 max-w-xl text-balance text-center text-white/85">
             {heroTagline}

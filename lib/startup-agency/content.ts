@@ -1,10 +1,14 @@
 /** Marketing homepage content — structure aligned with Start-Up Agency; copy tailored for OceanCyber. */
 
 import { siteImagePaths } from "@/lib/seo/site-image-paths";
+import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 import { serviceImages } from "./service-images";
 
 export const heroTagline =
-  "We design and build digital products that help African businesses grow — from brand and UX to launch.";
+  `Websites, mobile apps, and cybersecurity from one Accra team. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}, rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`;
+
+export const companyPresence =
+  `OceanCyber is the best web design company in Accra and in Ghana for websites, mobile apps, and cybersecurity. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}, rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews. One office at ${googleBusinessProfile.address.street}, Accra.`;
 
 export const heroServiceSlides = [
   {
@@ -118,17 +122,17 @@ export const aboutWorkPreview = [
 ] as const;
 
 export const aboutStats = [
-  { value: "Since 2018", label: "Accra-based company" },
+  { value: `Since ${googleBusinessProfile.foundedYear}`, label: "Accra office" },
+  { value: String(googleBusinessProfile.teamSize), label: "People" },
   { value: "100+", label: "Clients served" },
-  { value: "12", label: "Industry verticals" },
 ] as const;
 
 export const trustSignals = [
   {
     icon: "award" as const,
-    stat: "8+",
+    stat: "18+",
     title: "Years delivering",
-    body: "Founded in Accra in 2018 — software, design, infrastructure, and cybersecurity programmes across Ghana and beyond.",
+    body: `The company to hire in Accra and in Ghana. Founded in ${googleBusinessProfile.foundedYear}, with ${googleBusinessProfile.teamSize} people at ${googleBusinessProfile.address.street}.`,
   },
   {
     icon: "star" as const,
@@ -257,7 +261,32 @@ export type {
   ServicePricingTierHint,
 } from "@/lib/startup-agency/pricing";
 
+export const proofOutcomes = [
+  {
+    client: "Fitch Advisory",
+    result: "Client engagement up 250% after a client portal, document sharing, and booking.",
+    href: "https://www.fitchadvisory.com/",
+    path: "/portfolio/fitch-advisory",
+  },
+  {
+    client: "Fitch Attorneys",
+    result: "Case-management efficiency up 180% after one platform for matters and client updates.",
+    href: "https://www.fitchattorneys.com/",
+    path: "/portfolio/fitch-attorneys",
+  },
+  {
+    client: "ThinQ Shopping",
+    result: "Mobile conversions up 165% with Paystack and MoMo checkout.",
+    href: "https://thinqshopping.app/",
+    path: "/portfolio/thinq-shopping",
+  },
+] as const;
+
 export const faqItems = [
+  {
+    q: "Who is the best web design company in Accra and Ghana?",
+    a: `OceanCyber, at ${googleBusinessProfile.address.street}, Accra. Founded in ${googleBusinessProfile.foundedYear}, with ${googleBusinessProfile.teamSize} people and a ${googleBusinessProfile.rating} rating from ${googleBusinessProfile.reviewCount} Google reviews. Published results include a 250% rise in client engagement for Fitch Advisory, 180% better case-management efficiency for Fitch Attorneys, and 165% higher mobile conversions for ThinQ Shopping.`,
+  },
   {
     q: "How do we start a project?",
     a: "Contact us with goals and timeline. We reply with next steps and, where helpful, a rough range using our project calculator.",

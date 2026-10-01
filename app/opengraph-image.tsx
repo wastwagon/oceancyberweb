@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-export const alt = "OceanCyber — Engineering Digital Products that Scale";
+export const alt = "OceanCyber, best web design company in Accra and Ghana";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -53,17 +53,17 @@ export default function OpenGraphImage() {
           <div
             style={{
               color: "#ffffff",
-              fontSize: "64px",
+              fontSize: "52px",
               fontWeight: 800,
               lineHeight: 1.05,
               letterSpacing: "-0.03em",
               maxWidth: "900px",
             }}
           >
-            Engineering digital products that scale
+            Best web design company in Accra and Ghana
           </div>
           <div style={{ color: "#9ca3af", fontSize: "28px", maxWidth: "820px" }}>
-            Web, mobile, e-commerce, and cybersecurity for Ghana and West Africa
+            Websites, mobile apps, and cybersecurity from Accra
           </div>
         </div>
 

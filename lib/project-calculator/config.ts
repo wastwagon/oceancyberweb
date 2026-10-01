@@ -78,8 +78,8 @@ export const PROJECT_FEATURE_ID_SET: ReadonlySet<string> = new Set(
 );
 
 export const PROFORMA_COMPANY = {
-  name: "Ocean Cyber",
-  addressLines: ["232 Nii Kwashiefo Avenue", "Abofu - Achimota, Accra", "Ghana"],
+  name: "OceanCyber",
+  addressLines: ["47 Nii Kwashiefio Avenue", "Accra", "Ghana"],
   email: "info@oceancyber.net",
   phone: "+233 242 565 695",
 } as const;

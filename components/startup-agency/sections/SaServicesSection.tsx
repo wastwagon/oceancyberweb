@@ -29,8 +29,21 @@ export function SaServicesSection() {
           align="center"
           eyebrow="Services"
           title="What we do"
-          className="mb-16"
+          className="mb-8"
         />
+        <p className="mb-16 text-center text-sm leading-relaxed text-sa-muted">
+          <Link href="/services/web-design-in-accra" className="font-semibold text-sa-primary hover:underline">
+            Best web design company in Accra
+          </Link>
+          <span aria-hidden> · </span>
+          <Link href="/services/web-design-in-ghana" className="font-semibold text-sa-primary hover:underline">
+            Best web design company in Ghana
+          </Link>
+          <span aria-hidden> · </span>
+          <Link href="/guides/website-cost-in-ghana" className="font-semibold text-sa-primary hover:underline">
+            Website cost in Ghana
+          </Link>
+        </p>
 
         <div className="space-y-4 md:space-y-8">
           {serviceCards.map((service, index) => {

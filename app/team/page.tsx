@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getTeamMembers } from "@/lib/data/team-loader";
 import { withCanonical } from "@/lib/seo/canonical";
+import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 
 export const revalidate = 60;
 
@@ -10,7 +11,7 @@ export const metadata: Metadata = withCanonical(
   {
     title: "The OceanCyber team",
     description:
-      "Meet the people who design, build, and secure digital products at OceanCyber in Accra.",
+      `Leadership at OceanCyber, an Accra company of ${googleBusinessProfile.teamSize} people.`,
   },
   "/team",
 );
@@ -26,8 +27,8 @@ export default async function TeamPage() {
             Leadership and specialists focused on outcomes
           </h1>
           <p className="sa-subtitle mx-auto max-w-3xl">
-            Strategy, engineering, design, and security in one delivery rhythm, with clear ownership
-            at every stage.
+            OceanCyber is {googleBusinessProfile.teamSize} people in Accra. These leads cover
+            strategy, engineering, design, and security.
           </p>
         </div>
       </section>

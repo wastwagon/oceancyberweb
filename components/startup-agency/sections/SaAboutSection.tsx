@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
 import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
 import { SaTeamCollage } from "@/components/startup-agency/sections/SaTeamCollage";
-import { aboutStats } from "@/lib/startup-agency/content";
+import { aboutStats, companyPresence } from "@/lib/startup-agency/content";
 
 export function SaAboutSection() {
   return (
@@ -19,7 +19,7 @@ export function SaAboutSection() {
                 align="left"
                 eyebrow="Our Agency"
                 title="Design craft meets engineering discipline"
-                subtitle="OceanCyber is an Accra-based company. We partner with ambitious teams to shape brands, design intuitive experiences, and ship software that holds up in real use across Ghana and for clients abroad."
+                subtitle={companyPresence}
               />
               <p className="mt-4 max-w-2xl text-sm leading-relaxed text-sa-muted">
                 From fintech and e-commerce to professional services, we combine UX

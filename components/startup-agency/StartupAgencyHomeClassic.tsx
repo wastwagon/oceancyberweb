@@ -36,8 +36,8 @@ export function StartupAgencyHomeClassic() {
 
       <main id="startup-main-content" className="sa-mobile-tab-pad md:pb-0" tabIndex={-1}>
         <SaHeroSection />
-        <SaMarqueeSection />
         <SaAboutSection />
+        <SaMarqueeSection />
         <SaServicesSection />
         <SaPortfolioGallerySection />
         <SaProcessSection />

@@ -45,8 +45,8 @@ const DEFAULT_CONFIG = {
     { label: "Project cost calculator", href: "/tools/project-cost" },
     { label: "Contact", href: "/contact" },
     { label: "Services", href: "/services" },
-    { label: "Web design in Ghana", href: "/services/web-design-in-ghana" },
-    { label: "Web design in Accra", href: "/services/web-design-in-accra" },
+    { label: "Best web design company in Ghana", href: "/services/web-design-in-ghana" },
+    { label: "Best web design company in Accra", href: "/services/web-design-in-accra" },
     { label: "Products", href: "/products" },
     { label: "Insights", href: "/insights" },
     { label: "Reviews", href: "/reviews" },
@@ -122,15 +122,15 @@ const DEFAULT_CONFIG = {
           link: "/services",
         },
         {
-          heading: "Web design in Ghana",
+          heading: "Best web design company in Ghana",
           description:
-            "Web designers and website developers for businesses nationwide.",
+            "Best website design and development for businesses across Ghana, from Accra.",
           link: "/services/web-design-in-ghana",
         },
         {
-          heading: "Web design in Accra",
+          heading: "Best web design company in Accra",
           description:
-            "Accra company on Nii Kwashiefio Avenue—local meetings, same delivery team.",
+            "Best web design company in Accra. Meet the team at 47 Nii Kwashiefio Avenue.",
           link: "/services/web-design-in-accra",
         },
         {

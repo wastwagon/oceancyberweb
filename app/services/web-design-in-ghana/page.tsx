@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { MapPin, Mail, Phone } from "lucide-react";
+import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { withCanonical } from "@/lib/seo/canonical";
+import { proofOutcomes } from "@/lib/startup-agency/content";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://oceancyber.net";
@@ -10,14 +12,19 @@ const pageUrl = `${SITE_URL}${path}`;
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "Web designer in Ghana",
+    title: "Best web design company in Ghana",
     description:
-      "Web designer and website developer in Ghana. OceanCyber designs and builds company websites, online stores, and web apps for Accra, Kumasi, Tema, Takoradi, and businesses nationwide.",
+      "Best web design company in Ghana. OceanCyber builds company websites, online stores, and web apps from Accra, rated 4.9 from 54 Google reviews.",
   },
   path,
 );
 
 const faqs = [
+  {
+    question: "Who is the best web design company in Ghana?",
+    answer:
+      "OceanCyber. The company is at 47 Nii Kwashiefio Avenue in Accra, founded in 2008, with 25 people and a 4.9 rating from 54 Google reviews. The same team serves Kumasi, Tema, Takoradi, and the rest of Ghana.",
+  },
   {
     question: "Do you serve all of Ghana?",
     answer:
@@ -31,7 +38,7 @@ const faqs = [
   {
     question: "Where is the company?",
     answer:
-      "232 Nii Kwashiefio Avenue, Accra. Accra clients can meet locally. The same team, phone number, and delivery process cover the rest of the country.",
+      "47 Nii Kwashiefio Avenue, Accra. Accra clients can meet locally. The same team, phone number, and delivery process cover the rest of Ghana.",
   },
   {
     question: "What kinds of websites do you design and develop?",
@@ -65,17 +72,17 @@ export default function WebDesignGhanaPage() {
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
           { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services` },
-          { "@type": "ListItem", position: 3, name: "Web designer in Ghana", item: pageUrl },
+          { "@type": "ListItem", position: 3, name: "Web design company in Ghana", item: pageUrl },
         ],
       },
       {
         "@type": "Service",
-        name: "Web design and website development in Ghana",
+        name: "Best web design company in Ghana",
         serviceType: ["Web design", "Web development", "Website development"],
         url: pageUrl,
         areaServed: { "@type": "Country", name: "Ghana" },
         description:
-          "Web designers and website developers for businesses across Ghana, delivered from OceanCyber in Accra.",
+          "Best web design company in Ghana. Company websites, online stores, and web apps delivered from OceanCyber in Accra.",
       },
       {
         "@type": "FAQPage",
@@ -111,20 +118,20 @@ export default function WebDesignGhanaPage() {
                 </Link>
               </li>
               <li aria-hidden>/</li>
-              <li className="text-sa-muted">Web designer in Ghana</li>
+              <li className="text-sa-muted">Web design company in Ghana</li>
             </ol>
           </nav>
 
           <p className="mt-8 text-sm font-semibold text-sa-primary">
-            Nationwide Ghana
+            Best in Ghana
           </p>
           <h1 className="sa-title-lg mt-3">
-            Web designer in Ghana
+            Best web design company in Ghana
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-sa-muted/80">
-            OceanCyber designs and builds websites for businesses across Ghana—from Accra and
-            Kumasi to Tema, Takoradi, and remote teams nationwide. One Accra company, one phone
-            number, clear delivery.
+            OceanCyber is the company to hire in Ghana for websites, from Accra to Kumasi,
+            Tema, and Takoradi. Rated 4.9 from 54 Google reviews. One office, at 47 Nii
+            Kwashiefio Avenue in Accra, and one phone number.
           </p>
 
           <div className="mt-8 flex flex-col items-start gap-3">
@@ -193,7 +200,22 @@ export default function WebDesignGhanaPage() {
 
       <section className="border-b border-sa-border py-14 md:py-20">
         <div className="sa-container max-w-3xl">
+          <FaqPageJsonLd items={faqs.map((faq) => ({ q: faq.question, a: faq.answer }))} />
           <h2 className="font-heading text-2xl font-semibold text-white md:text-3xl">
+            Results
+          </h2>
+          <ul className="mt-6 space-y-3 text-sm leading-relaxed text-sa-muted/80">
+            {proofOutcomes.map((item) => (
+              <li key={item.client}>
+                <a href={item.href} className="font-semibold text-white hover:text-sa-primary">
+                  {item.client}
+                </a>
+                {" — "}
+                {item.result}
+              </li>
+            ))}
+          </ul>
+          <h2 className="mt-14 font-heading text-2xl font-semibold text-white md:text-3xl">
             Common questions
           </h2>
           <dl className="mt-8 space-y-6">
@@ -213,7 +235,7 @@ export default function WebDesignGhanaPage() {
           <ul className="mt-6 space-y-3 text-sm text-sa-muted">
             <li className="flex items-start gap-3">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-sa-primary" aria-hidden />
-              232 Nii Kwashiefio Avenue, Accra, Ghana
+              47 Nii Kwashiefio Avenue, Accra, Ghana
             </li>
             <li className="flex items-center gap-3">
               <Phone className="h-4 w-4 shrink-0 text-sa-primary" aria-hidden />

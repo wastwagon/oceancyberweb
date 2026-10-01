@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Play } from "lucide-react";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
-import { aboutStats, aboutWorkPreview } from "@/lib/startup-agency/content";
+import { aboutStats, aboutWorkPreview, companyPresence } from "@/lib/startup-agency/content";
 
 /** Aeolla about = LIGHT cream band (not dark). */
 export function CaAboutSection() {
@@ -48,9 +48,8 @@ export function CaAboutSection() {
             engineering discipline
           </h2>
           <p className="ae-body-light mt-6 max-w-xl text-base leading-relaxed md:text-lg">
-            OceanCyber is an Accra-based company. We partner with ambitious teams to
-            shape brands, design intuitive experiences, and ship software that holds up in real use
-            across Ghana and for clients abroad.
+            {companyPresence} We partner with ambitious teams to shape brands, design
+            intuitive experiences, and ship software that holds up in real use.
           </p>
 
           <div className="mt-10 grid grid-cols-3 gap-4 border-t border-[var(--ae-line-light)] pt-8 md:gap-8">

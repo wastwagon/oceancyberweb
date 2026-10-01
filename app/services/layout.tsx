@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    default: "Web and mobile development in Ghana",
+    default: "Best web and mobile development in Accra and Ghana",
     template: "%s | OceanCyber",
   },
   description:
-    "Web, mobile apps, e-commerce, UI/UX, cybersecurity, and hosting for teams in Ghana. Packages start from GHS 6,000, with clear milestones and billing in Ghana cedis.",
+    "Best web design, mobile apps, e-commerce, and cybersecurity in Accra and Ghana. Packages start from GHS 6,000. Rated 4.9 from 54 Google reviews.",
   alternates: { canonical: "/services" },
 };
 

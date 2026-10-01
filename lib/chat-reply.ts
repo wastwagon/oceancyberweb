@@ -1,3 +1,5 @@
+import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
+
 /**
  * Offline assistant when OPENAI_API_KEY is not set (or OpenAI fails).
  * Keep answers short and point to real site routes.
@@ -33,7 +35,7 @@ export function getLocalChatReply(userText: string): string {
   }
 
   if (/\b(where|location|address|accra|ghana)\b/.test(t)) {
-    return "We are based in Accra, Ghana: 232 Nii Kwashiefio Avenue. Remote delivery across the region is normal for us.";
+    return `Our only office is in Accra, Ghana: ${googleBusinessProfile.address.street}. A team of ${googleBusinessProfile.teamSize} works from there, including for clients outside Accra.`;
   }
 
   if (/\b(job|career|hire|intern)\b/.test(t)) {

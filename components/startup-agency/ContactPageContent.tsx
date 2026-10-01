@@ -53,8 +53,8 @@ const contactItems = [
   },
   {
     title: "Visit",
-    content: "232 Nii Kwashiefio Avenue, Accra, Ghana",
-    href: "https://maps.google.com/?q=232+Nii+Kwashiefio+Avenue,+Accra",
+    content: "47 Nii Kwashiefio Avenue, Accra, Ghana",
+    href: "https://maps.google.com/?q=47+Nii+Kwashiefio+Avenue,+Accra",
     external: true,
     icon: MapPin,
   },

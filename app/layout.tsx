@@ -15,6 +15,7 @@ import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { GoogleAnalyticsRouteTracker } from "@/components/analytics/GoogleAnalyticsRouteTracker";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { CreativeEnhancements } from "@/components/shared/CreativeEnhancements";
+import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 
 const ChatBot = dynamic(
   () => import("@/components/ui/ChatBot").then((mod) => mod.ChatBot),
@@ -33,16 +34,16 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: {
-    default: "OceanCyber | Web, mobile, and cybersecurity in Ghana",
+    default: "Best web design company in Accra and Ghana | OceanCyber",
     template: "%s | OceanCyber",
   },
   description:
-    "OceanCyber designs and builds websites, mobile apps, and secure digital products for businesses in Accra and across Africa.",
+    `Best web design company in Accra and Ghana for websites, mobile apps, and cybersecurity. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}, rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`,
   keywords: [
     "web development Ghana",
     "mobile app development Accra",
     "cybersecurity services Ghana",
-    "e-commerce solutions West Africa",
+    "e-commerce solutions Ghana",
     "software engineering Accra",
     "fintech development Ghana",
   ],
@@ -57,9 +58,9 @@ export const metadata: Metadata = {
     locale: "en_GH",
     url: "https://oceancyber.net",
     siteName: "OceanCyber",
-    title: "OceanCyber | Web, mobile, and cybersecurity in Ghana",
+    title: "Best web design company in Accra and Ghana | OceanCyber",
     description:
-      "Websites, mobile apps, and cybersecurity for teams in Ghana. Clear scope, secure delivery, and local support from Accra.",
+      `Best web design company in Accra and Ghana for websites, mobile apps, and cybersecurity. Rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`,
     images: [
       {
         url: "/opengraph-image",
@@ -71,9 +72,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "OceanCyber | Web, mobile, and cybersecurity in Ghana",
+    title: "Best web design company in Accra and Ghana | OceanCyber",
     description:
-      "Websites, mobile apps, and cybersecurity for teams in Ghana. Clear scope, secure delivery, and local support from Accra.",
+      `Best web design company in Accra and Ghana for websites, mobile apps, and cybersecurity. Rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`,
     images: ["/opengraph-image"],
   },
   robots: {

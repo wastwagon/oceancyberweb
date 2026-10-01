@@ -8,16 +8,28 @@ export const googleBusinessProfile = {
   phone: "+233242565695",
   phoneDisplay: "024 256 5695",
   address: {
-    street: "Nii Kwashiefio Avenue",
+    street: "47 Nii Kwashiefio Avenue",
     locality: "Accra",
     country: "Ghana",
     countryCode: "GH",
   },
+  /** Single office. Clients outside Accra are served from here. */
+  foundedYear: 2008,
+  teamSize: 25,
+  founderName: "Gilbert Kwabena Amidu",
+  founderRole: "Founder & CEO",
   /** Coordinates from verified directory listing (Accra). */
   geo: {
     latitude: 5.6173486,
     longitude: -0.2252809,
   },
+} as const;
+
+export const socialProfiles = {
+  linkedin: "https://linkedin.com/company/oceancyber",
+  twitter: "https://twitter.com/oceancyber",
+  facebook: "https://facebook.com/oceancyber",
+  instagram: "https://instagram.com/oceancyber",
 } as const;
 
 const mapsProfileUrl =
@@ -32,6 +44,11 @@ const mapsSearchFallback =
 /** Profile / reviews page — override in Coolify with Share link from Google Business Profile. */
 export function getGoogleBusinessProfileUrl(): string {
   return process.env.NEXT_PUBLIC_GOOGLE_REVIEWS_URL?.trim() || mapsProfileUrl || mapsSearchFallback;
+}
+
+/** Profiles that should agree with the on-site company description. */
+export function organizationSameAs(): string[] {
+  return [getGoogleBusinessProfileUrl(), ...Object.values(socialProfiles)];
 }
 
 /** Direct “Write a review” link when Place ID is configured. */

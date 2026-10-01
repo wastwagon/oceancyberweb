@@ -70,7 +70,7 @@ export class ChatService {
       return "For a detailed price range based on your needs, try our project cost calculator at /tools/project-cost.";
     }
     if (q.includes("about")) {
-      return "OceanCyber is an Accra-based digital partner specializing in high-performance web and mobile delivery. Learn more at /about.";
+      return "OceanCyber is the best company to hire in Accra and in Ghana for web, mobile, and security. 25 people, founded in 2008, at 47 Nii Kwashiefio Avenue. Learn more at /about.";
     }
     if (q.includes("contact") || q.includes("email") || q.includes("phone")) {
       return "You can reach our team at info@oceancyber.net or by using the contact form at /contact.";

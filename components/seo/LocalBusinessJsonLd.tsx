@@ -1,6 +1,6 @@
 import {
-  getGoogleBusinessProfileUrl,
   googleBusinessProfile,
+  organizationSameAs,
 } from "@/lib/startup-agency/google-business";
 import { getGooglePlaceStats } from "@/lib/google-places-stats";
 
@@ -16,11 +16,21 @@ export async function LocalBusinessJsonLd() {
     "@type": "ProfessionalService",
     name: googleBusinessProfile.name,
     alternateName: googleBusinessProfile.shortName,
+    foundingDate: String(googleBusinessProfile.foundedYear),
     url: site,
     image: `${site}/images/og-image.jpg`,
     telephone: googleBusinessProfile.phone,
     description:
-      "Website and mobile app development, UI/UX design, e-commerce, cybersecurity, and hosting for businesses in Ghana and abroad.",
+      `Best website, mobile app, and cybersecurity company in Accra and Ghana. Team of ${googleBusinessProfile.teamSize} at ${googleBusinessProfile.address.street}. Rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`,
+    founder: {
+      "@type": "Person",
+      name: googleBusinessProfile.founderName,
+      jobTitle: googleBusinessProfile.founderRole,
+    },
+    numberOfEmployees: {
+      "@type": "QuantitativeValue",
+      value: googleBusinessProfile.teamSize,
+    },
     address: {
       "@type": "PostalAddress",
       streetAddress: googleBusinessProfile.address.street,
@@ -39,7 +49,7 @@ export async function LocalBusinessJsonLd() {
       bestRating: 5,
       worstRating: 1,
     },
-    sameAs: [getGoogleBusinessProfileUrl(), "https://twitter.com/oceancyber"],
+    sameAs: organizationSameAs(),
   };
 
   return (

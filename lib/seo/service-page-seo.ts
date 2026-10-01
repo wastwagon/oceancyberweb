@@ -10,16 +10,16 @@ export type ServicePageSeoEntry = {
 export const servicePageSeoEntries: ServicePageSeoEntry[] = [
   {
     path: "/services/web-design-in-ghana",
-    name: "Web designer in Ghana",
+    name: "Best web design company in Ghana",
     description:
-      "Web designer and website developer in Ghana. Company websites, online stores, and web apps for Accra, Kumasi, Tema, Takoradi, and nationwide.",
+      "Best web design company in Ghana. Company websites, online stores, and web apps from 47 Nii Kwashiefio Avenue, Accra. Rated 4.9 from 54 Google reviews.",
     image: serviceImages.webDevelopment,
   },
   {
     path: "/services/web-design-in-accra",
-    name: "Web designer in Accra",
+    name: "Best web design company in Accra",
     description:
-      "Web designer in Accra for company websites and web apps — Accra company on Nii Kwashiefio Avenue, nationwide delivery available.",
+      "Best web design company in Accra for company websites and web apps. OceanCyber at 47 Nii Kwashiefio Avenue, rated 4.9 from 54 Google reviews.",
     image: serviceImages.webDevelopment,
   },
   {
@@ -31,9 +31,9 @@ export const servicePageSeoEntries: ServicePageSeoEntry[] = [
   },
   {
     path: "/services/web-development",
-    name: "Web development",
+    name: "Web development in Accra and Ghana",
     description:
-      "Fast, accessible marketing sites and robust web products in Ghana — from GHS 6,000. Performance budgets, SEO foundations, and maintainable systems your team can extend.",
+      "Best web development company in Accra and Ghana. Marketing sites and web apps from GHS 6,000, with SEO, speed, and a team of 25 at 47 Nii Kwashiefio Avenue.",
     image: serviceImages.webDevelopment,
   },
   {

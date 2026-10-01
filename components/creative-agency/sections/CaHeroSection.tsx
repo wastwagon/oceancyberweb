@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Facebook, Instagram, Linkedin, Play, Twitter } from "lucide-react";
 import { SaShowreelModal } from "@/components/startup-agency/SaShowreelModal";
 import { heroServiceSlides, serviceCards } from "@/lib/startup-agency/content";
+import { socialProfiles } from "@/lib/startup-agency/google-business";
 
 const tickerItems = [
   ...serviceCards.map((s) => s.title),
@@ -13,10 +14,10 @@ const tickerItems = [
 ];
 
 const socials = [
-  { icon: Linkedin, href: "https://linkedin.com/company/oceancyber", label: "LinkedIn" },
-  { icon: Instagram, href: "https://instagram.com/oceancyber", label: "Instagram" },
-  { icon: Twitter, href: "https://twitter.com/oceancyber", label: "X" },
-  { icon: Facebook, href: "https://facebook.com/oceancyber", label: "Facebook", accent: true },
+  { icon: Linkedin, href: socialProfiles.linkedin, label: "LinkedIn" },
+  { icon: Instagram, href: socialProfiles.instagram, label: "Instagram" },
+  { icon: Twitter, href: socialProfiles.twitter, label: "X" },
+  { icon: Facebook, href: socialProfiles.facebook, label: "Facebook", accent: true },
 ] as const;
 
 export function CaHeroSection() {

@@ -6,7 +6,7 @@ export const metadata = withCanonical(
   {
     title: "Contact OceanCyber in Accra",
     description:
-      "Call, email, or send a message about a web, mobile, or cybersecurity project. The company is at 232 Nii Kwashiefio Avenue, Accra.",
+      "Call, email, or send a message about a web, mobile, or cybersecurity project. The company is at 47 Nii Kwashiefio Avenue, Accra.",
   },
   "/contact",
 );

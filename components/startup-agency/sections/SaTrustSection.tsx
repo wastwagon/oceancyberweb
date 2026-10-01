@@ -3,7 +3,7 @@
 import { Award, ShieldCheck, Star } from "lucide-react";
 import Link from "next/link";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
-import { trustSignals } from "@/lib/startup-agency/content";
+import { proofOutcomes, trustSignals } from "@/lib/startup-agency/content";
 
 const iconMap = {
   award: Award,
@@ -35,6 +35,26 @@ export function SaTrustSection() {
             );
           })}
         </div>
+
+        <SaReveal delay={0.12} className="mx-auto mt-10 max-w-3xl">
+          <h2 className="text-center font-heading text-xl font-semibold text-white">
+            Results clients can open
+          </h2>
+          <ul className="mt-6 space-y-4">
+            {proofOutcomes.map((item) => (
+              <li key={item.client} className="text-sm leading-relaxed text-sa-muted">
+                <Link href={item.path} className="font-semibold text-white hover:text-sa-primary">
+                  {item.client}
+                </Link>
+                {" — "}
+                {item.result}{" "}
+                <a href={item.href} className="text-sa-primary hover:underline">
+                  Live site
+                </a>
+              </li>
+            ))}
+          </ul>
+        </SaReveal>
 
         <SaReveal delay={0.15} className="mt-8 text-center">
           <Link

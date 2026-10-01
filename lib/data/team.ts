@@ -1,3 +1,5 @@
+import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
+
 export type TeamMember = {
   name: string;
   initials: string;
@@ -8,7 +10,6 @@ export type TeamMember = {
 };
 
 export const teamHeadshotFilenameGuide: Record<string, string> = {
-  "Marcus Owusu": "/images/team/marcus-owusu.webp",
   "Sarah Mensah": "/images/team/sarah-mensah.webp",
   "Kwame Nkrumah": "/images/team/kwame-nkrumah.webp",
   "Ama Serwaa": "/images/team/ama-serwaa.webp",
@@ -16,9 +17,9 @@ export const teamHeadshotFilenameGuide: Record<string, string> = {
 
 export const teamMembers: TeamMember[] = [
   {
-    name: "Marcus Owusu",
-    initials: "MO",
-    role: "Founder & CEO",
+    name: googleBusinessProfile.founderName,
+    initials: "GA",
+    role: googleBusinessProfile.founderRole,
     accent: "from-lime-300/30 to-emerald-500/20",
     bio: "Leads strategy, product direction, and delivery standards across multidisciplinary teams.",
   },

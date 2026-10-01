@@ -23,6 +23,7 @@ import { type HeaderDropdownKey } from "@/lib/navigation/menu";
 import { useNavigationConfig } from "@/lib/navigation/useNavigationConfig";
 import { cn, formatWhatsAppLink } from "@/lib/utils";
 import { getBrowserSession } from "@/lib/auth-client";
+import { socialProfiles } from "@/lib/startup-agency/google-business";
 import {
   NavCompactMenu,
   NavMegaMenu,
@@ -33,10 +34,10 @@ const navLinkClass =
   "group relative inline-flex min-h-11 items-center gap-1 px-3 py-2 text-sm font-medium tracking-normal text-white transition duration-300 hover:text-sa-primary";
 
 const HEADER_SOCIAL_LINKS = [
-  { Icon: Facebook, href: "https://facebook.com/oceancyber", label: "Facebook" },
-  { Icon: Twitter, href: "https://twitter.com/oceancyber", label: "Twitter" },
-  { Icon: Instagram, href: "https://instagram.com/oceancyber", label: "Instagram" },
-  { Icon: Linkedin, href: "https://linkedin.com/company/oceancyber", label: "LinkedIn" },
+  { Icon: Facebook, href: socialProfiles.facebook, label: "Facebook" },
+  { Icon: Twitter, href: socialProfiles.twitter, label: "Twitter" },
+  { Icon: Instagram, href: socialProfiles.instagram, label: "Instagram" },
+  { Icon: Linkedin, href: socialProfiles.linkedin, label: "LinkedIn" },
 ] as const;
 
 export function StartupAgencyNavbar() {
@@ -148,7 +149,7 @@ export function StartupAgencyNavbar() {
                 <span className="truncate">info@oceancyber.net</span>
               </a>
               <span className="hidden min-w-0 text-sa-muted/55 2xl:inline">
-                232 Nii Kwashiefio Avenue, Accra, Ghana
+                47 Nii Kwashiefio Avenue, Accra, Ghana
               </span>
             </div>
 

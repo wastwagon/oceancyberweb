@@ -192,7 +192,7 @@ export function buildMenuPreset(kind: string): AdminNavMenu {
             ...createEmptyNavItem(10),
             heading: "Case studies",
             href: "/portfolio",
-            description: "Delivery outcomes across sectors in Ghana and beyond.",
+            description: "Delivery outcomes across sectors, from the Accra office.",
           },
         ],
       };

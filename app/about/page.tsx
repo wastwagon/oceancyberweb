@@ -19,13 +19,14 @@ import {
 } from "@/lib/scroll-reveal";
 import { PartnersAndStandardsSection } from "@/components/marketing/PartnersAndStandardsSection";
 import { VideoTestimonialSection } from "@/components/marketing/VideoTestimonialSection";
+import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 
 const teamMembers = [
   {
-    name: "Marcus Owusu",
-    role: "Founder & CEO",
-    image: "/images/team/marcus.png",
-    bio: "Technology leader with 15+ years of experience in product delivery and cybersecurity programmes across Africa.",
+    name: googleBusinessProfile.founderName,
+    role: googleBusinessProfile.founderRole,
+    initials: "GA",
+    bio: "Leads strategy, product direction, and delivery standards across multidisciplinary teams.",
     expertise: [
       "Strategic Leadership",
       "Digital Transformation",
@@ -63,7 +64,7 @@ const teamMembers = [
 
 const milestones = [
   {
-    year: "2018",
+    year: String(googleBusinessProfile.foundedYear),
     title: "Company Founded",
     description: "OceanCyber established in Accra, Ghana",
   },
@@ -74,36 +75,26 @@ const milestones = [
   },
   {
     year: "2020",
-    title: "Team Expansion",
-    description: "Grew from 5 to 25 team members across multiple African countries",
-  },
-  {
-    year: "2021",
-    title: "Award Recognition",
-    description: "Recognized as Top Tech Company in West Africa",
-  },
-  {
-    year: "2022",
-    title: "International Expansion",
-    description: "Opened offices in Nigeria and Kenya",
+    title: `Team of ${googleBusinessProfile.teamSize}`,
+    description: `A team of ${googleBusinessProfile.teamSize} people, working from the Accra office`,
   },
   {
     year: "2023",
     title: "100+ Clients",
-    description: "Successfully served 100+ businesses across various industries",
+    description: "Served 100+ businesses from Accra, across 12 industries",
   },
   {
     year: "2024",
     title: "Innovation Lab",
-    description: "Launched R&D lab focusing on AI and blockchain technologies",
+    description: "Launched an R&D lab in Accra focusing on AI and blockchain",
   },
 ];
 
 const stats = [
-  { label: "Founded", value: "2018" },
+  { label: "Founded", value: String(googleBusinessProfile.foundedYear) },
+  { label: "People", value: String(googleBusinessProfile.teamSize) },
   { label: "Clients served", value: "100+" },
   { label: "Industries", value: "12+" },
-  { label: "SOC coverage", value: "24/7" },
 ];
 
 const missionPillars = [
@@ -177,9 +168,10 @@ export default function AboutPage() {
               variants={aboutHeroItem}
               className="sa-lead mx-auto mt-3"
             >
-              We design and secure the platforms businesses rely on, from
-              first sketch to production-grade infrastructure, with a team
-              obsessed with clarity, performance, and trust.
+              The best company in Accra and in Ghana for web, mobile, and
+              security. A team of {googleBusinessProfile.teamSize}, founded in{" "}
+              {googleBusinessProfile.foundedYear}, rated {googleBusinessProfile.rating} from{" "}
+              {googleBusinessProfile.reviewCount} Google reviews.
             </motion.p>
             <motion.div variants={aboutHeroItem} className="mt-8">
               <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">
@@ -286,10 +278,10 @@ export default function AboutPage() {
                   </p>
                   <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                     {[
-                      "100+ African businesses supported",
-                      "Ghana, Nigeria, and Kenya delivery footprint",
+                      "100+ businesses supported",
+                      "One office, in Accra",
+                      `Team of ${googleBusinessProfile.teamSize}`,
                       "12 industry verticals served",
-                      "24/7 security operations mindset",
                     ].map((line) => (
                       <li
                         key={line}
@@ -340,13 +332,21 @@ export default function AboutPage() {
                 className="sa-card group flex flex-col overflow-hidden md:flex-row md:items-stretch"
               >
                 <div className="relative h-44 w-full shrink-0 overflow-hidden md:h-auto md:w-[42%] md:min-h-[260px]">
-                  <Image
-                    src={member.image}
-                    alt={`${member.name}, ${member.role}`}
-                    fill
-                    className="object-cover object-top transition-transform duration-700 ease-out grayscale group-hover:scale-[1.03] group-hover:grayscale-0"
-                    sizes="(max-width: 1024px) 100vw, 38vw"
-                  />
+                  {"image" in member && member.image ? (
+                    <Image
+                      src={member.image}
+                      alt={`${member.name}, ${member.role}`}
+                      fill
+                      className="object-cover object-top transition-transform duration-700 ease-out grayscale group-hover:scale-[1.03] group-hover:grayscale-0"
+                      sizes="(max-width: 1024px) 100vw, 38vw"
+                    />
+                  ) : (
+                    <div className="flex h-full min-h-[11rem] items-center justify-center bg-sa-surface md:min-h-[260px]">
+                      <span className="font-heading text-4xl font-bold tracking-[0.08em] text-sa-primary">
+                        {"initials" in member ? member.initials : member.name.slice(0, 1)}
+                      </span>
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-sa-surface via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:via-sa-surface/60 md:to-sa-surface" />
                 </div>
 
@@ -392,8 +392,7 @@ export default function AboutPage() {
               Our journey
             </h2>
             <p className="sa-subtitle mx-auto mt-3 max-w-xl">
-              From a focused Accra company to a regional partner: milestones
-              that mark how we scale responsibility with growth.
+              Milestones from the Accra office since {googleBusinessProfile.foundedYear}.
             </p>
           </motion.div>
 
