@@ -36,18 +36,19 @@ export function StartupAgencyMobileQuickBar() {
       aria-label="Quick navigation"
       data-app-print-hide-chrome
     >
-      <div className="mx-auto grid w-full max-w-lg grid-cols-3 px-2 pt-1.5">
+      <div className="mx-auto grid h-14 w-full max-w-lg grid-cols-3 items-center px-2">
         {quickActions.map((action) => {
           const active = isActive(action.href);
           const Icon = action.icon;
+          const primary = "primary" in action && action.primary;
 
           return (
             <Link
               key={action.href}
               href={action.href}
               className={cn(
-                "sa-pressable relative flex min-h-[44px] flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-1.5 text-xs font-medium leading-none transition-colors",
-                "primary" in action && action.primary
+                "sa-pressable relative flex h-12 flex-col items-center justify-center gap-0.5 rounded-xl px-1 text-[11px] font-medium leading-none transition-colors",
+                primary
                   ? "mx-1 rounded-2xl bg-sa-primary text-sa-bg"
                   : active
                     ? "text-sa-primary"
@@ -73,7 +74,7 @@ export function StartupAgencyMobileQuickBar() {
                   </span>
                 ) : null}
               </span>
-              <span>{action.label}</span>
+              <span className="whitespace-nowrap">{action.label}</span>
             </Link>
           );
         })}
