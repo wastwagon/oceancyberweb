@@ -100,7 +100,15 @@ export function buildMenuPreset(kind: string): AdminNavMenu {
           ...createEmptyNavItem(15),
           heading: "Products",
           href: "/products",
-          metadataInput: '{"dropdownKey":"products","activeMatch":["/products"]}',
+          metadataInput:
+            '{"dropdownKey":"products","activeMatch":["/products","/domains","/hosting","/ssl"]}',
+        },
+        {
+          ...createEmptyNavItem(18),
+          heading: "Infrastructure",
+          href: "/domains",
+          metadataInput:
+            '{"dropdownKey":"infrastructure","activeMatch":["/domains","/hosting","/ssl","/guides/domain-prices-in-ghana","/guides/web-hosting-cost-in-ghana"]}',
         },
         {
           ...createEmptyNavItem(20),
@@ -120,7 +128,7 @@ export function buildMenuPreset(kind: string): AdminNavMenu {
           heading: "Support",
           href: "/help-center",
           metadataInput:
-            '{"dropdownKey":"support","activeMatch":["/help-center","/contact","/reviews","/tools/project-cost","/tools/proposal","/domains","/hosting","/get-started","/pricing"]}',
+            '{"dropdownKey":"support","activeMatch":["/help-center","/contact","/reviews","/tools/project-cost","/tools/proposal","/get-started","/pricing"]}',
         },
         {
           ...createEmptyNavItem(50),
@@ -165,15 +173,33 @@ export function buildMenuPreset(kind: string): AdminNavMenu {
         items: [
           {
             ...createEmptyNavItem(0),
-            heading: "Domains & SSL",
+            heading: "Buy a domain",
             href: "/domains",
-            description: "Search domain availability and add SSL with secure checkout.",
+            description: "Search availability and register in GHS with Paystack.",
+          },
+          {
+            ...createEmptyNavItem(5),
+            heading: "SSL certificates",
+            href: "/ssl",
+            description: "PositiveSSL from GHS 45/yr — renews at the same list price.",
           },
           {
             ...createEmptyNavItem(10),
             heading: "Hosting",
             href: "/hosting",
             description: "Launch cPanel and WHM hosting plans with local support.",
+          },
+          {
+            ...createEmptyNavItem(15),
+            heading: "Domain prices in Ghana",
+            href: "/guides/domain-prices-in-ghana",
+            description: ".com from GHS 120/yr and other TLD list prices in cedis.",
+          },
+          {
+            ...createEmptyNavItem(20),
+            heading: "Hosting cost in Ghana",
+            href: "/guides/web-hosting-cost-in-ghana",
+            description: "What Launch, Grow, and Scale cost in the first year.",
           },
         ],
       };

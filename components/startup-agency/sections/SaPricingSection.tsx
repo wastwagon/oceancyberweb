@@ -25,15 +25,9 @@ export function SaPricingSection() {
             </Link>
             <Link
               href="/pricing"
-              className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+              className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline underline-offset-4 hover:text-sa-primary"
             >
               Compare plans
-            </Link>
-            <Link
-              href="/tools/project-cost"
-              className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline-offset-4 hover:underline"
-            >
-              Estimate in cedis
             </Link>
           </div>
         </SaReveal>

@@ -69,3 +69,14 @@ export function formatGoogleReviewCountLabel(
 ): string {
   return `${count} Google review${count === 1 ? "" : "s"}`;
 }
+
+/**
+ * Single source for NAP / review trust lines — prefer these over retyping
+ * “team of X, founded Y, rated Z” across pages.
+ */
+export const trustBlurb = {
+  short: `Websites, mobile apps, and cybersecurity from one Accra team. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}, rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`,
+  office: `One office at ${googleBusinessProfile.address.street}, Accra.`,
+  seo: `OceanCyber is a web design and development company in Accra and Ghana for websites, mobile apps, and cybersecurity. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}, rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews. One office at ${googleBusinessProfile.address.street}, Accra.`,
+  reviewsOnly: `Rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`,
+} as const;

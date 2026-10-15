@@ -60,9 +60,8 @@ function SignInForm() {
               Welcome <br />
               <span className="text-sa-primary">Back</span>
             </h1>
-            <p className="mt-8 max-w-xl text-xl leading-relaxed text-sa-muted/60">
-              Sign in to manage your digital infrastructure, track project updates, 
-              and access your secure client workspace.
+            <p className="mt-8 max-w-xl text-xl leading-relaxed text-sa-muted/80">
+              Sign in to track project updates and open your client workspace.
             </p>
             
             <div className="mt-12 flex gap-10">
@@ -91,9 +90,14 @@ function SignInForm() {
           <section className="w-full">
             <div className="relative overflow-hidden rounded-[40px] border border-sa-border bg-[#0d0d10]/90 p-8 shadow-2xl backdrop-blur-2xl md:p-12">
               <div className="mb-10 text-center lg:text-left">
-                <h2 className="font-heading text-3xl font-bold text-white">Sign in</h2>
-                <p className="mt-3 text-sa-muted/50">
-                  Enter your credentials to continue to your dashboard.
+                <h1 className="font-heading text-3xl font-bold text-white lg:hidden">
+                  Sign in
+                </h1>
+                <h2 className="hidden font-heading text-3xl font-bold text-white lg:block">
+                  Sign in
+                </h2>
+                <p className="mt-3 text-sa-muted/80">
+                  Enter your email and password to continue.
                 </p>
               </div>
 
@@ -144,11 +148,11 @@ function SignInForm() {
               </form>
 
               <div className="mt-10 border-t border-sa-border pt-8 text-center">
-                <p className="text-sm text-sa-muted/40">
+                <p className="text-sm text-sa-muted/80">
                   New project?{" "}
                   <Link
                     href={`/signup${nextPath ? `?next=${encodeURIComponent(nextPath)}` : ""}`}
-                    className="font-bold text-sa-primary hover:underline underline-offset-8"
+                    className="sa-text-link font-bold underline-offset-8"
                   >
                     Create an account
                   </Link>

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: {
     absolute: "Best web design company in Accra and Ghana | OceanCyber",
   },
-  description: `Best web design company in Accra and Ghana for websites, mobile apps, and cybersecurity. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}, rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`,
+  description: `Best web design company in Accra and Ghana. Websites from GHS 6,000, mobile apps from GHS 12,000, cybersecurity from GHS 4,500. ${googleBusinessProfile.teamSize} people at ${googleBusinessProfile.address.street}, rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`,
   alternates: {
     canonical: "/",
   },

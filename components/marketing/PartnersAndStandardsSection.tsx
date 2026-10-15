@@ -15,9 +15,10 @@ export function PartnersAndStandardsSection() {
       <div className="sa-container">
         <SaReveal className="mx-auto mb-12 max-w-2xl text-center">
           <p className="sa-eyebrow">Platforms & standards</p>
-          <h2 className="sa-title mt-3">Built on rails your stakeholders already trust</h2>
+          <h2 className="sa-title mt-3">Tools Ghana teams already use</h2>
           <p className="sa-subtitle mx-auto mt-3">
-            We integrate proven payment, cloud, and engineering platforms — with security and compliance context for Ghana.
+            Paystack, cloud, and engineering platforms — with security and Data Protection
+            context for Ghana businesses.
           </p>
         </SaReveal>
 

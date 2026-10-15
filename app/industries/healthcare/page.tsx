@@ -13,12 +13,12 @@ const content: IndustryPageContent = {
   heroSuffix: "",
   heroHighlightTone: "white",
   heroDescription:
-    "Clinical workflows, telemedicine, and secure data platforms — prioritising patient safety, uptime, and privacy-by-design.",
-  pills: ["Telemedicine", "Health records", "Medical technology"],
+    "Clinic and hospital systems for Ghana — appointments, records, and telemedicine with privacy and uptime built in.",
+  pills: ["Telemedicine", "Health records", "Clinic ops"],
   solutionsEyebrow: "Solutions",
-  solutionsTitle: "Digital health programmes",
+  solutionsTitle: "Health systems clinicians can run",
   solutionsSubtitle:
-    "Systems clinicians can trust: clear audit trails, role-based access, and resilient operations.",
+    "Clear audit trails, role-based access, and workflows that match how Accra and regional facilities work.",
   services: [
     {
       title: "Electronic health records",
@@ -84,9 +84,9 @@ const content: IndustryPageContent = {
       result: "Lower administrative overhead and faster retrieval.",
     },
   ],
-  ctaTitle: "Digitize care delivery?",
+  ctaTitle: "Need health software for your facility?",
   ctaDescription:
-    "Walk us through workflows, integrations, and compliance, and we'll propose a phased, verifiable roadmap.",
+    "Tell us your workflows, integrations, and compliance needs — we will propose a phased plan in cedis.",
 };
 
 export default function HealthcarePage() {

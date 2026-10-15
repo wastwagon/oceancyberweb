@@ -151,8 +151,8 @@ export function LeadMagnetGate({
         )}
       </div>
       {preset.footer ? (
-        <p className="relative mt-4 text-center text-xs text-sa-muted/50 md:text-left">
-          <Link href={preset.footer.href} className="text-sa-primary hover:underline">
+        <p className="relative mt-4 text-center text-xs text-sa-muted/80 md:text-left">
+          <Link href={preset.footer.href} className="sa-text-link font-medium">
             {preset.footer.label}
           </Link>
         </p>

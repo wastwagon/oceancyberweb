@@ -34,6 +34,9 @@ export type ServicePageContent = {
   heroDescription: string;
   heroCtaLabel: string;
   heroCtaHref: string;
+  /** Geo hire page that owns “Best … company in Accra” — capability pages must not compete. */
+  hireGeoHref?: string;
+  hireGeoLabel?: string;
   heroImage?: string;
   pills: string[];
   focusEyebrow: string;
@@ -100,34 +103,49 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
             >
               {content.heroDescription}
             </motion.p>
-            <motion.div variants={heroMotion.item} className="mt-8">
-              <div className="sa-chip-scroller justify-start sm:justify-center">
-                {content.pills.map((pill) => (
-                  <span key={pill} className="sa-chip">
-                    {pill}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-            <motion.div variants={heroMotion.item} className="mt-12 flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
+            <motion.div variants={heroMotion.item} className="mt-10 flex w-full max-w-sm flex-col items-center gap-3 sm:max-w-none">
               <Link
                 href={content.heroCtaHref}
                 className="sa-btn-primary flex w-full sm:inline-flex sm:w-auto"
               >
                 {content.heroCtaLabel}
               </Link>
-              {content.pricing ? (
-                <Link
-                  href="/pricing"
-                  className="sa-btn-outline flex w-full sm:inline-flex sm:w-auto"
-                >
-                  View pricing
-                </Link>
-              ) : null}
+              <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+                {content.pricing ? (
+                  <Link
+                    href="/pricing"
+                    className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline underline-offset-4 hover:text-sa-primary"
+                  >
+                    View pricing
+                  </Link>
+                ) : null}
+                {content.hireGeoHref && content.hireGeoLabel ? (
+                  <Link
+                    href={content.hireGeoHref}
+                    className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline underline-offset-4 hover:text-sa-primary"
+                  >
+                    {content.hireGeoLabel}
+                  </Link>
+                ) : null}
+              </div>
             </motion.div>
           </motion.div>
         </div>
       </section>
+
+      {content.pills.length > 0 ? (
+        <div className="relative z-10 border-b border-sa-border py-6 md:py-8">
+          <div className="sa-container">
+            <div className="sa-chip-scroller justify-start sm:justify-center">
+              {content.pills.map((pill) => (
+                <span key={pill} className="sa-chip">
+                  {pill}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
 
       <section className="sa-section relative z-10 border-b border-sa-border">
         <div className="sa-container">

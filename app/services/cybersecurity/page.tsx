@@ -8,137 +8,101 @@ import { serviceImages } from "@/lib/startup-agency/service-images";
 import { servicePricingHints } from "@/lib/startup-agency/pricing";
 
 const content: ServicePageContent = {
-  heroEyebrow: "Security practice",
+  heroEyebrow: "Security",
   heroPrefix: "",
   heroHighlight: "Cybersecurity",
   heroSuffix: "",
   heroHighlightTone: "white",
   heroDescription:
-    "Protect digital assets with assessments, hardening, monitoring alignment, and response readiness: practical controls, not checkbox theatre.",
+    "Security assessments and hardening for Ghana sites and apps — from GHS 4,500 — by the same Accra team that builds and hosts.",
   heroCtaLabel: "Get started",
   heroCtaHref: "/get-started",
+  hireGeoHref: "/services/cybersecurity-in-accra",
+  hireGeoLabel: "Cybersecurity in Accra →",
   heroImage: serviceImages.cyberSecurity,
-  pills: ["Threat detection", "Data protection", "Compliance"],
-  focusEyebrow: "Coverage",
-  focusTitle: "Defense across people, process, and systems",
+  pills: ["Assessments", "Hardening", "Monitoring"],
+  focusEyebrow: "What we cover",
+  focusTitle: "Practical controls, not checkbox theatre",
   focusSubtitle:
-    "Prioritised risk reduction with clear owners, timelines, and evidence you can hand to auditors or boards.",
+    "Find weak spots, fix what matters first, and leave your team with a clear action list.",
   focusAreas: [
     {
-      title: "Continuous threat monitoring",
+      title: "Security assessments",
       description:
-        "Detection use-cases, log discipline, and escalation paths tuned to your environment.",
+        "Review of sites, apps, and hosting for common Ghana SME risks — misconfig, weak auth, exposed admin.",
     },
     {
-      title: "Identity and access hardening",
+      title: "Hardening",
       description:
-        "Least privilege, MFA rollout, and privileged access patterns that survive real usage.",
+        "TLS, headers, backups, access control, and patch habits that stick after we leave.",
     },
     {
-      title: "Data protection and privacy",
+      title: "Identity and access",
       description:
-        "Encryption, key handling, retention, and access patterns aligned to sensitivity classes.",
+        "MFA, least privilege, and fewer shared passwords floating in WhatsApp groups.",
     },
     {
-      title: "Cloud and network security",
+      title: "Incident readiness",
       description:
-        "Segmentation, posture management, and secure defaults for hybrid footprints.",
-    },
-    {
-      title: "Compliance and audit readiness",
-      description:
-        "Control mapping, evidence collection, and gap plans for common frameworks.",
-    },
-    {
-      title: "Incident readiness and recovery",
-      description:
-        "Playbooks, tabletop exercises, and communications templates before pressure hits.",
+        "Who to call, what to preserve, and how to restore when something goes wrong.",
     },
   ],
-  stackEyebrow: "Disciplines",
-  stackTitle: "Tools and domains we work in",
+  stackEyebrow: "How we work",
+  stackTitle: "Evidence you can act on",
   stackSubtitle:
-    "We meet you where you are, whether brownfield, regulated, or cloud-native, and sequence work by impact.",
+    "Reports directors and engineers can both read — with priority and effort tagged.",
   stack: [
-    {
-      title: "Security audits",
-      description: "Architecture and configuration reviews with actionable findings.",
-    },
-    {
-      title: "Firewall and segmentation",
-      description: "North-south and east-west controls that match real traffic.",
-    },
-    {
-      title: "Encryption",
-      description: "Protect data at rest, in transit, and across integrations.",
-    },
-    {
-      title: "Monitoring",
-      description: "Signal quality, retention, and on-call alignment for SOC workflows.",
-    },
-    {
-      title: "Incident response",
-      description: "Containment, eradication, and recovery with clear decision rights.",
-    },
-    {
-      title: "Compliance programmes",
-      description: "Operational controls, not binders, mapped to obligations you face.",
-    },
+    { title: "Baseline reviews", description: "From GHS 4,500 for a focused pass." },
+    { title: "Web app checks", description: "Auth, input handling, and session hygiene." },
+    { title: "Hosting hardening", description: "cPanel, DNS, SSL, and backup routines." },
+    { title: "Logging basics", description: "Enough signal to spot odd access patterns." },
+    { title: "Staff guidance", description: "Short briefings for non-technical owners." },
+    { title: "Follow-up fixes", description: "We can implement remediations, not only list them." },
   ],
   deliverEyebrow: "Deliverables",
-  deliverTitle: "What you walk away with",
-  deliverSubtitle:
-    "Tangible artifacts your teams can run: documentation, roadmaps, and runbooks that age well.",
+  deliverTitle: "What you leave with",
+  deliverSubtitle: "A ranked fix list and optional build work to close gaps.",
   deliverables: [
     {
-      title: "Threat detection coverage",
-      description: "Prioritised detections, data sources, and tuning notes for your stack.",
+      title: "Findings report",
+      description: "Risks ranked by impact and effort — plain English summary included.",
     },
     {
-      title: "Data protection blueprint",
-      description: "Classification, handling rules, and technical controls tied to risk.",
+      title: "Remediation plan",
+      description: "What to fix this week vs next quarter.",
     },
     {
-      title: "Compliance evidence pack",
-      description: "Traceability from control intent to implementation and testing.",
+      title: "Config checklist",
+      description: "Hosting and app settings to keep locked after changes.",
     },
     {
-      title: "Incident response runbooks",
-      description: "Roles, comms templates, and technical steps for likely scenarios.",
-    },
-    {
-      title: "Security training kits",
-      description: "Role-based modules and phishing simulations sized to your culture.",
-    },
-    {
-      title: "Risk assessment summary",
-      description: "Executive narrative plus engineering backlog ordered by blast radius.",
+      title: "Optional fix sprint",
+      description: "Same Accra engineers can implement the priority items.",
     },
   ],
   outcomesEyebrow: "Outcomes",
-  outcomesTitle: "Representative engagements",
-  outcomesSubtitle:
-    "Illustrative results: scope, maturity, and threat landscape vary by client.",
+  outcomesTitle: "Security that protects revenue",
+  outcomesSubtitle: "Illustrative — every estate starts in a different place.",
   outcomes: [
     {
-      title: "Financial institution hardening",
-      client: "Banking client",
-      result: "Material reduction in exploitable misconfigurations post-assessment.",
+      title: "Pre-launch hardening",
+      client: "New product sites",
+      result: "Fewer surprises when traffic and payments go live.",
     },
     {
-      title: "Healthcare data protection",
-      client: "Medical provider",
-      result: "DPA-aligned controls with clearer ownership and audit trails.",
+      title: "SME cleanup",
+      client: "Growing Accra firms",
+      result: "Shared passwords retired; backups actually restore.",
     },
     {
-      title: "E-commerce security review",
-      client: "Online retailer",
-      result: "Checkout and admin paths reviewed; critical issues remediated first.",
+      title: "Ongoing reviews",
+      client: "Regulated teams",
+      result: "Evidence packs leadership can show partners.",
     },
   ],
-  ctaTitle: "Ready to tighten your security posture?",
+  ctaTitle: "Want a security review?",
   ctaDescription:
-    "Share your stack, obligations, and pain points, and we will propose a sequenced plan with honest tradeoffs.",
+    "Share your site or app URL and what worries you most — we will propose a baseline review or a deeper engagement.",
   pricing: servicePricingHints.cybersecurity,
 };
 

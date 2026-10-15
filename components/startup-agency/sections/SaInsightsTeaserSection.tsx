@@ -14,7 +14,7 @@ export function SaInsightsTeaserSection() {
           <SaSectionHeader align="left" eyebrow="Insights" title="Latest notes" />
           <Link
             href="/insights"
-            className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+            className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline underline-offset-4 hover:text-white"
           >
             View all insights
           </Link>
@@ -70,27 +70,27 @@ export function SaInsightsTeaserSection() {
           <p className="font-heading text-sm font-semibold text-white">Buyer guides</p>
           <ul className="mt-4 flex flex-col gap-3 text-sm sm:flex-row sm:flex-wrap sm:gap-x-8">
             <li>
-              <Link href="/guides/website-cost-in-ghana" className="font-semibold text-sa-primary hover:underline">
+              <Link href="/guides/website-cost-in-ghana" className="sa-text-link">
                 Website cost in Ghana
               </Link>
             </li>
             <li>
-              <Link href="/alternatives/wix-ghana" className="font-semibold text-sa-primary hover:underline">
+              <Link href="/alternatives/wix-ghana" className="sa-text-link">
                 Wix alternatives
               </Link>
             </li>
             <li>
-              <Link href="/alternatives/shopify-ghana" className="font-semibold text-sa-primary hover:underline">
+              <Link href="/alternatives/shopify-ghana" className="sa-text-link">
                 Shopify alternatives
               </Link>
             </li>
             <li>
-              <Link href="/guides/dwumapos-for-ghana-shops" className="font-semibold text-sa-primary hover:underline">
+              <Link href="/guides/dwumapos-for-ghana-shops" className="sa-text-link">
                 DwumaPOS for Ghana shops
               </Link>
             </li>
             <li>
-              <Link href="/guides" className="font-semibold text-sa-primary hover:underline">
+              <Link href="/guides" className="sa-text-link">
                 All guides
               </Link>
             </li>

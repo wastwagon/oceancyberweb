@@ -39,7 +39,7 @@ export function SaPortfolioGallerySection() {
           </Link>
           <Link
             href="/portfolio?tab=creative"
-            className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+            className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline underline-offset-4 hover:text-white"
           >
             Concept work
           </Link>

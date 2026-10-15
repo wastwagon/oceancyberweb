@@ -37,7 +37,7 @@ export default function GetStartedPage() {
             Already have a site?{" "}
             <Link
               href="/services/website-to-mobile-app"
-              className="font-medium text-sa-primary underline-offset-4 hover:underline"
+              className="sa-text-link font-medium"
             >
               Turn it into a mobile app
             </Link>

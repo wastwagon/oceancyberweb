@@ -7,12 +7,12 @@ export const logisticsIndustryContent: IndustryPageContent = {
   heroSuffix: " & supply chain",
   heroHighlightTone: "white",
   heroDescription:
-    "Fleet, warehouse, and last-mile software that gives operators real-time visibility from depot to doorstep.",
+    "Fleet, warehouse, and last-mile tools for Ghana operators — live status from depot to doorstep, including cash-on-delivery.",
   pills: ["Fleet tracking", "Fulfillment", "Last-mile delivery"],
   solutionsEyebrow: "Solutions",
   solutionsTitle: "Move goods with clarity",
   solutionsSubtitle:
-    "Dispatch, inventory, and proof-of-delivery flows designed for Ghana's roads and retail density.",
+    "Dispatch, inventory, and proof-of-delivery flows built for Ghana roads and Accra retail density.",
   services: [
     {
       title: "Fleet & dispatch",
@@ -70,9 +70,9 @@ export const logisticsIndustryContent: IndustryPageContent = {
       result: "Unified tracking across multiple last-mile partners.",
     },
   ],
-  ctaTitle: "Modernize logistics operations?",
+  ctaTitle: "Need logistics software that fits Ghana ops?",
   ctaDescription:
-    "Share fleet size, hubs, and delivery SLAs — we'll map platform, mobile, and integration scope.",
+    "Tell us fleet size, hubs, and delivery targets — we will map web, mobile, and integration scope in cedis.",
 };
 
 export const realEstateIndustryContent: IndustryPageContent = {
@@ -145,9 +145,9 @@ export const realEstateIndustryContent: IndustryPageContent = {
       result: "Unified inventory across branches and agents.",
     },
   ],
-  ctaTitle: "Launch a property platform?",
+  ctaTitle: "Need listings or tenant software?",
   ctaDescription:
-    "Tell us about listings volume, payment flows, and teams — we'll scope web and mobile delivery.",
+    "Tell us listing volume, MoMo rent collection, and who will use the system — we will scope web and mobile in cedis.",
 };
 
 export const agricultureIndustryContent: IndustryPageContent = {
@@ -220,9 +220,9 @@ export const agricultureIndustryContent: IndustryPageContent = {
       result: "Higher extension reach via lightweight field app.",
     },
   ],
-  ctaTitle: "Digitize your agri value chain?",
+  ctaTitle: "Need software for farms, traders, or agritech?",
   ctaDescription:
-    "Share farmer network size, buyers, and connectivity realities — we'll design a practical rollout.",
+    "Share farmer network size, buyers, and connectivity realities — we will design a practical rollout.",
 };
 
 export const mediaEntertainmentIndustryContent: IndustryPageContent = {
@@ -297,7 +297,7 @@ export const mediaEntertainmentIndustryContent: IndustryPageContent = {
   ],
   ctaTitle: "Build your media product?",
   ctaDescription:
-    "Share audience, content types, and monetization goals — we'll map platform and app scope.",
+    "Share audience, content types, and how you charge — we will map platform and app scope.",
 };
 
 export const governmentIndustryContent: IndustryPageContent = {
@@ -370,9 +370,9 @@ export const governmentIndustryContent: IndustryPageContent = {
       result: "Published KPIs with automated refresh.",
     },
   ],
-  ctaTitle: "Modernize public services?",
+  ctaTitle: "Building a public-sector site or portal?",
   ctaDescription:
-    "Outline services, users, and compliance needs — we'll propose a phased delivery plan.",
+    "Outline services, users, and compliance needs — we will propose a phased delivery plan.",
 };
 
 export const energyIndustryContent: IndustryPageContent = {
@@ -445,7 +445,7 @@ export const energyIndustryContent: IndustryPageContent = {
       result: "Smoother recharge journeys on mobile money.",
     },
   ],
-  ctaTitle: "Upgrade utility experiences?",
+  ctaTitle: "Need customer portals for utilities?",
   ctaDescription:
-    "Share customer base, metering, and payment rails — we'll align web, mobile, and integrations.",
+    "Share customer base, metering, and payment rails — we will align web, mobile, and integrations.",
 };

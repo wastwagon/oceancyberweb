@@ -50,7 +50,7 @@ export function SaProcessSection() {
               {p.step === 2 ? (
                 <Link
                   href="/services/ui-ux-design"
-                  className="mt-6 inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+                  className="mt-6 inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline underline-offset-4 hover:text-white"
                 >
                   UI/UX services →
                 </Link>
@@ -58,7 +58,7 @@ export function SaProcessSection() {
               {p.step === 1 ? (
                 <Link
                   href="/how-we-work"
-                  className="mt-6 inline-flex min-h-11 items-center text-sm font-medium text-sa-muted underline-offset-4 hover:text-sa-primary hover:underline"
+                  className="mt-6 inline-flex min-h-11 items-center text-sm font-medium text-sa-muted underline underline-offset-4 hover:text-sa-primary"
                 >
                   How we work →
                 </Link>

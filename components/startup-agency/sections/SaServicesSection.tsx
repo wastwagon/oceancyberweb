@@ -32,15 +32,15 @@ export function SaServicesSection() {
           className="mb-8"
         />
         <p className="mb-16 text-center text-sm leading-relaxed text-sa-muted">
-          <Link href="/services/web-design-in-accra" className="font-semibold text-sa-primary hover:underline">
-            Best web design company in Accra
+          <Link href="/services/web-design-in-accra" className="sa-text-link">
+            Hire in Accra
           </Link>
           <span aria-hidden> · </span>
-          <Link href="/services/web-design-in-ghana" className="font-semibold text-sa-primary hover:underline">
-            Best web design company in Ghana
+          <Link href="/services" className="sa-text-link">
+            All services
           </Link>
           <span aria-hidden> · </span>
-          <Link href="/guides/website-cost-in-ghana" className="font-semibold text-sa-primary hover:underline">
+          <Link href="/guides/website-cost-in-ghana" className="sa-text-link">
             Website cost in Ghana
           </Link>
         </p>

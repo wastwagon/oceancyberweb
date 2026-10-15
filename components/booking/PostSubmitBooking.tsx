@@ -30,16 +30,13 @@ export function PostSubmitBooking({
                 href="https://wa.me/233242565695"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sa-primary underline-offset-2 hover:underline"
+                className="sa-text-link font-medium"
               >
                 Message us
               </a>
               .
             </p>
-            <Link
-              href="/contact"
-              className="mt-3 inline-flex text-sm font-semibold text-sa-primary underline-offset-2 hover:underline"
-            >
+            <Link href="/contact" className="sa-text-link mt-3 inline-flex text-sm">
               Contact page →
             </Link>
           </div>

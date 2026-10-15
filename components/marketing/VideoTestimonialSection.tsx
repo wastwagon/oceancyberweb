@@ -115,7 +115,7 @@ export function VideoTestimonialSection({ variant = "home" }: VideoTestimonialSe
                 <Link href="/portfolio/fitch-advisory" className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary">
                   View project
                 </Link>
-                <Link href="/reviews" className="text-sm font-semibold text-sa-primary underline-offset-2 hover:underline">
+                <Link href="/reviews" className="sa-text-link text-sm">
                   Google reviews →
                 </Link>
               </div>

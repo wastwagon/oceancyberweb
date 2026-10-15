@@ -75,7 +75,7 @@ export function SeoIntentHub({ kind }: { kind: IntentKind }) {
               <li key={item}>
                 <Link
                   href={intentKindMeta[item].path}
-                  className="text-sm font-semibold text-sa-primary hover:underline"
+                  className="sa-text-link text-sm"
                 >
                   {intentKindMeta[item].hubTitle}
                 </Link>

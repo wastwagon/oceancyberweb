@@ -143,7 +143,7 @@ export default function PricingPage() {
               Estimate your project in GHS
             </Link>
             <p className="mt-4">
-              <Link href="/guides/website-cost-in-ghana" className="font-semibold text-sa-primary hover:underline">
+              <Link href="/guides/website-cost-in-ghana" className="sa-text-link">
                 How website pricing works in Ghana
               </Link>
             </p>

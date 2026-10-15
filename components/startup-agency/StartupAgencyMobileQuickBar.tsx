@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Briefcase, Rocket, Tags } from "lucide-react";
-import { useCart } from "@/components/commerce/CartProvider";
+import { useCartOptional } from "@/components/commerce/CartProvider";
 import { cn } from "@/lib/utils";
 
 /** Mobile tab bar — Work · Pricing · Get started. */
@@ -16,7 +16,8 @@ const quickActions = [
 
 export function StartupAgencyMobileQuickBar() {
   const pathname = usePathname();
-  const { itemCount } = useCart();
+  const cart = useCartOptional();
+  const itemCount = cart?.itemCount ?? 0;
   const [animateBadge, setAnimateBadge] = useState(false);
 
   useEffect(() => {

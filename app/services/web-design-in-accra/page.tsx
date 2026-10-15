@@ -13,9 +13,9 @@ const ghanaUrl = `${SITE_URL}/services/web-design-in-ghana`;
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "Best web design company in Accra",
+    title: "Best web design company in Accra, from GHS 6,000",
     description:
-      "Best web design company in Accra for company websites, online stores, and web apps. OceanCyber is at 47 Nii Kwashiefio Avenue, rated 4.9 from 54 Google reviews.",
+      "Best web design company in Accra for company websites, online stores, and web apps. From GHS 6,000. OceanCyber at 47 Nii Kwashiefio Avenue, rated 4.9 from 54 Google reviews.",
   },
   path,
 );
@@ -79,19 +79,20 @@ export default function WebDesignAccraPage() {
           </nav>
 
           <p className="mt-8 text-sm font-semibold text-sa-primary">
-            Best in Accra
+            Accra · from GHS 6,000
           </p>
           <h1 className="sa-title-lg mt-3">
             Best web design company in Accra
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-sa-muted/80">
-            OceanCyber is the company Accra businesses hire for design and build in one place.
-            Rated 4.9 from 54 Google reviews, with 25 people at 47 Nii Kwashiefio Avenue. For
-            the rest of Ghana, see our{" "}
-            <Link href="/services/web-design-in-ghana" className="text-sa-primary hover:underline">
-              web design company in Ghana
-            </Link>{" "}
-            page for coverage outside Accra.
+            Company websites designed and built in one Accra office — structure, visuals, and
+            engineering together, so you are not bouncing between a designer and a separate
+            developer. Packages from GHS 6,000. Meet us at 47 Nii Kwashiefio Avenue. Outside
+            Greater Accra, see{" "}
+            <Link href="/services/web-design-in-ghana" className="sa-text-link font-medium">
+              web design in Ghana
+            </Link>
+            .
           </p>
 
           <div className="mt-6 flex items-start gap-3 text-sm text-sa-muted/75">
@@ -121,7 +122,7 @@ export default function WebDesignAccraPage() {
           <ul className="mt-6 space-y-3 text-sm leading-relaxed text-sa-muted/80">
             {proofOutcomes.map((item) => (
               <li key={item.client}>
-                <a href={item.href} className="font-semibold text-white hover:text-sa-primary">
+                <a href={item.href} className="sa-text-link-quiet">
                   {item.client}
                 </a>
                 {" — "}
@@ -170,18 +171,33 @@ export default function WebDesignAccraPage() {
           </h2>
           <ul className="mt-6 space-y-3 text-sm">
             <li>
-              <Link href="/guides/website-cost-in-ghana" className="font-semibold text-sa-primary hover:underline">
+              <Link href="/guides/website-cost-in-ghana" className="sa-text-link">
                 How much a website costs in Ghana
               </Link>
             </li>
             <li>
-              <Link href="/compare/agency-vs-freelancer-vs-in-house-ghana" className="font-semibold text-sa-primary hover:underline">
+              <Link href="/compare/agency-vs-freelancer-vs-in-house-ghana" className="sa-text-link">
                 Agency, freelancer, or an in-house hire
               </Link>
             </li>
             <li>
-              <Link href="/pricing" className="font-semibold text-sa-primary hover:underline">
+              <Link href="/pricing" className="sa-text-link">
                 Package pricing
+              </Link>
+            </li>
+            <li>
+              <Link href="/services/web-development-in-accra" className="sa-text-link">
+                Web development in Accra
+              </Link>
+            </li>
+            <li>
+              <Link href="/services/mobile-app-development-in-accra" className="sa-text-link">
+                Mobile apps in Accra
+              </Link>
+            </li>
+            <li>
+              <Link href="/services/ecommerce-development-in-accra" className="sa-text-link">
+                Ecommerce in Accra
               </Link>
             </li>
           </ul>

@@ -24,21 +24,21 @@ export function PricingPathsLinks({
     return (
       <p className={cn("text-sm text-sa-muted/80", className)}>
         Packages from{" "}
-        <Link href="/pricing#startup" className="font-semibold text-sa-primary hover:underline">
+        <Link href="/pricing#startup" className="sa-text-link">
           GHS 6,000
         </Link>
         .{" "}
-        <Link href="/pricing" className="text-sa-primary hover:underline">
+        <Link href="/pricing" className="sa-text-link font-medium">
           Compare tiers
         </Link>
         {" · "}
-        <Link href="/tools/project-cost" className="text-sa-primary hover:underline">
+        <Link href="/tools/project-cost" className="sa-text-link font-medium">
           Estimate scope
         </Link>
         {omitStart ? null : (
           <>
             {" · "}
-            <Link href="/get-started" className="text-sa-primary hover:underline">
+            <Link href="/get-started" className="sa-text-link font-medium">
               Get started
             </Link>
           </>
@@ -66,7 +66,7 @@ export function PricingPathsLinks({
         className={
           variant === "stack"
             ? "sa-btn-outline w-full min-h-[44px]"
-            : "inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+            : "inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline underline-offset-4 hover:text-white"
         }
       >
         Compare packages
@@ -76,7 +76,7 @@ export function PricingPathsLinks({
         className={
           variant === "stack"
             ? "sa-btn-outline w-full min-h-[44px]"
-            : "inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+            : "inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline underline-offset-4 hover:text-white"
         }
       >
         Estimate in GHS
@@ -87,7 +87,7 @@ export function PricingPathsLinks({
           className={
             variant === "stack"
               ? "sa-btn-outline w-full min-h-[44px]"
-              : "inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+              : "inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline underline-offset-4 hover:text-white"
           }
         >
           Talk to our team

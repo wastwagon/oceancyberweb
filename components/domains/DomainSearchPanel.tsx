@@ -244,7 +244,13 @@ export function DomainSearchPanel({
 }
 
 export function RegistrarValueProps() {
-  const items = [
+  const items: Array<{
+    icon: typeof Globe2;
+    title: string;
+    body: string;
+    href?: string;
+    cta?: string;
+  }> = [
     {
       icon: Globe2,
       title: "Domains",
@@ -253,27 +259,36 @@ export function RegistrarValueProps() {
     {
       icon: ShieldCheck,
       title: "SSL certificates",
-      body: "PositiveSSL, EV, and multi-domain options via Namecheap (create, activate, renew). Ideal for ecommerce and compliance-led launches.",
+      body: "PositiveSSL from GHS 45/yr, Wildcard, and EV — renews at list price. Ideal for ecommerce and compliance-led launches.",
+      href: "/ssl",
+      cta: "View SSL packages",
     },
     {
       icon: Sparkles,
       title: "Managed setup",
       body: "We align hosting, DNS, email, and security the same way global registrars bundle professional services—without sacrificing your brand.",
+      href: "/hosting",
+      cta: "View hosting",
     },
-  ] as const;
+  ];
 
   return (
     <div className="grid gap-6 md:grid-cols-3">
-      {items.map(({ icon: Icon, title, body }) => (
-        <div
-          key={title}
-          className="sa-card p-6"
-        >
+      {items.map(({ icon: Icon, title, body, href, cta }) => (
+        <div key={title} className="sa-card p-6">
           <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-sa-border bg-sa-surface text-sa-primary">
             <Icon className="h-5 w-5" aria-hidden />
           </div>
           <h3 className="font-heading text-lg font-bold text-white">{title}</h3>
           <p className="mt-3 text-sm leading-relaxed text-sa-muted/70">{body}</p>
+          {href && cta ? (
+            <Link
+              href={href}
+              className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary underline underline-offset-4"
+            >
+              {cta}
+            </Link>
+          ) : null}
         </div>
       ))}
     </div>

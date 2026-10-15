@@ -16,6 +16,29 @@ export type IndustryExtrasConfig = {
 
 export const industryExtras: Partial<Record<string, IndustryExtrasConfig>> = {
   healthcare: {
+    proof: {
+      title: "Accra-built platforms with privacy-aware patterns",
+      subtitle:
+        "Live Ghana deployments with access control and client portals — patterns we apply to clinics and health operators from our Accra office.",
+      items: [
+        {
+          slug: "fitch-advisory",
+          title: "Fitch Advisory",
+          metric: "250%",
+          metricLabel: "Client engagement",
+          summary:
+            "Secure document sharing and booking — applicable to patient intake and clinician collaboration portals.",
+        },
+        {
+          slug: "fitch-attorneys",
+          title: "Fitch Attorneys",
+          metric: "180%",
+          metricLabel: "Case efficiency",
+          summary:
+            "Role-based matter workspace patterns transferable to clinical case files and confidential records.",
+        },
+      ],
+    },
     leadMagnet: {
       magnetId: "compliance_checklist",
       page: "industries/healthcare",
@@ -25,9 +48,9 @@ export const industryExtras: Partial<Record<string, IndustryExtrasConfig>> = {
   },
   retail: {
     proof: {
-      title: "Commerce platforms we have shipped",
+      title: "Accra commerce platforms we have shipped",
       subtitle:
-        "Live retail and services deployments with MoMo-ready checkout and measurable conversion gains.",
+        "Live retail deployments with MoMo-ready checkout — built and supported from 47 Nii Kwashiefio Avenue.",
       items: [
         {
           slug: "thinq-shopping",
@@ -36,6 +59,14 @@ export const industryExtras: Partial<Record<string, IndustryExtrasConfig>> = {
           metricLabel: "Mobile conversions",
           summary:
             "E-commerce and services app with Ghana payment rails, mobile-first discovery, and checkout flows built for real retail volume.",
+        },
+        {
+          slug: "juelle-hair",
+          title: "Juelle Hair",
+          metric: "150%",
+          metricLabel: "Sales growth",
+          summary:
+            "Storefront with inventory, accounts, and payments — Accra retail pattern for catalog-led brands.",
         },
       ],
     },
@@ -96,17 +127,25 @@ export const industryExtras: Partial<Record<string, IndustryExtrasConfig>> = {
   },
   tourism: {
     proof: {
-      title: "Events and destination platforms",
+      title: "Accra hospitality and booking platforms",
       subtitle:
-        "Live work with programme discovery, event promotion, and international stakeholder credibility.",
+        "Live tour and destination work with availability, payments, and guest journeys — Accra engineering.",
       items: [
         {
-          slug: "africa-governance-centre",
-          title: "Africa Governance Centre",
-          metric: "220%",
-          metricLabel: "Programme visibility",
+          slug: "tour-world-tourism",
+          title: "Tour World Tourism",
+          metric: "300%",
+          metricLabel: "Booking conversions",
           summary:
-            "Event and programme promotion patterns applicable to hospitality, conferences, and destination marketing sites.",
+            "Operator booking platform with real-time availability and payment integration for Ghana tourism.",
+        },
+        {
+          slug: "africa-trade-awards",
+          title: "Africa Trade Awards",
+          metric: "400%",
+          metricLabel: "Nomination submissions",
+          summary:
+            "Event nomination and audience flows applicable to festivals, conferences, and destination campaigns.",
         },
       ],
     },
@@ -168,17 +207,25 @@ export const industryExtras: Partial<Record<string, IndustryExtrasConfig>> = {
   },
   "media-entertainment": {
     proof: {
-      title: "Content and audience platforms",
+      title: "Accra content and audience platforms",
       subtitle:
-        "Programme publishing, events, and audience engagement from live continental and institutional work.",
+        "Event, media, and programme publishing from live Ghana and continental work.",
       items: [
+        {
+          slug: "africa-trade-awards",
+          title: "Africa Trade Awards",
+          metric: "400%",
+          metricLabel: "Nomination submissions",
+          summary:
+            "Nominations and audience journeys for awards and media properties.",
+        },
         {
           slug: "africa-governance-centre",
           title: "Africa Governance Centre",
           metric: "220%",
           metricLabel: "Programme visibility",
           summary:
-            "Research, media, and event publishing architecture applicable to broadcasters, creators, and cultural institutions.",
+            "Research, media, and event publishing architecture for creators and cultural institutions.",
         },
       ],
     },

@@ -91,7 +91,7 @@ export function InsightArticleView({ post }: Props) {
                 <ul className="mt-4 space-y-2">
                   {section.links.map((link) => (
                     <li key={link.href}>
-                      <Link href={link.href} className="text-sm font-semibold text-sa-primary hover:underline">
+                      <Link href={link.href} className="sa-text-link text-sm">
                         {link.label}
                       </Link>
                     </li>
@@ -107,7 +107,7 @@ export function InsightArticleView({ post }: Props) {
               <ul className="mt-4 space-y-2">
                 {post.related.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-sm font-semibold text-sa-primary hover:underline">
+                    <Link href={link.href} className="sa-text-link text-sm">
                       {link.label}
                     </Link>
                   </li>

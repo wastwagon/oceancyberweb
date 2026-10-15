@@ -69,7 +69,7 @@ export default function CookiesPage() {
             email{" "}
             <a
               href="mailto:privacy@oceancyber.net"
-              className="font-semibold text-sa-primary underline-offset-4 hover:underline"
+              className="sa-text-link"
             >
               privacy@oceancyber.net
             </a>

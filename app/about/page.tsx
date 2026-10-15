@@ -21,72 +21,55 @@ import { PartnersAndStandardsSection } from "@/components/marketing/PartnersAndS
 import { VideoTestimonialSection } from "@/components/marketing/VideoTestimonialSection";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 
-const teamMembers = [
+type AboutTeamMember = {
+  name: string;
+  role: string;
+  bio: string;
+  expertise: string[];
+  initials?: string;
+  image?: string;
+};
+
+const teamMembers: AboutTeamMember[] = [
   {
     name: googleBusinessProfile.founderName,
     role: googleBusinessProfile.founderRole,
     initials: "GA",
-    bio: "Leads strategy, product direction, and delivery standards across multidisciplinary teams.",
+    bio: "Leads client work, delivery standards, and the Accra team that designs, builds, and secures products for Ghana businesses.",
     expertise: [
-      "Strategic Leadership",
-      "Digital Transformation",
+      "Client delivery",
+      "Web and mobile",
       "Cybersecurity",
-      "Business Development",
+      "Business development",
     ],
-  },
-  {
-    name: "Sarah Mensah",
-    role: "CTO & Lead Architect",
-    image: "/images/team/sarah.png",
-    bio: "Software architect focused on scalable cloud systems and maintainable enterprise application architecture.",
-    expertise: ["Cloud Architecture", "DevOps", "AI/ML", "System Design"],
-  },
-  {
-    name: "Kwame Nkrumah",
-    role: "Head of Security",
-    image: "/images/team/kwame.png",
-    bio: "Certified cybersecurity expert dedicated to protecting businesses from evolving digital threats.",
-    expertise: [
-      "Security Auditing",
-      "Incident Response",
-      "Compliance",
-      "Risk Management",
-    ],
-  },
-  {
-    name: "Ama Serwaa",
-    role: "Creative Director",
-    image: "/images/team/ama.png",
-    bio: "Award-winning designer passionate about creating user experiences that blend beauty with functionality.",
-    expertise: ["UI/UX Design", "Brand Identity", "Digital Marketing", "User Research"],
   },
 ];
 
 const milestones = [
   {
     year: String(googleBusinessProfile.foundedYear),
-    title: "Company Founded",
-    description: "OceanCyber established in Accra, Ghana",
+    title: "Opened in Accra",
+    description: "OceanCyber started serving Ghana businesses from Accra.",
   },
   {
     year: "2019",
-    title: "First Major Client",
-    description: "Secured our first enterprise client in the financial sector",
+    title: "Enterprise delivery",
+    description: "Grew into larger financial-sector and professional-services projects.",
   },
   {
     year: "2020",
     title: `Team of ${googleBusinessProfile.teamSize}`,
-    description: `A team of ${googleBusinessProfile.teamSize} people, working from the Accra office`,
+    description: `A team of ${googleBusinessProfile.teamSize} at ${googleBusinessProfile.address.street}.`,
   },
   {
     year: "2023",
-    title: "100+ Clients",
-    description: "Served 100+ businesses from Accra, across 12 industries",
+    title: "100+ clients",
+    description: "Supported 100+ businesses from Accra across 12 industries.",
   },
   {
-    year: "2024",
-    title: "Innovation Lab",
-    description: "Launched an R&D lab in Accra focusing on AI and blockchain",
+    year: "2025",
+    title: "4.9 Google rating",
+    description: `${googleBusinessProfile.reviewCount} verified Google reviews from real client work.`,
   },
 ];
 
@@ -99,18 +82,18 @@ const stats = [
 
 const missionPillars = [
   {
-    title: "Innovation",
-    body: "We push the boundaries of technology so your business stays ahead in a fast-moving digital landscape.",
+    title: "Ship on time",
+    body: "We agree scope and milestones up front, then deliver working software you can use — not endless slide decks.",
     Icon: Sparkles,
   },
   {
-    title: "Excellence",
-    body: "Every engagement is held to a high bar: architecture, security, design, and delivery you can stake your reputation on.",
+    title: "Build it properly",
+    body: "Design, engineering, and security sit in one Accra team so quality does not get lost between vendors.",
     Icon: Award,
   },
   {
-    title: "Partnership",
-    body: "We work as an extension of your team: clear communication, shared goals, and outcomes measured in your success.",
+    title: "Stay reachable",
+    body: "You can call, WhatsApp, or meet us at the office. Updates are plain English, with clear next steps.",
     Icon: UsersRound,
   },
 ] as const;
@@ -160,17 +143,17 @@ export default function AboutPage() {
               variants={aboutHeroItem}
               className="sa-title-lg mx-auto max-w-4xl text-balance"
             >
-              Building Africa&apos;s
+              Web, mobile, and security
               <br />
-              <span className="text-sa-primary">digital backbone</span>
+              <span className="text-sa-primary">for Ghana businesses</span>
             </motion.h1>
             <motion.p
               variants={aboutHeroItem}
               className="sa-lead mx-auto mt-3"
             >
-              The best company in Accra and in Ghana for web, mobile, and
-              security. A team of {googleBusinessProfile.teamSize}, founded in{" "}
-              {googleBusinessProfile.foundedYear}, rated {googleBusinessProfile.rating} from{" "}
+              From our Accra office since {googleBusinessProfile.foundedYear}. A team of{" "}
+              {googleBusinessProfile.teamSize} at {googleBusinessProfile.address.street},
+              rated {googleBusinessProfile.rating} from{" "}
               {googleBusinessProfile.reviewCount} Google reviews.
             </motion.p>
             <motion.div variants={aboutHeroItem} className="mt-8">
@@ -216,8 +199,8 @@ export default function AboutPage() {
                 Mission &amp; principles
               </h2>
               <p className="sa-subtitle mt-3 max-w-md text-left">
-                Three commitments shape every roadmap, line of code, and
-                security review we ship for our partners.
+                How we work with Accra and Ghana clients — from first brief to
+                launch and support.
               </p>
               <div className="mt-10 space-y-4">
                 {missionPillars.map((pillar, index) => (
@@ -259,7 +242,7 @@ export default function AboutPage() {
                 <div className="relative aspect-[16/10] w-full">
                   <Image
                     src="/images/Africa Trade Chamber.webp"
-                    alt="OceanCyber's vision for a digitally empowered Africa"
+                    alt="OceanCyber Accra team delivery for Ghana businesses"
                     fill
                     className="object-cover grayscale"
                     sizes="(max-width: 1024px) 100vw, 60vw"
@@ -269,12 +252,12 @@ export default function AboutPage() {
                 </div>
                 <div className="space-y-5 p-8 md:p-10">
                   <h3 className="font-heading text-xl font-semibold tracking-tight text-white md:text-2xl">
-                    Building Africa&apos;s digital future
+                    Accra office, Ghana-wide clients
                   </h3>
                   <p className="text-sm leading-relaxed text-sa-muted/80 md:text-base">
-                    We envision a continent where every business, from
-                    startups to enterprises, can compete globally with secure,
-                    beautiful, and reliable technology.
+                    We help Ghana businesses go online properly — websites, apps,
+                    shops, and security — with fixed GHS packages and a team you
+                    can meet in person.
                   </p>
                   <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                     {[
@@ -307,16 +290,16 @@ export default function AboutPage() {
               People
             </p>
             <h2 className="sa-title">
-              Leadership &amp; craft
+              Who you work with
             </h2>
             <p className="sa-subtitle mx-auto mt-3">
-              A multidisciplinary team blending strategy, engineering, and
-              design, built for ambitious African brands.{" "}
+              Founder-led delivery from Accra, with designers, engineers, and
+              security specialists on the same team.{" "}
               <Link
                 href="/team"
-                className="font-medium text-sa-primary underline-offset-4 transition hover:text-white hover:underline"
+                className="sa-text-link font-medium"
               >
-                View full team roster →
+                Meet the wider team →
               </Link>
             </p>
           </motion.div>
@@ -332,7 +315,7 @@ export default function AboutPage() {
                 className="sa-card group flex flex-col overflow-hidden md:flex-row md:items-stretch"
               >
                 <div className="relative h-44 w-full shrink-0 overflow-hidden md:h-auto md:w-[42%] md:min-h-[260px]">
-                  {"image" in member && member.image ? (
+                  {member.image ? (
                     <Image
                       src={member.image}
                       alt={`${member.name}, ${member.role}`}
@@ -343,7 +326,7 @@ export default function AboutPage() {
                   ) : (
                     <div className="flex h-full min-h-[11rem] items-center justify-center bg-sa-surface md:min-h-[260px]">
                       <span className="font-heading text-4xl font-bold tracking-[0.08em] text-sa-primary">
-                        {"initials" in member ? member.initials : member.name.slice(0, 1)}
+                        {member.initials ?? member.name.slice(0, 1)}
                       </span>
                     </div>
                   )}

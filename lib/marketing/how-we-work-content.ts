@@ -4,7 +4,7 @@ export const deliveryPhases = [
   {
     step: 1,
     title: "Discovery & scoping",
-    body: "We align stakeholders on goals, users, constraints, and success metrics before design or code. You leave with a shared scope document and a realistic timeline — not a vague estimate.",
+    body: "We align your team on goals, users, constraints, and success metrics before design or code. You leave with a shared scope document and a realistic timeline — not a vague estimate.",
     bullets: [
       "Stakeholder workshops and user journey mapping",
       "Technical feasibility and integration inventory",
@@ -76,7 +76,7 @@ export const engagementModels = [
   {
     title: "Discovery → proposal",
     body: "Start with a paid or complimentary discovery block, then a formal proposal with GHS breakdown, team, and timeline.",
-    fit: "Ideal for enterprise, regulated, or multi-stakeholder programmes.",
+    fit: "Ideal for enterprise, regulated, or multi-team projects.",
     priceHint: "Enterprise from GHS 30,000",
   },
   {

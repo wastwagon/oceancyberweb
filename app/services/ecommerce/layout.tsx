@@ -5,7 +5,7 @@ import { getServicePageSeo } from "@/lib/seo/service-page-seo";
 const seo = getServicePageSeo("/services/ecommerce");
 
 export const metadata: Metadata = {
-  title: "E-commerce development in Ghana",
+  title: "Ecommerce development services",
   description: seo?.description,
   alternates: { canonical: "/services/ecommerce" },
 };

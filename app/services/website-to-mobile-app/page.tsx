@@ -39,11 +39,12 @@ export default function WebsiteToMobileAppPage() {
                 Website to mobile app
               </span>
               <h1 className="sa-title-lg !text-left mt-5">
-                Convert your existing website into a <span className="text-sa-primary">production-ready app</span>
+                Turn your website into an{" "}
+                <span className="text-sa-primary">iOS and Android app</span>
               </h1>
               <p className="sa-subtitle !text-left mt-4 max-w-2xl">
-                Bring your live website, user flows, and priorities. We assess technical fit,
-                propose architecture, and send a practical quote with timeline and milestones.
+                Send your live URL and what users must do in the app. We check technical
+                fit and reply with a clear path, GHS budget band, and milestones.
               </p>
               <div className="mt-8 rounded-3xl border border-sa-primary/20 bg-sa-primary/5 p-6 flex justify-center backdrop-blur-sm">
                 <ConversionClipart />

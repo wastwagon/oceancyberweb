@@ -53,10 +53,50 @@ function IntentTable({ table }: { table: IntentTable }) {
   );
 }
 
+function isExternalHref(href: string): boolean {
+  return /^https?:\/\//i.test(href);
+}
+
+function IntentOutboundLink({
+  href,
+  label,
+  sponsored,
+  className,
+}: {
+  href: string;
+  label: string;
+  sponsored?: boolean;
+  className?: string;
+}) {
+  const external = isExternalHref(href);
+  const rel = [
+    external ? "noopener" : null,
+    external ? "noreferrer" : null,
+    sponsored && external ? "sponsored" : null,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return (
+    <Link
+      href={href}
+      className={className}
+      {...(external
+        ? { target: "_blank", rel: rel || undefined }
+        : {})}
+    >
+      {label}
+    </Link>
+  );
+}
+
 export function SeoIntentPageView({ page }: { page: IntentPage }) {
   const kind = intentKindMeta[page.kind];
   const path = intentPagePath(page);
   const pageUrl = `${SITE_URL}${path}`;
+  /** Paid/affiliate pages only — editorial product guides omit partnerBrand (dofollow). */
+  const partner = page.partnerBrand;
+  const sponsorOutbound = Boolean(partner);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -123,6 +163,22 @@ export function SeoIntentPageView({ page }: { page: IntentPage }) {
           <p className="mt-8 text-sm font-semibold text-sa-primary">{page.eyebrow}</p>
           <h1 className="sa-title-lg mt-3">{page.title}</h1>
           <p className="mt-5 text-lg leading-relaxed text-sa-muted/80">{page.intro}</p>
+          {partner ? (
+            <aside
+              className="mt-6 rounded-2xl border border-sa-border bg-sa-surface/40 p-4 text-sm leading-relaxed text-sa-muted/80"
+              aria-label="Partner disclosure"
+            >
+              <p className="font-heading font-semibold text-white">
+                Partner product: {partner.name}
+              </p>
+              <p className="mt-2">{partner.disclosure}</p>
+              <p className="mt-3">
+                <Link href="/get-started" className="sa-text-link">
+                  Custom build with OceanCyber
+                </Link>
+              </p>
+            </aside>
+          ) : null}
           <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-2xl border border-sa-border">
             <Image
               src={page.image}
@@ -137,11 +193,15 @@ export function SeoIntentPageView({ page }: { page: IntentPage }) {
             Updated <time dateTime={intentPagesUpdated}>{intentPagesUpdatedLabel}</time>
             {" · "}
             OceanCyber, Accra
+            {partner ? ` · Partner guide for ${partner.siteLabel}` : null}
           </p>
           <div className="mt-8">
-            <Link href={page.cta.href} className="sa-btn-primary w-full sm:w-auto">
-              {page.cta.label}
-            </Link>
+            <IntentOutboundLink
+              href={page.cta.href}
+              label={page.cta.label}
+              sponsored={sponsorOutbound}
+              className="sa-btn-primary w-full sm:w-auto"
+            />
           </div>
         </div>
       </section>
@@ -194,12 +254,12 @@ export function SeoIntentPageView({ page }: { page: IntentPage }) {
                   ))}
                 </div>
                 {section.example.link ? (
-                  <Link
+                  <IntentOutboundLink
                     href={section.example.link.href}
-                    className="mt-4 inline-flex text-sm font-semibold text-sa-primary hover:underline"
-                  >
-                    {section.example.link.label}
-                  </Link>
+                    label={section.example.link.label}
+                    sponsored={sponsorOutbound}
+                    className="sa-text-link mt-4 inline-flex text-sm"
+                  />
                 ) : null}
               </aside>
             ) : null}
@@ -207,9 +267,12 @@ export function SeoIntentPageView({ page }: { page: IntentPage }) {
               <ul className="mt-6 space-y-2">
                 {section.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-sm font-semibold text-sa-primary hover:underline">
-                      {link.label}
-                    </Link>
+                    <IntentOutboundLink
+                      href={link.href}
+                      label={link.label}
+                      sponsored={sponsorOutbound}
+                      className="sa-text-link text-sm"
+                    />
                   </li>
                 ))}
               </ul>
@@ -242,9 +305,12 @@ export function SeoIntentPageView({ page }: { page: IntentPage }) {
           <ul className="mt-6 space-y-3">
             {page.related.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="text-sm font-semibold text-sa-primary hover:underline">
-                  {link.label}
-                </Link>
+                <IntentOutboundLink
+                  href={link.href}
+                  label={link.label}
+                  sponsored={sponsorOutbound}
+                  className="sa-text-link text-sm"
+                />
               </li>
             ))}
           </ul>
@@ -258,9 +324,12 @@ export function SeoIntentPageView({ page }: { page: IntentPage }) {
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-sa-muted/80 md:text-base">{page.cta.body}</p>
           <div className="mt-8">
-            <Link href={page.cta.href} className="sa-btn-primary w-full sm:w-auto">
-              {page.cta.label}
-            </Link>
+            <IntentOutboundLink
+              href={page.cta.href}
+              label={page.cta.label}
+              sponsored={sponsorOutbound}
+              className="sa-btn-primary w-full sm:w-auto"
+            />
           </div>
         </div>
       </section>

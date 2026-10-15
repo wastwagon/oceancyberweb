@@ -1,14 +1,36 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Boxes, ExternalLink } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight, Boxes } from "lucide-react";
 import Link from "next/link";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
-import { productCatalog } from "@/lib/data/products-catalog";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
 import { fadeUpProps, revealViewport, staggerDelay } from "@/lib/scroll-reveal";
+
+const products = [
+  {
+    href: "/domains",
+    title: "Domains",
+    price: "From GHS 120/yr",
+    body: "Search availability and register in cedis with Paystack.",
+    action: "Search a domain",
+  },
+  {
+    href: "/ssl",
+    title: "SSL certificates",
+    price: "From GHS 45/yr",
+    body: "PositiveSSL, Wildcard, and EV. Renews at the same list price.",
+    action: "See certificates",
+  },
+  {
+    href: "/hosting",
+    title: "Web hosting",
+    price: "From GHS 69/mo",
+    body: "cPanel hosting with Accra support.",
+    action: "See hosting plans",
+  },
+] as const;
 
 export function ProductsHubPage() {
   const reduceMotion = useReducedMotion();
@@ -29,34 +51,12 @@ export function ProductsHubPage() {
               Products
             </motion.span>
             <motion.h1 variants={heroMotion.item} className="sa-title-lg mx-auto max-w-4xl">
-              Subscription software for{" "}
-              <span className="text-sa-primary">African operators</span>
+              Domains, certificates, and{" "}
+              <span className="text-sa-primary">hosting</span>
             </motion.h1>
             <motion.p variants={heroMotion.item} className="sa-lead mx-auto mt-3 max-w-2xl">
-              OceanCyber POS is software you can start yourself. Sign up, connect payments, and go live. Custom builds are still available from the company.
+              Register a name, protect it, and host the site. Prices are in Ghana cedis.
             </motion.p>
-            {productCatalog[0] ? (
-              <motion.div
-                variants={heroMotion.item}
-                className="mx-auto mt-8 flex w-full max-w-sm flex-col gap-3"
-              >
-                <a
-                  href={productCatalog[0].trialSignupHref}
-                  className="sa-btn-primary w-full gap-2"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Start free trial
-                  <ExternalLink className="h-4 w-4" aria-hidden />
-                </a>
-                <Link
-                  href={`/products/${productCatalog[0].slug}`}
-                  className="inline-flex min-h-11 items-center justify-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
-                >
-                  View features
-                </Link>
-              </motion.div>
-            ) : null}
           </motion.div>
         </div>
       </section>
@@ -66,63 +66,30 @@ export function ProductsHubPage() {
           <motion.div {...fadeUpProps}>
             <SaSectionHeader
               eyebrow="Available now"
-              title="Point of sale for Ghanaian commerce"
-              subtitle="Sign up on the POS platform, connect Paystack or Hubtel, and go live — cash and manual MoMo work from day one."
+              title="What you can buy today"
+              subtitle="Domain registration, SSL, and cPanel hosting. Pay in GHS with Paystack."
             />
           </motion.div>
-          <div className="mt-14 grid gap-8 lg:grid-cols-2">
-            {productCatalog.map((product, index) => (
+          <div className="mt-14 grid gap-8 lg:grid-cols-3">
+            {products.map((product, index) => (
               <motion.article
-                key={product.slug}
+                key={product.href}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={staggerDelay(index, 0.08)}
-                className="sa-card sa-pressable group overflow-hidden"
+                className="sa-card sa-pressable group p-5 md:p-8"
               >
-                <div className="relative aspect-[16/9] w-full bg-black/50">
-                  <Image
-                    src={product.heroImage}
-                    alt=""
-                    fill
-                    className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                </div>
-                <div className="p-5 md:p-8">
-                  <p className="text-sm font-medium text-sa-primary">
-                    {product.pricingFrom} · 14-day trial
-                  </p>
-                  <h2 className="mt-2 font-heading text-2xl font-bold text-white">
-                    {product.name}
-                  </h2>
-                  <p className="mt-4 text-sm leading-relaxed text-sa-muted/80">{product.tagline}</p>
-                  <ul className="sa-chip-scroller mt-6">
-                    {product.pills.slice(0, 4).map((pill) => (
-                      <li key={pill} className="sa-chip">
-                        {pill}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-8 flex flex-col gap-3">
-                    <a
-                      href={product.trialSignupHref}
-                      className="sa-btn-primary w-full gap-2"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Start free trial
-                      <ExternalLink className="h-4 w-4" aria-hidden />
-                    </a>
-                    <Link
-                      href={`/products/${product.slug}`}
-                      className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
-                    >
-                      View features
-                      <ArrowRight className="h-4 w-4" aria-hidden />
-                    </Link>
-                  </div>
-                </div>
+                <p className="text-sm font-medium text-sa-primary">{product.price}</p>
+                <h2 className="mt-2 font-heading text-2xl font-bold text-white">{product.title}</h2>
+                <p className="mt-4 text-sm leading-relaxed text-sa-muted/80">{product.body}</p>
+                <Link
+                  href={product.href}
+                  className="mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+                >
+                  {product.action}
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </Link>
               </motion.article>
             ))}
           </div>
@@ -134,7 +101,7 @@ export function ProductsHubPage() {
           <motion.div {...fadeUpProps} className="sa-card p-10 md:p-12">
             <SaSectionHeader
               title="Need a custom platform instead?"
-              subtitle="OceanCyber still designs and builds bespoke web, mobile, and security programmes."
+              subtitle="OceanCyber still designs and builds custom websites, apps, and security work from Accra."
             />
             <div className="mt-8 flex flex-col items-center gap-3">
               <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">

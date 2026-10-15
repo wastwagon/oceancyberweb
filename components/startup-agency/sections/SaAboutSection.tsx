@@ -18,13 +18,13 @@ export function SaAboutSection() {
               <SaSectionHeader
                 align="left"
                 eyebrow="Our Agency"
-                title="Design craft meets engineering discipline"
+                title="We design in Figma and build in-house in Accra"
                 subtitle={companyPresence}
               />
               <p className="mt-4 max-w-2xl text-sm leading-relaxed text-sa-muted">
-                From fintech and e-commerce to professional services, we combine UX
-                research, visual design, and secure engineering so your product looks
-                premium and scales with confidence.
+                From shops and professional firms to fintech and logistics, one Accra
+                team handles design, engineering, and security — so sites and apps
+                stay fast as you add pages, products, or staff logins.
               </p>
             </SaReveal>
 
@@ -47,7 +47,7 @@ export function SaAboutSection() {
             <SaReveal delay={0.25} className="mt-8">
               <Link
                 href="/about"
-                className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+                className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-sa-primary underline underline-offset-4 hover:text-white"
               >
                 Our story
                 <ArrowRight className="h-4 w-4" aria-hidden />

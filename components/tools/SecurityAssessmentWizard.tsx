@@ -112,7 +112,7 @@ export function SecurityAssessmentWizard() {
           title="Book a security review"
           description="Optional: pick a time for a complimentary posture review with our security lead."
         />
-        <Link href="/security-journey" className="text-sm font-semibold text-sa-primary hover:underline">
+        <Link href="/security-journey" className="sa-text-link text-sm">
           Explore our security journey →
         </Link>
       </div>

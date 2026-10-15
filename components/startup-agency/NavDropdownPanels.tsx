@@ -24,6 +24,8 @@ const VIEW_ALL_BY_KEY: Partial<
 > = {
   industries: { href: "/industries", label: "View all industries" },
   services: { href: "/services", label: "View all services" },
+  products: { href: "/products", label: "View all products" },
+  infrastructure: { href: "/domains", label: "Domains, SSL & hosting" },
   resources: { href: "/insights", label: "Explore resources" },
   support: { href: "/help-center", label: "Visit help center" },
   company: { href: "/about", label: "About OceanCyber" },

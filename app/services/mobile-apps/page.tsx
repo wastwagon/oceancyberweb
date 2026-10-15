@@ -14,113 +14,95 @@ const content: ServicePageContent = {
   heroSuffix: "",
   heroHighlightTone: "white",
   heroDescription:
-    "Native-quality experiences on iOS and Android: offline-aware flows, push engagement, and release discipline your users feel.",
+    "iOS and Android apps built in Accra for Ghana phones and data — offline-aware flows, MoMo or Paystack when needed, and help getting into the stores. From GHS 12,000 per platform.",
   heroCtaLabel: "Get started",
   heroCtaHref: "/get-started",
+  hireGeoHref: "/services/mobile-app-development-in-accra",
+  hireGeoLabel: "Mobile apps in Accra →",
   heroImage: serviceImages.mobileApps,
-  pills: ["iOS", "Android", "Cross-platform"],
-  focusEyebrow: "Experiences",
-  focusTitle: "Apps people keep installed",
+  pills: ["iOS", "Android", "MoMo / Paystack"],
+  focusEyebrow: "What we build",
+  focusTitle: "Apps people keep on mid-range Android",
   focusSubtitle:
-    "Performance, permissions, and polish, balanced with shipping cadence and store compliance.",
+    "Designed for real Ghana devices, patchy data, and one-handed use — not just demo-day screenshots.",
   focusAreas: [
     {
-      title: "Consumer-grade UX",
+      title: "Customer apps",
       description:
-        "Motion, haptics, and microcopy tuned for attention spans and one-handed use.",
+        "Bookings, wallets, catalogs, and account areas that stay usable when the network drops.",
     },
     {
-      title: "Cross-platform delivery",
+      title: "Staff and field apps",
       description:
-        "Shared business logic with platform-native shells where differentiation matters.",
+        "Tools for delivery, sales, and ops teams who work outside the office.",
     },
     {
-      title: "Offline and flaky networks",
+      title: "Payments in-app",
       description:
-        "Queues, conflict resolution, and honest sync states users can trust.",
+        "Paystack and Mobile Money wired with clear success and failure states.",
     },
     {
-      title: "Push and lifecycle messaging",
+      title: "Store submission",
       description:
-        "Deep links, preferences, and frequency caps that respect trust.",
-    },
-    {
-      title: "Payments and identity",
-      description:
-        "Biometrics, secure storage, and session handling aligned to risk profiles.",
-    },
-    {
-      title: "Observability and releases",
-      description:
-        "Crash analytics, staged rollouts, and feature flags for confident iteration.",
+        "Privacy text, screenshots, and review notes so App Store and Play Store review is less painful.",
     },
   ],
-  stackEyebrow: "Stack",
-  stackTitle: "Technologies we build with",
+  stackEyebrow: "Tools we use",
+  stackTitle: "Paths that fit your budget and timeline",
   stackSubtitle:
-    "We pick stacks for maintainability and team skills, not novelty for decks.",
+    "Native or cross-platform — chosen for your users and your maintenance plan.",
   stack: [
-    { title: "React Native", description: "Shared UI with native modules where needed." },
-    { title: "Flutter", description: "Consistent rendering when pixel parity matters." },
-    { title: "Swift and Kotlin", description: "Native modules and fully native paths." },
-    { title: "Firebase", description: "Auth, messaging, and remote config with sane limits." },
-    { title: "Push notifications", description: "FCM and APNs with segmentation and testing." },
-    { title: "CI for mobile", description: "Signing, builds, and store submission automation." },
+    { title: "iOS", description: "SwiftUI or UIKit when Apple-first quality matters." },
+    { title: "Android", description: "Kotlin builds tuned for mid-range Ghana devices." },
+    { title: "React Native / Flutter", description: "Shared code when one team ships both stores." },
+    { title: "Push and deep links", description: "Notifications and links that open the right screen." },
+    { title: "CI for apps", description: "Repeatable builds and store upload checklists." },
+    { title: "Crash reporting", description: "See what breaks on real devices after launch." },
   ],
   deliverEyebrow: "Deliverables",
-  deliverTitle: "What you ship with",
-  deliverSubtitle:
-    "Store-ready binaries plus the operational glue product and support teams need.",
+  deliverTitle: "What you leave with",
+  deliverSubtitle: "Files and access your team can keep shipping after handover.",
   deliverables: [
     {
-      title: "Cross-platform parity plan",
-      description: "Where code is shared vs forked, documented for future contributors.",
+      title: "Store-ready builds",
+      description: "Release candidates with icons, splash, and versioning.",
     },
     {
-      title: "Native performance profile",
-      description: "Startup, memory, and scroll benchmarks with budgets and fixes.",
+      title: "Source and docs",
+      description: "Repo access, environment notes, and how to cut the next build.",
     },
     {
-      title: "Push notification strategy",
-      description: "Segments, quiet hours, and deep link maps tied to product goals.",
+      title: "QA on real devices",
+      description: "Test notes from phones Ghana users actually own.",
     },
     {
-      title: "Offline support patterns",
-      description: "Caching, retries, and user-visible sync for critical journeys.",
-    },
-    {
-      title: "App Store readiness",
-      description: "Guideline checks, screenshots, and review notes prepared early.",
-    },
-    {
-      title: "Analytics integration",
-      description: "Event schema, privacy posture, and funnels product can trust.",
+      title: "Launch support window",
+      description: "Help through first store review and early crash triage.",
     },
   ],
   outcomesEyebrow: "Outcomes",
-  outcomesTitle: "Representative engagements",
-  outcomesSubtitle:
-    "Illustrative results: categories, acquisition, and product maturity differ.",
+  outcomesTitle: "Mobile work in context",
+  outcomesSubtitle: "Illustrative results — scope and start point always differ.",
   outcomes: [
     {
-      title: "Retail mobile commerce",
+      title: "Commerce on phones",
       client: "Retail client",
-      result: "Checkout refinements and performance work that improved mobile conversion.",
+      result: "Browse and checkout that hold up on mobile data.",
     },
     {
-      title: "Healthcare patient app",
-      client: "Medical provider",
-      result: "Secure messaging and scheduling with clearer consent and access paths.",
+      title: "Client engagement",
+      client: "Advisory firm",
+      result: "Booking and document access without email ping-pong.",
     },
     {
-      title: "Fitness companion",
-      client: "Wellness company",
-      result: "Sensor integrations and habit loops tuned for daily retention.",
+      title: "Website to app path",
+      client: "Existing site owners",
+      result: "Clear quote to wrap or rebuild for the stores.",
     },
   ],
-  ctaTitle: "Ready to ship a mobile product?",
+  ctaTitle: "Ready to ship an app?",
   ctaDescription:
-    "Bring your personas, platforms, and timeline, and we will propose a build plan with realistic milestones.",
+    "Tell us iOS, Android, or both — plus budget and timeline — and we will reply with a scoped next step.",
   pricing: servicePricingHints.mobileApps,
 };
 

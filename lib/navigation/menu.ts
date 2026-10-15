@@ -18,11 +18,18 @@ export const startupPagesMenu = [
   { label: "Services", href: "/services" },
   { label: "Best web design company in Ghana", href: "/services/web-design-in-ghana" },
   { label: "Best web design company in Accra", href: "/services/web-design-in-accra" },
+  { label: "Best web development company in Accra", href: "/services/web-development-in-accra" },
+  { label: "Best software development company in Accra", href: "/services/software-development-in-accra" },
+  { label: "Best mobile app development company in Accra", href: "/services/mobile-app-development-in-accra" },
+  { label: "Best ecommerce development company in Accra", href: "/services/ecommerce-development-in-accra" },
+  { label: "Best cybersecurity company in Accra", href: "/services/cybersecurity-in-accra" },
+  { label: "Best UI UX design company in Accra", href: "/services/ui-ux-design-in-accra" },
   { label: "Products", href: "/products" },
   { label: "Insights", href: "/insights" },
   { label: "Reviews", href: "/reviews" },
   { label: "Portfolio", href: "/portfolio" },
-  { label: "Domains & SSL", href: "/domains" },
+  { label: "Domains", href: "/domains" },
+  { label: "SSL certificates", href: "/ssl" },
   { label: "Hosting", href: "/hosting" },
   { label: "Checkout", href: "/checkout/cart" },
 ] as const;
@@ -55,7 +62,19 @@ export const mainHeaderNav: HeaderNavItem[] = [
     href: "/products",
     label: "Products",
     dropdownKey: "products",
-    activeMatch: ["/products"],
+    activeMatch: ["/products", "/domains", "/hosting", "/ssl"],
+  },
+  {
+    href: "/domains",
+    label: "Infrastructure",
+    dropdownKey: "infrastructure",
+    activeMatch: [
+      "/domains",
+      "/hosting",
+      "/ssl",
+      "/guides/domain-prices-in-ghana",
+      "/guides/web-hosting-cost-in-ghana",
+    ],
   },
   { href: "/industries", label: "Industries", dropdownKey: "industries" },
   {
@@ -84,8 +103,6 @@ export const mainHeaderNav: HeaderNavItem[] = [
       "/reviews",
       "/tools/project-cost",
       "/tools/proposal",
-      "/domains",
-      "/hosting",
       "/get-started",
       "/pricing",
     ],
@@ -119,14 +136,39 @@ export const mainHeaderDropdownContent: Record<
         link: "/services",
       },
       {
-        heading: "Best web design company in Ghana",
-        description: "Best website design and development for businesses across Ghana, from Accra.",
+        heading: "Web design in Accra",
+        description: "Meet the team at 47 Nii Kwashiefio Avenue. Hire page for Accra web design.",
+        link: "/services/web-design-in-accra",
+      },
+      {
+        heading: "Web design in Ghana",
+        description: "Nationwide website design and development from the Accra office.",
         link: "/services/web-design-in-ghana",
       },
       {
-        heading: "Best web design company in Accra",
-        description: "Best web design company in Accra. Meet the team at 47 Nii Kwashiefio Avenue.",
-        link: "/services/web-design-in-accra",
+        heading: "Web development in Accra",
+        description: "Web and website development from GHS 6,000. Paystack and MoMo ready.",
+        link: "/services/web-development-in-accra",
+      },
+      {
+        heading: "Web development in Ghana",
+        description: "Company sites and web apps for teams across Ghana, from GHS 6,000.",
+        link: "/services/web-development-in-ghana",
+      },
+      {
+        heading: "Software development in Accra",
+        description: "Custom software and tools from GHS 14,500 for Accra teams.",
+        link: "/services/software-development-in-accra",
+      },
+      {
+        heading: "Mobile app development in Accra",
+        description: "iOS and Android from GHS 12,000 per platform for Ghana phones.",
+        link: "/services/mobile-app-development-in-accra",
+      },
+      {
+        heading: "UI/UX design in Accra",
+        description: "Product and brand design hire page from GHS 3,500.",
+        link: "/services/ui-ux-design-in-accra",
       },
       {
         heading: "Pricing & packages",
@@ -147,6 +189,11 @@ export const mainHeaderDropdownContent: Record<
         heading: "Web development",
         description: "Marketing sites and web apps built for speed, search, and maintenance.",
         link: "/services/web-development",
+      },
+      {
+        heading: "Software development",
+        description: "Custom tools and platforms from GHS 14,500 for Ghana operations.",
+        link: "/services/software-development",
       },
       {
         heading: "Mobile apps",
@@ -172,17 +219,22 @@ export const mainHeaderDropdownContent: Record<
   },
   products: {
     title: "Products",
-    description: "Subscription software and SaaS platforms from OceanCyber.",
+    description: "Domains, SSL, and hosting priced in Ghana cedis.",
     items: [
       {
-        heading: "Software products",
-        description: "Explore OceanCyber subscription products for African operators.",
-        link: "/products",
+        heading: "Buy a domain",
+        description: "Search availability and register in GHS with Paystack.",
+        link: "/domains",
       },
       {
-        heading: "OceanCyber POS",
-        description: "Ghana-ready point of sale — MoMo, offline mode, and multi-branch.",
-        link: "/products/pos",
+        heading: "SSL certificates",
+        description: "PositiveSSL from GHS 45/yr — renews at the same list price.",
+        link: "/ssl",
+      },
+      {
+        heading: "Web hosting",
+        description: "cPanel hosting from GHS 69/mo with Accra support.",
+        link: "/hosting",
       },
     ],
   },
@@ -202,8 +254,18 @@ export const mainHeaderDropdownContent: Record<
       },
       {
         heading: "Buyer guides",
-        description: "Website cost, Mobile Money, timelines, and comparisons.",
+        description: "Website cost, domain prices, hosting cost, and MoMo checkout.",
         link: "/guides",
+      },
+      {
+        heading: "Comparisons",
+        description: "Agency vs freelancer, Shopify vs custom, Wix vs custom.",
+        link: "/compare",
+      },
+      {
+        heading: "Alternatives",
+        description: "When Wix, Squarespace, or Shopify is enough — and when to move.",
+        link: "/alternatives",
       },
       {
         heading: "Portfolio",
@@ -272,16 +334,6 @@ export const mainHeaderDropdownContent: Record<
         description: "Verified client ratings and recent feedback from Google.",
         link: "/reviews",
       },
-      {
-        heading: "Domains & SSL",
-        description: "Search domain availability and add SSL with secure checkout.",
-        link: "/domains",
-      },
-      {
-        heading: "Hosting",
-        description: "cPanel hosting plans priced in Ghana cedis.",
-        link: "/hosting",
-      },
     ],
   },
   infrastructure: {
@@ -289,14 +341,29 @@ export const mainHeaderDropdownContent: Record<
     description: "Domains, SSL, and hosting for reliable digital operations.",
     items: [
       {
-        heading: "Domains & SSL",
-        description: "Search domain availability and add SSL with secure checkout.",
+        heading: "Buy a domain",
+        description: "Search availability and register in GHS with Paystack.",
         link: "/domains",
       },
       {
-        heading: "Hosting",
-        description: "cPanel hosting plans priced in Ghana cedis.",
+        heading: "SSL certificates",
+        description: "PositiveSSL from GHS 45/yr — renews at the same list price.",
+        link: "/ssl",
+      },
+      {
+        heading: "Web hosting",
+        description: "cPanel hosting from GHS 69/mo with Accra support.",
         link: "/hosting",
+      },
+      {
+        heading: "Domain prices in Ghana",
+        description: ".com from GHS 120/yr and other TLD list prices in cedis.",
+        link: "/guides/domain-prices-in-ghana",
+      },
+      {
+        heading: "Hosting cost in Ghana",
+        description: "What Launch, Grow, and Scale cost in the first year.",
+        link: "/guides/web-hosting-cost-in-ghana",
       },
     ],
   },
@@ -349,10 +416,13 @@ export const footerCompanyLinks = [
 
 /** Footer services column — mirrors primary services mega-menu destinations. */
 export const footerServiceLinks = [
-  { label: "Software products", href: "/products" },
-  { label: "OceanCyber POS", href: "/products/pos" },
   { label: "Best web design company in Ghana", href: "/services/web-design-in-ghana" },
   { label: "Best web design company in Accra", href: "/services/web-design-in-accra" },
+  { label: "Best web development company in Accra", href: "/services/web-development-in-accra" },
+  { label: "Best software development company in Accra", href: "/services/software-development-in-accra" },
+  { label: "Best mobile app development company in Accra", href: "/services/mobile-app-development-in-accra" },
+  { label: "Best ecommerce development company in Accra", href: "/services/ecommerce-development-in-accra" },
+  { label: "Best cybersecurity company in Accra", href: "/services/cybersecurity-in-accra" },
   { label: "UI/UX & brand design", href: "/services/ui-ux-design" },
   { label: "Web development", href: "/services/web-development" },
   { label: "Mobile apps", href: "/services/mobile-apps" },

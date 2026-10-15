@@ -42,7 +42,7 @@ export function SaTestimonialsSection({ googleStats, googleReviews, featuredCard
               href={profileUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sa-primary underline-offset-2 hover:underline"
+              className="sa-text-link font-medium"
             >
               Read reviews on Google
             </Link>
@@ -52,10 +52,7 @@ export function SaTestimonialsSection({ googleStats, googleReviews, featuredCard
           <>
             <GoogleReviewsCarousel reviews={googleReviews} />
             <p className="mx-auto mt-10 max-w-lg text-center text-sm text-sa-muted">
-              <Link
-                href="/reviews"
-                className="font-semibold text-sa-primary underline-offset-2 hover:underline"
-              >
+              <Link href="/reviews" className="sa-text-link">
                 View all Google reviews
               </Link>
             </p>

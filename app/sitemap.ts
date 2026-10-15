@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 import { getInsightPosts } from "@/lib/data/insights-loader";
 import { insightArticlePath } from "@/lib/insights/content";
 import { industrySitemapPaths } from "@/lib/data/industries-catalog";
-import { productSitemapPaths } from "@/lib/data/products-catalog";
 import { intentSitemapPaths } from "@/lib/seo/intent-pages";
+import { geoServiceSitemapPaths } from "@/lib/seo/geo-service-pages";
 
 const base =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
@@ -14,16 +14,16 @@ const routes = [
   "/about",
   "/contact",
   "/cookies",
-  "/design-process",
   "/how-we-work",
   "/domains",
   "/get-started",
   "/help-center",
   "/hosting",
+  "/ssl",
   "/insights",
   "/portfolio",
-  "/creative-hub",
   "/pricing",
+  "/products",
   "/reviews",
   "/privacy",
   "/security-journey",
@@ -33,6 +33,7 @@ const routes = [
   "/services/mobile-apps",
   "/services/ui-ux-design",
   "/services/web-development",
+  "/services/software-development",
   "/services/web-design-in-ghana",
   "/services/web-design-in-accra",
   "/services/website-to-mobile-app",
@@ -41,7 +42,7 @@ const routes = [
   "/tools/project-cost",
   "/tools/proposal",
   "/tools/security-assessment",
-  ...productSitemapPaths,
+  ...geoServiceSitemapPaths(),
   ...intentSitemapPaths(),
   "/industries",
   ...industrySitemapPaths,
@@ -62,6 +63,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const topSeo = new Set([
     "/services/web-design-in-accra",
     "/services/web-design-in-ghana",
+    "/services/web-development-in-accra",
+    "/services/web-development-in-ghana",
+    "/services/software-development-in-accra",
+    "/services/software-development-in-ghana",
+    "/services/mobile-app-development-in-accra",
+    "/services/mobile-app-development-in-ghana",
+    "/services/ecommerce-development-in-accra",
+    "/services/ecommerce-development-in-ghana",
+    "/services/cybersecurity-in-accra",
+    "/services/ui-ux-design-in-accra",
     "/guides/website-cost-in-ghana",
     "/about",
     "/reviews",
@@ -75,8 +86,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/contact",
     "/hosting",
     "/domains",
+    "/ssl",
+    "/guides/domain-prices-in-ghana",
+    "/guides/web-hosting-cost-in-ghana",
     "/products",
-    "/products/pos",
   ]);
 
   const legalPaths = new Set(["/privacy", "/terms", "/cookies"]);

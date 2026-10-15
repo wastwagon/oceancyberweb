@@ -12,9 +12,9 @@ const pageUrl = `${SITE_URL}${path}`;
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "Best web design company in Ghana",
+    title: "Best web design company in Ghana, from GHS 6,000",
     description:
-      "Best web design company in Ghana. OceanCyber builds company websites, online stores, and web apps from Accra, rated 4.9 from 54 Google reviews.",
+      "Best web design company in Ghana. Company websites, stores, and web apps from Accra — packages from GHS 6,000. Rated 4.9 from 54 Google reviews.",
   },
   path,
 );
@@ -123,15 +123,20 @@ export default function WebDesignGhanaPage() {
           </nav>
 
           <p className="mt-8 text-sm font-semibold text-sa-primary">
-            Best in Ghana
+            Ghana · from GHS 6,000
           </p>
           <h1 className="sa-title-lg mt-3">
             Best web design company in Ghana
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-sa-muted/80">
-            OceanCyber is the company to hire in Ghana for websites, from Accra to Kumasi,
-            Tema, and Takoradi. Rated 4.9 from 54 Google reviews. One office, at 47 Nii
-            Kwashiefio Avenue in Accra, and one phone number.
+            Websites for Ghana businesses nationwide — designed and built from Accra for
+            Kumasi, Tema, Takoradi, Tamale, and remote teams. Same GHS packages as Accra
+            clients, one phone number, and screen-share discovery when you cannot visit.
+            Prefer local meetings? See{" "}
+            <Link href="/services/web-design-in-accra" className="sa-text-link font-medium">
+              web design in Accra
+            </Link>
+            .
           </p>
 
           <div className="mt-8 flex flex-col items-start gap-3">
@@ -165,7 +170,7 @@ export default function WebDesignGhanaPage() {
           </ul>
           <p className="mt-6 text-sm text-sa-muted/70">
             Looking for Accra specifically?{" "}
-            <Link href="/services/web-design-in-accra" className="text-sa-primary hover:underline">
+            <Link href="/services/web-design-in-accra" className="sa-text-link font-medium">
               Web designer in Accra
             </Link>
             .
@@ -180,17 +185,17 @@ export default function WebDesignGhanaPage() {
           </h2>
           <ul className="mt-6 space-y-3 text-sm">
             <li>
-              <Link href="/guides/website-cost-in-ghana" className="font-semibold text-sa-primary hover:underline">
+              <Link href="/guides/website-cost-in-ghana" className="sa-text-link">
                 How much a website costs in Ghana
               </Link>
             </li>
             <li>
-              <Link href="/compare/wix-vs-custom-website-ghana" className="font-semibold text-sa-primary hover:underline">
+              <Link href="/compare/wix-vs-custom-website-ghana" className="sa-text-link">
                 Wix or a custom website
               </Link>
             </li>
             <li>
-              <Link href="/compare/agency-vs-freelancer-vs-in-house-ghana" className="font-semibold text-sa-primary hover:underline">
+              <Link href="/compare/agency-vs-freelancer-vs-in-house-ghana" className="sa-text-link">
                 Agency, freelancer, or an in-house hire
               </Link>
             </li>
@@ -207,7 +212,7 @@ export default function WebDesignGhanaPage() {
           <ul className="mt-6 space-y-3 text-sm leading-relaxed text-sa-muted/80">
             {proofOutcomes.map((item) => (
               <li key={item.client}>
-                <a href={item.href} className="font-semibold text-white hover:text-sa-primary">
+                <a href={item.href} className="sa-text-link-quiet">
                   {item.client}
                 </a>
                 {" — "}

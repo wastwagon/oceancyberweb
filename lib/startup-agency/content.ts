@@ -1,14 +1,12 @@
 /** Marketing homepage content — structure aligned with Start-Up Agency; copy tailored for OceanCyber. */
 
 import { siteImagePaths } from "@/lib/seo/site-image-paths";
-import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
+import { googleBusinessProfile, trustBlurb } from "@/lib/startup-agency/google-business";
 import { serviceImages } from "./service-images";
 
-export const heroTagline =
-  `Websites, mobile apps, and cybersecurity from one Accra team. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}, rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`;
+export const heroTagline = trustBlurb.short;
 
-export const companyPresence =
-  `OceanCyber is the best web design company in Accra and in Ghana for websites, mobile apps, and cybersecurity. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}, rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews. One office at ${googleBusinessProfile.address.street}, Accra.`;
+export const companyPresence = `${trustBlurb.seo}`;
 
 export const heroServiceSlides = [
   {
@@ -149,52 +147,50 @@ export const trustSignals = [
 ] as const;
 
 export const marqueeTags = [
-  "Solid Software Engineering",
-  "Trusted Payment Systems",
-  "Zero‑Trust Security",
-  "High-Performance Cloud Hosting",
-  "Engineering for Growth",
-  "Scalable E‑commerce Solutions",
-  "Professional Product Delivery",
-  "Managed ICT Services",
   "Web · Mobile · Cloud · Security",
-  "Your Technology Partner",
+  "Paystack & Mobile Money",
+  "Accra office since 2008",
+  "Fixed GHS packages",
+  "cPanel hosting & SSL",
+  "Store-ready mobile apps",
+  "Security assessments",
+  "Design and build in one team",
 ] as const;
 
 export const serviceCards = [
   {
     title: "UI/UX & Brand",
-    desc: "Human-centered interfaces and brand systems in Figma — wireframes, prototypes, and design handoff your engineers can ship.",
+    desc: "Interfaces your customers can use on a phone, with Figma files your developers can build from.",
     href: "/services/ui-ux-design",
     image: serviceImages.uiUxBrand,
   },
   {
     title: "Web Development",
-    desc: "High-performance websites and web apps that convert visitors into customers — built for speed, SEO, and long-term growth.",
+    desc: "Fast company sites that show up on Google and take Paystack or MoMo when you sell online.",
     href: "/services/web-development",
     image: serviceImages.webDevelopment,
   },
   {
     title: "Mobile Apps",
-    desc: "Native-quality iOS and Android experiences users enjoy — offline flows, MoMo payments, and store-ready releases.",
+    desc: "iOS and Android apps with offline flows, MoMo payments, and store-ready releases.",
     href: "/services/mobile-apps",
     image: serviceImages.mobileApps,
   },
   {
     title: "E‑commerce",
-    desc: "Storefronts that handle real volume — catalog, checkout, MoMo, and ops tooling without breaking under pressure.",
+    desc: "Storefronts that handle real volume — catalog, checkout, MoMo, and ops tooling that holds up.",
     href: "/services/ecommerce",
     image: serviceImages.ecommerce,
   },
   {
     title: "Cybersecurity",
-    desc: "Find vulnerabilities before attackers do — audits, hardening, and monitoring that protect your reputation and revenue.",
+    desc: "Find weak spots before attackers do — audits, hardening, and monitoring for Ghana businesses.",
     href: "/services/cybersecurity",
     image: serviceImages.cyberSecurity,
   },
   {
     title: "Cloud Hosting",
-    desc: "Reliable infrastructure with local support — domains, SSL, and hosting that keeps your business online.",
+    desc: "Domains, SSL, and hosting with Accra support — billed in GHS so you stay online without forex drama.",
     href: "/hosting",
     image: serviceImages.cloudHosting,
   },
@@ -284,40 +280,40 @@ export const proofOutcomes = [
 
 export const faqItems = [
   {
-    q: "Who is the best web design company in Accra and Ghana?",
-    a: `OceanCyber, at ${googleBusinessProfile.address.street}, Accra. Founded in ${googleBusinessProfile.foundedYear}, with ${googleBusinessProfile.teamSize} people and a ${googleBusinessProfile.rating} rating from ${googleBusinessProfile.reviewCount} Google reviews. Published results include a 250% rise in client engagement for Fitch Advisory, 180% better case-management efficiency for Fitch Attorneys, and 165% higher mobile conversions for ThinQ Shopping.`,
+    q: "Where is OceanCyber based?",
+    a: `Accra — ${googleBusinessProfile.address.street}. A team of ${googleBusinessProfile.teamSize}, founded in ${googleBusinessProfile.foundedYear}, rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews. For hire pages by city, see web design in Accra and web design in Ghana.`,
   },
   {
     q: "How do we start a project?",
-    a: "Contact us with goals and timeline. We reply with next steps and, where helpful, a rough range using our project calculator.",
+    a: "Share goals, budget range, and timeline on Get started or Contact. We reply with the right package or a scoped next step — the project calculator helps with a rough cedis range.",
   },
   {
     q: "What services do you offer?",
-    a: "UI/UX design, brand identity, web, mobile apps, e‑commerce, cybersecurity, hosting, and related delivery — see Services for detail.",
+    a: "UI/UX, websites, mobile apps, ecommerce, cybersecurity, and hosting — all from the Accra office. See Services for detail.",
   },
   {
     q: "Do you offer maintenance?",
-    a: "Yes — retainers and milestone‑based support after launch, tuned to your needs.",
+    a: "Yes — retainers and milestone support after launch, sized to your site or app.",
   },
   {
     q: "How long does a typical build take?",
-    a: "Depends on scope. Small marketing sites are faster; product work is milestone‑based with weekly visibility.",
+    a: "Depends on scope. Small marketing sites move faster; product work ships in milestones with regular demos.",
   },
   {
     q: "Do you require a deposit?",
-    a: "Most engagements use phased billing aligned to milestones — we’ll spell this out in the proposal.",
+    a: "Most work uses phased billing tied to milestones — spelled out in the proposal before we start.",
   },
   {
     q: "Can we customise a package?",
-    a: "Packages are starting points; we scope to your constraints and priorities. See our pricing page for a full feature comparison across Startup, Professional, and Enterprise tiers.",
+    a: "Yes. Startup, Professional, and Enterprise are starting points — we scope to your constraints. Compare inclusions on the pricing page.",
   },
   {
     q: "What is included in each pricing package?",
-    a: "Startup starts from GHS 6,000 for up to 5 pages. Professional from GHS 14,500 adds custom UI/UX and analytics. Enterprise from GHS 30,000 covers complex platforms with a dedicated delivery lead. Compare details on our pricing page.",
+    a: "Startup from GHS 6,000 (up to 5 pages). Professional from GHS 14,500 adds custom UI/UX and analytics. Enterprise from GHS 30,000 covers complex platforms with a dedicated delivery lead.",
   },
   {
     q: "How do you measure success?",
-    a: "We agree KPIs upfront — technical, commercial, or operational — and review them after launch.",
+    a: "We agree goals up front — traffic, sales, staff time saved, or security fixes — and review them after launch.",
   },
 ] as const;
 

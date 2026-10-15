@@ -14,113 +14,95 @@ const content: ServicePageContent = {
   heroSuffix: "",
   heroHighlightTone: "white",
   heroDescription:
-    "Interfaces and brand systems that convert — researched with real users, prototyped in Figma, and handed off ready for engineering.",
+    "Interfaces and brand systems for Ghana teams — researched with real users, prototyped in Figma, and handed to engineering without guesswork. From GHS 3,500.",
   heroCtaLabel: "Get started",
   heroCtaHref: "/get-started",
+  hireGeoHref: "/services/ui-ux-design-in-accra",
+  hireGeoLabel: "UI/UX design in Accra →",
   heroImage: serviceImages.uiUxBrand,
-  pills: ["Figma", "Design systems", "User research"],
-  focusEyebrow: "Experience design",
-  focusTitle: "Design that earns trust before the first click",
+  pills: ["Figma", "Brand", "Prototypes"],
+  focusEyebrow: "What we design",
+  focusTitle: "Screens your customers can finish on a phone",
   focusSubtitle:
-    "We pair visual craft with product thinking so every screen supports a business outcome.",
+    "Clear hierarchy, readable type, and flows that match how Accra and Ghana users actually behave.",
   focusAreas: [
     {
-      title: "Brand identity & visual language",
+      title: "Brand and visual language",
       description:
-        "Logo systems, typography, color, and voice that feel unmistakably yours across web and product.",
+        "Logo, colour, and type that look professional next to peers in your industry.",
     },
     {
-      title: "UX research & journey mapping",
+      title: "UX research and flows",
       description:
-        "Interviews, flows, and wireframes that validate assumptions before expensive build cycles.",
+        "Short interviews and task tests so we fix confusion before build spend.",
     },
     {
-      title: "UI design & design systems",
+      title: "Figma prototypes",
       description:
-        "Component libraries, tokens, and patterns your team can extend without visual drift.",
+        "Clickable journeys your team can review on a phone before coding starts.",
     },
     {
-      title: "Interactive prototypes",
+      title: "Design systems",
       description:
-        "Clickable Figma prototypes for stakeholder buy-in, usability tests, and dev handoff.",
-    },
-    {
-      title: "Marketing & product surfaces",
-      description:
-        "Landing pages, dashboards, and mobile flows designed for clarity, accessibility, and conversion.",
-    },
-    {
-      title: "Design-to-dev collaboration",
-      description:
-        "Specs, redlines, and review rituals so engineering ships what design intended.",
+        "Components and spacing rules so the tenth page matches the first.",
     },
   ],
-  stackEyebrow: "Toolkit",
-  stackTitle: "How we design",
+  stackEyebrow: "Tools we use",
+  stackTitle: "Handoff engineers can ship from",
   stackSubtitle:
-    "Modern workflows that keep stakeholders aligned from discovery through launch.",
+    "Figma files with specs — not mood boards that die in a PDF.",
   stack: [
-    { title: "Figma", description: "Shared libraries, variants, and dev-ready exports." },
-    { title: "User research", description: "Lightweight interviews and task-based usability checks." },
-    { title: "Wireframing", description: "Low-fidelity flows to agree structure before polish." },
-    { title: "Prototyping", description: "Interactive demos for mobile and web experiences." },
-    { title: "Accessibility", description: "Contrast, focus order, and WCAG-minded patterns." },
-    { title: "Design QA", description: "Pre-launch reviews against approved specs." },
+    { title: "Figma", description: "Source of truth for screens and components." },
+    { title: "Prototypes", description: "Click-through flows for review meetings." },
+    { title: "Design tokens", description: "Colour, type, and spacing that map to code." },
+    { title: "Content notes", description: "Real Ghana English microcopy, not lorem." },
+    { title: "Accessibility checks", description: "Contrast and focus paths before handoff." },
+    { title: "Dev walkthrough", description: "We sit with engineers on the first build." },
   ],
   deliverEyebrow: "Deliverables",
-  deliverTitle: "What you receive",
-  deliverSubtitle:
-    "Artifacts marketing, product, and engineering can all work from after handoff.",
+  deliverTitle: "What you leave with",
+  deliverSubtitle: "Assets marketing and engineering can both own.",
   deliverables: [
     {
-      title: "Brand guidelines",
-      description: "Logo usage, typography, color, and tone for consistent rollout.",
+      title: "Figma source",
+      description: "Organised pages, components, and prototype links.",
     },
     {
-      title: "UX flows & wireframes",
-      description: "Mapped journeys with annotated decisions and edge cases.",
+      title: "Brand basics",
+      description: "Logo usage, colour, and type when brand is in scope.",
     },
     {
-      title: "High-fidelity UI screens",
-      description: "Responsive layouts for key breakpoints and states.",
+      title: "Handoff notes",
+      description: "Spacing, states, and edge cases called out for build.",
     },
     {
-      title: "Figma component library",
-      description: "Reusable components with tokens for scale.",
-    },
-    {
-      title: "Clickable prototype",
-      description: "Shareable demo for investors, users, or internal review.",
-    },
-    {
-      title: "Engineering handoff pack",
-      description: "Specs, assets, and review support through build.",
+      title: "Optional build bundle",
+      description: "Same Accra team can implement the designs in Next.js.",
     },
   ],
   outcomesEyebrow: "Outcomes",
-  outcomesTitle: "Design-led launches",
-  outcomesSubtitle:
-    "Representative engagements where design drove measurable business impact.",
+  outcomesTitle: "Design that ships",
+  outcomesSubtitle: "Illustrative — every product starts with different constraints.",
   outcomes: [
     {
-      title: "Creative hub dashboard",
-      client: "OceanCyber",
-      result: "Premium UI system with glassmorphism and analytics — showcase of our craft.",
+      title: "Product UI systems",
+      client: "SaaS and portals",
+      result: "Consistent screens before engineering scales the backlog.",
     },
     {
-      title: "E-commerce refresh",
-      client: "Juelle Hair",
-      result: "Conversion-focused storefront UX with clearer merchandising and checkout.",
+      title: "Brand refresh",
+      client: "Professional firms",
+      result: "Clearer trust signals for Accra clients.",
     },
     {
-      title: "Professional services portal",
-      client: "Fitch Advisory",
-      result: "Trust-led information architecture and client portal experience.",
+      title: "Store UX",
+      client: "Retailers",
+      result: "Fewer abandoned carts from confusing mobile checkout.",
     },
   ],
-  ctaTitle: "Ready to shape your product experience?",
+  ctaTitle: "Need design before you build?",
   ctaDescription:
-    "Share your audience, goals, and timeline — we'll propose a discovery sprint and design roadmap.",
+    "Tell us whether you need brand, product UI, or both — we will recommend a package from GHS 3,500.",
   pricing: servicePricingHints.uiUx,
 };
 

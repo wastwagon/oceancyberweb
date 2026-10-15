@@ -14,113 +14,97 @@ const content: ServicePageContent = {
   heroSuffix: "",
   heroHighlightTone: "white",
   heroDescription:
-    "Web development in Accra and across Ghana. Fast marketing sites and web apps, with SEO and speed built in, from a team of 25 at 47 Nii Kwashiefio Avenue.",
+    "Company websites and web apps for Accra and Ghana teams — built for speed on mobile networks, SEO, and Paystack or MoMo when you need checkout. From our office at 47 Nii Kwashiefio Avenue.",
   heroCtaLabel: "Get started",
   heroCtaHref: "/get-started",
+  hireGeoHref: "/services/web-development-in-accra",
+  hireGeoLabel: "Web development in Accra →",
   heroImage: serviceImages.webDevelopment,
-  pills: ["Next.js", "Performance", "Design systems"],
-  focusEyebrow: "Product surfaces",
-  focusTitle: "Sites and apps that feel as good as they measure",
+  pills: ["Next.js", "Paystack / MoMo", "SEO"],
+  focusEyebrow: "What we build",
+  focusTitle: "Sites and apps that work on Ghana phones",
   focusSubtitle:
-    "From first paint to long-term velocity, we pair UX craft with engineering discipline.",
+    "We care about speed on mobile data and clean code you can extend after launch.",
   focusAreas: [
     {
-      title: "Marketing and brand sites",
+      title: "Company and marketing sites",
       description:
-        "Narrative-led pages with motion, typography, and content modeling that scales.",
+        "Clear pages for services, team, and contact — structured so Google can understand you and visitors can call or WhatsApp.",
     },
     {
       title: "Product web applications",
       description:
-        "Dashboards, workflows, and multi-role experiences with clear state and permissions.",
+        "Dashboards, staff workflows, and client portals with roles your operations team can manage.",
     },
     {
-      title: "Headless and composable stacks",
+      title: "CMS and content workflows",
       description:
-        "CMS, commerce, and service boundaries chosen for your editorial and ops reality.",
+        "Editors update pages without waiting on a developer for every headline change.",
     },
     {
-      title: "Search and discovery",
+      title: "Payments and integrations",
       description:
-        "Structured data, faceted experiences, and performance-aware indexing patterns.",
-    },
-    {
-      title: "Integrations",
-      description:
-        "Payments, CRM, analytics, and identity, wired with retries, observability, and fallbacks.",
-    },
-    {
-      title: "Platform hardening",
-      description:
-        "Caching, edge configuration, and release safety nets for predictable launches.",
+        "Paystack, Mobile Money, CRM, and analytics wired with sensible fallbacks when the network is slow.",
     },
   ],
-  stackEyebrow: "Stack",
-  stackTitle: "Technologies we ship with",
+  stackEyebrow: "Tools we use",
+  stackTitle: "A stack your team can maintain",
   stackSubtitle:
-    "Modern defaults: type safety, component systems, and deployment pipelines you can trust.",
+    "Type-safe defaults and preview deploys — not a black-box theme you cannot change.",
   stack: [
-    { title: "Next.js", description: "App Router, streaming, and edge-ready patterns." },
-    { title: "TypeScript", description: "Shared contracts across UI, API, and workers." },
-    { title: "React", description: "Composable interfaces with disciplined state boundaries." },
-    { title: "Tailwind CSS", description: "Tokenized styling that stays consistent at scale." },
-    { title: "Node.js", description: "API routes, workers, and glue that match your topology." },
-    { title: "Vercel and CI", description: "Preview environments, checks, and measured rollouts." },
+    { title: "Next.js", description: "Modern React sites with fast page loads." },
+    { title: "TypeScript", description: "Fewer runtime surprises across UI and API." },
+    { title: "React", description: "Front ends structured so new features do not break old ones." },
+    { title: "Tailwind CSS", description: "Consistent spacing and type without one-off CSS chaos." },
+    { title: "Node.js", description: "APIs and background jobs that match how you operate." },
+    { title: "CI and previews", description: "Staging links before go-live so your team can review." },
   ],
   deliverEyebrow: "Deliverables",
-  deliverTitle: "What ships with the build",
+  deliverTitle: "What you leave with",
   deliverSubtitle:
-    "Artifacts that help marketing, product, and engineering stay aligned after handoff.",
+    "Handover your marketing and ops teams can actually use.",
   deliverables: [
     {
-      title: "SEO and performance baseline",
-      description: "Core vitals targets, metadata, and structured data where it matters.",
+      title: "SEO and speed baseline",
+      description: "Titles, metadata, and Core Web Vitals targets suited to Ghana mobile traffic.",
     },
     {
-      title: "Design system kit",
-      description: "Components, tokens, and usage notes for consistent iteration.",
+      title: "Component kit",
+      description: "Reusable UI pieces and notes so the next feature looks like the last.",
     },
     {
-      title: "Analytics instrumentation",
-      description: "Event taxonomy and privacy-aware collection aligned to decisions you need.",
+      title: "Analytics setup",
+      description: "Events that answer business questions — not vanity pageviews alone.",
     },
     {
-      title: "Accessibility pass",
-      description: "Keyboard flows, contrast, and semantics checked against WCAG intent.",
-    },
-    {
-      title: "Content authoring workflow",
-      description: "Preview, approvals, and safe publishing paths for non-engineers.",
-    },
-    {
-      title: "Runbooks and handover",
-      description: "Deploy steps, rollback, and on-call notes your team can operate.",
+      title: "Launch runbook",
+      description: "Deploy steps, rollback, and who to call when something breaks.",
     },
   ],
   outcomesEyebrow: "Outcomes",
-  outcomesTitle: "Representative engagements",
+  outcomesTitle: "Work you can open",
   outcomesSubtitle:
-    "Illustrative results: baselines, traffic, and goals differ by engagement.",
+    "Live Accra clients — results vary by brief and starting point.",
   outcomes: [
     {
-      title: "E-commerce platform uplift",
-      client: "Retail client",
-      result: "Conversion-focused rebuild with faster checkout and clearer merchandising.",
+      title: "Client portal and booking",
+      client: "Fitch Advisory",
+      result: "Client engagement up after portal, document sharing, and booking.",
     },
     {
-      title: "Corporate web refresh",
-      client: "Financial services",
-      result: "Information architecture and performance tuned for trust and clarity.",
+      title: "Law firm web presence",
+      client: "Fitch Attorneys",
+      result: "Clear service pages and contact paths for Accra clients.",
     },
     {
-      title: "Creative portfolio system",
-      client: "Agency",
-      result: "Case study templates and motion that scale across dozens of launches.",
+      title: "Commerce storefront",
+      client: "ThinQ Shopping",
+      result: "Catalog and checkout shaped for Ghana buyers.",
     },
   ],
-  ctaTitle: "Ready to build your next web experience?",
+  ctaTitle: "Ready to build your next website?",
   ctaDescription:
-    "Tell us about audiences, constraints, and success metrics, and we will shape a roadmap and team rhythm that fits.",
+    "Share your goals, budget range, and timeline — we will reply with the right package or a scoped proposal.",
   pricing: servicePricingHints.webDevelopment,
 };
 

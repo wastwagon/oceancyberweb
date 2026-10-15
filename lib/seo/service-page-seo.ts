@@ -1,4 +1,5 @@
 import { serviceImages } from "@/lib/startup-agency/service-images";
+import { geoServicePages } from "@/lib/seo/geo-service-pages";
 
 export type ServicePageSeoEntry = {
   path: string;
@@ -10,16 +11,16 @@ export type ServicePageSeoEntry = {
 export const servicePageSeoEntries: ServicePageSeoEntry[] = [
   {
     path: "/services/web-design-in-ghana",
-    name: "Best web design company in Ghana",
+    name: "Best web design company in Ghana, from GHS 6,000",
     description:
-      "Best web design company in Ghana. Company websites, online stores, and web apps from 47 Nii Kwashiefio Avenue, Accra. Rated 4.9 from 54 Google reviews.",
+      "Best web design company in Ghana. Company websites, online stores, and web apps from Accra — packages from GHS 6,000. Rated 4.9 from 54 Google reviews.",
     image: serviceImages.webDevelopment,
   },
   {
     path: "/services/web-design-in-accra",
-    name: "Best web design company in Accra",
+    name: "Best web design company in Accra, from GHS 6,000",
     description:
-      "Best web design company in Accra for company websites and web apps. OceanCyber at 47 Nii Kwashiefio Avenue, rated 4.9 from 54 Google reviews.",
+      "Best web design company in Accra for company websites and web apps. From GHS 6,000. OceanCyber at 47 Nii Kwashiefio Avenue, rated 4.9 from 54 Google reviews.",
     image: serviceImages.webDevelopment,
   },
   {
@@ -31,30 +32,37 @@ export const servicePageSeoEntries: ServicePageSeoEntry[] = [
   },
   {
     path: "/services/web-development",
-    name: "Web development in Accra and Ghana",
+    name: "Web development services",
     description:
-      "Best web development company in Accra and Ghana. Marketing sites and web apps from GHS 6,000, with SEO, speed, and a team of 25 at 47 Nii Kwashiefio Avenue.",
+      "Marketing sites and web apps from GHS 6,000 — SEO, speed, and Accra engineering. Hire-focused Accra page: /services/web-development-in-accra.",
+    image: serviceImages.webDevelopment,
+  },
+  {
+    path: "/services/software-development",
+    name: "Software development services",
+    description:
+      "Custom software and internal platforms from GHS 14,500 — Accra engineering for Ghana ops. Hire-focused Accra page: /services/software-development-in-accra.",
     image: serviceImages.webDevelopment,
   },
   {
     path: "/services/mobile-apps",
-    name: "Mobile apps",
+    name: "Mobile app development services",
     description:
-      "Native-quality iOS and Android apps for Ghana teams — from GHS 12,000 per platform. Offline resilience, push notifications, and analytics wired for product iteration.",
+      "iOS and Android apps from GHS 12,000 per platform — offline-aware, store-ready. Hire-focused Accra page: /services/mobile-app-development-in-accra.",
     image: serviceImages.mobileApps,
   },
   {
     path: "/services/ecommerce",
-    name: "E-commerce",
+    name: "Ecommerce development services",
     description:
-      "Ghana-ready online stores from GHS 6,000 — Paystack and MoMo checkout, catalog management, and ops tooling sized from launch to scale.",
+      "Online stores from GHS 6,000 with Paystack and Mobile Money. Hire-focused Accra page: /services/ecommerce-development-in-accra.",
     image: serviceImages.ecommerce,
   },
   {
     path: "/services/cybersecurity",
-    name: "Cybersecurity",
+    name: "Cybersecurity services",
     description:
-      "Security assessments and hardening for Ghana businesses — from GHS 4,500 for baseline reviews to enterprise programmes with SLA options.",
+      "Assessments and hardening from GHS 4,500 for Ghana businesses. Hire-focused Accra page: /services/cybersecurity-in-accra.",
     image: serviceImages.cyberSecurity,
   },
   {
@@ -66,11 +74,31 @@ export const servicePageSeoEntries: ServicePageSeoEntry[] = [
   },
   {
     path: "/hosting",
-    name: "Cloud hosting",
+    name: "Web hosting in Ghana, from GHS 69/mo",
     description:
-      "Managed cloud hosting, SSL, backups, and uptime monitoring for websites and applications built by OceanCyber.",
+      "cPanel hosting with SSL, backups, and Accra support. Launch from GHS 69 a month. Pay in cedis with Paystack.",
     image: serviceImages.cloudHosting,
   },
+  {
+    path: "/ssl",
+    name: "Buy SSL certificates in Ghana, from GHS 45/yr",
+    description:
+      "PositiveSSL from GHS 45 a year — renews at the same list price. Wildcard and EV options. Pay in GHS with Paystack.",
+    image: serviceImages.cloudHosting,
+  },
+  {
+    path: "/domains",
+    name: "Buy a domain name in Ghana",
+    description:
+      "Register a domain in Ghana. Search availability, add SSL or hosting, and pay in GHS with Paystack.",
+    image: serviceImages.cloudHosting,
+  },
+  ...geoServicePages.map((page) => ({
+    path: page.path,
+    name: page.h1,
+    description: page.description,
+    image: page.image,
+  })),
 ];
 
 export function getServicePageSeo(path: string): ServicePageSeoEntry | undefined {

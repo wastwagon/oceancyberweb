@@ -24,6 +24,9 @@ function shouldShowMobileQuickBar(pathname: string, appRoute: boolean, selfChrom
 /**
  * Marketing chrome on public pages; minimal workspace shell on `/dashboard` and `/admin`.
  * `/` and `/home-creative` render their own footer + tab bar — layout skips those.
+ *
+ * Header clearance lives on page heroes (`.sa-page-intro` / `.sa-page-hero` / `.sa-page-top`) —
+ * do not add a second desktop `pt-36` here.
  */
 export function ConditionalChrome({
   header,
@@ -53,7 +56,7 @@ export function ConditionalChrome({
   }
 
   if (selfChrome) {
-    // Shell pages own `<main>` — do not wrap again (avoids nested landmarks).
+    // Shell pages own `<main>` + skip link — do not wrap again (avoids nested landmarks).
     return (
       <>
         {header}
@@ -66,11 +69,16 @@ export function ConditionalChrome({
 
   return (
     <>
+      <a href="#main-content" className="skip-link-startup">
+        Skip to content
+      </a>
       {header}
       {/* Pages/components own `<main>` when they need a landmark; avoid nesting. */}
       <div
+        id="main-content"
+        tabIndex={-1}
         className={cn(
-          "flex-1 md:pt-36",
+          "flex-1 outline-none",
           showMobileQuickBar && "sa-mobile-tab-pad md:pb-0",
         )}
       >

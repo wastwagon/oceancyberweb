@@ -43,12 +43,12 @@ export function SaTrustSection() {
           <ul className="mt-6 space-y-4">
             {proofOutcomes.map((item) => (
               <li key={item.client} className="text-sm leading-relaxed text-sa-muted">
-                <Link href={item.path} className="font-semibold text-white hover:text-sa-primary">
+                <Link href={item.path} className="sa-text-link-quiet">
                   {item.client}
                 </Link>
                 {" — "}
                 {item.result}{" "}
-                <a href={item.href} className="text-sa-primary hover:underline">
+                <a href={item.href} className="sa-text-link">
                   Live site
                 </a>
               </li>
@@ -59,7 +59,7 @@ export function SaTrustSection() {
         <SaReveal delay={0.15} className="mt-8 text-center">
           <Link
             href="/reviews"
-            className="text-sm font-medium text-sa-primary underline-offset-4 transition hover:text-white hover:underline"
+            className="sa-text-link text-sm font-medium"
           >
             Read Google reviews →
           </Link>

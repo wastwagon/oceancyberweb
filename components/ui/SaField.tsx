@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { Children, cloneElement, isValidElement, type ReactElement, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type SaFieldProps = {
@@ -14,6 +14,13 @@ type SaFieldProps = {
   className?: string;
 };
 
+type ControlA11yProps = {
+  id?: string;
+  "aria-describedby"?: string;
+  "aria-invalid"?: boolean | "true" | "false";
+  "aria-required"?: boolean | "true" | "false";
+};
+
 export function SaField({
   id,
   label,
@@ -25,8 +32,26 @@ export function SaField({
   children,
   className,
 }: SaFieldProps) {
-  const hintId = id && hint ? `${id}-hint` : undefined;
+  const hintId = id && hint && !error ? `${id}-hint` : undefined;
   const errorId = id && error ? `${id}-error` : undefined;
+  const describedBy = [hintId, errorId].filter(Boolean).join(" ") || undefined;
+
+  const enhanced = Children.map(children, (child) => {
+    if (!isValidElement(child)) return child;
+    const el = child as ReactElement<ControlA11yProps>;
+    const existingDescribedBy = el.props["aria-describedby"];
+    const mergedDescribedBy = [existingDescribedBy, describedBy]
+      .filter(Boolean)
+      .join(" ")
+      .trim() || undefined;
+
+    return cloneElement(el, {
+      id: el.props.id ?? id,
+      "aria-describedby": mergedDescribedBy,
+      "aria-invalid": error ? true : el.props["aria-invalid"],
+      "aria-required": required ? true : el.props["aria-required"],
+    });
+  });
 
   return (
     <div className={cn("space-y-sa-sm", className)}>
@@ -52,7 +77,7 @@ export function SaField({
           </span>
         ) : null}
       </label>
-      {children}
+      {enhanced}
       {hint && !error ? (
         <p id={hintId} className="sa-hint px-1">
           {hint}

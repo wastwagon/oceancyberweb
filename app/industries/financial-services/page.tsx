@@ -16,12 +16,12 @@ const content: IndustryPageContent = {
   heroHighlight: "services",
   heroSuffix: "",
   heroDescription:
-    "Banking-grade platforms, payments, and risk tooling, designed for Ghana's regulatory reality and customer expectations.",
-  pills: ["Secure & compliant", "Fintech innovation", "Digital banking"],
+    "Banking and fintech platforms for Ghana — payments, channels, and risk tools shaped for local rails and regulation.",
+  pills: ["Payments", "Mobile banking", "Compliance"],
   solutionsEyebrow: "Solutions",
-  solutionsTitle: "What we build with banks & fintechs",
+  solutionsTitle: "What we build with banks and fintechs",
   solutionsSubtitle:
-    "From channels to core integrations: performance, auditability, and fraud resistance by default.",
+    "From customer apps to core integrations — performance, audit trails, and fraud resistance by default.",
   services: [
     {
       title: "Digital banking platforms",
@@ -59,12 +59,12 @@ const content: IndustryPageContent = {
   capabilitiesSubtitle:
     "How we connect legacy cores to modern channels without compromising safety.",
   technologies: [
-    { title: "Blockchain", description: "Where immutability fits the use case" },
-    { title: "AI / ML", description: "Fraud analytics and anomaly detection" },
-    { title: "API integration", description: "Stable contracts between systems" },
-    { title: "Cloud security", description: "Zero-trust patterns and hardening" },
-    { title: "Biometric authentication", description: "Device and identity signals" },
-    { title: "Real-time analytics", description: "Operational and executive views" },
+    { title: "Paystack / MoMo", description: "Ghana payment rails and reconciliation" },
+    { title: "Fraud signals", description: "Rules and alerts ops teams can act on" },
+    { title: "API integration", description: "Stable contracts between cores and channels" },
+    { title: "Cloud hardening", description: "Access control, logging, and patch habits" },
+    { title: "Strong authentication", description: "MFA and device-aware login patterns" },
+    { title: "Live dashboards", description: "Views for ops and leadership" },
   ],
   storiesEyebrow: "Outcomes",
   storiesTitle: "Representative engagements",
@@ -72,9 +72,9 @@ const content: IndustryPageContent = {
     "Directional results: your risk profile and stack will differ.",
   caseStudies: [
     {
-      title: "Mobile banking transformation",
+      title: "Mobile banking channels",
       client: "Regional bank",
-      result: "Increased digital transactions materially post-launch.",
+      result: "More digital transactions after launch.",
     },
     {
       title: "Fraud prevention system",
@@ -87,9 +87,9 @@ const content: IndustryPageContent = {
       result: "Cut manual reporting time with auditable pipelines.",
     },
   ],
-  ctaTitle: "Modernize financial experiences?",
+  ctaTitle: "Building a bank or fintech product?",
   ctaDescription:
-    "Share your channels, partners, and compliance scope, and we'll map delivery phases and security gates.",
+    "Share your channels, partners, and compliance scope — we will map delivery phases and security gates.",
 };
 
 const financeProof: IndustryProofItem[] = [

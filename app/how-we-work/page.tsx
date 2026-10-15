@@ -119,7 +119,7 @@ export default function HowWeWorkPage() {
             })}
           </div>
           <p className="mt-10 text-center">
-            <Link href="/services/ui-ux-design" className="text-sm font-semibold text-sa-primary hover:underline">
+            <Link href="/services/ui-ux-design" className="sa-text-link text-sm">
               UI and brand design
             </Link>
           </p>

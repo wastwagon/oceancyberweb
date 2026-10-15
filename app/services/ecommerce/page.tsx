@@ -14,113 +14,95 @@ const content: ServicePageContent = {
   heroSuffix: "",
   heroHighlightTone: "white",
   heroDescription:
-    "Stores that convert: catalog modeling, checkout trust, payments, and operations tooling sized from launch to scale.",
+    "Online stores for Accra retailers and Ghana-wide sellers — catalog, checkout, Paystack and Mobile Money, from GHS 6,000.",
   heroCtaLabel: "Get started",
   heroCtaHref: "/get-started",
+  hireGeoHref: "/services/ecommerce-development-in-accra",
+  hireGeoLabel: "Ecommerce in Accra →",
   heroImage: serviceImages.ecommerce,
-  pills: ["Checkout", "Payments", "Operations"],
-  focusEyebrow: "Capabilities",
-  focusTitle: "Commerce that holds up on launch day and year two",
+  pills: ["Paystack", "Mobile Money", "Catalog"],
+  focusEyebrow: "What we build",
+  focusTitle: "Shops that take money without drama",
   focusSubtitle:
-    "We connect storefront experience with inventory, finance, and fulfillment reality.",
+    "Storefront, payments, and the day-to-day ops your staff run after launch.",
   focusAreas: [
     {
-      title: "Storefront experience",
+      title: "Storefront and product pages",
       description:
-        "Merchandising, search, and PDP storytelling tuned to mobile-first buyers.",
+        "Clear photos, prices in GHS, and mobile layouts shoppers can finish on a phone.",
     },
     {
-      title: "Checkout and payments",
+      title: "Checkout with MoMo and cards",
       description:
-        "Fraud signals, retries, tax, and localization handled without brittle hacks.",
+        "Paystack and Mobile Money with honest error messages when a payment fails.",
     },
     {
-      title: "Catalog and PIM alignment",
+      title: "Orders and inventory",
       description:
-        "Variants, bundles, and content workflows that stay accurate as SKUs grow.",
+        "Stock and order views your team can use without calling a developer every morning.",
     },
     {
-      title: "Subscriptions and loyalty",
+      title: "Delivery and pickup",
       description:
-        "Plans, proration, and retention hooks where your unit economics need them.",
-    },
-    {
-      title: "B2B and wholesale flows",
-      description:
-        "Approvals, net terms, and account hierarchies without sacrificing self-serve speed.",
-    },
-    {
-      title: "Analytics and experimentation",
-      description:
-        "Funnels, cohort views, and test infrastructure that marketing can actually use.",
+        "Greater Accra delivery notes, pickup locations, and customer SMS or email updates.",
     },
   ],
-  stackEyebrow: "Platforms",
-  stackTitle: "Tools we implement and extend",
+  stackEyebrow: "Tools we use",
+  stackTitle: "Platforms that match how you sell",
   stackSubtitle:
-    "Shopify, WooCommerce, or custom, chosen for total cost of ownership, not trends.",
+    "Custom, Shopify, or WooCommerce — chosen for your catalog size and ops.",
   stack: [
-    { title: "Shopify", description: "Hydrogen, custom themes, and app discipline." },
-    { title: "WooCommerce", description: "WordPress stacks with performance guardrails." },
-    { title: "Custom commerce", description: "When off-the-shelf limits your model." },
-    { title: "Payment gateways", description: "PSPs, wallets, and reconciliation patterns." },
-    { title: "Inventory and OMS", description: "Stock truth across channels and warehouses." },
-    { title: "Analytics", description: "Attribution, margin, and cohort views operators need." },
+    { title: "Custom storefronts", description: "When you need full control and Accra hosting." },
+    { title: "Shopify / Woo", description: "When speed-to-launch beats bespoke everything." },
+    { title: "Paystack", description: "Cards and MoMo in Ghana cedis." },
+    { title: "Catalog tools", description: "Variants, stock, and pricing your team can edit." },
+    { title: "Analytics", description: "What sells, where shoppers drop off." },
+    { title: "Hosting & SSL", description: "Keep the store online and trusted." },
   ],
   deliverEyebrow: "Deliverables",
-  deliverTitle: "What operators receive",
-  deliverSubtitle:
-    "Launch-ready configuration plus the documentation teams rely on when traffic spikes.",
+  deliverTitle: "What you leave with",
+  deliverSubtitle: "A live store plus the training to run it.",
   deliverables: [
     {
-      title: "Secure payments posture",
-      description: "PCI-aware flows, webhook reliability, and dispute-ready logging.",
+      title: "Live checkout",
+      description: "Tested Paystack / MoMo flows before you announce launch.",
     },
     {
-      title: "Inventory accuracy",
-      description: "Alerts, buffers, and reconciliation to prevent oversell moments.",
+      title: "Admin training",
+      description: "How to add products, fulfil orders, and refund.",
     },
     {
-      title: "Customer analytics layer",
-      description: "Events, dashboards, and exports aligned to merchandising decisions.",
+      title: "SEO basics",
+      description: "Product titles and structure that can rank in Ghana search.",
     },
     {
-      title: "Mobile-optimized buying",
-      description: "Touch targets, speed, and payment UX tuned for small screens.",
-    },
-    {
-      title: "SEO-ready catalog",
-      description: "Clean URLs, structured data, and crawl budget friendly templates.",
-    },
-    {
-      title: "Scalable architecture",
-      description: "Queues, caching, and rate limits sized to campaign traffic.",
+      title: "Support window",
+      description: "Post-launch help while your first orders settle in.",
     },
   ],
   outcomesEyebrow: "Outcomes",
-  outcomesTitle: "Representative engagements",
-  outcomesSubtitle:
-    "Illustrative results: category, traffic, and ops maturity vary widely.",
+  outcomesTitle: "Commerce in Accra context",
+  outcomesSubtitle: "Illustrative — every catalog and ops model differs.",
   outcomes: [
     {
-      title: "Fashion direct-to-consumer",
-      client: "Retail brand",
-      result: "Faster mobile checkout and clearer PDP hierarchy for seasonal drops.",
+      title: "ThinQ Shopping",
+      client: "Retail",
+      result: "Catalog and checkout shaped for Ghana buyers.",
     },
     {
-      title: "B2B marketplace",
-      client: "Wholesale supplier",
-      result: "Order flows and approvals that reduced manual coordination overhead.",
+      title: "Launch campaigns",
+      client: "SME retailers",
+      result: "MoMo-ready stores without waiting on foreign gateways.",
     },
     {
-      title: "Subscription commerce",
-      client: "Subscription company",
-      result: "Billing edge cases handled; retention reporting surfaced to growth teams.",
+      title: "Ops calm-down",
+      client: "Growing shops",
+      result: "Fewer WhatsApp-only orders and clearer stock truth.",
     },
   ],
-  ctaTitle: "Ready to grow revenue online?",
+  ctaTitle: "Ready to sell online?",
   ctaDescription:
-    "Share catalog complexity, markets, and stack preferences, and we will recommend a pragmatic path to launch.",
+    "Share what you sell, how you deliver, and your budget — we will recommend Startup or Professional with a clear milestone plan.",
   pricing: servicePricingHints.ecommerce,
 };
 

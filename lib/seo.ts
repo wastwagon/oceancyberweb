@@ -5,7 +5,7 @@ export const defaultSEO: DefaultSeoProps = {
   titleTemplate: "%s | OceanCyber",
   defaultTitle: "Best web design company in Accra and Ghana | OceanCyber",
   description:
-    `Best web design company in Accra and Ghana for websites, mobile apps, and cybersecurity. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}, rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`,
+    `Best web design company in Accra and Ghana. Websites from GHS 6,000, apps from GHS 12,000. ${googleBusinessProfile.teamSize} people at ${googleBusinessProfile.address.street}, rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`,
   openGraph: {
     type: "website",
     locale: "en_GH",

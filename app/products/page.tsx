@@ -4,9 +4,9 @@ import { withCanonical } from "@/lib/seo/canonical";
 
 export const metadata = withCanonical(
   {
-    title: "OceanCyber POS and software",
+    title: "Domains, SSL, and hosting",
     description:
-      "OceanCyber POS is subscription software for retail and hospitality in Ghana. Start a trial, or ask the company to build a custom platform.",
+      "Register a domain, buy an SSL certificate, or start cPanel hosting. Prices are in Ghana cedis, paid with Paystack.",
   },
   "/products",
 );

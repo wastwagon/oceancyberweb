@@ -40,7 +40,9 @@ export function StartupAgencyFooter() {
                 />
               </Link>
               <p className="mt-6 max-w-md text-base leading-relaxed text-white/75">
-                Best web design company in Accra and Ghana. Websites, apps, and security. A team of {googleBusinessProfile.teamSize}, founded in {googleBusinessProfile.foundedYear}.
+                Websites, apps, and security from Accra. A team of{" "}
+                {googleBusinessProfile.teamSize}, founded in{" "}
+                {googleBusinessProfile.foundedYear}.
               </p>
 
               <ul className="sa-ios-group mt-8 divide-y divide-white/10">

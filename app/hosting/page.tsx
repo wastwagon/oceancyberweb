@@ -1,23 +1,14 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
 import { Server, Shield, Wrench, Check } from "lucide-react";
-import { HostingPackagesSection } from "@/components/hosting/HostingPackagesSection";
-import { HOSTING_TRUST_POINTS } from "@/lib/hosting-packages";
 import Image from "next/image";
 import Link from "next/link";
-import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
-import {
-  fadeFromLeft,
-  fadeFromRight,
-  fadeUpProps,
-  revealViewport,
-  staggerDelay,
-} from "@/lib/scroll-reveal";
+import { HostingPackagesSection } from "@/components/hosting/HostingPackagesSection";
+import { CommerceStackBundle } from "@/components/commerce/CommerceStackBundle";
+import { HOSTING_TRUST_POINTS } from "@/lib/hosting-packages";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { ServicePageHeroBanner } from "@/components/services/ServicePageHeroBanner";
 import { serviceImages } from "@/lib/startup-agency/service-images";
 
+/** Server-rendered hero for LCP; packages/cart remain client islands. */
 export default function HostingPage({
   searchParams,
 }: {
@@ -25,52 +16,33 @@ export default function HostingPage({
 }) {
   const initialBillingCycle =
     searchParams?.billing?.toLowerCase() === "annual" ? "annual" : "monthly";
-  const reduceMotion = useReducedMotion();
-  const heroMotion = getPageHeroMotionVariants(reduceMotion);
 
   return (
     <main className="sa-shell relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
       <SaPageAmbient />
-      {/* Hero */}
       <section className="sa-page-hero">
         <ServicePageHeroBanner image={serviceImages.cloudHosting} />
         <div className="sa-page-hero-body">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={heroMotion.container}
-          >
-            <motion.span
-              variants={heroMotion.item}
-              className="sa-eyebrow mb-6 inline-flex items-center gap-2"
-            >
-              <Server className="h-4 w-4" aria-hidden />
-              cPanel & WHM Hosting
-            </motion.span>
-            <motion.h1
-              variants={heroMotion.item}
-              className="sa-title-lg mx-auto max-w-4xl text-balance"
-            >
-              High-performance
-              <span className="text-sa-primary"> web hosting</span>
-            </motion.h1>
-            <motion.p
-              variants={heroMotion.item}
-              className="sa-lead mx-auto mt-3"
-            >
-              Built on a Namecheap reseller stack with WHM isolation, LiteSpeed
-              performance, and local GHS billing via Paystack.
-            </motion.p>
-            <motion.div variants={heroMotion.item} className="mt-8">
-              <Link href="#packages" className="sa-btn-primary w-full sm:w-auto">
-                Compare packages
-              </Link>
-            </motion.div>
-          </motion.div>
+          <span className="sa-eyebrow mb-6 inline-flex items-center gap-2">
+            <Server className="h-4 w-4" aria-hidden />
+            cPanel & WHM Hosting
+          </span>
+          <h1 className="sa-title-lg mx-auto max-w-4xl text-balance">
+            Web hosting in Ghana,
+            <span className="text-sa-primary"> from GHS 69/mo</span>
+          </h1>
+          <p className="sa-lead mx-auto mt-3">
+            cPanel hosting with SSL, backups, and Accra support. WHM isolation,
+            LiteSpeed performance, and Paystack billing in Ghana cedis.
+          </p>
+          <div className="mt-8">
+            <Link href="#packages" className="sa-btn-primary w-full sm:w-auto">
+              Compare packages
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Feature Highlights */}
       <section className="sa-section relative z-10 border-b border-sa-border">
         <div className="sa-container">
           <ul className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -90,21 +62,14 @@ export default function HostingPage({
                 title: "Secure by default",
                 body: "Let's Encrypt SSL, hardened configurations, and daily backups to protect your business continuity.",
               },
-            ].map(({ icon: Icon, title, body }, index) => (
-              <motion.li
-                key={title}
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={revealViewport}
-                transition={staggerDelay(index, 0.05)}
-                className="sa-card p-6"
-              >
+            ].map(({ icon: Icon, title, body }) => (
+              <li key={title} className="sa-card p-6">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-sa-border bg-sa-surface text-sa-primary">
                   <Icon className="h-5 w-5" aria-hidden />
                 </div>
                 <h3 className="mt-5 font-heading text-lg font-bold text-white">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-sa-muted/70">{body}</p>
-              </motion.li>
+              </li>
             ))}
           </ul>
         </div>
@@ -115,16 +80,15 @@ export default function HostingPage({
         initialBillingCycle={initialBillingCycle}
       />
 
-      {/* Operations Features */}
       <section className="sa-section relative z-10 border-t border-sa-border">
         <div className="sa-container">
-          <motion.div {...fadeUpProps} className="mx-auto mb-12 max-w-2xl text-center md:mb-16">
+          <div className="mx-auto mb-12 max-w-2xl text-center md:mb-16">
             <p className="sa-eyebrow">Operations</p>
             <h2 className="sa-title mt-4">Standard on all plans</h2>
             <p className="sa-subtitle mx-auto">
               Everything you need to launch and scale your digital presence in the Ghana market.
             </p>
-          </motion.div>
+          </div>
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
               "WHM account provisioning",
@@ -135,30 +99,25 @@ export default function HostingPage({
               "PHP & Database tuning",
               "Email setup (SPF/DKIM)",
               "99.9% uptime health checks",
-            ].map((item, index) => (
-              <motion.li
+            ].map((item) => (
+              <li
                 key={item}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={revealViewport}
-                transition={staggerDelay(index, 0.04)}
                 className="sa-card flex items-center gap-3 px-5 py-4"
               >
-                <Check className="h-4 w-4 text-sa-primary" />
+                <Check className="h-4 w-4 text-sa-primary" aria-hidden />
                 <span className="text-sm font-medium text-sa-muted">{item}</span>
-              </motion.li>
+              </li>
             ))}
           </ul>
         </div>
       </section>
 
-      {/* Trust Points */}
       <section className="sa-section relative z-10 border-t border-sa-border">
         <div className="sa-container">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
-            <motion.div {...fadeFromLeft}>
+            <div>
               <p className="sa-eyebrow">Local context</p>
-            <h2 className="sa-title mt-4 text-left">Why host with OceanCyber?</h2>
+              <h2 className="sa-title mt-4 text-left">Why host with OceanCyber?</h2>
               <p className="sa-subtitle mt-6 text-left">
                 We combine global registrar standards with local operational reality.
                 Pay in GHS, get local support, and enjoy the reliability of Namecheap-level infrastructure.
@@ -176,9 +135,9 @@ export default function HostingPage({
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div {...fadeFromRight} className="sa-card overflow-hidden !rounded-3xl">
+            <div className="sa-card overflow-hidden !rounded-3xl">
               <div className="relative aspect-square md:aspect-video lg:aspect-square">
                 <Image
                   src="/images/hero-services/oceancyber-accra-cloud-hosting-services-ghana.webp"
@@ -195,34 +154,40 @@ export default function HostingPage({
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
+      <section className="sa-section relative z-10 border-t border-sa-border">
+        <div className="sa-container">
+          <CommerceStackBundle current="hosting" />
+        </div>
+      </section>
+
       <section className="sa-section relative z-10 border-t border-sa-border">
         <div className="sa-container max-w-3xl">
-          <motion.div
-            {...fadeUpProps}
-            className="sa-card p-10 text-center md:p-14"
-          >
-            <h2 className="sa-title">
-              Need a custom VPS or Dedicated Server?
-            </h2>
+          <div className="sa-card p-10 text-center md:p-14">
+            <h2 className="sa-title">Need a custom VPS or Dedicated Server?</h2>
             <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-sa-muted/80 md:text-base">
               For high-traffic applications, specialized databases, or strict
               compliance, we offer managed VPS and dedicated hardware solutions.
             </p>
-            <div className="mt-8">
+            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <Link
                 href="/contact?topic=Custom VPS and Dedicated Server"
                 className="sa-btn-primary w-full sm:w-auto"
               >
                 Talk to our team
               </Link>
+              <Link
+                href="/guides/web-hosting-cost-in-ghana"
+                className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary underline underline-offset-4"
+              >
+                Hosting cost guide
+              </Link>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </main>

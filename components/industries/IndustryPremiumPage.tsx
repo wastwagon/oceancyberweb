@@ -8,7 +8,9 @@ import {
   PremiumFinalCtaSection,
   PremiumStoriesGridSection,
 } from "@/components/shared/PremiumContentSections";
+import Link from "next/link";
 import { getIndustryBySlug } from "@/lib/data/industries-catalog";
+import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
 import { fadeUpProps, revealViewport, staggerDelay } from "@/lib/scroll-reveal";
 
@@ -91,15 +93,54 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
             >
               {content.heroDescription}
             </motion.p>
-            <motion.div variants={heroMotion.item} className="mt-8">
-              <div className="sa-chip-scroller justify-start sm:justify-center">
-                {content.pills.map((pill) => (
-                  <span key={pill} className="sa-chip">
-                    {pill}
-                  </span>
-                ))}
-              </div>
+            <motion.div variants={heroMotion.item} className="mt-10">
+              <Link href="/get-started" className="sa-btn-primary">
+                Get started
+              </Link>
             </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {content.pills.length > 0 ? (
+        <div className="relative z-10 border-b border-sa-border py-6 md:py-8">
+          <div className="sa-container">
+            <div className="sa-chip-scroller justify-start sm:justify-center">
+              {content.pills.map((pill) => (
+                <span key={pill} className="sa-chip">
+                  {pill}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      <section className="sa-section relative z-10 border-b border-sa-border">
+        <div className="sa-container max-w-3xl text-center">
+          <motion.div {...fadeUpProps}>
+            <p className="sa-eyebrow">Accra delivery</p>
+            <h2 className="sa-title mt-4">Built and supported in Accra</h2>
+            <p className="sa-subtitle mx-auto mt-4">
+              {googleBusinessProfile.teamSize}-person team at{" "}
+              {googleBusinessProfile.address.street} — rated{" "}
+              {googleBusinessProfile.rating} from {googleBusinessProfile.reviewCount}{" "}
+              Google reviews. Packages from GHS 6,000 with Paystack and MoMo.
+            </p>
+            <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+              <Link
+                href="/contact"
+                className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline underline-offset-4 hover:text-sa-primary"
+              >
+                Talk to our team
+              </Link>
+              <Link
+                href="/reviews"
+                className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline underline-offset-4 hover:text-sa-primary"
+              >
+                Read Accra reviews
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>

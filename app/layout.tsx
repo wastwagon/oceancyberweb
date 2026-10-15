@@ -22,7 +22,14 @@ const ChatBot = dynamic(
   { ssr: false },
 );
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+/** Body font: do not preload — frees bandwidth for Outfit (LCP text on mobile). */
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+  adjustFontFallback: true,
+  preload: false,
+});
 const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-heading",
@@ -38,15 +45,7 @@ export const metadata: Metadata = {
     template: "%s | OceanCyber",
   },
   description:
-    `Best web design company in Accra and Ghana for websites, mobile apps, and cybersecurity. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}, rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`,
-  keywords: [
-    "web development Ghana",
-    "mobile app development Accra",
-    "cybersecurity services Ghana",
-    "e-commerce solutions Ghana",
-    "software engineering Accra",
-    "fintech development Ghana",
-  ],
+    `Best web design company in Accra and Ghana. Websites from GHS 6,000, apps from GHS 12,000. ${googleBusinessProfile.teamSize} people at ${googleBusinessProfile.address.street}, rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`,
   authors: [{ name: "OceanCyber" }],
   creator: "OceanCyber",
   publisher: "OceanCyber",
@@ -60,13 +59,13 @@ export const metadata: Metadata = {
     siteName: "OceanCyber",
     title: "Best web design company in Accra and Ghana | OceanCyber",
     description:
-      `Best web design company in Accra and Ghana for websites, mobile apps, and cybersecurity. Rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`,
+      `Best web design company in Accra and Ghana. Websites from GHS 6,000, apps from GHS 12,000. Rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews at ${googleBusinessProfile.address.street}.`,
     images: [
       {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "OceanCyber Technology Solutions",
+        alt: "Best web design company in Accra and Ghana — OceanCyber",
       },
     ],
   },
@@ -74,7 +73,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Best web design company in Accra and Ghana | OceanCyber",
     description:
-      `Best web design company in Accra and Ghana for websites, mobile apps, and cybersecurity. Rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`,
+      `Best web design company in Accra and Ghana. Websites from GHS 6,000, apps from GHS 12,000. Rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`,
     images: ["/opengraph-image"],
   },
   robots: {

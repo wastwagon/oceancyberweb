@@ -32,11 +32,11 @@ export default function SecurityAssessmentPage() {
         <SecurityAssessmentWizard />
         <p className="mt-8 text-center text-sm text-sa-muted/70">
           Need a full audit?{" "}
-          <Link href="/services/cybersecurity" className="text-sa-primary hover:underline">
+          <Link href="/services/cybersecurity" className="sa-text-link font-medium">
             Cybersecurity services
           </Link>{" "}
           ·{" "}
-          <Link href="/security-journey" className="text-sa-primary hover:underline">
+          <Link href="/security-journey" className="sa-text-link font-medium">
             Security journey
           </Link>
         </p>

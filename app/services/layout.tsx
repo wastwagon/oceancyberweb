@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
 
+/**
+ * Hub-only defaults. Do NOT set alternates.canonical here — child routes
+ * (/services/web-development, geo pages, etc.) must own their own canonicals.
+ * Forcing /services as canonical on this layout risks consolidating the whole
+ * subtree onto the hub in Google.
+ */
 export const metadata: Metadata = {
   title: {
-    default: "Best web and mobile development in Accra and Ghana",
+    default: "Web, mobile, and cybersecurity services in Accra and Ghana",
     template: "%s | OceanCyber",
   },
   description:
-    "Best web design, mobile apps, e-commerce, and cybersecurity in Accra and Ghana. Packages start from GHS 6,000. Rated 4.9 from 54 Google reviews.",
-  alternates: { canonical: "/services" },
+    "Web design, development, mobile apps, ecommerce, and cybersecurity for Accra and Ghana. Packages from GHS 6,000. Rated 4.9 from 54 Google reviews.",
 };
 
 export default function ServicesLayout({

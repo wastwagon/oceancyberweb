@@ -116,7 +116,7 @@ export const pricingPlans: readonly PricingPlan[] = [
     id: "enterprise",
     name: "Enterprise",
     priceGhs: 30000,
-    desc: "Security-aware delivery for regulated and complex programmes.",
+    desc: "Security-aware delivery for regulated and complex projects.",
     idealFor: "Enterprises, fintech, and multi-stakeholder builds",
     timeline: "10–16+ weeks",
     featured: false,
@@ -213,6 +213,31 @@ export const servicePricingHints = {
         label: "Enterprise",
         priceGhs: 30000,
         note: "Complex platforms, security, and SLA options",
+      },
+    ],
+  },
+  softwareDevelopment: {
+    eyebrow: "Investment",
+    title: "Indicative software development tiers",
+    subtitle:
+      "Custom tools and platforms in Ghana cedis after discovery. Typical floor is Professional; Enterprise for multi-role systems and compliance.",
+    tiers: [
+      {
+        planId: "professional",
+        label: "Custom tools",
+        priceGhs: 14500,
+        note: "Internal workflows, staff roles, and integrations",
+      },
+      {
+        planId: "enterprise",
+        label: "Platform / SaaS",
+        priceGhs: 30000,
+        note: "Multi-branch ops, audit trails, and security review options",
+      },
+      {
+        label: "Scoped discovery",
+        priceGhs: 4500,
+        note: "Written build plan before engineering — credited if you proceed",
       },
     ],
   },
@@ -408,7 +433,7 @@ export const pricingFaqItems = [
   },
   {
     q: "How much does a security assessment cost?",
-    a: "Baseline vulnerability reviews start from GHS 4,500. Hardening programmes with remediation sprints start from GHS 12,000. Enterprise security is scoped within our GHS 30,000+ delivery tier.",
+    a: "Baseline vulnerability reviews start from GHS 4,500. Hardening with remediation sprints starts from GHS 12,000. Enterprise security is scoped within our GHS 30,000+ delivery tier.",
   },
 ] as const;
 

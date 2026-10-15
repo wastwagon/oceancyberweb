@@ -66,9 +66,16 @@ export function FxProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
+  // Skip FX network until a non-GHS display currency is chosen (default is GHS).
   useEffect(() => {
+    if (currency === "GHS") {
+      setRates({ GHS: 1 });
+      setStatus("ready");
+      return;
+    }
+
     let cancelled = false;
-    setStatus((s) => (s === "idle" ? "loading" : s));
+    setStatus("loading");
     fetch(`${getApiBaseUrl()}/api/v1/fx/rates`)
       .then(async (res) => {
         if (!res.ok) throw new Error(String(res.status));
@@ -88,7 +95,7 @@ export function FxProvider({ children }: { children: React.ReactNode }) {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [currency]);
 
   const formatGhs = useCallback(
     (amountGhs: number) => formatGhsAsCurrency(amountGhs, currency, rates),

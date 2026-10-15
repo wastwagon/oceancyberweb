@@ -129,23 +129,23 @@ export function StartupAgencyNavbar() {
         <div
           className={cn(
             "hidden w-full max-w-[1400px] overflow-hidden transition-all duration-400 lg:block",
-            scrolled ? "h-0 translate-y-[-100%] opacity-0" : "h-9 translate-y-0 opacity-100",
+            scrolled ? "h-0 translate-y-[-100%] opacity-0" : "h-11 translate-y-0 opacity-100",
           )}
         >
           <div className="flex h-full items-center justify-between gap-3 rounded-t-[16px] border border-b-0 border-white/10 bg-[#141416]/90 px-4 backdrop-blur-xl sm:px-5">
-            <div className="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-1 text-xs font-medium text-sa-muted/80">
+            <div className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1 text-xs font-medium text-sa-muted/80">
               <a
                 href="tel:+233242565695"
-                className="flex min-w-0 items-center gap-2 text-sa-muted transition-colors hover:text-sa-primary"
+                className="inline-flex min-h-11 min-w-0 items-center gap-2 text-sa-muted transition-colors hover:text-sa-primary"
               >
-                <Phone className="h-3 w-3 shrink-0 text-sa-primary" aria-hidden />
+                <Phone className="h-3.5 w-3.5 shrink-0 text-sa-primary" aria-hidden />
                 <span className="truncate">+233 242 565 695</span>
               </a>
               <a
                 href="mailto:info@oceancyber.net"
-                className="flex min-w-0 items-center gap-2 text-sa-muted transition-colors hover:text-sa-primary"
+                className="inline-flex min-h-11 min-w-0 items-center gap-2 text-sa-muted transition-colors hover:text-sa-primary"
               >
-                <Mail className="h-3 w-3 shrink-0 text-sa-primary" aria-hidden />
+                <Mail className="h-3.5 w-3.5 shrink-0 text-sa-primary" aria-hidden />
                 <span className="truncate">info@oceancyber.net</span>
               </a>
               <span className="hidden min-w-0 text-sa-muted/55 2xl:inline">
@@ -153,20 +153,20 @@ export function StartupAgencyNavbar() {
               </span>
             </div>
 
-            <div className="ml-auto flex shrink-0 items-center gap-2">
+            <div className="ml-auto flex shrink-0 items-center gap-1.5">
               {isLoggedIn ? (
                 <>
                   {isAdmin ? (
                     <Link
                       href="/admin"
-                      className="px-2.5 py-1 text-xs font-medium text-sa-primary transition hover:text-white"
+                      className="inline-flex min-h-11 items-center px-2.5 text-xs font-medium text-sa-primary transition hover:text-white"
                     >
                       Admin
                     </Link>
                   ) : null}
                   <Link
                     href="/dashboard"
-                    className="inline-flex h-7 items-center rounded-full border border-white/10 px-3 text-xs font-medium text-sa-muted transition hover:border-sa-primary/50 hover:text-sa-primary"
+                    className="inline-flex min-h-11 items-center rounded-full border border-white/10 px-3 text-xs font-medium text-sa-muted transition hover:border-sa-primary/50 hover:text-sa-primary"
                   >
                     Dashboard
                   </Link>
@@ -174,16 +174,16 @@ export function StartupAgencyNavbar() {
               ) : (
                 <Link
                   href="/signin"
-                  className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-white/10 text-sa-muted transition hover:border-sa-primary/50 hover:text-sa-primary"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-sa-muted transition hover:border-sa-primary/50 hover:text-sa-primary"
                   aria-label="Account — sign in or create account"
                   title="Sign in / Create account"
                 >
-                  <UserRound className="h-3.5 w-3.5" strokeWidth={2} aria-hidden />
+                  <UserRound className="h-4 w-4" strokeWidth={2} aria-hidden />
                 </Link>
               )}
               <Link
                 href="/get-started"
-                className="inline-flex h-7 items-center rounded-full border border-sa-primary bg-sa-primary px-3.5 text-xs font-semibold text-sa-bg transition hover:bg-sa-primary/90"
+                className="inline-flex min-h-11 items-center rounded-full border border-sa-primary bg-sa-primary px-3.5 text-xs font-semibold text-sa-bg transition hover:bg-sa-primary/90"
               >
                 Get started
               </Link>
@@ -191,7 +191,7 @@ export function StartupAgencyNavbar() {
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden h-7 items-center rounded-full border border-white/10 px-3 text-xs font-medium text-sa-muted transition hover:border-sa-primary/40 hover:text-sa-primary xl:inline-flex"
+                className="hidden min-h-11 items-center rounded-full border border-white/10 px-3 text-xs font-medium text-sa-muted transition hover:border-sa-primary/40 hover:text-sa-primary xl:inline-flex"
               >
                 WhatsApp
               </a>
@@ -201,10 +201,10 @@ export function StartupAgencyNavbar() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sa-muted/60 transition-colors hover:text-sa-primary"
+                  className="inline-flex h-11 w-11 items-center justify-center text-sa-muted/60 transition-colors hover:text-sa-primary"
                   aria-label={label}
                 >
-                  <Icon size={13} />
+                  <Icon size={16} aria-hidden />
                 </a>
               ))}
             </div>
@@ -289,7 +289,7 @@ export function StartupAgencyNavbar() {
                 {!isLoggedIn ? (
                   <Link
                     href="/signin"
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-sa-muted transition hover:border-sa-primary/50 hover:text-sa-primary"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-sa-muted transition hover:border-sa-primary/50 hover:text-sa-primary"
                     aria-label="Account — sign in or create account"
                     title="Sign in / Create account"
                   >
@@ -298,7 +298,7 @@ export function StartupAgencyNavbar() {
                 ) : (
                   <Link
                     href="/dashboard"
-                    className="px-2 text-sm font-medium text-sa-muted transition hover:text-sa-primary"
+                    className="inline-flex min-h-11 items-center px-2 text-sm font-medium text-sa-muted transition hover:text-sa-primary"
                   >
                     Dashboard
                   </Link>
@@ -340,11 +340,17 @@ export function StartupAgencyNavbar() {
               action="/insights"
               className="flex overflow-hidden rounded-2xl border border-white/10 bg-[#1c1c1e]/95 shadow-lg backdrop-blur-xl"
               method="get"
+              role="search"
             >
+              <label htmlFor="site-header-search" className="sr-only">
+                Search guides and articles
+              </label>
               <input
+                id="site-header-search"
                 type="search"
                 name="q"
                 placeholder="Search guides and articles…"
+                autoComplete="off"
                 className="min-h-[48px] flex-1 bg-transparent px-4 text-base text-white placeholder:text-sa-muted/70 focus:outline-none"
               />
               <button type="submit" className="sa-pressable bg-sa-primary px-5 text-sm font-semibold text-sa-bg">

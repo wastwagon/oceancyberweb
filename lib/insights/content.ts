@@ -62,13 +62,13 @@ export const insightPosts: InsightPost[] = [
   },
   {
     slug: "digital-transformation-ghana",
-    title: "Digital Transformation: A Ghanaian Perspective",
+    title: "Going digital in Ghana without the buzzwords",
     excerpt:
-      "How businesses in Ghana are embracing digital transformation to stay competitive in the global market.",
+      "How Ghana businesses actually ship payments, ordering, and service channels — and what to fix so the back office keeps up.",
     paragraphs: [
-      "Transformation in Ghana often begins with customer-facing channels—payments, ordering, and service delivery—while back-office systems catch up. That sequencing is sensible when revenue pressure is immediate, but it can create integration debt if core data models stay fragmented.",
-      "High-performing teams align roadmaps around a few measurable outcomes: shorter fulfillment cycles, fewer manual reconciliations, and clearer ownership between business and engineering.",
-      "Partnerships matter. Local regulatory context, telco and banking rails, and real-world connectivity constraints should inform architecture choices early—not after launch.",
+      "In Ghana, digital work often starts with customer-facing channels — payments, ordering, and service delivery — while back-office systems catch up. That order makes sense when revenue is urgent, but it creates messy integrations if core data stays fragmented.",
+      "Teams that win pick a few measurable outcomes: shorter fulfilment, fewer manual reconciliations, and clear ownership between business and engineering.",
+      "Local context matters. Regulation, telco and banking rails, and real connectivity should shape architecture early — not after launch.",
     ],
     image: insightCoverPath("digital-transformation-ghana"),
     category: "Technology",
@@ -83,7 +83,7 @@ export const insightPosts: InsightPost[] = [
     paragraphs: [
       "Mobile money demonstrated that reliable rails plus simple UX can move inclusion faster than traditional branch expansion. The next wave layers credit, savings, and business tools on those same habits—often with stricter fraud expectations.",
       "Building for underserved users means designing for intermittent connectivity, shared devices, and support channels that do not assume desktop literacy. Interfaces must build trust step by step.",
-      "Compliance and partnership governance are not overhead—they protect users and keep programmes durable when volumes spike or regulation shifts.",
+      "Compliance and partnership rules are not overhead — they protect users and keep products stable when volumes spike or regulation shifts.",
     ],
     image: insightCoverPath("fintech-banking-unbanked"),
     category: "Finance",

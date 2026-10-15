@@ -925,8 +925,10 @@
   opacity: 0.2;
 }
 
-/* Dark marketing homepage (`StartupAgencyHomeClassic`): keyboard focus visible on lime */
-[data-marketing-surface="startup-agency"] :is(a, button, input, textarea, select):focus-visible {
+/* Dark marketing shell: keyboard focus on brand lime (all sa-shell pages, not only home) */
+.sa-shell :is(a, button, input, textarea, select):focus-visible,
+[data-marketing-surface="startup-agency"] :is(a, button, input, textarea, select):focus-visible,
+[data-marketing-surface="creative-agency"] :is(a, button, input, textarea, select):focus-visible {
   outline: 2px solid #bbf340;
   outline-offset: 3px;
 }
@@ -1047,13 +1049,13 @@
   }
 
   .sa-page-hero {
-    @apply relative z-10 flex min-h-[100dvh] flex-col overflow-hidden border-b border-sa-border;
+    @apply relative z-10 flex min-h-[min(100dvh,40rem)] flex-col overflow-hidden border-b border-sa-border;
     padding-top: var(--sa-mobile-header);
   }
 
   @media (min-width: 768px) {
     .sa-page-hero {
-      min-height: 78vh;
+      min-height: 68vh;
       padding-top: 9rem;
     }
   }
@@ -1180,6 +1182,15 @@
       border-color: #414141;
       transform: none;
     }
+  }
+
+  /** In-copy links — underline always on so color is not the only cue (Lighthouse link-in-text-block). */
+  .sa-text-link {
+    @apply font-semibold text-sa-primary underline underline-offset-4 transition-colors hover:text-white;
+  }
+
+  .sa-text-link-quiet {
+    @apply font-semibold text-white underline underline-offset-4 transition-colors hover:text-sa-primary;
   }
 
   .sa-btn-primary {

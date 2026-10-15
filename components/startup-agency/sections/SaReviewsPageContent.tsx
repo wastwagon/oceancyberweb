@@ -132,7 +132,7 @@ export function SaReviewsPageContent({ stats, reviews }: Props) {
             href={profileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sa-primary underline-offset-2 hover:underline"
+            className="sa-text-link font-medium"
           >
             our Google Business Profile
           </Link>

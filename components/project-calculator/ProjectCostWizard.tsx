@@ -402,7 +402,7 @@ export function ProjectCostWizard() {
               Share your contact details to unlock the itemized breakdown, print a one-page summary, and download a
               branded proforma.{" "}
               <span className="font-medium text-white">All figures are in GHS; Paystack (cards, MoMo) is available for deposits when you contract with us.</span>{" "}
-              <span className="text-sa-muted/50">Indicative only, not a binding quote.</span>
+              <span className="text-sa-muted/80">Indicative only, not a binding quote.</span>
             </p>
 
             <div className="grid gap-sa-lg sm:grid-cols-2">

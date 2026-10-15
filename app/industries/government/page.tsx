@@ -15,15 +15,15 @@ const governmentProof: IndustryProofItem[] = [
     metric: "220%",
     metricLabel: "Programme visibility",
     summary:
-      "Continental governance platform for programmes, research, and events — credible digital presence for international stakeholders.",
+      "Governance platform for research, events, and partner engagement — a clear public site international partners can trust.",
   },
   {
     slug: "fitch-advisory",
     title: "Fitch Advisory",
     metric: "250%",
-    metricLabel: "Stakeholder engagement",
+    metricLabel: "Client engagement",
     summary:
-      "Advisory platform patterns applicable to policy, institutional, and public-facing programme sites.",
+      "Advisory portal patterns that also fit policy and institutional public-facing sites.",
   },
 ];
 
@@ -32,8 +32,8 @@ export default function GovernmentIndustryPage() {
     <>
       <IndustryPremiumPage content={governmentIndustryContent} />
       <IndustryFeaturedProof
-        title="Governance & public programme delivery"
-        subtitle="Continental and institutional work with audit-friendly structure and international credibility."
+        title="Governance and public-sector delivery"
+        subtitle="Institutional work with clear structure, audit trails, and Accra engineering support."
         items={governmentProof}
       />
       <section className="sa-section relative z-10 border-t border-sa-border bg-sa-bg">
@@ -41,7 +41,7 @@ export default function GovernmentIndustryPage() {
           <LeadMagnetGate
             magnetId="compliance_checklist"
             page="industries/government"
-            description="Data inventory, access control, vendor oversight, and breach playbooks for public programmes and citizen-facing services."
+            description="Data inventory, access control, vendor oversight, and breach playbooks for public agencies and citizen-facing services."
           />
         </div>
       </section>

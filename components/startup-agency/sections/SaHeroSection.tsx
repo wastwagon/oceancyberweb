@@ -33,11 +33,11 @@ export function SaHeroSection() {
           <div className="mb-4 flex items-center gap-3 rounded-full border border-white/20 bg-black/40 px-4 py-2 backdrop-blur-md">
             <span className="h-1.5 w-1.5 rounded-full bg-sa-primary" />
             <span className="text-sm font-medium text-white/80">
-              Best in Accra and Ghana · since {googleBusinessProfile.foundedYear}
+              Accra team · since {googleBusinessProfile.foundedYear}
             </span>
           </div>
           <h1 className="sa-title-lg mx-auto max-w-2xl text-balance text-center">
-            Best web design company in Accra and Ghana
+            Websites, apps, and security from Accra
           </h1>
           <p className="sa-lead mx-auto mt-3 max-w-xl text-balance text-center text-white/85">
             {heroTagline}
@@ -48,7 +48,7 @@ export function SaHeroSection() {
             </Link>
             <Link
               href="/contact"
-              className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline-offset-4 hover:text-sa-primary hover:underline"
+              className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline underline-offset-4 hover:text-sa-primary"
             >
               Talk to our team
             </Link>
@@ -56,14 +56,14 @@ export function SaHeroSection() {
           <div className="pointer-events-auto mt-4 hidden flex-wrap items-center justify-center gap-x-5 gap-y-2 md:flex">
             <Link
               href="/portfolio"
-              className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline-offset-4 hover:text-sa-primary hover:underline"
+              className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline underline-offset-4 hover:text-sa-primary"
             >
               View portfolio
             </Link>
             <button
               type="button"
               onClick={() => setShowreelOpen(true)}
-              className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-white/80 underline-offset-4 hover:text-sa-primary hover:underline"
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-white/80 underline underline-offset-4 hover:text-sa-primary"
             >
               <Play className="h-3.5 w-3.5 fill-current" aria-hidden />
               Watch showreel
@@ -71,6 +71,7 @@ export function SaHeroSection() {
           </div>
         </div>
 
+        {/* Desktop-only hero plate: real URL lives on <source>; tiny data URI avoids empty-src console errors and mobile downloads. */}
         <picture
           className={`absolute inset-0 z-0 hidden md:block ${
             hoveredSlide ? "opacity-0" : "opacity-40"
@@ -78,9 +79,9 @@ export function SaHeroSection() {
         >
           <source media="(min-width: 768px)" srcSet={heroServiceSlides[0].image} />
           <img
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
             alt=""
             className="h-full w-full object-cover"
-            fetchPriority="high"
             decoding="async"
           />
         </picture>
@@ -118,13 +119,13 @@ export function SaHeroSection() {
                     </span>
                   </div>
 
-                  <h2
+                  <span
                     className={`font-heading text-base font-bold text-white transition-all duration-500 md:text-2xl ${
                       isHovered ? "text-sa-primary" : ""
                     }`}
                   >
                     {slide.title}
-                  </h2>
+                  </span>
 
                   <div
                     className={`hidden h-12 w-12 items-center justify-center rounded-full border border-white/30 transition-all duration-500 md:mt-6 md:flex ${

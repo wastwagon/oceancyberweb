@@ -5,7 +5,7 @@ import { getServicePageSeo } from "@/lib/seo/service-page-seo";
 const seo = getServicePageSeo("/services/mobile-apps");
 
 export const metadata: Metadata = {
-  title: "Mobile app development in Ghana",
+  title: "Mobile app development services",
   description: seo?.description,
   alternates: { canonical: "/services/mobile-apps" },
 };

@@ -160,7 +160,7 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
                     <span className="text-sa-primary"> leadership</span>
                   </>
                 }
-                subtitle="Perspectives on security, platforms, and digital transformation across Ghana and Africa — written for leaders who ship."
+                subtitle="Perspectives on security, platforms, and shipping software across Ghana and Africa — written for leaders who deliver."
                 subtitleVariant="lead"
               />
             </motion.div>
@@ -272,7 +272,7 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
             <ul className="mt-4 space-y-2">
               {guideMatches.map((match) => (
                 <li key={match.href}>
-                  <Link href={match.href} className="text-sm font-semibold text-sa-primary hover:underline">
+                  <Link href={match.href} className="sa-text-link text-sm">
                     {match.label}
                   </Link>
                 </li>

@@ -129,3 +129,8 @@ export function useCart() {
   }
   return ctx;
 }
+
+/** Safe when chrome sits outside a cart tree (e.g. tests / future scoped providers). */
+export function useCartOptional(): CartContextValue | null {
+  return useContext(CartContext);
+}

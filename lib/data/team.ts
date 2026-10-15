@@ -11,7 +11,7 @@ export type TeamMember = {
 
 export const teamHeadshotFilenameGuide: Record<string, string> = {
   "Sarah Mensah": "/images/team/sarah-mensah.webp",
-  "Kwame Nkrumah": "/images/team/kwame-nkrumah.webp",
+  "Kwame Asante": "/images/team/kwame-asante.webp",
   "Ama Serwaa": "/images/team/ama-serwaa.webp",
 };
 
@@ -21,27 +21,27 @@ export const teamMembers: TeamMember[] = [
     initials: "GA",
     role: googleBusinessProfile.founderRole,
     accent: "from-lime-300/30 to-emerald-500/20",
-    bio: "Leads strategy, product direction, and delivery standards across multidisciplinary teams.",
+    bio: "Leads client work and the Accra team that designs, builds, and secures products for Ghana businesses.",
   },
   {
     name: "Sarah Mensah",
     initials: "SM",
     role: "CTO & Lead Architect",
     accent: "from-cyan-300/30 to-blue-500/20",
-    bio: "Designs resilient platform architecture with strong quality gates and release discipline.",
+    bio: "Owns platform architecture, release quality, and the engineering standards the Accra team ships with.",
   },
   {
-    name: "Kwame Nkrumah",
-    initials: "KN",
+    name: "Kwame Asante",
+    initials: "KA",
     role: "Head of Security",
     accent: "from-fuchsia-300/30 to-violet-500/20",
-    bio: "Owns security posture, assessments, hardening, and incident-readiness execution.",
+    bio: "Runs assessments, hardening, and incident readiness for sites and apps we build or review.",
   },
   {
     name: "Ama Serwaa",
     initials: "AS",
     role: "Creative Director",
     accent: "from-amber-300/30 to-orange-500/20",
-    bio: "Shapes visual systems, content storytelling, and conversion-aware interface design.",
+    bio: "Leads brand systems and interface design so products look clear on Ghana mobile screens.",
   },
 ];
