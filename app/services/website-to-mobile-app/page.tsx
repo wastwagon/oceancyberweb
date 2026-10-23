@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { ArrowRight, Smartphone } from "lucide-react";
+import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { WebsiteToAppQuoteForm } from "@/components/services/WebsiteToAppQuoteForm";
+import { StartupAgencyFaq } from "@/components/startup-agency/StartupAgencyFaq";
+import { getServiceHubFaqs } from "@/lib/seo/service-hub-faqs";
 import { ServicePageHeroBanner } from "@/components/services/ServicePageHeroBanner";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { ServicePricingStrip } from "@/components/services/ServicePricingStrip";
@@ -23,6 +26,9 @@ function ConversionClipart() {
     </svg>
   );
 }
+
+const hubFaqs = getServiceHubFaqs("/services/website-to-mobile-app") ?? [];
+const faqItems = hubFaqs.map((item) => ({ q: item.q, a: item.a }));
 
 export default function WebsiteToMobileAppPage() {
   return (
@@ -110,6 +116,18 @@ export default function WebsiteToMobileAppPage() {
       </section>
 
       <ServicePricingStrip content={servicePricingHints.websiteToMobile} />
+
+      {faqItems.length > 0 ? (
+        <section className="sa-section relative z-10 border-t border-sa-border">
+          <FaqPageJsonLd items={faqItems} />
+          <div className="sa-container max-w-3xl">
+            <h2 className="font-heading text-2xl font-bold text-white">Common questions</h2>
+            <div className="mt-8">
+              <StartupAgencyFaq items={faqItems} />
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="sa-section relative z-10 border-t border-sa-border">
         <div className="sa-container max-w-3xl">

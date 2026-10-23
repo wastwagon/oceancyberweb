@@ -13,6 +13,7 @@ import {
   staggerDelay,
 } from "@/lib/scroll-reveal";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
+import { cybersecurityDisclosureShort } from "@/lib/marketing/cyber-licence";
 
 const journeySteps = [
   {
@@ -52,15 +53,15 @@ const journeySteps = [
     ],
   },
   {
-    phase: "Monitoring",
-    title: "Continuous security monitoring",
+    phase: "Review",
+    title: "Scheduled consulting reviews",
     description:
-      "Always-on visibility into events and anomalies: correlation, alerting, and tuning so signal rises above noise.",
+      "Quarterly or milestone reviews of controls and logs — prioritised fixes, not a 24/7 managed SOC.",
     features: [
-      "Real-time threat detection",
-      "Security event monitoring",
-      "Log analysis",
-      "Alert management",
+      "Log and access spot checks",
+      "Patch and backup hygiene",
+      "Updated risk ranking",
+      "Optional fix sprints",
     ],
   },
   {
@@ -91,19 +92,19 @@ const journeySteps = [
 
 const stats = [
   {
-    value: "99.9%",
-    label: "Uptime posture",
-    detail: "Architected for resilient, monitored operations.",
+    value: "GHS 4,500",
+    label: "Baseline review",
+    detail: "Focused assessment with a prioritised fix list.",
   },
   {
-    value: "24/7",
-    label: "Coverage model",
-    detail: "Detection and escalation paths you can rely on.",
+    value: "Accra",
+    label: "Delivery",
+    detail: "Same engineering team that builds your site or app.",
   },
   {
-    value: "60%+",
-    label: "Typical risk reduction",
-    detail: "After remediation cycles on comparable programmes.",
+    value: "Consulting",
+    label: "Scope",
+    detail: "Not MSSP, SOC, or always-on monitoring services.",
   },
 ] as const;
 
@@ -151,7 +152,7 @@ export default function SecurityJourneyPage() {
               className="sa-eyebrow mb-6 inline-flex items-center justify-center gap-2"
             >
               <Shield className="h-4 w-4" aria-hidden />
-              Security programme
+              Security consulting
             </motion.span>
             <motion.h1
               variants={heroMotion.item}
@@ -159,15 +160,20 @@ export default function SecurityJourneyPage() {
             >
               Your security
               <br />
-              <span className="text-sa-primary">journey, engineered</span>
+              <span className="text-sa-primary">consulting journey</span>
             </motion.h1>
             <motion.p
               variants={heroMotion.item}
               className="sa-lead mx-auto mt-3"
             >
-              Six disciplined phases, from first assessment through continuous
-              improvement, so protection, compliance, and operations move
-              together.
+              Six phases from assessment through remediation and scheduled
+              reviews — engineering-led consulting from Accra.
+            </motion.p>
+            <motion.p
+              variants={heroMotion.item}
+              className="mx-auto mt-4 max-w-2xl rounded-2xl border border-sa-border bg-sa-surface/40 px-4 py-3 text-sm text-sa-muted/90"
+            >
+              {cybersecurityDisclosureShort()}
             </motion.p>
           </motion.div>
 

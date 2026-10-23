@@ -37,7 +37,9 @@ export function SaTestimonialsSection({ googleStats, googleReviews, featuredCard
 
         {googleReviews.length === 0 ? (
           <p className="mx-auto max-w-xl text-center text-sm text-sa-muted">
-            Reviews sync from Google when the Places API is configured.{" "}
+            Recent excerpts appear when Google Places is configured on the server. Your{" "}
+            {googleStats.rating.toFixed(1)} rating from {googleStats.reviewCount} reviews is shown
+            above —{" "}
             <Link
               href={profileUrl}
               target="_blank"

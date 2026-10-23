@@ -17,6 +17,9 @@ const content: ServicePageContent = {
     "Online stores for Accra retailers and Ghana-wide sellers — catalog, checkout, Paystack and Mobile Money, from GHS 6,000.",
   heroCtaLabel: "Get started",
   heroCtaHref: "/get-started",
+  showAtAGlance: true,
+  showOwnership: true,
+  serviceHubPath: "/services/ecommerce",
   hireGeoHref: "/services/ecommerce-development-in-accra",
   hireGeoLabel: "Ecommerce in Accra →",
   heroImage: serviceImages.ecommerce,
@@ -47,7 +50,7 @@ const content: ServicePageContent = {
         "Greater Accra delivery notes, pickup locations, and customer SMS or email updates.",
     },
   ],
-  stackEyebrow: "Tools we use",
+  stackEyebrow: "Store stack",
   stackTitle: "Platforms that match how you sell",
   stackSubtitle:
     "Custom, Shopify, or WooCommerce — chosen for your catalog size and ops.",

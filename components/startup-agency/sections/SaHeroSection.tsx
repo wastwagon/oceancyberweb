@@ -8,7 +8,11 @@ import { SaShowreelModal } from "@/components/startup-agency/SaShowreelModal";
 import { heroServiceSlides, heroTagline } from "@/lib/startup-agency/content";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 
-export function SaHeroSection() {
+type Props = {
+  tagline?: string;
+};
+
+export function SaHeroSection({ tagline = heroTagline }: Props) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [showreelOpen, setShowreelOpen] = useState(false);
   const hoveredSlide = hoveredIndex === null ? null : heroServiceSlides[hoveredIndex];
@@ -40,7 +44,7 @@ export function SaHeroSection() {
             Websites, apps, and security from Accra
           </h1>
           <p className="sa-lead mx-auto mt-3 max-w-xl text-balance text-center text-white/85">
-            {heroTagline}
+            {tagline}
           </p>
           <div className="pointer-events-auto mt-6 flex w-full max-w-sm flex-col items-center gap-3 sm:max-w-none">
             <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">

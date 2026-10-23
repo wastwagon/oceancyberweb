@@ -50,8 +50,8 @@ const DEFAULT_CONFIG = {
     { label: "Best web development company in Accra", href: "/services/web-development-in-accra" },
     { label: "Best software development company in Accra", href: "/services/software-development-in-accra" },
     { label: "Best mobile app development company in Accra", href: "/services/mobile-app-development-in-accra" },
-    { label: "Best ecommerce development company in Accra", href: "/services/ecommerce-development-in-accra" },
-    { label: "Best cybersecurity company in Accra", href: "/services/cybersecurity-in-accra" },
+    { label: "Best e-commerce development company in Accra", href: "/services/ecommerce-development-in-accra" },
+    { label: "Best security consulting in Accra", href: "/services/cybersecurity-in-accra" },
     { label: "Products", href: "/products" },
     { label: "Insights", href: "/insights" },
     { label: "Reviews", href: "/reviews" },
@@ -227,7 +227,7 @@ const DEFAULT_CONFIG = {
           link: "/services/ecommerce",
         },
         {
-          heading: "Cybersecurity",
+          heading: "Security consulting",
           description:
             "Hardening and reviews for the sites and apps we ship.",
           link: "/services/cybersecurity",

@@ -33,7 +33,7 @@ export default function SecurityAssessmentPage() {
         <p className="mt-8 text-center text-sm text-sa-muted/70">
           Need a full audit?{" "}
           <Link href="/services/cybersecurity" className="sa-text-link font-medium">
-            Cybersecurity services
+            Security consulting
           </Link>{" "}
           ·{" "}
           <Link href="/security-journey" className="sa-text-link font-medium">

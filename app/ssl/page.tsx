@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ServiceHubFaqSection } from "@/components/marketing/ServiceHubFaqSection";
 import { ShieldCheck } from "lucide-react";
 import { SslPackagesSection } from "@/components/ssl/SslPackagesSection";
 import { CommerceStackBundle } from "@/components/commerce/CommerceStackBundle";
@@ -75,6 +76,8 @@ export default function SslPage() {
           </div>
         </div>
       </section>
+
+      <ServiceHubFaqSection path="/ssl" />
     </main>
   );
 }

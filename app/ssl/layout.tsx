@@ -1,20 +1,23 @@
 import { withCanonical } from "@/lib/seo/canonical";
 import { serviceImages } from "@/lib/startup-agency/service-images";
 import type { Metadata } from "next";
+import { ServiceLayoutWithJsonLd } from "@/components/seo/ServiceLayoutWithJsonLd";
+import { getServicePageSeo } from "@/lib/seo/service-page-seo";
 
-const title = "Buy SSL certificates in Ghana, from GHS 45/yr";
-const description =
+const path = "/ssl";
+const fallbackTitle = "Buy SSL certificates in Ghana, from GHS 45/yr";
+const fallbackDescription =
   "PositiveSSL from GHS 45 a year — renews at the same list price. Wildcard and EV options. Pay in GHS with Paystack. Accra install help from OceanCyber.";
 
 export const metadata: Metadata = withCanonical(
   {
-    title,
-    description,
+    title: getServicePageSeo(path)?.name ?? fallbackTitle,
+    description: getServicePageSeo(path)?.description ?? fallbackDescription,
     openGraph: {
-      title,
-      description,
+      title: fallbackTitle,
+      description: fallbackDescription,
       type: "website",
-      url: "/ssl",
+      url: path,
       images: [
         {
           url: serviceImages.cloudHosting,
@@ -24,14 +27,14 @@ export const metadata: Metadata = withCanonical(
     },
     twitter: {
       card: "summary_large_image",
-      title,
-      description,
+      title: fallbackTitle,
+      description: fallbackDescription,
       images: [serviceImages.cloudHosting],
     },
   },
-  "/ssl",
+  path,
 );
 
-export default function SslLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+export default async function SslLayout({ children }: { children: React.ReactNode }) {
+  return <ServiceLayoutWithJsonLd path={path}>{children}</ServiceLayoutWithJsonLd>;
 }

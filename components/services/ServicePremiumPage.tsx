@@ -14,7 +14,11 @@ import {
   staggerDelay,
 } from "@/lib/scroll-reveal";
 import { ServicePageHeroBanner } from "@/components/services/ServicePageHeroBanner";
+import { CompanyFactsBox } from "@/components/marketing/CompanyFactsBox";
+import { ServiceOwnershipSection } from "@/components/services/ServiceOwnershipSection";
 import { ServicePricingStrip } from "@/components/services/ServicePricingStrip";
+import { StartupAgencyFaq } from "@/components/startup-agency/StartupAgencyFaq";
+import { getServiceHubFaqs } from "@/lib/seo/service-hub-faqs";
 import type { ServicePricingStripContent } from "@/lib/startup-agency/pricing";
 
 export type ServiceCard = { title: string; description: string };
@@ -58,13 +62,29 @@ export type ServicePageContent = {
   ctaTitle: string;
   ctaDescription: string;
   pricing?: ServicePricingStripContent;
+  /** Show compact at-a-glance fact box after hero pills */
+  showAtAGlance?: boolean;
+  /** Show standard ownership / IP block before final CTA */
+  showOwnership?: boolean;
+  /** Optional compliance note (e.g. cybersecurity licence status). */
+  regulatoryNote?: string | null;
+  /** Renders matching on-page + JSON-LD FAQs from service-hub-faqs. */
+  serviceHubPath?: string;
 };
 
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
 
+/**
+ * Capability hub layout (10 blocks): hero → pills → facts → focus → pricing → stack →
+ * deliverables → outcomes (optional) → FAQ → ownership → CTA.
+ */
 export function ServicePremiumPage({ content }: { content: ServicePageContent }) {
   const hasOutcomes = content.outcomes && content.outcomes.length > 0;
+  const hubFaqs = content.serviceHubPath
+    ? getServiceHubFaqs(content.serviceHubPath)
+    : undefined;
+  const faqItems = hubFaqs?.map((item) => ({ q: item.q, a: item.a }));
   const reduceMotion = useReducedMotion();
   const heroMotion = getPageHeroMotionVariants(reduceMotion);
 
@@ -133,6 +153,16 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
         </div>
       </section>
 
+      {content.regulatoryNote ? (
+        <div className="relative z-10 border-b border-sa-border bg-sa-surface/30">
+          <div className="sa-container py-5">
+            <p className="text-center text-sm leading-relaxed text-sa-muted/90">
+              {content.regulatoryNote}
+            </p>
+          </div>
+        </div>
+      ) : null}
+
       {content.pills.length > 0 ? (
         <div className="relative z-10 border-b border-sa-border py-6 md:py-8">
           <div className="sa-container">
@@ -145,6 +175,14 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
             </div>
           </div>
         </div>
+      ) : null}
+
+      {content.showAtAGlance ? (
+        <section className="sa-section relative z-10 border-b border-sa-border py-10 md:py-12">
+          <div className="sa-container max-w-3xl">
+            <CompanyFactsBox maxRows={8} />
+          </div>
+        </section>
       ) : null}
 
       <section className="sa-section relative z-10 border-b border-sa-border">
@@ -248,6 +286,19 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
           stories={content.outcomes!}
         />
       ) : null}
+
+      {faqItems && faqItems.length > 0 ? (
+        <section className="sa-section relative z-10 border-b border-sa-border">
+          <div className="sa-container max-w-3xl">
+            <SaSectionHeader eyebrow="FAQ" title="Common questions" />
+            <div className="mt-8">
+              <StartupAgencyFaq items={faqItems} />
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {content.showOwnership ? <ServiceOwnershipSection /> : null}
 
       <PremiumFinalCtaSection
         title={content.ctaTitle}

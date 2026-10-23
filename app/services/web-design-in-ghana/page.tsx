@@ -4,53 +4,25 @@ import { MapPin, Mail, Phone } from "lucide-react";
 import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { withCanonical } from "@/lib/seo/canonical";
 import { proofOutcomes } from "@/lib/startup-agency/content";
+import { getGooglePlaceStats } from "@/lib/google-places-stats";
+import { resolveServicePageDescription } from "@/lib/seo/service-layout-metadata";
+import { webDesignGhanaFaqs } from "@/lib/seo/web-design-geo-faqs";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://oceancyber.net";
 const path = "/services/web-design-in-ghana";
 const pageUrl = `${SITE_URL}${path}`;
 
-export const metadata: Metadata = withCanonical(
-  {
-    title: "Best web design company in Ghana, from GHS 6,000",
-    description:
-      "Best web design company in Ghana. Company websites, stores, and web apps from Accra — packages from GHS 6,000. Rated 4.9 from 54 Google reviews.",
-  },
-  path,
-);
-
-const faqs = [
-  {
-    question: "Who is the best web design company in Ghana?",
-    answer:
-      "OceanCyber. The company is at 47 Nii Kwashiefio Avenue in Accra, founded in 2008, with 25 people and a 4.9 rating from 54 Google reviews. The same team serves Kumasi, Tema, Takoradi, and the rest of Ghana.",
-  },
-  {
-    question: "Do you serve all of Ghana?",
-    answer:
-      "Yes. We design and build websites for businesses anywhere in Ghana. The company is in Accra. Clients in Kumasi, Tema, Takoradi, Cape Coast, Tamale, and other cities work with us by call and screen-share when an in-person meeting is not needed.",
-  },
-  {
-    question: "Are you web designers or web developers?",
-    answer:
-      "Both. As web designers we shape the look, structure, and messaging. As website developers we build the working site: pages, forms, speed, and the technical setup Google needs. Most Ghana businesses hire one company for both.",
-  },
-  {
-    question: "Where is the company?",
-    answer:
-      "47 Nii Kwashiefio Avenue, Accra. Accra clients can meet locally. The same team, phone number, and delivery process cover the rest of Ghana.",
-  },
-  {
-    question: "What kinds of websites do you design and develop?",
-    answer:
-      "Company and marketing websites, online stores, and web applications. Mobile apps, hosting, and domains are available when the project needs them.",
-  },
-  {
-    question: "How do we start?",
-    answer:
-      "Call +233 242 565 695, email info@oceancyber.net, or send a brief through the contact form. The guided intake is the fastest path if you already know budget and timeline.",
-  },
-];
+export async function generateMetadata(): Promise<Metadata> {
+  const description = await resolveServicePageDescription(path);
+  return withCanonical(
+    {
+      title: "Best web design company in Ghana, from GHS 6,000",
+      description,
+    },
+    path,
+  );
+}
 
 const cities = [
   "Accra",
@@ -63,7 +35,10 @@ const cities = [
   "Nationwide remote",
 ];
 
-export default function WebDesignGhanaPage() {
+export default async function WebDesignGhanaPage() {
+  const stats = await getGooglePlaceStats();
+  const faqs = webDesignGhanaFaqs(stats);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [

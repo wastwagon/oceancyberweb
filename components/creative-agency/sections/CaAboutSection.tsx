@@ -2,11 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Play } from "lucide-react";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
-import { aboutStats, aboutWorkPreview, companyPresence } from "@/lib/startup-agency/content";
+import { aboutStats, companyPresence, portfolioLiveWork } from "@/lib/startup-agency/content";
 
 /** Aeolla about = LIGHT cream band (not dark). */
 export function CaAboutSection() {
-  const photos = aboutWorkPreview.slice(0, 3);
+  const photos = portfolioLiveWork.slice(0, 3);
 
   return (
     <section id="about" className="ae-band-light relative overflow-hidden py-16 md:py-24 lg:py-28">

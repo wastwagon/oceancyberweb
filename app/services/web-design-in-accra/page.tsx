@@ -4,6 +4,9 @@ import { MapPin } from "lucide-react";
 import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { withCanonical } from "@/lib/seo/canonical";
 import { proofOutcomes } from "@/lib/startup-agency/content";
+import { getGooglePlaceStats } from "@/lib/google-places-stats";
+import { resolveServicePageDescription } from "@/lib/seo/service-layout-metadata";
+import { webDesignAccraFaqs } from "@/lib/seo/web-design-geo-faqs";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://oceancyber.net";
@@ -11,16 +14,22 @@ const path = "/services/web-design-in-accra";
 const pageUrl = `${SITE_URL}${path}`;
 const ghanaUrl = `${SITE_URL}/services/web-design-in-ghana`;
 
-export const metadata: Metadata = withCanonical(
-  {
-    title: "Best web design company in Accra, from GHS 6,000",
-    description:
-      "Best web design company in Accra for company websites, online stores, and web apps. From GHS 6,000. OceanCyber at 47 Nii Kwashiefio Avenue, rated 4.9 from 54 Google reviews.",
-  },
-  path,
-);
+export async function generateMetadata(): Promise<Metadata> {
+  const description = await resolveServicePageDescription(path);
+  return withCanonical(
+    {
+      title: "Best web design company in Accra, from GHS 6,000",
+      description,
+    },
+    path,
+  );
+}
 
-export default function WebDesignAccraPage() {
+export default async function WebDesignAccraPage() {
+  const stats = await getGooglePlaceStats();
+  const faqs = webDesignAccraFaqs(stats);
+  const serviceDescription = await resolveServicePageDescription(path);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -39,8 +48,13 @@ export default function WebDesignAccraPage() {
         serviceType: ["Web design", "Web development"],
         url: pageUrl,
         areaServed: { "@type": "City", name: "Accra" },
-        description:
-          "Best web design company in Accra for company websites and web apps. OceanCyber, 47 Nii Kwashiefio Avenue, rated 4.9 from 54 Google reviews.",
+        description: serviceDescription,
+        offers: {
+          "@type": "Offer",
+          priceCurrency: "GHS",
+          price: "6000",
+          url: `${SITE_URL}/pricing`,
+        },
       },
     ],
   };
@@ -133,33 +147,14 @@ export default function WebDesignAccraPage() {
           <h2 className="mt-14 font-heading text-2xl font-semibold text-white md:text-3xl">
             Common questions
           </h2>
-          <FaqPageJsonLd
-            items={[
-              {
-                q: "Who is the best web design company in Accra?",
-                a: "OceanCyber, at 47 Nii Kwashiefio Avenue. Founded in 2008, with 25 people and a 4.9 rating from 54 Google reviews.",
-              },
-              {
-                q: "Where can we meet?",
-                a: "The only office is at 47 Nii Kwashiefio Avenue, Accra. Call +233 242 565 695.",
-              },
-            ]}
-          />
+          <FaqPageJsonLd items={faqs.map((faq) => ({ q: faq.question, a: faq.answer }))} />
           <dl className="mt-8 space-y-6">
-            <div>
-              <dt className="font-heading text-base font-semibold text-white">
-                Who is the best web design company in Accra?
-              </dt>
-              <dd className="mt-2 text-sm leading-relaxed text-sa-muted/75">
-                OceanCyber, at 47 Nii Kwashiefio Avenue. Founded in 2008, with 25 people and a 4.9 rating from 54 Google reviews.
-              </dd>
-            </div>
-            <div>
-              <dt className="font-heading text-base font-semibold text-white">Where can we meet?</dt>
-              <dd className="mt-2 text-sm leading-relaxed text-sa-muted/75">
-                The only office is at 47 Nii Kwashiefio Avenue, Accra. Call +233 242 565 695.
-              </dd>
-            </div>
+            {faqs.map((faq) => (
+              <div key={faq.question}>
+                <dt className="font-heading text-base font-semibold text-white">{faq.question}</dt>
+                <dd className="mt-2 text-sm leading-relaxed text-sa-muted/75">{faq.answer}</dd>
+              </div>
+            ))}
           </dl>
         </div>
       </section>

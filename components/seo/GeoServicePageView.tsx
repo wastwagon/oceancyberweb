@@ -3,6 +3,7 @@ import { MapPin } from "lucide-react";
 import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { proofOutcomes } from "@/lib/startup-agency/content";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
+import { cybersecurityDisclosureShort } from "@/lib/marketing/cyber-licence";
 import type { GeoProofKey, GeoServicePage } from "@/lib/seo/geo-service-pages";
 
 const PROOF_BY_KEY: Record<GeoProofKey, (typeof proofOutcomes)[number]> = {
@@ -21,6 +22,8 @@ type Props = {
 export function GeoServicePageView({ page }: Props) {
   const pageUrl = `${SITE_URL}${page.path}`;
   const p = googleBusinessProfile;
+  const cyberNote =
+    page.topicKey === "cybersecurity" ? cybersecurityDisclosureShort() : null;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -53,7 +56,7 @@ export function GeoServicePageView({ page }: Props) {
           url: `${SITE_URL}/pricing`,
         },
         provider: {
-          "@type": "Organization",
+          "@type": "ProfessionalService",
           name: "OceanCyber",
           url: SITE_URL,
           address: {
@@ -97,6 +100,12 @@ export function GeoServicePageView({ page }: Props) {
           <p className="mt-8 text-sm font-semibold text-sa-primary">{page.eyebrow}</p>
           <h1 className="sa-title-lg mt-3">{page.h1}</h1>
           <p className="mt-5 text-lg leading-relaxed text-sa-muted/80">{page.intro}</p>
+
+          {cyberNote ? (
+            <p className="mt-5 rounded-2xl border border-sa-border bg-sa-surface/40 px-4 py-3 text-sm leading-relaxed text-sa-muted/90">
+              {cyberNote}
+            </p>
+          ) : null}
 
           <div className="mt-6 flex items-start gap-3 text-sm text-sa-muted/75">
             <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-sa-primary" aria-hidden />
@@ -183,8 +192,8 @@ export function GeoServicePageView({ page }: Props) {
                 <li className="flex gap-3">
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-sa-primary" aria-hidden />
                   <span>
-                    {p.rating} from {p.reviewCount} Google reviews on our Accra
-                    Business Profile — not anonymous marketplace ratings.
+                    Google reviews on our Accra Business Profile — see /reviews for the
+                    live rating and count, not anonymous marketplace scores.
                   </span>
                 </li>
                 <li className="flex gap-3">

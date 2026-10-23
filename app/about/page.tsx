@@ -39,7 +39,7 @@ const teamMembers: AboutTeamMember[] = [
     expertise: [
       "Client delivery",
       "Web and mobile",
-      "Cybersecurity",
+      "Security consulting",
       "Business development",
     ],
   },
@@ -63,21 +63,23 @@ const milestones = [
   },
   {
     year: "2023",
-    title: "100+ clients",
-    description: "Supported 100+ businesses from Accra across 12 industries.",
+    title: "Named portfolio sites",
+    description:
+      "Live client work including Fitch Advisory, Fitch Attorneys, Africa Governance Centre, and ThinQ Shopping — open the portfolio for URLs.",
   },
   {
     year: "2025",
-    title: "4.9 Google rating",
-    description: `${googleBusinessProfile.reviewCount} verified Google reviews from real client work.`,
+    title: "Google reviews",
+    description:
+      "Google reviews on /reviews — rating and count sync from our Business Profile.",
   },
 ];
 
 const stats = [
   { label: "Founded", value: String(googleBusinessProfile.foundedYear) },
   { label: "People", value: String(googleBusinessProfile.teamSize) },
-  { label: "Clients served", value: "100+" },
-  { label: "Industries", value: "12+" },
+  { label: "Live portfolio", value: "4 sites" },
+  { label: "Office", value: "Accra" },
 ];
 
 const missionPillars = [
@@ -152,9 +154,11 @@ export default function AboutPage() {
               className="sa-lead mx-auto mt-3"
             >
               From our Accra office since {googleBusinessProfile.foundedYear}. A team of{" "}
-              {googleBusinessProfile.teamSize} at {googleBusinessProfile.address.street},
-              rated {googleBusinessProfile.rating} from{" "}
-              {googleBusinessProfile.reviewCount} Google reviews.
+              {googleBusinessProfile.teamSize} at {googleBusinessProfile.address.street}.{" "}
+              <Link href="/reviews" className="sa-text-link">
+                Google reviews
+              </Link>{" "}
+              show the live rating and count.
             </motion.p>
             <motion.div variants={aboutHeroItem} className="mt-8">
               <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">
@@ -261,7 +265,7 @@ export default function AboutPage() {
                   </p>
                   <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                     {[
-                      "100+ businesses supported",
+                      "Named client sites in portfolio",
                       "One office, in Accra",
                       `Team of ${googleBusinessProfile.teamSize}`,
                       "12 industry verticals served",

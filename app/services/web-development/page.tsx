@@ -17,6 +17,9 @@ const content: ServicePageContent = {
     "Company websites and web apps for Accra and Ghana teams — built for speed on mobile networks, SEO, and Paystack or MoMo when you need checkout. From our office at 47 Nii Kwashiefio Avenue.",
   heroCtaLabel: "Get started",
   heroCtaHref: "/get-started",
+  showAtAGlance: true,
+  showOwnership: true,
+  serviceHubPath: "/services/web-development",
   hireGeoHref: "/services/web-development-in-accra",
   hireGeoLabel: "Web development in Accra →",
   heroImage: serviceImages.webDevelopment,
@@ -47,7 +50,7 @@ const content: ServicePageContent = {
         "Paystack, Mobile Money, CRM, and analytics wired with sensible fallbacks when the network is slow.",
     },
   ],
-  stackEyebrow: "Tools we use",
+  stackEyebrow: "Engineering",
   stackTitle: "A stack your team can maintain",
   stackSubtitle:
     "Type-safe defaults and preview deploys — not a black-box theme you cannot change.",

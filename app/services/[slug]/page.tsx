@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { GeoServicePageView } from "@/components/seo/GeoServicePageView";
+import { getGooglePlaceStats } from "@/lib/google-places-stats";
+import { withCanonical } from "@/lib/seo/canonical";
 import {
   geoServicePages,
-  geoServicePageMetadata,
+  geoServicePageWithStats,
   getGeoServicePage,
 } from "@/lib/seo/geo-service-pages";
 
@@ -13,12 +15,31 @@ export function generateStaticParams() {
   return geoServicePages.map((page) => ({ slug: page.slug }));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  return geoServicePageMetadata(params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const base = getGeoServicePage(params.slug);
+  if (!base) return { title: "Page not found" };
+  const stats = await getGooglePlaceStats();
+  const page = geoServicePageWithStats(base, stats);
+  return withCanonical(
+    {
+      title: page.title,
+      description: page.description,
+      openGraph: {
+        title: page.title,
+        description: page.description,
+        type: "website",
+        url: page.path,
+        images: [{ url: page.image, alt: page.h1 }],
+      },
+    },
+    page.path,
+  );
 }
 
-export default function GeoServiceSlugPage({ params }: Props) {
-  const page = getGeoServicePage(params.slug);
-  if (!page) notFound();
+export default async function GeoServiceSlugPage({ params }: Props) {
+  const base = getGeoServicePage(params.slug);
+  if (!base) notFound();
+  const stats = await getGooglePlaceStats();
+  const page = geoServicePageWithStats(base, stats);
   return <GeoServicePageView page={page} />;
 }

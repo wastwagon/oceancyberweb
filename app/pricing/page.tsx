@@ -1,28 +1,34 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Check } from "lucide-react";
+import { getGooglePlaceStats } from "@/lib/google-places-stats";
 import { withCanonical } from "@/lib/seo/canonical";
+import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
+import { buildTrustBlurb } from "@/lib/trust/review-trust";
 import { PricingComparisonTable } from "@/components/startup-agency/PricingComparisonTable";
 import { PricingPageJsonLd } from "@/components/seo/PricingPageJsonLd";
 import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { StartupAgencyFaq } from "@/components/startup-agency/StartupAgencyFaq";
 import { formatPlanPrice, pricingAddOns, pricingFaqItems, pricingPlans } from "@/lib/startup-agency/pricing";
 
-export const metadata: Metadata = withCanonical(
-  {
-    title: "Web and mobile pricing in Ghana",
-    description:
-      "Starting prices in Ghana cedis for web, mobile, and cybersecurity work. Compare Startup, Professional, and Enterprise, then get a formal quote.",
-    keywords: [
-      "web development pricing Ghana",
-      "mobile app development cost Accra",
-      "software development packages Ghana",
-      "GHS web design pricing",
-      "OceanCyber pricing",
-    ],
-  },
-  "/pricing",
-);
+export async function generateMetadata(): Promise<Metadata> {
+  const stats = await getGooglePlaceStats();
+  const { reviewsOnly } = buildTrustBlurb(stats);
+  return withCanonical(
+    {
+      title: "Web and mobile pricing in Ghana",
+      description: `Starting prices in Ghana cedis for web, mobile, and cybersecurity work. Compare Startup, Professional, and Enterprise. ${googleBusinessProfile.teamSize} people in Accra. ${reviewsOnly}.`,
+      keywords: [
+        "web development pricing Ghana",
+        "mobile app development cost Accra",
+        "software development packages Ghana",
+        "GHS web design pricing",
+        "OceanCyber pricing",
+      ],
+    },
+    "/pricing",
+  );
+}
 
 export default function PricingPage() {
   return (

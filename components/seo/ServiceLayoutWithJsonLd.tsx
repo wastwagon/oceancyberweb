@@ -1,4 +1,6 @@
 import { ServicePageJsonLd } from "@/components/seo/ServicePageJsonLd";
+import { resolveServicePageDescription } from "@/lib/seo/service-layout-metadata";
+import { getServiceHubFaqs } from "@/lib/seo/service-hub-faqs";
 import { getServicePageSeo } from "@/lib/seo/service-page-seo";
 
 type Props = {
@@ -6,17 +8,21 @@ type Props = {
   children: React.ReactNode;
 };
 
-export function ServiceLayoutWithJsonLd({ path, children }: Props) {
+export async function ServiceLayoutWithJsonLd({ path, children }: Props) {
   const seo = getServicePageSeo(path);
+  const faqs = getServiceHubFaqs(path);
+  const description = seo ? await resolveServicePageDescription(path) : undefined;
 
   return (
     <>
-      {seo ? (
+      {seo && description ? (
         <ServicePageJsonLd
           path={seo.path}
           name={seo.name}
-          description={seo.description}
+          description={description}
           image={seo.image}
+          offerPriceGhs={seo.offerPriceGhs}
+          faqs={faqs}
         />
       ) : null}
       {children}

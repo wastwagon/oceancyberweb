@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
-import { aboutWorkPreview, processSteps } from "@/lib/startup-agency/content";
+import { portfolioLiveWork, processSteps } from "@/lib/startup-agency/content";
 
 /** Aeolla process cards with watermark numbers — OC processSteps + work images. */
 export function CaProcessSection() {
@@ -22,7 +22,7 @@ export function CaProcessSection() {
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-7">
           {processSteps.map((step, i) => {
-            const image = aboutWorkPreview[i % aboutWorkPreview.length].image;
+            const image = portfolioLiveWork[i % portfolioLiveWork.length].image;
             return (
               <SaReveal key={step.step} delay={i * 0.08}>
                 <article className="group relative flex h-full min-h-[420px] flex-col overflow-hidden rounded-[10px] border border-white/10 bg-[#111]">

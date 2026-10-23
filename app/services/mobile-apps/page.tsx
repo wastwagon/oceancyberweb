@@ -17,6 +17,9 @@ const content: ServicePageContent = {
     "iOS and Android apps built in Accra for Ghana phones and data — offline-aware flows, MoMo or Paystack when needed, and help getting into the stores. From GHS 12,000 per platform.",
   heroCtaLabel: "Get started",
   heroCtaHref: "/get-started",
+  showAtAGlance: true,
+  showOwnership: true,
+  serviceHubPath: "/services/mobile-apps",
   hireGeoHref: "/services/mobile-app-development-in-accra",
   hireGeoLabel: "Mobile apps in Accra →",
   heroImage: serviceImages.mobileApps,
@@ -47,7 +50,7 @@ const content: ServicePageContent = {
         "Privacy text, screenshots, and review notes so App Store and Play Store review is less painful.",
     },
   ],
-  stackEyebrow: "Tools we use",
+  stackEyebrow: "Mobile delivery",
   stackTitle: "Paths that fit your budget and timeline",
   stackSubtitle:
     "Native or cross-platform — chosen for your users and your maintenance plan.",

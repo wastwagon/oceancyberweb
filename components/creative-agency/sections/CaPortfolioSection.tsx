@@ -5,12 +5,14 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
-import { aboutWorkPreview } from "@/lib/startup-agency/content";
+import { portfolioConceptWork, portfolioLiveWork } from "@/lib/startup-agency/content";
+
+const creativePortfolioItems = [...portfolioLiveWork, ...portfolioConceptWork];
 
 const FILTERS = ["All", "Web", "Mobile", "Brand", "Security"] as const;
 type PortfolioFilter = (typeof FILTERS)[number];
 
-type WorkItem = (typeof aboutWorkPreview)[number];
+type WorkItem = (typeof creativePortfolioItems)[number];
 
 function itemMatchesFilter(item: WorkItem, filter: PortfolioFilter) {
   if (filter === "All") return true;
@@ -47,19 +49,19 @@ export function CaPortfolioSection() {
   const reduceMotion = useReducedMotion();
 
   const filtered = useMemo(
-    () => aboutWorkPreview.filter((item) => itemMatchesFilter(item, filter)),
+    () => creativePortfolioItems.filter((item) => itemMatchesFilter(item, filter)),
     [filter],
   );
 
   const counts = useMemo(() => {
     const map: Record<PortfolioFilter, number> = {
-      All: aboutWorkPreview.length,
+      All: creativePortfolioItems.length,
       Web: 0,
       Mobile: 0,
       Brand: 0,
       Security: 0,
     };
-    for (const item of aboutWorkPreview) {
+    for (const item of creativePortfolioItems) {
       for (const tag of item.tags) {
         if (tag in map) map[tag as Exclude<PortfolioFilter, "All">] += 1;
       }
@@ -74,10 +76,14 @@ export function CaPortfolioSection() {
           <div>
             <p className="ae-eyebrow">Portfolio</p>
             <h2 className="ae-title-light mt-4 text-[clamp(2rem,4vw,3.5rem)]">
-              Recent projects
+              Live clients & concept work
             </h2>
+            <p className="ae-body-light mt-2 max-w-xl text-sm">
+              Live entries link to case studies. Concept studies are labelled and live under the
+              creative portfolio tab.
+            </p>
             <p className="ae-body-light mt-3 text-sm md:text-base" aria-live="polite">
-              Showing {filtered.length} of {aboutWorkPreview.length}
+              Showing {filtered.length} of {creativePortfolioItems.length}
               {filter !== "All" ? ` · ${filter}` : ""}
             </p>
           </div>
@@ -160,6 +166,15 @@ export function CaPortfolioSection() {
                         sizes="(max-width:768px) 100vw, 60vw"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+                      <span
+                        className={`absolute left-4 top-4 rounded-full px-3 py-1 text-xs font-semibold ${
+                          item.kind === "live"
+                            ? "bg-[var(--ae-primary)] text-black"
+                            : "border border-white/30 bg-black/50 text-white"
+                        }`}
+                      >
+                        {item.kind === "live" ? "Live" : "Concept"}
+                      </span>
                       <div className="absolute inset-x-0 bottom-0 p-5 md:p-7">
                         <p className="text-sm font-medium text-[var(--ae-primary)]">
                           {item.category}

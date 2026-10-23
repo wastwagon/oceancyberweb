@@ -12,8 +12,8 @@ const products = [
   {
     href: "/domains",
     title: "Domains",
-    price: "From GHS 120/yr",
-    body: "Search availability and register in cedis with Paystack.",
+    price: "From GHS 120/yr · .com.gh on /facts",
+    body: "Search availability and register in cedis with Paystack — .com.gh list price on /facts.",
     action: "Search a domain",
   },
   {
@@ -55,7 +55,11 @@ export function ProductsHubPage() {
               <span className="text-sa-primary">hosting</span>
             </motion.h1>
             <motion.p variants={heroMotion.item} className="sa-lead mx-auto mt-3 max-w-2xl">
-              Register a name, protect it, and host the site. Prices are in Ghana cedis.
+              Register a name, protect it, and host the site. Prices are in Ghana cedis — see the{" "}
+              <Link href="/guides/domains-hosting-and-ssl-ghana" className="sa-text-link">
+                domains, hosting, and SSL guide
+              </Link>
+              .
             </motion.p>
           </motion.div>
         </div>

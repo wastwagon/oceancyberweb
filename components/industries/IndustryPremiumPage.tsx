@@ -123,9 +123,12 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
             <h2 className="sa-title mt-4">Built and supported in Accra</h2>
             <p className="sa-subtitle mx-auto mt-4">
               {googleBusinessProfile.teamSize}-person team at{" "}
-              {googleBusinessProfile.address.street} — rated{" "}
-              {googleBusinessProfile.rating} from {googleBusinessProfile.reviewCount}{" "}
-              Google reviews. Packages from GHS 6,000 with Paystack and MoMo.
+              {googleBusinessProfile.address.street}. Packages from GHS 6,000 with
+              Paystack and MoMo —{" "}
+              <Link href="/reviews" className="sa-text-link">
+                read Google reviews
+              </Link>{" "}
+              for the current rating.
             </p>
             <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <Link

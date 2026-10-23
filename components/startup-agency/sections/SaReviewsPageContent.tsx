@@ -8,6 +8,7 @@ import {
 import { getReviewBadges } from "@/lib/startup-agency/reviews";
 import { GoogleReviewsCarousel } from "@/components/startup-agency/sections/GoogleReviewsCarousel";
 import type { GooglePlaceReview, GooglePlaceStats } from "@/lib/google-places-stats";
+import { reviewStatsSourceNote } from "@/lib/trust/review-source-label";
 
 type Props = {
   stats: GooglePlaceStats;
@@ -38,15 +39,7 @@ function StarRow({ rating }: { rating: number }) {
 export function SaReviewsPageContent({ stats, reviews }: Props) {
   const profileUrl = getGoogleBusinessProfileUrl();
   const writeReviewUrl = getGoogleWriteReviewUrl();
-  const badges = getReviewBadges().map((badge) =>
-    badge.id === "google"
-      ? {
-          ...badge,
-          rating: stats.rating.toFixed(1),
-          label: `${stats.reviewCount} Google review${stats.reviewCount === 1 ? "" : "s"}`,
-        }
-      : badge,
-  );
+  const badges = getReviewBadges(stats);
 
   return (
     <main>
@@ -72,9 +65,7 @@ export function SaReviewsPageContent({ stats, reviews }: Props) {
           <p className="mt-3 text-sa-muted">
             {stats.reviewCount} verified Google reviews · {googleBusinessProfile.name}
           </p>
-          {stats.source === "places-api" ? (
-            <p className="mt-2 text-xs text-sa-muted/70">Synced from Google Business Profile</p>
-          ) : null}
+          <p className="mt-2 text-xs text-sa-muted/70">{reviewStatsSourceNote(stats)}</p>
           <div className="mt-8 flex flex-col items-center gap-3">
             <Link
               href={writeReviewUrl}
@@ -120,8 +111,9 @@ export function SaReviewsPageContent({ stats, reviews }: Props) {
           </div>
         ) : (
           <p className="mx-auto mt-20 max-w-xl text-center text-sm text-sa-muted">
-            Recent Google reviews will appear here once the Places API key is configured on the
-            server.
+            Recent review excerpts sync when Google Places is configured on the server. Your{" "}
+            {stats.rating.toFixed(1)} rating from {stats.reviewCount} reviews is still shown above
+            — open our Google Business Profile for the full list.
           </p>
         )}
 

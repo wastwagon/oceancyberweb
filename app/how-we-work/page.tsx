@@ -41,7 +41,8 @@ export default function HowWeWorkPage() {
           <p className="sa-eyebrow">Delivery</p>
           <h1 className="sa-title mt-6">How we deliver a project</h1>
           <p className="sa-lead mx-auto mt-3 max-w-2xl">
-            We start with discovery, show progress at each milestone, and launch with security in mind. That suits teams in legal, fintech, governance, and commerce.
+            The same four phases shown on the homepage — with engagement models, design detail, and
+            proof links below. Packages start from GHS 6,000; scope is always confirmed in writing.
           </p>
           <div className="mx-auto mt-8 flex w-full max-w-sm flex-col items-center gap-3">
             <Link href="/get-started" className="sa-btn-primary w-full gap-2 sm:w-auto">
@@ -62,10 +63,10 @@ export default function HowWeWorkPage() {
 
       <section className="sa-section border-b border-sa-border">
         <div className="sa-container">
-          <h2 className="sa-title mb-4 text-center">Four phases, one accountable team</h2>
+          <h2 className="sa-title mb-4 text-center">Four phases, one Accra team</h2>
           <p className="sa-subtitle mx-auto mb-12 max-w-2xl text-center">
-            Every engagement follows the same spine — adapted to your sector, stack, and compliance
-            scope.
+            These match the process section on the homepage. Legal, fintech, governance, and
+            commerce projects use the same spine with different compliance add-ons.
           </p>
           <div className="grid gap-6 md:grid-cols-2">
             {deliveryPhases.map((phase) => (
@@ -203,9 +204,14 @@ export default function HowWeWorkPage() {
               Get started
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
-            <Link href="/pricing" className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline">
-              View pricing
-            </Link>
+            <div className="flex flex-wrap items-center justify-center gap-x-5">
+              <Link href="/pricing" className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline">
+                View pricing
+              </Link>
+              <Link href="/facts" className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline-offset-4 hover:underline">
+                Company facts
+              </Link>
+            </div>
           </div>
         </div>
       </section>

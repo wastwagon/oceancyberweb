@@ -4,25 +4,32 @@ import {
   ServicePremiumPage,
   type ServicePageContent,
 } from "@/components/services/ServicePremiumPage";
+import {
+  cybersecurityDisclosureShort,
+  cybersecurityPublicScopeLine,
+} from "@/lib/marketing/cyber-licence";
 import { serviceImages } from "@/lib/startup-agency/service-images";
 import { servicePricingHints } from "@/lib/startup-agency/pricing";
 
 const content: ServicePageContent = {
   heroEyebrow: "Security",
   heroPrefix: "",
-  heroHighlight: "Cybersecurity",
+  heroHighlight: "Security consulting",
   heroSuffix: "",
   heroHighlightTone: "white",
-  heroDescription:
-    "Security assessments and hardening for Ghana sites and apps — from GHS 4,500 — by the same Accra team that builds and hosts.",
+  heroDescription: `${cybersecurityPublicScopeLine()} From GHS 4,500.`,
+  regulatoryNote: cybersecurityDisclosureShort(),
+  showAtAGlance: true,
+  showOwnership: true,
+  serviceHubPath: "/services/cybersecurity",
   heroCtaLabel: "Get started",
   heroCtaHref: "/get-started",
   hireGeoHref: "/services/cybersecurity-in-accra",
-  hireGeoLabel: "Cybersecurity in Accra →",
+  hireGeoLabel: "Security consulting in Accra →",
   heroImage: serviceImages.cyberSecurity,
-  pills: ["Assessments", "Hardening", "Monitoring"],
+  pills: ["Assessments", "Hardening", "Remediation"],
   focusEyebrow: "What we cover",
-  focusTitle: "Practical controls, not checkbox theatre",
+  focusTitle: "Practical controls, not checkbox audits",
   focusSubtitle:
     "Find weak spots, fix what matters first, and leave your team with a clear action list.",
   focusAreas: [
@@ -95,9 +102,9 @@ const content: ServicePageContent = {
       result: "Shared passwords retired; backups actually restore.",
     },
     {
-      title: "Ongoing reviews",
-      client: "Regulated teams",
-      result: "Evidence packs leadership can show partners.",
+      title: "Follow-up consulting",
+      client: "Teams with compliance asks",
+      result: "Prioritised fix lists and evidence your engineers can implement.",
     },
   ],
   ctaTitle: "Want a security review?",

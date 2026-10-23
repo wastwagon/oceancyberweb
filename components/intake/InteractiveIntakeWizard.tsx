@@ -20,7 +20,7 @@ const SERVICE_OPTIONS = [
   "Website build",
   "Mobile app",
   "E-commerce",
-  "Cybersecurity",
+  "Security consulting",
   "Ongoing support",
   "Local growth (Google Business Profile, SEO)",
 ] as const;

@@ -33,6 +33,6 @@ export const metadata: Metadata = withCanonical(
   "/hosting",
 );
 
-export default function HostingLayout({ children }: { children: React.ReactNode }) {
+export default async function HostingLayout({ children }: { children: React.ReactNode }) {
   return <ServiceLayoutWithJsonLd path="/hosting">{children}</ServiceLayoutWithJsonLd>;
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { withCanonical } from "@/lib/seo/canonical";
+import { extraIntentGuidePages } from "@/lib/seo/intent-guides-extra";
 
 export type IntentKind = "guide" | "compare" | "alternative";
 
@@ -78,7 +79,7 @@ export const intentKindMeta: Record<
     label: "Guides",
     hubTitle: "Guides for building in Ghana",
     hubDescription:
-      "Practical answers on website cost, domain prices, hosting cost, Mobile Money checkout, ecommerce timelines, the Ghana Data Protection Act, and DwumaPOS for Ghana shops.",
+      "Practical answers on website cost, app development cost, domain and .com.gh registration, hosting cost, Mobile Money checkout, ecommerce timelines, the Ghana Data Protection Act, and DwumaPOS for Ghana shops.",
   },
   compare: {
     path: "/compare",
@@ -135,7 +136,7 @@ const dwumaOfflineSummary =
 const dwumaWebsiteNote =
   "On Starter the website is yourshop.dwumapos.com. Business and Scale can use your own domain, such as yourshop.com. Customer MoMo and card payments go to the Paystack or Hubtel account you connect. That money is not the DwumaPOS bill.";
 
-export const intentPages: readonly IntentPage[] = [
+const coreIntentPages: readonly IntentPage[] = [
   {
     kind: "guide",
     slug: "website-cost-in-ghana",
@@ -349,6 +350,7 @@ export const intentPages: readonly IntentPage[] = [
     ],
     related: [
       { href: "/compare/shopify-woocommerce-custom-ghana", label: "Shopify, WooCommerce, or custom" },
+      { href: "/guides/hubtel-vs-paystack-ghana", label: "Hubtel vs Paystack" },
       { href: "/guides/ecommerce-website-timeline-ghana", label: "Ecommerce timelines" },
       { href: "/guides/dwumapos-for-ghana-shops", label: "DwumaPOS for Ghana shops" },
     ],
@@ -387,7 +389,7 @@ export const intentPages: readonly IntentPage[] = [
         ],
         links: [
           { href: "/insights/ghana-data-protection-act-2026", label: "2026 checklist for SaaS and fintech teams" },
-          { href: "/services/cybersecurity", label: "Cybersecurity services" },
+          { href: "/services/cybersecurity", label: "Security consulting" },
         ],
       },
       {
@@ -1627,6 +1629,11 @@ export const intentPages: readonly IntentPage[] = [
       label: "Open hosting",
     },
   },
+];
+
+export const intentPages: readonly IntentPage[] = [
+  ...coreIntentPages,
+  ...extraIntentGuidePages,
 ];
 
 export function intentPagesByKind(kind: IntentKind): IntentPage[] {

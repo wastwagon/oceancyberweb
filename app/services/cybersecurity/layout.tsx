@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
 import { ServiceLayoutWithJsonLd } from "@/components/seo/ServiceLayoutWithJsonLd";
-import { getServicePageSeo } from "@/lib/seo/service-page-seo";
+import { buildServiceLayoutMetadata } from "@/lib/seo/service-layout-metadata";
 
-const seo = getServicePageSeo("/services/cybersecurity");
+export async function generateMetadata(): Promise<Metadata> {
+  return buildServiceLayoutMetadata("/services/cybersecurity", "Security consulting services", {
+    alternates: { canonical: "/services/cybersecurity" },
+  });
+}
 
-export const metadata: Metadata = {
-  title: "Cybersecurity services",
-  description: seo?.description,
-  alternates: { canonical: "/services/cybersecurity" },
-};
-
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({ children }: { children: React.ReactNode }) {
   return (
     <ServiceLayoutWithJsonLd path="/services/cybersecurity">
       {children}

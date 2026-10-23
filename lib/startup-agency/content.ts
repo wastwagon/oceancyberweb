@@ -1,7 +1,13 @@
 /** Marketing homepage content — structure aligned with Start-Up Agency; copy tailored for OceanCyber. */
 
 import { siteImagePaths } from "@/lib/seo/site-image-paths";
+import { publishedLivePortfolioCount } from "@/lib/site-facts";
 import { googleBusinessProfile, trustBlurb } from "@/lib/startup-agency/google-business";
+import {
+  buildHomeFaqItems,
+  buildTrustSignals,
+  fallbackPlaceStats,
+} from "@/lib/trust/review-trust";
 import { serviceImages } from "./service-images";
 
 export const heroTagline = trustBlurb.short;
@@ -12,7 +18,7 @@ export const heroServiceSlides = [
   {
     title: "Web Development",
     href: "/services/web-development",
-    imageAlt: "Premium web platform and dashboard interfaces built by OceanCyber",
+    imageAlt: "Web platform and dashboard interfaces built by OceanCyber",
     image: serviceImages.webDevelopment,
   },
   {
@@ -22,15 +28,15 @@ export const heroServiceSlides = [
     image: serviceImages.mobileApps,
   },
   {
-    title: "Cybersecurity",
+    title: "Security consulting",
     href: "/services/cybersecurity",
-    imageAlt: "Secure enterprise monitoring and protection systems by OceanCyber",
+    imageAlt: "Security consulting — assessments and hardening by OceanCyber",
     image: serviceImages.cyberSecurity,
   },
   {
     title: "E-Commerce",
     href: "/services/ecommerce",
-    imageAlt: "High-converting online storefront and checkout experiences by OceanCyber",
+    imageAlt: "Online storefront and checkout experiences built by OceanCyber",
     image: serviceImages.ecommerce,
   },
 ] as const;
@@ -74,77 +80,82 @@ export const showreelSlides = [
   { src: siteImagePaths.portfolio.creativeHub, caption: "Creative Hub — Concept work" },
 ] as const;
 
-export const aboutWorkPreview = [
+export type WorkPreviewItem = {
+  title: string;
+  category: string;
+  tags: readonly ("Web" | "Mobile" | "Brand" | "Security")[];
+  image: string;
+  href: string;
+  kind: "live" | "concept";
+};
+
+/** Public client sites — same four names as /facts and llms.txt. */
+export const portfolioLiveWork: readonly WorkPreviewItem[] = [
   {
-    title: "Financial Services Platform",
-    category: "Web · Dashboard",
-    tags: ["Web"] as const,
-    image: siteImagePaths.work.fintechDashboard,
-    href: "/portfolio?tab=creative",
+    title: "Fitch Advisory",
+    category: "Live client · Portal & booking",
+    tags: ["Web"],
+    image: siteImagePaths.portfolioLive.fitchAdvisory,
+    href: "/portfolio/fitch-advisory",
+    kind: "live",
   },
   {
-    title: "Mobile Commerce Experience",
-    category: "E-commerce · App",
-    tags: ["Mobile"] as const,
-    image: siteImagePaths.work.mobileCommerce,
-    href: "/portfolio?tab=creative",
+    title: "Fitch Attorneys",
+    category: "Live client · Case management",
+    tags: ["Web"],
+    image: siteImagePaths.portfolioLive.fitchAttorneys,
+    href: "/portfolio/fitch-attorneys",
+    kind: "live",
   },
   {
-    title: "Brand & Design System",
-    category: "UI/UX · Identity",
-    tags: ["Brand"] as const,
+    title: "Africa Governance Centre",
+    category: "Live client · Programmes site",
+    tags: ["Web"],
+    image: siteImagePaths.portfolioLive.africaGovernanceCentre,
+    href: "/portfolio/africa-governance-centre",
+    kind: "live",
+  },
+  {
+    title: "ThinQ Shopping",
+    category: "Live client · MoMo commerce",
+    tags: ["Mobile", "Web"],
+    image: siteImagePaths.portfolioLive.thinqShopping,
+    href: "/portfolio/thinq-shopping",
+    kind: "live",
+  },
+];
+
+/** Internal concept work — never presented as live clients. */
+export const portfolioConceptWork: readonly WorkPreviewItem[] = [
+  {
+    title: "Brand system study",
+    category: "Concept · UI/UX",
+    tags: ["Brand"],
     image: siteImagePaths.work.brandSystem,
     href: "/portfolio?tab=creative",
+    kind: "concept",
   },
   {
-    title: "Travel Booking Platform",
-    category: "Web · Hospitality",
-    tags: ["Web"] as const,
-    image: siteImagePaths.work.travelPlatform,
+    title: "Dashboard layout study",
+    category: "Concept · Web",
+    tags: ["Web"],
+    image: siteImagePaths.work.fintechDashboard,
     href: "/portfolio?tab=creative",
+    kind: "concept",
   },
-  {
-    title: "Secure Enterprise Portal",
-    category: "Cybersecurity · Web",
-    tags: ["Security", "Web"] as const,
-    image: siteImagePaths.work.cybersecurityPlatform,
-    href: "/portfolio?tab=creative",
-  },
-  {
-    title: "Creative Hub Concepts",
-    category: "UI/UX · Brand",
-    tags: ["Brand"] as const,
-    image: siteImagePaths.portfolio.creativeHub,
-    href: "/portfolio?tab=creative",
-  },
-] as const;
+];
+
+/** Homepage collage + creative portfolio grid (live first). */
+/** About / homepage grids — live clients only; concepts live under /portfolio?tab=creative. */
+export const aboutWorkPreview: readonly WorkPreviewItem[] = [...portfolioLiveWork];
 
 export const aboutStats = [
   { value: `Since ${googleBusinessProfile.foundedYear}`, label: "Accra office" },
   { value: String(googleBusinessProfile.teamSize), label: "People" },
-  { value: "100+", label: "Clients served" },
+  { value: String(publishedLivePortfolioCount), label: "Live portfolio sites" },
 ] as const;
 
-export const trustSignals = [
-  {
-    icon: "award" as const,
-    stat: "18+",
-    title: "Years delivering",
-    body: `The company to hire in Accra and in Ghana. Founded in ${googleBusinessProfile.foundedYear}, with ${googleBusinessProfile.teamSize} people at ${googleBusinessProfile.address.street}.`,
-  },
-  {
-    icon: "star" as const,
-    stat: "4.9★",
-    title: "Google rating",
-    body: "54 verified Google reviews from clients across web, mobile, and digital projects.",
-  },
-  {
-    icon: "shield" as const,
-    stat: "100%",
-    title: "Security-first builds",
-    body: "Every engagement treats performance, privacy, and resilience as product requirements.",
-  },
-] as const;
+export const trustSignals = buildTrustSignals(fallbackPlaceStats());
 
 export const marqueeTags = [
   "Web · Mobile · Cloud · Security",
@@ -158,6 +169,12 @@ export const marqueeTags = [
 ] as const;
 
 export const serviceCards = [
+  {
+    title: "Web Design",
+    desc: "Company sites and landing pages from GHS 6,000 — mobile-first layouts and SEO-ready builds.",
+    href: "/services/web-design",
+    image: serviceImages.webDevelopment,
+  },
   {
     title: "UI/UX & Brand",
     desc: "Interfaces your customers can use on a phone, with Figma files your developers can build from.",
@@ -183,8 +200,8 @@ export const serviceCards = [
     image: serviceImages.ecommerce,
   },
   {
-    title: "Cybersecurity",
-    desc: "Find weak spots before attackers do — audits, hardening, and monitoring for Ghana businesses.",
+    title: "Security consulting",
+    desc: "Consultation from GHS 4,500 — assessments and hardening, not MSSP or 24/7 monitoring.",
     href: "/services/cybersecurity",
     image: serviceImages.cyberSecurity,
   },
@@ -196,32 +213,7 @@ export const serviceCards = [
   },
 ] as const;
 
-export const processSteps = [
-  {
-    step: 1,
-    title: "Discovery & scoping",
-    body: "We clarify goals, users, and constraints up front — then agree scope, timeline, and success metrics before design or development begins.",
-    bullets: ["Stakeholder alignment", "Technical feasibility", "Scope and milestones"],
-  },
-  {
-    step: 2,
-    title: "Design & prototyping",
-    body: "Where design is in scope, we wireframe and prototype in Figma so you can review structure and flows before engineering commits to build.",
-    bullets: ["UX/UI and brand systems", "Clickable prototypes", "Handoff specs for dev"],
-  },
-  {
-    step: 3,
-    title: "Build & integrate",
-    body: "We ship in agreed phases with demo checkpoints — web, mobile, payments, APIs, and hosting connected to the tools your team already uses.",
-    bullets: ["Phased delivery", "Integrations and APIs", "Staging previews"],
-  },
-  {
-    step: 4,
-    title: "QA, security & go-live",
-    body: "We test on real devices, tune performance, apply security hardening where required, and deploy with documentation your team can run after handover.",
-    bullets: ["QA and accessibility", "Performance and security", "Launch and handover"],
-  },
-] as const;
+export { deliveryPhases as processSteps } from "@/lib/marketing/delivery-phases";
 
 export const techStack = [
   "Next.js",
@@ -233,11 +225,12 @@ export const techStack = [
 ] as const;
 
 export const projectChips = [
-  "Custom ERP for Logistics",
-  "FinTech Mobile Wallet",
-  "Healthcare Portal Hardening",
-  "E‑commerce Platform Rebuild",
-  "Government Digital Strategy",
+  "ThinQ Shopping · MoMo store",
+  "Fitch Advisory · Client portal",
+  "Website from GHS 6,000",
+  "Paystack + MoMo checkout",
+  "cPanel hosting in GHS",
+  "Security review from GHS 4,500",
 ] as const;
 
 export {
@@ -278,44 +271,7 @@ export const proofOutcomes = [
   },
 ] as const;
 
-export const faqItems = [
-  {
-    q: "Where is OceanCyber based?",
-    a: `Accra — ${googleBusinessProfile.address.street}. A team of ${googleBusinessProfile.teamSize}, founded in ${googleBusinessProfile.foundedYear}, rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews. For hire pages by city, see web design in Accra and web design in Ghana.`,
-  },
-  {
-    q: "How do we start a project?",
-    a: "Share goals, budget range, and timeline on Get started or Contact. We reply with the right package or a scoped next step — the project calculator helps with a rough cedis range.",
-  },
-  {
-    q: "What services do you offer?",
-    a: "UI/UX, websites, mobile apps, ecommerce, cybersecurity, and hosting — all from the Accra office. See Services for detail.",
-  },
-  {
-    q: "Do you offer maintenance?",
-    a: "Yes — retainers and milestone support after launch, sized to your site or app.",
-  },
-  {
-    q: "How long does a typical build take?",
-    a: "Depends on scope. Small marketing sites move faster; product work ships in milestones with regular demos.",
-  },
-  {
-    q: "Do you require a deposit?",
-    a: "Most work uses phased billing tied to milestones — spelled out in the proposal before we start.",
-  },
-  {
-    q: "Can we customise a package?",
-    a: "Yes. Startup, Professional, and Enterprise are starting points — we scope to your constraints. Compare inclusions on the pricing page.",
-  },
-  {
-    q: "What is included in each pricing package?",
-    a: "Startup from GHS 6,000 (up to 5 pages). Professional from GHS 14,500 adds custom UI/UX and analytics. Enterprise from GHS 30,000 covers complex platforms with a dedicated delivery lead.",
-  },
-  {
-    q: "How do you measure success?",
-    a: "We agree goals up front — traffic, sales, staff time saved, or security fixes — and review them after launch.",
-  },
-] as const;
+export const faqItems = buildHomeFaqItems(fallbackPlaceStats());
 
 export const blogTeasers = [
   {

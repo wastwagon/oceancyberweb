@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Security programmes in Ghana",
+  title: "Security consulting journey in Ghana",
   description:
-    "A phased way to assess risk, harden systems, and keep them secure. Based in Accra.",
+    "How OceanCyber runs security consulting — assessment, remediation, and review cadence from Accra. Not MSSP or 24/7 SOC services.",
   alternates: { canonical: "/security-journey" },
 };
 

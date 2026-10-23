@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { ServiceLayoutWithJsonLd } from "@/components/seo/ServiceLayoutWithJsonLd";
+import { buildServiceLayoutMetadata } from "@/lib/seo/service-layout-metadata";
 
-export const metadata: Metadata = {
-  title: "UI and brand design services",
-  description:
-    "UI/UX design, brand identity, and Figma prototypes from GHS 3,500. Hire-focused Accra page: /services/ui-ux-design-in-accra.",
-  alternates: { canonical: "/services/ui-ux-design" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return buildServiceLayoutMetadata("/services/ui-ux-design", "UI/UX and brand design services", {
+    alternates: { canonical: "/services/ui-ux-design" },
+  });
+}
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({ children }: { children: React.ReactNode }) {
   return (
     <ServiceLayoutWithJsonLd path="/services/ui-ux-design">
       {children}

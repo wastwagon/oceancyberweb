@@ -190,6 +190,32 @@ export type ServicePricingStripContent = {
 };
 
 export const servicePricingHints = {
+  webDesign: {
+    eyebrow: "Investment",
+    title: "Indicative web design packages",
+    subtitle:
+      "Design and build in Ghana cedis — same Startup, Professional, and Enterprise tiers as /pricing.",
+    tiers: [
+      {
+        planId: "startup",
+        label: "Startup",
+        priceGhs: 6000,
+        note: "Up to 5 pages — template-led UI with your brand",
+      },
+      {
+        planId: "professional",
+        label: "Professional",
+        priceGhs: 14500,
+        note: "Custom UI, CMS, Paystack or MoMo reconciliation",
+      },
+      {
+        planId: "enterprise",
+        label: "Enterprise",
+        priceGhs: 30000,
+        note: "Portals, security review, dedicated lead",
+      },
+    ],
+  },
   webDevelopment: {
     eyebrow: "Investment",
     title: "Indicative web development tiers",
@@ -296,7 +322,7 @@ export const servicePricingHints = {
     eyebrow: "Investment",
     title: "Indicative security engagement tiers",
     subtitle:
-      "Practical assessments and hardening for Ghana teams — sequenced by risk, not checkbox audits. Enterprise packages include security in broader delivery.",
+      "Security consulting only — assessments and hardening sprints, not MSSP or 24/7 monitoring. Enterprise tiers bundle security into broader delivery.",
     tiers: [
       {
         label: "Baseline assessment",
@@ -306,13 +332,13 @@ export const servicePricingHints = {
       {
         label: "Hardening programme",
         priceGhs: 12000,
-        note: "Assessment plus remediation sprints and monitoring alignment",
+        note: "Assessment plus remediation sprints and logging/runbook alignment",
       },
       {
         planId: "enterprise",
         label: "Enterprise security",
         priceGhs: 30000,
-        note: "Continuous programme, compliance mapping, and SLA options",
+        note: "Extended consulting programme, compliance mapping, and fix sprints",
       },
     ],
   },

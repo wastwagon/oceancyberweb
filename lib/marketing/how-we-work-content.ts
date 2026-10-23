@@ -1,47 +1,6 @@
 /** Sales content for /how-we-work — full delivery methodology. */
 
-export const deliveryPhases = [
-  {
-    step: 1,
-    title: "Discovery & scoping",
-    body: "We align your team on goals, users, constraints, and success metrics before design or code. You leave with a shared scope document and a realistic timeline — not a vague estimate.",
-    bullets: [
-      "Stakeholder workshops and user journey mapping",
-      "Technical feasibility and integration inventory",
-      "Milestone plan with phased billing",
-    ],
-  },
-  {
-    step: 2,
-    title: "Design & prototyping",
-    body: "When design is in scope, we wireframe and prototype in Figma so you approve structure and flows before engineering commits. Brand, UX, and handoff specs stay in one thread.",
-    bullets: [
-      "Wireframes and clickable Figma prototypes",
-      "Design tokens and component library",
-      "Engineering-ready redlines and assets",
-    ],
-  },
-  {
-    step: 3,
-    title: "Build & integrate",
-    body: "We ship in agreed phases with demo checkpoints — web, mobile, payments, APIs, and hosting connected to the tools your team already uses. You see working software every sprint, not slides.",
-    bullets: [
-      "Phased delivery with staging previews",
-      "MoMo, Paystack, and third-party integrations",
-      "Code review, CI, and documentation as we go",
-    ],
-  },
-  {
-    step: 4,
-    title: "QA, security & go-live",
-    body: "We test on real devices, tune performance, apply security hardening where required, and deploy with runbooks your team can operate after handover.",
-    bullets: [
-      "QA, accessibility, and performance tuning",
-      "Security review for regulated workloads",
-      "Launch support and knowledge transfer",
-    ],
-  },
-] as const;
+export { deliveryPhases } from "@/lib/marketing/delivery-phases";
 
 export const designPhases = [
   {

@@ -1,11 +1,17 @@
 import { cache } from "react";
+import {
+  getPlaceDetails,
+  searchPlaceByText,
+  type PlacesNewReview,
+} from "@/lib/google-places/new-api";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
+import { readEnvGbpOverride, staticGbpFallback } from "@/lib/trust/gbp-fallback";
 
 export type GooglePlaceStats = {
   rating: number;
   reviewCount: number;
   placeId?: string;
-  source: "places-api" | "fallback";
+  source: "places-api" | "env-config" | "fallback";
 };
 
 export type GooglePlaceReview = {
@@ -36,50 +42,24 @@ function getConfiguredPlaceId(): string | undefined {
   );
 }
 
-type PlacesReviewRaw = {
-  author_name?: string;
-  author_url?: string;
-  profile_photo_url?: string;
-  rating?: number;
-  relative_time_description?: string;
-  text?: string;
-  time?: number;
-};
-
-type PlacesDetailsResponse = {
-  status: string;
-  result?: {
-    rating?: number;
-    user_ratings_total?: number;
-    reviews?: PlacesReviewRaw[];
-  };
-};
-
-type FindPlaceResponse = {
-  status: string;
-  candidates?: Array<{
-    place_id?: string;
-    rating?: number;
-    user_ratings_total?: number;
-  }>;
-};
-
 function fallbackProfile(): GooglePlaceProfile {
+  const env = readEnvGbpOverride();
+  const { rating, reviewCount } = staticGbpFallback();
   return {
     stats: {
-      rating: googleBusinessProfile.rating,
-      reviewCount: googleBusinessProfile.reviewCount,
-      source: "fallback",
+      rating,
+      reviewCount,
+      source: env ? "env-config" : "fallback",
     },
     reviews: [],
   };
 }
 
-function mapReview(raw: PlacesReviewRaw): GooglePlaceReview | null {
-  const quote = raw.text?.trim();
+function mapReview(raw: PlacesNewReview): GooglePlaceReview | null {
+  const quote = raw.text?.text?.trim();
   if (!quote) return null;
 
-  const name = raw.author_name?.trim() || "Google reviewer";
+  const name = raw.authorAttribution?.displayName?.trim() || "Google reviewer";
   const parts = name.split(/\s+/).filter(Boolean);
   const initials =
     parts.length >= 2
@@ -89,11 +69,11 @@ function mapReview(raw: PlacesReviewRaw): GooglePlaceReview | null {
   return {
     quote,
     name,
-    role: raw.relative_time_description?.trim() || "Google review",
+    role: raw.relativePublishTimeDescription?.trim() || "Google review",
     rating: typeof raw.rating === "number" ? raw.rating : 5,
     initials,
-    authorUrl: raw.author_url,
-    profilePhotoUrl: raw.profile_photo_url,
+    authorUrl: raw.authorAttribution?.uri,
+    profilePhotoUrl: raw.authorAttribution?.photoUri,
   };
 }
 
@@ -101,22 +81,19 @@ async function fetchPlaceProfile(
   placeId: string,
   apiKey: string,
 ): Promise<GooglePlaceProfile | null> {
-  const url = new URL("https://maps.googleapis.com/maps/api/place/details/json");
-  url.searchParams.set("place_id", placeId);
-  url.searchParams.set("fields", "rating,user_ratings_total,reviews");
-  url.searchParams.set("key", apiKey);
+  const result = await getPlaceDetails(
+    apiKey,
+    placeId,
+    "id,rating,userRatingCount,reviews",
+    { next: { revalidate: REVALIDATE_SECONDS } },
+  );
+  if (!result) return null;
 
-  const res = await fetch(url, { next: { revalidate: REVALIDATE_SECONDS } });
-  if (!res.ok) return null;
-
-  const data = (await res.json()) as PlacesDetailsResponse;
-  if (data.status !== "OK" || !data.result) return null;
-
-  const rating = data.result.rating;
-  const reviewCount = data.result.user_ratings_total;
+  const rating = result.rating;
+  const reviewCount = result.userRatingCount;
   if (typeof rating !== "number" || typeof reviewCount !== "number") return null;
 
-  const reviews = (data.result.reviews ?? [])
+  const reviews = (result.reviews ?? [])
     .map(mapReview)
     .filter((review): review is GooglePlaceReview => review !== null);
 
@@ -129,23 +106,17 @@ async function fetchPlaceProfile(
 async function findPlaceId(apiKey: string): Promise<string | null> {
   const query = `${googleBusinessProfile.name}, ${googleBusinessProfile.address.locality}, ${googleBusinessProfile.address.country}`;
 
-  const url = new URL(
-    "https://maps.googleapis.com/maps/api/place/findplacefromtext/json",
+  const place = await searchPlaceByText(
+    apiKey,
+    query,
+    {
+      latitude: googleBusinessProfile.geo.latitude,
+      longitude: googleBusinessProfile.geo.longitude,
+      radiusMeters: 5000,
+    },
+    { next: { revalidate: REVALIDATE_SECONDS } },
   );
-  url.searchParams.set("input", query);
-  url.searchParams.set("inputtype", "textquery");
-  url.searchParams.set("fields", "place_id");
-  url.searchParams.set(
-    "locationbias",
-    `circle:5000@${googleBusinessProfile.geo.latitude},${googleBusinessProfile.geo.longitude}`,
-  );
-  url.searchParams.set("key", apiKey);
-
-  const res = await fetch(url, { next: { revalidate: REVALIDATE_SECONDS } });
-  if (!res.ok) return null;
-
-  const data = (await res.json()) as FindPlaceResponse;
-  return data.candidates?.[0]?.place_id ?? null;
+  return place?.id ?? null;
 }
 
 async function resolvePlaceId(apiKey: string): Promise<string | null> {

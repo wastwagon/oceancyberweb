@@ -1,3 +1,4 @@
+import type { GooglePlaceStats } from "@/lib/google-places-stats";
 import {
   formatGoogleRatingLabel,
   formatGoogleReviewCountLabel,
@@ -16,15 +17,19 @@ export type ReviewBadge = {
 };
 
 /** Homepage / reviews trust badges — Google Business Profile only. */
-export function getReviewBadges(): ReviewBadge[] {
+export function getReviewBadges(stats?: GooglePlaceStats): ReviewBadge[] {
   const googleUrl = getGoogleBusinessProfileUrl();
+  const rating = stats ? stats.rating.toFixed(1) : formatGoogleRatingLabel();
+  const label = stats
+    ? `${stats.reviewCount} Google review${stats.reviewCount === 1 ? "" : "s"}`
+    : formatGoogleReviewCountLabel();
 
   return [
     {
       id: "google",
       provider: "Google",
-      rating: formatGoogleRatingLabel(),
-      label: formatGoogleReviewCountLabel(),
+      rating,
+      label,
       href: googleUrl,
       external: true,
     },

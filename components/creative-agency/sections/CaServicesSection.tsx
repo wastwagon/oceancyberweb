@@ -12,7 +12,7 @@ const TAGS: Record<string, string[]> = {
   "Web Development": ["Next.js", "Performance", "SEO"],
   "Mobile Apps": ["iOS", "Android", "Product"],
   "E‑commerce": ["Storefront", "Checkout", "Growth"],
-  Cybersecurity: ["Audits", "Hardening", "Monitoring"],
+  "Security consulting": ["Assessments", "Hardening", "Remediation"],
   "Cloud Hosting": ["Domains", "SSL", "Uptime"],
 };
 

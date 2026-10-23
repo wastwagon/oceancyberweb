@@ -16,7 +16,7 @@ const PROJECT_TYPES = [
   { id: "website", label: "Website" },
   { id: "mobile_app", label: "Mobile app" },
   { id: "ecommerce", label: "E-commerce" },
-  { id: "security", label: "Cybersecurity" },
+  { id: "security", label: "Security consulting" },
   { id: "support", label: "Ongoing support" },
   { id: "other", label: "Other" },
 ] as const;

@@ -6,6 +6,7 @@ import { CommerceStackBundle } from "@/components/commerce/CommerceStackBundle";
 import { HOSTING_TRUST_POINTS } from "@/lib/hosting-packages";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { ServicePageHeroBanner } from "@/components/services/ServicePageHeroBanner";
+import { ServiceHubFaqSection } from "@/components/marketing/ServiceHubFaqSection";
 import { serviceImages } from "@/lib/startup-agency/service-images";
 
 /** Server-rendered hero for LCP; packages/cart remain client islands. */
@@ -190,6 +191,8 @@ export default function HostingPage({
           </div>
         </div>
       </section>
+
+      <ServiceHubFaqSection path="/hosting" />
     </main>
   );
 }

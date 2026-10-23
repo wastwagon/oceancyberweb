@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ExternalLink, Star } from "lucide-react";
 import { getGoogleReviewCta } from "@/lib/startup-agency/reviews";
 import type { GooglePlaceStats } from "@/lib/google-places-stats";
+import { reviewStatsSourceNote } from "@/lib/trust/review-source-label";
 
 type Props = {
   stats?: GooglePlaceStats;
@@ -40,8 +41,8 @@ export function SaGoogleReviewsBanner({ stats }: Props) {
       <p className="mt-2 text-sm text-sa-muted">
         {reviewCount} verified reviews · {businessName}
       </p>
-      {stats?.source === "places-api" ? (
-        <p className="mt-2 text-xs text-sa-muted/70">Synced from Google Business Profile</p>
+      {stats ? (
+        <p className="mt-2 text-xs text-sa-muted/70">{reviewStatsSourceNote(stats)}</p>
       ) : null}
       <Link
         href={profileUrl}

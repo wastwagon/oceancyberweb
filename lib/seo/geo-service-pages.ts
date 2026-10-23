@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import type { GooglePlaceStats } from "@/lib/google-places-stats";
 import { withCanonical } from "@/lib/seo/canonical";
+import { buildGeoFaqs, buildGeoIntro } from "@/lib/seo/geo-page-copy";
 import { serviceImages } from "@/lib/startup-agency/service-images";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
+import { fallbackPlaceStats, formatReviewsTrustLine } from "@/lib/trust/review-trust";
 
 export type GeoCity = "accra" | "ghana";
 
@@ -58,9 +61,9 @@ export const geoServiceTopics: readonly GeoServiceTopic[] = [
       "On-page search setup, performance budget, and 30–90 days of defect support by package",
     ],
     whyUs: [
-      `${p.rating} from ${p.reviewCount} Google reviews and published Accra client results`,
+      "Published Accra client sites you can open from our portfolio",
       "Fixed-price packages in cedis — Startup from GHS 6,000",
-      "One Accra team for design, engineering, and launch — not a freelancers marketplace",
+      "One Accra team for design, engineering, and launch — not a freelancer marketplace",
     ],
     proofKeys: ["fitch-advisory", "fitch-attorneys"],
     secondaryQueries: [
@@ -158,19 +161,19 @@ export const geoServiceTopics: readonly GeoServiceTopic[] = [
   },
   {
     key: "cybersecurity",
-    label: "cybersecurity",
+    label: "security consulting",
     serviceHref: "/services/cybersecurity",
     image: serviceImages.cyberSecurity,
     startingPriceGhs: 4500,
-    serviceTypes: ["Cybersecurity", "Security assessments", "Hardening"],
+    serviceTypes: ["Security consulting", "Security assessments", "Hardening"],
     accraFocus:
-      "Security assessments and hardening for Accra businesses — baseline reviews from GHS 4,500 with a team you can meet on Nii Kwashiefio Avenue.",
+      "Security consulting for Accra businesses — assessments and hardening from GHS 4,500. Consultation only, not MSSP or 24/7 monitoring.",
     ghanaFocus:
-      "Security reviews for Ghana organisations: assessments, hardening, and readiness with evidence your board can read. Delivered from Accra nationwide.",
+      "Security consulting for Ghana organisations — assessments, hardening, and remediation evidence your team can act on. Delivered from Accra nationwide.",
     deliverables: [
       "Scoped assessment with written findings and priority fixes",
       "Hardening for sites, apps, and cloud accounts you already run",
-      "Path to ongoing monitoring or a longer Enterprise security retainer",
+      "Path to extended security retainers when you need recurring reviews",
     ],
     whyUs: [
       "Baseline reviews from GHS 4,500 — transparent Accra pricing",
@@ -186,7 +189,7 @@ export const geoServiceTopics: readonly GeoServiceTopic[] = [
   },
   {
     key: "ui-ux-design",
-    label: "UI UX design",
+    label: "UI/UX design",
     serviceHref: "/services/ui-ux-design",
     image: serviceImages.uiUxBrand,
     startingPriceGhs: 3500,
@@ -255,7 +258,11 @@ function placeLabel(city: GeoCity): string {
   return city === "accra" ? "Accra" : "Ghana";
 }
 
-function buildGeoPage(topic: GeoServiceTopic, city: GeoCity): GeoServicePage {
+function buildGeoPage(
+  topic: GeoServiceTopic,
+  city: GeoCity,
+  stats: GooglePlaceStats = fallbackPlaceStats(),
+): GeoServicePage {
   const place = placeLabel(city);
   const slug = `${topic.key}-in-${city}`;
   const path = `/services/${slug}`;
@@ -270,55 +277,10 @@ function buildGeoPage(topic: GeoServiceTopic, city: GeoCity): GeoServicePage {
   // KayTech/Devarps pattern: price in the title for commercial CTR
   const title = `${h1}, from ${price}`;
 
-  const description = `${h1}. ${focus} From ${price}.`;
+  const description = `${h1}. ${focus} From ${price}. ${formatReviewsTrustLine(stats)}`;
 
-  const intro =
-    city === "accra"
-      ? `${focus} Packages from ${price}. Office at ${p.address.street} — ${p.rating} from ${p.reviewCount} Google reviews.`
-      : `${focus} Packages from ${price}. Accra office, nationwide delivery — ${p.rating} from ${p.reviewCount} Google reviews.`;
-
-  const faqs =
-    city === "accra"
-      ? [
-          {
-            question: `Who is the best ${topic.label} company in Accra?`,
-            answer: `OceanCyber at ${p.address.street}, Accra — founded ${p.foundedYear}, ${p.teamSize} people, ${p.rating} from ${p.reviewCount} Google reviews. ${focus}`,
-          },
-          {
-            question: `How much does ${topic.label} cost in Accra?`,
-            answer:
-              topic.priceBandNote ??
-              `Packages start from ${price}. Scope is confirmed in discovery with fixed-price milestones in Ghana cedis.`,
-          },
-          {
-            question: `Can we meet before we hire for ${topic.label}?`,
-            answer: `Yes. Book a visit at ${p.address.street}, Accra, or start on WhatsApp with ${p.phoneDisplay}. Most Accra clients meet once before kickoff.`,
-          },
-          {
-            question: "Do you only work with Accra companies?",
-            answer: `No. Accra is the office; we also deliver nationwide. Prefer the Ghana hire page if your team is outside Greater Accra.`,
-          },
-        ]
-      : [
-          {
-            question: `Who is the best ${topic.label} company in Ghana?`,
-            answer: `OceanCyber works from Accra for teams across Ghana — Kumasi, Tema, Takoradi, Tamale, and remote. ${p.rating} from ${p.reviewCount} Google reviews. ${focus}`,
-          },
-          {
-            question: `How much does ${topic.label} cost in Ghana?`,
-            answer:
-              topic.priceBandNote ??
-              `The same GHS packages as Accra — from ${price}. Domain, hosting, and care are separate lines.`,
-          },
-          {
-            question: `Can a team outside Accra hire OceanCyber for ${topic.label}?`,
-            answer: `Yes. Discovery can be remote or at ${p.address.street}, Accra. Delivery and support run on the same Accra engineering channel.`,
-          },
-          {
-            question: "Where is the office?",
-            answer: `The only office is at ${p.address.street}, Accra, Ghana. Call ${p.phoneDisplay}.`,
-          },
-        ];
+  const intro = buildGeoIntro(city, focus, price, stats);
+  const faqs = buildGeoFaqs(topic, city, price, focus, stats);
 
   return {
     slug,
@@ -352,6 +314,16 @@ export const geoServicePages: readonly GeoServicePage[] = geoServiceTopics.flatM
 
 export function getGeoServicePage(slug: string): GeoServicePage | undefined {
   return geoServicePages.find((page) => page.slug === slug);
+}
+
+/** Rebuild visible intro/FAQs with live Google stats (SSR). */
+export function geoServicePageWithStats(
+  page: GeoServicePage,
+  stats: GooglePlaceStats,
+): GeoServicePage {
+  const topic = geoServiceTopics.find((t) => t.key === page.topicKey);
+  if (!topic) return page;
+  return buildGeoPage(topic, page.city, stats);
 }
 
 export function geoServiceSitemapPaths(): string[] {

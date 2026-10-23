@@ -5,7 +5,11 @@ import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
 import { SaTeamCollage } from "@/components/startup-agency/sections/SaTeamCollage";
 import { aboutStats, companyPresence } from "@/lib/startup-agency/content";
 
-export function SaAboutSection() {
+type Props = {
+  presenceSubtitle?: string;
+};
+
+export function SaAboutSection({ presenceSubtitle = companyPresence }: Props) {
   return (
     <section
       id="about"
@@ -19,7 +23,7 @@ export function SaAboutSection() {
                 align="left"
                 eyebrow="Our Agency"
                 title="We design in Figma and build in-house in Accra"
-                subtitle={companyPresence}
+                subtitle={presenceSubtitle}
               />
               <p className="mt-4 max-w-2xl text-sm leading-relaxed text-sa-muted">
                 From shops and professional firms to fintech and logistics, one Accra

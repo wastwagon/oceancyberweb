@@ -3,6 +3,7 @@ import {
   organizationSameAs,
 } from "@/lib/startup-agency/google-business";
 import { getGooglePlaceStats } from "@/lib/google-places-stats";
+import { buildTrustBlurb } from "@/lib/trust/review-trust";
 
 const site =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
@@ -10,6 +11,7 @@ const site =
 
 export async function LocalBusinessJsonLd() {
   const stats = await getGooglePlaceStats();
+  const trust = buildTrustBlurb(stats);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -21,7 +23,7 @@ export async function LocalBusinessJsonLd() {
     image: `${site}/images/og-image.jpg`,
     telephone: googleBusinessProfile.phone,
     description:
-      `Best website, mobile app, and cybersecurity company in Accra and Ghana. Team of ${googleBusinessProfile.teamSize} at ${googleBusinessProfile.address.street}. Rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`,
+      `Best website, mobile app, and cybersecurity company in Accra and Ghana. Team of ${googleBusinessProfile.teamSize} at ${googleBusinessProfile.address.street}. ${trust.reviewsOnly}.`,
     founder: {
       "@type": "Person",
       name: googleBusinessProfile.founderName,
@@ -41,13 +43,6 @@ export async function LocalBusinessJsonLd() {
       "@type": "GeoCoordinates",
       latitude: googleBusinessProfile.geo.latitude,
       longitude: googleBusinessProfile.geo.longitude,
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: stats.rating,
-      reviewCount: stats.reviewCount,
-      bestRating: 5,
-      worstRating: 1,
     },
     sameAs: organizationSameAs(),
   };

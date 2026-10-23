@@ -6,9 +6,7 @@ import Image from "next/image";
 import { SaWhenVisibleImage } from "@/components/startup-agency/SaWhenVisibleImage";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
-import { aboutWorkPreview } from "@/lib/startup-agency/content";
-
-type WorkPreviewItem = (typeof aboutWorkPreview)[number];
+import { portfolioLiveWork, type WorkPreviewItem } from "@/lib/startup-agency/content";
 
 export function SaTeamCollage() {
   const [activeItem, setActiveItem] = useState<WorkPreviewItem | null>(null);
@@ -35,7 +33,7 @@ export function SaTeamCollage() {
     <>
       <div className="relative lg:min-h-[480px]">
         <div className="grid grid-cols-2 gap-3 md:gap-4">
-          {aboutWorkPreview.map((item, index) => (
+          {portfolioLiveWork.map((item, index) => (
             <button
               key={item.title}
               type="button"

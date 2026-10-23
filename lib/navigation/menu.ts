@@ -21,9 +21,9 @@ export const startupPagesMenu = [
   { label: "Best web development company in Accra", href: "/services/web-development-in-accra" },
   { label: "Best software development company in Accra", href: "/services/software-development-in-accra" },
   { label: "Best mobile app development company in Accra", href: "/services/mobile-app-development-in-accra" },
-  { label: "Best ecommerce development company in Accra", href: "/services/ecommerce-development-in-accra" },
-  { label: "Best cybersecurity company in Accra", href: "/services/cybersecurity-in-accra" },
-  { label: "Best UI UX design company in Accra", href: "/services/ui-ux-design-in-accra" },
+  { label: "Best e-commerce development company in Accra", href: "/services/ecommerce-development-in-accra" },
+  { label: "Best security consulting in Accra", href: "/services/cybersecurity-in-accra" },
+  { label: "Best UI/UX design company in Accra", href: "/services/ui-ux-design-in-accra" },
   { label: "Products", href: "/products" },
   { label: "Insights", href: "/insights" },
   { label: "Reviews", href: "/reviews" },
@@ -132,7 +132,7 @@ export const mainHeaderDropdownContent: Record<
     items: [
       {
         heading: "All services",
-        description: "Web design, development, mobile apps, commerce, and cybersecurity.",
+        description: "Web design, development, mobile apps, commerce, and security consulting.",
         link: "/services",
       },
       {
@@ -181,6 +181,11 @@ export const mainHeaderDropdownContent: Record<
         link: "/how-we-work",
       },
       {
+        heading: "Web design",
+        description: "Company sites and landing pages from GHS 6,000 — mobile-first and SEO-ready.",
+        link: "/services/web-design",
+      },
+      {
         heading: "UI/UX & brand design",
         description: "Research, Figma prototypes, and design systems ready for engineering.",
         link: "/services/ui-ux-design",
@@ -211,7 +216,7 @@ export const mainHeaderDropdownContent: Record<
         link: "/services/ecommerce",
       },
       {
-        heading: "Cybersecurity",
+        heading: "Security consulting",
         description: "Hardening and reviews for the sites and apps we ship.",
         link: "/services/cybersecurity",
       },
@@ -421,13 +426,13 @@ export const footerServiceLinks = [
   { label: "Best web development company in Accra", href: "/services/web-development-in-accra" },
   { label: "Best software development company in Accra", href: "/services/software-development-in-accra" },
   { label: "Best mobile app development company in Accra", href: "/services/mobile-app-development-in-accra" },
-  { label: "Best ecommerce development company in Accra", href: "/services/ecommerce-development-in-accra" },
-  { label: "Best cybersecurity company in Accra", href: "/services/cybersecurity-in-accra" },
+  { label: "Best e-commerce development company in Accra", href: "/services/ecommerce-development-in-accra" },
+  { label: "Best security consulting in Accra", href: "/services/cybersecurity-in-accra" },
   { label: "UI/UX & brand design", href: "/services/ui-ux-design" },
   { label: "Web development", href: "/services/web-development" },
   { label: "Mobile apps", href: "/services/mobile-apps" },
   { label: "Website to app", href: "/services/website-to-mobile-app" },
-  { label: "Cybersecurity", href: "/services/cybersecurity" },
+  { label: "Security consulting", href: "/services/cybersecurity" },
   { label: "E-commerce", href: "/services/ecommerce" },
   { label: "Hosting", href: "/hosting" },
 ] as const;

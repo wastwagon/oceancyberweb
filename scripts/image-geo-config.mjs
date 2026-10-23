@@ -129,7 +129,7 @@ export const siteImageCatalog = [
   },
   {
     path: "hero-services/oceancyber-accra-cybersecurity-services-ghana.webp",
-    title: "Cybersecurity services in Accra",
+    title: "Security consulting in Accra",
     description:
       "Security assessments and hardened builds by OceanCyber — Accra, Ghana.",
     keywords: [...baseKeywords, "cybersecurity", "security"],

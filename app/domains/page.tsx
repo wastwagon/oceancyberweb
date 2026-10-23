@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Globe2 } from "lucide-react";
 import { DomainSearchPanel, RegistrarValueProps } from "@/components/domains/DomainSearchPanel";
 import { CommerceStackBundle } from "@/components/commerce/CommerceStackBundle";
+import { ServiceHubFaqSection } from "@/components/marketing/ServiceHubFaqSection";
 
 /**
  * Server-rendered commerce page: static H1 for LCP, client islands for search/cart.
@@ -94,6 +95,8 @@ export default function DomainsPage() {
           </div>
         </div>
       </section>
+
+      <ServiceHubFaqSection path="/domains" />
     </main>
   );
 }

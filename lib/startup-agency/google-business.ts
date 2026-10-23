@@ -1,10 +1,12 @@
+import { buildTrustBlurb, fallbackPlaceStats } from "@/lib/trust/review-trust";
+
 /** Public Google Business Profile facts — keep in sync with Google Search / Maps listing. */
 export const googleBusinessProfile = {
   name: "OceanCyber - Website & Mobile App Development",
   shortName: "OceanCyber",
   category: "Website designer",
   rating: 4.9,
-  reviewCount: 54,
+  reviewCount: 56,
   phone: "+233242565695",
   phoneDisplay: "024 256 5695",
   address: {
@@ -51,8 +53,11 @@ export function organizationSameAs(): string[] {
   return [getGoogleBusinessProfileUrl(), ...Object.values(socialProfiles)];
 }
 
-/** Direct “Write a review” link when Place ID is configured. */
+/** Direct “Write a review” link — GBP short link, Place ID, or profile URL. */
 export function getGoogleWriteReviewUrl(): string {
+  const shortLink = process.env.NEXT_PUBLIC_GOOGLE_WRITE_REVIEW_URL?.trim();
+  if (shortLink) return shortLink;
+
   const placeId = process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID?.trim();
   if (placeId) {
     return `https://search.google.com/local/writereview?placeid=${encodeURIComponent(placeId)}`;
@@ -72,11 +77,7 @@ export function formatGoogleReviewCountLabel(
 
 /**
  * Single source for NAP / review trust lines — prefer these over retyping
- * “team of X, founded Y, rated Z” across pages.
+ * “team of X, founded Y, rated Z” across pages. Uses GBP fallback until
+ * server components call buildTrustBlurb(await getGooglePlaceStats()).
  */
-export const trustBlurb = {
-  short: `Websites, mobile apps, and cybersecurity from one Accra team. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}, rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`,
-  office: `One office at ${googleBusinessProfile.address.street}, Accra.`,
-  seo: `OceanCyber is a web design and development company in Accra and Ghana for websites, mobile apps, and cybersecurity. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}, rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews. One office at ${googleBusinessProfile.address.street}, Accra.`,
-  reviewsOnly: `Rated ${googleBusinessProfile.rating} from ${googleBusinessProfile.reviewCount} Google reviews.`,
-} as const;
+export const trustBlurb = buildTrustBlurb(fallbackPlaceStats());

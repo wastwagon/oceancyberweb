@@ -21,8 +21,13 @@ import { SaServicesSection } from "@/components/startup-agency/sections/SaServic
 import { SaTechSection } from "@/components/startup-agency/sections/SaTechSection";
 import { SaTestimonialsSectionWithData } from "@/components/startup-agency/sections/SaTestimonialsSectionWithData";
 import { SaTrustSection } from "@/components/startup-agency/sections/SaTrustSection";
+import type { HomeTrustContent } from "@/lib/trust/home-trust";
 
-export function StartupAgencyHomeClassic() {
+type Props = {
+  homeTrust?: HomeTrustContent;
+};
+
+export function StartupAgencyHomeClassic({ homeTrust }: Props) {
   return (
     <div
       className="sa-shell relative min-h-screen bg-sa-bg text-sa-muted antialiased"
@@ -35,8 +40,8 @@ export function StartupAgencyHomeClassic() {
       <StartupAgencyProgressBar />
 
       <main id="startup-main-content" className="sa-mobile-tab-pad md:pb-0" tabIndex={-1}>
-        <SaHeroSection />
-        <SaAboutSection />
+        <SaHeroSection tagline={homeTrust?.tagline} />
+        <SaAboutSection presenceSubtitle={homeTrust?.companyPresence} />
         <SaMarqueeSection />
         <SaServicesSection />
         <SaPortfolioGallerySection />
@@ -57,10 +62,10 @@ export function StartupAgencyHomeClassic() {
         >
           <SaTestimonialsSectionWithData />
         </Suspense>
-        <SaTrustSection />
+        <SaTrustSection signals={homeTrust?.trustSignals} />
         <SaPricingSection />
         <SaTechSection />
-        <SaHomeFaqSection />
+        <SaHomeFaqSection items={homeTrust?.faqItems} />
         <SaCtaStripSection />
         <SaInsightsTeaserSection />
       </main>

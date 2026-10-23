@@ -100,10 +100,12 @@ Set in Coolify **before rebuilding `web`**. `NEXT_PUBLIC_*` values are baked in 
 
 | Name | Example | Purpose |
 | ---- | ------- | ------- |
-| `NEXT_PUBLIC_GOOGLE_REVIEWS_URL` | `https://maps.app.goo.gl/yWiB5pNhev2rgZSx7` | “Read reviews on Google” links (fallback exists in code if unset). |
-| `NEXT_PUBLIC_GOOGLE_PLACE_ID` | `ChIJ…` | Direct “Write a review” URL ([Place ID Finder](https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder)). |
-| `GOOGLE_MAPS_API_KEY` | server API key | Sync live rating/count from Google Places API. Enable **Places API** in Google Cloud; restrict key to Places + your server IP. |
-| `GOOGLE_PLACE_ID` | `ChIJ…` | Same as above; server-side Places lookup (optional if text search finds your listing). |
+| `NEXT_PUBLIC_GOOGLE_REVIEWS_URL` | `https://g.page/r/CTpsyAyrQ3FIEAI` | GBP profile — “read reviews” / Maps listing (not the `/review` URL). |
+| `NEXT_PUBLIC_GOOGLE_WRITE_REVIEW_URL` | `https://g.page/r/CTpsyAyrQ3FIEAI/review` | “Write a review” CTAs on `/reviews` and testimonials. |
+| `NEXT_PUBLIC_GOOGLE_PLACE_ID` | `ChIJ…` | Places API + fallback write-review URL if write URL unset. |
+| `GOOGLE_MAPS_API_KEY` | server API key | Live rating/count via **Places API (New)** (not legacy Places). On the key: API restriction must include **Places API (New)** (search “Places” in the filter, not only “maps”). Prefer **IP address** restriction = Coolify VPS. |
+| `GOOGLE_PLACE_ID` | `ChIJte_56k6Z3w8ROmzIDKtDcUg` | Server-side lookup; should match `NEXT_PUBLIC_GOOGLE_PLACE_ID`. |
+| `NEXT_PUBLIC_SITE_URL` | `https://oceancyber.net` | Canonical URLs, sitemap, spot-check links from `verify:marketing`. **Rebuild** after change. |
 | `GOOGLE_VERIFICATION_CODE` | meta tag `content` value | Search Console HTML-tag verification. **Skip if you verified via** `public/google4aca0206ad5fa02e.html`. |
 | `NEXT_PUBLIC_GA_ID` | `G-XXXXXXXX` | Google Analytics. |
 | `NEXT_PUBLIC_SHOWREEL_URL` | CDN MP4 URL | Hero showreel video (optional). |
@@ -111,13 +113,20 @@ Set in Coolify **before rebuilding `web`**. `NEXT_PUBLIC_*` values are baked in 
 **Production copy-paste (OceanCyber):**
 
 ```bash
-NEXT_PUBLIC_GOOGLE_REVIEWS_URL=https://maps.app.goo.gl/yWiB5pNhev2rgZSx7
-# Optional — after creating Google Cloud project + Places API:
-# GOOGLE_MAPS_API_KEY=
-# GOOGLE_PLACE_ID=
-# NEXT_PUBLIC_GOOGLE_PLACE_ID=
+NEXT_PUBLIC_SITE_URL=https://oceancyber.net
+NEXT_PUBLIC_GOOGLE_REVIEWS_URL=https://g.page/r/CTpsyAyrQ3FIEAI
+NEXT_PUBLIC_GOOGLE_WRITE_REVIEW_URL=https://g.page/r/CTpsyAyrQ3FIEAI/review
+NEXT_PUBLIC_GOOGLE_PLACE_ID=ChIJte_56k6Z3w8ROmzIDKtDcUg
+GOOGLE_PLACE_ID=ChIJte_56k6Z3w8ROmzIDKtDcUg
+GOOGLE_MAPS_API_KEY=<server key — rotate after sharing; restrict to Places API New + VPS IP>
 # NEXT_PUBLIC_GA_ID=
 ```
+
+After env changes: `npm run verify:marketing -- --strict --live` locally, then rebuild `web` in Coolify.
+
+If `--live` reports **API key suspended** or **403 PERMISSION_DENIED**, create a new key in Google Cloud (Places API New + billing), restrict by VPS IP, and replace `GOOGLE_MAPS_API_KEY` — do not reuse keys posted in chat.
+
+**Maps on the site:** contact/review links do not use a browser Maps key. Extra Maps APIs (Embed, JavaScript, Static) on the same GCP key are optional for future embeds only.
 
 After adding or changing any `NEXT_PUBLIC_*` or `GOOGLE_VERIFICATION_CODE`, **rebuild** the `web` service in Coolify.
 

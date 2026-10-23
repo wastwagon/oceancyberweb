@@ -4,6 +4,7 @@ import { Award, ShieldCheck, Star } from "lucide-react";
 import Link from "next/link";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
 import { proofOutcomes, trustSignals } from "@/lib/startup-agency/content";
+import type { TrustSignal } from "@/lib/trust/review-trust";
 
 const iconMap = {
   award: Award,
@@ -12,12 +13,16 @@ const iconMap = {
 } as const;
 
 /** Compact trust stats — reviews live in testimonials; portfolio metrics live in portfolio. */
-export function SaTrustSection() {
+type Props = {
+  signals?: readonly TrustSignal[];
+};
+
+export function SaTrustSection({ signals = trustSignals }: Props) {
   return (
     <section className="border-b border-sa-border bg-sa-surface/20 py-12 md:py-16">
       <div className="sa-container">
         <div className="grid gap-6 md:grid-cols-3">
-          {trustSignals.map((signal, i) => {
+          {signals.map((signal, i) => {
             const Icon = iconMap[signal.icon];
             return (
               <SaReveal key={signal.title} delay={i * 0.08}>

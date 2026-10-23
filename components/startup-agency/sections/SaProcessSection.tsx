@@ -17,6 +17,7 @@ export function SaProcessSection() {
             <SaSectionHeader
               align="left"
               title="From brief to launch"
+              subtitle="Summary of our delivery — full detail on How we work."
               className="max-w-2xl"
             />
             <div className="flex items-center gap-2">
@@ -55,7 +56,7 @@ export function SaProcessSection() {
                   UI/UX services →
                 </Link>
               ) : null}
-              {p.step === 1 ? (
+              {p.step === 1 || p.step === 4 ? (
                 <Link
                   href="/how-we-work"
                   className="mt-6 inline-flex min-h-11 items-center text-sm font-medium text-sa-muted underline underline-offset-4 hover:text-sa-primary"

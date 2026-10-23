@@ -36,7 +36,9 @@
     "import:industry-stories": "node scripts/import-industry-story-images.mjs",
     "export:industry-stories": "node scripts/export-industry-story-ads.mjs",
     "rename:site-images": "node scripts/rename-site-images-descriptive.mjs",
-    "verify:google-places": "node scripts/verify-google-places.mjs",
+    "verify:google-places": "tsx scripts/verify-google-places.ts",
+    "verify:marketing": "node scripts/verify-marketing-readiness.mjs",
+    "preflight:deploy": "npm test && npm run build && npm run verify:marketing",
     "capture:live-previews": "node scripts/capture-live-client-previews.mjs"
   },
   "dependencies": {

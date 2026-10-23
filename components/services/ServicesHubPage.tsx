@@ -27,6 +27,18 @@ type ServiceCard = {
 /** Capability pages only — geo hire URLs live in the compact link strip below. */
 const services: ServiceCard[] = [
   {
+    title: "Web Design",
+    description:
+      "Company sites and landing pages from GHS 6,000 — mobile-first UX, SEO, and MoMo-ready stores when you sell online.",
+    image: serviceImages.webDevelopment,
+    services: [
+      "Marketing and company websites",
+      "Landing pages and campaigns",
+      "Design + build in one Accra team",
+    ],
+    href: "/services/web-design",
+  },
+  {
     title: "UI/UX & Brand Design",
     description:
       "Research, wireframes, and Figma files your team can build from — packages from GHS 3,500.",
@@ -87,13 +99,13 @@ const services: ServiceCard[] = [
     href: "/services/ecommerce",
   },
   {
-    title: "Cybersecurity",
+    title: "Security consulting",
     description:
-      "Assessments and hardening from GHS 4,500 — practical controls the same Accra team that builds your product can run.",
+      "Consultation from GHS 4,500 — assessments and hardening, not MSSP or 24/7 monitoring.",
     image: serviceImages.cyberSecurity,
     services: [
       "Security assessments",
-      "Hardening and monitoring",
+      "Hardening and remediation",
       "Incident readiness",
     ],
     href: "/services/cybersecurity",
@@ -225,6 +237,38 @@ export function ServicesHubPage() {
               <ServiceGridCard key={service.title} service={service} index={index} />
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="relative z-10 border-t border-sa-border py-12 md:py-16">
+        <div className="sa-container max-w-4xl">
+          <h2 className="font-heading text-xl font-semibold text-white md:text-2xl">
+            Domains, hosting, and SSL
+          </h2>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-sa-muted/80">
+            Buy infrastructure in cedis separately from website build packages — domain search,
+            cPanel hosting from GHS 69/mo, and certificates.
+          </p>
+          <ul className="mt-6 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-6">
+            <li>
+              <Link href="/products" className="sa-text-link text-sm font-medium">
+                Products hub
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/guides/domains-hosting-and-ssl-ghana"
+                className="sa-text-link text-sm font-medium"
+              >
+                Infrastructure guide
+              </Link>
+            </li>
+            <li>
+              <Link href="/facts" className="sa-text-link text-sm font-medium">
+                Company facts
+              </Link>
+            </li>
+          </ul>
         </div>
       </section>
 
