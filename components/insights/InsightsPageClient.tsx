@@ -34,10 +34,6 @@ import { NewsletterSignupForm } from "@/components/insights/NewsletterSignupForm
 import { LeadMagnetGate } from "@/components/marketing/LeadMagnetGate";
 import { searchIntentPages } from "@/lib/seo/intent-pages";
 
-function contactHrefForTopic(title: string) {
-  return `/contact?topic=${encodeURIComponent(title)}`;
-}
-
 const editorialPillars = [
   {
     icon: Shield,
@@ -385,12 +381,6 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
                         >
                           Read article
                           <ArrowRight className="h-4 w-4" aria-hidden />
-                        </Link>
-                        <Link
-                          href={contactHrefForTopic(featured.title)}
-                          className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
-                        >
-                          Talk to our team
                         </Link>
                       </div>
                     </div>

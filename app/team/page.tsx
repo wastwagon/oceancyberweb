@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { getTeamMembers } from "@/lib/data/team-loader";
 import { withCanonical } from "@/lib/seo/canonical";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
@@ -124,12 +123,6 @@ export default async function TeamPage() {
               </div>
             </>
           ) : null}
-
-          <div className="mt-12 text-center">
-            <Link href="/contact" className="sa-btn-primary w-full sm:w-auto">
-              Talk to our team
-            </Link>
-          </div>
         </div>
       </section>
     </main>

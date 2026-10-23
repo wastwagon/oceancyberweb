@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import type { PortfolioCaseStudy } from "@/lib/types/portfolio-case-study";
 import type { PortfolioProjectType } from "@/lib/types/portfolio-project-type";
+import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 import { getProjectCategories } from "@/lib/data/projects-helpers";
 import {
   getProjectTypeLabel,
@@ -227,14 +228,12 @@ function PortfolioFilteredLibraryInner({
           <p className="mb-5 text-sm text-sa-muted/80 sm:mb-6 sm:text-base">
             Share your goals and we&apos;ll recommend the right engagement model and rollout path.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <Link href="/contact" className="sa-btn-primary">
-              Talk to our team
-            </Link>
-            <Link href="/portfolio" className="sa-btn-outline">
-              View full portfolio
-            </Link>
-          </div>
+          <Link
+            href={getStartedHref({ topic: "Project from portfolio" })}
+            className="sa-btn-primary"
+          >
+            {SITE_CTA.getStarted.label}
+          </Link>
         </motion.div>
       </div>
     </section>

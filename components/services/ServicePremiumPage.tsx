@@ -19,6 +19,7 @@ import { ServiceOwnershipSection } from "@/components/services/ServiceOwnershipS
 import { ServicePricingStrip } from "@/components/services/ServicePricingStrip";
 import { StartupAgencyFaq } from "@/components/startup-agency/StartupAgencyFaq";
 import { getServiceHubFaqs } from "@/lib/seo/service-hub-faqs";
+import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 import type { ServicePricingStripContent } from "@/lib/startup-agency/pricing";
 
 export type ServiceCard = { title: string; description: string };
@@ -79,6 +80,15 @@ import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
  * Capability hub layout (10 blocks): hero → pills → facts → focus → pricing → stack →
  * deliverables → outcomes (optional) → FAQ → ownership → CTA.
  */
+function resolveServiceHeroCtaHref(content: ServicePageContent): string {
+  if (content.heroCtaHref !== SITE_CTA.getStarted.href) {
+    return content.heroCtaHref;
+  }
+  const topic =
+    `${content.heroPrefix}${content.heroHighlight}${content.heroSuffix}`.replace(/\s+/g, " ").trim();
+  return getStartedHref({ topic });
+}
+
 export function ServicePremiumPage({ content }: { content: ServicePageContent }) {
   const hasOutcomes = content.outcomes && content.outcomes.length > 0;
   const hubFaqs = content.serviceHubPath
@@ -125,7 +135,7 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
             </motion.p>
             <motion.div variants={heroMotion.item} className="mt-10 flex w-full max-w-sm flex-col items-center gap-3 sm:max-w-none">
               <Link
-                href={content.heroCtaHref}
+                href={resolveServiceHeroCtaHref(content)}
                 className="sa-btn-primary flex w-full sm:inline-flex sm:w-auto"
               >
                 {content.heroCtaLabel}
@@ -136,7 +146,7 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
                     href="/pricing"
                     className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline underline-offset-4 hover:text-sa-primary"
                   >
-                    View pricing
+                    Compare packages
                   </Link>
                 ) : null}
                 {content.hireGeoHref && content.hireGeoLabel ? (
@@ -303,8 +313,13 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
       <PremiumFinalCtaSection
         title={content.ctaTitle}
         description={content.ctaDescription}
-        secondaryCtaLabel={content.pricing ? "Compare pricing" : "View portfolio"}
-        secondaryCtaHref={content.pricing ? "/pricing" : "/portfolio"}
+        secondaryCtaLabel={
+          content.pricing ? SITE_CTA.comparePackages.label : SITE_CTA.fullPortfolio.label
+        }
+        secondaryCtaHref={
+          content.pricing ? SITE_CTA.comparePackages.href : SITE_CTA.fullPortfolio.href
+        }
+        planningOnly
       />
       
     </main>

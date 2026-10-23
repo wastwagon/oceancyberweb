@@ -3,7 +3,6 @@ import { Globe2 } from "lucide-react";
 import { DomainSearchPanel, RegistrarValueProps } from "@/components/domains/DomainSearchPanel";
 import { CommerceStackBundle } from "@/components/commerce/CommerceStackBundle";
 import { ServiceHubFaqSection } from "@/components/marketing/ServiceHubFaqSection";
-
 /**
  * Server-rendered commerce page: static H1 for LCP, client islands for search/cart.
  */
@@ -82,9 +81,6 @@ export default function DomainsPage() {
           <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Link href="/ssl" className="sa-btn-primary w-full sm:w-auto">
               Add SSL
-            </Link>
-            <Link href="/contact" className="sa-btn-outline w-full sm:w-auto">
-              Talk to our team
             </Link>
             <Link
               href="/guides/domain-prices-in-ghana"

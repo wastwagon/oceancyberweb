@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SITE_CTA } from "@/lib/marketing/site-cta";
 import { withCanonical } from "@/lib/seo/canonical";
 import { extraIntentGuidePages } from "@/lib/seo/intent-guides-extra";
 
@@ -79,7 +80,7 @@ export const intentKindMeta: Record<
     label: "Guides",
     hubTitle: "Guides for building in Ghana",
     hubDescription:
-      "Practical answers on website cost, app development cost, domain and .com.gh registration, hosting cost, Mobile Money checkout, ecommerce timelines, the Ghana Data Protection Act, and DwumaPOS for Ghana shops.",
+      "Practical answers on website cost, app development cost, domain registration, hosting cost, Mobile Money checkout, ecommerce timelines, the Ghana Data Protection Act, and DwumaPOS for Ghana shops.",
   },
   compare: {
     path: "/compare",
@@ -279,8 +280,8 @@ const coreIntentPages: readonly IntentPage[] = [
     cta: {
       title: "Tell us the pages and the budget",
       body: "Send the pages, whether you take payment, and the date you want. We will match that to a package before we build.",
-      href: "/get-started",
-      label: "Get started",
+      href: SITE_CTA.getStarted.href,
+      label: SITE_CTA.getStarted.label,
     },
   },
   {
@@ -357,8 +358,8 @@ const coreIntentPages: readonly IntentPage[] = [
     cta: {
       title: "Tell us which wallets you need",
       body: "Tell us what you sell and which wallets you take. We will write the payment steps before we build.",
-      href: "/get-started",
-      label: "Get started",
+      href: SITE_CTA.getStarted.href,
+      label: SITE_CTA.getStarted.label,
     },
   },
   {
@@ -486,8 +487,8 @@ const coreIntentPages: readonly IntentPage[] = [
     cta: {
       title: "Put a date on it",
       body: "Tell us how many products you have and how you take payment. We will say which timeline fits.",
-      href: "/get-started",
-      label: "Get started",
+      href: SITE_CTA.getStarted.href,
+      label: SITE_CTA.getStarted.label,
     },
   },
   {
@@ -557,8 +558,8 @@ const coreIntentPages: readonly IntentPage[] = [
     cta: {
       title: "Tell us the date",
       body: "Tell us when you want to launch and who will look after the site. We will say if a package fits.",
-      href: "/get-started",
-      label: "Get started",
+      href: SITE_CTA.getStarted.href,
+      label: SITE_CTA.getStarted.label,
     },
   },
   {
@@ -630,8 +631,8 @@ const coreIntentPages: readonly IntentPage[] = [
     cta: {
       title: "Bring the product list",
       body: "Bring the products and how you deliver. We will say Shopify, WooCommerce, or a custom price.",
-      href: "/get-started",
-      label: "Get started",
+      href: SITE_CTA.getStarted.href,
+      label: SITE_CTA.getStarted.label,
     },
   },
   {
@@ -702,8 +703,8 @@ const coreIntentPages: readonly IntentPage[] = [
     cta: {
       title: "Send the current site",
       body: "Send the current site and what it needs to do next. We will say if GHS 6,000 or GHS 14,500 is the fit.",
-      href: "/get-started",
-      label: "Get started",
+      href: SITE_CTA.getStarted.href,
+      label: SITE_CTA.getStarted.label,
     },
   },
   {
@@ -796,8 +797,8 @@ const coreIntentPages: readonly IntentPage[] = [
     cta: {
       title: "Plan the move off Wix",
       body: "Share the current Wix URL. We will list what should be rebuilt, redirected, and left behind.",
-      href: "/get-started",
-      label: "Get started",
+      href: SITE_CTA.getStarted.href,
+      label: SITE_CTA.getStarted.label,
     },
   },
   {
@@ -887,8 +888,8 @@ const coreIntentPages: readonly IntentPage[] = [
     cta: {
       title: "Replace Squarespace with a scoped site",
       body: "Send the live URL and the pages that bring enquiries. We will quote the replacement against a package.",
-      href: "/get-started",
-      label: "Get started",
+      href: SITE_CTA.getStarted.href,
+      label: SITE_CTA.getStarted.label,
     },
   },
   {
@@ -982,8 +983,8 @@ const coreIntentPages: readonly IntentPage[] = [
     cta: {
       title: "Bring the product list",
       body: "Tell us how many products you have, which wallets you take, and what Shopify cannot do today.",
-      href: "/get-started",
-      label: "Get started",
+      href: SITE_CTA.getStarted.href,
+      label: SITE_CTA.getStarted.label,
     },
   },
   {

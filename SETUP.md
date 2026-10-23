@@ -16,11 +16,10 @@ Your world-class website is now ready for development and deployment.
    - Custom animations
 
 ### 3. **Components & home page (`/`)**
-   - **Shell:** dark Startup Agency (`StartupAgencyHomeClassic`) — navbar, footer, mobile tab bar (Work · Pricing · Start)
-   - **Home sections (in order):** Hero → Marquee → About → Services → Portfolio → Process → Google testimonials → Trust stats → Pricing → Tech → FAQ → CTA strip → Insights teaser
-   - **Primary CTA vocabulary:** **Get started** (`/get-started`) · **Talk to our team** (`/contact`) · **View portfolio** (`/portfolio`)
+   - **Shell:** dark Startup Agency (`StartupAgencyHomeClassic`) — navbar, footer, mobile tab bar (Work · Pricing · Get started)
+   - **Home sections (in order):** Hero → About (agency spotlight) → Marquee → Services → Portfolio → Process → Testimonials → Trust → Pricing → Tech → FAQ → Insights teaser
+   - **CTA copy:** `SITE_CTA` in `packages/shared/src/marketing-cta.ts` (via `@/lib/marketing/site-cta`); guard with `npm run verify:marketing-cta`
    - **Project cost tool** (full wizard): **`/tools/project-cost`** (not embedded on home)
-   - **WIP alternate home:** `/home-creative` (Aeolla creative layout; self-contained chrome)
    - Other tools/pages: **Dashboard / wallet / billing** (signed-in), **admin**, **help center**, **hosting**, **portfolio** — see `app/` routes
    - **WhatsApp** and Ghana-specific contact patterns in layout/components
 

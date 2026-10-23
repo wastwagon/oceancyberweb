@@ -10,6 +10,7 @@ import {
 } from "@/components/shared/PremiumContentSections";
 import Link from "next/link";
 import { getIndustryBySlug } from "@/lib/data/industries-catalog";
+import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
 import { fadeUpProps, revealViewport, staggerDelay } from "@/lib/scroll-reveal";
@@ -94,8 +95,16 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
               {content.heroDescription}
             </motion.p>
             <motion.div variants={heroMotion.item} className="mt-10">
-              <Link href="/get-started" className="sa-btn-primary">
-                Get started
+              <Link
+                href={getStartedHref({
+                  topic:
+                    `${content.heroPrefix}${content.heroHighlight}${content.heroSuffix}`
+                      .replace(/\s+/g, " ")
+                      .trim(),
+                })}
+                className="sa-btn-primary"
+              >
+                {SITE_CTA.getStarted.label}
               </Link>
             </motion.div>
           </motion.div>
@@ -131,12 +140,6 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
               for the current rating.
             </p>
             <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-              <Link
-                href="/contact"
-                className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline underline-offset-4 hover:text-sa-primary"
-              >
-                Talk to our team
-              </Link>
               <Link
                 href="/reviews"
                 className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline underline-offset-4 hover:text-sa-primary"
@@ -226,8 +229,9 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
       <PremiumFinalCtaSection
         title={content.ctaTitle}
         description={content.ctaDescription}
-        secondaryCtaLabel="Compare pricing"
-        secondaryCtaHref="/pricing"
+        secondaryCtaLabel={SITE_CTA.comparePackages.label}
+        secondaryCtaHref={SITE_CTA.comparePackages.href}
+        planningOnly
       />
 
     </main>

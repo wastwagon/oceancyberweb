@@ -1,15 +1,9 @@
-/**
- * ACTIVE homepage — Lime “Startup Agency” shell.
- *
- * Alternate / WIP home: Aeolla Creative Agency at `/home-creative`
- * (`CreativeAgencyHome`).
- */
+/** ACTIVE homepage — Lime “Startup Agency” shell at `/`. */
 import { Suspense } from "react";
 import { StartupAgencyFooter } from "@/components/startup-agency/StartupAgencyFooter";
 import { StartupAgencyMobileQuickBar } from "@/components/startup-agency/StartupAgencyMobileQuickBar";
 import { StartupAgencyProgressBar } from "@/components/startup-agency/StartupAgencyProgressBar";
 import { SaAboutSection } from "@/components/startup-agency/sections/SaAboutSection";
-import { SaCtaStripSection } from "@/components/startup-agency/sections/SaCtaStripSection";
 import { SaHeroSection } from "@/components/startup-agency/sections/SaHeroSection";
 import { SaHomeFaqSection } from "@/components/startup-agency/sections/SaHomeFaqSection";
 import { SaInsightsTeaserSection } from "@/components/startup-agency/sections/SaInsightsTeaserSection";
@@ -66,7 +60,6 @@ export function StartupAgencyHomeClassic({ homeTrust }: Props) {
         <SaPricingSection />
         <SaTechSection />
         <SaHomeFaqSection items={homeTrust?.faqItems} />
-        <SaCtaStripSection />
         <SaInsightsTeaserSection />
       </main>
 

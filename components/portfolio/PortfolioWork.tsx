@@ -22,6 +22,7 @@ import { ChevronDown, ChevronUp, Star } from "lucide-react";
 import { getProjectCategories } from "@/lib/data/projects-helpers";
 import type { PortfolioCaseStudy } from "@/lib/types/portfolio-case-study";
 import { cn } from "@/lib/utils";
+import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 import { fadeUpProps, fadeUpSoft, staggerDelay } from "@/lib/scroll-reveal";
 
 const MotionLink = motion(Link);
@@ -559,17 +560,17 @@ export function PortfolioWork({
             </p>
             <div className="mt-10 flex flex-col items-center gap-3">
               <Link
-                href="/contact?topic=Project%20from%20portfolio"
+                href={getStartedHref({ topic: "Project from portfolio" })}
                 className="sa-btn-primary w-full sm:w-auto"
               >
-                Talk to our team
+                {SITE_CTA.getStarted.label}
               </Link>
               {isPage ? null : (
                 <Link
-                  href="/portfolio"
+                  href={SITE_CTA.fullPortfolio.href}
                   className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
                 >
-                  Full portfolio
+                  {SITE_CTA.fullPortfolio.label}
                 </Link>
               )}
             </div>

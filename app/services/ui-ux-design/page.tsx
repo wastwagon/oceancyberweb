@@ -4,6 +4,7 @@ import {
   ServicePremiumPage,
   type ServicePageContent,
 } from "@/components/services/ServicePremiumPage";
+import { serviceHeroCta } from "@/lib/marketing/site-cta";
 import { serviceImages } from "@/lib/startup-agency/service-images";
 import { servicePricingHints } from "@/lib/startup-agency/pricing";
 
@@ -15,8 +16,8 @@ const content: ServicePageContent = {
   heroHighlightTone: "white",
   heroDescription:
     "Interfaces and brand systems for Ghana teams — researched with real users, prototyped in Figma, and handed to engineering without guesswork. From GHS 3,500.",
-  heroCtaLabel: "Get started",
-  heroCtaHref: "/get-started",
+  heroCtaLabel: serviceHeroCta.label,
+  heroCtaHref: serviceHeroCta.href,
   showAtAGlance: true,
   showOwnership: true,
   serviceHubPath: "/services/ui-ux-design",

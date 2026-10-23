@@ -6,6 +6,7 @@ import { withCanonical } from "@/lib/seo/canonical";
 import { proofOutcomes } from "@/lib/startup-agency/content";
 import { getGooglePlaceStats } from "@/lib/google-places-stats";
 import { resolveServicePageDescription } from "@/lib/seo/service-layout-metadata";
+import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 import { webDesignAccraFaqs } from "@/lib/seo/web-design-geo-faqs";
 
 const SITE_URL =
@@ -115,14 +116,11 @@ export default async function WebDesignAccraPage() {
           </div>
 
           <div className="mt-8 flex flex-col items-start gap-3">
-            <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">
-              Get started
-            </Link>
             <Link
-              href="/contact"
-              className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
+              href={getStartedHref({ topic: "Web design in Accra" })}
+              className="sa-btn-primary w-full sm:w-auto"
             >
-              Talk to our team
+              {SITE_CTA.getStarted.label}
             </Link>
           </div>
         </div>

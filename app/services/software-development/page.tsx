@@ -4,6 +4,7 @@ import {
   ServicePremiumPage,
   type ServicePageContent,
 } from "@/components/services/ServicePremiumPage";
+import { serviceHeroCta } from "@/lib/marketing/site-cta";
 import { serviceImages } from "@/lib/startup-agency/service-images";
 import { servicePricingHints } from "@/lib/startup-agency/pricing";
 
@@ -15,8 +16,8 @@ const content: ServicePageContent = {
   heroHighlightTone: "white",
   heroDescription:
     "Custom software for Accra and Ghana operations — staff logins, workflows, finance reconciliation, and MoMo-aware integrations. Packages from GHS 14,500 at 47 Nii Kwashiefio Avenue.",
-  heroCtaLabel: "Get started",
-  heroCtaHref: "/get-started",
+  heroCtaLabel: serviceHeroCta.label,
+  heroCtaHref: serviceHeroCta.href,
   showAtAGlance: true,
   showOwnership: true,
   serviceHubPath: "/services/software-development",

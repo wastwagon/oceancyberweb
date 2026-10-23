@@ -9,6 +9,7 @@ import { PricingComparisonTable } from "@/components/startup-agency/PricingCompa
 import { PricingPageJsonLd } from "@/components/seo/PricingPageJsonLd";
 import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { StartupAgencyFaq } from "@/components/startup-agency/StartupAgencyFaq";
+import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 import { formatPlanPrice, pricingAddOns, pricingFaqItems, pricingPlans } from "@/lib/startup-agency/pricing";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -43,11 +44,8 @@ export default function PricingPage() {
             Starting prices are in Ghana cedis. We confirm scope in discovery, then deliver on fixed-price milestones.
           </p>
           <div className="mx-auto mt-8 flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
-            <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">
-              Get started
-            </Link>
-            <Link href="/tools/project-cost" className="sa-btn-outline w-full sm:w-auto">
-              Estimate in cedis
+            <Link href={SITE_CTA.estimateInCedis.href} className="sa-btn-outline w-full sm:w-auto">
+              {SITE_CTA.estimateInCedis.label}
             </Link>
           </div>
         </div>
@@ -91,7 +89,7 @@ export default function PricingPage() {
                   ))}
                 </ul>
                 <Link
-                  href="/get-started"
+                  href={getStartedHref({ plan: plan.id })}
                   className={`mt-8 w-full ${plan.featured ? "sa-btn-primary" : "sa-btn-outline"}`}
                 >
                   Choose {plan.name}

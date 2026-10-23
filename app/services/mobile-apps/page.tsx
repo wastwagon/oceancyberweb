@@ -4,6 +4,7 @@ import {
   ServicePremiumPage,
   type ServicePageContent,
 } from "@/components/services/ServicePremiumPage";
+import { serviceHeroCta } from "@/lib/marketing/site-cta";
 import { serviceImages } from "@/lib/startup-agency/service-images";
 import { servicePricingHints } from "@/lib/startup-agency/pricing";
 
@@ -15,8 +16,8 @@ const content: ServicePageContent = {
   heroHighlightTone: "white",
   heroDescription:
     "iOS and Android apps built in Accra for Ghana phones and data — offline-aware flows, MoMo or Paystack when needed, and help getting into the stores. From GHS 12,000 per platform.",
-  heroCtaLabel: "Get started",
-  heroCtaHref: "/get-started",
+  heroCtaLabel: serviceHeroCta.label,
+  heroCtaHref: serviceHeroCta.href,
   showAtAGlance: true,
   showOwnership: true,
   serviceHubPath: "/services/mobile-apps",

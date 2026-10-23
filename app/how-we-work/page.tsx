@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  ArrowRight,
   CheckCircle2,
   Figma,
   Layers,
@@ -11,6 +10,7 @@ import {
   Shield,
 } from "lucide-react";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
+import { SITE_CTA } from "@/lib/marketing/site-cta";
 import { withCanonical } from "@/lib/seo/canonical";
 import {
   clientCommitments,
@@ -44,19 +44,25 @@ export default function HowWeWorkPage() {
             The same four phases shown on the homepage — with engagement models, design detail, and
             proof links below. Packages start from GHS 6,000; scope is always confirmed in writing.
           </p>
-          <div className="mx-auto mt-8 flex w-full max-w-sm flex-col items-center gap-3">
-            <Link href="/get-started" className="sa-btn-primary w-full gap-2 sm:w-auto">
-              Get started
-              <ArrowRight className="h-4 w-4" aria-hidden />
+          <div className="mx-auto mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+            <Link
+              href="/pricing"
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary underline underline-offset-4 hover:text-white"
+            >
+              Compare packages
             </Link>
-            <div className="flex flex-wrap items-center justify-center gap-x-5">
-              <Link href="/pricing" className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline">
-                Compare packages
-              </Link>
-              <Link href="/tools/project-cost" className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline-offset-4 hover:underline">
-                Estimate in cedis
-              </Link>
-            </div>
+            <Link
+              href="/tools/project-cost"
+              className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline underline-offset-4 hover:text-sa-primary"
+            >
+              Estimate in cedis
+            </Link>
+            <Link
+              href="/facts"
+              className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline underline-offset-4 hover:text-sa-primary"
+            >
+              Company facts
+            </Link>
           </div>
         </div>
       </section>
@@ -193,25 +199,25 @@ export default function HowWeWorkPage() {
         </div>
       </section>
 
-      <section className="sa-section">
+      <section className="sa-section border-t border-sa-border">
         <div className="sa-container max-w-3xl text-center">
-          <h2 className="sa-title">Ready to scope your project?</h2>
+          <h2 className="sa-title">Plan your scope</h2>
           <p className="sa-subtitle mx-auto mt-4 max-w-lg">
-            Share your goals in the intake. We reply with the next step and a clear range.
+            Compare packages or run the estimator before you share goals in intake.
           </p>
-          <div className="mx-auto mt-8 flex w-full max-w-sm flex-col items-center gap-3">
-            <Link href="/get-started" className="sa-btn-primary w-full gap-2 sm:w-auto">
-              Get started
-              <ArrowRight className="h-4 w-4" aria-hidden />
+          <div className="mx-auto mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+            <Link href={SITE_CTA.comparePackages.href} className="sa-btn-outline min-h-11 px-6">
+              {SITE_CTA.comparePackages.label}
             </Link>
-            <div className="flex flex-wrap items-center justify-center gap-x-5">
-              <Link href="/pricing" className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline">
-                View pricing
-              </Link>
-              <Link href="/facts" className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline-offset-4 hover:underline">
-                Company facts
-              </Link>
-            </div>
+            <Link href={SITE_CTA.estimateInCedis.href} className="sa-btn-outline min-h-11 px-6">
+              {SITE_CTA.estimateInCedis.label}
+            </Link>
+            <Link
+              href="/facts"
+              className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline-offset-4 hover:underline"
+            >
+              Company facts
+            </Link>
           </div>
         </div>
       </section>

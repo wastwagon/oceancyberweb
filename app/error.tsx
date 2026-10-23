@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import { SITE_CTA } from "@/lib/marketing/site-cta";
 import { ArrowLeft, Home, RefreshCw } from "lucide-react";
 
 export default function Error({
@@ -18,7 +19,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-sa-bg px-6 py-24 text-center text-sa-muted">
+    <main className="sa-status-page bg-sa-bg">
       <p className="sa-eyebrow block">
         Error
       </p>
@@ -26,7 +27,7 @@ export default function Error({
         Something went wrong
       </h1>
       <p className="sa-subtitle mt-4 mx-auto max-w-md">
-        We couldn&apos;t complete that action. You can try again, go home, or contact us if it keeps
+        We couldn&apos;t complete that action. Try again, go home, or talk to our team if it keeps
         happening.
       </p>
       <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-center">
@@ -46,11 +47,11 @@ export default function Error({
           Back to home
         </Link>
         <Link
-          href="/contact"
+          href={SITE_CTA.talkToTeam.href}
           className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-6 text-sm font-semibold text-white transition hover:border-sa-primary hover:bg-black/20"
         >
           <ArrowLeft className="mr-2 h-4 w-4" aria-hidden />
-          Contact us
+          {SITE_CTA.talkToTeam.label}
         </Link>
       </div>
     </main>

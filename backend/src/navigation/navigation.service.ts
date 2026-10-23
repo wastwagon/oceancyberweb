@@ -1,6 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
 import { v4 as uuidv4 } from "uuid";
+import { SITE_CTA } from "@oceancyber/shared";
 import { UpdateNavigationDto } from "./dto/update-navigation.dto";
 
 interface AdminConfigRow {
@@ -41,7 +42,6 @@ const DEFAULT_CONFIG = {
     { label: "About", href: "/about" },
     { label: "Team", href: "/team" },
     { label: "Pricing", href: "/pricing" },
-    { label: "Get started", href: "/get-started" },
     { label: "Project cost calculator", href: "/tools/project-cost" },
     { label: "Contact", href: "/contact" },
     { label: "Services", href: "/services" },
@@ -395,17 +395,12 @@ const DEFAULT_CONFIG = {
     support: {
       title: "Support",
       description:
-        "Start with guided intake. Use pricing or the estimator to plan — talk to us anytime.",
+        "Plan with pricing and tools — talk to our team when you are ready to start.",
       items: [
         {
-          heading: "Get started",
-          description: "Primary path — share goals, budget, and timeline.",
-          link: "/get-started",
-        },
-        {
-          heading: "Talk to our team",
+          heading: SITE_CTA.talkToTeam.label,
           description: "Questions or a quick call before you start.",
-          link: "/contact",
+          link: SITE_CTA.talkToTeam.href,
         },
         {
           heading: "Pricing",
@@ -495,11 +490,6 @@ const DEFAULT_CONFIG = {
           heading: "Reviews",
           description: "Verified Google ratings and client feedback.",
           link: "/reviews",
-        },
-        {
-          heading: "Get started",
-          description: "Guided intake for your next project.",
-          link: "/get-started",
         },
       ],
     },

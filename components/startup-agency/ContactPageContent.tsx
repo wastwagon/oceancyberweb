@@ -12,6 +12,7 @@ import {
   type FormEvent,
 } from "react";
 import { useSearchParams } from "next/navigation";
+import { SITE_CTA } from "@/lib/marketing/site-cta";
 import { trackLeadConversion } from "@/lib/analytics/conversions";
 import { publicApiFetch } from "@/lib/public-api";
 import { formatWhatsAppLink } from "@/lib/utils";
@@ -192,7 +193,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
             variants={contactHeaderItem}
             className="sa-title mx-auto mb-5 max-w-4xl text-balance text-center"
           >
-            Talk to our team
+            {SITE_CTA.talkToTeam.label}
             <br />
             <span className="text-sa-primary">About your next release</span>
           </motion.h1>

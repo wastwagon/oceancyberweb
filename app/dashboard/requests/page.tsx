@@ -6,6 +6,7 @@ import { getProfile, listClientRequests, type ClientRequestRow } from "@/lib/aut
 import { DashboardNav } from "@/components/dashboard/DashboardNav";
 import { AppAlert } from "@/components/ui/AppAlert";
 import { sourceLabel } from "@/lib/ops/format";
+import { SITE_CTA } from "@/lib/marketing/site-cta";
 import { cn } from "@/lib/utils";
 
 function unifiedCheckoutRef(metadata: unknown): string | null {
@@ -85,10 +86,10 @@ export default function ClientRequestsPage() {
                 </p>
               </div>
               <Link
-                href="/get-started"
+                href={SITE_CTA.getStarted.href}
                 className="sa-btn-primary min-h-[44px] px-6 text-[10px]"
               >
-                New request
+                {SITE_CTA.getStarted.label}
               </Link>
             </div>
             <div className="overflow-x-auto">

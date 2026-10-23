@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { getStartedHref } from "@/lib/marketing/site-cta";
 import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
 import type { ServicePricingStripContent } from "@/lib/startup-agency/pricing";
 import { fadeUpProps, revealViewport, staggerDelay } from "@/lib/scroll-reveal";
@@ -39,10 +40,10 @@ export function ServicePricingStrip({ content }: Props) {
               <p className="mt-3 flex-1 text-sm leading-relaxed text-sa-muted">{tier.note}</p>
               {tier.planId ? (
                 <Link
-                  href={`/pricing#${tier.planId}`}
+                  href={getStartedHref({ plan: tier.planId })}
                   className="mt-6 inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
                 >
-                  View package
+                  Choose {tier.label}
                 </Link>
               ) : null}
             </motion.div>

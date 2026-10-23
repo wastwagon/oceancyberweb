@@ -12,8 +12,8 @@ const products = [
   {
     href: "/domains",
     title: "Domains",
-    price: "From GHS 120/yr · .com.gh on /facts",
-    body: "Search availability and register in cedis with Paystack — .com.gh list price on /facts.",
+    price: "From GHS 120/yr",
+    body: "Search availability and register in cedis with Paystack — list prices on /guides/domain-prices-in-ghana.",
     action: "Search a domain",
   },
   {
@@ -59,6 +59,10 @@ export function ProductsHubPage() {
               <Link href="/guides/domains-hosting-and-ssl-ghana" className="sa-text-link">
                 domains, hosting, and SSL guide
               </Link>
+              . Need a custom website or app?{" "}
+              <Link href="/services" className="sa-text-link font-medium">
+                See our services
+              </Link>
               .
             </motion.p>
           </motion.div>
@@ -97,28 +101,6 @@ export function ProductsHubPage() {
               </motion.article>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="sa-section relative z-10 border-t border-sa-border">
-        <div className="sa-container max-w-3xl text-center">
-          <motion.div {...fadeUpProps} className="sa-card p-10 md:p-12">
-            <SaSectionHeader
-              title="Need a custom platform instead?"
-              subtitle="OceanCyber still designs and builds custom websites, apps, and security work from Accra."
-            />
-            <div className="mt-8 flex flex-col items-center gap-3">
-              <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">
-                Get started
-              </Link>
-              <Link
-                href="/tools/project-cost"
-                className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
-              >
-                Estimate in cedis
-              </Link>
-            </div>
-          </motion.div>
         </div>
       </section>
     </main>

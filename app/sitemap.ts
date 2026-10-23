@@ -77,7 +77,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/services/ui-ux-design-in-accra",
     "/guides/website-cost-in-ghana",
     "/guides/app-development-cost-in-ghana",
-    "/guides/com-gh-domain-registration-guide",
     "/guides/hubtel-vs-paystack-ghana",
     "/guides/domains-hosting-and-ssl-ghana",
     "/facts",

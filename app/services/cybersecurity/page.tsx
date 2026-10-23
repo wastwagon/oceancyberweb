@@ -8,6 +8,7 @@ import {
   cybersecurityDisclosureShort,
   cybersecurityPublicScopeLine,
 } from "@/lib/marketing/cyber-licence";
+import { serviceHeroCta } from "@/lib/marketing/site-cta";
 import { serviceImages } from "@/lib/startup-agency/service-images";
 import { servicePricingHints } from "@/lib/startup-agency/pricing";
 
@@ -22,8 +23,8 @@ const content: ServicePageContent = {
   showAtAGlance: true,
   showOwnership: true,
   serviceHubPath: "/services/cybersecurity",
-  heroCtaLabel: "Get started",
-  heroCtaHref: "/get-started",
+  heroCtaLabel: serviceHeroCta.label,
+  heroCtaHref: serviceHeroCta.href,
   hireGeoHref: "/services/cybersecurity-in-accra",
   hireGeoLabel: "Security consulting in Accra →",
   heroImage: serviceImages.cyberSecurity,

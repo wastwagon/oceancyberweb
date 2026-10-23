@@ -1,10 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { CalendarDays } from "lucide-react";
 import { CalendlyEmbed } from "@/components/booking/CalendlyEmbed";
 import { isCalendlyConfigured } from "@/lib/booking/calendly";
-
 type PostSubmitBookingProps = {
   title?: string;
   description?: string;
@@ -36,9 +34,6 @@ export function PostSubmitBooking({
               </a>
               .
             </p>
-            <Link href="/contact" className="sa-text-link mt-3 inline-flex text-sm">
-              Contact page →
-            </Link>
           </div>
         </div>
       </div>

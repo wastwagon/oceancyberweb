@@ -4,6 +4,7 @@ import {
   ServicePremiumPage,
   type ServicePageContent,
 } from "@/components/services/ServicePremiumPage";
+import { serviceHeroCta } from "@/lib/marketing/site-cta";
 import { serviceImages } from "@/lib/startup-agency/service-images";
 import { servicePricingHints } from "@/lib/startup-agency/pricing";
 
@@ -15,8 +16,8 @@ const content: ServicePageContent = {
   heroHighlightTone: "white",
   heroDescription:
     "Company websites and web apps for Accra and Ghana teams — built for speed on mobile networks, SEO, and Paystack or MoMo when you need checkout. From our office at 47 Nii Kwashiefio Avenue.",
-  heroCtaLabel: "Get started",
-  heroCtaHref: "/get-started",
+  heroCtaLabel: serviceHeroCta.label,
+  heroCtaHref: serviceHeroCta.href,
   showAtAGlance: true,
   showOwnership: true,
   serviceHubPath: "/services/web-development",

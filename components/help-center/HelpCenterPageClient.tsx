@@ -7,6 +7,7 @@ import { Search, HelpCircle, ArrowRight, MessageSquare, Check, X } from "lucide-
 import { publicApiFetch } from "@/lib/public-api";
 import { fadeUpProps, revealViewport, staggerDelay } from "@/lib/scroll-reveal";
 import type { HelpArticle } from "@/lib/help-center/content";
+import { getStartedHref } from "@/lib/marketing/site-cta";
 import { SaField } from "@/components/ui/SaField";
 import { SaSelect } from "@/components/ui/SaSelect";
 import { SaInput } from "@/components/ui/SaInput";
@@ -54,7 +55,10 @@ export function HelpCenterPageClient({ articles }: HelpCenterPageClientProps) {
           "If you need formal scope and pricing sections, submit Formal Proposal Request.",
           "Track progress from Dashboard > Requests.",
         ],
-        cta: { label: "Start guided intake", href: "/get-started?topic=Need quote or proposal" },
+        cta: {
+          label: "Start guided intake",
+          href: getStartedHref({ topic: "Need quote or proposal" }),
+        },
       };
     }
     if (issue === "site_issue") {

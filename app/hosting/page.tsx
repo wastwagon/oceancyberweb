@@ -9,6 +9,8 @@ import { ServicePageHeroBanner } from "@/components/services/ServicePageHeroBann
 import { ServiceHubFaqSection } from "@/components/marketing/ServiceHubFaqSection";
 import { serviceImages } from "@/lib/startup-agency/service-images";
 
+const VPS_CONTACT_HREF = "/contact?topic=Custom%20VPS%20or%20dedicated%20server";
+
 /** Server-rendered hero for LCP; packages/cart remain client islands. */
 export default function HostingPage({
   searchParams,
@@ -169,17 +171,15 @@ export default function HostingPage({
       <section className="sa-section relative z-10 border-t border-sa-border">
         <div className="sa-container max-w-3xl">
           <div className="sa-card p-10 text-center md:p-14">
-            <h2 className="sa-title">Need a custom VPS or Dedicated Server?</h2>
+            <h2 className="sa-title">Need VPS or dedicated hardware?</h2>
             <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-sa-muted/80 md:text-base">
-              For high-traffic applications, specialized databases, or strict
-              compliance, we offer managed VPS and dedicated hardware solutions.
+              cPanel packages above cover most sites. For higher traffic, custom stacks, or
+              compliance-heavy workloads, send requirements and we will scope managed VPS or
+              dedicated options.
             </p>
             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-              <Link
-                href="/contact?topic=Custom VPS and Dedicated Server"
-                className="sa-btn-primary w-full sm:w-auto"
-              >
-                Talk to our team
+              <Link href={VPS_CONTACT_HREF} className="sa-btn-outline w-full sm:w-auto">
+                Request a VPS quote
               </Link>
               <Link
                 href="/guides/web-hosting-cost-in-ghana"

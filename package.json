@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "dev": "next dev -p ${FRONTEND_PORT:-3020}",
+    "dev:clean": "rm -rf .next && npm run build:shared && npm run dev",
     "build": "npm run build:shared && prisma generate && next build",
     "build:shared": "npm run build --workspace=@oceancyber/shared",
     "build:api": "npm run build --workspace=@oceancyber/api",
@@ -38,7 +39,10 @@
     "rename:site-images": "node scripts/rename-site-images-descriptive.mjs",
     "verify:google-places": "tsx scripts/verify-google-places.ts",
     "verify:marketing": "node scripts/verify-marketing-readiness.mjs",
-    "preflight:deploy": "npm test && npm run build && npm run verify:marketing",
+    "verify:marketing-cta": "node scripts/verify-marketing-cta.mjs",
+    "verify:production-seo": "node scripts/verify-production-seo.mjs",
+    "verify:all": "npm test && npm run verify:marketing-cta && npm run verify:marketing -- --strict --live && npm run verify:production-seo && npm run verify:google-places",
+    "preflight:deploy": "npm run verify:all && npm run build",
     "capture:live-previews": "node scripts/capture-live-client-previews.mjs"
   },
   "dependencies": {

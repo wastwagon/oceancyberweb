@@ -155,11 +155,11 @@ export function SaShowreelModal({ open, onClose }: SaShowreelModalProps) {
                   : "Selected work highlight — add public/videos/oceancyber-showreel.mp4 or set NEXT_PUBLIC_SHOWREEL_URL"}
               </p>
               <Link
-                href="/portfolio"
+                href="/#projects"
                 className="sa-btn-primary w-full text-center sm:w-auto"
                 onClick={onClose}
               >
-                View portfolio
+                See selected work
               </Link>
             </div>
           </motion.div>

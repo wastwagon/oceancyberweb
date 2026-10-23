@@ -11,7 +11,7 @@ const MOBILE_QUICK_BAR_EXCLUDED = ["/signin", "/signup"] as const;
 
 /** Pages that own their own footer + tab bar (avoid double chrome). */
 function ownsOwnChrome(pathname: string) {
-  return pathname === "/" || pathname === "/home-creative";
+  return pathname === "/";
 }
 
 function shouldShowMobileQuickBar(pathname: string, appRoute: boolean, selfChrome: boolean) {
@@ -23,7 +23,7 @@ function shouldShowMobileQuickBar(pathname: string, appRoute: boolean, selfChrom
 
 /**
  * Marketing chrome on public pages; minimal workspace shell on `/dashboard` and `/admin`.
- * `/` and `/home-creative` render their own footer + tab bar — layout skips those.
+ * `/` renders its own footer + tab bar — layout skips those.
  *
  * Header clearance lives on page heroes (`.sa-page-intro` / `.sa-page-hero` / `.sa-page-top`) —
  * do not add a second desktop `pt-36` here.

@@ -45,13 +45,15 @@ if (!apiKey) {
   process.exit(1);
 }
 
+const mapsApiKey = apiKey;
+
 async function main() {
   console.log("Checking Google Places API (New)…\n");
 
   let resolvedPlaceId = placeId;
   let summary = placeId
     ? await getPlaceDetails(
-        apiKey,
+        mapsApiKey,
         placeId,
         "id,displayName,rating,userRatingCount,googleMapsUri,reviews",
       )
@@ -59,7 +61,7 @@ async function main() {
 
   if (!placeId) {
     console.log(`Searching: "${query}"`);
-    const candidate = await searchPlaceByText(apiKey, query, {
+    const candidate = await searchPlaceByText(mapsApiKey, query, {
       latitude: lat,
       longitude: lng,
       radiusMeters: 5000,
@@ -72,7 +74,7 @@ async function main() {
     }
     resolvedPlaceId = candidate.id;
     summary = await getPlaceDetails(
-      apiKey,
+      mapsApiKey,
       resolvedPlaceId,
       "id,displayName,rating,userRatingCount,googleMapsUri,reviews",
     );
@@ -103,7 +105,7 @@ async function main() {
   }
 
   console.log("\nAdd to Coolify (web service):");
-  console.log(`  GOOGLE_MAPS_API_KEY=${apiKey.slice(0, 8)}…`);
+  console.log(`  GOOGLE_MAPS_API_KEY=${mapsApiKey.slice(0, 8)}…`);
   console.log(`  GOOGLE_PLACE_ID=${resolvedPlaceId}`);
   console.log(`  NEXT_PUBLIC_GOOGLE_PLACE_ID=${resolvedPlaceId}`);
   console.log("\nThen redeploy / rebuild web.");

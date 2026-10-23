@@ -1,3 +1,4 @@
+import { SITE_CTA } from "@/lib/marketing/site-cta";
 import { defaultNavigationConfig } from "@/lib/navigation/menu";
 
 export type AdminNavItem = {
@@ -229,14 +230,8 @@ export function buildMenuPreset(kind: string): AdminNavMenu {
         items: [
           {
             ...createEmptyNavItem(0),
-            heading: "Get started",
-            href: "/get-started",
-            description: "Primary path — share goals, budget, and timeline.",
-          },
-          {
-            ...createEmptyNavItem(10),
-            heading: "Talk to our team",
-            href: "/contact",
+            heading: SITE_CTA.talkToTeam.label,
+            href: SITE_CTA.talkToTeam.href,
             description: "Questions or a quick call before you start.",
           },
           {
@@ -275,12 +270,6 @@ export function buildMenuPreset(kind: string): AdminNavMenu {
             heading: "Pricing",
             href: "/pricing",
             description: "Transparent tiers and indicative investment ranges in GHS.",
-          },
-          {
-            ...createEmptyNavItem(30),
-            heading: "Get started",
-            href: "/get-started",
-            description: "Guided intake for your next project.",
           },
         ],
       };

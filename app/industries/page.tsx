@@ -6,11 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { HeroSectionMotionLayers } from "@/components/layout/HeroSectionMotionLayers";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
-import {
-  fadeUpProps,
-  revealViewport,
-  staggerDelay,
-} from "@/lib/scroll-reveal";
+import { revealViewport, staggerDelay } from "@/lib/scroll-reveal";
 import { industryCatalog } from "@/lib/data/industries-catalog";
 
 type IndustryCard = {
@@ -150,6 +146,16 @@ export default function IndustriesPage() {
               operational reality, folded into every architecture and release
               plan.
             </motion.p>
+            <motion.p variants={heroMotion.item} className="mt-6 text-sm text-sa-muted/80">
+              Don&apos;t see your sector?{" "}
+              <Link
+                href="/contact?topic=Industry%20not%20listed"
+                className="sa-text-link font-medium"
+              >
+                Tell us about your use case
+              </Link>
+              .
+            </motion.p>
           </motion.div>
         </div>
       </section>
@@ -165,31 +171,6 @@ export default function IndustriesPage() {
               />
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="sa-section relative z-10 border-t border-sa-border">
-        <div className="sa-container max-w-3xl">
-          <motion.div
-            {...fadeUpProps}
-            className="sa-card p-10 text-center md:p-14"
-          >
-            <h2 className="font-heading text-2xl font-bold tracking-tight text-white md:text-3xl">
-              Not listed here?
-            </h2>
-            <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-sa-muted/80 md:text-base">
-              We regularly onboard new verticals when the problem space is
-              clear: manufacturing, nonprofits, telecom, and more.
-            </p>
-            <div className="mt-8">
-              <Link
-                href="/contact"
-                className="sa-btn-primary w-full sm:w-auto"
-              >
-                Talk to our team
-              </Link>
-            </div>
-          </motion.div>
         </div>
       </section>
     </main>

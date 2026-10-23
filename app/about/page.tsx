@@ -160,11 +160,6 @@ export default function AboutPage() {
               </Link>{" "}
               show the live rating and count.
             </motion.p>
-            <motion.div variants={aboutHeroItem} className="mt-8">
-              <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">
-                Get started
-              </Link>
-            </motion.div>
           </motion.div>
 
           <motion.div
@@ -425,28 +420,6 @@ export default function AboutPage() {
       <VideoTestimonialSection variant="about" />
       <PartnersAndStandardsSection />
 
-      {/* CTA */}
-      <section className="sa-section relative z-10 border-t border-sa-border">
-        <div className="sa-container max-w-3xl">
-          <motion.div
-            {...fadeUpProps}
-            className="sa-card p-10 text-center md:p-14"
-          >
-            <h2 className="sa-title">
-              Ready to work with us?
-            </h2>
-            <p className="sa-subtitle mx-auto mt-3 max-w-lg">
-              Tell us about your product, security posture, or growth goals, and
-              we&apos;ll respond with a clear path forward.
-            </p>
-            <div className="mt-8 flex flex-col items-center gap-3">
-              <Link href="/contact" className="sa-btn-primary w-full sm:w-auto">
-                Talk to our team
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
     </main>
   );
 }

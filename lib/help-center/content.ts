@@ -1,3 +1,5 @@
+import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
+
 export type HelpArticleCategory =
   | "billing"
   | "renewals"
@@ -49,7 +51,10 @@ export const defaultHelpArticles: HelpArticle[] = [
     audience: "everyone",
     body: "Use interactive intake to describe needs quickly. Use formal proposal request when you want a structured scope, timeline, and cost sections.",
     actions: [
-      { label: "Start interactive intake", href: "/get-started?topic=Need quote or proposal" },
+      {
+        label: "Start interactive intake",
+        href: getStartedHref({ topic: "Need quote or proposal" }),
+      },
       { label: "Request formal proposal", href: "/tools/proposal?topic=Need quote or proposal" },
     ],
   },
@@ -78,7 +83,7 @@ export const defaultHelpArticles: HelpArticle[] = [
       "Choose Web Development for websites and browser-based platforms, Mobile Apps for a new iOS or Android product, and Website to Mobile App when you already have a working website you want assessed for conversion.",
     actions: [
       { label: "Compare services", href: "/services" },
-      { label: "Explain your project", href: "/get-started" },
+      { label: SITE_CTA.comparePackages.label, href: SITE_CTA.comparePackages.href },
     ],
   },
   {
@@ -88,7 +93,10 @@ export const defaultHelpArticles: HelpArticle[] = [
     audience: "everyone",
     body:
       "Our team reviews your goals, timeline, constraints, and contact details. We then respond with clarifying questions or recommend the most suitable discovery, estimate, or proposal path.",
-    actions: [{ label: "Get started", href: "/get-started" }],
+    actions: [
+      { label: "View package pricing", href: "/pricing" },
+      { label: "Track requests", href: "/dashboard/requests" },
+    ],
   },
   {
     id: "pricing-scope",

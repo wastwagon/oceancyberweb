@@ -8,13 +8,6 @@ import { FxPrice } from "@/components/currency/FxPrice";
 import { cn } from "@/lib/utils";
 import { HOSTING_PACKAGES, type HostingPackage } from "@/lib/hosting-packages";
 
-function planContactHref(pkg: HostingPackage) {
-  const q = new URLSearchParams({
-    topic: `cPanel hosting — ${pkg.name} (${pkg.id})`,
-  });
-  return `/contact?${q.toString()}`;
-}
-
 function planCheckoutCodeByCycle(
   pkg: HostingPackage,
   billingCycle: "monthly" | "annual",
@@ -235,12 +228,6 @@ export function HostingPackagesSection({
                 >
                   Add to cart
                 </button>
-                <Link
-                  href={planContactHref(pkg)}
-                  className="inline-flex min-h-11 w-full items-center justify-center text-sm font-semibold text-sa-muted"
-                >
-                  Talk to our team
-                </Link>
               </div>
             </li>
           ))}

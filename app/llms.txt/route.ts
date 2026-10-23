@@ -85,7 +85,6 @@ ${ghanaServiceKeywords.map((k) => `- ${k}`).join("\n")}
 - [Website cost in Ghana](${site}/guides/website-cost-in-ghana)
 - [App development cost in Ghana](${site}/guides/app-development-cost-in-ghana)
 - [Domain prices in Ghana](${site}/guides/domain-prices-in-ghana)
-- [.com.gh registration guide](${site}/guides/com-gh-domain-registration-guide)
 - [Accept Mobile Money and Paystack](${site}/guides/accept-mobile-money-paystack)
 - [Hubtel vs Paystack](${site}/guides/hubtel-vs-paystack-ghana)
 - [Domains, hosting, and SSL](${site}/guides/domains-hosting-and-ssl-ghana)

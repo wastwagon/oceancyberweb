@@ -12,6 +12,7 @@ import {
   revealViewport,
   staggerDelay,
 } from "@/lib/scroll-reveal";
+import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
 import { cybersecurityDisclosureShort } from "@/lib/marketing/cyber-licence";
 
@@ -333,14 +334,17 @@ export default function SecurityJourneyPage() {
               90 days.
             </p>
             <div className="mt-8 flex flex-col items-center gap-3">
-              <Link href="/contact" className="sa-btn-primary w-full sm:w-auto">
-                Book a discovery session
-              </Link>
               <Link
                 href="/tools/security-assessment"
-                className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary"
+                className="sa-btn-primary w-full sm:w-auto"
               >
                 Take the self-assessment
+              </Link>
+              <Link
+                href={getStartedHref({ topic: "Security consulting from security journey" })}
+                className="inline-flex min-h-11 items-center text-sm font-semibold text-sa-primary underline underline-offset-4 hover:text-white"
+              >
+                {SITE_CTA.getStarted.label}
               </Link>
             </div>
           </motion.div>

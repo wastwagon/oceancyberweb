@@ -1,3 +1,5 @@
+import { SITE_CTA } from "@/lib/marketing/site-cta";
+
 export type StartupNavLink = { readonly label: string; readonly href: string };
 
 export const startupPrimaryNav: StartupNavLink[] = [
@@ -12,7 +14,6 @@ export const startupPagesMenu = [
   { label: "About", href: "/about" },
   { label: "Team", href: "/team" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Get started", href: "/get-started" },
   { label: "Project cost calculator", href: "/tools/project-cost" },
   { label: "Contact", href: "/contact" },
   { label: "Services", href: "/services" },
@@ -302,27 +303,22 @@ export const mainHeaderDropdownContent: Record<
   support: {
     title: "Support",
     description:
-      "Start with guided intake. Use pricing or the estimator to plan — talk to us anytime.",
+      "Plan with pricing and tools — talk to our team when you are ready to start.",
     items: [
       {
-        heading: "Get started",
-        description: "Primary path — share goals, budget, and timeline.",
-        link: "/get-started",
-      },
-      {
-        heading: "Talk to our team",
+        heading: SITE_CTA.talkToTeam.label,
         description: "Questions or a quick call before you start.",
-        link: "/contact",
+        link: SITE_CTA.talkToTeam.href,
       },
       {
-        heading: "Pricing",
+        heading: SITE_CTA.comparePackages.label,
         description: "Compare packages and indicative investment ranges in GHS.",
-        link: "/pricing",
+        link: SITE_CTA.comparePackages.href,
       },
       {
-        heading: "Project cost calculator",
+        heading: SITE_CTA.estimateInCedis.label,
         description: "Optional tool — estimate scope and a GHS range.",
-        link: "/tools/project-cost",
+        link: SITE_CTA.estimateInCedis.href,
       },
       {
         heading: "Request a proposal",
@@ -396,11 +392,6 @@ export const mainHeaderDropdownContent: Record<
         description: "Verified Google ratings and client feedback.",
         link: "/reviews",
       },
-      {
-        heading: "Get started",
-        description: "Guided intake for your next project.",
-        link: "/get-started",
-      },
     ],
   },
 };
@@ -412,7 +403,6 @@ export const footerCompanyLinks = [
   { label: "Portfolio", href: "/portfolio" },
   { label: "Pricing", href: "/pricing" },
   { label: "How we work", href: "/how-we-work" },
-  { label: "Get started", href: "/get-started" },
   { label: "Insights", href: "/insights" },
   { label: "Guides", href: "/guides" },
   { label: "Reviews", href: "/reviews" },

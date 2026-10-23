@@ -54,6 +54,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: "/home-creative",
+        destination: "/",
+        permanent: false,
+      },
+      {
         source: "/ocean-legacy",
         destination: "/",
         permanent: true,
@@ -82,6 +87,11 @@ const nextConfig = {
       {
         source: "/products/pos",
         destination: "/products",
+        permanent: true,
+      },
+      {
+        source: "/guides/com-gh-domain-registration-guide",
+        destination: "/guides/domain-prices-in-ghana",
         permanent: true,
       },
     ];

@@ -1,5 +1,6 @@
 /** Shared API contract between Next.js and NestJS */
 
+export { SITE_CTA, getStartedHref, serviceHeroCta } from "./marketing-cta";
 export { isAdminForUser } from "./admin";
 export { assertProductionSecrets } from "./secrets";
 export type { SecretEnv } from "./secrets";

@@ -3,6 +3,7 @@ import { MapPin } from "lucide-react";
 import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { proofOutcomes } from "@/lib/startup-agency/content";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
+import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 import { cybersecurityDisclosureShort } from "@/lib/marketing/cyber-licence";
 import type { GeoProofKey, GeoServicePage } from "@/lib/seo/geo-service-pages";
 
@@ -131,14 +132,8 @@ export function GeoServicePageView({ page }: Props) {
           </p>
 
           <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-            <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">
-              Get started
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline underline-offset-4 hover:text-sa-primary"
-            >
-              Talk to our team
+            <Link href={getStartedHref({ topic: page.h1 })} className="sa-btn-primary w-full sm:w-auto">
+              {SITE_CTA.getStarted.label}
             </Link>
           </div>
         </div>
@@ -274,11 +269,6 @@ export function GeoServicePageView({ page }: Props) {
             <li>
               <Link href="/reviews" className="sa-text-link">
                 Google reviews
-              </Link>
-            </li>
-            <li>
-              <Link href="/get-started" className="sa-text-link">
-                Get started
               </Link>
             </li>
           </ul>

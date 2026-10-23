@@ -4,6 +4,8 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
 import { PortfolioTabbedGallery } from "@/components/portfolio/PortfolioTabbedGallery";
+import { SITE_CTA } from "@/lib/marketing/site-cta";
+import { portfolioSectionIntro } from "@/lib/startup-agency/content";
 
 export function SaPortfolioGallerySection() {
   return (
@@ -23,9 +25,10 @@ export function SaPortfolioGallerySection() {
       <div className="sa-container relative z-10">
         <SaSectionHeader
           align="center"
-          eyebrow="Portfolio"
-          title="Live sites and concept work"
-          subtitle="Switch between client sites that are live and concept work that is still illustrative."
+          eyebrow={portfolioSectionIntro.eyebrow}
+          title={portfolioSectionIntro.title}
+          subtitle={portfolioSectionIntro.subtitle}
+          subtitleVariant="lead"
           className="mb-10 md:mb-12"
         />
 
@@ -33,15 +36,18 @@ export function SaPortfolioGallerySection() {
           <PortfolioTabbedGallery variant="section" className="mx-auto max-w-6xl" />
         </Suspense>
 
-        <div className="mx-auto mt-10 flex flex-col items-center gap-3 md:mt-12">
-          <Link href="/portfolio" className="sa-btn-primary w-full sm:w-auto">
-            View portfolio
+        <div className="mx-auto mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:mt-12">
+          <Link
+            href={SITE_CTA.fullPortfolio.href}
+            className="inline-flex min-h-11 items-center text-sm font-semibold text-white underline underline-offset-4 hover:text-sa-primary"
+          >
+            {SITE_CTA.fullPortfolio.label}
           </Link>
           <Link
-            href="/portfolio?tab=creative"
+            href={SITE_CTA.conceptWork.href}
             className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline underline-offset-4 hover:text-white"
           >
-            Concept work
+            {SITE_CTA.conceptWork.label}
           </Link>
         </div>
       </div>

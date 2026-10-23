@@ -19,6 +19,7 @@ import {
   UserRound,
   X,
 } from "lucide-react";
+import { SITE_CTA } from "@/lib/marketing/site-cta";
 import { type HeaderDropdownKey } from "@/lib/navigation/menu";
 import { useNavigationConfig } from "@/lib/navigation/useNavigationConfig";
 import { cn, formatWhatsAppLink } from "@/lib/utils";
@@ -182,10 +183,10 @@ export function StartupAgencyNavbar() {
                 </Link>
               )}
               <Link
-                href="/get-started"
-                className="inline-flex min-h-11 items-center rounded-full border border-sa-primary bg-sa-primary px-3.5 text-xs font-semibold text-sa-bg transition hover:bg-sa-primary/90"
+                href={SITE_CTA.talkToTeam.href}
+                className="inline-flex min-h-11 items-center px-2.5 text-xs font-medium text-sa-muted transition hover:text-sa-primary"
               >
-                Get started
+                {SITE_CTA.talkToTeam.label}
               </Link>
               <a
                 href={whatsappHref}
@@ -304,10 +305,10 @@ export function StartupAgencyNavbar() {
                   </Link>
                 )}
                 <Link
-                  href="/get-started"
-                  className="inline-flex min-h-11 items-center rounded-2xl border border-sa-primary bg-sa-primary px-4 text-sm font-semibold text-sa-bg transition hover:bg-sa-primary/90"
+                  href={SITE_CTA.talkToTeam.href}
+                  className="inline-flex min-h-11 items-center px-2 text-sm font-medium text-sa-muted transition hover:text-sa-primary"
                 >
-                  Get started
+                  {SITE_CTA.talkToTeam.label}
                 </Link>
               </div>
             ) : null}
@@ -449,6 +450,17 @@ export function StartupAgencyNavbar() {
                 </div>
 
                 <div className="mt-4 space-y-2">
+                  <p className="px-1 pb-2 text-[13px] font-semibold text-white/55">Contact</p>
+                  <Link
+                    href={SITE_CTA.talkToTeam.href}
+                    className="sa-ios-group sa-ios-row sa-pressable"
+                    onClick={closeMobileMenu}
+                  >
+                    {SITE_CTA.talkToTeam.label}
+                  </Link>
+                </div>
+
+                <div className="mt-4 space-y-2">
                   <p className="px-1 pb-2 text-[13px] font-semibold text-white/55">Account</p>
                   {isLoggedIn ? (
                     <div className="sa-ios-group divide-y divide-white/[0.06]">
@@ -473,13 +485,6 @@ export function StartupAgencyNavbar() {
                       </span>
                     </Link>
                   )}
-                  <Link
-                    href="/get-started"
-                    className="sa-btn-primary flex w-full"
-                    onClick={closeMobileMenu}
-                  >
-                    Get started
-                  </Link>
                 </div>
               </div>
             </motion.div>

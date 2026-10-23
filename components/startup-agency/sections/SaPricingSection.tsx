@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { SaReveal } from "@/components/startup-agency/SaReveal";
 import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
+import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 import { pricingPlans } from "@/lib/startup-agency/pricing";
 
 export function SaPricingSection() {
@@ -16,18 +17,15 @@ export function SaPricingSection() {
         <SaReveal className="mb-16">
           <SaSectionHeader
             eyebrow="Investment"
-            title="Transparent pricing"
-            subtitle="Indicative starting tiers in Ghana cedis. Fixed-price milestones after discovery — use the calculator or compare full packages on our pricing page."
+            title="Clear pricing in cedis"
+            subtitle="Starting tiers below. We confirm fixed milestones after discovery — or use the cost calculator on the pricing page."
           />
-          <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-            <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">
-              Get started
-            </Link>
+          <div className="mt-6">
             <Link
-              href="/pricing"
-              className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline underline-offset-4 hover:text-sa-primary"
+              href={SITE_CTA.comparePackages.href}
+              className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline underline-offset-4 hover:text-white"
             >
-              Compare plans
+              {SITE_CTA.comparePackages.label}
             </Link>
           </div>
         </SaReveal>
@@ -80,10 +78,12 @@ export function SaPricingSection() {
                 </ul>
 
                 <Link
-                  href={`/pricing#${plan.id}`}
+                  href={
+                    plan.featured ? getStartedHref({ plan: plan.id }) : `/pricing#${plan.id}`
+                  }
                   className={`mt-10 sa-btn-${plan.featured ? "primary" : "outline"} group w-full`}
                 >
-                  View full details
+                  {plan.featured ? `Choose ${plan.name}` : "View full details"}
                   <ArrowRight className="ml-2 inline h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>

@@ -5,13 +5,19 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Briefcase, Rocket, Tags } from "lucide-react";
 import { useCartOptional } from "@/components/commerce/CartProvider";
+import { SITE_CTA } from "@/lib/marketing/site-cta";
 import { cn } from "@/lib/utils";
 
 /** Mobile tab bar — Work · Pricing · Get started. */
 const quickActions = [
-  { label: "Work", href: "/portfolio", icon: Briefcase },
-  { label: "Pricing", href: "/pricing", icon: Tags },
-  { label: "Get started", href: "/get-started", icon: Rocket, primary: true },
+  { label: "Work", href: SITE_CTA.fullPortfolio.href, icon: Briefcase },
+  { label: "Pricing", href: SITE_CTA.comparePackages.href, icon: Tags },
+  {
+    label: SITE_CTA.getStarted.label,
+    href: SITE_CTA.getStarted.href,
+    icon: Rocket,
+    primary: true,
+  },
 ] as const;
 
 export function StartupAgencyMobileQuickBar() {
@@ -63,7 +69,7 @@ export function StartupAgencyMobileQuickBar() {
                   strokeWidth={active ? 2.25 : 1.75}
                   aria-hidden
                 />
-                {action.href === "/get-started" && itemCount > 0 ? (
+                {action.href === SITE_CTA.getStarted.href && itemCount > 0 ? (
                   <span
                     className={cn(
                       "absolute -right-2 -top-1 inline-flex min-w-[16px] items-center justify-center rounded-full bg-sa-bg px-1 text-[9px] font-bold leading-4 text-sa-primary transition",

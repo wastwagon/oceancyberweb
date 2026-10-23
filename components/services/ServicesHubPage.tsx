@@ -11,9 +11,9 @@ import {
   staggerDelay,
 } from "@/lib/scroll-reveal";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
-import { PricingQuickSummary } from "@/components/startup-agency/PricingQuickSummary";
 import { ServicePageHeroBanner } from "@/components/services/ServicePageHeroBanner";
 import { serviceImages } from "@/lib/startup-agency/service-images";
+import { SITE_CTA } from "@/lib/marketing/site-cta";
 import { geoServiceHubCards } from "@/lib/seo/geo-service-pages";
 
 type ServiceCard = {
@@ -221,9 +221,15 @@ export function ServicesHubPage() {
               Fixed GHS packages, clear milestones, and a team you can meet at
               47 Nii Kwashiefio Avenue — not a middleman agency.
             </motion.p>
-            <motion.div variants={heroMotion.item} className="mt-10">
-              <Link href="/get-started" className="sa-btn-primary">
-                Get started
+            <motion.div
+              variants={heroMotion.item}
+              className="mt-10 flex w-full max-w-sm flex-col items-center gap-3 sm:max-w-none"
+            >
+              <Link
+                href={SITE_CTA.comparePackages.href}
+                className="sa-btn-primary w-full sm:w-auto"
+              >
+                {SITE_CTA.comparePackages.label}
               </Link>
             </motion.div>
           </motion.div>
@@ -293,36 +299,6 @@ export function ServicesHubPage() {
               </li>
             ))}
           </ul>
-        </div>
-      </section>
-
-      <PricingQuickSummary />
-
-      <section className="sa-section relative z-10 border-t border-sa-border">
-        <div className="sa-container max-w-3xl">
-          <motion.div
-            {...fadeUpProps}
-            className="sa-card p-10 text-center md:p-14"
-          >
-            <h2 className="font-heading text-2xl font-bold tracking-tight text-white md:text-3xl">
-              Not sure where to start?
-            </h2>
-            <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-sa-muted md:text-base">
-              Tell us your goals, budget range, and timeline — we will reply with
-              the right package or a scoped next step.
-            </p>
-            <div className="mt-8 flex flex-col items-center gap-3">
-              <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">
-                Get started
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline underline-offset-4 hover:text-sa-primary"
-              >
-                Talk to our team
-              </Link>
-            </div>
-          </motion.div>
         </div>
       </section>
     </main>

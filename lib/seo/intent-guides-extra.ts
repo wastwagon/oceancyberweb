@@ -1,5 +1,5 @@
+import { SITE_CTA } from "@/lib/marketing/site-cta";
 import type { IntentPage } from "@/lib/seo/intent-pages";
-import { formatComGhListPriceLabel } from "@/lib/domain-tld-pricing";
 
 /** Additional guides referenced by the oceancyber.net build brief. */
 export const extraIntentGuidePages: readonly IntentPage[] = [
@@ -82,77 +82,8 @@ export const extraIntentGuidePages: readonly IntentPage[] = [
     cta: {
       title: "Describe the app in one paragraph",
       body: "Tell us the platforms, login needs, and whether you take payment in-app.",
-      href: "/get-started",
-      label: "Get started",
-    },
-  },
-  {
-    kind: "guide",
-    slug: "com-gh-domain-registration-guide",
-    title: ".com.gh domain registration guide (Ghana)",
-    description:
-      "How Ghana businesses register a .com.gh domain: documents, DNS, and how OceanCyber search shows live cedis pricing before Paystack checkout.",
-    eyebrow: ".com.gh guide",
-    image: "/images/articles/website-cost-ghana.png",
-    imageAlt: "Domain registration checklist beside cedis in Accra",
-    intro:
-      `A .com.gh domain is Ghana’s commercial ccTLD. Marketing list price is ${formatComGhListPriceLabel()} — the domain search still shows the live registrar total before Paystack. Other extensions (.com, .org, .africa) are on /guides/domain-prices-in-ghana.`,
-    sections: [
-      {
-        heading: "When to choose .com.gh",
-        paragraphs: [
-          "Use .com.gh when your customers expect a Ghana commercial domain, especially alongside local trust signals and Mobile Money checkout.",
-          "Many SMEs still launch on .com (GHS 120/year on our list) when global email compatibility matters more than the ccTLD.",
-        ],
-        links: [{ href: "/guides/domain-prices-in-ghana", label: "Compare .com and other TLDs" }],
-      },
-      {
-        heading: "Registration steps on OceanCyber",
-        paragraphs: [
-          "Search the domain on /domains, add privacy if required, and complete Paystack checkout in cedis.",
-          "After registration we help you point DNS to OceanCyber hosting or an external provider.",
-        ],
-        steps: [
-          "Search yourbusiness.com.gh on the domain page",
-          "Confirm the live annual total in the cart (GHS)",
-          "Pay with Paystack (card or Mobile Money)",
-          "Set DNS A/AAAA or nameservers to your host",
-          "Add SSL — Let’s Encrypt is free on OceanCyber hosting",
-        ],
-        links: [{ href: "/domains", label: "Start domain search" }],
-      },
-      {
-        heading: "What is not included",
-        paragraphs: [
-          "The domain fee covers registration and renewal. Website build, hosting, and commercial SSL are separate lines — see /guides/website-cost-in-ghana.",
-        ],
-      },
-    ],
-    faqs: [
-      {
-        question: "What does .com.gh cost per year?",
-        answer:
-          `Marketing list price is ${formatComGhListPriceLabel()}. Search on /domains for the live GHS total before checkout. Other extensions are on /guides/domain-prices-in-ghana.`,
-      },
-      {
-        question: "Can you move an existing .com.gh to OceanCyber?",
-        answer:
-          "Yes. We guide transfers once you have the auth code from your current registrar.",
-      },
-      {
-        question: "Do you bill in cedis?",
-        answer: "Yes — domain checkout uses Paystack in Ghana cedis.",
-      },
-    ],
-    related: [
-      { href: "/domains", label: "Buy a domain" },
-      { href: "/hosting", label: "Hosting from GHS 69/mo" },
-    ],
-    cta: {
-      title: "Check your .com.gh name",
-      body: "Search availability, then add hosting if you still need a site built.",
-      href: "/domains",
-      label: "Open domain search",
+      href: SITE_CTA.getStarted.href,
+      label: SITE_CTA.getStarted.label,
     },
   },
   {
@@ -224,8 +155,8 @@ export const extraIntentGuidePages: readonly IntentPage[] = [
     cta: {
       title: "Tell us which gateway you prefer",
       body: "Share your catalog, wallets, and whether finance needs a daily export.",
-      href: "/get-started",
-      label: "Get started",
+      href: SITE_CTA.getStarted.href,
+      label: SITE_CTA.getStarted.label,
     },
   },
   {
@@ -233,7 +164,7 @@ export const extraIntentGuidePages: readonly IntentPage[] = [
     slug: "domains-hosting-and-ssl-ghana",
     title: "Domains, hosting, and SSL in Ghana (one stack)",
     description:
-      "How Ghana businesses buy a .com or .com.gh domain, add SSL, and host on cPanel — list prices in GHS and what OceanCyber sells today.",
+      "How Ghana businesses buy a .com domain, add SSL, and host on cPanel — list prices in GHS and what OceanCyber sells today.",
     eyebrow: "Infrastructure guide",
     image: "/images/articles/website-cost-ghana.png",
     imageAlt: "Laptop showing domain search and cPanel hosting options",
@@ -243,12 +174,9 @@ export const extraIntentGuidePages: readonly IntentPage[] = [
       {
         heading: "Domains",
         paragraphs: [
-          "Search on /domains. Global TLDs (.com from GHS 120/year) and .com.gh (marketing list on /facts) show annual cedis pricing before checkout.",
+          "Search on /domains. Global TLDs (.com from GHS 120/year, .africa from GHS 100/year) show annual cedis pricing before checkout.",
         ],
-        links: [
-          { href: "/guides/domain-prices-in-ghana", label: "Domain price list" },
-          { href: "/guides/com-gh-domain-registration-guide", label: ".com.gh registration steps" },
-        ],
+        links: [{ href: "/guides/domain-prices-in-ghana", label: "Domain price list" }],
       },
       {
         heading: "Hosting",

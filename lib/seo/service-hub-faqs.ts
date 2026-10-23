@@ -68,8 +68,8 @@ export const serviceHubFaqs: Record<string, readonly ServiceFaqJsonLdItem[]> = {
   ],
   "/domains": [
     {
-      q: "How do I register a .com.gh domain?",
-      a: "Search on /domains for live GHS pricing, then checkout with Paystack. Steps and list prices: /guides/com-gh-domain-registration-guide.",
+      q: "Which domain extensions can I register?",
+      a: "Search on /domains for .com, .net, .org, .africa, and other global TLDs with live GHS pricing before Paystack checkout. See /guides/domain-prices-in-ghana for list prices.",
     },
     {
       q: "Is domain registration separate from website build?",

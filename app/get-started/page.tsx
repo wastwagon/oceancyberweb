@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { InteractiveIntakeWizard } from "@/components/intake/InteractiveIntakeWizard";
 import { PricingPathsLinks } from "@/components/startup-agency/PricingPathsLinks";
+import { resolveIntakeInitialTopic } from "@/lib/marketing/intake-topic";
 import { withCanonical } from "@/lib/seo/canonical";
 
 export const metadata: Metadata = withCanonical(
@@ -13,7 +14,13 @@ export const metadata: Metadata = withCanonical(
   "/get-started",
 );
 
-export default function GetStartedPage() {
+type PageProps = {
+  searchParams?: { topic?: string | string[]; plan?: string | string[] };
+};
+
+export default function GetStartedPage({ searchParams }: PageProps) {
+  const initialTopic = resolveIntakeInitialTopic(searchParams);
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
       <section className="sa-page-intro overflow-hidden border-b border-sa-border">
@@ -27,7 +34,7 @@ export default function GetStartedPage() {
             respond faster with the right proposal.
           </p>
           <div className="mt-6">
-            <PricingPathsLinks variant="compact" omitStart />
+            <PricingPathsLinks variant="compact" />
           </div>
         </div>
       </section>
@@ -43,7 +50,7 @@ export default function GetStartedPage() {
             </Link>
             .
           </p>
-          <InteractiveIntakeWizard />
+          <InteractiveIntakeWizard initialTopic={initialTopic} />
         </div>
       </section>
     </main>

@@ -4,6 +4,7 @@ import {
   ServicePremiumPage,
   type ServicePageContent,
 } from "@/components/services/ServicePremiumPage";
+import { serviceHeroCta } from "@/lib/marketing/site-cta";
 import { serviceImages } from "@/lib/startup-agency/service-images";
 import { servicePricingHints } from "@/lib/startup-agency/pricing";
 
@@ -15,8 +16,8 @@ const content: ServicePageContent = {
   heroHighlightTone: "white",
   heroDescription:
     "Online stores for Accra retailers and Ghana-wide sellers — catalog, checkout, Paystack and Mobile Money, from GHS 6,000.",
-  heroCtaLabel: "Get started",
-  heroCtaHref: "/get-started",
+  heroCtaLabel: serviceHeroCta.label,
+  heroCtaHref: serviceHeroCta.href,
   showAtAGlance: true,
   showOwnership: true,
   serviceHubPath: "/services/ecommerce",

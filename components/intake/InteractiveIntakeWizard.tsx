@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import Link from "next/link";
@@ -34,7 +34,12 @@ const BUDGET_OPTIONS = [
 const TIMELINE_OPTIONS = ["ASAP (under 1 month)", "1-3 months", "3-6 months", "6+ months"] as const;
 const STEPS = ["Basics", "Needs", "Budget", "Booking"] as const;
 
-export function InteractiveIntakeWizard() {
+type InteractiveIntakeWizardProps = {
+  /** From `?topic=` on /get-started (help center, pricing links, etc.) */
+  initialTopic?: string;
+};
+
+export function InteractiveIntakeWizard({ initialTopic }: InteractiveIntakeWizardProps) {
   const [step, setStep] = useState(0);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -50,6 +55,12 @@ export function InteractiveIntakeWizard() {
   const [preferredDate, setPreferredDate] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    const topic = initialTopic?.trim();
+    if (!topic) return;
+    setGoals((prev) => (prev.trim().length > 0 ? prev : topic));
+  }, [initialTopic]);
 
   const canNext = useMemo(() => {
     if (step === 0) return name.trim().length >= 2 && /@/.test(email);

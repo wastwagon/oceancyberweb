@@ -5,6 +5,7 @@ import {
   type ServicePageContent,
 } from "@/components/services/ServicePremiumPage";
 import { serviceImages } from "@/lib/startup-agency/service-images";
+import { serviceHeroCta } from "@/lib/marketing/site-cta";
 import { servicePricingHints } from "@/lib/startup-agency/pricing";
 
 const content: ServicePageContent = {
@@ -15,8 +16,8 @@ const content: ServicePageContent = {
   heroHighlightTone: "gradient",
   heroDescription:
     "Company websites, landing pages, and online stores — mobile-first layouts, clear messaging, and builds that load fast on Ghana networks. Packages from GHS 6,000 with published timelines.",
-  heroCtaLabel: "Get started",
-  heroCtaHref: "/get-started",
+  heroCtaLabel: serviceHeroCta.label,
+  heroCtaHref: serviceHeroCta.href,
   hireGeoHref: "/services/web-design-in-ghana",
   hireGeoLabel: "Web design in Ghana →",
   heroImage: serviceImages.webDevelopment,

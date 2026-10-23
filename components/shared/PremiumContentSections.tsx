@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
+import { SITE_CTA } from "@/lib/marketing/site-cta";
 import { fadeUpSoft, revealViewport, staggerDelay } from "@/lib/scroll-reveal";
 
 type StoryCard = {
@@ -55,10 +56,10 @@ export function PremiumStoriesGridSection({
                 {story.result}
               </p>
               <Link
-                href="/portfolio"
+                href={SITE_CTA.fullPortfolio.href}
                 className="sa-ios-link mt-8 inline-flex items-center gap-2 text-sm font-semibold text-sa-primary transition-colors active:opacity-80"
               >
-                View work
+                {SITE_CTA.fullPortfolio.label}
                 <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
             </motion.article>
@@ -74,13 +75,16 @@ type PremiumFinalCtaSectionProps = {
   description: string;
   secondaryCtaLabel?: string;
   secondaryCtaHref?: string;
+  /** Hero already has Get started — close with planning links only. */
+  planningOnly?: boolean;
 };
 
 export function PremiumFinalCtaSection({
   title,
   description,
-  secondaryCtaLabel = "View portfolio",
-  secondaryCtaHref = "/portfolio",
+  secondaryCtaLabel = SITE_CTA.comparePackages.label,
+  secondaryCtaHref = SITE_CTA.comparePackages.href,
+  planningOnly = false,
 }: PremiumFinalCtaSectionProps) {
   return (
     <section className="sa-section relative z-10 border-t border-sa-border">
@@ -91,12 +95,25 @@ export function PremiumFinalCtaSection({
         >
           <SaSectionHeader title={title} subtitle={description} />
           <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:justify-center">
-            <Link href="/contact" className="sa-btn-primary w-full sm:w-auto">
-              Talk to our team
-            </Link>
-            <Link href={secondaryCtaHref} className="sa-btn-outline w-full sm:w-auto">
-              {secondaryCtaLabel}
-            </Link>
+            {planningOnly ? (
+              <>
+                <Link href={secondaryCtaHref} className="sa-btn-outline w-full sm:w-auto">
+                  {secondaryCtaLabel}
+                </Link>
+                <Link href={SITE_CTA.estimateInCedis.href} className="sa-btn-outline w-full sm:w-auto">
+                  {SITE_CTA.estimateInCedis.label}
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link href={SITE_CTA.getStarted.href} className="sa-btn-primary w-full sm:w-auto">
+                  {SITE_CTA.getStarted.label}
+                </Link>
+                <Link href={secondaryCtaHref} className="sa-btn-outline w-full sm:w-auto">
+                  {secondaryCtaLabel}
+                </Link>
+              </>
+            )}
           </div>
         </motion.div>
       </div>

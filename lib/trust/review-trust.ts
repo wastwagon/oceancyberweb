@@ -73,7 +73,7 @@ export function buildHomeFaqItems(stats: GooglePlaceStats): HomeFaqItem[] {
     },
     {
       q: "How do we start a project?",
-      a: "Share goals, budget range, and timeline on Get started or Contact. We reply with the right package or a scoped next step — the project calculator helps with a rough cedis range.",
+      a: "Use Get started or talk to our team on Contact. Share goals, budget, and timeline — we reply with the right package or next step. The project calculator gives a rough cedis range.",
     },
     {
       q: "What services do you offer?",

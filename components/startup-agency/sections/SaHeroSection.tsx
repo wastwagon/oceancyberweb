@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Play } from "lucide-react";
 import { SaShowreelModal } from "@/components/startup-agency/SaShowreelModal";
+import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 import { heroServiceSlides, heroTagline } from "@/lib/startup-agency/content";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 
@@ -30,7 +31,7 @@ export function SaHeroSection({ tagline = heroTagline }: Props) {
         </div>
 
         <div
-          className={`relative z-10 flex min-h-[calc(100svh-var(--sa-mobile-tab-bar))] flex-col items-center justify-center px-4 pb-8 pt-[max(4.5rem,env(safe-area-inset-top))] pointer-events-none md:absolute md:inset-0 md:min-h-0 md:px-0 md:py-0 md:transition-opacity md:duration-700 ${
+          className={`relative z-10 flex min-h-[calc(100dvh-var(--sa-mobile-tab-bar)-var(--sa-mobile-header))] flex-col items-center justify-center px-4 pb-6 pt-[var(--sa-mobile-header)] pointer-events-none md:absolute md:inset-0 md:min-h-0 md:px-0 md:py-0 md:transition-opacity md:duration-700 ${
             hoveredIndex !== null ? "md:opacity-0" : "opacity-100"
           }`}
         >
@@ -47,22 +48,19 @@ export function SaHeroSection({ tagline = heroTagline }: Props) {
             {tagline}
           </p>
           <div className="pointer-events-auto mt-6 flex w-full max-w-sm flex-col items-center gap-3 sm:max-w-none">
-            <Link href="/get-started" className="sa-btn-primary w-full sm:w-auto">
-              Get started
-            </Link>
             <Link
-              href="/contact"
-              className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline underline-offset-4 hover:text-sa-primary"
+              href={getStartedHref({ topic: "Project from homepage hero" })}
+              className="sa-btn-primary w-full sm:w-auto"
             >
-              Talk to our team
+              {SITE_CTA.getStarted.label}
             </Link>
           </div>
           <div className="pointer-events-auto mt-4 hidden flex-wrap items-center justify-center gap-x-5 gap-y-2 md:flex">
             <Link
-              href="/portfolio"
+              href={SITE_CTA.selectedWork.href}
               className="inline-flex min-h-11 items-center text-sm font-medium text-white/80 underline underline-offset-4 hover:text-sa-primary"
             >
-              View portfolio
+              {SITE_CTA.selectedWork.label}
             </Link>
             <button
               type="button"

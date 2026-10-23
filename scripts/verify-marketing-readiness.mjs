@@ -46,11 +46,12 @@ const placeId =
   process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID?.trim();
 const ratingEnv = process.env.OCEAN_GOOGLE_RATING?.trim();
 const countEnv = process.env.OCEAN_GOOGLE_REVIEW_COUNT?.trim();
-const comGh = process.env.OCEAN_COM_GH_ANNUAL_GHS?.trim();
 
 let reviewTier = "code-fallback";
 let reviewOk = false;
-if (mapsKey && placeId) {
+if (placeId && (placeId.startsWith("AIza") || placeId.length < 20)) {
+  reviewTier = "places-api-misconfigured (GOOGLE_PLACE_ID must be ChIJ… not the API key)";
+} else if (mapsKey && placeId) {
   reviewTier = "places-api-ready";
   reviewOk = true;
 } else if (mapsKey) {
@@ -94,7 +95,6 @@ if (reviewTier.startsWith("code-fallback") || reviewTier.startsWith("places-api-
   push("    → Preferred: npm run verify:google-places (then set keys in Coolify)");
   push("    → Or set OCEAN_GOOGLE_RATING + OCEAN_GOOGLE_REVIEW_COUNT together");
 }
-push(`  .com.gh list price  ${comGh ? `GHS ${comGh}/yr (env)` : "GHS 280 default in code — set OCEAN_COM_GH_ANNUAL_GHS if different"}`);
 push("  Cyber offering      consultation only (no env — do not advertise MSSP/monitoring)\n");
 
 push("CODE (already done)");

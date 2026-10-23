@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SITE_CTA } from "@/lib/marketing/site-cta";
 import { ArrowLeft, Home } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-sa-bg px-6 py-24 text-center text-sa-muted">
+    <main className="sa-status-page bg-sa-bg">
       <p className="sa-eyebrow block">
         404
       </p>
@@ -30,11 +31,11 @@ export default function NotFound() {
           Back to home
         </Link>
         <Link
-          href="/contact"
+          href={SITE_CTA.talkToTeam.href}
           className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-sa-border bg-sa-surface px-6 text-sm font-semibold text-white transition hover:border-sa-primary hover:bg-black/20"
         >
           <ArrowLeft className="mr-2 h-4 w-4" aria-hidden />
-          Contact us
+          {SITE_CTA.talkToTeam.label}
         </Link>
       </div>
     </main>

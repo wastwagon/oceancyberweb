@@ -4,10 +4,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { InsightArticleJsonLd } from "@/components/seo/InsightArticleJsonLd";
 import { buildInsightsHref, type InsightPost } from "@/lib/insights/content";
-
-function contactHrefForTopic(title: string) {
-  return `/contact?topic=${encodeURIComponent(title)}`;
-}
+import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 
 type Props = {
   post: InsightPost;
@@ -124,10 +121,10 @@ export function InsightArticleView({ post }: Props) {
               Tell us about priorities and timelines—we&apos;ll route you to the right lead.
             </p>
             <Link
-              href={contactHrefForTopic(post.title)}
+              href={getStartedHref({ topic: post.title })}
               className="sa-btn-primary mt-8 w-full gap-2 sm:w-auto"
             >
-              Talk to our team
+              {SITE_CTA.getStarted.label}
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </div>

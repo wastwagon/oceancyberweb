@@ -1,24 +1,16 @@
 import Link from "next/link";
+import { SITE_CTA } from "@/lib/marketing/site-cta";
 import { cn } from "@/lib/utils";
 
 type Props = {
   variant?: "inline" | "stack" | "compact";
   className?: string;
-  /** When true, show Get started as the primary action. */
-  showQuote?: boolean;
-  /** Hide the Get started text link. Use on the intake page itself. */
-  omitStart?: boolean;
 };
 
-/**
- * Shared pricing → next-step links.
- * Hierarchy: Get started (primary) → packages → estimator → talk to team.
- */
+/** Pricing context links — packages and estimator (intake lives on tab bar / page CTAs). */
 export function PricingPathsLinks({
   variant = "inline",
   className,
-  showQuote = false,
-  omitStart = false,
 }: Props) {
   if (variant === "compact") {
     return (
@@ -35,64 +27,32 @@ export function PricingPathsLinks({
         <Link href="/tools/project-cost" className="sa-text-link font-medium">
           Estimate scope
         </Link>
-        {omitStart ? null : (
-          <>
-            {" · "}
-            <Link href="/get-started" className="sa-text-link font-medium">
-              Get started
-            </Link>
-          </>
-        )}
       </p>
     );
   }
 
   const links = (
     <>
-      {showQuote ? (
-        <Link
-          href="/get-started"
-          className={
-            variant === "stack"
-              ? "sa-btn-primary w-full min-h-[44px]"
-              : "sa-btn-primary min-h-11 px-5 text-sm"
-          }
-        >
-          Get started
-        </Link>
-      ) : null}
       <Link
-        href="/pricing"
+        href={SITE_CTA.comparePackages.href}
         className={
           variant === "stack"
             ? "sa-btn-outline w-full min-h-[44px]"
             : "inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline underline-offset-4 hover:text-white"
         }
       >
-        Compare packages
+        {SITE_CTA.comparePackages.label}
       </Link>
       <Link
-        href="/tools/project-cost"
+        href={SITE_CTA.estimateInCedis.href}
         className={
           variant === "stack"
             ? "sa-btn-outline w-full min-h-[44px]"
             : "inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline underline-offset-4 hover:text-white"
         }
       >
-        Estimate in GHS
+        {SITE_CTA.estimateInCedis.label}
       </Link>
-      {showQuote ? (
-        <Link
-          href="/contact"
-          className={
-            variant === "stack"
-              ? "sa-btn-outline w-full min-h-[44px]"
-              : "inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline underline-offset-4 hover:text-white"
-          }
-        >
-          Talk to our team
-        </Link>
-      ) : null}
     </>
   );
 

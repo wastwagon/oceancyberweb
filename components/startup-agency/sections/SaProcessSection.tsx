@@ -17,7 +17,7 @@ export function SaProcessSection() {
             <SaSectionHeader
               align="left"
               title="From brief to launch"
-              subtitle="Summary of our delivery — full detail on How we work."
+              subtitle="The same four steps we use on every build — more detail on How we work."
               className="max-w-2xl"
             />
             <div className="flex items-center gap-2">

@@ -1,6 +1,6 @@
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 import { pricingPlans } from "@/lib/startup-agency/pricing";
-import { formatComGhListPriceLabel, HERO_TLD_PRICING } from "@/lib/domain-tld-pricing";
+import { HERO_TLD_PRICING } from "@/lib/domain-tld-pricing";
 
 export type SiteFactRow = {
   label: string;
@@ -84,12 +84,6 @@ export const companyAtAGlanceFacts: readonly SiteFactRow[] = [
     href: "/domains",
   },
   {
-    label: ".com.gh domain (list)",
-    value: `${formatComGhListPriceLabel()} — confirm in search`,
-    href: "/guides/com-gh-domain-registration-guide",
-    note: "Cart shows live registrar total before Paystack",
-  },
-  {
     label: "Ownership",
     value: "Bespoke deliverables transfer after full payment",
     href: "/terms",
@@ -113,7 +107,6 @@ export const ghanaServiceKeywords = [
   "ecommerce website Ghana",
   "cybersecurity company Accra",
   "cPanel hosting Ghana",
-  ".com.gh domain registration",
   "custom software development Ghana",
 ] as const;
 

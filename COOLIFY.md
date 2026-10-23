@@ -104,7 +104,7 @@ Set in Coolify **before rebuilding `web`**. `NEXT_PUBLIC_*` values are baked in 
 | `NEXT_PUBLIC_GOOGLE_WRITE_REVIEW_URL` | `https://g.page/r/CTpsyAyrQ3FIEAI/review` | “Write a review” CTAs on `/reviews` and testimonials. |
 | `NEXT_PUBLIC_GOOGLE_PLACE_ID` | `ChIJ…` | Places API + fallback write-review URL if write URL unset. |
 | `GOOGLE_MAPS_API_KEY` | server API key | Live rating/count via **Places API (New)** (not legacy Places). On the key: API restriction must include **Places API (New)** (search “Places” in the filter, not only “maps”). Prefer **IP address** restriction = Coolify VPS. |
-| `GOOGLE_PLACE_ID` | `ChIJte_56k6Z3w8ROmzIDKtDcUg` | Server-side lookup; should match `NEXT_PUBLIC_GOOGLE_PLACE_ID`. |
+| `GOOGLE_PLACE_ID` | `ChIJte_56k6Z3w8ROmzIDKtDcUg` | **Place ID (`ChIJ…`) — not the API key.** Must match `NEXT_PUBLIC_GOOGLE_PLACE_ID`. |
 | `NEXT_PUBLIC_SITE_URL` | `https://oceancyber.net` | Canonical URLs, sitemap, spot-check links from `verify:marketing`. **Rebuild** after change. |
 | `GOOGLE_VERIFICATION_CODE` | meta tag `content` value | Search Console HTML-tag verification. **Skip if you verified via** `public/google4aca0206ad5fa02e.html`. |
 | `NEXT_PUBLIC_GA_ID` | `G-XXXXXXXX` | Google Analytics. |
@@ -130,6 +130,22 @@ If `--live` reports **API key suspended** or **403 PERMISSION_DENIED**, create a
 
 After adding or changing any `NEXT_PUBLIC_*` or `GOOGLE_VERIFICATION_CODE`, **rebuild** the `web` service in Coolify.
 
+### Get started intake & lead email (`backend` service)
+
+`/get-started` posts to `POST /api/v1/contact/intake`. Rows land in the `contact` table (`source: intake_wizard`) and appear in **Admin → Leads**. Signed-in clients see matching rows on **Dashboard → Project requests** when the email matches.
+
+| Name | Example | Purpose |
+| ---- | ------- | ------- |
+| `CONTACT_NOTIFICATION_EMAIL` | `info@oceancyber.net` | Inbox for contact form, intake, proposals, calculator leads. |
+| `INTAKE_NOTIFICATION_EMAIL` | (optional) | Override inbox for intake only; falls back to `CONTACT_NOTIFICATION_EMAIL`. |
+| `SMTP_FROM` | `OceanCyber <noreply@oceancyber.net>` | Required to send mail; without SMTP, leads still save in the DB. |
+| `SMTP_URL` or `SMTP_HOST` + `SMTP_PORT` + `SMTP_USER` + `SMTP_PASS` | provider-specific | See `backend/src/mail/mail.service.ts`. |
+
+On **`web`** (build + runtime for embed after submit):
+
+| Name | Purpose |
+| ---- | ------- |
+| `NEXT_PUBLIC_CALENDLY_URL` | `https://calendly.com/…` — booking widget on intake success; omit for WhatsApp + contact fallback. |
 
 **Do not** use nested shell-style defaults inside a single value in Coolify (e.g. `http://localhost:${PORT}`). Use one plain URL per variable.
 
@@ -180,3 +196,29 @@ For host access during local development, use `docker/docker-compose.dev.yml` or
 
 
 For local Docker usage (not Coolify), see `SETUP.md` and `ports.env.example`.
+
+---
+
+## 8. Marketing CTAs and project intake
+
+Lead capture is intentionally **not** duplicated in the header utility bar. Operators should know where intake actually runs after deploy.
+
+| Surface | Path / behaviour |
+| -------- | ---------------- |
+| **Primary intake** | `/get-started` → `POST /api/v1/contact/intake` (Prisma `contact`, `source: intake_wizard`) |
+| **Query params** | `?plan=startup\|professional\|enterprise` and/or `?topic=` prefill wizard goals (see `lib/marketing/intake-topic.ts`, `getStartedHref` in `@oceancyber/shared`) |
+| **Mobile tab bar** | **Get started** on marketing routes (see `ConditionalChrome` / home shells) |
+| **Header** | **Talk to our team** → `/contact` (no header **Get started** pill) |
+| **CTA constants** | `packages/shared/src/marketing-cta.ts` — re-exported as `@/lib/marketing/site-cta` |
+
+**Optional notifications after intake**
+
+| Variable | Purpose |
+| -------- | ------- |
+| `INTAKE_NOTIFICATION_EMAIL` or `CONTACT_NOTIFICATION_EMAIL` | Inbox for new intake rows |
+| `SMTP_*` | Outbound mail from the **backend** (see `.env.example`) |
+| `NEXT_PUBLIC_CALENDLY_URL` | Post-submit booking embed on `/get-started` |
+
+**CI guard:** `npm run verify:marketing-cta` blocks hardcoded duplicate CTA copy outside the shared module.
+
+**After copy or CTA changes:** rebuild **`web`** so `NEXT_PUBLIC_*` and UI updates ship; intake API changes need **`backend`** redeploy.

@@ -145,15 +145,34 @@ export const portfolioConceptWork: readonly WorkPreviewItem[] = [
   },
 ];
 
-/** Homepage collage + creative portfolio grid (live first). */
-/** About / homepage grids — live clients only; concepts live under /portfolio?tab=creative. */
-export const aboutWorkPreview: readonly WorkPreviewItem[] = [...portfolioLiveWork];
-
 export const aboutStats = [
-  { value: `Since ${googleBusinessProfile.foundedYear}`, label: "Accra office" },
-  { value: String(googleBusinessProfile.teamSize), label: "People" },
-  { value: String(publishedLivePortfolioCount), label: "Live portfolio sites" },
+  { value: `Since ${googleBusinessProfile.foundedYear}`, label: "Accra studio" },
+  { value: String(googleBusinessProfile.teamSize), label: "In-house team" },
+  { value: "Design → ship", label: "One accountable team" },
 ] as const;
+
+/** Homepage “Our Agency” — how we work, not portfolio tiles. */
+export const agencyPillars = [
+  {
+    title: "Design in Figma, build in-house",
+    body: "You approve real screens before we write production code.",
+  },
+  {
+    title: "One Accra team end to end",
+    body: "Same people from discovery through launch — design, engineering, hosting, and security advice.",
+  },
+  {
+    title: "Ghana-ready checkout and hosting",
+    body: "Paystack, Mobile Money, and cPanel hosting with prices in cedis on /pricing.",
+  },
+] as const;
+
+export const portfolioSectionIntro = {
+  eyebrow: "Selected work",
+  title: "A few highlights from many projects",
+  subtitle:
+    `We have delivered sites and apps across law, retail, advisory, and public sector. These ${publishedLivePortfolioCount} live clients are a sample — not our full list.`,
+} as const;
 
 export const trustSignals = buildTrustSignals(fallbackPlaceStats());
 

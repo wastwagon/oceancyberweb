@@ -8,9 +8,18 @@ import {
   type IntentPage,
   type IntentTable,
 } from "@/lib/seo/intent-pages";
+import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://oceancyber.net";
+
+/** Prefill intake goals from the guide title when CTA points at /get-started. */
+function resolveIntentCtaHref(page: IntentPage): string {
+  if (page.cta.href === SITE_CTA.getStarted.href) {
+    return getStartedHref({ topic: page.title });
+  }
+  return page.cta.href;
+}
 
 function IntentTable({ table }: { table: IntentTable }) {
   return (
@@ -55,6 +64,13 @@ function IntentTable({ table }: { table: IntentTable }) {
 
 function isExternalHref(href: string): boolean {
   return /^https?:\/\//i.test(href);
+}
+
+function resolveOutboundHref(href: string, page: IntentPage): string {
+  if (href === SITE_CTA.getStarted.href) {
+    return getStartedHref({ topic: page.title });
+  }
+  return href;
 }
 
 function IntentOutboundLink({
@@ -173,7 +189,7 @@ export function SeoIntentPageView({ page }: { page: IntentPage }) {
               </p>
               <p className="mt-2">{partner.disclosure}</p>
               <p className="mt-3">
-                <Link href="/get-started" className="sa-text-link">
+                <Link href={getStartedHref({ topic: page.title })} className="sa-text-link">
                   Custom build with OceanCyber
                 </Link>
               </p>
@@ -197,7 +213,7 @@ export function SeoIntentPageView({ page }: { page: IntentPage }) {
           </p>
           <div className="mt-8">
             <IntentOutboundLink
-              href={page.cta.href}
+              href={resolveIntentCtaHref(page)}
               label={page.cta.label}
               sponsored={sponsorOutbound}
               className="sa-btn-primary w-full sm:w-auto"
@@ -255,7 +271,7 @@ export function SeoIntentPageView({ page }: { page: IntentPage }) {
                 </div>
                 {section.example.link ? (
                   <IntentOutboundLink
-                    href={section.example.link.href}
+                    href={resolveOutboundHref(section.example.link.href, page)}
                     label={section.example.link.label}
                     sponsored={sponsorOutbound}
                     className="sa-text-link mt-4 inline-flex text-sm"
@@ -268,7 +284,7 @@ export function SeoIntentPageView({ page }: { page: IntentPage }) {
                 {section.links.map((link) => (
                   <li key={link.href}>
                     <IntentOutboundLink
-                      href={link.href}
+                      href={resolveOutboundHref(link.href, page)}
                       label={link.label}
                       sponsored={sponsorOutbound}
                       className="sa-text-link text-sm"
@@ -306,7 +322,7 @@ export function SeoIntentPageView({ page }: { page: IntentPage }) {
             {page.related.map((link) => (
               <li key={link.href}>
                 <IntentOutboundLink
-                  href={link.href}
+                  href={resolveOutboundHref(link.href, page)}
                   label={link.label}
                   sponsored={sponsorOutbound}
                   className="sa-text-link text-sm"
@@ -314,23 +330,6 @@ export function SeoIntentPageView({ page }: { page: IntentPage }) {
               </li>
             ))}
           </ul>
-        </div>
-      </section>
-
-      <section className="py-14 md:py-20">
-        <div className="sa-container max-w-3xl">
-          <h2 className="font-heading text-2xl font-semibold text-white md:text-3xl">
-            {page.cta.title}
-          </h2>
-          <p className="mt-4 text-sm leading-relaxed text-sa-muted/80 md:text-base">{page.cta.body}</p>
-          <div className="mt-8">
-            <IntentOutboundLink
-              href={page.cta.href}
-              label={page.cta.label}
-              sponsored={sponsorOutbound}
-              className="sa-btn-primary w-full sm:w-auto"
-            />
-          </div>
         </div>
       </section>
     </div>
