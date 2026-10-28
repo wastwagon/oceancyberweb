@@ -4,9 +4,9 @@ import { withCanonical } from "@/lib/seo/canonical";
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "Web, mobile, and cybersecurity services in Accra and Ghana",
+    title: "Web, mobile, and cybersecurity services in Accra, Ghana",
     description:
-      "Service hub for OceanCyber: web design, web development, mobile apps, ecommerce, cybersecurity, and UI/UX. Packages from GHS 6,000. Hire pages for Accra and Ghana linked below.",
+      "Service hub for OceanCyber: best web design and website development company in Accra, Ghana. Mobile apps, ecommerce, cybersecurity, and UI/UX from GHS 6,000. Accra and Ghana local pages linked below.",
   },
   "/services",
 );

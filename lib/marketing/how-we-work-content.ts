@@ -17,10 +17,10 @@ export const designPhases = [
   },
   {
     title: "Design system",
-    body: "Tokens, components, and specs your engineering team can ship at scale.",
+    body: "Tokens, components, and specs your engineering team can implement at scale.",
   },
   {
-    title: "Handoff & QA",
+    title: "Handoff and QA",
     body: "Redlines, assets, and design QA through launch.",
   },
 ] as const;
@@ -53,7 +53,7 @@ export const clientCommitments = [
   },
   {
     title: "Weekly visibility",
-    body: "Demo checkpoints, written status, and direct access during active build phases.",
+    body: "Review checkpoints, written status, and direct access during active build phases.",
   },
   {
     title: "Security as standard",
@@ -61,7 +61,7 @@ export const clientCommitments = [
   },
   {
     title: "Honest scoping",
-    body: "We use the project calculator and intake process to filter mismatches early — premium delivery, not lowball bait-and-switch.",
+    body: "We use the project cost estimator and Get started intake to filter mismatches early — scoped delivery with clear milestones, not lowball bait-and-switch.",
   },
 ] as const;
 
@@ -70,28 +70,28 @@ export const proofLinks = [
     slug: "fitch-attorneys",
     title: "Fitch Attorneys",
     metric: "180%",
-    metricLabel: "Case efficiency",
+    metricLabel: "Case efficiency increased",
     sector: "Legal",
   },
   {
     slug: "africa-governance-centre",
     title: "Africa Governance Centre",
     metric: "220%",
-    metricLabel: "Programme visibility",
+    metricLabel: "Programme visibility increased",
     sector: "Governance",
   },
   {
     slug: "fitch-advisory",
     title: "Fitch Advisory",
     metric: "250%",
-    metricLabel: "Client engagement",
+    metricLabel: "Client engagement increased",
     sector: "Advisory",
   },
   {
     slug: "thinq-shopping",
     title: "ThinQ Shopping",
     metric: "165%",
-    metricLabel: "Mobile conversions",
+    metricLabel: "Mobile conversions rose",
     sector: "Commerce",
   },
 ] as const;

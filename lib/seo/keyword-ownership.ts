@@ -40,6 +40,51 @@ export const keywordOwners: readonly KeywordOwner[] = [
     role: "geo-hire",
   },
   {
+    phrase: "best website developers in ghana",
+    ownerPath: "/services/web-development-in-ghana",
+    role: "geo-hire",
+  },
+  {
+    phrase: "best web developers in ghana",
+    ownerPath: "/services/web-development-in-ghana",
+    role: "geo-hire",
+  },
+  {
+    phrase: "website development company in ghana",
+    ownerPath: "/services/web-development-in-ghana",
+    role: "geo-hire",
+  },
+  {
+    phrase: "website development companies in accra",
+    ownerPath: "/services/web-development-in-accra",
+    role: "geo-hire",
+  },
+  {
+    phrase: "website design company in ghana",
+    ownerPath: "/services/web-design-in-ghana",
+    role: "geo-hire",
+  },
+  {
+    phrase: "web design company in ghana",
+    ownerPath: "/services/web-design-in-ghana",
+    role: "geo-hire",
+  },
+  {
+    phrase: "seo website developers ghana",
+    ownerPath: "/services/web-development-in-ghana",
+    role: "geo-hire",
+  },
+  {
+    phrase: "best web designers in ghana",
+    ownerPath: "/services/ui-ux-design-in-ghana",
+    role: "geo-hire",
+  },
+  {
+    phrase: "best web designers in accra",
+    ownerPath: "/services/ui-ux-design-in-accra",
+    role: "geo-hire",
+  },
+  {
     phrase: "best software development company in accra",
     ownerPath: "/services/software-development-in-accra",
     role: "geo-hire",

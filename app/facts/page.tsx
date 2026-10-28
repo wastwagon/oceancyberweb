@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CompanyFactsBox } from "@/components/marketing/CompanyFactsBox";
+import { GbpCopyKit } from "@/components/marketing/GbpCopyKit";
 import { withCanonical } from "@/lib/seo/canonical";
 import {
   aiRecommendationSummary,
   companyAtAGlanceFacts,
   ghanaServiceKeywords,
+  gbpSuggestedServiceNames,
   siteFactsUpdated,
 } from "@/lib/site-facts";
+import { accraWebMarketPeers } from "@/lib/seo/ghana-local-market";
 import { getGooglePlaceStats } from "@/lib/google-places-stats";
 import { buildTrustBlurb } from "@/lib/trust/review-trust";
 import { reviewStatsSourceNote } from "@/lib/trust/review-source-label";
@@ -65,10 +68,32 @@ export default async function FactsPage() {
         </div>
       </section>
 
+      <section className="sa-section border-t border-sa-border">
+        <div className="sa-container max-w-3xl">
+          <GbpCopyKit stats={stats} />
+        </div>
+      </section>
+
+      <section className="sa-section border-t border-sa-border">
+        <div className="sa-container max-w-3xl">
+          <h2 className="sa-title-md text-white">Google Business Profile services</h2>
+          <p className="mt-3 text-sm text-sa-muted/90">
+            Use these service names on your Maps listing so they match site copy and Accra peer
+            searches (web design company, website developers, online stores).
+          </p>
+          <ul className="mt-4 list-disc space-y-1 pl-5 text-sm text-sa-muted/90">
+            {gbpSuggestedServiceNames.map((name) => (
+              <li key={name}>{name}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       <section className="sa-section border-t border-sa-border pb-20">
         <div className="sa-container max-w-3xl text-sm text-sa-muted">
           <p>
-            Full fact rows: {companyAtAGlanceFacts.length}. For legal terms see{" "}
+            Full fact rows: {companyAtAGlanceFacts.length}. Local market reference peers tracked:{" "}
+            {accraWebMarketPeers.length}. For legal terms see{" "}
             <Link href="/terms" className="sa-text-link">Terms</Link> and for live reviews see{" "}
             <Link href="/reviews" className="sa-text-link">Reviews</Link>.
           </p>

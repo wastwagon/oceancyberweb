@@ -53,7 +53,7 @@ export function buildGeoFaqs(
       {
         question: "Do you only work with Greater Accra businesses?",
         answer:
-          "No. Accra is our only office, but we deliver nationwide. Use the Ghana hire page if your team is outside Greater Accra.",
+          "No. Accra is our only office, but we deliver nationwide. See our best web design company in Ghana page if your team is outside Greater Accra.",
       },
     ];
   }
@@ -64,7 +64,7 @@ export function buildGeoFaqs(
       answer: priceAnswer,
     },
     {
-      question: "Can a team outside Accra hire OceanCyber?",
+      question: "Can a team outside Accra work with OceanCyber?",
       answer: `Yes. Discovery can be remote or at ${googleBusinessProfile.address.street}, Accra. Delivery and support use the same Accra engineering channel.`,
     },
     {

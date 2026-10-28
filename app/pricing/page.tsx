@@ -41,7 +41,7 @@ export default function PricingPage() {
           <p className="sa-eyebrow">Pricing</p>
           <h1 className="sa-title-lg mt-4">Web and mobile packages for teams in Ghana</h1>
           <p className="sa-subtitle mx-auto">
-            Starting prices are in Ghana cedis. We confirm scope in discovery, then deliver on fixed-price milestones.
+            Starting prices are in Ghana cedis. We confirm scope in discovery, then deliver on fixed-price milestones in writing.
           </p>
           <div className="mx-auto mt-8 flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
             <Link href={SITE_CTA.estimateInCedis.href} className="sa-btn-outline w-full sm:w-auto">

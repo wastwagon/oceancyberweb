@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { GooglePlaceStats } from "@/lib/google-places-stats";
 import { withCanonical } from "@/lib/seo/canonical";
 import { buildGeoFaqs, buildGeoIntro } from "@/lib/seo/geo-page-copy";
+import { geoMarketFaqs } from "@/lib/seo/ghana-local-market";
 import { serviceImages } from "@/lib/startup-agency/service-images";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 import { fallbackPlaceStats, formatReviewsTrustLine } from "@/lib/trust/review-trust";
@@ -50,7 +51,12 @@ export const geoServiceTopics: readonly GeoServiceTopic[] = [
     serviceHref: "/services/web-development",
     image: serviceImages.webDevelopment,
     startingPriceGhs: 6000,
-    serviceTypes: ["Web development", "Website development", "Web applications"],
+    serviceTypes: [
+      "Web development company",
+      "Website development",
+      "Website developers",
+      "Web applications",
+    ],
     accraFocus:
       "Company websites and web apps for Accra teams that want design and build in one office visit at 47 Nii Kwashiefio Avenue — SEO, speed, and Paystack or MoMo when checkout is required.",
     ghanaFocus:
@@ -69,8 +75,13 @@ export const geoServiceTopics: readonly GeoServiceTopic[] = [
     secondaryQueries: [
       "best web development agency in Accra Ghana",
       "best website development company in Accra",
+      "best website developers in Ghana",
+      "best web developers in Ghana",
+      "website development company in Ghana",
+      "website development companies in Accra",
       "web developer in Accra Ghana",
       "website developer in Accra Ghana",
+      "SEO website developers Ghana",
     ],
   },
   {
@@ -139,11 +150,11 @@ export const geoServiceTopics: readonly GeoServiceTopic[] = [
     startingPriceGhs: 6000,
     serviceTypes: ["E-commerce", "Online stores", "Checkout"],
     accraFocus:
-      "Online stores for Accra retailers: catalog, Paystack and Mobile Money checkout, and delivery rules that match Greater Accra logistics.",
+      "Online stores for Accra retailers: catalogue, Paystack and Mobile Money checkout, and delivery rules that match Greater Accra logistics.",
     ghanaFocus:
-      "Ecommerce builds for Ghana shops selling nationwide. MoMo and cards, order desk workflows, and hosting sized for a real catalog — not a template demo.",
+      "Ecommerce builds for Ghana shops selling nationwide. MoMo and cards, order desk workflows, and hosting sized for a real catalogue — not a template demo.",
     deliverables: [
-      "Product catalog, cart, and checkout with Paystack or MoMo",
+      "Product catalogue, cart, and checkout with Paystack or MoMo",
       "Order notifications your team can run from phone or desk",
       "SEO for category and product pages where the platform allows it",
     ],
@@ -167,7 +178,7 @@ export const geoServiceTopics: readonly GeoServiceTopic[] = [
     startingPriceGhs: 4500,
     serviceTypes: ["Security consulting", "Security assessments", "Hardening"],
     accraFocus:
-      "Security consulting for Accra businesses — assessments and hardening from GHS 4,500. Consultation only, not MSSP or 24/7 monitoring.",
+      "Security consulting for Accra businesses — assessments and hardening from GHS 4,500. Consultation only, not managed security services or 24/7 monitoring.",
     ghanaFocus:
       "Security consulting for Ghana organisations — assessments, hardening, and remediation evidence your team can act on. Delivered from Accra nationwide.",
     deliverables: [
@@ -197,7 +208,7 @@ export const geoServiceTopics: readonly GeoServiceTopic[] = [
     accraFocus:
       "UI/UX and brand design for Accra product teams — Figma prototypes and engineering handoff from the same studio that builds the release.",
     ghanaFocus:
-      "Product and brand design for Ghana startups and SMEs. Research, wireframes, and design systems that Accra engineers can ship without rework.",
+      "Product and brand design for Ghana startups and SMEs. Research, wireframes, and design systems that Accra engineers can build without rework.",
     deliverables: [
       "Brand UX packages from GHS 3,500",
       "Figma prototypes your team can click before build",
@@ -280,7 +291,10 @@ function buildGeoPage(
   const description = `${h1}. ${focus} From ${price}. ${formatReviewsTrustLine(stats)}`;
 
   const intro = buildGeoIntro(city, focus, price, stats);
-  const faqs = buildGeoFaqs(topic, city, price, focus, stats);
+  const faqs = [
+    ...buildGeoFaqs(topic, city, price, focus, stats),
+    ...geoMarketFaqs(topic.key, city, stats),
+  ];
 
   return {
     slug,

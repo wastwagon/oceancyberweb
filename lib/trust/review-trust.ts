@@ -16,6 +16,17 @@ export function formatReviewsTrustLine(stats: GooglePlaceStats): string {
   return `Rated ${stats.rating.toFixed(1)} from ${stats.reviewCount} Google review${stats.reviewCount === 1 ? "" : "s"}`;
 }
 
+/** Schema.org AggregateRating — keep in sync with Google Business Profile. */
+export function buildAggregateRatingJsonLd(stats: GooglePlaceStats) {
+  return {
+    "@type": "AggregateRating" as const,
+    ratingValue: stats.rating,
+    reviewCount: stats.reviewCount,
+    bestRating: 5,
+    worstRating: 1,
+  };
+}
+
 export function formatCompanyPresenceLine(stats: GooglePlaceStats): string {
   return `OceanCyber is at ${googleBusinessProfile.address.street} in Accra, founded in ${googleBusinessProfile.foundedYear}, with ${googleBusinessProfile.teamSize} people and a ${stats.rating.toFixed(1)} rating from ${stats.reviewCount} Google reviews.`;
 }
@@ -23,9 +34,9 @@ export function formatCompanyPresenceLine(stats: GooglePlaceStats): string {
 export function buildTrustBlurb(stats: GooglePlaceStats) {
   const reviews = formatReviewsTrustLine(stats);
   return {
-    short: `Websites, mobile apps, and cybersecurity from one Accra team. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}, ${reviews.toLowerCase()}.`,
+    short: `Websites, mobile apps, and cybersecurity from one Accra team. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}. ${reviews}`,
     office: `One office at ${googleBusinessProfile.address.street}, Accra.`,
-    seo: `OceanCyber is a web design and development company in Accra and Ghana for websites, mobile apps, and cybersecurity. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}, ${reviews.toLowerCase()}. One office at ${googleBusinessProfile.address.street}, Accra.`,
+    seo: `OceanCyber is a web design and development company in Accra, Ghana — websites, mobile apps, and cybersecurity. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}. ${reviews} Our office is at ${googleBusinessProfile.address.street}, Accra.`,
     reviewsOnly: reviews,
   };
 }
@@ -44,14 +55,14 @@ export function buildTrustSignals(stats: GooglePlaceStats): TrustSignal[] {
     {
       icon: "award",
       stat: "18+",
-      title: "Years delivering",
+      title: "Years in business",
       body: `Accra-based since ${googleBusinessProfile.foundedYear}, with ${googleBusinessProfile.teamSize} people at ${googleBusinessProfile.address.street}.`,
     },
     {
       icon: "star",
       stat: `${stats.rating.toFixed(1)}★`,
       title: "Google rating",
-      body: `${stats.reviewCount} verified Google reviews from web, mobile, and security work — see /reviews.`,
+      body: `${stats.reviewCount} verified Google reviews from web, mobile, and security work. See our Google reviews page.`,
     },
     {
       icon: "shield",
@@ -69,15 +80,15 @@ export function buildHomeFaqItems(stats: GooglePlaceStats): HomeFaqItem[] {
   return [
     {
       q: "Where is OceanCyber based?",
-      a: `Accra — ${googleBusinessProfile.address.street}. A team of ${googleBusinessProfile.teamSize}, founded in ${googleBusinessProfile.foundedYear}. ${reviewsOnly} See web design in Accra and web design in Ghana for hire pages.`,
+      a: `Accra — ${googleBusinessProfile.address.street}. A team of ${googleBusinessProfile.teamSize}, founded in ${googleBusinessProfile.foundedYear}. ${reviewsOnly} See best web design company in Accra and Ghana on our Services hub.`,
     },
     {
       q: "How do we start a project?",
-      a: "Use Get started or talk to our team on Contact. Share goals, budget, and timeline — we reply with the right package or next step. The project calculator gives a rough cedis range.",
+      a: "Use Get started or talk to our team on the Contact page. Share goals, budget, and timeline — we reply with the right package or next step. The project calculator gives a rough cedis range.",
     },
     {
       q: "What services do you offer?",
-      a: "UI/UX, websites, mobile apps, e-commerce, cybersecurity, and hosting — all from the Accra office. See Services for detail.",
+      a: "UI/UX, websites, mobile apps, e-commerce, cybersecurity, and hosting — all from the Accra office. See Services for details.",
     },
     {
       q: "Do you offer maintenance?",
@@ -85,7 +96,7 @@ export function buildHomeFaqItems(stats: GooglePlaceStats): HomeFaqItem[] {
     },
     {
       q: "How long does a typical build take?",
-      a: "Depends on scope. Small marketing sites move faster; product work ships in milestones with regular demos.",
+      a: "Depends on scope. Small marketing sites move faster; product work is delivered in milestones with regular demos.",
     },
     {
       q: "Do you require a deposit?",

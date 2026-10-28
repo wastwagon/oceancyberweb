@@ -27,7 +27,7 @@ export function SaAboutSection({ presenceSubtitle = companyPresence }: Props) {
                 subtitle={presenceSubtitle}
               />
               <p className="mt-4 max-w-xl text-sm leading-relaxed text-sa-muted md:text-base">
-                We are one Accra studio for design, engineering, hosting, and security advice — not a
+                We are one Accra studio for design, engineering, hosting, and security consulting — not a
                 handoff chain. That keeps your site or app consistent as you add features, logins, or
                 payments.
               </p>

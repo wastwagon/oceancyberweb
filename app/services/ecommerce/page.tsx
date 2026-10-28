@@ -7,6 +7,7 @@ import {
 import { serviceHeroCta } from "@/lib/marketing/site-cta";
 import { serviceImages } from "@/lib/startup-agency/service-images";
 import { servicePricingHints } from "@/lib/startup-agency/pricing";
+import { ecommerceServiceRelatedReading } from "@/lib/marketing/related-reading-presets";
 
 const content: ServicePageContent = {
   heroEyebrow: "Commerce",
@@ -15,7 +16,7 @@ const content: ServicePageContent = {
   heroSuffix: "",
   heroHighlightTone: "white",
   heroDescription:
-    "Online stores for Accra retailers and Ghana-wide sellers — catalog, checkout, Paystack and Mobile Money, from GHS 6,000.",
+    "Online stores for Accra retailers and Ghana-wide sellers — catalogue, checkout, Paystack and Mobile Money, from GHS 6,000.",
   heroCtaLabel: serviceHeroCta.label,
   heroCtaHref: serviceHeroCta.href,
   showAtAGlance: true,
@@ -54,7 +55,7 @@ const content: ServicePageContent = {
   stackEyebrow: "Store stack",
   stackTitle: "Platforms that match how you sell",
   stackSubtitle:
-    "Custom, Shopify, or WooCommerce — chosen for your catalog size and ops.",
+    "Custom, Shopify, or WooCommerce — chosen for your catalogue size and ops.",
   stack: [
     { title: "Custom storefronts", description: "When you need full control and Accra hosting." },
     { title: "Shopify / Woo", description: "When speed-to-launch beats bespoke everything." },
@@ -86,7 +87,7 @@ const content: ServicePageContent = {
   ],
   outcomesEyebrow: "Outcomes",
   outcomesTitle: "Commerce in Accra context",
-  outcomesSubtitle: "Illustrative — every catalog and ops model differs.",
+  outcomesSubtitle: "Illustrative — every catalogue and ops model differs.",
   outcomes: [
     {
       title: "ThinQ Shopping",
@@ -108,6 +109,7 @@ const content: ServicePageContent = {
   ctaDescription:
     "Share what you sell, how you deliver, and your budget — we will recommend Startup or Professional with a clear milestone plan.",
   pricing: servicePricingHints.ecommerce,
+  relatedReading: ecommerceServiceRelatedReading,
 };
 
 export default function EcommercePage() {

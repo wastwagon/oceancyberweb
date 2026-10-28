@@ -24,6 +24,7 @@ import type { PortfolioCaseStudy } from "@/lib/types/portfolio-case-study";
 import { cn } from "@/lib/utils";
 import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 import { fadeUpProps, fadeUpSoft, staggerDelay } from "@/lib/scroll-reveal";
+import { isStudioPortfolio } from "@/lib/portfolio/portfolio-seo-metadata";
 
 const MotionLink = motion(Link);
 
@@ -124,6 +125,7 @@ function GridProjectCard({
   project: PortfolioCaseStudy;
   index: number;
 }) {
+  const studioConcept = isStudioPortfolio(project);
   const body = (
     <>
       <div className="relative aspect-[16/10] min-h-[10.5rem] w-full overflow-hidden rounded-t-3xl md:min-h-[12rem] border-b border-sa-border">
@@ -138,6 +140,11 @@ function GridProjectCard({
         
         <div className="absolute left-4 right-4 top-4 flex items-start justify-between gap-2">
           <div className="flex flex-wrap gap-2">
+            {studioConcept ? (
+              <span className="sa-chip border-sa-primary/40 bg-sa-bg/90 text-sa-primary">
+                Studio concept
+              </span>
+            ) : null}
             <span className="sa-chip">{project.category}</span>
             <span className="sa-chip">{project.year}</span>
           </div>
@@ -551,7 +558,7 @@ export function PortfolioWork({
         >
           <div className="sa-card p-10 md:p-16">
             <h3 className="sa-title">
-              {isPage ? "Ready to ship your product?" : "Talk to our team"}
+              {isPage ? "Ready to launch your product?" : "Talk to our team"}
             </h3>
             <p className="sa-subtitle mx-auto mt-6">
               {isPage

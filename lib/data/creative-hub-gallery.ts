@@ -21,7 +21,7 @@ export const creativeHubGallery: CreativeHubItem[] = [
     id: "design-system-template",
     title: "Design System Template",
     category: "Brand & UI",
-    image: "/images/creative-template.png",
+    image: siteImagePaths.work.brandSystem,
     imageAlt: "OceanCyber design system template concept",
   },
   {

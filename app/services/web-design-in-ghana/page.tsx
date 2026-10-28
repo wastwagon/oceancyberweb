@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { MapPin, Mail, Phone } from "lucide-react";
-import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
+import { WebDesignGeoPageView } from "@/components/seo/WebDesignGeoPageView";
 import { withCanonical } from "@/lib/seo/canonical";
-import { proofOutcomes } from "@/lib/startup-agency/content";
 import { getGooglePlaceStats } from "@/lib/google-places-stats";
 import { resolveServicePageDescription } from "@/lib/seo/service-layout-metadata";
-import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 import { webDesignGhanaFaqs } from "@/lib/seo/web-design-geo-faqs";
+import { siteImagePaths } from "@/lib/seo/site-image-paths";
+import { webDesignGeoRelatedReading } from "@/lib/marketing/web-design-geo-related";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://oceancyber.net";
@@ -54,7 +53,12 @@ export default async function WebDesignGhanaPage() {
       {
         "@type": "Service",
         name: "Best web design company in Ghana",
-        serviceType: ["Web design", "Web development", "Website development"],
+        serviceType: [
+          "Web design company",
+          "Website design company",
+          "Website development",
+          "Website developers",
+        ],
         url: pageUrl,
         areaServed: { "@type": "Country", name: "Ghana" },
         description:
@@ -72,164 +76,49 @@ export default async function WebDesignGhanaPage() {
   };
 
   return (
-    <div className="bg-sa-bg text-sa-muted">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-
-      <section className="border-b border-sa-border">
-        <div className="sa-container max-w-3xl pb-14 pt-28 md:pb-20 md:pt-36">
-          <nav aria-label="Breadcrumb" className="text-sm text-sa-muted/60">
-            <ol className="flex flex-wrap items-center gap-2">
-              <li>
-                <Link href="/" className="hover:text-sa-primary">
-                  Home
-                </Link>
-              </li>
-              <li aria-hidden>/</li>
-              <li>
-                <Link href="/services" className="hover:text-sa-primary">
-                  Services
-                </Link>
-              </li>
-              <li aria-hidden>/</li>
-              <li className="text-sa-muted">Web design company in Ghana</li>
-            </ol>
-          </nav>
-
-          <p className="mt-8 text-sm font-semibold text-sa-primary">
-            Ghana · from GHS 6,000
-          </p>
-          <h1 className="sa-title-lg mt-3">
-            Best web design company in Ghana
-          </h1>
-          <p className="mt-5 text-lg leading-relaxed text-sa-muted/80">
-            Websites for Ghana businesses nationwide — designed and built from Accra for
-            Kumasi, Tema, Takoradi, Tamale, and remote teams. Same GHS packages as Accra
-            clients, one phone number, and screen-share discovery when you cannot visit.
-            Prefer local meetings? See{" "}
-            <Link href="/services/web-design-in-accra" className="sa-text-link font-medium">
-              web design in Accra
-            </Link>
-            .
-          </p>
-
-          <div className="mt-8 flex flex-col items-start gap-3">
-            <Link
-              href={getStartedHref({ topic: "Web design in Ghana" })}
-              className="sa-btn-primary w-full sm:w-auto"
+    <WebDesignGeoPageView
+      jsonLd={jsonLd}
+      heroImage={siteImagePaths.work.brandSystem}
+      eyebrow="Ghana · from GHS 6,000"
+      h1="Best web design company in Ghana"
+      intro={
+        <p>
+          Websites for Ghana businesses nationwide — designed and built from Accra for Kumasi, Tema,
+          Takoradi, Tamale, and remote teams. Same GHS packages as Accra clients, one phone number,
+          and screen-share discovery when you cannot visit. Prefer local meetings? See{" "}
+          <Link href="/services/web-design-in-accra" className="sa-text-link font-medium">
+            web design in Accra
+          </Link>
+          .
+        </p>
+      }
+      ctaTopic="Web design in Ghana"
+      faqs={faqs}
+      relatedReading={webDesignGeoRelatedReading}
+      showContactBlock
+    >
+      <section>
+        <h2 className="font-heading text-2xl font-semibold text-white md:text-3xl">
+          Cities and coverage
+        </h2>
+        <ul className="mt-6 flex flex-wrap gap-2">
+          {cities.map((city) => (
+            <li
+              key={city}
+              className="rounded-full border border-sa-border bg-sa-surface px-3 py-1.5 text-sm text-sa-muted"
             >
-              {SITE_CTA.getStarted.label}
-            </Link>
-          </div>
-        </div>
+              {city}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-6 text-sm text-sa-muted/70">
+          Looking for Accra specifically?{" "}
+          <Link href="/services/web-design-in-accra" className="sa-text-link font-medium">
+            Web designer in Accra
+          </Link>
+          .
+        </p>
       </section>
-
-      <section className="border-b border-sa-border py-14 md:py-20">
-        <div className="sa-container max-w-3xl">
-          <h2 className="font-heading text-2xl font-semibold text-white md:text-3xl">
-            Cities and coverage
-          </h2>
-          <ul className="mt-6 flex flex-wrap gap-2">
-            {cities.map((city) => (
-              <li
-                key={city}
-                className="rounded-full border border-sa-border bg-sa-surface px-3 py-1.5 text-sm text-sa-muted"
-              >
-                {city}
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 text-sm text-sa-muted/70">
-            Looking for Accra specifically?{" "}
-            <Link href="/services/web-design-in-accra" className="sa-text-link font-medium">
-              Web designer in Accra
-            </Link>
-            .
-          </p>
-        </div>
-      </section>
-
-      <section className="border-b border-sa-border py-14 md:py-20">
-        <div className="sa-container max-w-3xl">
-          <h2 className="font-heading text-2xl font-semibold text-white md:text-3xl">
-            Before you brief us
-          </h2>
-          <ul className="mt-6 space-y-3 text-sm">
-            <li>
-              <Link href="/guides/website-cost-in-ghana" className="sa-text-link">
-                How much a website costs in Ghana
-              </Link>
-            </li>
-            <li>
-              <Link href="/compare/wix-vs-custom-website-ghana" className="sa-text-link">
-                Wix or a custom website
-              </Link>
-            </li>
-            <li>
-              <Link href="/compare/agency-vs-freelancer-vs-in-house-ghana" className="sa-text-link">
-                Agency, freelancer, or an in-house hire
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section className="border-b border-sa-border py-14 md:py-20">
-        <div className="sa-container max-w-3xl">
-          <FaqPageJsonLd items={faqs.map((faq) => ({ q: faq.question, a: faq.answer }))} />
-          <h2 className="font-heading text-2xl font-semibold text-white md:text-3xl">
-            Results
-          </h2>
-          <ul className="mt-6 space-y-3 text-sm leading-relaxed text-sa-muted/80">
-            {proofOutcomes.map((item) => (
-              <li key={item.client}>
-                <a href={item.href} className="sa-text-link-quiet">
-                  {item.client}
-                </a>
-                {" — "}
-                {item.result}
-              </li>
-            ))}
-          </ul>
-          <h2 className="mt-14 font-heading text-2xl font-semibold text-white md:text-3xl">
-            Common questions
-          </h2>
-          <dl className="mt-8 space-y-6">
-            {faqs.map((faq) => (
-              <div key={faq.question}>
-                <dt className="font-heading text-base font-semibold text-white">{faq.question}</dt>
-                <dd className="mt-2 text-sm leading-relaxed text-sa-muted/75">{faq.answer}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
-
-      <section className="py-14 md:py-20">
-        <div className="sa-container max-w-3xl">
-          <h2 className="font-heading text-2xl font-semibold text-white md:text-3xl">Contact</h2>
-          <ul className="mt-6 space-y-3 text-sm text-sa-muted">
-            <li className="flex items-start gap-3">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-sa-primary" aria-hidden />
-              47 Nii Kwashiefio Avenue, Accra, Ghana
-            </li>
-            <li className="flex items-center gap-3">
-              <Phone className="h-4 w-4 shrink-0 text-sa-primary" aria-hidden />
-              <a href="tel:+233242565695" className="hover:text-sa-primary">
-                +233 242 565 695
-              </a>
-            </li>
-            <li className="flex items-center gap-3">
-              <Mail className="h-4 w-4 shrink-0 text-sa-primary" aria-hidden />
-              <a href="mailto:info@oceancyber.net" className="hover:text-sa-primary">
-                info@oceancyber.net
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-    </div>
+    </WebDesignGeoPageView>
   );
 }

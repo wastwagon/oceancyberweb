@@ -12,8 +12,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return withCanonical(
     {
-      title: "Client reviews on Google",
-      description: `${googleBusinessProfile.shortName} has a ${stats.rating.toFixed(1)} star rating on Google from ${stats.reviewCount} verified reviews for website and mobile app work in Accra.`,
+      title: "Google reviews · web design company in Accra",
+      description: `${googleBusinessProfile.shortName} — ${stats.rating.toFixed(1)}★ from ${stats.reviewCount} Google reviews for website design, development, and mobile apps in Accra, Ghana.`,
       openGraph: {
         title: `${stats.rating.toFixed(1)}★ on Google · ${stats.reviewCount} reviews`,
         description:

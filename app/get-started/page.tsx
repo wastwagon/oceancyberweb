@@ -7,9 +7,9 @@ import { withCanonical } from "@/lib/seo/canonical";
 
 export const metadata: Metadata = withCanonical(
   {
-    title: "Start a project",
+    title: "Start a website or app project in Ghana",
     description:
-      "Share your goals, budget, and timeline in one guided flow. Packages start from GHS 6,000, and we reply with the right next step.",
+      "Tell our Accra web design and development team your goals, budget, and timeline. Packages from GHS 6,000 — we reply with the right package or next step.",
   },
   "/get-started",
 );
@@ -30,7 +30,7 @@ export default function GetStartedPage({ searchParams }: PageProps) {
             Get started in one guided flow
           </h1>
           <p className="sa-lead mx-auto mt-3 text-center">
-            Share your goals, scope, budget range, and timeline, then choose your preferred next step. We use this to
+            Share your goals, scope, budget range, and timeline. Then choose your preferred next step — we use this to
             respond faster with the right proposal.
           </p>
           <div className="mt-6">

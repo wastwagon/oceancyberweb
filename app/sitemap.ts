@@ -74,12 +74,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/services/ecommerce-development-in-accra",
     "/services/ecommerce-development-in-ghana",
     "/services/cybersecurity-in-accra",
+    "/services/cybersecurity-in-ghana",
     "/services/ui-ux-design-in-accra",
+    "/services/ui-ux-design-in-ghana",
     "/guides/website-cost-in-ghana",
     "/guides/app-development-cost-in-ghana",
     "/guides/hubtel-vs-paystack-ghana",
     "/guides/domains-hosting-and-ssl-ghana",
     "/facts",
+    "/help-center",
     "/about",
     "/reviews",
     "/services/web-development",
@@ -130,8 +133,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let slugs: string[] = [];
   try {
-    const { getPortfolioSlugs } = await import("@/lib/data/portfolio-loader");
-    slugs = await getPortfolioSlugs();
+    const { getPortfolioCaseStudies } = await import("@/lib/data/portfolio-loader");
+    const { resolvePortfolioSource } = await import("@/lib/portfolio/portfolio-source");
+    const projects = await getPortfolioCaseStudies();
+    slugs = projects
+      .filter((project) => resolvePortfolioSource(project) === "client")
+      .map((project) => project.slug);
   } catch {
     slugs = [];
   }

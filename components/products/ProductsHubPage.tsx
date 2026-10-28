@@ -13,7 +13,7 @@ const products = [
     href: "/domains",
     title: "Domains",
     price: "From GHS 120/yr",
-    body: "Search availability and register in cedis with Paystack — list prices on /guides/domain-prices-in-ghana.",
+    body: "Search availability and register in cedis with Paystack — see our domain prices in Ghana guide for list prices.",
     action: "Search a domain",
   },
   {
@@ -29,6 +29,21 @@ const products = [
     price: "From GHS 69/mo",
     body: "cPanel hosting with Accra support.",
     action: "See hosting plans",
+  },
+] as const;
+
+const planningGuides = [
+  {
+    href: "/guides/dwumapos-for-ghana-shops",
+    title: "Retail POS planning (Ghana)",
+    body: "Editorial guides on DwumaPOS for shops, restaurants, and pharmacies — not OceanCyber software. Use when staff sell at a counter, not when you need a custom website.",
+    action: "Shop POS guide",
+  },
+  {
+    href: "/guides",
+    title: "All buyer guides",
+    body: "Website cost, MoMo checkout, hosting, and ecommerce timelines in Ghana cedis.",
+    action: "Browse guides",
   },
 ] as const;
 
@@ -96,6 +111,40 @@ export function ProductsHubPage() {
                   className="mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
                 >
                   {product.action}
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </Link>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="sa-section relative z-10 border-t border-sa-border bg-sa-surface/20">
+        <div className="sa-container">
+          <motion.div {...fadeUpProps}>
+            <SaSectionHeader
+              eyebrow="Not for sale here"
+              title="Retail POS planning guides"
+              subtitle="Partner editorial content — compare in-store POS with the ecommerce builds we deliver."
+            />
+          </motion.div>
+          <div className="mt-14 grid gap-8 lg:grid-cols-2">
+            {planningGuides.map((item, index) => (
+              <motion.article
+                key={item.href}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={revealViewport}
+                transition={staggerDelay(index, 0.08)}
+                className="sa-card sa-pressable group p-5 md:p-8"
+              >
+                <h2 className="font-heading text-2xl font-bold text-white">{item.title}</h2>
+                <p className="mt-4 text-sm leading-relaxed text-sa-muted/80">{item.body}</p>
+                <Link
+                  href={item.href}
+                  className="mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+                >
+                  {item.action}
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
               </motion.article>

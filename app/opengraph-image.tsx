@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-export const alt = "OceanCyber, best web design company in Accra and Ghana";
+export const alt = "OceanCyber, best web design company in Accra, Ghana";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -60,7 +60,7 @@ export default function OpenGraphImage() {
               maxWidth: "900px",
             }}
           >
-            Best web design company in Accra and Ghana
+            Best web design company in Accra, Ghana
           </div>
           <div style={{ color: "#9ca3af", fontSize: "28px", maxWidth: "820px" }}>
             Websites, mobile apps, and cybersecurity from Accra

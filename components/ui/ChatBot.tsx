@@ -7,6 +7,7 @@ import { getApiBaseUrl } from "@/lib/api-config";
 import { floatingChrome } from "@/components/ui/floating-chrome";
 import { SaInput } from "@/components/ui/SaInput";
 import { cn } from "@/lib/utils";
+import { getLocalChatReply } from "@/lib/chat-reply";
 
 interface Message {
   id: string;
@@ -145,12 +146,11 @@ export function ChatBot() {
         error?: string;
       };
 
+      const localFallback = getLocalChatReply(trimmed);
       const replyText =
         res.ok && typeof data.reply === "string" && data.reply.trim().length > 0
           ? data.reply.trim()
-          : typeof data.error === "string"
-            ? `Sorry, I could not process that (${data.error}). Try email at info@oceancyber.net or /contact.`
-            : "Sorry, something went wrong. Please try again or use the Contact page.";
+          : localFallback;
 
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -164,7 +164,7 @@ export function ChatBot() {
         ...prev,
         {
           id: (Date.now() + 1).toString(),
-          text: "Network issue. Check your connection, or email info@oceancyber.net.",
+          text: getLocalChatReply(trimmed),
           isUser: false,
           timestamp: new Date(),
         },

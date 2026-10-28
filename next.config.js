@@ -94,6 +94,16 @@ const nextConfig = {
         destination: "/guides/domain-prices-in-ghana",
         permanent: true,
       },
+      {
+        source: "/best-web-design-company-ghana",
+        destination: "/services/web-design-in-ghana",
+        permanent: true,
+      },
+      {
+        source: "/best-website-developers-ghana",
+        destination: "/services/web-development-in-ghana",
+        permanent: true,
+      },
     ];
   },
 };

@@ -1,3 +1,5 @@
+import { siteImagePaths } from "@/lib/seo/site-image-paths";
+
 export type DesignArtifact = {
   phase: string;
   title: string;
@@ -13,7 +15,7 @@ export const caseStudyDesignBySlug: Record<string, DesignArtifact[]> = {
       phase: "01",
       title: "Mood & direction",
       description: "Dark premium aesthetic with lime accent tokens aligned to the OceanCyber brand system.",
-      image: "/images/creative-template.png",
+      image: siteImagePaths.portfolio.creativeHub,
       imageAlt: "Creative hub moodboard direction",
     },
     {
@@ -27,7 +29,7 @@ export const caseStudyDesignBySlug: Record<string, DesignArtifact[]> = {
       phase: "03",
       title: "High-fidelity UI",
       description: "Glassmorphism surfaces, data cards, and motion specs for engineering handoff.",
-      image: "/images/creative-template.png",
+      image: siteImagePaths.portfolio.creativeHub,
       imageAlt: "High-fidelity dashboard UI",
     },
   ],
@@ -36,7 +38,7 @@ export const caseStudyDesignBySlug: Record<string, DesignArtifact[]> = {
       phase: "01",
       title: "Customer journey map",
       description: "Mapped browse-to-checkout flows with MoMo payment and account recovery paths.",
-      image: "/images/Juelle Hair.webp",
+      image: siteImagePaths.portfolio.juelleHair,
       imageAlt: "Juelle Hair customer journey",
     },
     {
@@ -50,7 +52,7 @@ export const caseStudyDesignBySlug: Record<string, DesignArtifact[]> = {
       phase: "03",
       title: "Launch experience",
       description: "Production storefront with inventory sync and conversion-focused checkout.",
-      image: "/images/Juelle Hair.webp",
+      image: siteImagePaths.portfolio.juelleHair,
       imageAlt: "Juelle Hair live storefront",
     },
   ],
@@ -59,7 +61,7 @@ export const caseStudyDesignBySlug: Record<string, DesignArtifact[]> = {
       phase: "01",
       title: "Trust & compliance UX",
       description: "Security-first flows for authentication, session handling, and customer self-service.",
-      image: "/images/EGP Ghana.webp",
+      image: siteImagePaths.portfolio.egpGhana,
       imageAlt: "EGP Ghana trust UX patterns",
     },
     {
@@ -73,7 +75,7 @@ export const caseStudyDesignBySlug: Record<string, DesignArtifact[]> = {
       phase: "03",
       title: "Shipped platform",
       description: "Hardened financial portal with measurable uplift in digital transactions.",
-      image: "/images/EGP Ghana.webp",
+      image: siteImagePaths.portfolio.egpGhana,
       imageAlt: "EGP Ghana live platform",
     },
   ],
@@ -89,14 +91,14 @@ export const caseStudyDesignBySlug: Record<string, DesignArtifact[]> = {
       phase: "02",
       title: "Client portal UX",
       description: "Secure document sharing and consultation scheduling with minimal friction.",
-      image: "/images/Fitch Advisory.webp",
+      image: siteImagePaths.portfolioLive.fitchAdvisory,
       imageAlt: "Fitch Advisory client portal",
     },
     {
       phase: "03",
       title: "Live experience",
       description: "Published site with engagement-focused content and portal access.",
-      image: "/images/Fitch Advisory.webp",
+      image: siteImagePaths.portfolioLive.fitchAdvisory,
       imageAlt: "Fitch Advisory live site",
     },
   ],

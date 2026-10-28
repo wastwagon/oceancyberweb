@@ -5,6 +5,7 @@ import {
   type IndustryPageContent,
 } from "@/components/industries/IndustryPremiumPage";
 import { IndustryPageExtras } from "@/components/industries/IndustryPageExtras";
+import { retailIndustryRelatedReading } from "@/lib/marketing/related-reading-presets";
 
 const content: IndustryPageContent = {
   heroEyebrow: "Retail",
@@ -56,7 +57,7 @@ const content: IndustryPageContent = {
   capabilitiesSubtitle:
     "Patterns for peak traffic, fraud, and omnichannel returns.",
   technologies: [
-    { title: "Omnichannel platforms", description: "Unified catalog and orders" },
+    { title: "Omnichannel platforms", description: "Unified catalogue and orders" },
     { title: "Mobile commerce", description: "Fast mobile paths to purchase" },
     { title: "AI recommendations", description: "Personalization with guardrails" },
     { title: "Inventory systems", description: "Accuracy across channels" },
@@ -86,7 +87,8 @@ const content: IndustryPageContent = {
   ],
   ctaTitle: "Grow retail revenue?",
   ctaDescription:
-    "Share channels, catalog size, and peak traffic, and we'll align platform, payments, and analytics.",
+    "Share channels, catalogue size, and peak traffic, and we'll align platform, payments, and analytics.",
+  relatedReading: retailIndustryRelatedReading,
 };
 
 export default function RetailPage() {

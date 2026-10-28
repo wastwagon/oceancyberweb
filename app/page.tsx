@@ -14,9 +14,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const { reviewsOnly } = buildTrustBlurb(stats);
   return {
     title: {
-      absolute: "Best web design company in Accra and Ghana | OceanCyber",
+      absolute: "Best web design company in Accra, Ghana | OceanCyber",
     },
-    description: `Best web design company in Accra and Ghana. Websites from GHS 6,000, mobile apps from GHS 12,000, cybersecurity from GHS 4,500. ${googleBusinessProfile.teamSize} people at ${googleBusinessProfile.address.street}. ${reviewsOnly}.`,
+    description: `Best web design company in Accra, Ghana. Websites from GHS 6,000, mobile apps from GHS 12,000, cybersecurity from GHS 4,500. ${googleBusinessProfile.teamSize} people at ${googleBusinessProfile.address.street}. ${reviewsOnly}.`,
     alternates: {
       canonical: "/",
     },

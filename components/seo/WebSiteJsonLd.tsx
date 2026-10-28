@@ -6,8 +6,10 @@ const site =
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": `${site}/#website`,
   name: "OceanCyber",
   url: site,
+  publisher: { "@id": `${site}/#localbusiness` },
   potentialAction: {
     "@type": "SearchAction",
     target: {

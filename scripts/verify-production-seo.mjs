@@ -35,8 +35,23 @@ const base = (
 ).replace(/\/$/, "");
 
 const paths = [
-  { path: "/", checks: ["places-sync", "no-template-reviews", "jsonld"] },
-  { path: "/facts", checks: ["places-sync", "jsonld"] },
+  { path: "/", checks: ["places-sync", "no-template-reviews", "jsonld", "home-aggregate-rating", "home-best-hero"] },
+  { path: "/facts", checks: ["places-sync", "jsonld", "facts-maps-kit"] },
+  { path: "/help-center", checks: ["help-maps-article", "help-pos-article"] },
+  {
+    path: "/guides/dwumapos-for-ghana-shops",
+    checks: ["jsonld", "faq-jsonld", "dwumapos-shop-guide"],
+  },
+  {
+    path: "/guides/dwumapos-pharmacy-pos-ghana",
+    checks: ["jsonld", "faq-jsonld", "dwumapos-pharmacy-guide"],
+  },
+  {
+    path: "/guides/dwumapos-restaurant-pos-ghana",
+    checks: ["jsonld", "faq-jsonld", "dwumapos-restaurant-guide"],
+  },
+  { path: "/services/web-development-in-ghana", checks: ["no-template-reviews", "jsonld", "geo-developers"] },
+  { path: "/services/web-design-in-ghana", checks: ["no-template-reviews", "jsonld"] },
   { path: "/reviews", checks: ["places-sync", "jsonld", "aggregate-rating"] },
   { path: "/llms.txt", checks: ["llms"] },
   { path: "/services/cybersecurity", checks: ["consultation", "jsonld", "no-template-reviews"] },
@@ -45,7 +60,11 @@ const paths = [
   { path: "/domains", checks: ["faq-jsonld"] },
   { path: "/hosting", checks: ["faq-jsonld"] },
   { path: "/ssl", checks: ["faq-jsonld"] },
-  { path: "/sitemap.xml", checks: ["sitemap"] },
+  { path: "/sitemap.xml", checks: ["sitemap", "sitemap-no-studio-portfolio"] },
+  {
+    path: "/portfolio/creative-hub-template",
+    checks: ["studio-portfolio-noindex"],
+  },
   { path: "/robots.txt", checks: ["robots"] },
 ];
 
@@ -85,6 +104,11 @@ for (const { path, checks } of paths) {
     if (!text.includes("<urlset") && !text.includes("<loc>")) {
       fail("sitemap.xml: invalid or empty");
     } else pass("sitemap.xml: present");
+    if (checks.includes("sitemap-no-studio-portfolio")) {
+      if (text.includes("/portfolio/creative-hub-template")) {
+        fail("sitemap.xml: studio concept URL should not be indexed");
+      } else pass("sitemap.xml: studio portfolio omitted");
+    }
     continue;
   }
 
@@ -143,6 +167,102 @@ for (const { path, checks } of paths) {
     if (!text.includes("AggregateRating")) {
       fail("/reviews: AggregateRating JSON-LD missing");
     } else pass("/reviews: AggregateRating JSON-LD");
+  }
+
+  if (checks.includes("home-aggregate-rating")) {
+    if (!text.includes("AggregateRating")) {
+      fail("/: sitewide AggregateRating JSON-LD missing");
+    } else pass("/: AggregateRating JSON-LD");
+  }
+
+  if (checks.includes("home-best-hero")) {
+    if (!text.includes("Best web design") || !text.includes("website development company")) {
+      fail("/: homepage missing peer-aligned hero phrasing");
+    } else pass("/: hero local SEO phrasing");
+  }
+
+  if (checks.includes("facts-maps-kit")) {
+    if (!text.includes("Maps listing kit") || !text.includes("Google Business Profile")) {
+      fail("/facts: Maps copy kit section missing");
+    } else pass("/facts: Maps copy kit");
+  }
+
+  if (checks.includes("help-maps-article")) {
+    if (!text.includes("Google Maps listing") && !text.includes("google-maps-listing")) {
+      fail("/help-center: Maps listing help article missing");
+    } else pass("/help-center: Maps article");
+  }
+
+  if (checks.includes("help-pos-article")) {
+    if (!text.includes("In-store POS vs ecommerce") && !text.includes("pos-vs-ecommerce")) {
+      fail("/help-center: POS vs ecommerce help article missing");
+    } else pass("/help-center: POS vs ecommerce article");
+  }
+
+  if (checks.includes("geo-developers")) {
+    if (!text.includes("website developers") && !text.includes("Website developers")) {
+      fail(`${path}: missing website developers phrasing`);
+    } else pass(`${path}: developers phrasing`);
+  }
+
+  if (checks.includes("dwumapos-restaurant-guide")) {
+    if (!text.includes("Restaurant POS on DwumaPOS | OceanCyber")) {
+      fail(`${path}: missing updated meta title in HTML`);
+    } else if (!text.includes("kitchen order slip")) {
+      fail(`${path}: missing kitchen order slip wording`);
+    } else if (text.includes("close of night") || text.match(/\bthe pass\b/i) || text.includes("KOT")) {
+      fail(`${path}: banned restaurant guide wording`);
+    } else if (!text.includes("What a restaurant pays")) {
+      fail(`${path}: missing pricing section`);
+    } else {
+      pass(`${path}: DwumaPOS restaurant guide copy`);
+    }
+  }
+
+  if (checks.includes("dwumapos-pharmacy-guide")) {
+    if (!text.includes("Pharmacy POS on DwumaPOS | OceanCyber")) {
+      fail(`${path}: missing updated meta title in HTML`);
+    } else if (!text.includes("Payments and delivery") || !text.includes("What a pharmacy pays")) {
+      fail(`${path}: missing pharmacy guide sections`);
+    } else if (!text.includes("not from a warning when you scan")) {
+      fail(`${path}: missing batch-list wording`);
+    } else if (text.match(/\bcounter\b/i) && !text.includes("pharmacy-expiry-at-the-counter-pos")) {
+      fail(`${path}: banned word counter in visible copy`);
+    } else if (text.includes("pop-up") || text.includes("popup")) {
+      fail(`${path}: banned pop-up wording`);
+    } else {
+      pass(`${path}: DwumaPOS pharmacy guide copy`);
+    }
+  }
+
+  if (checks.includes("dwumapos-shop-guide")) {
+    if (!text.includes("DwumaPOS Guide for Ghana Shops")) {
+      fail(`${path}: missing updated meta title in HTML`);
+    } else if (!text.includes("30-day free trial begins when you sign up")) {
+      fail(`${path}: missing trial-on-signup copy`);
+    } else if (
+      text.includes("Up to 50 branches") ||
+      text.includes("when you open the shop for sales") ||
+      text.includes("14-day")
+    ) {
+      fail(`${path}: stale DwumaPOS facts in HTML`);
+    } else if (!text.includes("Prepaid for 12 months")) {
+      fail(`${path}: missing prepaid section`);
+    } else {
+      pass(`${path}: DwumaPOS shop guide copy`);
+    }
+  }
+
+  if (checks.includes("studio-portfolio-noindex")) {
+    if (!text.includes("noindex")) {
+      fail(`${path}: studio concept page should be noindex`);
+    } else if (text.includes("500%") || text.includes("Internal Prototype")) {
+      fail(`${path}: stale demo-style portfolio copy in HTML`);
+    } else if (!text.includes("studio") && !text.includes("concept")) {
+      fail(`${path}: missing studio/concept labelling`);
+    } else {
+      pass(`${path}: studio portfolio hygiene`);
+    }
   }
 }
 

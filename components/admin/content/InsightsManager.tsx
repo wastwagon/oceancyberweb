@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { DEFAULT_INSIGHT_COVER } from "@/lib/insights/default-cover";
 import { insightCategories, type InsightPost } from "@/lib/insights/content";
 import { AppAlert } from "@/components/ui/AppAlert";
 import { SaButton } from "@/components/ui/SaButton";
@@ -16,7 +17,7 @@ function emptyPost(): InsightPost {
     title: "",
     excerpt: "",
     paragraphs: [""],
-    image: "/images/EGP Ghana.webp",
+    image: DEFAULT_INSIGHT_COVER,
     category: "Technology",
     date: new Date().toLocaleDateString("en-US", {
       month: "long",
@@ -86,7 +87,7 @@ export function InsightsManager() {
       });
       const data = (await res.json().catch(() => ({}))) as { error?: string };
       if (!res.ok) throw new Error(data.error ?? "Save failed");
-      setToast("Insights saved. Live on /insights now.");
+      setToast("Insights saved. Changes are live on Insights.");
       await load();
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Save failed");

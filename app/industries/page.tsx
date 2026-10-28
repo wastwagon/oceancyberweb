@@ -136,15 +136,14 @@ export default function IndustriesPage() {
               className="sa-title-lg mx-auto max-w-4xl text-balance"
             >
               Sectors we
-              <span className="text-sa-primary"> ship for</span>
+              <span className="text-sa-primary"> build for</span>
             </motion.h1>
             <motion.p
               variants={heroMotion.item}
               className="sa-lead mx-auto mt-3"
             >
-              Deep vertical context: regulation, customer journeys, and
-              operational reality, folded into every architecture and release
-              plan.
+              Regulation, customer journeys, and operational reality — built into
+              every architecture and release plan from our Accra team.
             </motion.p>
             <motion.p variants={heroMotion.item} className="mt-6 text-sm text-sa-muted/80">
               Don&apos;t see your sector?{" "}

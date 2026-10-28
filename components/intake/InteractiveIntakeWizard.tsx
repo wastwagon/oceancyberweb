@@ -19,20 +19,28 @@ type ContactMethod = "email" | "phone" | "whatsapp";
 const SERVICE_OPTIONS = [
   "Website build",
   "Mobile app",
-  "E-commerce",
+  "E-commerce store",
+  "In-store POS (planning only)",
   "Security consulting",
   "Ongoing support",
   "Local growth (Google Business Profile, SEO)",
 ] as const;
 
+const POS_PLANNING_OPTION = "In-store POS (planning only)" as const;
+
 const BUDGET_OPTIONS = [
   "Under GHS 10,000",
-  "GHS 10,000 - 30,000",
-  "GHS 30,000 - 80,000",
+  "GHS 10,000 – 30,000",
+  "GHS 30,000 – 80,000",
   "GHS 80,000+",
 ] as const;
-const TIMELINE_OPTIONS = ["ASAP (under 1 month)", "1-3 months", "3-6 months", "6+ months"] as const;
-const STEPS = ["Basics", "Needs", "Budget", "Booking"] as const;
+const TIMELINE_OPTIONS = [
+  "ASAP (under 1 month)",
+  "1–3 months",
+  "3–6 months",
+  "6+ months",
+] as const;
+const STEPS = ["Your details", "Project scope", "Budget & timing", "Follow-up"] as const;
 
 type InteractiveIntakeWizardProps = {
   /** From `?topic=` on /get-started (help center, pricing links, etc.) */
@@ -61,6 +69,8 @@ export function InteractiveIntakeWizard({ initialTopic }: InteractiveIntakeWizar
     if (!topic) return;
     setGoals((prev) => (prev.trim().length > 0 ? prev : topic));
   }, [initialTopic]);
+
+  const showPosGuideLinks = serviceNeeds.has(POS_PLANNING_OPTION);
 
   const canNext = useMemo(() => {
     if (step === 0) return name.trim().length >= 2 && /@/.test(email);
@@ -130,7 +140,8 @@ export function InteractiveIntakeWizard({ initialTopic }: InteractiveIntakeWizar
             <h2 className="text-xl font-bold text-white">Request received</h2>
             <p className="mt-2 text-sm text-sa-muted">
               Thanks. We saved your intake and will respond with next steps. If you asked for a call, pick a time
-              below or we will confirm by {contactMethod === "email" ? "email" : contactMethod}.
+              below or we will confirm by{" "}
+              {contactMethod === "email" ? "email" : contactMethod === "phone" ? "phone" : "WhatsApp"}.
             </p>
             <PostSubmitBooking
               prefill={`name=${encodeURIComponent(name.trim())}&email=${encodeURIComponent(email.trim())}`}
@@ -253,7 +264,34 @@ export function InteractiveIntakeWizard({ initialTopic }: InteractiveIntakeWizar
                 })}
               </div>
             </div>
-            <SaField id="intake-goals" label="Main goals">
+            {showPosGuideLinks ? (
+              <aside className="rounded-sa-lg border border-sa-border bg-sa-surface/60 p-4 text-sm leading-relaxed text-sa-muted">
+                <p className="font-medium text-white">In-store POS vs OceanCyber builds</p>
+                <p className="mt-2">
+                  Counter POS, branches, and inventory tills are covered in our DwumaPOS editorial
+                  guides — we do not sell POS software. For a website or ecommerce store with MoMo,
+                  keep E-commerce store selected too.
+                </p>
+                <ul className="mt-3 space-y-1.5">
+                  <li>
+                    <Link href="/guides/dwumapos-for-ghana-shops" className="sa-text-link">
+                      DwumaPOS for Ghana shops
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/guides/dwumapos-restaurant-pos-ghana" className="sa-text-link">
+                      Restaurant POS (DwumaPOS)
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/guides/dwumapos-pharmacy-pos-ghana" className="sa-text-link">
+                      Pharmacy POS (DwumaPOS)
+                    </Link>
+                  </li>
+                </ul>
+              </aside>
+            ) : null}
+            <SaField id="intake-goals" label="Main goals" required>
               <SaTextarea
                 id="intake-goals"
                 density="compact"

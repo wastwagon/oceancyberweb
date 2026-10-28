@@ -28,7 +28,7 @@ export function SaTestimonialsSection({ googleStats, googleReviews, featuredCard
       <div className="sa-container relative z-10">
         <SaSectionHeader
           className="mb-12 md:mb-14"
-          eyebrow="Social Proof"
+          eyebrow="Social proof"
           title="What clients say on Google"
           subtitle="Live reviews synced from our Google Business Profile — updated automatically."
         />

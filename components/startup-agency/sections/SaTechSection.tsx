@@ -10,7 +10,7 @@ export function SaTechSection() {
     >
       <div className="sa-container">
         <SaReveal className="mb-8">
-          <SaSectionHeader eyebrow="Tech" title="Stack we ship with" />
+          <SaSectionHeader eyebrow="Tech" title="Stack we build with" />
         </SaReveal>
         <div className="mb-10 flex flex-wrap justify-center gap-3">
           {techStack.map((t) => (

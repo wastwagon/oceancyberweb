@@ -20,11 +20,14 @@ export const startupPagesMenu = [
   { label: "Best web design company in Ghana", href: "/services/web-design-in-ghana" },
   { label: "Best web design company in Accra", href: "/services/web-design-in-accra" },
   { label: "Best web development company in Accra", href: "/services/web-development-in-accra" },
+  { label: "Best website developers in Ghana", href: "/services/web-development-in-ghana" },
+  { label: "Best web development company in Ghana", href: "/services/web-development-in-ghana" },
   { label: "Best software development company in Accra", href: "/services/software-development-in-accra" },
   { label: "Best mobile app development company in Accra", href: "/services/mobile-app-development-in-accra" },
   { label: "Best e-commerce development company in Accra", href: "/services/ecommerce-development-in-accra" },
   { label: "Best security consulting in Accra", href: "/services/cybersecurity-in-accra" },
   { label: "Best UI/UX design company in Accra", href: "/services/ui-ux-design-in-accra" },
+  { label: "Company facts", href: "/facts" },
   { label: "Products", href: "/products" },
   { label: "Insights", href: "/insights" },
   { label: "Reviews", href: "/reviews" },
@@ -117,6 +120,7 @@ export const mainHeaderNav: HeaderNavItem[] = [
 ];
 
 import { industryNavItems } from "@/lib/data/industries-catalog";
+import { servicesGeoMegaMenuItems } from "@/lib/navigation/services-geo-nav";
 
 export const mainHeaderDropdownContent: Record<
   HeaderDropdownKey,
@@ -136,41 +140,7 @@ export const mainHeaderDropdownContent: Record<
         description: "Web design, development, mobile apps, commerce, and security consulting.",
         link: "/services",
       },
-      {
-        heading: "Web design in Accra",
-        description: "Meet the team at 47 Nii Kwashiefio Avenue. Hire page for Accra web design.",
-        link: "/services/web-design-in-accra",
-      },
-      {
-        heading: "Web design in Ghana",
-        description: "Nationwide website design and development from the Accra office.",
-        link: "/services/web-design-in-ghana",
-      },
-      {
-        heading: "Web development in Accra",
-        description: "Web and website development from GHS 6,000. Paystack and MoMo ready.",
-        link: "/services/web-development-in-accra",
-      },
-      {
-        heading: "Web development in Ghana",
-        description: "Company sites and web apps for teams across Ghana, from GHS 6,000.",
-        link: "/services/web-development-in-ghana",
-      },
-      {
-        heading: "Software development in Accra",
-        description: "Custom software and tools from GHS 14,500 for Accra teams.",
-        link: "/services/software-development-in-accra",
-      },
-      {
-        heading: "Mobile app development in Accra",
-        description: "iOS and Android from GHS 12,000 per platform for Ghana phones.",
-        link: "/services/mobile-app-development-in-accra",
-      },
-      {
-        heading: "UI/UX design in Accra",
-        description: "Product and brand design hire page from GHS 3,500.",
-        link: "/services/ui-ux-design-in-accra",
-      },
+      ...servicesGeoMegaMenuItems,
       {
         heading: "Pricing & packages",
         description: "Transparent GHS tiers for Startup, Professional, and Enterprise.",
@@ -213,7 +183,7 @@ export const mainHeaderDropdownContent: Record<
       },
       {
         heading: "E-commerce",
-        description: "Online stores with catalog, checkout, and local payment flows.",
+        description: "Online stores with catalogue, checkout, and local payment flows.",
         link: "/services/ecommerce",
       },
       {
@@ -298,6 +268,11 @@ export const mainHeaderDropdownContent: Record<
         description: "Score your maturity in minutes and download a PDF report.",
         link: "/tools/security-assessment",
       },
+      {
+        heading: "Company facts",
+        description: "Canonical NAP, GHS pricing, and Google Maps copy kit.",
+        link: "/facts",
+      },
     ],
   },
   support: {
@@ -334,6 +309,11 @@ export const mainHeaderDropdownContent: Record<
         heading: "Google reviews",
         description: "Verified client ratings and recent feedback from Google.",
         link: "/reviews",
+      },
+      {
+        heading: "Company facts & Maps copy",
+        description: "NAP, pricing, and paste-ready Google Business Profile text.",
+        link: "/facts",
       },
     ],
   },
@@ -392,6 +372,11 @@ export const mainHeaderDropdownContent: Record<
         description: "Verified Google ratings and client feedback.",
         link: "/reviews",
       },
+      {
+        heading: "Company facts",
+        description: "Verifiable pricing, office, and Google Maps listing copy kit.",
+        link: "/facts",
+      },
     ],
   },
 };
@@ -406,6 +391,7 @@ export const footerCompanyLinks = [
   { label: "Insights", href: "/insights" },
   { label: "Guides", href: "/guides" },
   { label: "Reviews", href: "/reviews" },
+  { label: "Company facts", href: "/facts" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
@@ -414,10 +400,14 @@ export const footerServiceLinks = [
   { label: "Best web design company in Ghana", href: "/services/web-design-in-ghana" },
   { label: "Best web design company in Accra", href: "/services/web-design-in-accra" },
   { label: "Best web development company in Accra", href: "/services/web-development-in-accra" },
+  { label: "Best website developers in Ghana", href: "/services/web-development-in-ghana" },
+  { label: "Best web development company in Ghana", href: "/services/web-development-in-ghana" },
   { label: "Best software development company in Accra", href: "/services/software-development-in-accra" },
   { label: "Best mobile app development company in Accra", href: "/services/mobile-app-development-in-accra" },
   { label: "Best e-commerce development company in Accra", href: "/services/ecommerce-development-in-accra" },
+  { label: "E-commerce development in Ghana", href: "/services/ecommerce-development-in-ghana" },
   { label: "Best security consulting in Accra", href: "/services/cybersecurity-in-accra" },
+  { label: "Security consulting in Ghana", href: "/services/cybersecurity-in-ghana" },
   { label: "UI/UX & brand design", href: "/services/ui-ux-design" },
   { label: "Web development", href: "/services/web-development" },
   { label: "Mobile apps", href: "/services/mobile-apps" },

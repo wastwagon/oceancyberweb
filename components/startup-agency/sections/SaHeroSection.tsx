@@ -8,12 +8,21 @@ import { SaShowreelModal } from "@/components/startup-agency/SaShowreelModal";
 import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 import { heroServiceSlides, heroTagline } from "@/lib/startup-agency/content";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
+import {
+  homeHeroH1,
+  homeHeroSupportLine,
+} from "@/lib/seo/ghana-local-market";
 
 type Props = {
   tagline?: string;
+  /** Live from Places API when configured; falls back to static GBP in page shell. */
+  heroReviewsLine?: string;
 };
 
-export function SaHeroSection({ tagline = heroTagline }: Props) {
+export function SaHeroSection({ tagline = heroTagline, heroReviewsLine }: Props) {
+  const reviewsLine =
+    heroReviewsLine ??
+    `Rated ${googleBusinessProfile.rating.toFixed(1)} from ${googleBusinessProfile.reviewCount} Google reviews`;
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [showreelOpen, setShowreelOpen] = useState(false);
   const hoveredSlide = hoveredIndex === null ? null : heroServiceSlides[hoveredIndex];
@@ -42,10 +51,20 @@ export function SaHeroSection({ tagline = heroTagline }: Props) {
             </span>
           </div>
           <h1 className="sa-title-lg mx-auto max-w-2xl text-balance text-center">
-            Websites, apps, and security from Accra
+            {homeHeroH1}
           </h1>
           <p className="sa-lead mx-auto mt-3 max-w-xl text-balance text-center text-white/85">
             {tagline}
+          </p>
+          <p className="mx-auto mt-2 max-w-lg text-balance text-center text-sm text-white/70">
+            {homeHeroSupportLine}
+          </p>
+          <p className="pointer-events-auto mt-3 text-center text-sm font-medium text-white/65">
+            <Link href="/reviews" className="underline-offset-2 hover:underline">
+              {reviewsLine}
+            </Link>
+            {" · "}
+            packages from GHS 6,000 · MoMo &amp; Paystack
           </p>
           <div className="pointer-events-auto mt-6 flex w-full max-w-sm flex-col items-center gap-3 sm:max-w-none">
             <Link

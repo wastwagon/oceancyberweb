@@ -70,6 +70,11 @@ export function SaInsightsTeaserSection() {
           <p className="font-heading text-sm font-semibold text-white">Buyer guides</p>
           <ul className="mt-4 flex flex-col gap-3 text-sm sm:flex-row sm:flex-wrap sm:gap-x-8">
             <li>
+              <Link href="/insights/pos-vs-ecommerce-ghana-2026" className="sa-text-link">
+                POS vs ecommerce (insight)
+              </Link>
+            </li>
+            <li>
               <Link href="/guides/website-cost-in-ghana" className="sa-text-link">
                 Website cost in Ghana
               </Link>
@@ -87,6 +92,16 @@ export function SaInsightsTeaserSection() {
             <li>
               <Link href="/guides/dwumapos-for-ghana-shops" className="sa-text-link">
                 DwumaPOS for Ghana shops
+              </Link>
+            </li>
+            <li>
+              <Link href="/guides/dwumapos-restaurant-pos-ghana" className="sa-text-link">
+                Restaurant POS (DwumaPOS)
+              </Link>
+            </li>
+            <li>
+              <Link href="/guides/dwumapos-pharmacy-pos-ghana" className="sa-text-link">
+                Pharmacy POS (DwumaPOS)
               </Link>
             </li>
             <li>

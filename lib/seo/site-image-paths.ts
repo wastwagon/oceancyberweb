@@ -25,6 +25,8 @@ export const siteImagePaths = {
       "/images/insights/oceancyber-accra-mobile-money-ghana-insights.webp",
     "agency-vs-hire-ghana":
       "/images/insights/oceancyber-accra-digital-transformation-ghana-insights.webp",
+    "pos-vs-ecommerce-ghana-2026":
+      "/images/insights/oceancyber-accra-ecommerce-growth-ghana-insights.webp",
     "ghana-sme-cybersecurity-baseline":
       "/images/insights/oceancyber-accra-cybersecurity-trends-ghana-insights.webp",
   },

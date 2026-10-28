@@ -51,9 +51,9 @@ export function HelpCenterPageClient({ articles }: HelpCenterPageClientProps) {
       return {
         title: "Need a quote or proposal",
         steps: [
-          "Use Interactive Intake for quick qualification.",
-          "If you need formal scope and pricing sections, submit Formal Proposal Request.",
-          "Track progress from Dashboard > Requests.",
+          "Use Get started for quick qualification.",
+          "If you need formal scope and pricing sections, submit a formal proposal request.",
+          "Track progress from Dashboard → Requests.",
         ],
         cta: {
           label: "Start guided intake",
@@ -67,9 +67,9 @@ export function HelpCenterPageClient({ articles }: HelpCenterPageClientProps) {
         steps: [
           "Write the exact issue and when it started.",
           "Include page URL and screenshots if possible.",
-          "Send it through Contact or Proposal request for triage.",
+          "Send it through our Contact page or a proposal request for triage.",
         ],
-        cta: { label: "Open contact", href: "/contact?topic=Website issue and troubleshooting" },
+        cta: { label: "Open Contact page", href: "/contact?topic=Website issue and troubleshooting" },
       };
     }
     return {
@@ -77,7 +77,7 @@ export function HelpCenterPageClient({ articles }: HelpCenterPageClientProps) {
       steps: [
         "Search articles first for a quick answer.",
         "If unresolved, submit a contact request with relevant details.",
-        "Customers can use Dashboard > Requests to track submitted requests.",
+        "Customers can use Dashboard → Requests to track submitted requests.",
       ],
       cta: { label: "Contact support", href: "/contact" },
     };

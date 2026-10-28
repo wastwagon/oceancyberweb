@@ -65,7 +65,7 @@ const content: ServicePageContent = {
   ],
   deliverEyebrow: "Deliverables",
   deliverTitle: "What you leave with",
-  deliverSubtitle: "Files and access your team can keep shipping after handover.",
+  deliverSubtitle: "Files and access your team can keep extending after handover.",
   deliverables: [
     {
       title: "Store-ready builds",
@@ -104,7 +104,7 @@ const content: ServicePageContent = {
       result: "Clear quote to wrap or rebuild for the stores.",
     },
   ],
-  ctaTitle: "Ready to ship an app?",
+  ctaTitle: "Ready to launch an app?",
   ctaDescription:
     "Tell us iOS, Android, or both — plus budget and timeline — and we will reply with a scoped next step.",
   pricing: servicePricingHints.mobileApps,

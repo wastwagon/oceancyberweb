@@ -22,4 +22,18 @@ test.describe("public smoke", () => {
       page.getByRole("heading", { level: 1, name: /Talk to our team/i }),
     ).toBeVisible();
   });
+
+  test("DwumaPOS shop guide renders hero", async ({ page }) => {
+    await page.goto("/guides/dwumapos-for-ghana-shops");
+    await expect(
+      page.getByRole("heading", { level: 1, name: /DwumaPOS/i }),
+    ).toBeVisible();
+    await expect(page.getByRole("link", { name: /Back to guides/i })).toBeVisible();
+  });
+
+  test("studio portfolio is noindex", async ({ page }) => {
+    await page.goto("/portfolio/creative-hub-template");
+    const robots = page.locator('meta[name="robots"]');
+    await expect(robots).toHaveAttribute("content", /noindex/i);
+  });
 });

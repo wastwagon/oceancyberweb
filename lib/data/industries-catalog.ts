@@ -215,7 +215,7 @@ export const industryNavItems = industryCatalog.map((item) => ({
   link: item.href,
 }));
 
-/** Footer shows a short list; full catalog lives on /industries. */
+/** Footer shows a short list; full catalogue lives on /industries. */
 export const FOOTER_INDUSTRY_LINK_LIMIT = 6;
 
 export const industryFooterLinks = industryCatalog

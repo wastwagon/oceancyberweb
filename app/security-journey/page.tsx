@@ -105,7 +105,7 @@ const stats = [
   {
     value: "Consulting",
     label: "Scope",
-    detail: "Not MSSP, SOC, or always-on monitoring services.",
+    detail: "Not managed security services, SOC, or always-on monitoring.",
   },
 ] as const;
 

@@ -1,5 +1,21 @@
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 
+const POS_REPLY =
+  "For in-store POS (counter sales, branches, pharmacy or restaurant tills), we publish editorial guides on DwumaPOS — not OceanCyber-built POS software. " +
+  "Start with /guides/dwumapos-for-ghana-shops, /guides/dwumapos-restaurant-pos-ghana, or /guides/dwumapos-pharmacy-pos-ghana. " +
+  "If you need a custom website or ecommerce store with Paystack or MoMo, say “ecommerce” or open /services/ecommerce.";
+
+function isPosPlanningIntent(t: string): boolean {
+  if (/\b(dwuma|dwumapos)\b/.test(t)) return true;
+  if (/\b(pos|point of sale|point-of-sale|cash register|barcode|receipt printer)\b/.test(t)) return true;
+  if (/\b(pharmacy)\b/.test(t) && /\b(counter|pos|inventory|dispens)\b/.test(t)) return true;
+  if (/\b(restaurant|cafe|bar|kitchen)\b/.test(t) && /\b(pos|till|order)\b/.test(t)) return true;
+  if (/\b(shop|store|retail|supermarket|boutique)\b/.test(t) && /\b(pos|till|branch|inventory)\b/.test(t)) {
+    return !/\b(online|website|ecommerce|e-commerce|web store)\b/.test(t);
+  }
+  return false;
+}
+
 /**
  * Offline assistant when OPENAI_API_KEY is not set (or OpenAI fails).
  * Keep answers short and point to real site routes.
@@ -15,23 +31,45 @@ export function getLocalChatReply(userText: string): string {
   }
 
   if (/\b(thanks|thank\s*you|ty)\b/.test(t)) {
-    return "You are welcome. If you want a human to follow up, visit /contact or email info@oceancyber.net.";
+    return "You are welcome. If you want a human to follow up, use our Contact page or email info@oceancyber.net.";
   }
 
   if (/\b(contact|email|reach|speak|human|call|phone|whatsapp|office)\b/.test(t)) {
-    return "Reach us at info@oceancyber.net or +233 242 565 695. For a full form, open the Contact page: /contact (WhatsApp is linked there too).";
+    return "Reach us at info@oceancyber.net or +233 242 565 695. For a full form, open our Contact page (WhatsApp is linked there too).";
   }
 
   if (/\b(price|pricing|cost|quote|budget|how\s*much)\b/.test(t)) {
-    return "Packages start from GHS 6,000 for web work and GHS 12,000 for mobile add-ons. Compare tiers at /pricing, estimate scope at /tools/project-cost, or contact us at /contact for a formal quote.";
+    return "Packages start from GHS 6,000 for web work and GHS 12,000 for mobile add-ons. Compare tiers on our pricing page, use the project cost estimator, or contact us for a formal quote.";
+  }
+
+  if (isPosPlanningIntent(t)) {
+    return POS_REPLY;
+  }
+
+  if (
+    /\b(best|top|number\s*one|#1)\b/.test(t) &&
+    /\b(web|website|design|developer|development|company|accra|ghana)\b/.test(t)
+  ) {
+    return (
+      "OceanCyber is a best-rated web design and website development company in Accra, Ghana — " +
+      "packages from GHS 6,000. See Best web design in Ghana (/services/web-design-in-ghana) or " +
+      "website developers in Ghana (/services/web-development-in-ghana), or Contact us to start."
+    );
+  }
+
+  if (/\b(developer|developers|web design company|design company)\b/.test(t)) {
+    return (
+      "We are website designers and developers in one Accra team. " +
+      "Web design in Ghana: /services/web-design-in-ghana · Website developers: /services/web-development-in-ghana."
+    );
   }
 
   if (/\b(service|web|website|app|mobile|ecommerce|e-commerce|shop|store|security|cyber|audit)\b/.test(t)) {
-    return "We cover web development, mobile apps, e-commerce, and cybersecurity. Browse /services for details, or describe your goal here and I will narrow it down.";
+    return "We cover web development, mobile apps, e-commerce, and cybersecurity. Browse our Services page for details, or describe your goal here and I will narrow it down.";
   }
 
   if (/\b(portfolio|work|project|case\s*stud|example)\b/.test(t)) {
-    return "See selected work on the home page portfolio section and the full /portfolio listing for deeper project write-ups.";
+    return "See selected work on the home page portfolio section and our full portfolio for deeper project write-ups.";
   }
 
   if (/\b(where|location|address|accra|ghana)\b/.test(t)) {
@@ -43,7 +81,7 @@ export function getLocalChatReply(userText: string): string {
   }
 
   return (
-    "Thanks for your message. For web, mobile, commerce, or security work, the team can help on /contact. " +
+    "Thanks for your message. For web, mobile, commerce, or security work, the team can help on our Contact page. " +
     "You can also say “services”, “portfolio”, or “pricing” for quick pointers."
   );
 }

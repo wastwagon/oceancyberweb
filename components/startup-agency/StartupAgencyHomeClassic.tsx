@@ -34,7 +34,10 @@ export function StartupAgencyHomeClassic({ homeTrust }: Props) {
       <StartupAgencyProgressBar />
 
       <main id="startup-main-content" className="sa-mobile-tab-pad md:pb-0" tabIndex={-1}>
-        <SaHeroSection tagline={homeTrust?.tagline} />
+        <SaHeroSection
+          tagline={homeTrust?.tagline}
+          heroReviewsLine={homeTrust?.heroReviewsLine}
+        />
         <SaAboutSection presenceSubtitle={homeTrust?.companyPresence} />
         <SaMarqueeSection />
         <SaServicesSection />

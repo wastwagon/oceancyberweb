@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { MapPin } from "lucide-react";
-import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
+import { WebDesignGeoPageView } from "@/components/seo/WebDesignGeoPageView";
 import { withCanonical } from "@/lib/seo/canonical";
-import { proofOutcomes } from "@/lib/startup-agency/content";
 import { getGooglePlaceStats } from "@/lib/google-places-stats";
 import { resolveServicePageDescription } from "@/lib/seo/service-layout-metadata";
-import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 import { webDesignAccraFaqs } from "@/lib/seo/web-design-geo-faqs";
+import { siteImagePaths } from "@/lib/seo/site-image-paths";
+import {
+  webDesignAccraExtraLinks,
+  webDesignGeoRelatedReading,
+} from "@/lib/marketing/web-design-geo-related";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://oceancyber.net";
@@ -46,7 +48,12 @@ export default async function WebDesignAccraPage() {
       {
         "@type": "Service",
         name: "Best web design company in Accra",
-        serviceType: ["Web design", "Web development"],
+        serviceType: [
+          "Web design company",
+          "Website design company",
+          "Website development",
+          "Website developers",
+        ],
         url: pageUrl,
         areaServed: { "@type": "City", name: "Accra" },
         description: serviceDescription,
@@ -60,142 +67,30 @@ export default async function WebDesignAccraPage() {
     ],
   };
 
+  const relatedReading = [...webDesignGeoRelatedReading, ...webDesignAccraExtraLinks];
+
   return (
-    <div className="bg-sa-bg text-sa-muted">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-
-      <section className="border-b border-sa-border">
-        <div className="sa-container max-w-3xl pb-14 pt-28 md:pb-20 md:pt-36">
-          <nav aria-label="Breadcrumb" className="text-sm text-sa-muted/60">
-            <ol className="flex flex-wrap items-center gap-2">
-              <li>
-                <Link href="/" className="hover:text-sa-primary">
-                  Home
-                </Link>
-              </li>
-              <li aria-hidden>/</li>
-              <li>
-                <Link href="/services" className="hover:text-sa-primary">
-                  Services
-                </Link>
-              </li>
-              <li aria-hidden>/</li>
-              <li>
-                <Link href="/services/web-design-in-ghana" className="hover:text-sa-primary">
-                  Ghana
-                </Link>
-              </li>
-              <li aria-hidden>/</li>
-              <li className="text-sa-muted">Accra</li>
-            </ol>
-          </nav>
-
-          <p className="mt-8 text-sm font-semibold text-sa-primary">
-            Accra · from GHS 6,000
-          </p>
-          <h1 className="sa-title-lg mt-3">
-            Best web design company in Accra
-          </h1>
-          <p className="mt-5 text-lg leading-relaxed text-sa-muted/80">
-            Company websites designed and built in one Accra office — structure, visuals, and
-            engineering together, so you are not bouncing between a designer and a separate
-            developer. Packages from GHS 6,000. Meet us at 47 Nii Kwashiefio Avenue. Outside
-            Greater Accra, see{" "}
-            <Link href="/services/web-design-in-ghana" className="sa-text-link font-medium">
-              web design in Ghana
-            </Link>
-            .
-          </p>
-
-          <div className="mt-6 flex items-start gap-3 text-sm text-sa-muted/75">
-            <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-sa-primary" aria-hidden />
-            47 Nii Kwashiefio Avenue, Accra, Ghana
-          </div>
-
-          <div className="mt-8 flex flex-col items-start gap-3">
-            <Link
-              href={getStartedHref({ topic: "Web design in Accra" })}
-              className="sa-btn-primary w-full sm:w-auto"
-            >
-              {SITE_CTA.getStarted.label}
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-sa-border py-14 md:py-20">
-        <div className="sa-container max-w-3xl">
-          <h2 className="font-heading text-2xl font-semibold text-white md:text-3xl">
-            Results in Accra
-          </h2>
-          <ul className="mt-6 space-y-3 text-sm leading-relaxed text-sa-muted/80">
-            {proofOutcomes.map((item) => (
-              <li key={item.client}>
-                <a href={item.href} className="sa-text-link-quiet">
-                  {item.client}
-                </a>
-                {" — "}
-                {item.result}
-              </li>
-            ))}
-          </ul>
-          <h2 className="mt-14 font-heading text-2xl font-semibold text-white md:text-3xl">
-            Common questions
-          </h2>
-          <FaqPageJsonLd items={faqs.map((faq) => ({ q: faq.question, a: faq.answer }))} />
-          <dl className="mt-8 space-y-6">
-            {faqs.map((faq) => (
-              <div key={faq.question}>
-                <dt className="font-heading text-base font-semibold text-white">{faq.question}</dt>
-                <dd className="mt-2 text-sm leading-relaxed text-sa-muted/75">{faq.answer}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
-
-      <section className="py-14 md:py-20">
-        <div className="sa-container max-w-3xl">
-          <h2 className="font-heading text-2xl font-semibold text-white md:text-3xl">
-            Plan the project
-          </h2>
-          <ul className="mt-6 space-y-3 text-sm">
-            <li>
-              <Link href="/guides/website-cost-in-ghana" className="sa-text-link">
-                How much a website costs in Ghana
-              </Link>
-            </li>
-            <li>
-              <Link href="/compare/agency-vs-freelancer-vs-in-house-ghana" className="sa-text-link">
-                Agency, freelancer, or an in-house hire
-              </Link>
-            </li>
-            <li>
-              <Link href="/pricing" className="sa-text-link">
-                Package pricing
-              </Link>
-            </li>
-            <li>
-              <Link href="/services/web-development-in-accra" className="sa-text-link">
-                Web development in Accra
-              </Link>
-            </li>
-            <li>
-              <Link href="/services/mobile-app-development-in-accra" className="sa-text-link">
-                Mobile apps in Accra
-              </Link>
-            </li>
-            <li>
-              <Link href="/services/ecommerce-development-in-accra" className="sa-text-link">
-                Ecommerce in Accra
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </section>
-    </div>
+    <WebDesignGeoPageView
+      jsonLd={jsonLd}
+      heroImage={siteImagePaths.work.brandSystem}
+      eyebrow="Accra · from GHS 6,000"
+      h1="Best web design company in Accra"
+      intro={
+        <p>
+          Company websites designed and built in one Accra office — structure, visuals, and
+          engineering together, so you are not bouncing between a designer and a separate developer.
+          Packages from GHS 6,000. Meet us at 47 Nii Kwashiefio Avenue. Outside Greater Accra, see{" "}
+          <Link href="/services/web-design-in-ghana" className="sa-text-link font-medium">
+            web design in Ghana
+          </Link>
+          .
+        </p>
+      }
+      showOfficePin
+      ctaTopic="Web design in Accra"
+      faqs={faqs}
+      proofHeading="Results in Accra"
+      relatedReading={relatedReading}
+    />
   );
 }

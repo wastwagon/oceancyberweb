@@ -10,7 +10,7 @@ export const cyberLicenceStatus = cyberServiceMode;
 
 /** Hero and meta for /services/cybersecurity and geo cyber pages. */
 export function cybersecurityPublicScopeLine(): string {
-  return "Security consulting for Ghana sites and apps — assessments, hardening, and remediation from our Accra engineering team. Not regulated monitoring or MSSP services.";
+  return "Security consulting for Ghana sites and apps — assessments, hardening, and remediation from our Accra engineering team. Not regulated monitoring or managed security services.";
 }
 
 /** Short banner on cyber hub and geo pages. */

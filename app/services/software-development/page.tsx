@@ -6,6 +6,7 @@ import {
 } from "@/components/services/ServicePremiumPage";
 import { serviceHeroCta } from "@/lib/marketing/site-cta";
 import { serviceImages } from "@/lib/startup-agency/service-images";
+import { CLIENT_PROOF_LINES } from "@/lib/marketing/client-proof-outcomes";
 import { servicePricingHints } from "@/lib/startup-agency/pricing";
 
 const content: ServicePageContent = {
@@ -15,7 +16,7 @@ const content: ServicePageContent = {
   heroSuffix: "",
   heroHighlightTone: "white",
   heroDescription:
-    "Custom software for Accra and Ghana operations — staff logins, workflows, finance reconciliation, and MoMo-aware integrations. Packages from GHS 14,500 at 47 Nii Kwashiefio Avenue.",
+    "Custom software for operations in Accra and across Ghana — staff logins, workflows, finance reconciliation, and MoMo-aware integrations. Packages from GHS 14,500 at 47 Nii Kwashiefio Avenue.",
   heroCtaLabel: serviceHeroCta.label,
   heroCtaHref: serviceHeroCta.href,
   showAtAGlance: true,
@@ -62,7 +63,7 @@ const content: ServicePageContent = {
     },
   ],
   stackEyebrow: "Stack",
-  stackTitle: "Technologies we ship with",
+  stackTitle: "Technologies we build with",
   stackSubtitle:
     "Type-safe web stacks with APIs your team can extend after handover.",
   stack: [
@@ -111,17 +112,17 @@ const content: ServicePageContent = {
     {
       title: "Legal matter workspace",
       client: "Fitch Attorneys",
-      result: "Case-management efficiency up 180% with a unified client platform.",
+      result: CLIENT_PROOF_LINES.fitchAttorneys,
     },
     {
       title: "Advisory client portal",
       client: "Fitch Advisory",
-      result: "Client engagement up 250% after portal, documents, and booking.",
+      result: CLIENT_PROOF_LINES.fitchAdvisory,
     },
     {
       title: "Mobile commerce ops",
       client: "ThinQ Shopping",
-      result: "Mobile conversions up 165% with Paystack and MoMo checkout.",
+      result: CLIENT_PROOF_LINES.thinqShopping,
     },
   ],
   ctaTitle: "Need custom software, not another brochure site?",

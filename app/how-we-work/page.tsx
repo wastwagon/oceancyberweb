@@ -100,7 +100,7 @@ export default function HowWeWorkPage() {
         <div className="sa-container">
           <div className="mx-auto mb-12 max-w-2xl text-center">
             <p className="sa-eyebrow">Design</p>
-            <h2 className="sa-title mt-3">Design process built for shipping</h2>
+            <h2 className="sa-title mt-3">Design process built for launch</h2>
             <p className="sa-subtitle mx-auto mt-3">
               We do not stop at mockups. Research, Figma prototypes, and engineering handoff stay in
               one delivery thread.
@@ -203,7 +203,7 @@ export default function HowWeWorkPage() {
         <div className="sa-container max-w-3xl text-center">
           <h2 className="sa-title">Plan your scope</h2>
           <p className="sa-subtitle mx-auto mt-4 max-w-lg">
-            Compare packages or run the estimator before you share goals in intake.
+            Compare packages or run the estimator, then share goals in Get started.
           </p>
           <div className="mx-auto mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
             <Link href={SITE_CTA.comparePackages.href} className="sa-btn-outline min-h-11 px-6">

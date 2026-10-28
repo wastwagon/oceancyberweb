@@ -53,7 +53,7 @@ export const insightPosts: InsightPost[] = [
     paragraphs: [
       "Africa’s digital economies are expanding faster than many legacy security programmes can absorb. That gap shows up as phishing-driven fraud, ransomware targeting SMEs, and inconsistent visibility into cloud and mobile-first stacks.",
       "National frameworks and sector regulators are maturing, but execution still varies by industry and company size. The teams that win treat security as a product discipline: measurable controls, incident playbooks, and executive-level accountability—not checkbox audits alone.",
-      "For leaders shipping software or operating critical services, the practical sequence is risk prioritisation, identity and endpoint hygiene, logging that supports investigation, and vendor oversight that matches how data actually flows.",
+      "For leaders delivering software or operating critical services, the practical sequence is risk prioritisation, identity and endpoint hygiene, logging that supports investigation, and vendor oversight that matches how data actually flows.",
     ],
     image: insightCoverPath("future-cybersecurity-africa"),
     category: "Security",
@@ -64,7 +64,7 @@ export const insightPosts: InsightPost[] = [
     slug: "digital-transformation-ghana",
     title: "Going digital in Ghana without the buzzwords",
     excerpt:
-      "How Ghana businesses actually ship payments, ordering, and service channels — and what to fix so the back office keeps up.",
+      "How Ghana businesses actually digitise payments, ordering, and service channels — and what to fix so the back office keeps up.",
     paragraphs: [
       "In Ghana, digital work often starts with customer-facing channels — payments, ordering, and service delivery — while back-office systems catch up. That order makes sense when revenue is urgent, but it creates messy integrations if core data stays fragmented.",
       "Teams that win pick a few measurable outcomes: shorter fulfilment, fewer manual reconciliations, and clear ownership between business and engineering.",
@@ -81,7 +81,7 @@ export const insightPosts: InsightPost[] = [
     excerpt:
       "Examining how fintech solutions are bringing financial services to underserved communities across Africa.",
     paragraphs: [
-      "Mobile money demonstrated that reliable rails plus simple UX can move inclusion faster than traditional branch expansion. The next wave layers credit, savings, and business tools on those same habits—often with stricter fraud expectations.",
+      "Mobile money demonstrated that reliable rails plus simple UX can move inclusion faster than traditional branch expansion. The next wave layers credit, savings, and business tools on those same habits — often with stricter fraud expectations.",
       "Building for underserved users means designing for intermittent connectivity, shared devices, and support channels that do not assume desktop literacy. Interfaces must build trust step by step.",
       "Compliance and partnership rules are not overhead — they protect users and keep products stable when volumes spike or regulation shifts.",
     ],
@@ -96,7 +96,7 @@ export const insightPosts: InsightPost[] = [
     excerpt:
       "Strategies for success in the rapidly growing e-commerce sector across emerging African economies.",
     paragraphs: [
-      "Growth is rarely limited by storefront templates—it is constrained by logistics, returns, payments acceptance, and honest merchandising. Operators who map the full journey beat those who optimize ads alone.",
+      "Growth is rarely limited by storefront templates — it is constrained by logistics, returns, payments acceptance, and honest merchandising. Operators who map the full journey beat those who optimise ads alone.",
       "Checkout friction remains the silent killer: carrier-defined delivery expectations, cash versus digital incentives, and clear duty or fee disclosure matter more than marginal conversion tweaks.",
       "Inventory and supplier coordination systems become the bottleneck at scale. Investing early in operational visibility pays off when traffic spikes during campaigns.",
     ],
@@ -113,7 +113,7 @@ export const insightPosts: InsightPost[] = [
     paragraphs: [
       "Useful ML deployments start with a decision pipeline: what input data exists, what decision it supports, and how errors show up to customers or staff. Without that clarity, models become demos.",
       "Document extraction, support triage, forecasting, and ranking are common early wins because evaluation is straightforward and humans remain in the loop during rollout.",
-      "Responsible rollout includes monitoring drift, documenting limitations, and avoiding features that infer sensitive attributes without governance. Shipping fast still requires audit trails.",
+      "Responsible rollout includes monitoring drift, documenting limitations, and avoiding features that infer sensitive attributes without governance. Moving fast still requires audit trails.",
     ],
     image: insightCoverPath("ai-ml-practical"),
     category: "Innovation",
@@ -158,7 +158,7 @@ export const insightPosts: InsightPost[] = [
     paragraphs: [
       "Ghana's e-commerce trajectory is less about storefront aesthetics and more about fulfillment truth: accurate delivery windows, returns policies customers trust, and payment options that match how people actually pay on mobile.",
       "Operators preparing for the next growth wave should prioritize inventory visibility, carrier integrations with realistic SLA messaging, and checkout flows that surface fees before confirmation. Campaign traffic amplifies weak ops faster than it fixes them.",
-      "Platform choices should support scale without re-platforming every year—catalog tooling, promo engines, and reporting that finance and marketing both trust. Teams that build operational muscle early compound gains when demand spikes.",
+      "Platform choices should support scale without re-platforming every year — catalogue tooling, promo engines, and reporting that finance and marketing both trust. Teams that build operational muscle early compound gains when demand spikes.",
     ],
     image: insightCoverPath("ecommerce-growth-ghana"),
     category: "Business",
@@ -181,6 +181,91 @@ export const insightPosts: InsightPost[] = [
     category: "Compliance",
     date: "February 15, 2024",
     readTime: "7 min read",
+  },
+  {
+    slug: "pos-vs-ecommerce-ghana-2026",
+    title: "In-store POS vs an ecommerce website in Ghana",
+    excerpt:
+      "Counter sales, branches, and MoMo at the till are not the same problem as a Paystack checkout online — here is how to choose and where OceanCyber fits.",
+    paragraphs: [
+      "Retail teams in Ghana often ask for “a system to sell” when they mean two different things: staff ringing up walk-in customers at a branch, or customers paying on a website or app. Mixing the two in one brief leads to wrong budgets and the wrong vendor.",
+      "OceanCyber designs and builds marketing sites and ecommerce stores — catalogue, checkout, Paystack and Mobile Money, delivery notes — from GHS 6,000 upward. That is custom or platform-led web commerce, not counter POS software.",
+      "In-store POS — tills, stock by branch, kitchen or pharmacy workflows — is a separate product category. We publish editorial DwumaPOS guides (shops, restaurants, pharmacies) so you can compare plans and payment setup without confusing them with a website quote.",
+    ],
+    sections: [
+      {
+        heading: "Choose ecommerce when",
+        paragraphs: ["OceanCyber can scope and build the storefront and checkout."],
+        bullets: [
+          "Customers discover products online and pay before pickup or delivery.",
+          "You need SEO, campaigns, and a branded domain.",
+          "Checkout must use Paystack or Mobile Money on the web.",
+        ],
+        links: [
+          { href: "/services/ecommerce", label: "E-commerce service" },
+          { href: "/guides/ecommerce-website-timeline-ghana", label: "Ecommerce timeline in Ghana" },
+        ],
+      },
+      {
+        heading: "Read POS guides when",
+        paragraphs: ["Use our DwumaPOS editorial guides to compare POS plans — we do not sell POS software."],
+        bullets: [
+          "Staff sell at a physical counter or multiple branches.",
+          "You need inventory, receipts, and branch reporting at the till.",
+          "You want DwumaPOS plan comparisons in Ghana cedis.",
+        ],
+        links: [
+          { href: "/guides/dwumapos-for-ghana-shops", label: "DwumaPOS for Ghana shops" },
+          { href: "/guides/dwumapos-restaurant-pos-ghana", label: "Restaurant POS guide" },
+          { href: "/guides/dwumapos-pharmacy-pos-ghana", label: "Pharmacy POS guide" },
+        ],
+      },
+    ],
+    related: [
+      { href: "/help-center", label: "Help center — POS vs ecommerce article" },
+      { href: "/guides/accept-mobile-money-paystack", label: "Mobile Money and Paystack" },
+    ],
+    image: insightCoverPath("pos-vs-ecommerce-ghana-2026"),
+    category: "Business",
+    date: "October 28, 2026",
+    readTime: "4 min read",
+  },
+  {
+    slug: "google-maps-web-design-ghana-2026",
+    title: "How Ghanaians pick a web design company on Google Maps",
+    excerpt:
+      "What “best web design company” and “website developers” searches mean in Accra — and how to compare packages, reviews, and real delivery before you call.",
+    paragraphs: [
+      "Most buyers in Ghana search Google Maps for best web design company in Ghana, website developers in Accra, or web development company — not “hire a developer.” Rankings blend reviews, profile services, and review text that mentions real deliverables.",
+      "Compare teams on published GHS prices, live portfolio URLs, and consistent office details — not keyword-stuffed business names that risk policy issues.",
+    ],
+    sections: [
+      {
+        heading: "Pages that match how you searched",
+        paragraphs: ["Use local owner pages for design vs development intent."],
+        links: [
+          { href: "/services/web-design-in-ghana", label: "Web design company in Ghana" },
+          { href: "/services/web-development-in-ghana", label: "Website developers in Ghana" },
+        ],
+      },
+      {
+        heading: "Managing your own Maps listing",
+        paragraphs: ["Use Company facts for paste-ready GBP description, services, and Q&A."],
+        links: [
+          { href: "/facts", label: "Company facts & Maps kit" },
+          { href: "/help-center", label: "Help center" },
+        ],
+      },
+    ],
+    related: [
+      { href: "/guides/website-cost-in-ghana", label: "Website cost in Ghana" },
+      { href: "/insights/pos-vs-ecommerce-ghana-2026", label: "POS vs ecommerce in Ghana" },
+      { href: "/reviews", label: "Google reviews" },
+    ],
+    image: insightCoverPath("digital-transformation-ghana"),
+    category: "Business",
+    date: "October 28, 2026",
+    readTime: "3 min read",
   },
 ];
 

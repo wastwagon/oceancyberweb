@@ -8,7 +8,7 @@ export function webDesignGhanaFaqs(stats: GooglePlaceStats) {
     {
       question: "What is the starting price for web design in Ghana?",
       answer:
-        "Company website packages start at GHS 6,000 (Startup), GHS 14,500 (Professional), and GHS 30,000 (Enterprise). See /pricing and /guides/website-cost-in-ghana for what each includes.",
+        "Company website packages start at GHS 6,000 (Startup), GHS 14,500 (Professional), and GHS 30,000 (Enterprise). See our pricing page and the website cost in Ghana guide for what each includes.",
     },
     {
       question: "Do you serve all of Ghana?",
@@ -16,9 +16,18 @@ export function webDesignGhanaFaqs(stats: GooglePlaceStats) {
         "Yes. We design and build from Accra for Kumasi, Tema, Takoradi, Cape Coast, Tamale, and remote teams. Screen-share discovery works when travel is not practical.",
     },
     {
-      question: "Are you web designers or web developers?",
+      question: "Are you web designers or website developers?",
       answer:
-        "Both. We shape structure and visuals, then build the working site — pages, forms, speed, and search setup. Most Ghana businesses hire one team for both.",
+        "Both — a web design company and website development team in one Accra office. We shape structure and visuals, then build the working site with speed and search setup.",
+    },
+    {
+      question: "Best website design company in Ghana — why OceanCyber?",
+      answer: `We publish GHS packages, live client sites, and ${reviews}. One team for design, development, MoMo or Paystack stores, and hosting when you need it.`,
+    },
+    {
+      question: "Do you build online store websites in Ghana?",
+      answer:
+        "Yes — ecommerce and catalogue sites with Ghana checkout. Same Accra team that ships marketing sites; see our ecommerce service and ThinQ Shopping in the portfolio.",
     },
     {
       question: "Where is your office?",
@@ -32,7 +41,7 @@ export function webDesignGhanaFaqs(stats: GooglePlaceStats) {
     {
       question: "How do we start?",
       answer:
-        "Use /get-started with your pages, budget, and timeline. We match you to a package and send a written quote before build work begins.",
+        "Use Get started with your pages, budget, and timeline. We match you to a package and send a written quote before build work begins.",
     },
   ];
 }
@@ -43,7 +52,16 @@ export function webDesignAccraFaqs(stats: GooglePlaceStats) {
     {
       question: "What is the starting price for web design in Accra?",
       answer:
-        "Packages start at GHS 6,000 for a five-page company site. Professional and Enterprise add custom UI, payments, and larger scope — see /pricing.",
+        "Packages start at GHS 6,000 for a five-page company site. Professional and Enterprise add custom UI, payments, and larger scope — see our pricing page.",
+    },
+    {
+      question: "Best web design company in Accra — why choose OceanCyber?",
+      answer: `We are website designers and developers at ${googleBusinessProfile.address.street} with published GHS packages and live client sites. ${reviews}.`,
+    },
+    {
+      question: "Website development companies in Accra — do you only design?",
+      answer:
+        "No — we design and build: company sites, online stores, and web apps with Paystack or MoMo when you need checkout.",
     },
     {
       question: "Where can we meet in Accra?",

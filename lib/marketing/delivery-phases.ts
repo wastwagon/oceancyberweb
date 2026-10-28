@@ -18,14 +18,14 @@ export const deliveryPhases: readonly DeliveryPhase[] = [
   },
   {
     step: 2,
-    title: "Design on mobile first",
+    title: "Mobile-first design",
     body: "When design is in scope, we prototype in Figma for phone-sized screens first — so Accra and nationwide users are not an afterthought.",
     bullets: ["Brand and UX", "Clickable review links", "Engineering handoff"],
   },
   {
     step: 3,
     title: "Build and integrate",
-    body: "We ship in phases with staging URLs you can share on WhatsApp. Paystack, MoMo, CRM, and hosting connect in the same Accra team.",
+    body: "We deliver in phases with staging URLs you can share on WhatsApp. Paystack, MoMo, CRM, and hosting connect in the same Accra team.",
     bullets: ["Milestone demos", "Paystack / MoMo when needed", "Staging before DNS cutover"],
   },
   {

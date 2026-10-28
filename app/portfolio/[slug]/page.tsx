@@ -8,6 +8,12 @@ import {
   getPortfolioSlugs,
   getRelatedPortfolioProjects,
 } from "@/lib/data/portfolio-loader";
+import {
+  portfolioDetailRobots,
+  portfolioDetailTitle,
+  portfolioOgImageAlt,
+  portfolioOpenGraphTitle,
+} from "@/lib/portfolio/portfolio-seo-metadata";
 import { withCanonical } from "@/lib/seo/canonical";
 
 const siteBase =
@@ -77,19 +83,23 @@ export async function generateMetadata({
     ? project.image
     : `${siteBase}${project.image}`;
 
+  const ogAlt = portfolioOgImageAlt(project);
+  const robots = portfolioDetailRobots(project);
+
   return withCanonical(
     {
-      title: `${project.title} — Case Study`,
+      title: portfolioDetailTitle(project),
       description,
+      ...(robots ? { robots } : {}),
       openGraph: {
-        title: `${project.title} | OceanCyber Case Study`,
+        title: portfolioOpenGraphTitle(project),
         description,
         type: "article",
-        images: [{ url: ogImage, alt: `${project.title} — OceanCyber client work` }],
+        images: [{ url: ogImage, alt: ogAlt }],
       },
       twitter: {
         card: "summary_large_image",
-        title: `${project.title} | OceanCyber Case Study`,
+        title: portfolioOpenGraphTitle(project),
         description,
         images: [ogImage],
       },

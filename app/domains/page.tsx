@@ -53,7 +53,7 @@ export default function DomainsPage() {
                 Need a home for that domain?
               </h3>
               <p className="mt-2 text-sm text-sa-muted/70">
-                cPanel & WHM hosting on our premium stack—competitive launch, grow,
+                cPanel and WHM hosting on our premium stack — launch, grow,
                 and scale plans with local support.
               </p>
             </div>

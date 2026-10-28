@@ -54,7 +54,7 @@ const content: ServicePageContent = {
   stackEyebrow: "How we work",
   stackTitle: "From brief to launch",
   stackSubtitle:
-    "Fixed packages with optional add-ons — see /pricing and /guides/website-cost-in-ghana.",
+    "Fixed packages with optional add-ons — see our pricing page and website cost in Ghana guide.",
   stack: [
     { title: "Discovery", description: "Pages, goals, and whether you take payment online." },
     { title: "UX & UI", description: "Wireframes or full custom UI depending on package." },

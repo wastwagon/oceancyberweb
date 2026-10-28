@@ -71,10 +71,13 @@ export type ServicePageContent = {
   regulatoryNote?: string | null;
   /** Renders matching on-page + JSON-LD FAQs from service-hub-faqs. */
   serviceHubPath?: string;
+  relatedReading?: RelatedReadingLink[];
 };
 
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
+import { MarketingRelatedReading } from "@/components/marketing/MarketingRelatedReading";
+import type { RelatedReadingLink } from "@/lib/marketing/related-reading-presets";
 
 /**
  * Capability hub layout (10 blocks): hero → pills → facts → focus → pricing → stack →
@@ -304,6 +307,14 @@ export function ServicePremiumPage({ content }: { content: ServicePageContent })
             <div className="mt-8">
               <StartupAgencyFaq items={faqItems} />
             </div>
+          </div>
+        </section>
+      ) : null}
+
+      {content.relatedReading && content.relatedReading.length > 0 ? (
+        <section className="sa-section relative z-10 border-b border-sa-border">
+          <div className="sa-container max-w-3xl">
+            <MarketingRelatedReading links={content.relatedReading} className="mt-0 border-0 pt-0" />
           </div>
         </section>
       ) : null}

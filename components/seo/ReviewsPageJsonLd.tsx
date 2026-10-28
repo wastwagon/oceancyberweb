@@ -3,6 +3,7 @@ import {
   googleBusinessProfile,
 } from "@/lib/startup-agency/google-business";
 import type { GooglePlaceStats } from "@/lib/google-places-stats";
+import { buildAggregateRatingJsonLd } from "@/lib/trust/review-trust";
 
 const site =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
@@ -43,13 +44,7 @@ export function ReviewsPageJsonLd({ stats }: Props) {
           addressLocality: googleBusinessProfile.address.locality,
           addressCountry: googleBusinessProfile.address.countryCode,
         },
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: stats.rating,
-          reviewCount: stats.reviewCount,
-          bestRating: 5,
-          worstRating: 1,
-        },
+        aggregateRating: buildAggregateRatingJsonLd(stats),
         sameAs: [getGoogleBusinessProfileUrl()],
       },
     ],

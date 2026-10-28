@@ -25,18 +25,18 @@ export const projects: Project[] = [
   {
     title: "OceanCyber Creative Hub",
     category: "Creative Dashboard",
-    description: "A visually stunning, high-performance creative hub dashboard showcasing our premium UI/UX design capabilities, featuring dynamic glassmorphism and real-time analytics.",
-    tech: ["Next.js", "Framer Motion", "Tailwind CSS", "TypeScript", "Three.js"],
+    description:
+      "An in-house studio concept dashboard — illustrative UI patterns (glass surfaces, analytics cards, motion) used in design proposals. Not a live client deployment.",
+    tech: ["Next.js", "Framer Motion", "Tailwind CSS", "TypeScript"],
     gradient: "from-purple-500 to-cyan-500",
     image: siteImagePaths.portfolio.creativeHub,
-    metrics: { increase: "500%", metric: "Visual Engagement" },
     year: "2026",
-    client: "Internal Prototype",
+    client: "OceanCyber studio concept",
     rating: 5,
     slug: "creative-hub-template",
-    services: ["Premium UI/UX", "Interactive Prototyping", "Dashboard Design", "3D Elements"],
-    testimonial: "This prototype demonstrates the absolute cutting edge of web design, blending complex data visualization with breathtaking aesthetics.",
-    results: "Set a new benchmark for premium agency deliverables and increased client inquiry rates."
+    services: ["UI/UX direction", "Dashboard layout", "Design system tokens"],
+    results:
+      "Reference for how we present analytics-heavy interfaces in pitches — labelled as concept work on the portfolio hub.",
   },
   {
     title: "EGP Ghana",

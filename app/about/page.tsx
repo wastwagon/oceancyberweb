@@ -20,6 +20,7 @@ import {
 import { PartnersAndStandardsSection } from "@/components/marketing/PartnersAndStandardsSection";
 import { VideoTestimonialSection } from "@/components/marketing/VideoTestimonialSection";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
+import { siteImagePaths } from "@/lib/seo/site-image-paths";
 
 type AboutTeamMember = {
   name: string;
@@ -71,7 +72,7 @@ const milestones = [
     year: "2025",
     title: "Google reviews",
     description:
-      "Google reviews on /reviews — rating and count sync from our Business Profile.",
+      "Google reviews on our reviews page — rating and count sync from our Business Profile.",
   },
 ];
 
@@ -198,7 +199,7 @@ export default function AboutPage() {
                 Mission &amp; principles
               </h2>
               <p className="sa-subtitle mt-3 max-w-md text-left">
-                How we work with Accra and Ghana clients — from first brief to
+                How we work with clients in Accra and across Ghana — from first brief to
                 launch and support.
               </p>
               <div className="mt-10 space-y-4">
@@ -240,7 +241,7 @@ export default function AboutPage() {
               <div className="sa-card mt-8 overflow-hidden !rounded-3xl">
                 <div className="relative aspect-[16/10] w-full">
                   <Image
-                    src="/images/Africa Trade Chamber.webp"
+                    src={siteImagePaths.portfolio.africaTradeAwards}
                     alt="OceanCyber Accra team delivery for Ghana businesses"
                     fill
                     className="object-cover grayscale"

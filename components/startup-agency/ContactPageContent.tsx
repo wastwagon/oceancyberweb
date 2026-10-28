@@ -201,7 +201,11 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
             variants={contactHeaderItem}
             className="sa-subtitle mx-auto"
           >
-            Send your goals and timeline. If you already know the scope and budget, use the guided intake instead.
+            Send your goals, timeline, and budget if you have them. For a full brief, use{" "}
+            <Link href={SITE_CTA.getStarted.href} className="sa-text-link font-medium">
+              {SITE_CTA.getStarted.label}
+            </Link>{" "}
+            instead of this short form.
           </motion.p>
           <motion.div variants={contactHeaderItem} className="mt-6">
             <PricingPathsLinks variant="compact" />

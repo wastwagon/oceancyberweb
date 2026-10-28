@@ -28,7 +28,7 @@ const content: ServicePageContent = {
   focusEyebrow: "What we design",
   focusTitle: "Screens your customers can finish on a phone",
   focusSubtitle:
-    "Clear hierarchy, readable type, and flows that match how Accra and Ghana users actually behave.",
+    "Clear hierarchy, readable type, and flows that match how users in Accra and across Ghana actually behave.",
   focusAreas: [
     {
       title: "Brand and visual language",
@@ -52,7 +52,7 @@ const content: ServicePageContent = {
     },
   ],
   stackEyebrow: "Tools we use",
-  stackTitle: "Handoff engineers can ship from",
+  stackTitle: "Handoff engineers can build from",
   stackSubtitle:
     "Figma files with specs — not mood boards that die in a PDF.",
   stack: [

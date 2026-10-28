@@ -77,8 +77,8 @@ export const pricingPlans: readonly PricingPlan[] = [
     id: "professional",
     name: "Professional",
     priceGhs: 14500,
-    desc: "Scale product, marketing, and conversion together.",
-    idealFor: "Growing teams shipping multi-page products",
+    desc: "Scale your product, marketing, and conversions together.",
+    idealFor: "Growing teams launching multi-page products",
     timeline: "6–10 weeks",
     featured: true,
     homepageFeatures: [
@@ -97,7 +97,7 @@ export const pricingPlans: readonly PricingPlan[] = [
       "90 days post-launch support",
     ],
     comparison: {
-      idealFor: "Growing teams shipping multi-page products",
+      idealFor: "Growing teams launching multi-page products",
       timeline: "6–10 weeks",
       scope: "Up to 12 pages",
       design: "Custom UI/UX in Figma",
@@ -122,7 +122,7 @@ export const pricingPlans: readonly PricingPlan[] = [
     featured: false,
     homepageFeatures: [
       "Web + optional native mobile app",
-      "Compliance-friendly workflows & SLA options",
+      "Compliance-friendly workflows and SLA options",
       "Dedicated delivery lead",
     ],
     features: [
@@ -194,7 +194,7 @@ export const servicePricingHints = {
     eyebrow: "Investment",
     title: "Indicative web design packages",
     subtitle:
-      "Design and build in Ghana cedis — same Startup, Professional, and Enterprise tiers as /pricing.",
+      "Design and build in Ghana cedis — same Startup, Professional, and Enterprise tiers as on our pricing page.",
     tiers: [
       {
         planId: "startup",
@@ -271,7 +271,7 @@ export const servicePricingHints = {
     eyebrow: "Investment",
     title: "Indicative mobile app investment",
     subtitle:
-      "Mobile work is scoped per platform and feature set. Pair with a web package or ship standalone — full comparison on our pricing page.",
+      "Mobile work is scoped per platform and feature set. Pair with a web package or scope standalone — full comparison on our pricing page.",
     tiers: [
       {
         label: "Single-platform app",
@@ -308,7 +308,7 @@ export const servicePricingHints = {
         planId: "professional",
         label: "Growth store",
         priceGhs: 14500,
-        note: "Full catalog, admin panel, analytics, 90-day support",
+        note: "Full catalogue, admin panel, analytics, 90-day support",
       },
       {
         planId: "enterprise",
@@ -322,7 +322,7 @@ export const servicePricingHints = {
     eyebrow: "Investment",
     title: "Indicative security engagement tiers",
     subtitle:
-      "Security consulting only — assessments and hardening sprints, not MSSP or 24/7 monitoring. Enterprise tiers bundle security into broader delivery.",
+      "Security consulting only — assessments and hardening sprints, not managed security services or 24/7 monitoring. Enterprise tiers bundle security into broader delivery.",
     tiers: [
       {
         label: "Baseline assessment",

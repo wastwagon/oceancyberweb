@@ -39,4 +39,15 @@ describe("keyword ownership anti-cannibalization", () => {
   it("does not publish website-development geo pages", () => {
     expect(geoServicePages.some((p) => p.topicKey === "website-development")).toBe(false);
   });
+
+  it("maps every geo-hire owner phrase to a live geo slug", () => {
+    const slugs = new Set(geoServicePages.map((p) => p.path));
+    slugs.add("/");
+    slugs.add("/services/web-design-in-accra");
+    slugs.add("/services/web-design-in-ghana");
+    for (const row of keywordOwners) {
+      if (row.role !== "geo-hire" && row.role !== "homepage") continue;
+      expect(slugs.has(row.ownerPath), row.phrase).toBe(true);
+    }
+  });
 });

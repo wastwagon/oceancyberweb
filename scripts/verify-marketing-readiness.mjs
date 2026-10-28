@@ -109,6 +109,10 @@ const paths = [
   "/facts",
   "/reviews",
   "/llms.txt",
+  "/help-center",
+  "/insights/google-maps-web-design-ghana-2026",
+  "/services/web-development-in-ghana",
+  "/services/web-design-in-ghana",
   "/services/cybersecurity",
   "/services/web-design-in-accra",
   "/domains",
@@ -125,6 +129,9 @@ if (siteUrl.startsWith("http")) {
 push("Commands");
 push("--------");
 push("  npm run verify:google-places   # live rating + Place ID for Coolify");
+push("  npm run sync:help-center       # refresh public/data/help-center.json from code");
+push("  npm run sync:nav               # prisma db seed — navigation from lib/navigation/menu.ts");
+push("  npm run verify:production-seo  # live HTML smoke (after deploy)");
 push("  npm run verify:marketing -- --strict   # fail if reviews not configured");
 push("  npm run verify:marketing -- --strict --live   # also ping Places API (New)");
 push("  npm run build && npm test\n");

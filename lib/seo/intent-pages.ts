@@ -19,14 +19,28 @@ export type IntentExample = {
   link?: IntentLink;
 };
 
+export type IntentSubsection = {
+  heading: string;
+  paragraphs?: string[];
+  table?: IntentTable;
+  links?: IntentLink[];
+};
+
 export type IntentSection = {
   heading: string;
   paragraphs: string[];
+  /** Optional in-body figure (shown after section paragraphs). */
+  figure?: { src: string; alt: string };
   bullets?: string[];
+  /** Rendered after bullets (supports [label](url) links) */
+  trailingParagraphs?: string[];
   steps?: string[];
   table?: IntentTable;
+  subsections?: IntentSubsection[];
   example?: IntentExample;
   links?: IntentLink[];
+  /** Render section.links on one line separated by · */
+  linksInline?: boolean;
 };
 
 export type IntentTable = {
@@ -44,11 +58,17 @@ export type IntentPage = {
   kind: IntentKind;
   slug: string;
   title: string;
+  /** SEO & Open Graph title when it differs from the on-page H1 */
+  metaTitle?: string;
   description: string;
+  openGraphLocale?: string;
+  dateModified?: string;
   eyebrow: string;
   image: string;
   imageAlt: string;
   intro: string;
+  /** Extra intro paragraphs after `intro` (supports [label](url) links) */
+  introParagraphs?: string[];
   sections: IntentSection[];
   table?: IntentTable;
   faqs: IntentFaq[];
@@ -80,7 +100,7 @@ export const intentKindMeta: Record<
     label: "Guides",
     hubTitle: "Guides for building in Ghana",
     hubDescription:
-      "Practical answers on website cost, app development cost, domain registration, hosting cost, Mobile Money checkout, ecommerce timelines, the Ghana Data Protection Act, and DwumaPOS for Ghana shops.",
+      "Practical answers on website cost, app development cost, domains, hosting, Mobile Money checkout, ecommerce timelines, the Ghana Data Protection Act, and DwumaPOS for shops, restaurants, and pharmacies.",
   },
   compare: {
     path: "/compare",
@@ -104,38 +124,65 @@ export function intentPagePath(page: Pick<IntentPage, "kind" | "slug">): string 
 
 /** Shared DwumaPOS facts so the shop, restaurant, and pharmacy guides stay aligned. */
 const dwumaPlanSummary =
-  "Setting up the shop is free. The 30-day trial starts when you open the shop for sales, on Starter, Business, or Scale. After the trial, Starter is GHS 149 a month, Business is GHS 249 a month, and Scale is GHS 399 a month. You can pay each month, or prepay for one to five years. One year uses the same monthly price. A longer prepay lowers that monthly rate.";
+  "Setting up the shop is free. Your 30-day free trial begins when you sign up, on Starter, Business or Scale. Subscribe in Billing before it ends to keep selling. After the trial, Starter is GHS 149 a month, Business is GHS 249 a month and Scale is GHS 399 a month. Billing is in cedis.";
+
+const dwumaGuideLinks = {
+  shop: { href: "/guides/dwumapos-for-ghana-shops", label: "DwumaPOS for Ghana shops" },
+  restaurant: { href: "/guides/dwumapos-restaurant-pos-ghana", label: "Restaurant POS" },
+  pharmacy: { href: "/guides/dwumapos-pharmacy-pos-ghana", label: "Pharmacy POS" },
+} as const;
+
+function dwumaVerticalPlansIntro(vertical: string): string {
+  return `${vertical} use the same plans as other shops. Setting up the shop is free. Your 30-day free trial begins when you sign up, on Starter, Business or Scale. Subscribe in Billing before it ends to keep selling. Billing is in cedis.`;
+}
+
+const dwumaVerticalPlanBullets = [
+  "Starter, GHS 149 a month: 1 branch, unlimited products, 3 staff logins, an online shop on yourshop.dwumapos.com, pickup and delivery.",
+  "Business, GHS 249 a month (recommended): up to 3 branches, your own domain such as yourshop.com, stock transfers between branches, promotions, gift cards, loyalty and digital products.",
+  "Scale, GHS 399 a month: up to 10 branches, payroll with SSNIT and PAYE, setup help, and offline sales kept for about 7 days.",
+] as const;
+
+const dwumaVerticalPlanTrailingParagraphs = [
+  "Enterprise: custom solutions for more than 10 branches. [Discuss your needs](https://www.dwumapos.com/contact?intent=enterprise)",
+  "You can prepay 12 months for a lower monthly price. Customer MoMo and card payments go to the Paystack or Hubtel account you connect. That money is not the DwumaPOS bill.",
+] as const;
 
 const dwumaPlanTable: IntentTable = {
-  caption: "DwumaPOS plans after the 30-day trial (GHS a month)",
+  caption: "DwumaPOS plans after the 30-day free trial",
   columns: ["Plan", "GHS a month", "Limits", "What you get"],
   rows: [
     [
       "Starter",
       "149",
-      "1 branch, unlimited products, 3 staff",
-      "Website on yourshop.dwumapos.com, pickup and delivery, POS Desktop keeps sales for up to 3 days",
+      "1 branch, unlimited products, 3 staff logins",
+      "Online shop on yourshop.dwumapos.com, pickup and delivery, delivery tools, 34 themes, POS Desktop keeps sales for about 3 days",
     ],
     [
-      "Business",
+      "Business (recommended)",
       "249",
-      "Up to 3 branches, 10 staff",
-      "Your own domain, transfers between branches, promotions and coupons, part payments",
+      "Up to 3 branches",
+      "Everything in Starter, plus stock transfers between branches, your own domain, promotions, gift cards, loyalty and digital products",
     ],
     [
       "Scale",
       "399",
-      "Up to 50 branches, 200 staff",
-      "POS Desktop keeps sales for up to 7 days, payroll with SSNIT and PAYE",
+      "Up to 10 branches",
+      "Everything in Business, plus payroll with SSNIT and PAYE, setup help, and POS Desktop keeps sales for about 7 days",
+    ],
+    [
+      "Enterprise",
+      "Custom solutions",
+      "More than 10 branches, or special needs",
+      "A plan built with you for large groups and franchises. We work with you on branches, staff, payments, setup and support, then send a quote.",
     ],
   ],
 };
 
 const dwumaOfflineSummary =
-  "Install POS Desktop on a Windows PC if you need to keep selling when the network drops. Cash, a card payment you record, a bank transfer, and MoMo you type in by hand stay on that computer and upload when you are back online. Starter and Business hold them for up to three days. Scale holds them for up to seven days. A live MoMo prompt, the sales report, moving stock between branches, and promotions wait for the internet. If you only use the POS in a browser, sales stop until the internet returns. Leave stock edits alone until those sales have uploaded, so the website and the POS do not show two quantities for one product.";
+  "Install POS Desktop on a Windows or Mac computer if you need to keep selling when the internet is down. Cash, a card payment you record, a bank transfer, and MoMo you type in by hand stay on that computer and upload when you are back online. Starter and Business keep them for about 3 days. Scale keeps them for about 7 days. A live MoMo prompt, the sales report, moving stock between branches, and promotions wait for the internet. If you only use the POS in a browser, sales stop until the internet returns. Leave stock edits alone until those sales have uploaded, so your online shop and the POS do not show two quantities for one product.";
 
-const dwumaWebsiteNote =
-  "On Starter the website is yourshop.dwumapos.com. Business and Scale can use your own domain, such as yourshop.com. Customer MoMo and card payments go to the Paystack or Hubtel account you connect. That money is not the DwumaPOS bill.";
+const dwumaOnlineShopNote =
+  "On Starter your online shop is yourshop.dwumapos.com. Business and Scale can use your own domain, such as yourshop.com. Customer MoMo and card payments go to the Paystack or Hubtel account you connect. That money is not the DwumaPOS bill.";
 
 const coreIntentPages: readonly IntentPage[] = [
   {
@@ -206,7 +253,7 @@ const coreIntentPages: readonly IntentPage[] = [
         bullets: [
           "Custom interface design, quoted from Professional at GHS 14,500",
           "Paystack and Mobile Money with receipts and reconciliation, also Professional",
-          "A catalog, bookings, or a client portal",
+          "A catalogue, bookings, or a client portal",
           "Copy, photography, and product data you still need to produce",
           "Each extra integration, from GHS 2,500 when it is scoped as an add-on",
           "A single mobile platform, from GHS 12,000",
@@ -353,7 +400,7 @@ const coreIntentPages: readonly IntentPage[] = [
       { href: "/compare/shopify-woocommerce-custom-ghana", label: "Shopify, WooCommerce, or custom" },
       { href: "/guides/hubtel-vs-paystack-ghana", label: "Hubtel vs Paystack" },
       { href: "/guides/ecommerce-website-timeline-ghana", label: "Ecommerce timelines" },
-      { href: "/guides/dwumapos-for-ghana-shops", label: "DwumaPOS for Ghana shops" },
+      dwumaGuideLinks.shop,
     ],
     cta: {
       title: "Tell us which wallets you need",
@@ -429,7 +476,7 @@ const coreIntentPages: readonly IntentPage[] = [
     slug: "ecommerce-website-timeline-ghana",
     title: "How long does an ecommerce website take in Ghana?",
     description:
-      "Realistic ecommerce timelines in Accra and across Ghana: 6–10 weeks for a scoped store, 10–16 weeks or more when catalog, payments, and operations are complex.",
+      "Realistic ecommerce timelines in Accra and across Ghana: 6–10 weeks for a scoped store, 10–16 weeks or more when catalogue, payments, and operations are complex.",
     eyebrow: "Timeline guide",
     image: "/images/articles/ecommerce-timeline-ghana.png",
     imageAlt: "Blank timeline cards and a laptop on an Accra workshop table",
@@ -482,7 +529,7 @@ const coreIntentPages: readonly IntentPage[] = [
     related: [
       { href: "/guides/accept-mobile-money-paystack", label: "Mobile Money and Paystack" },
       { href: "/compare/shopify-woocommerce-custom-ghana", label: "Shopify, WooCommerce, or custom" },
-      { href: "/guides/dwumapos-for-ghana-shops", label: "DwumaPOS for Ghana shops" },
+      dwumaGuideLinks.shop,
     ],
     cta: {
       title: "Put a date on it",
@@ -567,7 +614,7 @@ const coreIntentPages: readonly IntentPage[] = [
     slug: "shopify-woocommerce-custom-ghana",
     title: "Shopify vs WooCommerce vs a custom store in Ghana",
     description:
-      "Choose Shopify, WooCommerce, or a custom ecommerce build for a Ghana store that needs Mobile Money, cards, and a catalog your team can run.",
+      "Choose Shopify, WooCommerce, or a custom ecommerce build for a Ghana store that needs Mobile Money, cards, and a catalogue your team can run.",
     eyebrow: "Comparison",
     image: "/images/articles/shopify-woocommerce-custom.png",
     imageAlt: "A phone, a laptop, and a tablet showing different shop layouts on a dark table",
@@ -580,7 +627,7 @@ const coreIntentPages: readonly IntentPage[] = [
         ["You own the storefront", "Shopify hosts it", "You host the WordPress site", "You own the code and the content"],
         ["Mobile Money", "Through a payments app such as Paystack", "Through a Paystack plugin on your server", "Checkout and webhooks built for your flow"],
         ["Monthly cost", "Plan plus apps", "Hosting from GHS 69, plus plugins", "Hosting, then changes scoped as work"],
-        ["Best for", "A standard catalog and fast setup", "A WordPress team that will patch the site", "Custom ops, roles, or reconciliation"],
+        ["Best for", "A standard catalogue and fast setup", "A WordPress team that will patch the site", "Custom ops, roles, or reconciliation"],
         ["OceanCyber package", "We can integrate where it is the right core", "We can build and harden it", "Professional from GHS 14,500, Enterprise from GHS 30,000"],
       ],
     },
@@ -618,7 +665,7 @@ const coreIntentPages: readonly IntentPage[] = [
           "The software does not rank by itself. Clear product pages, a fast phone load, and a checkout that matches what people searched for do the work. A neglected plugin site and a neglected custom site both lose.",
       },
       {
-        question: "Can you migrate a Shopify catalog later?",
+        question: "Can you migrate a Shopify catalogue later?",
         answer:
           "Yes. Product data, customers, and URLs should be mapped before the new store launches so existing links keep working.",
       },
@@ -897,7 +944,7 @@ const coreIntentPages: readonly IntentPage[] = [
     slug: "shopify-ghana",
     title: "Shopify alternatives for stores in Ghana",
     description:
-      "Shopify alternatives for Ghana stores: when to stay, what WooCommerce and a custom Paystack build cost, and how to move the catalog without dropping URLs.",
+      "Shopify alternatives for Ghana stores: when to stay, what WooCommerce and a custom Paystack build cost, and how to move the catalogue without dropping URLs.",
     eyebrow: "Alternatives",
     image: "/images/articles/shopify-alternatives-ghana.png",
     imageAlt: "A Ghana shop packing table with garments, a box, and a tablet",
@@ -919,7 +966,7 @@ const coreIntentPages: readonly IntentPage[] = [
           caption: "Shopify alternatives for Ghana",
           columns: ["Alternative", "Choose it when", "Budget anchor"],
           rows: [
-            ["Stay on Shopify", "The catalog and Paystack app already work", "Plan plus apps plus Paystack’s fee"],
+            ["Stay on Shopify", "The catalogue and Paystack app already work", "Plan plus apps plus Paystack’s fee"],
             ["WooCommerce", "You want WordPress and will patch it", "Grow hosting from GHS 129 a month, plus the build"],
             ["Custom store", "Roles, branches, or reconciliation do not fit the theme", "Professional from GHS 14,500, 6–10 weeks"],
           ],
@@ -945,13 +992,13 @@ const coreIntentPages: readonly IntentPage[] = [
         ],
       },
       {
-        heading: "How to move the catalog",
+        heading: "How to move the catalogue",
         paragraphs: [
           "People and Google should land on the product they already know. Export first. Launch second. Cancel Shopify last.",
         ],
         steps: [
           "Export products, customers, and the URLs that already rank or appear in ads.",
-          "Load the catalog on a staging shop and check variants, prices, and photos.",
+          "Load the catalogue on a staging shop and check variants, prices, and photos.",
           "Map each old product URL to the new one, or redirect it.",
           "Run a live Mobile Money test and match it to the Paystack settlement.",
           "Point the domain, then watch orders for a week before you close the Shopify plan.",
@@ -962,12 +1009,12 @@ const coreIntentPages: readonly IntentPage[] = [
       {
         question: "Can we keep our Shopify products and customers?",
         answer:
-          "Yes. Export the catalog and customer records, then map the URLs that already rank before the new store goes live.",
+          "Yes. Export the catalogue and customer records, then map the URLs that already rank before the new store goes live.",
       },
       {
         question: "Which alternative is fastest?",
         answer:
-          "WooCommerce is usually faster when the catalog is a standard list of products. A custom Professional store takes 6–10 weeks because checkout, webhooks, and the admin are built for your delivery rules.",
+          "WooCommerce is usually faster when the catalogue is a standard list of products. A custom Professional store takes 6–10 weeks because checkout, webhooks, and the admin are built for your delivery rules.",
       },
       {
         question: "Will a rebuild cost less than Shopify every month?",
@@ -978,7 +1025,7 @@ const coreIntentPages: readonly IntentPage[] = [
     related: [
       { href: "/compare/shopify-woocommerce-custom-ghana", label: "Full platform comparison" },
       { href: "/guides/accept-mobile-money-paystack", label: "Mobile Money and Paystack" },
-      { href: "/guides/dwumapos-for-ghana-shops", label: "DwumaPOS for Ghana shops" },
+      dwumaGuideLinks.shop,
     ],
     cta: {
       title: "Bring the product list",
@@ -991,168 +1038,196 @@ const coreIntentPages: readonly IntentPage[] = [
     kind: "guide",
     slug: "dwumapos-for-ghana-shops",
     title: "DwumaPOS for shops in Ghana",
+    metaTitle: "DwumaPOS Guide for Ghana Shops | OceanCyber",
     description:
-      "DwumaPOS sells the same products at the counter and on your website. Setting up is free. A 30-day trial starts when you open the shop. Starter is then GHS 149 a month.",
+      "Follow one product through a day in a Ghana shop: stock, MoMo and cash on one receipt, online orders, delivery and selling without internet.",
+    openGraphLocale: "en_GB",
+    dateModified: "2026-10-28",
     eyebrow: "POS guide",
     image: "/images/articles/dwumapos-shop-ghana.png",
-    imageAlt: "A POS screen, a receipt printer, and a phone on an Accra shop counter",
+    imageAlt: "A POS screen, a receipt printer, and a phone in an Accra shop",
     intro:
-      "DwumaPOS is point-of-sale software for shops in Ghana. Follow one product through the day. You enter it once. At lunch the cashier takes MoMo and cash on that same receipt. Later a customer orders it on your website for pickup, and the stock count goes down once. You do not keep a second price list in WhatsApp. Sign up at dwumapos.com. Support is on that site, on WhatsApp at 054 308 0918, or by email at support@dwumapos.com. A custom website or app from OceanCyber is a separate service.",
+      "DwumaPOS is point-of-sale software for shops in Ghana. It puts your POS, your online shop and delivery in one subscription, on one stock list. Follow one product through the day. You enter it once. At lunch the cashier takes MoMo and cash on that same receipt. Later a customer orders it on your online shop for pickup, and the stock count goes down once. You do not keep a second price list in WhatsApp.",
+    introParagraphs: [
+      "Start free at [dwumapos.com](https://app.dwumapos.com/signup). For help, message us on WhatsApp at 054 308 0918 or email support@dwumapos.com. A custom website or app from OceanCyber is a separate service.",
+    ],
     sections: [
       {
         heading: "Start with what you can pack this week",
         paragraphs: [
-          "You choose which products appear on the website. Start with the items that leave the shelf every week. Leave complicated sizes, and anything a staff member must explain in person, off the site until the shop is comfortable. Ten honest items are better than two hundred that are already gone.",
+          "You choose which products appear on your online shop. Start with the items that leave the shelf every week. Leave complicated sizes, and anything a staff member must explain in person, off the online shop until your team is comfortable. Ten honest items are better than two hundred that are already gone.",
           "Use the name customers already ask for, plus the size or colour on the pack. A photo from your own shelf is clearer than a supplier picture of a different pack.",
-          "Just Fit Wear GH, a shoe shop in East Legon, keeps each size on that one list. If the pair is not in the shop, it is not for sale online. Lifestyles By Glo, a beauty shop in Accra, uses WhatsApp for advice. The bottles for sale stay on the POS and the website.",
+          "[Just Fit Wear GH](https://www.dwumapos.com/resources/case-study-just-fit-wear-gh), a shoe shop in East Legon, keeps each size on one list. If the pair is not in the shop, it is not for sale online. [Lifestyles By Glo](https://www.dwumapos.com/resources/case-study-lifestyles-by-glo), a beauty shop in Accra, uses WhatsApp for advice. The bottles for sale stay on the POS and the online shop.",
         ],
         links: [
-          {
-            href: "https://www.dwumapos.com/resources/case-study-just-fit-wear-gh",
-            label: "Just Fit Wear GH, East Legon",
-          },
-          {
-            href: "https://www.dwumapos.com/resources/case-study-lifestyles-by-glo",
-            label: "Lifestyles By Glo, Accra",
-          },
           {
             href: "https://www.dwumapos.com/resources/storefront-plus-till-one-catalog",
-            label: "Same stock for POS and website",
+            label: "One stock list for your POS and your online shop",
           },
         ],
       },
       {
-        heading: "Sell at the counter",
+        heading: "Sell in your shop",
         paragraphs: [
-          "The customer is on the POS, on a phone, a laptop, or a Windows PC, not in a side chat. Add the items, then take MoMo on that sale. One receipt can take cash, card, and MoMo together, so a customer can pay part of the bill with MoMo and the rest in cash. Customers pay with MTN MoMo, Telecel Cash, or AT Money. Telecel Cash is the wallet people still call Vodafone Cash. Connect Paystack or Hubtel under Settings, then Payments. The money stays in your account. DwumaPOS does not hold it.",
-          "If a live prompt is slow, do not mark the sale paid a second time. Write three steps on a card by the counter: retry the prompt, cancel the stuck sale, or take cash.",
-          "The stock list lives on the POS. Starter is one branch, with unlimited products and three staff accounts. Business covers up to three branches and ten staff. Scale covers up to 50 branches and 200 staff. Each branch can see what is left, and the POS can warn you when an item is running low. Business and Scale include transfers between branches. Cashiers, supervisors, and managers do not all have the same access.",
-        ],
-        bullets: [
-          "Use the phone, laptop, printer, or USB scanner you already have. DwumaPOS does not sell you a POS machine.",
-          "A live MoMo prompt needs the internet. Cash, a recorded card payment, a bank transfer, and MoMo you type in by hand can continue on POS Desktop when the network drops.",
+          "Your customer is at the POS, on a phone, a laptop or a Windows or Mac computer, not in a side chat. Add the items, then take MoMo on that sale. One receipt can take cash, card and MoMo together, so a customer can pay part of the bill with MoMo and the rest in cash. Customers pay with MTN MoMo, Telecel Cash or AT Money. Telecel Cash is what many people still call Vodafone Cash. Connect Paystack or Hubtel under Settings → Payments. The money goes to you. DwumaPOS does not hold it.",
+          "If a live prompt is slow, do not mark the sale paid a second time. Write three steps on a card near the POS: retry the prompt, cancel the stuck sale, or take cash.",
+          "The stock list lives on the POS. Starter is one branch, with unlimited products and three staff logins. Business covers up to three branches. Scale covers up to 10 branches. For more than 10 branches, ask about Enterprise custom solutions. Each branch can see what is left, and the POS can warn you when an item is running low. Business and Scale include transfers between branches. Cashiers, supervisors and managers do not all have the same access.",
+          "Use the phone, laptop, printer or USB scanner you already have. DwumaPOS does not sell machines.",
+          "A live MoMo prompt needs the internet. Cash, a card payment you record, a bank transfer and MoMo you type in by hand can continue on POS Desktop when the internet is down.",
         ],
         links: [
-          { href: "https://www.dwumapos.com/", label: "DwumaPOS home" },
+          { href: "https://www.dwumapos.com/platform", label: "What DwumaPOS includes" },
+          { href: "https://www.dwumapos.com/payments", label: "How payments work" },
+          { href: "https://www.dwumapos.com/pricing", label: "Pricing" },
+        ],
+        linksInline: true,
+      },
+      {
+        heading: "Your online shop sells the same stock",
+        paragraphs: [
+          "You do not build a second stock list for your online shop. A customer opens your shop link, orders, and chooses pickup or delivery. That order appears in the same list as your shop sales, and the stock count goes down once. Train one person to pack online orders from the POS, so the end of the day is not a second app.",
+          "Choose the shop type that matches how you sell. DwumaPOS has setups for restaurants, pharmacies, salons, fashion, grocery, hotels and more. The shop type changes the tools on the POS and the look of the online shop. The stock list is still one list. You still choose which items the online shop shows.",
+        ],
+        links: [
           {
-            href: "https://www.dwumapos.com/solutions/shop-pos-ghana",
-            label: "Shop POS details",
+            href: "https://www.dwumapos.com/solutions/restaurant-pos-ghana",
+            label: "Restaurant POS",
           },
-          { href: "https://www.dwumapos.com/pricing", label: "DwumaPOS pricing (GHS)" },
+          {
+            href: "https://www.dwumapos.com/solutions/pharmacy-pos-ghana",
+            label: "Pharmacy POS",
+          },
+          { href: "https://www.dwumapos.com/solutions", label: "All shop types" },
         ],
-      },
-      {
-        heading: "The website sells the same stock",
-        paragraphs: [
-          "You do not build a second stock list for the website. A customer opens your shop link, orders, and chooses pickup or delivery. That order appears in the same list as counter sales, and the stock count goes down once. Train one person to pack website orders at that POS, so close of day is not a second app.",
-          "Choose the shop type that matches how you sell. DwumaPOS has setups for restaurants, pharmacies, salons, fashion, grocery, hotels, and more. The shop type changes the tools on the POS and the look of the website. The stock list is still one list. You still choose which of those items the website shows.",
-        ],
-        links: [
-          { href: "/guides/dwumapos-restaurant-pos-ghana", label: "Restaurant POS guide" },
-          { href: "/guides/dwumapos-pharmacy-pos-ghana", label: "Pharmacy POS guide" },
-          { href: "https://www.dwumapos.com/solutions", label: "All DwumaPOS solutions" },
-        ],
+        linksInline: true,
       },
       {
         heading: "Pickup and delivery",
         paragraphs: [
-          "At checkout the customer chooses pickup or delivery from the areas you publish. Staff see packing, out for delivery, and ready for pickup on that same order. Your own riders sign in, accept the job, collect it at the shop, and record proof: a photo, the customer’s name, and any cash they collected. Cash on delivery is only for your own riders. When the order is fulfilled, that cash sits on the original sale. It is not a chat total you add at close.",
-          "When your riders are busy, you can turn on Dwuma network riders. For those jobs the customer pays by MoMo or card before the rider collects the order. The customer follows a track-order link and sees the rider’s name, phone number, vehicle, and a map. You can also connect a courier, such as Terminal Africa, on your own account. You are not buying bikes from DwumaPOS.",
+          "At checkout the customer chooses pickup or delivery from the areas you publish. Staff see packing, out for delivery and ready for pickup on that same order. Your own riders sign in, accept the job, collect it at the shop, and record proof: a photo, the customer's name, and any cash they collected. Cash on delivery is only for your own riders. When the order is fulfilled, that cash sits on the original sale. It is not a chat total you add at the end of the day.",
+          "When your riders are busy, you can turn on Dwuma network riders, the DwumaPOS delivery network. For those jobs the customer pays by MoMo or card before the rider collects the order. The customer follows a track-order link and sees the rider's name, phone number, vehicle and a map. You can also connect a courier, such as Terminal Africa, on your own account. You are not buying bikes from DwumaPOS.",
         ],
         links: [
           {
-            href: "https://www.dwumapos.com/solutions/delivery",
-            label: "Shop delivery on DwumaPOS",
-          },
-          {
             href: "https://www.dwumapos.com/resources/shop-riders-and-dwuma-delivery",
-            label: "Riders, Dwuma network, and couriers",
-          },
-          {
-            href: "https://www.dwumapos.com/resources/storefront-plus-till-one-catalog",
-            label: "Same stock for POS and website",
+            label: "How delivery works",
           },
         ],
       },
       {
-        heading: "When the network drops",
+        heading: "When the internet is down",
         paragraphs: [
           dwumaOfflineSummary,
-          "When the connection returns, open the sales list and confirm the waiting sales uploaded. Check one product that sold during the cut before you trust the website count. A receipt printer you already own, and a lamp or UPS on the PC, matter more than a new machine. Print one test receipt on a quiet afternoon so the night shift is not learning it in the dark.",
+          "When the connection returns, open the sales list and confirm the waiting sales uploaded. Check one product that sold during the cut before you trust the online shop count. A receipt printer you already own, and a lamp or a UPS (battery backup) on the computer, matter more than a new machine. Print one test receipt on a quiet afternoon so the night shift is not learning it in the dark.",
         ],
         links: [
           {
             href: "https://www.dwumapos.com/resources/offline-pos-desktop",
-            label: "What still sells when the network is down",
+            label: "What you can still sell when the internet is down",
           },
           {
             href: "https://www.dwumapos.com/resources/ghana-momo-pos-checklist",
-            label: "MoMo checklist before you go live",
+            label: "MoMo checklist before you start selling",
           },
         ],
+        linksInline: true,
       },
       {
-        heading: "Close the shift",
+        heading: "Close your shift",
         paragraphs: [
-          "Close of day is one POS report: cash in the drawer, MoMo that went through on those sales, and card on those sales. A MoMo total on a phone that was never entered on the POS is a second record.",
+          "At the end of the day, use one POS report: cash in the drawer, MoMo that went through on those sales, and card on those sales. A MoMo total on a phone that was never entered on the POS is a second record.",
           "If a live prompt has not succeeded, the sale is not paid. Do not hand the item over, and do not take it off the open list, until your payment rule says it is paid. Pickup orders follow the same rule. The sales report itself needs the internet.",
         ],
         links: [
           {
             href: "https://www.dwumapos.com/resources/shift-close-on-the-counter-pos",
-            label: "How to close the shift",
+            label: "Close your shift: cash, MoMo and card",
           },
         ],
       },
       {
         heading: "What the plans cost",
-        paragraphs: [
-          dwumaPlanSummary,
-          dwumaWebsiteNote,
-        ],
+        paragraphs: [dwumaPlanSummary, dwumaOnlineShopNote],
         table: dwumaPlanTable,
-        links: [{ href: "https://www.dwumapos.com/pricing", label: "DwumaPOS pricing (GHS)" }],
+        subsections: [
+          {
+            heading: "Prepaid for 12 months",
+            paragraphs: [
+              "Monthly billing is always the full list price. If you prepay 12 months, you pay less per month for that year.",
+              "After a prepaid term, renewal is at the monthly price unless you prepay again.",
+            ],
+            table: {
+              caption: "DwumaPOS 12-month prepaid pricing",
+              columns: ["Plan", "Monthly price", "12 months prepaid", "Works out to", "Then"],
+              rows: [
+                ["Starter", "GHS 149", "GHS 1,428", "GHS 119/month", "GHS 149/month"],
+                ["Business", "GHS 249", "GHS 1,788", "GHS 149/month", "GHS 249/month"],
+                ["Scale", "GHS 399", "GHS 3,348", "GHS 279/month", "GHS 399/month"],
+              ],
+            },
+            links: [{ href: "https://www.dwumapos.com/pricing", label: "See full pricing" }],
+          },
+        ],
+        links: [
+          {
+            href: "https://www.dwumapos.com/contact?intent=enterprise",
+            label: "Discuss your needs (Enterprise)",
+          },
+        ],
       },
       {
-        heading: "Before you open the shop",
-        paragraphs: [
-          "Create the shop first. The trial does not start until you open it for sales.",
-        ],
+        heading: "Before you start selling",
+        paragraphs: ["Create the shop first, then add your products."],
         steps: [
           "Add the products you can pack this week, with the name customers already use and a photo from the shelf.",
-          "Connect Paystack or Hubtel under Settings, then Payments, if you want a live MoMo prompt. You can start with cash and MoMo entered by hand.",
-          "Take one MoMo test under GHS 2 at the counter and one website order for the same product.",
-          "Put a card by the counter: retry a failed prompt, cancel a stuck sale, or take cash. Do not charge the customer twice.",
-          "At close, match the POS report to the drawer, the MoMo that went through, and card. If MoMo is still pending, that sale is not paid yet.",
+          "Connect Paystack or Hubtel under Settings → Payments if you want a live MoMo prompt. You can start with cash and MoMo you record by hand.",
+          "Take one MoMo test under GHS 2 in your shop and one online order for the same product.",
+          "Put a card near the POS: retry a failed prompt, cancel a stuck sale, or take cash. Do not charge the customer twice.",
+          "At the end of the day, match the POS report to the drawer, the MoMo that went through, and card. If MoMo is still pending, that sale is not paid yet.",
         ],
-        links: [{ href: "https://www.dwumapos.com/start", label: "Start free on DwumaPOS" }],
+        links: [
+          {
+            href: "https://app.dwumapos.com/signup",
+            label: "Start free — 30-day free trial",
+          },
+        ],
       },
     ],
     faqs: [
       {
-        question: "Is the POS the same thing as the website?",
+        question: "Is the POS the same thing as the online shop?",
         answer:
-          "No. The POS is the counter. The website is where a customer orders for pickup or delivery. They share one stock list, so a sale in either place reduces the same count.",
+          "No. The POS is for selling in your shop. The online shop is where a customer orders for pickup or delivery. They share one stock list, so a sale in either place reduces the same count.",
       },
       {
-        question: "Do I get a website with the POS?",
+        question: "Do I get an online shop with the POS?",
         answer:
-          "Yes. Starter includes the website on yourshop.dwumapos.com. There is no second fee for that site. Business and Scale add your own domain, such as yourshop.com. Pickup and delivery are on every plan.",
+          "Yes. Starter includes an online shop on yourshop.dwumapos.com. There is no second fee for it. Business and Scale add your own domain, such as yourshop.com. Pickup and delivery are on every plan.",
       },
       {
         question: "How much is DwumaPOS?",
         answer:
-          "Setting up is free. The 30-day trial starts when you open the shop for sales. After that, Starter is GHS 149 a month, Business is GHS 249 a month, and Scale is GHS 399 a month. You can pay monthly or prepay for one to five years. The full grid is on dwumapos.com/pricing, or call 054 308 0918.",
+          "Setting up is free, and every plan has a 30-day free trial. After that, Starter is GHS 149 a month, Business is GHS 249 a month and Scale is GHS 399 a month. You can pay monthly, or prepay 12 months: Starter GHS 1,428, Business GHS 1,788, Scale GHS 3,348. See the full grid at dwumapos.com/pricing, or call 054 308 0918.",
       },
       {
-        question: "Does DwumaPOS hold my customers’ MoMo?",
+        question: "What happens when my free trial ends?",
         answer:
-          "No. MoMo and card payments go into the Paystack or Hubtel account you connect. The amount you pay DwumaPOS for the software is a separate bill in cedis.",
+          "Your 30-day trial begins when you sign up. Subscribe in Billing before it ends to keep selling.",
+      },
+      {
+        question: "What if I have more than 10 branches?",
+        answer:
+          "Ask about Enterprise custom solutions. We work with you on branches, staff, payments, setup and support, then send a quote. Scale covers up to 10 branches.",
+      },
+      {
+        question: "Does DwumaPOS hold my customers' money?",
+        answer:
+          "No. MoMo and card payments go into the Paystack or Hubtel account you connect. What you pay DwumaPOS for the software is a separate bill, in cedis.",
       },
       {
         question: "Do I need to buy a POS machine?",
         answer:
-          "No. Use the phone, laptop, printer, or USB scanner you already have. Install POS Desktop on a Windows PC if you need to keep selling when the network drops.",
+          "No. Use the phone, laptop, printer or USB scanner you already have. Install POS Desktop on a Windows or Mac computer if you need to keep selling when the internet is down.",
       },
       {
         question: "What if the MoMo prompt is slow?",
@@ -1161,286 +1236,307 @@ const coreIntentPages: readonly IntentPage[] = [
       },
     ],
     related: [
-      { href: "/guides/dwumapos-restaurant-pos-ghana", label: "Restaurant POS (DwumaPOS)" },
-      { href: "/guides/dwumapos-pharmacy-pos-ghana", label: "Pharmacy POS (DwumaPOS)" },
+      dwumaGuideLinks.restaurant,
+      dwumaGuideLinks.pharmacy,
       {
-        href: "https://www.dwumapos.com/solutions/delivery",
-        label: "Delivery on DwumaPOS",
+        href: "https://www.dwumapos.com/resources/shop-riders-and-dwuma-delivery",
+        label: "Delivery for your shop",
       },
     ],
     cta: {
-      title: "Talk to DwumaPOS",
-      body: "WhatsApp 054 308 0918 or email support@dwumapos.com. Open DwumaPOS for the product, or Pricing for the 30-day trial and the GHS plans.",
-      href: "https://www.dwumapos.com/",
-      label: "Open DwumaPOS",
+      title: "Start free on DwumaPOS",
+      body: "30-day free trial when you sign up. Starter, Business, and Scale plans in cedis.",
+      href: "https://app.dwumapos.com/signup",
+      label: "Start free — 30-day free trial",
     },
   },
   {
     kind: "guide",
     slug: "dwumapos-restaurant-pos-ghana",
     title: "Restaurant POS on DwumaPOS",
+    metaTitle: "Restaurant POS on DwumaPOS | OceanCyber",
     description:
-      "Restaurant POS for cafés, chop bars, and takeaway in Ghana. The kitchen sees the same order the waiter takes, and the website menu uses those dishes. From GHS 149 a month after a 30-day trial.",
+      "Follow one table through service in a Ghana restaurant: kitchen orders, MoMo and cash on one bill, takeaway orders and selling without internet.",
+    openGraphLocale: "en_GB",
+    dateModified: "2026-10-28",
     eyebrow: "Restaurant POS",
     image: "/images/articles/dwumapos-restaurant-ghana.png",
-    imageAlt: "A restaurant table with a POS tablet, and the kitchen counter where the plates come out",
+    imageAlt: "A restaurant table with a POS tablet, and plates coming out of the kitchen",
     intro:
-      "DwumaPOS is for chop bars, cafés, and takeaway kitchens in Ghana. Follow one table through service. The waiter names it the way the floor already says it, confirms the order, and the kitchen ticket leaves then, not when the guest asks for the bill. The ticket carries the dish and any change the customer asked for. MoMo, cash, or card closes that same table. A pickup order uses those same dishes, so a finished item does not stay on sale in WhatsApp. Sign up at dwumapos.com. Support is on that site, on WhatsApp at 054 308 0918, or by email at support@dwumapos.com. OceanCyber builds custom restaurant websites and apps separately.",
+      "DwumaPOS is for chop bars, cafés and takeaway kitchens in Ghana. It puts your POS, your online shop and delivery in one subscription, on one stock list. Follow one table through service. The waiter names it the way the floor already says it and confirms the order. The kitchen order slip goes out then, not when the guest asks for the bill. The slip shows the dish and any change the customer asked for. MoMo, cash or card closes that same table. A pickup order uses those same dishes, so a finished item does not stay on sale in WhatsApp.",
+    introParagraphs: [
+      "Start free at [dwumapos.com](https://app.dwumapos.com/signup). For help, message us on WhatsApp at 054 308 0918 or email support@dwumapos.com. OceanCyber builds custom restaurant websites and apps separately.",
+    ],
     sections: [
       {
         heading: "From the table to the kitchen",
         paragraphs: [
-          "Each open table is one sale. Name the tables the way floor staff already say them, such as T3 or balcony 2, not a number that only exists on a napkin. If the items live on different notes, the kitchen misses the change the customer asked for.",
-          "Send the kitchen ticket when the waiter confirms the order, not when the guest asks for the bill. The ticket shows those items and any change, so the pass is not guessing from a shout.",
-          "At the end of the meal, MoMo, cash, or card closes that same ticket. Split the bill on the POS. A second handwritten bill puts the food and the money in two places.",
+          "Each open table is one sale. Name the tables the way your staff already say them, such as T3 or balcony 2, not a number that only exists on a napkin. If the items live on different notes, the kitchen misses the change the customer asked for.",
+          "Send the kitchen order slip when the waiter confirms the order, not when the guest asks for the bill. The slip shows those items and any change, so the kitchen is not guessing from a shout.",
+          "At the end of the meal, MoMo, cash or card closes that same bill. Split the bill on the POS. A second handwritten bill puts the food and the money in two places.",
         ],
         steps: [
           "The waiter opens the table on the POS and confirms the order.",
-          "The kitchen ticket goes out then, with the dish and any change.",
-          "The customer pays MoMo, cash, or card on that same ticket.",
+          "The kitchen order slip goes out then, with the dish and any change.",
+          "The customer pays MoMo, cash or card on that same bill.",
           "Pickup and rider orders for the same dishes appear on the POS.",
         ],
         links: [
           {
             href: "https://www.dwumapos.com/solutions/restaurant-pos-ghana",
-            label: "Restaurant POS on DwumaPOS",
+            label: "Restaurant POS for Ghana shops",
           },
           {
             href: "https://www.dwumapos.com/resources/restaurant-kot-and-tables",
-            label: "Tables and kitchen tickets guide",
+            label: "Restaurant tables and kitchen order slips",
           },
         ],
+        linksInline: true,
       },
       {
-        heading: "One menu for the counter and the website",
+        heading: "One menu for your tables and your online shop",
         paragraphs: [
-          "Many kitchens sell on the POS and still keep a second menu in WhatsApp. When a dish runs out, it can still appear on the phone, so you accept an order you cannot cook. On DwumaPOS the website menu is the same product list as the POS. A pickup or rider order appears on the POS, and the stock count goes down once.",
-          "This guide is for food: tables, kitchen tickets, and takeaway. If you also sell rooms, use the hotels and guesthouses setup. That setup puts the room bill and the restaurant on one POS.",
+          "Many kitchens sell on the POS and still keep a second menu in WhatsApp. When a dish runs out, it can still appear on the phone, so you accept an order you cannot cook. On DwumaPOS your online shop menu is the same product list as the POS. A pickup or rider order appears on the POS, and the stock count goes down once.",
+          "This guide is for food: tables, kitchen orders and takeaway. If you also sell rooms, use the hotel and guesthouse setup. It puts the room bill and the restaurant on one POS.",
         ],
         links: [
           {
-            href: "https://www.dwumapos.com/solutions/hotel-pos-ghana",
-            label: "Hotel POS (rooms + restaurant)",
-          },
-        ],
-      },
-      {
-        heading: "When the network drops at dinner",
-        paragraphs: [
-          dwumaOfflineSummary,
-        ],
-        links: [
-          {
-            href: "https://www.dwumapos.com/resources/ghana-momo-pos-checklist",
-            label: "MoMo checklist before you go live",
+            href: "https://www.dwumapos.com/solutions/hotel-guesthouse-pos-ghana",
+            label: "Hotel and guesthouse POS",
           },
         ],
       },
       {
         heading: "Pickup and delivery",
         paragraphs: [
-          "Pickup and rider orders use the dishes the kitchen already cooks. Your own riders collect the order, hand it over, and record a photo, the customer’s name, and any cash. Cash on delivery is only for your own riders, and that cash sits on the original ticket when the order is fulfilled. When they are busy, you can turn on Dwuma network riders. For those jobs the customer pays by MoMo or card before the rider collects the food, then follows a track-order link with the rider’s name, phone number, and a map.",
+          "Pickup and rider orders use the dishes the kitchen already cooks. Your own riders collect the order, hand it over, and record a photo, the customer's name and any cash. Cash on delivery is only for your own riders, and that cash sits on the original sale when the order is fulfilled.",
+          "When your riders are busy, you can turn on Dwuma network riders. For those jobs the customer pays by MoMo or card before the rider collects the food. The customer then follows a track-order link with the rider's name, phone number and a map.",
         ],
         links: [
           {
-            href: "https://www.dwumapos.com/solutions/delivery",
-            label: "Shop delivery on DwumaPOS",
+            href: "https://www.dwumapos.com/resources/shop-riders-and-dwuma-delivery",
+            label: "How delivery works",
           },
           {
-            href: "https://www.dwumapos.com/pricing",
-            label: "DwumaPOS pricing",
+            href: "https://www.dwumapos.com/resources/ghana-momo-pos-checklist",
+            label: "MoMo checklist before you start selling",
+          },
+        ],
+        linksInline: true,
+      },
+      {
+        heading: "When the internet is down at dinner",
+        paragraphs: [
+          "Install POS Desktop on a Windows or Mac computer if you need to keep selling when the internet is down. Cash, a card payment you record, a bank transfer and MoMo you type in by hand stay on that computer and upload when you are back online. Starter and Business keep them for about 3 days. Scale keeps them for about 7 days. A live MoMo prompt, the sales report, moving stock between branches and promotions wait for the internet. If you only use the POS in a browser, sales stop until the internet returns. Leave stock edits alone until those sales have uploaded, so your online shop and the POS do not show two quantities for one dish.",
+        ],
+        links: [
+          {
+            href: "https://www.dwumapos.com/resources/offline-pos-desktop",
+            label: "What you can still sell when the internet is down",
           },
         ],
       },
       {
-        heading: "Close of night",
+        heading: "Close your shift",
         paragraphs: [
-          "One report should show the covers, the voids, the comps, and what riders collected. If those numbers still live in three notebooks, the kitchen tickets are not finished yet. A live MoMo prompt that has not succeeded is not paid. Do not mark the food as paid, and do not clear the table’s sale, until your payment rule says it is paid.",
+          "One report should show guests served, cancelled items (voids), free items (comps) and what riders collected. If those numbers still live in three notebooks, the kitchen orders are not finished yet. A live MoMo prompt that has not succeeded is not paid. Do not mark the food as paid, and do not clear the table's sale, until your payment rule says it is paid.",
         ],
         links: [
           {
             href: "https://www.dwumapos.com/resources/shift-close-on-the-counter-pos",
-            label: "How to close the shift",
+            label: "Close your shift: cash, MoMo and card",
           },
         ],
       },
       {
         heading: "What a restaurant pays",
-        paragraphs: [
-          "Restaurants use the same plans as other shops. " + dwumaPlanSummary,
-          dwumaWebsiteNote,
-        ],
-        table: dwumaPlanTable,
+        paragraphs: [dwumaVerticalPlansIntro("Restaurants")],
+        bullets: [...dwumaVerticalPlanBullets],
+        trailingParagraphs: [...dwumaVerticalPlanTrailingParagraphs],
         links: [
-          { href: "/guides/dwumapos-for-ghana-shops", label: "Full shop guide" },
-          { href: "https://www.dwumapos.com/pricing", label: "DwumaPOS pricing (GHS)" },
+          {
+            href: "https://www.dwumapos.com/pricing",
+            label: "See full pricing and prepaid amounts",
+          },
+          dwumaGuideLinks.shop,
         ],
+        linksInline: true,
       },
       {
         heading: "Before the first service",
-        paragraphs: [
-          "Create the shop first. The trial does not start until you open it for sales.",
-        ],
+        paragraphs: ["Create the shop first, then add your dishes."],
         steps: [
-          "Add the dishes once, with prices, and name the tables the way the floor already says them.",
+          "Add the dishes once, with prices, and name the tables the way your floor already says them.",
           "Send one test order to the kitchen as soon as you confirm it. Close it with a MoMo test under GHS 2.",
-          "Place one website order for the same dish and confirm it appears on the POS.",
-          "At close of night, match covers, voids, MoMo that went through, cash, and rider cash. If MoMo is still pending, do not mark the food as paid.",
+          "Place one online order for the same dish and confirm it appears on the POS.",
+          "At the end of the shift, match guests served, cancelled items, MoMo that went through, cash and rider cash. If MoMo is still pending, do not mark the food as paid.",
         ],
-        links: [{ href: "https://www.dwumapos.com/start", label: "Start free on DwumaPOS" }],
+        links: [
+          {
+            href: "https://app.dwumapos.com/signup",
+            label: "Start free — 30-day free trial",
+          },
+        ],
       },
     ],
     faqs: [
       {
         question: "Can the customer order without WhatsApp?",
         answer:
-          "Yes. The website menu uses the same dishes as the POS. The customer chooses pickup or a rider, and that order appears on the POS.",
+          "Yes. Your online shop menu uses the same dishes as the POS. The customer chooses pickup or a rider, and that order appears on the POS.",
       },
       {
         question: "Does this POS also sell hotel rooms?",
         answer:
-          "No. This guide is tables, kitchen tickets, and takeaway. Rooms, and a guest bill that includes food, use the hotel POS setup.",
+          "No. This guide is for tables, kitchen orders and takeaway. Rooms, and a guest bill that includes food, use the hotel and guesthouse setup.",
       },
       {
         question: "How much is the restaurant POS?",
         answer:
-          "The plans are the same as for other shops. Setting up is free. A 30-day trial starts when you open the shop for sales. Then Starter is GHS 149 a month, Business is GHS 249 a month, and Scale is GHS 399 a month.",
+          "The plans are the same as for other shops. Setting up is free, and every plan has a 30-day free trial that begins when you sign up. Then Starter is GHS 149 a month, Business is GHS 249 a month and Scale is GHS 399 a month. See dwumapos.com/pricing for prepaid amounts.",
       },
       {
         question: "Who do I call about the POS?",
         answer: "Call DwumaPOS on 054 308 0918, or email support@dwumapos.com.",
       },
     ],
-    related: [
-      { href: "/guides/dwumapos-for-ghana-shops", label: "POS for Ghana shops" },
-      { href: "/guides/dwumapos-pharmacy-pos-ghana", label: "Pharmacy POS" },
-    ],
+    related: [dwumaGuideLinks.shop, dwumaGuideLinks.pharmacy],
     cta: {
-      title: "See the restaurant POS",
-      body: "Tables, kitchen tickets, and MoMo on one sale. WhatsApp 054 308 0918 or email support@dwumapos.com.",
-      href: "https://www.dwumapos.com/solutions/restaurant-pos-ghana",
-      label: "Open restaurant POS",
+      title: "Start free on DwumaPOS",
+      body: "30-day free trial when you sign up.",
+      href: "https://app.dwumapos.com/signup",
+      label: "Start free — 30-day free trial",
     },
   },
   {
     kind: "guide",
     slug: "dwumapos-pharmacy-pos-ghana",
     title: "Pharmacy POS on DwumaPOS",
+    metaTitle: "Pharmacy POS on DwumaPOS | OceanCyber",
     description:
-      "Pharmacy POS for pharmacies and chemical shops in Ghana. Record the batch and expiry, sell the earliest expiry first, and take MoMo on that sale. From GHS 149 a month after a 30-day trial.",
+      "Follow one carton through a Ghana pharmacy: record batch and expiry, sell the earliest batch first, take MoMo, and deliver everyday medicines.",
+    openGraphLocale: "en_GB",
+    dateModified: "2026-10-28",
     eyebrow: "Pharmacy POS",
     image: "/images/articles/dwumapos-pharmacy-ghana.png",
-    imageAlt: "A calm pharmacy counter with plain boxes, a scanner, and a POS screen",
+    imageAlt: "A pharmacy with plain boxes, a scanner and a POS screen",
     intro:
-      "DwumaPOS is for pharmacies and chemical shops in Ghana. Follow one carton through the shop. It arrives in the morning, and you write the batch and the expiry date before the packs reach the shelf. At the counter, the sale offers the batch that expires first. Staff can choose another batch. An expired batch stays off the sale. You check what is close to expiry on the batches list, not from a popup when you scan. Everyday medicines can be ordered on the website from that same stock. A prescription item needs an approved prescription on the order. Sign up at dwumapos.com. Support is on that site, on WhatsApp at 054 308 0918, or by email at support@dwumapos.com. For custom healthcare software from OceanCyber, see the healthcare industry page.",
+      "DwumaPOS is for pharmacies and chemical shops in Ghana. It puts your POS, your online shop and delivery in one subscription, on one stock list. Follow one carton through the shop. It arrives in the morning, and you write the batch and the expiry date before the packs reach the shelf. In your shop, the sale offers the batch that expires first. Staff can choose another batch. An expired batch stays off the sale. You check what is close to expiry on the batches list, not from a warning when you scan. Everyday medicines can be ordered on your online shop from that same stock. A prescription item needs an approved prescription on the order.",
+    introParagraphs: [
+      "Start free at [dwumapos.com](https://app.dwumapos.com/signup). For help, message us on WhatsApp at 054 308 0918 or email support@dwumapos.com. For custom healthcare software from OceanCyber, see [the healthcare industry page](/industries/healthcare).",
+    ],
     sections: [
       {
         heading: "Record the batch when stock arrives",
         paragraphs: [
-          "Write the batch and the expiry date when the stock arrives, before it hits the shelf. Skipping that step makes a later recall a search through the shop. The batches list then shows expired stock, and stock expiring within 30, 60, or 90 days. Those windows are expiry dates, not the software trial. The POS does not pop up a warning when you scan.",
+          "Write the batch and the expiry date when the stock arrives, before it reaches the shelf. If you skip that step, a later recall becomes a search through the whole shop. The batches list then shows expired stock, and stock that expires within 30, 60 or 90 days. The POS does not show a warning when you scan, so check the list yourself.",
           "When a product has batches, the sale starts with the one that expires first. Staff confirm the batch, and they can pick another. Expired batches stay off the sale. That block is on by default.",
-          "Everyday medicines can sit on your website from the same stock. A prescription item needs an approved prescription on the order. The pharmacist still handles that approval. When the order is fulfilled, the sale uses the batch that expires first, the same way as the counter. One box cannot sell at the counter and again on WhatsApp.",
+          "Everyday medicines can sit on your online shop from the same stock. A prescription item needs an approved prescription on the order. The pharmacist still handles that approval. When the order is fulfilled, the sale uses the batch that expires first, the same way as in your shop. One box cannot sell in your shop and again on WhatsApp.",
         ],
         steps: [
           "Receive the stock and record the batch and expiry before it reaches the shelf.",
-          "Sell at the counter. Confirm the batch that expires first, or pick another that has not expired.",
-          "Review the batches list for items expiring in 30, 60, or 90 days. Do not wait for a warning on the scan.",
+          "Sell in your shop. Confirm the batch that expires first, or pick another that has not expired.",
+          "Review the batches list for items expiring in 30, 60 or 90 days. Do not wait for a warning on the scan.",
         ],
         links: [
           {
             href: "https://www.dwumapos.com/solutions/pharmacy-pos-ghana",
-            label: "Pharmacy POS on DwumaPOS",
+            label: "Pharmacy POS for Ghana shops",
           },
           {
             href: "https://www.dwumapos.com/resources/pharmacy-batch-expiry-basics",
-            label: "Batch and expiry basics",
-          },
-          {
-            href: "/industries/healthcare",
-            label: "Healthcare software from OceanCyber",
-          },
-        ],
-      },
-      {
-        heading: "MoMo, cash, and the rider on one sale",
-        paragraphs: [
-          "Customers can pay by MoMo, cash, or card on the POS. That money goes into the Paystack or Hubtel account you connect. DwumaPOS does not hold it.",
-          "If a rider delivers an everyday medicine, the cash they collect is written on the delivery proof. When that order is fulfilled, the payment is on the original sale, and the medicine still comes from the recorded batch.",
-          "GRA e-VAT can go out when a completed sale includes the buyer’s TIN, after that sale has uploaded. A walk-in receipt with no buyer TIN is not sent. DwumaPOS does not register you with GRA. Ask your pharmacist or accountant whether you need it. This page is not tax advice.",
-        ],
-        links: [
-          {
-            href: "https://www.dwumapos.com/resources/ghana-momo-pos-checklist",
-            label: "MoMo checklist before you go live",
+            label: "Batch and expiry basics for pharmacies",
           },
           {
             href: "https://www.dwumapos.com/resources/pharmacy-expiry-at-the-counter-pos",
-            label: "Batch expiry at the counter",
+            label: "Sell earliest-expiry stock first in your pharmacy",
           },
-          {
-            href: "https://www.dwumapos.com/resources/gra-evat-on-the-pos",
-            label: "GRA e-VAT on the POS",
-          },
+        ],
+        linksInline: true,
+        trailingParagraphs: [
+          "[Healthcare software from OceanCyber](/industries/healthcare).",
         ],
       },
       {
-        heading: "Website orders and delivery",
+        heading: "Payments and delivery",
         paragraphs: [
-          "Everyday medicines can be ordered on your DwumaPOS website. Your rider delivers that order. Cash they collect is recorded on the delivery proof, then on the original sale when the order is fulfilled. The medicine comes from the same batch stock, and the fulfilled order takes the batch that expires first.",
-          "Your own riders can take cash on delivery. Dwuma network riders are for when your riders are busy, and those customers pay by MoMo or card before collection. The customer follows a track-order link and sees the rider’s name, phone number, and a map.",
+          "Customers can pay by MoMo, cash or card on the POS. That money goes into the Paystack or Hubtel account you connect. DwumaPOS does not hold it.",
+          "Everyday medicines can be ordered on your online shop. Your own rider can deliver the order and take cash on delivery. The cash is written on the delivery proof, then on the original sale when the order is fulfilled. The medicine still comes from the recorded batch, and the fulfilled order takes the batch that expires first.",
+          "When your riders are busy, you can turn on Dwuma network riders. Those customers pay by MoMo or card before collection. The customer follows a track-order link and sees the rider's name, phone number and a map.",
         ],
-        links: [
-          {
-            href: "https://www.dwumapos.com/solutions/delivery",
-            label: "Shop delivery on DwumaPOS",
-          },
-          {
-            href: "https://www.dwumapos.com/pricing",
-            label: "DwumaPOS pricing",
-          },
-        ],
-      },
-      {
-        heading: "When the network drops",
-        paragraphs: [dwumaOfflineSummary],
         links: [
           {
             href: "https://www.dwumapos.com/resources/ghana-momo-pos-checklist",
-            label: "MoMo checklist before you go live",
+            label: "MoMo checklist before you start selling",
+          },
+          {
+            href: "https://www.dwumapos.com/resources/shop-riders-and-dwuma-delivery",
+            label: "Delivery for your shop",
+          },
+          { href: "https://www.dwumapos.com/payments", label: "How payments work" },
+        ],
+        linksInline: true,
+      },
+      {
+        heading: "GRA e-VAT",
+        paragraphs: [
+          "GRA e-VAT can go out when a completed sale includes the buyer's TIN, after that sale has uploaded. A walk-in receipt with no buyer TIN is not sent. DwumaPOS does not register you with GRA. Ask your pharmacist or accountant whether you need it. This page is not tax advice.",
+        ],
+        links: [
+          {
+            href: "https://www.dwumapos.com/compare/gra-evat-pos-ghana",
+            label: "GRA e-VAT and DwumaPOS",
+          },
+        ],
+      },
+      {
+        heading: "When the internet is down",
+        paragraphs: [
+          "Install POS Desktop on a Windows or Mac computer if you need to keep selling when the internet is down. Cash, a card payment you record, a bank transfer and MoMo you type in by hand stay on that computer and upload when you are back online. Starter and Business keep them for about 3 days. Scale keeps them for about 7 days. A live MoMo prompt, the sales report, moving stock between branches and promotions wait for the internet. If you only use the POS in a browser, sales stop until the internet returns. Leave stock edits alone until those sales have uploaded, so your online shop and the POS do not show two quantities for one product.",
+        ],
+        links: [
+          {
+            href: "https://www.dwumapos.com/resources/offline-pos-desktop",
+            label: "What you can still sell when the internet is down",
           },
         ],
       },
       {
         heading: "What a pharmacy pays",
-        paragraphs: [
-          "Pharmacies use the same plans as other shops. " + dwumaPlanSummary,
-          dwumaWebsiteNote,
-        ],
-        table: dwumaPlanTable,
+        paragraphs: [dwumaVerticalPlansIntro("Pharmacies")],
+        bullets: [...dwumaVerticalPlanBullets],
+        trailingParagraphs: [...dwumaVerticalPlanTrailingParagraphs],
         links: [
-          { href: "/guides/dwumapos-for-ghana-shops", label: "Full shop guide" },
-          { href: "https://www.dwumapos.com/pricing", label: "DwumaPOS pricing (GHS)" },
+          {
+            href: "https://www.dwumapos.com/pricing",
+            label: "See full pricing and prepaid amounts",
+          },
+          dwumaGuideLinks.shop,
         ],
+        linksInline: true,
       },
       {
         heading: "Before you offer delivery",
-        paragraphs: [
-          "Create the shop first. The trial does not start until you open it for sales.",
-        ],
+        paragraphs: ["Create the shop first, then add your products."],
         steps: [
-          "Record a batch and an expiry date for one item, then sell it at the counter and confirm the earliest batch.",
-          "Take one MoMo test under GHS 2 on the POS and one website order for the same everyday medicine.",
+          "Record a batch and an expiry date for one item, then sell it in your shop and confirm the earliest batch.",
+          "Take one MoMo test under GHS 2 on the POS and one online order for the same everyday medicine.",
           "If a rider collects cash, confirm it is on the original sale when the order is fulfilled, before you close the day.",
           "If MoMo is still pending, that sale is not paid yet. Do not hand the pack over.",
         ],
-        links: [{ href: "https://www.dwumapos.com/start", label: "Start free on DwumaPOS" }],
+        links: [
+          {
+            href: "https://app.dwumapos.com/signup",
+            label: "Start free — 30-day free trial",
+          },
+        ],
       },
     ],
     faqs: [
       {
-        question: "Can a prescription go on the website?",
+        question: "Can a prescription go on the online shop?",
         answer:
-          "Everyday medicines can. A prescription item needs an approved prescription on the order. The pharmacist still handles that approval. When the order is fulfilled, the sale uses the batch that expires first, the same way as the counter.",
+          "Everyday medicines can. A prescription item needs an approved prescription on the order. The pharmacist still handles that approval. When the order is fulfilled, the sale uses the batch that expires first, the same way as in your shop.",
       },
       {
         question: "What if the rider takes cash?",
@@ -1450,22 +1546,19 @@ const coreIntentPages: readonly IntentPage[] = [
       {
         question: "How much is the pharmacy POS?",
         answer:
-          "The plans are the same as for other shops. Setting up is free. A 30-day trial starts when you open the shop for sales. Then Starter is GHS 149 a month, Business is GHS 249 a month, and Scale is GHS 399 a month.",
+          "The plans are the same as for other shops. Setting up is free, and every plan has a 30-day free trial that begins when you sign up. Then Starter is GHS 149 a month, Business is GHS 249 a month and Scale is GHS 399 a month. See dwumapos.com/pricing for prepaid amounts.",
       },
       {
         question: "Who do I call about the POS?",
         answer: "Call DwumaPOS on 054 308 0918, or email support@dwumapos.com.",
       },
     ],
-    related: [
-      { href: "/guides/dwumapos-for-ghana-shops", label: "POS for Ghana shops" },
-      { href: "/guides/dwumapos-restaurant-pos-ghana", label: "Restaurant POS" },
-    ],
+    related: [dwumaGuideLinks.shop, dwumaGuideLinks.restaurant],
     cta: {
-      title: "See the pharmacy POS",
-      body: "Batch, expiry, and MoMo on the same sale. WhatsApp 054 308 0918 or email support@dwumapos.com.",
-      href: "https://www.dwumapos.com/solutions/pharmacy-pos-ghana",
-      label: "Open pharmacy POS",
+      title: "Start free on DwumaPOS",
+      body: "30-day free trial when you sign up.",
+      href: "https://app.dwumapos.com/signup",
+      label: "Start free — 30-day free trial",
     },
   },
   {
@@ -1649,14 +1742,20 @@ export function intentArticleMetadata(kind: IntentKind, slug: string): Metadata 
   const page = getIntentPage(kind, slug);
   if (!page) return { title: "Page not found" };
   const path = intentPagePath(page);
+  const metaTitle = page.metaTitle ?? page.title;
+  const title =
+    page.metaTitle != null
+      ? { absolute: metaTitle }
+      : page.title;
   return withCanonical(
     {
-      title: page.title,
+      title,
       description: page.description,
       openGraph: {
-        title: page.title,
+        title: metaTitle,
         description: page.description,
         type: "article",
+        locale: page.openGraphLocale,
         url: path,
         images: [{ url: page.image, alt: page.imageAlt }],
       },

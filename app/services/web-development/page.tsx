@@ -6,6 +6,7 @@ import {
 } from "@/components/services/ServicePremiumPage";
 import { serviceHeroCta } from "@/lib/marketing/site-cta";
 import { serviceImages } from "@/lib/startup-agency/service-images";
+import { CLIENT_PROOF_LINES } from "@/lib/marketing/client-proof-outcomes";
 import { servicePricingHints } from "@/lib/startup-agency/pricing";
 
 const content: ServicePageContent = {
@@ -15,7 +16,7 @@ const content: ServicePageContent = {
   heroSuffix: "",
   heroHighlightTone: "white",
   heroDescription:
-    "Company websites and web apps for Accra and Ghana teams — built for speed on mobile networks, SEO, and Paystack or MoMo when you need checkout. From our office at 47 Nii Kwashiefio Avenue.",
+    "Company websites and web apps for teams in Accra and across Ghana — built for speed on mobile networks, SEO, and Paystack or MoMo when you need checkout. From our office at 47 Nii Kwashiefio Avenue.",
   heroCtaLabel: serviceHeroCta.label,
   heroCtaHref: serviceHeroCta.href,
   showAtAGlance: true,
@@ -93,7 +94,7 @@ const content: ServicePageContent = {
     {
       title: "Client portal and booking",
       client: "Fitch Advisory",
-      result: "Client engagement up after portal, document sharing, and booking.",
+      result: CLIENT_PROOF_LINES.fitchAdvisory,
     },
     {
       title: "Law firm web presence",
@@ -103,7 +104,7 @@ const content: ServicePageContent = {
     {
       title: "Commerce storefront",
       client: "ThinQ Shopping",
-      result: "Catalog and checkout shaped for Ghana buyers.",
+      result: "Catalogue and checkout shaped for Ghana buyers.",
     },
   ],
   ctaTitle: "Ready to build your next website?",

@@ -18,7 +18,7 @@ export const extraIntentGuidePages: readonly IntentPage[] = [
       {
         heading: "Published starting points",
         paragraphs: [
-          "OceanCyber lists the same numbers on /pricing and /services/mobile-apps. We confirm features in discovery before locking milestones.",
+          "OceanCyber lists the same numbers on our pricing page and mobile apps service page. We confirm features in discovery before locking milestones.",
         ],
         table: {
           caption: "Indicative mobile app tiers (GHS)",
@@ -52,7 +52,7 @@ export const extraIntentGuidePages: readonly IntentPage[] = [
       {
         heading: "How this compares to website-only work",
         paragraphs: [
-          "A five-page marketing site starts at GHS 6,000. If you only need a mobile-friendly website, start with /guides/website-cost-in-ghana.",
+          "A five-page marketing site starts at GHS 6,000. If you only need a mobile-friendly website, start with our website cost in Ghana guide.",
           "Choose an app when users need installable access, device features, or repeat sessions — not when a fast website plus WhatsApp is enough.",
         ],
         links: [{ href: "/guides/website-cost-in-ghana", label: "Website cost in Ghana" }],
@@ -72,7 +72,7 @@ export const extraIntentGuidePages: readonly IntentPage[] = [
       {
         question: "Can you convert my existing website to an app?",
         answer:
-          "Yes — see /services/website-to-mobile-app. Store-ready wrappers start around GHS 8,000 after we audit your site.",
+          "Yes — see our website-to-mobile-app service. Store-ready wrappers start around GHS 8,000 after we audit your site.",
       },
     ],
     related: [
@@ -154,7 +154,7 @@ export const extraIntentGuidePages: readonly IntentPage[] = [
     ],
     cta: {
       title: "Tell us which gateway you prefer",
-      body: "Share your catalog, wallets, and whether finance needs a daily export.",
+      body: "Share your catalogue, wallets, and whether finance needs a daily export.",
       href: SITE_CTA.getStarted.href,
       label: SITE_CTA.getStarted.label,
     },
@@ -169,12 +169,12 @@ export const extraIntentGuidePages: readonly IntentPage[] = [
     image: "/images/articles/website-cost-ghana.png",
     imageAlt: "Laptop showing domain search and cPanel hosting options",
     intro:
-      "Your public site needs three lines: the domain, hosting that serves pages, and TLS so browsers trust the connection. OceanCyber sells all three in cedis via Paystack — separate from website build packages on /pricing.",
+      "Your public site needs three lines: the domain, hosting that serves pages, and TLS so browsers trust the connection. OceanCyber sells all three in cedis via Paystack — separate from website build packages on our pricing page.",
     sections: [
       {
         heading: "Domains",
         paragraphs: [
-          "Search on /domains. Global TLDs (.com from GHS 120/year, .africa from GHS 100/year) show annual cedis pricing before checkout.",
+          "Search on our domains page. Global TLDs (.com from GHS 120/year, .africa from GHS 100/year) show annual cedis pricing before checkout.",
         ],
         links: [{ href: "/guides/domain-prices-in-ghana", label: "Domain price list" }],
       },

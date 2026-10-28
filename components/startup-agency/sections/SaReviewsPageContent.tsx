@@ -128,7 +128,15 @@ export function SaReviewsPageContent({ stats, reviews }: Props) {
           >
             our Google Business Profile
           </Link>
-          .
+          . Compare our{" "}
+          <Link href="/services/web-design-in-ghana" className="sa-text-link font-medium">
+            web design company in Ghana
+          </Link>{" "}
+          and{" "}
+          <Link href="/services/web-development-in-ghana" className="sa-text-link font-medium">
+            website developers
+          </Link>{" "}
+          pages for packages and live work.
         </p>
         </div>
       </section>

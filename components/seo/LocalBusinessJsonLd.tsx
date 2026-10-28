@@ -3,27 +3,30 @@ import {
   organizationSameAs,
 } from "@/lib/startup-agency/google-business";
 import { getGooglePlaceStats } from "@/lib/google-places-stats";
-import { buildTrustBlurb } from "@/lib/trust/review-trust";
+import { buildMapsAlignedBusinessDescription } from "@/lib/seo/ghana-local-market";
+import { buildAggregateRatingJsonLd } from "@/lib/trust/review-trust";
 
 const site =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
   "https://oceancyber.net";
 
+const localBusinessId = `${site}/#localbusiness`;
+
 export async function LocalBusinessJsonLd() {
   const stats = await getGooglePlaceStats();
-  const trust = buildTrustBlurb(stats);
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
+    "@id": localBusinessId,
     name: googleBusinessProfile.name,
     alternateName: googleBusinessProfile.shortName,
     foundingDate: String(googleBusinessProfile.foundedYear),
     url: site,
     image: `${site}/images/og-image.jpg`,
     telephone: googleBusinessProfile.phone,
-    description:
-      `Best website, mobile app, and cybersecurity company in Accra and Ghana. Team of ${googleBusinessProfile.teamSize} at ${googleBusinessProfile.address.street}. ${trust.reviewsOnly}.`,
+    description: buildMapsAlignedBusinessDescription(stats),
+    aggregateRating: buildAggregateRatingJsonLd(stats),
     founder: {
       "@type": "Person",
       name: googleBusinessProfile.founderName,

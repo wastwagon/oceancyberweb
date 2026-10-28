@@ -14,6 +14,8 @@ import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
 import { fadeUpProps, revealViewport, staggerDelay } from "@/lib/scroll-reveal";
+import { MarketingRelatedReading } from "@/components/marketing/MarketingRelatedReading";
+import type { RelatedReadingLink } from "@/lib/marketing/related-reading-presets";
 
 export type IndustryCard = { title: string; description: string };
 
@@ -49,6 +51,7 @@ export type IndustryPageContent = {
   caseStudies: IndustryStory[];
   ctaTitle: string;
   ctaDescription: string;
+  relatedReading?: RelatedReadingLink[];
 };
 
 export function IndustryPremiumPage({ content }: { content: IndustryPageContent }) {
@@ -225,6 +228,14 @@ export function IndustryPremiumPage({ content }: { content: IndustryPageContent 
         subtitle={content.storiesSubtitle}
         stories={content.caseStudies}
       />
+
+      {content.relatedReading && content.relatedReading.length > 0 ? (
+        <section className="sa-section relative z-10 border-b border-sa-border">
+          <div className="sa-container max-w-3xl">
+            <MarketingRelatedReading links={content.relatedReading} className="mt-0 border-0 pt-0" />
+          </div>
+        </section>
+      ) : null}
 
       <PremiumFinalCtaSection
         title={content.ctaTitle}

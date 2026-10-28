@@ -267,13 +267,16 @@ export function GoogleReviewsCarousel({ reviews, className, size = "default" }: 
                   aria-selected={i === active}
                   aria-label={`Review ${i + 1} of ${count} by ${review.name}`}
                   onClick={() => goTo(i, i > active ? 1 : -1)}
-                  className={cn(
-                    "sa-pressable h-2 rounded-full transition-all duration-300",
-                    i === active
-                      ? "w-8 bg-sa-primary"
-                      : "w-2 bg-sa-muted/30",
-                  )}
-                />
+                  className="sa-pressable flex h-11 w-11 items-center justify-center rounded-full"
+                >
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "block rounded-full transition-all duration-300",
+                      i === active ? "h-2 w-8 bg-sa-primary" : "h-2 w-2 bg-sa-muted/30",
+                    )}
+                  />
+                </button>
               ))}
             </div>
 
@@ -294,7 +297,7 @@ export function GoogleReviewsCarousel({ reviews, className, size = "default" }: 
                 type="button"
                 onClick={() => goTo(i, i > active ? 1 : -1)}
                 className={cn(
-                  "rounded-full transition-all",
+                  "sa-pressable flex h-11 w-11 items-center justify-center rounded-full transition-all",
                   i === active || (slidesPerView === 2 && i === (active + 1) % count)
                     ? "ring-2 ring-sa-primary ring-offset-2 ring-offset-sa-bg"
                     : "opacity-55 hover:opacity-100",
@@ -328,11 +331,18 @@ export function GoogleReviewsCarousel({ reviews, className, size = "default" }: 
                 aria-selected={i === active}
                 aria-label={`Review ${i + 1} of ${count}`}
                 onClick={() => goTo(i, i > active ? 1 : -1)}
-                className={cn(
-                  "h-2 rounded-full transition-all duration-300",
-                  i === active ? "w-8 bg-sa-primary" : "w-2 bg-sa-muted/30 hover:bg-sa-muted/50",
-                )}
-              />
+                className="sa-pressable flex h-11 w-11 items-center justify-center rounded-full"
+              >
+                <span
+                  aria-hidden
+                  className={cn(
+                    "block rounded-full transition-all duration-300",
+                    i === active
+                      ? "h-2 w-8 bg-sa-primary"
+                      : "h-2 w-2 bg-sa-muted/30 hover:bg-sa-muted/50",
+                  )}
+                />
+              </button>
             ))}
           </div>
         </>

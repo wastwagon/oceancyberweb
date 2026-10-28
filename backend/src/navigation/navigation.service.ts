@@ -48,10 +48,14 @@ const DEFAULT_CONFIG = {
     { label: "Best web design company in Ghana", href: "/services/web-design-in-ghana" },
     { label: "Best web design company in Accra", href: "/services/web-design-in-accra" },
     { label: "Best web development company in Accra", href: "/services/web-development-in-accra" },
+    { label: "Best website developers in Ghana", href: "/services/web-development-in-ghana" },
+    { label: "Best web development company in Ghana", href: "/services/web-development-in-ghana" },
     { label: "Best software development company in Accra", href: "/services/software-development-in-accra" },
     { label: "Best mobile app development company in Accra", href: "/services/mobile-app-development-in-accra" },
     { label: "Best e-commerce development company in Accra", href: "/services/ecommerce-development-in-accra" },
     { label: "Best security consulting in Accra", href: "/services/cybersecurity-in-accra" },
+    { label: "Best UI/UX design company in Accra", href: "/services/ui-ux-design-in-accra" },
+    { label: "Company facts", href: "/facts" },
     { label: "Products", href: "/products" },
     { label: "Insights", href: "/insights" },
     { label: "Reviews", href: "/reviews" },
@@ -138,45 +142,77 @@ const DEFAULT_CONFIG = {
           link: "/services",
         },
         {
-          heading: "Web design in Accra",
+          heading: "Best web design company in Accra",
           description:
-            "Meet the team at 47 Nii Kwashiefio Avenue. Hire page for Accra web design.",
+            "Meet at 47 Nii Kwashiefio Avenue — company sites from GHS 6,000.",
           link: "/services/web-design-in-accra",
         },
         {
-          heading: "Web design in Ghana",
-          description:
-            "Nationwide website design and development from the Accra office.",
+          heading: "Best web design company in Ghana",
+          description: "Nationwide design and build from the Accra office.",
           link: "/services/web-design-in-ghana",
         },
         {
-          heading: "Web development in Accra",
+          heading: "Best web development company in Accra",
           description:
-            "Web and website development from GHS 6,000. Paystack and MoMo ready.",
+            "Website development, Paystack and MoMo — from GHS 6,000.",
           link: "/services/web-development-in-accra",
         },
         {
-          heading: "Web development in Ghana",
-          description:
-            "Company sites and web apps for teams across Ghana, from GHS 6,000.",
+          heading: "Best website developers in Ghana",
+          description: "Website development company for teams across Ghana.",
           link: "/services/web-development-in-ghana",
         },
         {
-          heading: "Software development in Accra",
-          description:
-            "Custom software and tools from GHS 14,500 for Accra teams.",
+          heading: "Best software development in Accra",
+          description: "Custom tools and platforms from GHS 14,500.",
           link: "/services/software-development-in-accra",
         },
         {
-          heading: "Mobile app development in Accra",
+          heading: "Software development in Ghana",
           description:
-            "iOS and Android from GHS 12,000 per platform for Ghana phones.",
+            "Internal tools and web apps — Accra engineering, nationwide delivery.",
+          link: "/services/software-development-in-ghana",
+        },
+        {
+          heading: "Best mobile apps in Accra",
+          description: "iOS and Android from GHS 12,000 per platform.",
           link: "/services/mobile-app-development-in-accra",
         },
         {
-          heading: "UI/UX design in Accra",
-          description: "Product and brand design hire page from GHS 3,500.",
+          heading: "Mobile app development in Ghana",
+          description: "Apps built for Ghana networks and mid-range Android.",
+          link: "/services/mobile-app-development-in-ghana",
+        },
+        {
+          heading: "E-commerce development in Accra",
+          description: "Online stores with Ghana checkout.",
+          link: "/services/ecommerce-development-in-accra",
+        },
+        {
+          heading: "E-commerce development in Ghana",
+          description: "Catalogue, MoMo, and Paystack from one Accra team.",
+          link: "/services/ecommerce-development-in-ghana",
+        },
+        {
+          heading: "Best web designers in Accra",
+          description: "UI/UX and product design from GHS 3,500.",
           link: "/services/ui-ux-design-in-accra",
+        },
+        {
+          heading: "Best web designers in Ghana",
+          description: "Brand and interface design with developer handoff.",
+          link: "/services/ui-ux-design-in-ghana",
+        },
+        {
+          heading: "Security consulting in Accra",
+          description: "Assessments and hardening from GHS 4,500.",
+          link: "/services/cybersecurity-in-accra",
+        },
+        {
+          heading: "Security consulting in Ghana",
+          description: "Security reviews for sites and apps we ship.",
+          link: "/services/cybersecurity-in-ghana",
         },
         {
           heading: "Pricing & packages",
@@ -223,7 +259,7 @@ const DEFAULT_CONFIG = {
         {
           heading: "E-commerce",
           description:
-            "Online stores with catalog, checkout, and local payment flows.",
+            "Online stores with catalogue, checkout, and local payment flows.",
           link: "/services/ecommerce",
         },
         {
@@ -430,6 +466,11 @@ const DEFAULT_CONFIG = {
             "Verified client ratings and recent feedback from Google.",
           link: "/reviews",
         },
+        {
+          heading: "Company facts & Maps copy",
+          description: "NAP, pricing, and paste-ready Google Business Profile text.",
+          link: "/facts",
+        },
       ],
     },
     infrastructure: {
@@ -490,6 +531,11 @@ const DEFAULT_CONFIG = {
           heading: "Reviews",
           description: "Verified Google ratings and client feedback.",
           link: "/reviews",
+        },
+        {
+          heading: "Company facts",
+          description: "Verifiable pricing, office, and Google Maps listing copy kit.",
+          link: "/facts",
         },
       ],
     },

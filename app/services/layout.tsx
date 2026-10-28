@@ -11,10 +11,10 @@ export async function generateMetadata(): Promise<Metadata> {
   const { reviewsOnly } = buildTrustBlurb(stats);
   return {
     title: {
-      default: "Web, mobile, and cybersecurity services in Accra and Ghana",
+      default: "Web, mobile, and cybersecurity services in Accra, Ghana",
       template: "%s | OceanCyber",
     },
-    description: `Web design, development, mobile apps, ecommerce, and cybersecurity for Accra and Ghana. Packages from GHS 6,000. ${reviewsOnly}.`,
+    description: `Web design, development, mobile apps, ecommerce, and cybersecurity in Accra, Ghana. Packages from GHS 6,000. ${reviewsOnly}.`,
   };
 }
 

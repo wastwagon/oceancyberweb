@@ -65,7 +65,7 @@ export function TeamMembersManager() {
       });
       const data = (await res.json().catch(() => ({}))) as { error?: string };
       if (!res.ok) throw new Error(data.error ?? "Save failed");
-      setToast("Team members saved. Live on /team now.");
+      setToast("Team members saved. Changes are live on the Team page.");
       await load();
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Save failed");

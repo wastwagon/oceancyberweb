@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { InsightArticleJsonLd } from "@/components/seo/InsightArticleJsonLd";
+import { MarketingArticleParagraph } from "@/components/seo/MarketingArticleMedia";
 import { buildInsightsHref, type InsightPost } from "@/lib/insights/content";
 import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 
@@ -65,7 +66,7 @@ export function InsightArticleView({ post }: Props) {
 
           <div className="mt-10 space-y-8 text-base leading-relaxed text-sa-muted/90">
             {post.paragraphs.map((p, i) => (
-              <p key={i}>{p}</p>
+              <MarketingArticleParagraph key={i} text={p} id={`insight-p-${i}`} />
             ))}
           </div>
 
@@ -73,8 +74,12 @@ export function InsightArticleView({ post }: Props) {
             <section key={section.heading} className="mt-12">
               <h2 className="font-heading text-2xl font-semibold text-white">{section.heading}</h2>
               <div className="mt-4 space-y-4 text-base leading-relaxed text-sa-muted/90">
-                {section.paragraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
+                {section.paragraphs.map((paragraph, index) => (
+                  <MarketingArticleParagraph
+                    key={paragraph}
+                    text={paragraph}
+                    id={`${section.heading}-p-${index}`}
+                  />
                 ))}
               </div>
               {section.bullets ? (

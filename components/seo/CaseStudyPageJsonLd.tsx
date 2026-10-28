@@ -1,4 +1,5 @@
 import type { PortfolioCaseStudy } from "@/lib/types/portfolio-case-study";
+import { isStudioPortfolio } from "@/lib/portfolio/portfolio-seo-metadata";
 import { absoluteSiteImageUrl } from "@/lib/seo/image-geo";
 
 const site =
@@ -20,13 +21,16 @@ export function CaseStudyPageJsonLd({ project, narrative }: Props) {
   const pageUrl = `${site}/portfolio/${project.slug}`;
   const description =
     narrative?.impact ?? project.results ?? project.description;
+  const studio = isStudioPortfolio(project);
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
     "@id": pageUrl,
     name: project.title,
-    headline: `${project.title} — OceanCyber Case Study`,
+    headline: studio
+      ? `${project.title} — OceanCyber studio concept`
+      : `${project.title} — OceanCyber case study`,
     description,
     image: absoluteSiteImageUrl(project.image),
     datePublished: project.year ? `${project.year}-01-01` : undefined,
@@ -44,10 +48,18 @@ export function CaseStudyPageJsonLd({ project, narrative }: Props) {
         url: absoluteSiteImageUrl("/images/oceancyber-logo.webp"),
       },
     },
-    about: {
-      "@type": "Organization",
-      name: project.client,
-    },
+    ...(studio
+      ? {
+          genre: "Design concept",
+          abstract:
+            "Illustrative in-house UI work for OceanCyber — not a live third-party client deployment.",
+        }
+      : {
+          about: {
+            "@type": "Organization",
+            name: project.client,
+          },
+        }),
     keywords: [project.category, ...project.tech].join(", "),
     url: pageUrl,
   };

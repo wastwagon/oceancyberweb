@@ -8,6 +8,7 @@ import {
   buildTrustSignals,
   fallbackPlaceStats,
 } from "@/lib/trust/review-trust";
+import { CLIENT_PROOF_LINES } from "@/lib/marketing/client-proof-outcomes";
 import { serviceImages } from "./service-images";
 
 export const heroTagline = trustBlurb.short;
@@ -28,13 +29,13 @@ export const heroServiceSlides = [
     image: serviceImages.mobileApps,
   },
   {
-    title: "Security consulting",
+    title: "Security Consulting",
     href: "/services/cybersecurity",
     imageAlt: "Security consulting — assessments and hardening by OceanCyber",
     image: serviceImages.cyberSecurity,
   },
   {
-    title: "E-Commerce",
+    title: "E-commerce",
     href: "/services/ecommerce",
     imageAlt: "Online storefront and checkout experiences built by OceanCyber",
     image: serviceImages.ecommerce,
@@ -148,7 +149,7 @@ export const portfolioConceptWork: readonly WorkPreviewItem[] = [
 export const aboutStats = [
   { value: `Since ${googleBusinessProfile.foundedYear}`, label: "Accra studio" },
   { value: String(googleBusinessProfile.teamSize), label: "In-house team" },
-  { value: "Design → ship", label: "One accountable team" },
+  { value: "Design to launch", label: "One accountable team" },
 ] as const;
 
 /** Homepage “Our Agency” — how we work, not portfolio tiles. */
@@ -159,11 +160,11 @@ export const agencyPillars = [
   },
   {
     title: "One Accra team end to end",
-    body: "Same people from discovery through launch — design, engineering, hosting, and security advice.",
+    body: "Same people from discovery through launch — design, engineering, hosting, and security consulting.",
   },
   {
     title: "Ghana-ready checkout and hosting",
-    body: "Paystack, Mobile Money, and cPanel hosting with prices in cedis on /pricing.",
+    body: "Paystack, MoMo (Mobile Money), and cPanel hosting with prices in cedis on our pricing page.",
   },
 ] as const;
 
@@ -171,7 +172,7 @@ export const portfolioSectionIntro = {
   eyebrow: "Selected work",
   title: "A few highlights from many projects",
   subtitle:
-    `We have delivered sites and apps across law, retail, advisory, and public sector. These ${publishedLivePortfolioCount} live clients are a sample — not our full list.`,
+    `We have delivered sites and apps across law, retail, advisory, and public sector. These ${publishedLivePortfolioCount} live clients are a sample, not our full client list.`,
 } as const;
 
 export const trustSignals = buildTrustSignals(fallbackPlaceStats());
@@ -184,7 +185,7 @@ export const marqueeTags = [
   "cPanel hosting & SSL",
   "Store-ready mobile apps",
   "Security assessments",
-  "Design and build in one team",
+  "Design and build in one Accra team",
 ] as const;
 
 export const serviceCards = [
@@ -202,7 +203,7 @@ export const serviceCards = [
   },
   {
     title: "Web Development",
-    desc: "Fast company sites that show up on Google and take Paystack or MoMo when you sell online.",
+    desc: "Fast company websites that rank on Google and take Paystack or MoMo when you sell online.",
     href: "/services/web-development",
     image: serviceImages.webDevelopment,
   },
@@ -214,19 +215,19 @@ export const serviceCards = [
   },
   {
     title: "E‑commerce",
-    desc: "Storefronts that handle real volume — catalog, checkout, MoMo, and ops tooling that holds up.",
+    desc: "Storefronts that handle real volume — catalogue, checkout, MoMo, and ops tooling that holds up.",
     href: "/services/ecommerce",
     image: serviceImages.ecommerce,
   },
   {
-    title: "Security consulting",
-    desc: "Consultation from GHS 4,500 — assessments and hardening, not MSSP or 24/7 monitoring.",
+    title: "Security Consulting",
+    desc: "Consultation from GHS 4,500 — assessments and hardening, not managed security services or 24/7 monitoring.",
     href: "/services/cybersecurity",
     image: serviceImages.cyberSecurity,
   },
   {
     title: "Cloud Hosting",
-    desc: "Domains, SSL, and hosting with Accra support — billed in GHS so you stay online without forex drama.",
+    desc: "Domains, SSL, and hosting with Accra support — billed in GHS so you stay online without unpredictable forex costs.",
     href: "/hosting",
     image: serviceImages.cloudHosting,
   },
@@ -249,7 +250,7 @@ export const projectChips = [
   "Website from GHS 6,000",
   "Paystack + MoMo checkout",
   "cPanel hosting in GHS",
-  "Security review from GHS 4,500",
+  "Security assessments from GHS 4,500",
 ] as const;
 
 export {
@@ -272,19 +273,19 @@ export type {
 export const proofOutcomes = [
   {
     client: "Fitch Advisory",
-    result: "Client engagement up 250% after a client portal, document sharing, and booking.",
+    result: CLIENT_PROOF_LINES.fitchAdvisory,
     href: "https://www.fitchadvisory.com/",
     path: "/portfolio/fitch-advisory",
   },
   {
     client: "Fitch Attorneys",
-    result: "Case-management efficiency up 180% after one platform for matters and client updates.",
+    result: CLIENT_PROOF_LINES.fitchAttorneys,
     href: "https://www.fitchattorneys.com/",
     path: "/portfolio/fitch-attorneys",
   },
   {
     client: "ThinQ Shopping",
-    result: "Mobile conversions up 165% with Paystack and MoMo checkout.",
+    result: CLIENT_PROOF_LINES.thinqShopping,
     href: "https://thinqshopping.app/",
     path: "/portfolio/thinq-shopping",
   },
@@ -293,6 +294,22 @@ export const proofOutcomes = [
 export const faqItems = buildHomeFaqItems(fallbackPlaceStats());
 
 export const blogTeasers = [
+  {
+    title: "In-store POS vs an ecommerce website in Ghana",
+    date: "October 2026",
+    href: "/insights/pos-vs-ecommerce-ghana-2026",
+    image: siteImagePaths.insights["pos-vs-ecommerce-ghana-2026"],
+    category: "Business",
+    author: "OceanCyber",
+  },
+  {
+    title: "How Ghanaians pick a web design company on Google Maps",
+    date: "October 2026",
+    href: "/insights/google-maps-web-design-ghana-2026",
+    image: siteImagePaths.insights["digital-transformation-ghana"],
+    category: "Business",
+    author: "OceanCyber",
+  },
   {
     title: "Cybersecurity Baseline for Ghanaian SMEs in 2026",
     date: "August 2026",

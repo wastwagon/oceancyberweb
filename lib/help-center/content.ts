@@ -30,7 +30,7 @@ export const defaultHelpArticles: HelpArticle[] = [
     title: "How to top up wallet and pay renewals",
     category: "billing",
     audience: "customers",
-    body: "Go to Dashboard > Wallet, add funds with Paystack, then return to Dashboard and click Charge wallet on any due renewal.",
+    body: "Open Dashboard → Wallet, add funds with Paystack, then return to Dashboard and click Charge wallet on any due renewal.",
     actions: [
       { label: "Open wallet", href: "/dashboard/wallet" },
       { label: "Open renewals dashboard", href: "/dashboard" },
@@ -49,7 +49,7 @@ export const defaultHelpArticles: HelpArticle[] = [
     title: "Intake request vs formal proposal request",
     category: "support",
     audience: "everyone",
-    body: "Use interactive intake to describe needs quickly. Use formal proposal request when you want a structured scope, timeline, and cost sections.",
+    body: "Use Get started for a quick interactive brief. Use the formal proposal request when you want structured scope, timeline, and cost sections.",
     actions: [
       {
         label: "Start interactive intake",
@@ -63,7 +63,7 @@ export const defaultHelpArticles: HelpArticle[] = [
     title: "How to generate a project estimate in GHS",
     category: "websites",
     audience: "everyone",
-    body: "Use the calculator to choose platform, design, scope, and timeline. It gives a rough range and lets you download a proforma PDF.",
+    body: "Use the project cost calculator to choose platform, design, scope, and timeline. It gives a rough range in cedis and lets you download a proforma PDF.",
     actions: [{ label: "Open project calculator", href: "/tools/project-cost" }],
   },
   {
@@ -80,7 +80,7 @@ export const defaultHelpArticles: HelpArticle[] = [
     category: "websites",
     audience: "everyone",
     body:
-      "Choose Web Development for websites and browser-based platforms, Mobile Apps for a new iOS or Android product, and Website to Mobile App when you already have a working website you want assessed for conversion.",
+      "Choose Web development for websites and browser-based platforms, Mobile apps for a new iOS or Android product, and Website to mobile app when you already have a working site you want assessed for store release.",
     actions: [
       { label: "Compare services", href: "/services" },
       { label: SITE_CTA.comparePackages.label, href: SITE_CTA.comparePackages.href },
@@ -92,7 +92,7 @@ export const defaultHelpArticles: HelpArticle[] = [
     category: "support",
     audience: "everyone",
     body:
-      "Our team reviews your goals, timeline, constraints, and contact details. We then respond with clarifying questions or recommend the most suitable discovery, estimate, or proposal path.",
+      "Our team reviews your goals, timeline, constraints, and contact details. We then respond with clarifying questions or recommend the right discovery call, estimate, or proposal path.",
     actions: [
       { label: "View package pricing", href: "/pricing" },
       { label: "Track requests", href: "/dashboard/requests" },
@@ -108,6 +108,45 @@ export const defaultHelpArticles: HelpArticle[] = [
     actions: [
       { label: "View package pricing", href: "/pricing" },
       { label: "Estimate project cost", href: "/tools/project-cost" },
+    ],
+  },
+  {
+    id: "google-maps-listing",
+    title: "Google Maps listing and company facts",
+    category: "websites",
+    audience: "everyone",
+    body:
+      "Our Company facts page lists verifiable office, pricing, and Ghana search topics. It also includes copy-ready text for Google Business Profile — business description, services, Q&A, and prompts you can send clients after delivery so reviews mention what was built. Keep the legal business name; paste wording only.",
+    actions: [
+      { label: "Open company facts & Maps kit", href: "/facts" },
+      { label: "Google reviews", href: "/reviews" },
+      { label: "Best web design in Ghana", href: "/services/web-design-in-ghana" },
+    ],
+  },
+  {
+    id: "pos-vs-ecommerce",
+    title: "In-store POS vs ecommerce website",
+    category: "websites",
+    audience: "everyone",
+    body:
+      "OceanCyber builds marketing sites and ecommerce stores (Paystack, Mobile Money, catalogue checkout). In-store POS — tills, branches, pharmacy or restaurant counters — is different software. We publish DwumaPOS planning guides (editorial, not a product we sell). Pick ecommerce if customers buy on the web; read the POS guides if staff sell at a counter.",
+    actions: [
+      { label: "E-commerce service", href: "/services/ecommerce" },
+      { label: "DwumaPOS for shops", href: "/guides/dwumapos-for-ghana-shops" },
+      { label: "Mobile Money checkout guide", href: "/guides/accept-mobile-money-paystack" },
+    ],
+  },
+  {
+    id: "find-web-company-ghana",
+    title: "Finding a web design or website development company in Ghana",
+    category: "websites",
+    audience: "everyone",
+    body:
+      "If you searched on Google Maps for a web design company, website developers, or a development company in Accra or Ghana, use our local pages for packages in cedis, live portfolio links, and the same team that works from 47 Nii Kwashiefio Avenue.",
+    actions: [
+      { label: "Web design company in Ghana", href: "/services/web-design-in-ghana" },
+      { label: "Website developers in Ghana", href: "/services/web-development-in-ghana" },
+      { label: "Compare all services", href: "/services" },
     ],
   },
 ];

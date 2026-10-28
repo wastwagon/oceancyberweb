@@ -38,7 +38,7 @@ const editorialPillars = [
   {
     icon: Shield,
     title: "Security & resilience",
-    body: "Threat posture, incident readiness, and practical controls for teams shipping fast.",
+    body: "Threat posture, incident readiness, and practical controls for teams delivering fast.",
   },
   {
     icon: Layers3,
@@ -156,7 +156,7 @@ export function InsightsPageClient({ posts }: InsightsPageClientProps) {
                     <span className="text-sa-primary"> leadership</span>
                   </>
                 }
-                subtitle="Perspectives on security, platforms, and shipping software across Ghana and Africa — written for leaders who deliver."
+                subtitle="Perspectives on security, platforms, and delivering software across Ghana and Africa — written for leaders who own outcomes."
                 subtitleVariant="lead"
               />
             </motion.div>

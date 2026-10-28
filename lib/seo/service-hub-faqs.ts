@@ -2,13 +2,13 @@ import { serviceOwnershipBlock } from "@/lib/services/ownership-terms";
 import type { ServiceFaqJsonLdItem } from "@/components/seo/ServicePageJsonLd";
 
 const ownershipAnswer =
-  `${serviceOwnershipBlock.bullets[0]} ${serviceOwnershipBlock.bullets[3]} Full terms: /terms.`;
+  `${serviceOwnershipBlock.bullets[0]} ${serviceOwnershipBlock.bullets[3]} Full terms are on our terms page.`;
 
 export const serviceHubFaqs: Record<string, readonly ServiceFaqJsonLdItem[]> = {
   "/services/web-design": [
     {
       q: "How much does web design cost in Ghana?",
-      a: "Company website packages start at GHS 6,000 (Startup), GHS 14,500 (Professional), and GHS 30,000 (Enterprise). See /pricing and /guides/website-cost-in-ghana.",
+      a: "Company website packages start at GHS 6,000 (Startup), GHS 14,500 (Professional), and GHS 30,000 (Enterprise). See our pricing page and the website cost in Ghana guide.",
     },
     {
       q: "Do you design and build the website?",
@@ -26,7 +26,7 @@ export const serviceHubFaqs: Record<string, readonly ServiceFaqJsonLdItem[]> = {
   "/services/mobile-apps": [
     {
       q: "How much does app development cost in Ghana?",
-      a: "A single iOS or Android platform starts at GHS 12,000. Web plus one mobile platform bundles from GHS 26,500 on Professional. See /guides/app-development-cost-in-ghana.",
+      a: "A single iOS or Android platform starts at GHS 12,000. Web plus one mobile platform bundles from GHS 26,500 on Professional. See our app development cost in Ghana guide.",
     },
     { q: "Do you submit to the App Store and Play Store?", a: "Yes — store-ready builds and submission support are part of scoped delivery." },
   ],
@@ -35,7 +35,10 @@ export const serviceHubFaqs: Record<string, readonly ServiceFaqJsonLdItem[]> = {
       q: "Can customers pay with Mobile Money?",
       a: "Yes. Stores include Paystack and MoMo checkout with webhook reconciliation on Professional packages and above.",
     },
-    { q: "Starting price for an online store?", a: "Starter stores from GHS 6,000; growth stores from GHS 14,500. Compare /pricing." },
+    {
+      q: "Starting price for an online store?",
+      a: "Starter stores from GHS 6,000; growth stores from GHS 14,500. Compare packages on our pricing page.",
+    },
   ],
   "/services/cybersecurity": [
     {
@@ -43,7 +46,7 @@ export const serviceHubFaqs: Record<string, readonly ServiceFaqJsonLdItem[]> = {
       a: "Focused reviews of sites, apps, and hosting for misconfiguration, weak auth, and exposed admin — with a prioritised fix list.",
     },
     {
-      q: "Are you a licensed cybersecurity or MSSP provider?",
+      q: "Are you a licensed cybersecurity or managed security services provider?",
       a: "No. We provide security consulting — assessments, hardening, and remediation sprints. We do not sell regulated monitoring or managed SOC services.",
     },
   ],
@@ -63,17 +66,17 @@ export const serviceHubFaqs: Record<string, readonly ServiceFaqJsonLdItem[]> = {
   "/hosting": [
     {
       q: "How much is hosting in Ghana cedis?",
-      a: "Launch from GHS 69/month with SSL and backups. See /guides/web-hosting-cost-in-ghana.",
+      a: "Launch from GHS 69/month with SSL and backups. See our web hosting cost in Ghana guide.",
     },
   ],
   "/domains": [
     {
       q: "Which domain extensions can I register?",
-      a: "Search on /domains for .com, .net, .org, .africa, and other global TLDs with live GHS pricing before Paystack checkout. See /guides/domain-prices-in-ghana for list prices.",
+      a: "Search on our domains page for .com, .net, .org, .africa, and other global TLDs with live GHS pricing before Paystack checkout. See our domain prices in Ghana guide for list prices.",
     },
     {
       q: "Is domain registration separate from website build?",
-      a: "Yes. Website packages on /pricing cover design and engineering. Domains renew annually — see /facts for list prices.",
+      a: "Yes. Website packages on our pricing page cover design and engineering. Domains renew annually — see our facts page for list prices.",
     },
   ],
   "/ssl": [
@@ -85,7 +88,7 @@ export const serviceHubFaqs: Record<string, readonly ServiceFaqJsonLdItem[]> = {
   "/services/website-to-mobile-app": [
     {
       q: "How much does website-to-app conversion cost?",
-      a: "Store-ready wrappers from GHS 8,000 after we audit your site. Full native shells from GHS 12,000 per platform — see /pricing.",
+      a: "Store-ready wrappers from GHS 8,000 after we audit your site. Full native shells from GHS 12,000 per platform — see our pricing page.",
     },
     {
       q: "Will the app match my website?",

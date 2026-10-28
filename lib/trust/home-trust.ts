@@ -1,8 +1,10 @@
 import { getGooglePlaceStats } from "@/lib/google-places-stats";
+import type { GooglePlaceStats } from "@/lib/google-places-stats";
 import {
   buildHomeFaqItems,
   buildTrustBlurb,
   buildTrustSignals,
+  formatReviewsTrustLine,
   type HomeFaqItem,
   type TrustSignal,
 } from "@/lib/trust/review-trust";
@@ -12,6 +14,8 @@ export type HomeTrustContent = {
   companyPresence: string;
   trustSignals: TrustSignal[];
   faqItems: HomeFaqItem[];
+  reviewStats: GooglePlaceStats;
+  heroReviewsLine: string;
 };
 
 export async function getHomeTrustContent(): Promise<HomeTrustContent> {
@@ -22,5 +26,7 @@ export async function getHomeTrustContent(): Promise<HomeTrustContent> {
     companyPresence: blurb.seo,
     trustSignals: buildTrustSignals(stats),
     faqItems: buildHomeFaqItems(stats),
+    reviewStats: stats,
+    heroReviewsLine: formatReviewsTrustLine(stats),
   };
 }

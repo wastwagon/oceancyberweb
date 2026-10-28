@@ -52,11 +52,11 @@ const CASE_STUDY_NARRATIVES: Record<string, CaseStudyNarrative> = {
   },
   "creative-hub-template": {
     challenge:
-      "The agency needed a flagship UI showcase that demonstrates premium product design craft.",
+      "Prospects needed to see how dense analytics and brand UI could look before committing to a build.",
     solution:
-      "A creative hub dashboard with glassmorphism, motion, and analytics patterns.",
+      "An in-house Creative Hub concept with layout, motion, and component patterns aligned to the OceanCyber brand system.",
     impact:
-      "Became the reference for design-led proposals and elevated perceived delivery quality.",
+      "Used as labelled studio concept work in the portfolio — not presented as a shipped client product.",
   },
   "juelle-hair": {
     challenge:

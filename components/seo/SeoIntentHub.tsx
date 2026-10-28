@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { withCanonical } from "@/lib/seo/canonical";
 import {
   intentKindMeta,
@@ -27,8 +29,9 @@ export function SeoIntentHub({ kind }: { kind: IntentKind }) {
   );
 
   return (
-    <div className="bg-sa-bg text-sa-muted">
-      <section className="border-b border-sa-border">
+    <main className="sa-shell relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted">
+      <SaPageAmbient />
+      <section className="relative z-10 border-b border-sa-border">
         <div className="sa-container max-w-3xl pb-14 pt-28 md:pb-20 md:pt-36">
           <nav aria-label="Breadcrumb" className="text-sm text-sa-muted/60">
             <ol className="flex flex-wrap items-center gap-2">
@@ -46,20 +49,31 @@ export function SeoIntentHub({ kind }: { kind: IntentKind }) {
         </div>
       </section>
 
-      <section className="border-b border-sa-border py-14 md:py-20">
+      <section className="relative z-10 border-b border-sa-border py-14 md:py-20">
         <div className="sa-container max-w-3xl">
           <ul className="space-y-4">
             {pages.map((page) => (
               <li key={page.slug}>
                 <Link
                   href={intentPagePath(page)}
-                  className="sa-card group block p-6 transition-colors hover:border-sa-primary/40"
+                  className="sa-card group flex flex-col overflow-hidden transition-colors hover:border-sa-primary/40 sm:flex-row sm:items-stretch"
                 >
-                  <p className="text-sm font-semibold text-sa-primary">{page.eyebrow}</p>
-                  <h2 className="mt-2 font-heading text-xl font-semibold text-white group-hover:text-sa-primary">
-                    {page.title}
-                  </h2>
-                  <p className="mt-2 text-sm leading-relaxed text-sa-muted/75">{page.description}</p>
+                  <div className="relative aspect-[16/10] w-full shrink-0 border-b border-sa-border sm:aspect-auto sm:w-44 sm:border-b-0 sm:border-r md:w-52">
+                    <Image
+                      src={page.image}
+                      alt={page.imageAlt}
+                      fill
+                      className="object-cover transition duration-500 group-hover:scale-[1.02]"
+                      sizes="(max-width: 640px) 100vw, 208px"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-6">
+                    <p className="text-sm font-semibold text-sa-primary">{page.eyebrow}</p>
+                    <h2 className="mt-2 font-heading text-xl font-semibold text-white group-hover:text-sa-primary">
+                      {page.title}
+                    </h2>
+                    <p className="mt-2 text-sm leading-relaxed text-sa-muted/75">{page.description}</p>
+                  </div>
                 </Link>
               </li>
             ))}
@@ -67,16 +81,13 @@ export function SeoIntentHub({ kind }: { kind: IntentKind }) {
         </div>
       </section>
 
-      <section className="py-14 md:py-20">
+      <section className="relative z-10 py-14 md:py-20">
         <div className="sa-container max-w-3xl">
           <h2 className="font-heading text-2xl font-semibold text-white">More buyer pages</h2>
           <ul className="mt-6 space-y-3">
             {otherKinds.map((item) => (
               <li key={item}>
-                <Link
-                  href={intentKindMeta[item].path}
-                  className="sa-text-link text-sm"
-                >
+                <Link href={intentKindMeta[item].path} className="sa-text-link text-sm">
                   {intentKindMeta[item].hubTitle}
                 </Link>
               </li>
@@ -84,6 +95,6 @@ export function SeoIntentHub({ kind }: { kind: IntentKind }) {
           </ul>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

@@ -66,7 +66,7 @@ export const industryExtras: Partial<Record<string, IndustryExtrasConfig>> = {
           metric: "150%",
           metricLabel: "Sales growth",
           summary:
-            "Storefront with inventory, accounts, and payments — Accra retail pattern for catalog-led brands.",
+            "Storefront with inventory, accounts, and payments — Accra retail pattern for catalogue-led brands.",
         },
       ],
     },

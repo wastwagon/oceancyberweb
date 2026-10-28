@@ -13,6 +13,7 @@ import {
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { ServicePageHeroBanner } from "@/components/services/ServicePageHeroBanner";
 import { serviceImages } from "@/lib/startup-agency/service-images";
+import { siteImagePaths } from "@/lib/seo/site-image-paths";
 import { SITE_CTA } from "@/lib/marketing/site-cta";
 import { geoServiceHubCards } from "@/lib/seo/geo-service-pages";
 
@@ -30,7 +31,7 @@ const services: ServiceCard[] = [
     title: "Web Design",
     description:
       "Company sites and landing pages from GHS 6,000 — mobile-first UX, SEO, and MoMo-ready stores when you sell online.",
-    image: serviceImages.webDevelopment,
+    image: siteImagePaths.work.brandSystem,
     services: [
       "Marketing and company websites",
       "Landing pages and campaigns",
@@ -87,12 +88,12 @@ const services: ServiceCard[] = [
     href: "/services/website-to-mobile-app",
   },
   {
-    title: "E-Commerce",
+    title: "E-commerce",
     description:
-      "Online stores from GHS 6,000 with catalog, checkout, and Mobile Money — for Accra retailers and Ghana-wide sellers.",
+      "Online stores from GHS 6,000 with catalogue, checkout, and Mobile Money — for Accra retailers and Ghana-wide sellers.",
     image: serviceImages.ecommerce,
     services: [
-      "Catalog and checkout",
+      "Catalogue and checkout",
       "Paystack and MoMo",
       "Inventory-ready ops",
     ],
@@ -101,7 +102,7 @@ const services: ServiceCard[] = [
   {
     title: "Security consulting",
     description:
-      "Consultation from GHS 4,500 — assessments and hardening, not MSSP or 24/7 monitoring.",
+      "Consultation from GHS 4,500 — assessments and hardening, not managed security services or 24/7 monitoring.",
     image: serviceImages.cyberSecurity,
     services: [
       "Security assessments",
@@ -281,11 +282,12 @@ export function ServicesHubPage() {
       <section className="relative z-10 border-t border-sa-border py-12 md:py-16">
         <div className="sa-container max-w-4xl">
           <h2 className="font-heading text-xl font-semibold text-white md:text-2xl">
-            Hire by city
+            Best web &amp; website companies by city
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-sa-muted/80">
-            Looking for Accra- or Ghana-specific hire pages? These keep local SEO
-            clear without repeating every service card above.
+            Accra and Ghana pages for the same searches you use on Google Maps —
+            best web design, website developers, and development companies — without
+            duplicating every service card above.
           </p>
           <ul className="mt-6 grid gap-2 sm:grid-cols-2">
             {hireLinks.map((link) => (

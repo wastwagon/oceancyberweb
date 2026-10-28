@@ -1,5 +1,6 @@
 import { readFile, writeFile, mkdir } from "fs/promises";
 import path from "path";
+import { DEFAULT_INSIGHT_COVER } from "@/lib/insights/default-cover";
 import {
   insightPosts as defaultInsightPosts,
   insightCategories,
@@ -98,7 +99,8 @@ function sanitizePost(raw: unknown, index: number): InsightPost | null {
     paragraphs: paragraphs.length > 0 ? paragraphs : [""],
     ...(sections ? { sections } : {}),
     ...(related ? { related } : {}),
-    image: typeof row.image === "string" && row.image.trim() ? row.image.trim() : "/images/EGP Ghana.webp",
+    image:
+      typeof row.image === "string" && row.image.trim() ? row.image.trim() : DEFAULT_INSIGHT_COVER,
     category,
     date: typeof row.date === "string" ? row.date.trim() : "January 1, 2024",
     readTime: typeof row.readTime === "string" ? row.readTime.trim() : "5 min read",

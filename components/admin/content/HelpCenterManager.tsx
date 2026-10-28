@@ -81,7 +81,7 @@ export function HelpCenterManager() {
       });
       const data = (await res.json().catch(() => ({}))) as { error?: string };
       if (!res.ok) throw new Error(data.error ?? "Save failed");
-      setToast("Help center saved. Live on /help-center now.");
+      setToast("Help center saved. Changes are live on the Help center.");
       await load();
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Save failed");

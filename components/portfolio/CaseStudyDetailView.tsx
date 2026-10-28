@@ -7,6 +7,7 @@ import {
 import { CaseStudyDesignGallery } from "@/components/portfolio/CaseStudyDesignGallery";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { getDesignArtifactsForProject } from "@/lib/portfolio/design-artifacts";
+import { isStudioPortfolio } from "@/lib/portfolio/portfolio-seo-metadata";
 import { resolveProjectType, getProjectTypeLabel } from "@/lib/portfolio/project-type";
 import type { PortfolioCaseStudy } from "@/lib/types/portfolio-case-study";
 
@@ -37,6 +38,7 @@ export function CaseStudyDetailView({
 }: Props) {
   const designArtifacts = getDesignArtifactsForProject(project);
   const projectType = resolveProjectType(project);
+  const studioConcept = isStudioPortfolio(project);
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted antialiased">
@@ -61,6 +63,14 @@ export function CaseStudyDetailView({
                   <span className="sa-eyebrow">
                     {project.category}
                   </span>
+                  {studioConcept ? (
+                    <>
+                      <span className="h-1 w-1 rounded-full bg-sa-border" />
+                      <span className="rounded-full border border-sa-primary/30 bg-sa-primary/10 px-3 py-1 text-xs font-semibold text-sa-primary">
+                        Studio concept — illustrative
+                      </span>
+                    </>
+                  ) : null}
                   <span className="h-1 w-1 rounded-full bg-sa-border" />
                   <span className="text-sm font-medium text-sa-muted/70">
                     {project.year}

@@ -14,13 +14,20 @@ import { WebVitals } from "@/components/analytics/WebVitals";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { GoogleAnalyticsRouteTracker } from "@/components/analytics/GoogleAnalyticsRouteTracker";
 import { AppProviders } from "@/components/providers/AppProviders";
-import { CreativeEnhancements } from "@/components/shared/CreativeEnhancements";
 import { getGooglePlaceStats } from "@/lib/google-places-stats";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 import { buildTrustBlurb } from "@/lib/trust/review-trust";
 
 const ChatBot = dynamic(
   () => import("@/components/ui/ChatBot").then((mod) => mod.ChatBot),
+  { ssr: false },
+);
+
+const CreativeEnhancements = dynamic(
+  () =>
+    import("@/components/shared/CreativeEnhancements").then(
+      (mod) => mod.CreativeEnhancements,
+    ),
   { ssr: false },
 );
 
@@ -44,11 +51,11 @@ const outfit = Outfit({
 export async function generateMetadata(): Promise<Metadata> {
   const stats = await getGooglePlaceStats();
   const { reviewsOnly } = buildTrustBlurb(stats);
-  const description = `Best web design company in Accra and Ghana. Websites from GHS 6,000, apps from GHS 12,000. ${googleBusinessProfile.teamSize} people at ${googleBusinessProfile.address.street}. ${reviewsOnly}.`;
+  const description = `Best web design company in Accra, Ghana. Websites from GHS 6,000, apps from GHS 12,000. ${googleBusinessProfile.teamSize} people at ${googleBusinessProfile.address.street}. ${reviewsOnly}.`;
 
   return {
     title: {
-      default: "Best web design company in Accra and Ghana | OceanCyber",
+      default: "Best web design company in Accra, Ghana | OceanCyber",
       template: "%s | OceanCyber",
     },
     description,
@@ -63,20 +70,20 @@ export async function generateMetadata(): Promise<Metadata> {
       locale: "en_GH",
       url: "https://oceancyber.net",
       siteName: "OceanCyber",
-      title: "Best web design company in Accra and Ghana | OceanCyber",
+      title: "Best web design company in Accra, Ghana | OceanCyber",
       description,
       images: [
         {
           url: "/opengraph-image",
           width: 1200,
           height: 630,
-          alt: "Best web design company in Accra and Ghana — OceanCyber",
+          alt: "Best web design company in Accra, Ghana — OceanCyber",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Best web design company in Accra and Ghana | OceanCyber",
+      title: "Best web design company in Accra, Ghana | OceanCyber",
       description,
       images: ["/opengraph-image"],
     },
