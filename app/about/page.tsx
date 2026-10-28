@@ -19,6 +19,7 @@ import {
 } from "@/lib/scroll-reveal";
 import { PartnersAndStandardsSection } from "@/components/marketing/PartnersAndStandardsSection";
 import { VideoTestimonialSection } from "@/components/marketing/VideoTestimonialSection";
+import { AGENCY_WHAT_WE_ARE } from "@/lib/marketing/agency-positioning";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 import { siteImagePaths } from "@/lib/seo/site-image-paths";
 
@@ -154,7 +155,8 @@ export default function AboutPage() {
               variants={aboutHeroItem}
               className="sa-lead mx-auto mt-3"
             >
-              From our Accra office since {googleBusinessProfile.foundedYear}. A team of{" "}
+              We are a {AGENCY_WHAT_WE_ARE.toLowerCase()} — from our Accra office since{" "}
+              {googleBusinessProfile.foundedYear}. A team of{" "}
               {googleBusinessProfile.teamSize} at {googleBusinessProfile.address.street}.{" "}
               <Link href="/reviews" className="sa-text-link">
                 Google reviews

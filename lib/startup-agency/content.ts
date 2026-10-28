@@ -147,7 +147,7 @@ export const portfolioConceptWork: readonly WorkPreviewItem[] = [
 ];
 
 export const aboutStats = [
-  { value: `Since ${googleBusinessProfile.foundedYear}`, label: "Accra studio" },
+  { value: `Since ${googleBusinessProfile.foundedYear}`, label: "Accra agency" },
   { value: String(googleBusinessProfile.teamSize), label: "In-house team" },
   { value: "Design to launch", label: "One accountable team" },
 ] as const;

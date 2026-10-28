@@ -1,8 +1,13 @@
 import { ImageResponse } from "next/og";
+import {
+  OG_IMAGE_ALT,
+  OG_IMAGE_HEADLINE,
+  OG_IMAGE_SUBLINE,
+} from "@/lib/marketing/agency-positioning";
 
 export const runtime = "edge";
 
-export const alt = "OceanCyber, best web design company in Accra, Ghana";
+export const alt = OG_IMAGE_ALT;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -60,10 +65,10 @@ export default function OpenGraphImage() {
               maxWidth: "900px",
             }}
           >
-            Best web design company in Accra, Ghana
+            {OG_IMAGE_HEADLINE}
           </div>
           <div style={{ color: "#9ca3af", fontSize: "28px", maxWidth: "820px" }}>
-            Websites, mobile apps, and cybersecurity from Accra
+            {OG_IMAGE_SUBLINE}
           </div>
         </div>
 

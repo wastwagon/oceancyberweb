@@ -5,6 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, ZoomIn } from "lucide-react";
 import type { CreativeHubItem } from "@/lib/data/creative-hub-gallery";
+import { CONCEPT_PORTFOLIO_GALLERY_DISCLAIMER } from "@/lib/marketing/concept-portfolio-copy";
 
 type CreativeHubGalleryProps = {
   items: CreativeHubItem[];
@@ -112,7 +113,7 @@ export function CreativeHubGallery({ items }: CreativeHubGalleryProps) {
                   {activeItem.title}
                 </p>
                 <p className="mt-1 text-sm text-sa-muted/80">
-                  Concept work — illustrative work by OceanCyber, not a live client deployment.
+                  {CONCEPT_PORTFOLIO_GALLERY_DISCLAIMER}
                 </p>
               </figcaption>
             </motion.figure>

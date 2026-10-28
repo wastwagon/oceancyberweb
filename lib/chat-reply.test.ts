@@ -12,3 +12,11 @@ describe("getLocalChatReply POS routing", () => {
     expect(reply).not.toMatch(/dwumapos-for-ghana-shops/);
   });
 });
+
+describe("getLocalChatReply agency positioning", () => {
+  it("rejects studio company framing", () => {
+    const reply = getLocalChatReply("Are you a design studio?");
+    expect(reply.toLowerCase()).toContain("not a design studio");
+    expect(reply.toLowerCase()).toContain("development agency");
+  });
+});

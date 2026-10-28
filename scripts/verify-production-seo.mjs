@@ -53,17 +53,17 @@ const paths = [
   { path: "/services/web-development-in-ghana", checks: ["no-template-reviews", "jsonld", "geo-developers"] },
   { path: "/services/web-design-in-ghana", checks: ["no-template-reviews", "jsonld"] },
   { path: "/reviews", checks: ["places-sync", "jsonld", "aggregate-rating"] },
-  { path: "/llms.txt", checks: ["llms"] },
+  { path: "/llms.txt", checks: ["llms", "llms-social-proof", "places-sync-llms"] },
   { path: "/services/cybersecurity", checks: ["consultation", "jsonld", "no-template-reviews"] },
   { path: "/services/web-design", checks: ["jsonld"] },
   { path: "/services/web-design-in-accra", checks: ["no-template-reviews", "jsonld"] },
   { path: "/domains", checks: ["faq-jsonld"] },
   { path: "/hosting", checks: ["faq-jsonld"] },
   { path: "/ssl", checks: ["faq-jsonld"] },
-  { path: "/sitemap.xml", checks: ["sitemap", "sitemap-no-studio-portfolio"] },
+  { path: "/sitemap.xml", checks: ["sitemap", "sitemap-no-concept-portfolio", "sitemap-llms"] },
   {
     path: "/portfolio/creative-hub-template",
-    checks: ["studio-portfolio-noindex"],
+    checks: ["concept-portfolio-noindex"],
   },
   { path: "/robots.txt", checks: ["robots"] },
 ];
@@ -96,18 +96,46 @@ for (const { path, checks } of paths) {
   if (checks.includes("llms")) {
     if (!text.includes("OceanCyber") || !text.includes("consultation")) {
       fail("llms.txt: missing expected company/consultation copy");
-    } else pass("llms.txt: content OK");
-    continue;
+    } else pass("llms.txt: core content OK");
+  }
+
+  if (checks.includes("llms-social-proof")) {
+    if (!text.includes("Social proof (Google reviews)")) {
+      fail("llms.txt: missing Social proof (Google reviews) section");
+    } else if (!text.includes("/reviews") || !text.includes("do not invent")) {
+      fail("llms.txt: missing reviews URL or anti-fabrication guard");
+    } else {
+      pass("llms.txt: social proof for AI agents");
+    }
+  }
+
+  if (checks.includes("places-sync-llms")) {
+    if (text.includes("source: fallback")) {
+      fail("llms.txt: review stats still on static fallback — configure Places API");
+    } else if (text.includes("source: places-api") || text.includes("source: env-config")) {
+      pass("llms.txt: review stats source labelled");
+    } else {
+      fail("llms.txt: missing review stats source line");
+    }
+  }
+
+  if (checks.includes("llms") || checks.includes("llms-social-proof") || checks.includes("places-sync-llms")) {
+    if (path === "/llms.txt") continue;
   }
 
   if (checks.includes("sitemap")) {
     if (!text.includes("<urlset") && !text.includes("<loc>")) {
       fail("sitemap.xml: invalid or empty");
     } else pass("sitemap.xml: present");
-    if (checks.includes("sitemap-no-studio-portfolio")) {
+    if (checks.includes("sitemap-no-concept-portfolio")) {
       if (text.includes("/portfolio/creative-hub-template")) {
-        fail("sitemap.xml: studio concept URL should not be indexed");
-      } else pass("sitemap.xml: studio portfolio omitted");
+        fail("sitemap.xml: in-house concept portfolio URL should not be indexed");
+      } else pass("sitemap.xml: concept portfolio omitted");
+    }
+    if (checks.includes("sitemap-llms")) {
+      if (!text.includes("/llms.txt")) {
+        fail("sitemap.xml: /llms.txt missing (AI discovery)");
+      } else pass("sitemap.xml: llms.txt listed");
     }
     continue;
   }
@@ -140,8 +168,13 @@ for (const { path, checks } of paths) {
       fail(`${path}: still on static GBP fallback`);
     } else if (text.includes("Synced from Google Business Profile via Places API")) {
       pass(`${path}: Places API sync label`);
+    } else if (
+      text.includes("OCEAN_GOOGLE_RATING") ||
+      text.includes("Rating and count from OCEAN_GOOGLE")
+    ) {
+      pass(`${path}: env-config review stats label`);
     } else {
-      fail(`${path}: missing Places sync label (unexpected)`);
+      fail(`${path}: missing Places or env-config review source label`);
     }
   }
 
@@ -166,7 +199,18 @@ for (const { path, checks } of paths) {
   if (checks.includes("aggregate-rating")) {
     if (!text.includes("AggregateRating")) {
       fail("/reviews: AggregateRating JSON-LD missing");
-    } else pass("/reviews: AggregateRating JSON-LD");
+    } else {
+      const hasReviewNodes = text.includes("/reviews#review-");
+      const hasReviewType =
+        text.includes('"@type":"Review"') || text.includes('"@type": "Review"');
+      if (hasReviewNodes && !hasReviewType) {
+        fail("/reviews: Review JSON-LD missing for synced excerpts");
+      } else if (hasReviewType) {
+        pass("/reviews: AggregateRating + Review JSON-LD");
+      } else {
+        pass("/reviews: AggregateRating JSON-LD");
+      }
+    }
   }
 
   if (checks.includes("home-aggregate-rating")) {
@@ -178,6 +222,8 @@ for (const { path, checks } of paths) {
   if (checks.includes("home-best-hero")) {
     if (!text.includes("Best web design") || !text.includes("website development company")) {
       fail("/: homepage missing peer-aligned hero phrasing");
+    } else if (/\bdesign studio\b/i.test(text) || /\bcreative studio\b/i.test(text)) {
+      fail("/: homepage must not position OceanCyber as a studio");
     } else pass("/: hero local SEO phrasing");
   }
 
@@ -253,15 +299,19 @@ for (const { path, checks } of paths) {
     }
   }
 
-  if (checks.includes("studio-portfolio-noindex")) {
+  if (checks.includes("concept-portfolio-noindex")) {
     if (!text.includes("noindex")) {
-      fail(`${path}: studio concept page should be noindex`);
+      fail(`${path}: in-house concept page should be noindex`);
     } else if (text.includes("500%") || text.includes("Internal Prototype")) {
       fail(`${path}: stale demo-style portfolio copy in HTML`);
-    } else if (!text.includes("studio") && !text.includes("concept")) {
-      fail(`${path}: missing studio/concept labelling`);
+    } else if (!text.toLowerCase().includes("concept")) {
+      fail(`${path}: missing in-house concept labelling`);
+    } else if (text.includes("Impact & Results") || text.includes("Verified client")) {
+      fail(`${path}: concept page must not use client case-study chrome`);
+    } else if (!text.includes("Why this sample exists") && !text.includes("About this sample")) {
+      fail(`${path}: concept page missing in-house narrative sections`);
     } else {
-      pass(`${path}: studio portfolio hygiene`);
+      pass(`${path}: concept portfolio hygiene`);
     }
   }
 }

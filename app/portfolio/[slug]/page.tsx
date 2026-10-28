@@ -3,12 +3,14 @@ import { notFound } from "next/navigation";
 import { CaseStudyDetailView } from "@/components/portfolio/CaseStudyDetailView";
 import { CaseStudyPageJsonLd } from "@/components/seo/CaseStudyPageJsonLd";
 import { getCaseStudyNarrativeBySlug } from "@/lib/data/case-studies";
+import { getConceptPortfolioNarrative } from "@/lib/marketing/concept-portfolio-narrative";
 import {
   getPortfolioCaseStudyBySlug,
   getPortfolioSlugs,
   getRelatedPortfolioProjects,
 } from "@/lib/data/portfolio-loader";
 import {
+  portfolioDetailDescription,
   portfolioDetailRobots,
   portfolioDetailTitle,
   portfolioOgImageAlt,
@@ -35,6 +37,7 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPag
   }
 
   const narrative = getCaseStudyNarrativeBySlug(params.slug);
+  const conceptNarrative = getConceptPortfolioNarrative(params.slug);
   const relatedProjects = await getRelatedPortfolioProjects(
     params.slug,
     project.category,
@@ -50,6 +53,7 @@ export default async function PortfolioDetailPage({ params }: PortfolioDetailPag
         sidebarTitle="Project details"
         detailTitle="View all projects"
         narrative={narrative}
+        conceptNarrative={conceptNarrative}
         relatedProjects={relatedProjects}
       />
     </>
@@ -74,10 +78,7 @@ export async function generateMetadata({
   }
 
   const narrative = getCaseStudyNarrativeBySlug(params.slug);
-  const description =
-    narrative?.impact ??
-    project.results ??
-    project.description.slice(0, 160);
+  const description = portfolioDetailDescription(project, narrative);
 
   const ogImage = project.image.startsWith("http")
     ? project.image

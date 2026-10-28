@@ -1,35 +1,53 @@
 import type { Metadata } from "next";
+import {
+  CONCEPT_PORTFOLIO_BADGE,
+  conceptPortfolioMetaDescription,
+  conceptPortfolioOpenGraphBrandSuffix,
+} from "@/lib/marketing/concept-portfolio-copy";
 import type { PortfolioCaseStudy } from "@/lib/types/portfolio-case-study";
-import { resolvePortfolioSource } from "@/lib/portfolio/portfolio-source";
+import { isConceptPortfolio, resolvePortfolioSource } from "@/lib/portfolio/portfolio-source";
 
 export function portfolioSourceOf(project: PortfolioCaseStudy) {
   return resolvePortfolioSource(project);
 }
 
-export function isStudioPortfolio(project: PortfolioCaseStudy): boolean {
-  return portfolioSourceOf(project) === "studio";
-}
+export { isConceptPortfolio } from "@/lib/portfolio/portfolio-source";
 
 export function portfolioDetailTitle(project: PortfolioCaseStudy): string {
-  return isStudioPortfolio(project)
-    ? `${project.title} — Studio concept`
-    : `${project.title} — Case study`;
+  return isConceptPortfolio(project)
+    ? `${project.title} — ${CONCEPT_PORTFOLIO_BADGE}`
+    : `${project.title} — Client case study`;
 }
 
 export function portfolioOpenGraphTitle(project: PortfolioCaseStudy): string {
-  return isStudioPortfolio(project)
-    ? `${project.title} | OceanCyber studio concept`
+  return isConceptPortfolio(project)
+    ? `${project.title} | ${conceptPortfolioOpenGraphBrandSuffix()}`
     : `${project.title} | OceanCyber case study`;
 }
 
 export function portfolioOgImageAlt(project: PortfolioCaseStudy): string {
-  return isStudioPortfolio(project)
-    ? `${project.title} — OceanCyber studio design concept (illustrative)`
+  return isConceptPortfolio(project)
+    ? `${project.title} — OceanCyber in-house design sample (illustrative)`
     : `${project.title} — OceanCyber client delivery`;
 }
 
+/** Meta description — concept pages must not use stale demo metrics from results fields. */
+export function portfolioDetailDescription(
+  project: PortfolioCaseStudy,
+  narrative?: { impact?: string } | null,
+): string {
+  if (isConceptPortfolio(project)) {
+    return conceptPortfolioMetaDescription();
+  }
+  const fromNarrative = narrative?.impact?.trim();
+  if (fromNarrative) return fromNarrative.slice(0, 160);
+  const fromResults = project.results?.trim();
+  if (fromResults) return fromResults.slice(0, 160);
+  return project.description.slice(0, 160);
+}
+
 export function portfolioDetailRobots(project: PortfolioCaseStudy): Metadata["robots"] {
-  if (isStudioPortfolio(project)) {
+  if (isConceptPortfolio(project)) {
     return { index: false, follow: true };
   }
   return undefined;

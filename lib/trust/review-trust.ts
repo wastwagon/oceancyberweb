@@ -1,3 +1,4 @@
+import { AGENCY_IDENTITY_GHANA } from "@/lib/marketing/agency-positioning";
 import type { GooglePlaceStats } from "@/lib/google-places-stats";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 import { readEnvGbpOverride, staticGbpFallback } from "@/lib/trust/gbp-fallback";
@@ -36,7 +37,7 @@ export function buildTrustBlurb(stats: GooglePlaceStats) {
   return {
     short: `Websites, mobile apps, and cybersecurity from one Accra team. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}. ${reviews}`,
     office: `One office at ${googleBusinessProfile.address.street}, Accra.`,
-    seo: `OceanCyber is a web design and development company in Accra, Ghana — websites, mobile apps, and cybersecurity. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}. ${reviews} Our office is at ${googleBusinessProfile.address.street}, Accra.`,
+    seo: `${AGENCY_IDENTITY_GHANA} — websites, mobile apps, and cybersecurity. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}. ${reviews} Office: ${googleBusinessProfile.address.street}, Accra. Listed on Google Maps as a web design company.`,
     reviewsOnly: reviews,
   };
 }

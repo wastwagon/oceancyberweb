@@ -1,11 +1,13 @@
 import type { PortfolioCaseStudy } from "@/lib/types/portfolio-case-study";
-import type { PortfolioSource, SourceFilter } from "@/lib/types/portfolio-source";
+import {
+  LEGACY_CONCEPT_PORTFOLIO_SOURCE,
+  type PortfolioSource,
+  type SourceFilter,
+} from "@/lib/types/portfolio-source";
 import { enrichPortfolioCaseStudy } from "@/lib/portfolio/project-type";
 
-/** Slugs that must always use canonical studio copy from fallback data (even if DB is stale). */
-export const STUDIO_PORTFOLIO_SLUGS = new Set(["creative-hub-template"]);
-
-const STUDIO_SLUGS = STUDIO_PORTFOLIO_SLUGS;
+/** Slugs that must always use canonical concept copy from fallback data (even if DB is stale). */
+export const CONCEPT_PORTFOLIO_SLUGS = new Set(["creative-hub-template"]);
 
 /** Top partner deliveries — homepage and client filter prioritize these. */
 export const FEATURED_CLIENT_SLUGS = [
@@ -15,20 +17,45 @@ export const FEATURED_CLIENT_SLUGS = [
   "thinq-shopping",
 ] as const;
 
+export function normalizePortfolioSource(
+  value: string | undefined | null,
+): PortfolioSource | undefined {
+  if (!value) return undefined;
+  if (value === LEGACY_CONCEPT_PORTFOLIO_SOURCE) return "concept";
+  if (value === "client" || value === "concept") return value;
+  return undefined;
+}
+
+/** Maps legacy `?source=studio` and stored JSON to the concept filter. */
+export function parseSourceFilterParam(value: string | null): SourceFilter | null {
+  if (!value) return null;
+  if (value === LEGACY_CONCEPT_PORTFOLIO_SOURCE) return "concept";
+  if (value === "All" || value === "client" || value === "concept") {
+    return value;
+  }
+  return null;
+}
+
 export function resolvePortfolioSource(project: PortfolioCaseStudy): PortfolioSource {
-  if (project.portfolioSource) return project.portfolioSource;
-  if (STUDIO_SLUGS.has(project.slug)) return "studio";
+  const fromField = normalizePortfolioSource(project.portfolioSource);
+  if (fromField) return fromField;
+  if (CONCEPT_PORTFOLIO_SLUGS.has(project.slug)) return "concept";
 
   const client = project.client.toLowerCase();
   if (
     client.includes("internal") ||
     client.includes("prototype") ||
+    client.includes("in-house sample") ||
     project.slug.includes("template")
   ) {
-    return "studio";
+    return "concept";
   }
 
   return "client";
+}
+
+export function isConceptPortfolio(project: PortfolioCaseStudy): boolean {
+  return resolvePortfolioSource(project) === "concept";
 }
 
 export function enrichPortfolioEntry(project: PortfolioCaseStudy): PortfolioCaseStudy {

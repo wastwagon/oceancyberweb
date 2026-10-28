@@ -26,7 +26,7 @@ export type PortfolioCaseStudy = {
   results?: string;
   liveUrl?: string;
   projectType?: PortfolioProjectType;
-  /** Client delivery vs in-house studio / concept work. */
+  /** Client delivery vs in-house concept work. */
   portfolioSource?: PortfolioSource;
   designArtifacts?: DesignArtifact[];
 };

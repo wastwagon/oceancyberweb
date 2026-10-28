@@ -1,3 +1,4 @@
+import { AGENCY_IDENTITY_GHANA } from "@/lib/marketing/agency-positioning";
 import type { GooglePlaceStats } from "@/lib/google-places-stats";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 import { formatReviewsTrustLine } from "@/lib/trust/review-trust";
@@ -79,8 +80,8 @@ export const homeHeroSupportLine =
 export function buildMapsAlignedBusinessDescription(stats: GooglePlaceStats): string {
   const reviews = formatReviewsTrustLine(stats);
   return (
-    `Best web design and website development company in Accra, Ghana. ` +
-    `Website developers for company sites, online stores, and mobile apps at ${googleBusinessProfile.address.street}. ` +
+    `${AGENCY_IDENTITY_GHANA} — also listed for local search as a web design company. ` +
+    `Company sites, online stores, and mobile apps from ${googleBusinessProfile.address.street}. ` +
     `Team of ${googleBusinessProfile.teamSize}, since ${googleBusinessProfile.foundedYear}. ${reviews}.`
   );
 }

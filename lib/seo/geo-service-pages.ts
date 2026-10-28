@@ -206,7 +206,7 @@ export const geoServiceTopics: readonly GeoServiceTopic[] = [
     startingPriceGhs: 3500,
     serviceTypes: ["UI/UX design", "Brand design", "Figma prototypes"],
     accraFocus:
-      "UI/UX and brand design for Accra product teams — Figma prototypes and engineering handoff from the same studio that builds the release.",
+      "UI/UX and brand design for Accra product teams — Figma prototypes and engineering handoff from the same Accra agency team that builds the release.",
     ghanaFocus:
       "Product and brand design for Ghana startups and SMEs. Research, wireframes, and design systems that Accra engineers can build without rework.",
     deliverables: [

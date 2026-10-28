@@ -145,10 +145,10 @@ export const siteImageCatalog = [
   },
   {
     path: "portfolio-showcase/oceancyber-accra-portfolio-creative-hub-ghana.webp",
-    title: "OceanCyber Creative Hub — studio concept",
+    title: "OceanCyber Creative Hub — in-house concept",
     description:
-      "Illustrative in-house dashboard UI used in OceanCyber design proposals — studio concept, not a live client deployment. Accra, Ghana.",
-    keywords: [...baseKeywords, "portfolio", "UI/UX", "studio concept"],
+      "Illustrative in-house dashboard UI used in OceanCyber design proposals — not a live client deployment. Accra web and mobile development agency, Ghana.",
+    keywords: [...baseKeywords, "portfolio", "UI/UX", "in-house concept"],
     gbpCategory: "At work",
   },
   {

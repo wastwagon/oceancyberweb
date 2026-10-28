@@ -21,6 +21,7 @@ import { PortfolioSourceChips } from "@/components/portfolio/PortfolioSourceChip
 import type { SourceFilter } from "@/lib/types/portfolio-source";
 import {
   filterByPortfolioSource,
+  parseSourceFilterParam,
   resolvePortfolioSource,
   sortPortfolioForDisplay,
 } from "@/lib/portfolio/portfolio-source";
@@ -29,8 +30,6 @@ import { fadeUpProps, staggerDelay } from "@/lib/scroll-reveal";
 import { cn } from "@/lib/utils";
 
 const VALID_TYPES = new Set<PortfolioProjectType>(["design", "development", "hybrid"]);
-const VALID_SOURCES = new Set<SourceFilter>(["All", "client", "studio"]);
-
 function ProjectSourceBadge({ project }: { project: PortfolioCaseStudy }) {
   const source = resolvePortfolioSource(project);
   return (
@@ -144,9 +143,9 @@ function PortfolioFilteredLibraryInner({
     if (t && VALID_TYPES.has(t as PortfolioProjectType)) {
       setWorkType(t as PortfolioProjectType);
     }
-    const s = searchParams.get("source");
-    if (s && VALID_SOURCES.has(s as SourceFilter)) {
-      setSourceFilter(s as SourceFilter);
+    const parsedSource = parseSourceFilterParam(searchParams.get("source"));
+    if (parsedSource) {
+      setSourceFilter(parsedSource);
     }
   }, [searchParams]);
 

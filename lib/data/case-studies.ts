@@ -1,4 +1,5 @@
 import type { PortfolioCaseStudy } from "@/lib/types/portfolio-case-study";
+import { CONCEPT_PORTFOLIO_SLUGS } from "@/lib/portfolio/portfolio-source";
 import { fallbackPortfolioCaseStudies } from "./projects";
 
 type CaseStudyNarrative = {
@@ -50,14 +51,6 @@ const CASE_STUDY_NARRATIVES: Record<string, CaseStudyNarrative> = {
     impact:
       "Mobile conversions increased 165%. Checkout friction dropped, manual order handling reduced, and the merchant team gained operational confidence as transaction volume grew.",
   },
-  "creative-hub-template": {
-    challenge:
-      "Prospects needed to see how dense analytics and brand UI could look before committing to a build.",
-    solution:
-      "An in-house Creative Hub concept with layout, motion, and component patterns aligned to the OceanCyber brand system.",
-    impact:
-      "Used as labelled studio concept work in the portfolio — not presented as a shipped client product.",
-  },
   "juelle-hair": {
     challenge:
       "Manual order handling and limited digital visibility slowed growth.",
@@ -89,16 +82,18 @@ function getNarrative(slug: string): CaseStudyNarrative {
   return CASE_STUDY_NARRATIVES[slug] ?? DEFAULT_NARRATIVE;
 }
 
-export const caseStudies: CaseStudy[] = fallbackPortfolioCaseStudies.map(
-  (project) => ({
+/** Client deliveries only — concept slugs use `getConceptPortfolioNarrative`. */
+export const caseStudies: CaseStudy[] = fallbackPortfolioCaseStudies
+  .filter((project) => !CONCEPT_PORTFOLIO_SLUGS.has(project.slug))
+  .map((project) => ({
     ...project,
     ...getNarrative(project.slug),
-  }),
-);
+  }));
 
 export function getCaseStudyNarrativeBySlug(
   slug: string,
 ): CaseStudyNarrative | null {
+  if (CONCEPT_PORTFOLIO_SLUGS.has(slug)) return null;
   const found = caseStudies.find((study) => study.slug === slug);
   if (!found) {
     return null;

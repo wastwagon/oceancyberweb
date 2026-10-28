@@ -2,14 +2,18 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { PortfolioTabbedGallery } from "@/components/portfolio/PortfolioTabbedGallery";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
+import {
+  PORTFOLIO_PAGE_TITLE,
+  portfolioPageMetaDescription,
+} from "@/lib/marketing/agency-positioning";
+import { CONCEPT_PORTFOLIO_TAB_LEAD } from "@/lib/marketing/concept-portfolio-copy";
 import { portfolioSectionIntro } from "@/lib/startup-agency/content";
 import { withCanonical } from "@/lib/seo/canonical";
 
 export const metadata = withCanonical(
   {
-    title: "Web and app portfolio",
-    description:
-      "Selected live client sites and Creative Hub concept work from OceanCyber — a curated sample from many deliveries.",
+    title: PORTFOLIO_PAGE_TITLE,
+    description: portfolioPageMetaDescription(),
   },
   "/portfolio",
 );
@@ -24,7 +28,8 @@ export default function PortfolioPage() {
           <h1 className="sa-title-lg text-balance">{portfolioSectionIntro.title}</h1>
           <p className="sa-lead mx-auto max-w-2xl">{portfolioSectionIntro.subtitle}</p>
           <p className="sa-subtitle mx-auto mt-4 max-w-xl">
-            Use the tabs for live URLs you can open today versus Creative Hub concepts labelled as illustrative.
+            One tab lists production URLs you can open today; the Creative Hub tab shows{" "}
+            {CONCEPT_PORTFOLIO_TAB_LEAD.toLowerCase()}
           </p>
         </div>
       </section>

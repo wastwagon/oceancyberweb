@@ -31,7 +31,7 @@ test.describe("public smoke", () => {
     await expect(page.getByRole("link", { name: /Back to guides/i })).toBeVisible();
   });
 
-  test("studio portfolio is noindex", async ({ page }) => {
+  test("concept portfolio is noindex", async ({ page }) => {
     await page.goto("/portfolio/creative-hub-template");
     const robots = page.locator('meta[name="robots"]');
     await expect(robots).toHaveAttribute("content", /noindex/i);

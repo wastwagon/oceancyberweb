@@ -1,3 +1,4 @@
+import { AGENCY_IDENTITY_GHANA, AGENCY_WHAT_WE_ARE } from "@/lib/marketing/agency-positioning";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 
 const POS_REPLY =
@@ -46,21 +47,34 @@ export function getLocalChatReply(userText: string): string {
     return POS_REPLY;
   }
 
+  if (/\b(studio|design studio|creative studio)\b/.test(t)) {
+    return (
+      `We are not a design studio — we are a ${AGENCY_WHAT_WE_ARE.toLowerCase()} in Accra (${AGENCY_IDENTITY_GHANA}). ` +
+      "We design in Figma and build websites and mobile apps in-house. See /about or /services."
+    );
+  }
+
+  if (/\b(who are you|what are you|what do you do|what kind of company)\b/.test(t)) {
+    return (
+      `${AGENCY_WHAT_WE_ARE} in Accra, Ghana — websites, mobile apps, ecommerce, hosting, and security consulting. ` +
+      "Packages from GHS 6,000 on /pricing. Live client URLs on /portfolio."
+    );
+  }
+
   if (
     /\b(best|top|number\s*one|#1)\b/.test(t) &&
     /\b(web|website|design|developer|development|company|accra|ghana)\b/.test(t)
   ) {
     return (
-      "OceanCyber is a best-rated web design and website development company in Accra, Ghana — " +
-      "packages from GHS 6,000. See Best web design in Ghana (/services/web-design-in-ghana) or " +
-      "website developers in Ghana (/services/web-development-in-ghana), or Contact us to start."
+      `${AGENCY_IDENTITY_GHANA} — also highly rated as a web design company on Google Maps. ` +
+      "Packages from GHS 6,000. See /services/web-design-in-ghana or /services/web-development-in-ghana, or /contact."
     );
   }
 
   if (/\b(developer|developers|web design company|design company)\b/.test(t)) {
     return (
-      "We are website designers and developers in one Accra team. " +
-      "Web design in Ghana: /services/web-design-in-ghana · Website developers: /services/web-development-in-ghana."
+      `We are a ${AGENCY_WHAT_WE_ARE.toLowerCase()} — design and engineering in one Accra team. ` +
+      "/services/web-design-in-ghana · /services/web-development-in-ghana"
     );
   }
 

@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { StartupAgencyHomeClassic } from "@/components/startup-agency/StartupAgencyHomeClassic";
 import { getGooglePlaceStats } from "@/lib/google-places-stats";
 import { serviceImages } from "@/lib/startup-agency/service-images";
+import {
+  SITE_HOME_TITLE_ABSOLUTE,
+  buildSiteMetaDescription,
+} from "@/lib/marketing/agency-positioning";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 import { buildTrustBlurb } from "@/lib/trust/review-trust";
 import { getHomeTrustContent } from "@/lib/trust/home-trust";
@@ -14,9 +18,13 @@ export async function generateMetadata(): Promise<Metadata> {
   const { reviewsOnly } = buildTrustBlurb(stats);
   return {
     title: {
-      absolute: "Best web design company in Accra, Ghana | OceanCyber",
+      absolute: SITE_HOME_TITLE_ABSOLUTE,
     },
-    description: `Best web design company in Accra, Ghana. Websites from GHS 6,000, mobile apps from GHS 12,000, cybersecurity from GHS 4,500. ${googleBusinessProfile.teamSize} people at ${googleBusinessProfile.address.street}. ${reviewsOnly}.`,
+    description: buildSiteMetaDescription({
+      reviewsOnly,
+      teamSize: googleBusinessProfile.teamSize,
+      street: googleBusinessProfile.address.street,
+    }),
     alternates: {
       canonical: "/",
     },

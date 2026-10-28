@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import { getGooglePlaceStats } from "@/lib/google-places-stats";
+import {
+  ABOUT_PAGE_TITLE,
+  aboutPageMetaDescription,
+} from "@/lib/marketing/agency-positioning";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 import { buildTrustBlurb } from "@/lib/trust/review-trust";
 
@@ -7,8 +11,13 @@ export async function generateMetadata(): Promise<Metadata> {
   const stats = await getGooglePlaceStats();
   const { reviewsOnly } = buildTrustBlurb(stats);
   return {
-    title: "About OceanCyber in Accra",
-    description: `Accra web, mobile, and security company since ${googleBusinessProfile.foundedYear}. ${googleBusinessProfile.teamSize} people at ${googleBusinessProfile.address.street}. ${reviewsOnly}.`,
+    title: ABOUT_PAGE_TITLE,
+    description: aboutPageMetaDescription({
+      reviewsOnly,
+      teamSize: googleBusinessProfile.teamSize,
+      street: googleBusinessProfile.address.street,
+      foundedYear: googleBusinessProfile.foundedYear,
+    }),
     alternates: { canonical: "/about" },
   };
 }

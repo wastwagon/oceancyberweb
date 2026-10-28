@@ -5,8 +5,12 @@ import type { Project } from "@prisma/client";
 import { prisma } from "@/lib/db";
 import type { PortfolioCaseStudy } from "@/lib/types/portfolio-case-study";
 import type { PortfolioDetailsV1 } from "@/lib/types/portfolio-details-v1";
-import { enrichPortfolioEntry, sortPortfolioForDisplay } from "@/lib/portfolio/portfolio-source";
-import { overlayStudioFallbackCopy } from "@/lib/portfolio/studio-fallback-overlay";
+import { overlayConceptFallbackCopy } from "@/lib/portfolio/concept-fallback-overlay";
+import {
+  enrichPortfolioEntry,
+  normalizePortfolioSource,
+  sortPortfolioForDisplay,
+} from "@/lib/portfolio/portfolio-source";
 import { getFeaturedClientBySlug } from "./featured-client-work";
 import { fallbackPortfolioCaseStudies } from "./projects";
 
@@ -44,7 +48,7 @@ function mapPrismaProjectToCaseStudy(row: Project): PortfolioCaseStudy | null {
       results: v1.results,
       liveUrl: row.liveUrl ?? undefined,
       projectType: v1.projectType,
-      portfolioSource: v1.portfolioSource,
+      portfolioSource: normalizePortfolioSource(v1.portfolioSource),
       designArtifacts: v1.designArtifacts,
     };
   }
@@ -83,7 +87,7 @@ export const getPortfolioCaseStudies = unstable_cache(
           fallbackPortfolioCaseStudies
             .map(attachFeaturedLiveUrl)
             .map(enrichPortfolioEntry)
-            .map(overlayStudioFallbackCopy),
+            .map(overlayConceptFallbackCopy),
         );
       }
       const mapped = rows
@@ -91,7 +95,7 @@ export const getPortfolioCaseStudies = unstable_cache(
         .filter((x): x is PortfolioCaseStudy => x != null)
         .map(attachFeaturedLiveUrl)
         .map(enrichPortfolioEntry)
-        .map(overlayStudioFallbackCopy);
+        .map(overlayConceptFallbackCopy);
       if (mapped.length > 0) {
         return sortPortfolioForDisplay(mapped);
       }
@@ -102,7 +106,7 @@ export const getPortfolioCaseStudies = unstable_cache(
       fallbackPortfolioCaseStudies
         .map(attachFeaturedLiveUrl)
         .map(enrichPortfolioEntry)
-        .map(overlayStudioFallbackCopy),
+        .map(overlayConceptFallbackCopy),
     );
   },
   ["site-portfolio-case-studies"],
@@ -131,7 +135,7 @@ export async function getPortfolioCaseStudyBySlug(
     if (row) {
       const m = mapPrismaProjectToCaseStudy(row);
       if (m) {
-        return overlayStudioFallbackCopy(
+        return overlayConceptFallbackCopy(
           enrichPortfolioEntry(attachFeaturedLiveUrl(m)),
         );
       }
@@ -141,7 +145,7 @@ export async function getPortfolioCaseStudyBySlug(
   }
   const fallback = fallbackPortfolioCaseStudies.find((p) => p.slug === slug);
   return fallback
-    ? overlayStudioFallbackCopy(enrichPortfolioEntry(attachFeaturedLiveUrl(fallback)))
+    ? overlayConceptFallbackCopy(enrichPortfolioEntry(attachFeaturedLiveUrl(fallback)))
     : null;
 }
 

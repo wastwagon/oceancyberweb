@@ -11,6 +11,7 @@ import {
   industryFooterLinks,
   industryFooterViewAllLink,
 } from "@/lib/data/industries-catalog";
+import { footerTagline } from "@/lib/marketing/agency-positioning";
 import { googleBusinessProfile, socialProfiles } from "@/lib/startup-agency/google-business";
 
 const socialLinks = [
@@ -40,9 +41,10 @@ export function StartupAgencyFooter() {
                 />
               </Link>
               <p className="mt-6 max-w-md text-base leading-relaxed text-white/75">
-                Best web design and website development company in Accra, Ghana. A team of{" "}
-                {googleBusinessProfile.teamSize}, in business since{" "}
-                {googleBusinessProfile.foundedYear}.
+                {footerTagline(
+                  googleBusinessProfile.teamSize,
+                  googleBusinessProfile.foundedYear,
+                )}
               </p>
 
               <ul className="sa-ios-group mt-8 divide-y divide-white/10">

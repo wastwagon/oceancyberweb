@@ -20,7 +20,7 @@ export function absoluteSiteImageUrl(path: string): string {
   return `${site}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
-/** schema.org Place for image contentLocation — ties visuals to Accra studio. */
+/** schema.org Place for image contentLocation — ties visuals to Accra agency location. */
 export function imageContentLocation() {
   return {
     "@type": "Place" as const,

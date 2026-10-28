@@ -8,7 +8,7 @@ export type CreativeHubItem = {
   imageAlt: string;
 };
 
-/** Studio / concept visuals — illustrative, not live client deliveries. */
+/** In-house concept visuals — illustrative, not live client deliveries. */
 export const creativeHubGallery: CreativeHubItem[] = [
   {
     id: "creative-hub-dashboard",

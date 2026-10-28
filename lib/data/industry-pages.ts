@@ -286,7 +286,7 @@ export const mediaEntertainmentIndustryContent: IndustryPageContent = {
     },
     {
       title: "Creator membership app",
-      client: "Digital studio",
+      client: "Media startup",
       result: "Recurring revenue from superfans and exclusive content.",
     },
     {

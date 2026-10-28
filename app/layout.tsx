@@ -15,6 +15,11 @@ import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { GoogleAnalyticsRouteTracker } from "@/components/analytics/GoogleAnalyticsRouteTracker";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { getGooglePlaceStats } from "@/lib/google-places-stats";
+import {
+  OG_IMAGE_ALT,
+  SITE_DEFAULT_TITLE,
+  buildSiteMetaDescription,
+} from "@/lib/marketing/agency-positioning";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 import { buildTrustBlurb } from "@/lib/trust/review-trust";
 
@@ -51,11 +56,15 @@ const outfit = Outfit({
 export async function generateMetadata(): Promise<Metadata> {
   const stats = await getGooglePlaceStats();
   const { reviewsOnly } = buildTrustBlurb(stats);
-  const description = `Best web design company in Accra, Ghana. Websites from GHS 6,000, apps from GHS 12,000. ${googleBusinessProfile.teamSize} people at ${googleBusinessProfile.address.street}. ${reviewsOnly}.`;
+  const description = buildSiteMetaDescription({
+    reviewsOnly,
+    teamSize: googleBusinessProfile.teamSize,
+    street: googleBusinessProfile.address.street,
+  });
 
   return {
     title: {
-      default: "Best web design company in Accra, Ghana | OceanCyber",
+      default: SITE_DEFAULT_TITLE,
       template: "%s | OceanCyber",
     },
     description,
@@ -70,20 +79,20 @@ export async function generateMetadata(): Promise<Metadata> {
       locale: "en_GH",
       url: "https://oceancyber.net",
       siteName: "OceanCyber",
-      title: "Best web design company in Accra, Ghana | OceanCyber",
+      title: SITE_DEFAULT_TITLE,
       description,
       images: [
         {
           url: "/opengraph-image",
           width: 1200,
           height: 630,
-          alt: "Best web design company in Accra, Ghana — OceanCyber",
+          alt: OG_IMAGE_ALT,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Best web design company in Accra, Ghana | OceanCyber",
+      title: SITE_DEFAULT_TITLE,
       description,
       images: ["/opengraph-image"],
     },
@@ -118,6 +127,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`} style={{ backgroundColor: "#000000" }}>
+      <head>
+        <link
+          rel="alternate"
+          type="text/plain"
+          href="/llms.txt"
+          title="OceanCyber — LLM-readable site summary"
+        />
+      </head>
       <body className="sa-shell min-h-screen font-sans antialiased" style={{ backgroundColor: "#000000", color: "#e9e9e9" }}>
         <GoogleAnalytics />
         <AppProviders>

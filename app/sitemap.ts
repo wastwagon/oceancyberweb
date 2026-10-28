@@ -26,6 +26,7 @@ const routes = [
   "/facts",
   "/products",
   "/reviews",
+  "/llms.txt",
   "/privacy",
   "/security-journey",
   "/services",

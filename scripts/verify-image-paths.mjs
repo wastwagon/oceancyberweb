@@ -75,6 +75,25 @@ for (const relRoot of marketingRoots) {
   }
 }
 
+const insightsJsonPath = resolve(root, "public/data/insights.json");
+if (existsSync(insightsJsonPath)) {
+  const insights = JSON.parse(readFileSync(insightsJsonPath, "utf8"));
+  if (Array.isArray(insights)) {
+    for (const post of insights) {
+      const img = post?.image;
+      if (typeof img !== "string" || !img.startsWith("/images/")) continue;
+      if (/\s/.test(img)) {
+        failures.push(`insights.json slug "${post.slug}": image path contains spaces (${img})`);
+        continue;
+      }
+      const rel = img.replace(/^\/images\//, "");
+      if (!existsSync(resolve(imagesRoot, rel))) {
+        failures.push(`insights.json slug "${post.slug}": missing public/images/${rel}`);
+      }
+    }
+  }
+}
+
 if (failures.length) {
   console.error("Image path verification failed:\n");
   for (const f of failures) console.error(`  ✗ ${f}`);

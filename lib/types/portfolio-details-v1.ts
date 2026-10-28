@@ -17,7 +17,7 @@ export type PortfolioDetailsV1 = {
   results?: string;
   /** Primary delivery emphasis for portfolio filters. */
   projectType?: PortfolioProjectType;
-  /** Client delivery vs studio concept work. */
+  /** Client delivery vs in-house concept work. */
   portfolioSource?: PortfolioSource;
   /** Design-process gallery (research → wireframes → UI). */
   designArtifacts?: DesignArtifact[];

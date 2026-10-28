@@ -354,7 +354,7 @@ async function main() {
       p.slug as (typeof FEATURED_CLIENT_SLUGS)[number],
     );
     const sortOrder =
-      portfolioSource === "studio"
+      portfolioSource === "concept"
         ? 900 + i * 10
         : featuredRank === -1
           ? 400 + i * 10

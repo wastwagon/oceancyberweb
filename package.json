@@ -19,6 +19,7 @@
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
     "prisma:seed": "prisma db seed",
+    "migrate:portfolio-source": "node scripts/migrate-portfolio-source-to-concept.mjs",
     "audit:all": "npm audit --workspaces --include-workspace-root",
     "dev:api": "npm run start:dev --workspace=@oceancyber/api",
     "docker:up": "node scripts/docker-run.cjs up",
@@ -38,6 +39,8 @@
     "export:industry-stories": "node scripts/export-industry-story-ads.mjs",
     "rename:site-images": "node scripts/rename-site-images-descriptive.mjs",
     "verify:google-places": "tsx scripts/verify-google-places.ts",
+    "verify:reviews-local": "node scripts/verify-reviews-integration.mjs",
+    "verify:reviews-integration": "node scripts/verify-reviews-integration.mjs",
     "sync:help-center": "tsx scripts/sync-help-center-defaults.ts",
     "sync:insights": "tsx scripts/sync-insights-defaults.ts",
     "sync:nav": "prisma db seed",
@@ -50,6 +53,7 @@
     "verify:predeploy-local": "npm test && npm run verify:local-seo && npm run verify:image-paths && npm run verify:marketing-cta && npm run verify:marketing -- --strict && npm run build",
     "preflight:deploy": "npm run verify:all && npm run build",
     "preflight:local": "npm run verify:predeploy-local && npm run test:e2e",
+    "setup:local": "node scripts/setup-local.mjs",
     "capture:live-previews": "node scripts/capture-live-client-previews.mjs"
   },
   "dependencies": {

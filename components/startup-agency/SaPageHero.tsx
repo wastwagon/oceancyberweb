@@ -11,7 +11,7 @@ type SaPageHeroProps = {
   children?: ReactNode;
 };
 
-/** Standard page hero — studio-grade H1 + lead paragraph alignment */
+/** Standard page hero — agency-grade H1 + lead paragraph alignment */
 export function SaPageHero({
   eyebrow,
   title,

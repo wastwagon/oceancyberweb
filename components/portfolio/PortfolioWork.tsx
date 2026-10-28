@@ -24,7 +24,11 @@ import type { PortfolioCaseStudy } from "@/lib/types/portfolio-case-study";
 import { cn } from "@/lib/utils";
 import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 import { fadeUpProps, fadeUpSoft, staggerDelay } from "@/lib/scroll-reveal";
-import { isStudioPortfolio } from "@/lib/portfolio/portfolio-seo-metadata";
+import {
+  CONCEPT_PORTFOLIO_BADGE,
+  portfolioDetailCtaLabel,
+} from "@/lib/marketing/concept-portfolio-copy";
+import { isConceptPortfolio } from "@/lib/portfolio/portfolio-seo-metadata";
 
 const MotionLink = motion(Link);
 
@@ -125,7 +129,7 @@ function GridProjectCard({
   project: PortfolioCaseStudy;
   index: number;
 }) {
-  const studioConcept = isStudioPortfolio(project);
+  const conceptWork = isConceptPortfolio(project);
   const body = (
     <>
       <div className="relative aspect-[16/10] min-h-[10.5rem] w-full overflow-hidden rounded-t-3xl md:min-h-[12rem] border-b border-sa-border">
@@ -140,9 +144,9 @@ function GridProjectCard({
         
         <div className="absolute left-4 right-4 top-4 flex items-start justify-between gap-2">
           <div className="flex flex-wrap gap-2">
-            {studioConcept ? (
+            {conceptWork ? (
               <span className="sa-chip border-sa-primary/40 bg-sa-bg/90 text-sa-primary">
-                Studio concept
+                {CONCEPT_PORTFOLIO_BADGE}
               </span>
             ) : null}
             <span className="sa-chip">{project.category}</span>
@@ -388,7 +392,7 @@ function PortfolioHomeVerticalSplit({ projects }: { projects: PortfolioCaseStudy
               <span className="text-sa-primary">work</span>
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-sa-muted/80">
-              Scroll for projects—each frame shows the full preview. Open a case for scope and outcomes.
+              Scroll for projects—each frame shows the full preview. Client deliveries include outcomes; concept samples are labelled in-house.
             </p>
           </div>
 
@@ -413,7 +417,7 @@ function PortfolioHomeVerticalSplit({ projects }: { projects: PortfolioCaseStudy
                 href={`/portfolio/${active.slug}`}
                 className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-sa-primary"
               >
-                Case study
+                {portfolioDetailCtaLabel(isConceptPortfolio(active))}
                 <span aria-hidden className="text-base leading-none">
                   →
                 </span>

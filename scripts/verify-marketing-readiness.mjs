@@ -133,6 +133,7 @@ if (siteUrl.startsWith("http")) {
 push("Commands");
 push("--------");
 push("  npm run verify:google-places   # live rating + Place ID for Coolify");
+push("  npm run verify:reviews-local   # Places + /reviews + llms.txt on local app");
 push("  npm run sync:help-center       # refresh public/data/help-center.json from code");
 push("  npm run sync:nav               # prisma db seed — navigation + portfolio rows from lib/data/projects.ts");
 push("  npx prisma db seed             # after deploy if admin portfolio still shows old Creative Hub copy");

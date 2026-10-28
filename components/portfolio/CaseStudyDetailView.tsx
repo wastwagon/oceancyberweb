@@ -7,7 +7,9 @@ import {
 import { CaseStudyDesignGallery } from "@/components/portfolio/CaseStudyDesignGallery";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { getDesignArtifactsForProject } from "@/lib/portfolio/design-artifacts";
-import { isStudioPortfolio } from "@/lib/portfolio/portfolio-seo-metadata";
+import { CONCEPT_PORTFOLIO_BADGE_LONG } from "@/lib/marketing/concept-portfolio-copy";
+import type { ConceptPortfolioNarrative } from "@/lib/marketing/concept-portfolio-narrative";
+import { isConceptPortfolio } from "@/lib/portfolio/portfolio-seo-metadata";
 import { resolveProjectType, getProjectTypeLabel } from "@/lib/portfolio/project-type";
 import type { PortfolioCaseStudy } from "@/lib/types/portfolio-case-study";
 
@@ -24,6 +26,7 @@ type Props = {
   sidebarTitle: string;
   detailTitle: string;
   narrative?: CaseStudyNarrative | null;
+  conceptNarrative?: ConceptPortfolioNarrative | null;
   relatedProjects?: PortfolioCaseStudy[];
 };
 
@@ -34,11 +37,12 @@ export function CaseStudyDetailView({
   sidebarTitle,
   detailTitle: _detailTitle,
   narrative,
+  conceptNarrative,
   relatedProjects = [],
 }: Props) {
   const designArtifacts = getDesignArtifactsForProject(project);
   const projectType = resolveProjectType(project);
-  const studioConcept = isStudioPortfolio(project);
+  const conceptWork = isConceptPortfolio(project);
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-sa-bg text-sa-muted antialiased">
@@ -63,11 +67,11 @@ export function CaseStudyDetailView({
                   <span className="sa-eyebrow">
                     {project.category}
                   </span>
-                  {studioConcept ? (
+                  {conceptWork ? (
                     <>
                       <span className="h-1 w-1 rounded-full bg-sa-border" />
                       <span className="rounded-full border border-sa-primary/30 bg-sa-primary/10 px-3 py-1 text-xs font-semibold text-sa-primary">
-                        Studio concept — illustrative
+                        {CONCEPT_PORTFOLIO_BADGE_LONG}
                       </span>
                     </>
                   ) : null}
@@ -116,14 +120,44 @@ export function CaseStudyDetailView({
 
               <div className="space-y-6">
                 <h2 className="font-heading text-2xl font-bold text-white md:text-3xl">
-                  Project Overview
+                  {conceptWork ? "About this sample" : "Project overview"}
                 </h2>
                 <p className="text-lg leading-relaxed text-sa-muted/90">
                   {project.description}
                 </p>
               </div>
 
-              {narrative?.challenge || narrative?.solution || narrative?.impact ? (
+              {conceptWork && conceptNarrative ? (
+                <div className="space-y-10 rounded-2xl border border-sa-primary/20 bg-sa-primary/5 p-6 md:p-8">
+                  <div className="space-y-4">
+                    <h3 className="font-heading text-xl font-bold text-white">
+                      Why this sample exists
+                    </h3>
+                    <p className="leading-relaxed text-sa-muted/80">
+                      {conceptNarrative.purpose}
+                    </p>
+                  </div>
+                  <div className="space-y-4">
+                    <h3 className="font-heading text-xl font-bold text-white">
+                      What it demonstrates
+                    </h3>
+                    <p className="leading-relaxed text-sa-muted/80">
+                      {conceptNarrative.whatItShows}
+                    </p>
+                  </div>
+                  <div className="space-y-4">
+                    <h3 className="font-heading text-xl font-bold text-white">
+                      How we label it
+                    </h3>
+                    <p className="leading-relaxed text-sa-muted/80">
+                      {conceptNarrative.labelling}
+                    </p>
+                  </div>
+                </div>
+              ) : null}
+
+              {!conceptWork &&
+              (narrative?.challenge || narrative?.solution || narrative?.impact) ? (
                 <div className="space-y-10">
                   {narrative?.challenge ? (
                     <div className="space-y-4">
@@ -181,7 +215,7 @@ export function CaseStudyDetailView({
                 </div>
               ) : null}
 
-              {project.testimonial ? (
+              {!conceptWork && project.testimonial ? (
                 <div className="sa-card relative p-8 md:p-12">
                   <span className="absolute -top-4 left-8 text-6xl font-serif text-sa-primary/20">
                     {String.fromCharCode(8220)}
@@ -216,7 +250,9 @@ export function CaseStudyDetailView({
                   </h3>
                   <div className="space-y-6">
                     <div className="flex flex-col gap-1">
-                      <span className="text-sm text-sa-muted">Client</span>
+                      <span className="text-sm text-sa-muted">
+                        {conceptWork ? "Source" : "Client"}
+                      </span>
                       <span className="font-bold text-white">{project.client}</span>
                     </div>
                     <div className="flex flex-col gap-1">
@@ -259,12 +295,21 @@ export function CaseStudyDetailView({
                       <ExternalLink className="ml-2 h-4 w-4" />
                     </a>
                   ) : null}
-                  <Link
-                    href={`/contact?topic=${encodeURIComponent(project.title)}`}
-                    className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
-                  >
-                    Discuss this project
-                  </Link>
+                  {conceptWork ? (
+                    <Link
+                      href="/portfolio?tab=creative"
+                      className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+                    >
+                      More in-house concept work
+                    </Link>
+                  ) : (
+                    <Link
+                      href={`/contact?topic=${encodeURIComponent(project.title)}`}
+                      className="inline-flex min-h-11 items-center text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+                    >
+                      Discuss this project
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>

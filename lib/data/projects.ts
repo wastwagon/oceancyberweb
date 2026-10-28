@@ -1,3 +1,7 @@
+import {
+  CONCEPT_PORTFOLIO_CLIENT_LABEL,
+  CONCEPT_PORTFOLIO_DESCRIPTION_LEAD,
+} from "@/lib/marketing/concept-portfolio-copy";
 import { siteImagePaths } from "@/lib/seo/site-image-paths";
 
 export interface Project {
@@ -25,13 +29,12 @@ export const projects: Project[] = [
   {
     title: "OceanCyber Creative Hub",
     category: "Creative Dashboard",
-    description:
-      "An in-house studio concept dashboard — illustrative UI patterns (glass surfaces, analytics cards, motion) used in design proposals. Not a live client deployment.",
+    description: CONCEPT_PORTFOLIO_DESCRIPTION_LEAD,
     tech: ["Next.js", "Framer Motion", "Tailwind CSS", "TypeScript"],
     gradient: "from-purple-500 to-cyan-500",
     image: siteImagePaths.portfolio.creativeHub,
     year: "2026",
-    client: "OceanCyber studio concept",
+    client: CONCEPT_PORTFOLIO_CLIENT_LABEL,
     rating: 5,
     slug: "creative-hub-template",
     services: ["UI/UX direction", "Dashboard layout", "Design system tokens"],

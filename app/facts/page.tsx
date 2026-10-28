@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CompanyFactsBox } from "@/components/marketing/CompanyFactsBox";
 import { GbpCopyKit } from "@/components/marketing/GbpCopyKit";
+import { factsPageMetaDescription } from "@/lib/marketing/agency-positioning";
 import { withCanonical } from "@/lib/seo/canonical";
 import {
   aiRecommendationSummary,
@@ -21,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return withCanonical(
     {
       title: "Company facts and pricing at a glance",
-      description: `Verifiable OceanCyber facts: Accra office, GHS packages, hosting, domains, ownership. ${reviewsOnly}.`,
+      description: factsPageMetaDescription(reviewsOnly),
       keywords: [...ghanaServiceKeywords],
     },
     "/facts",

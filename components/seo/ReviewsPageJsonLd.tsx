@@ -2,7 +2,8 @@ import {
   getGoogleBusinessProfileUrl,
   googleBusinessProfile,
 } from "@/lib/startup-agency/google-business";
-import type { GooglePlaceStats } from "@/lib/google-places-stats";
+import type { GooglePlaceReview, GooglePlaceStats } from "@/lib/google-places-stats";
+import { buildGoogleReviewJsonLdNodes } from "@/lib/trust/review-json-ld";
 import { buildAggregateRatingJsonLd } from "@/lib/trust/review-trust";
 
 const site =
@@ -11,11 +12,13 @@ const site =
 
 type Props = {
   stats: GooglePlaceStats;
+  reviews?: GooglePlaceReview[];
 };
 
 /** Structured data for the dedicated reviews page — separate from sitewide LocalBusiness. */
-export function ReviewsPageJsonLd({ stats }: Props) {
+export function ReviewsPageJsonLd({ stats, reviews = [] }: Props) {
   const pageUrl = `${site}/reviews`;
+  const reviewNodes = buildGoogleReviewJsonLdNodes(reviews);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -47,6 +50,7 @@ export function ReviewsPageJsonLd({ stats }: Props) {
         aggregateRating: buildAggregateRatingJsonLd(stats),
         sameAs: [getGoogleBusinessProfileUrl()],
       },
+      ...reviewNodes,
     ],
   };
 

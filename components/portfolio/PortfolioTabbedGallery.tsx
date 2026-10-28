@@ -6,6 +6,7 @@ import { ClientWorkGrid } from "@/components/portfolio/ClientWorkGrid";
 import { CreativeHubGallery } from "@/components/portfolio/CreativeHubGallery";
 import { creativeHubGallery } from "@/lib/data/creative-hub-gallery";
 import { featuredClientWork } from "@/lib/data/featured-client-work";
+import { CONCEPT_PORTFOLIO_TAB_LEAD } from "@/lib/marketing/concept-portfolio-copy";
 import { cn } from "@/lib/utils";
 
 export type PortfolioTab = "live" | "creative";
@@ -30,7 +31,7 @@ export function PortfolioTabbedGallery({
   const isPortfolioPage = pathname === "/portfolio";
   const tabParam = searchParams.get("tab");
   const initialTab: PortfolioTab =
-    tabParam === "creative" || tabParam === "studio" ? "creative" : "live";
+    tabParam === "creative" || tabParam === "studio" /* legacy */ ? "creative" : "live";
 
   const [activeTab, setActiveTab] = useState<PortfolioTab>(initialTab);
 
@@ -89,7 +90,7 @@ export function PortfolioTabbedGallery({
         <p className="text-center text-sm text-sa-muted/75">
           {activeTab === "live"
             ? "Production websites you can open right now — screenshots captured from each live URL."
-            : "Concept work and illustrative UI — not live client deployments."}
+            : CONCEPT_PORTFOLIO_TAB_LEAD}
         </p>
       </div>
 

@@ -6,7 +6,7 @@ import {
 } from "@/lib/types/portfolio-source";
 import { cn } from "@/lib/utils";
 
-const SOURCE_OPTIONS: SourceFilter[] = ["All", "client", "studio"];
+const SOURCE_OPTIONS: SourceFilter[] = ["All", "client", "concept"];
 
 export function PortfolioSourceChips({
   value,
