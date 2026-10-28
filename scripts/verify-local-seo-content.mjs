@@ -72,6 +72,7 @@ const requiredFiles = [
   "lib/navigation/services-geo-nav.ts",
   "scripts/sync-help-center-defaults.ts",
   "scripts/sync-insights-defaults.ts",
+  "scripts/verify-image-paths.mjs",
   "components/seo/WebDesignGeoPageView.tsx",
 ];
 for (const rel of requiredFiles) {

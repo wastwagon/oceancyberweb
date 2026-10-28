@@ -145,10 +145,10 @@ export const siteImageCatalog = [
   },
   {
     path: "portfolio-showcase/oceancyber-accra-portfolio-creative-hub-ghana.webp",
-    title: "OceanCyber Creative Hub — portfolio project",
+    title: "OceanCyber Creative Hub — studio concept",
     description:
-      "Premium UI/UX dashboard prototype delivered by OceanCyber — Accra, Ghana.",
-    keywords: [...baseKeywords, "portfolio", "UI/UX", "dashboard"],
+      "Illustrative in-house dashboard UI used in OceanCyber design proposals — studio concept, not a live client deployment. Accra, Ghana.",
+    keywords: [...baseKeywords, "portfolio", "UI/UX", "studio concept"],
     gbpCategory: "At work",
   },
   {
@@ -241,43 +241,94 @@ export const siteImageCatalog = [
   },
 ];
 
+/** Short insight filenames → slug (target path comes from siteImageCatalog). */
+export const legacyInsightSourcesBySlug = {
+  "future-cybersecurity-africa": "insights/future-cybersecurity-africa.webp",
+  "digital-transformation-ghana": "insights/digital-transformation-ghana.webp",
+  "fintech-banking-unbanked": "insights/fintech-banking-unbanked.webp",
+  "ecommerce-emerging-markets": "insights/ecommerce-emerging-markets.webp",
+  "ai-ml-practical": "insights/ai-ml-practical.webp",
+  "ghana-momo-economy": "insights/ghana-momo-economy.webp",
+  "ghana-cybersecurity-trends": "insights/ghana-cybersecurity-trends.webp",
+  "ecommerce-growth-ghana": "insights/ecommerce-growth-ghana.webp",
+  "data-privacy-compliance": "insights/data-privacy-compliance.webp",
+};
+
+/**
+ * Explicit [from, to] paths relative to public/images/.
+ * Sources may already be deleted after migration — rename script skips missing files.
+ */
+export const legacySourceRenames = [
+  // Service hero short names
+  ["hero-services/hero-ui-ux-brand.webp", "hero-services/oceancyber-accra-ui-ux-brand-design-services-ghana.webp"],
+  ["hero-services/hero-web-development.webp", "hero-services/oceancyber-accra-web-development-services-ghana.webp"],
+  ["hero-services/hero-mobile-apps.webp", "hero-services/oceancyber-accra-mobile-app-development-services-ghana.webp"],
+  ["hero-services/hero-ecommerce.webp", "hero-services/oceancyber-accra-ecommerce-development-services-ghana.webp"],
+  ["hero-services/hero-cyber-security.webp", "hero-services/oceancyber-accra-cybersecurity-services-ghana.webp"],
+  ["hero-services/hero-cloud-hosting.webp", "hero-services/oceancyber-accra-cloud-hosting-services-ghana.webp"],
+  // Portfolio short showcase names
+  ["portfolio-showcase/portfolio-creative-hub.webp", "portfolio-showcase/oceancyber-accra-portfolio-creative-hub-ghana.webp"],
+  ["portfolio-showcase/portfolio-egp-ghana.webp", "portfolio-showcase/oceancyber-accra-portfolio-egp-ghana-fintech.webp"],
+  ["portfolio-showcase/portfolio-juelle-hair.webp", "portfolio-showcase/oceancyber-accra-portfolio-juelle-hair-ecommerce.webp"],
+  ["portfolio-showcase/portfolio-tour-world.webp", "portfolio-showcase/oceancyber-accra-portfolio-tour-world-tourism.webp"],
+  ["portfolio-showcase/portfolio-fitch-advisory.webp", "portfolio-showcase/oceancyber-accra-portfolio-fitch-advisory-ghana.webp"],
+  ["portfolio-showcase/portfolio-fitch-attorneys.webp", "portfolio-showcase/oceancyber-accra-portfolio-fitch-attorneys-ghana.webp"],
+  // Legacy root filenames (spaces / old marketing names)
+  ["Africa Trade Chamber.webp", "oceancyber-accra-portfolio-africa-trade-awards-ghana.webp"],
+  ["EGP Ghana.webp", "portfolio-showcase/oceancyber-accra-portfolio-egp-ghana-fintech.webp"],
+  ["Juelle Hair.webp", "portfolio-showcase/oceancyber-accra-portfolio-juelle-hair-ecommerce.webp"],
+  ["Tour World Tourism.webp", "portfolio-showcase/oceancyber-accra-portfolio-tour-world-tourism.webp"],
+  ["Fitch Advisory.webp", "portfolio-showcase/oceancyber-accra-portfolio-fitch-advisory-ghana.webp"],
+  ["Fitch Attorney.webp", "portfolio-showcase/oceancyber-accra-portfolio-fitch-attorneys-ghana.webp"],
+  ["creative-template.png", "portfolio-showcase/oceancyber-accra-portfolio-creative-hub-ghana.webp"],
+  // Agency bento short names
+  ["agency-bento/agency-bento-fintech-dashboard.webp", "agency-bento/oceancyber-accra-fintech-dashboard-work-ghana.webp"],
+  ["agency-bento/agency-bento-mobile-commerce.webp", "agency-bento/oceancyber-accra-mobile-commerce-work-ghana.webp"],
+  ["agency-bento/agency-bento-brand-system.webp", "agency-bento/oceancyber-accra-brand-design-system-work-ghana.webp"],
+  ["agency-bento/agency-bento-travel-platform.webp", "agency-bento/oceancyber-accra-travel-platform-work-ghana.webp"],
+  ["agency-bento/agency-bento-cybersecurity-platform.webp", "agency-bento/oceancyber-accra-cybersecurity-platform-work-ghana.webp"],
+];
+
+/** @deprecated Use legacySourceRenames + legacyInsightSourcesBySlug. Kept for one release of external docs. */
 export const legacyImagePaths = {
-  insights: {
-    "future-cybersecurity-africa": "insights/future-cybersecurity-africa.webp",
-    "digital-transformation-ghana": "insights/digital-transformation-ghana.webp",
-    "fintech-banking-unbanked": "insights/fintech-banking-unbanked.webp",
-    "ecommerce-emerging-markets": "insights/ecommerce-emerging-markets.webp",
-    "ai-ml-practical": "insights/ai-ml-practical.webp",
-    "ghana-momo-economy": "insights/ghana-momo-economy.webp",
-    "ghana-cybersecurity-trends": "insights/ghana-cybersecurity-trends.webp",
-    "ecommerce-growth-ghana": "insights/ecommerce-growth-ghana.webp",
-    "data-privacy-compliance": "insights/data-privacy-compliance.webp",
-  },
+  insights: legacyInsightSourcesBySlug,
   services: {
-    uiUxBrand: "hero-services/hero-ui-ux-brand.webp",
-    webDevelopment: "hero-services/hero-web-development.webp",
-    mobileApps: "hero-services/hero-mobile-apps.webp",
-    ecommerce: "hero-services/hero-ecommerce.webp",
-    cyberSecurity: "hero-services/hero-cyber-security.webp",
-    cloudHosting: "hero-services/hero-cloud-hosting.webp",
+    uiUxBrand: legacySourceRenames[0][0],
+    webDevelopment: legacySourceRenames[1][0],
+    mobileApps: legacySourceRenames[2][0],
+    ecommerce: legacySourceRenames[3][0],
+    cyberSecurity: legacySourceRenames[4][0],
+    cloudHosting: legacySourceRenames[5][0],
   },
   portfolio: {
-    creativeHub: "portfolio-showcase/portfolio-creative-hub.webp",
-    egpGhana: "portfolio-showcase/portfolio-egp-ghana.webp",
-    juelleHair: "portfolio-showcase/portfolio-juelle-hair.webp",
-    tourWorld: "portfolio-showcase/portfolio-tour-world.webp",
-    fitchAdvisory: "portfolio-showcase/portfolio-fitch-advisory.webp",
-    fitchAttorneys: "portfolio-showcase/portfolio-fitch-attorneys.webp",
-    africaTradeAwards: "Africa Trade Chamber.webp",
+    creativeHub: legacySourceRenames[6][0],
+    egpGhana: legacySourceRenames[7][0],
+    juelleHair: legacySourceRenames[8][0],
+    tourWorld: legacySourceRenames[9][0],
+    fitchAdvisory: legacySourceRenames[10][0],
+    fitchAttorneys: legacySourceRenames[11][0],
+    africaTradeAwards: legacySourceRenames[12][0],
   },
   work: {
-    fintechDashboard: "agency-bento/agency-bento-fintech-dashboard.webp",
-    mobileCommerce: "agency-bento/agency-bento-mobile-commerce.webp",
-    brandSystem: "agency-bento/agency-bento-brand-system.webp",
-    travelPlatform: "agency-bento/agency-bento-travel-platform.webp",
-    cybersecurityPlatform: "agency-bento/agency-bento-cybersecurity-platform.webp",
+    fintechDashboard: legacySourceRenames[19][0],
+    mobileCommerce: legacySourceRenames[20][0],
+    brandSystem: legacySourceRenames[21][0],
+    travelPlatform: legacySourceRenames[22][0],
+    cybersecurityPlatform: legacySourceRenames[23][0],
   },
 };
+
+export function buildLegacyRenamePairs() {
+  const insightPairs = Object.entries(legacyInsightSourcesBySlug)
+    .map(([slug, fromRel]) => {
+      const to = siteImageCatalog.find((item) => item.slug === slug)?.path;
+      return to && fromRel !== to ? [fromRel, to] : null;
+    })
+    .filter(Boolean);
+
+  const explicit = legacySourceRenames.filter(([from, to]) => from !== to);
+  return [...insightPairs, ...explicit];
+}
 
 export const gbpCatalogs = {
   insights: siteImageCatalog.filter((item) => item.path.startsWith("insights/")),

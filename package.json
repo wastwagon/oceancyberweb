@@ -42,11 +42,12 @@
     "sync:insights": "tsx scripts/sync-insights-defaults.ts",
     "sync:nav": "prisma db seed",
     "verify:local-seo": "node scripts/verify-local-seo-content.mjs",
+    "verify:image-paths": "node scripts/verify-image-paths.mjs",
     "verify:marketing": "node scripts/verify-marketing-readiness.mjs",
     "verify:marketing-cta": "node scripts/verify-marketing-cta.mjs",
     "verify:production-seo": "node scripts/verify-production-seo.mjs",
     "verify:all": "npm test && npm run verify:local-seo && npm run verify:marketing-cta && npm run verify:marketing -- --strict --live && npm run verify:production-seo && npm run verify:google-places",
-    "verify:predeploy-local": "npm test && npm run verify:local-seo && npm run verify:marketing-cta && npm run verify:marketing -- --strict && npm run build",
+    "verify:predeploy-local": "npm test && npm run verify:local-seo && npm run verify:image-paths && npm run verify:marketing-cta && npm run verify:marketing -- --strict && npm run build",
     "preflight:deploy": "npm run verify:all && npm run build",
     "preflight:local": "npm run verify:predeploy-local && npm run test:e2e",
     "capture:live-previews": "node scripts/capture-live-client-previews.mjs"

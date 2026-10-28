@@ -139,6 +139,8 @@ push("  npx prisma db seed             # after deploy if admin portfolio still s
 push("  npm run verify:production-seo  # live HTML smoke (after deploy)");
 push("  npm run verify:marketing -- --strict   # fail if reviews not configured");
 push("  npm run verify:marketing -- --strict --live   # also ping Places API (New)");
+push("  npm run verify:image-paths       # site-image-paths + geo catalog on disk");
+push("  npm run rename:site-images       # one-time legacy filename migration");
 push("  npm run verify:predeploy-local   # tests + local SEO + build (no live site)");
 push("  npm run preflight:local          # above + Playwright smoke");
 push("  npm run build && npm test\n");

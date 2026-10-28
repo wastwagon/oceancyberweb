@@ -1,4 +1,4 @@
-/** Descriptive public image paths — keep aligned with scripts/image-geo-config.mjs */
+/** Descriptive public image paths — keep aligned with scripts/image-geo-config.mjs (npm run verify:image-paths). */
 export const siteImagePaths = {
   insights: {
     "future-cybersecurity-africa":
