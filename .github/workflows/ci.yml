@@ -44,6 +44,12 @@ jobs:
       - name: Unit tests
         run: npm test
 
+      - name: Local SEO content verify
+        run: npm run verify:local-seo
+
+      - name: Marketing CTA verify
+        run: npm run verify:marketing-cta
+
       - name: Lint web
         run: npm run lint
 
