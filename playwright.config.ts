@@ -22,5 +22,15 @@ export default defineConfig({
         url: baseURL,
         reuseExistingServer: !process.env.CI,
         timeout: 120_000,
+        env: {
+          ...process.env,
+          JWT_SECRET:
+            process.env.JWT_SECRET ||
+            "playwright-e2e-jwt-secret-min-32-chars-long",
+          SESSION_SECRET:
+            process.env.SESSION_SECRET ||
+            "playwright-e2e-session-secret-min-32-chars",
+          NEXT_PUBLIC_SITE_URL: baseURL,
+        },
       },
 });

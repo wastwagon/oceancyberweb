@@ -110,11 +110,15 @@ const paths = [
   "/reviews",
   "/llms.txt",
   "/help-center",
+  "/insights/pos-vs-ecommerce-ghana-2026",
   "/insights/google-maps-web-design-ghana-2026",
+  "/guides/dwumapos-for-ghana-shops",
   "/services/web-development-in-ghana",
   "/services/web-design-in-ghana",
   "/services/cybersecurity",
   "/services/web-design-in-accra",
+  "/services/ecommerce",
+  "/portfolio/creative-hub-template",
   "/domains",
 ];
 if (siteUrl.startsWith("http")) {
@@ -134,6 +138,8 @@ push("  npm run sync:nav               # prisma db seed — navigation from lib/
 push("  npm run verify:production-seo  # live HTML smoke (after deploy)");
 push("  npm run verify:marketing -- --strict   # fail if reviews not configured");
 push("  npm run verify:marketing -- --strict --live   # also ping Places API (New)");
+push("  npm run verify:predeploy-local   # tests + local SEO + build (no live site)");
+push("  npm run preflight:local          # above + Playwright smoke");
 push("  npm run build && npm test\n");
 
 console.log(lines.join("\n"));
