@@ -2,7 +2,10 @@ import type { PortfolioCaseStudy } from "@/lib/types/portfolio-case-study";
 import type { PortfolioSource, SourceFilter } from "@/lib/types/portfolio-source";
 import { enrichPortfolioCaseStudy } from "@/lib/portfolio/project-type";
 
-const STUDIO_SLUGS = new Set(["creative-hub-template"]);
+/** Slugs that must always use canonical studio copy from fallback data (even if DB is stale). */
+export const STUDIO_PORTFOLIO_SLUGS = new Set(["creative-hub-template"]);
+
+const STUDIO_SLUGS = STUDIO_PORTFOLIO_SLUGS;
 
 /** Top partner deliveries — homepage and client filter prioritize these. */
 export const FEATURED_CLIENT_SLUGS = [

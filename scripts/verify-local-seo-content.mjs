@@ -117,6 +117,35 @@ for (const banned of [
     failures.push(`projects.ts: demo-style portfolio copy still present (${banned})`);
   }
 }
+const creativeHubIdx = projectsFallback.indexOf('title: "OceanCyber Creative Hub"');
+if (creativeHubIdx === -1) {
+  failures.push("projects.ts: missing creative-hub-template entry");
+} else {
+  const nextProjectIdx = projectsFallback.indexOf('title: "EGP Ghana"', creativeHubIdx);
+  const blockEnd = nextProjectIdx === -1 ? creativeHubIdx + 1400 : nextProjectIdx;
+  const block = projectsFallback.slice(creativeHubIdx, blockEnd);
+  if (!block.includes('slug: "creative-hub-template"')) {
+    failures.push("projects.ts: OceanCyber Creative Hub entry missing slug creative-hub-template");
+  }
+  if (!block.includes("studio concept")) {
+    failures.push("projects.ts: creative-hub-template must label studio concept");
+  }
+  if (block.includes("testimonial:") || block.includes("metrics:")) {
+    failures.push("projects.ts: creative-hub-template must not include testimonial or metrics");
+  }
+}
+
+const caseStudies = readFileSync(resolve(root, "lib/data/case-studies.ts"), "utf8");
+if (
+  caseStudies.includes('"creative-hub-template"') &&
+  !caseStudies.includes("labelled studio concept")
+) {
+  failures.push("case-studies.ts: creative-hub narrative must state studio concept");
+}
+
+if (!existsSync(resolve(root, "lib/portfolio/studio-fallback-overlay.ts"))) {
+  failures.push("Missing studio-fallback-overlay.ts for DB stale studio copy");
+}
 
 const marketingSourceRoots = [
   "app",
