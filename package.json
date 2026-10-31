@@ -20,6 +20,8 @@
     "prisma:studio": "prisma studio",
     "prisma:seed": "prisma db seed",
     "migrate:portfolio-source": "node scripts/migrate-portfolio-source-to-concept.mjs",
+    "sync:portfolio": "tsx scripts/sync-portfolio-fallbacks.ts",
+    "postdeploy:portfolio": "npm run migrate:portfolio-source && npm run sync:portfolio",
     "audit:all": "npm audit --workspaces --include-workspace-root",
     "dev:api": "npm run start:dev --workspace=@oceancyber/api",
     "docker:up": "node scripts/docker-run.cjs up",

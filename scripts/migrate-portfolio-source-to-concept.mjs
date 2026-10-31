@@ -4,6 +4,8 @@
  * Safe to run multiple times. Requires DATABASE_URL.
  *
  * Usage: npm run migrate:portfolio-source
+ * Then align copy/metrics from repo fallbacks: npm run sync:portfolio
+ * Or both: npm run postdeploy:portfolio
  */
 import { PrismaClient } from "@prisma/client";
 

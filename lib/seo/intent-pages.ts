@@ -107,7 +107,7 @@ export const intentKindMeta: Record<
     label: "Comparisons",
     hubTitle: "Comparisons for Ghana teams",
     hubDescription:
-      "Side-by-side choices buyers search before they hire: agency or freelancer, Shopify or custom, Wix or a site you own.",
+      "Side-by-side choices Ghana teams compare before they pick a vendor: agency, freelancer, Shopify or custom, Wix or a site you own.",
   },
   alternative: {
     path: "/alternatives",
@@ -570,7 +570,7 @@ const coreIntentPages: readonly IntentPage[] = [
       {
         heading: "Hire full time when the product is already live",
         paragraphs: [
-          "Hire when the site is live and the next year is small changes every week. A planning figure we already use is a senior engineer plus design and security, above GHS 20,000 a month, before recruitment, a laptop, and a manager. One hire still leaves design and security as separate jobs. Filling the role often takes months.",
+          "Choose a full-time role when the site is live and the next year is small changes every week. A planning figure we already use is a senior engineer plus design and security, above GHS 20,000 a month, before recruitment, a laptop, and a manager. One employee still leaves design and security as separate jobs. Filling the role often takes months.",
         ],
         links: [{ href: "/insights/agency-vs-hire-ghana", label: "Cost map for Accra teams" }],
       },
@@ -587,9 +587,9 @@ const coreIntentPages: readonly IntentPage[] = [
     ],
     faqs: [
       {
-        question: "Can we use an agency and still hire later?",
+        question: "Can we use an agency and add in-house staff later?",
         answer:
-          "Yes. A common path is we launch the site, hand over the notes, and you hire later once people are using it. The new person inherits a working site.",
+          "Yes. A common path is we launch the site, hand over the notes, and you recruit in-house once people are using it. The new person inherits a working site.",
       },
       {
         question: "Is an agency more expensive than a freelancer?",
@@ -745,7 +745,7 @@ const coreIntentPages: readonly IntentPage[] = [
     related: [
       { href: "/alternatives/wix-ghana", label: "Wix alternatives in Ghana" },
       { href: "/alternatives/squarespace-ghana", label: "Squarespace alternatives in Ghana" },
-      { href: "/compare/agency-vs-freelancer-vs-in-house-ghana", label: "Agency, freelancer, or hire" },
+      { href: "/compare/agency-vs-freelancer-vs-in-house-ghana", label: "Agency, freelancer, or in-house" },
     ],
     cta: {
       title: "Send the current site",

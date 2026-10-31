@@ -337,6 +337,12 @@ for (const rel of longTermTrustRoots) {
 if (!existsSync(resolve(root, "lib/marketing/long-term-trust-policy.ts"))) {
   failures.push("Missing long-term-trust-policy.ts");
 }
+if (!existsSync(resolve(root, "scripts/sync-portfolio-fallbacks.ts"))) {
+  failures.push("Missing scripts/sync-portfolio-fallbacks.ts for post-deploy DB alignment");
+}
+if (!existsSync(resolve(root, "prisma/seed-portfolio-fallbacks.ts"))) {
+  failures.push("Missing prisma/seed-portfolio-fallbacks.ts");
+}
 
 const servicesPage = resolve(root, "app/services/page.tsx");
 if (existsSync(servicesPage)) {
