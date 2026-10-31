@@ -120,7 +120,7 @@ export const mainHeaderNav: HeaderNavItem[] = [
 ];
 
 import { industryNavItems } from "@/lib/data/industries-catalog";
-import { servicesGeoMegaMenuItems } from "@/lib/navigation/services-geo-nav";
+import { buildServicesDropdownItems } from "@/lib/navigation/services-geo-nav";
 
 export const mainHeaderDropdownContent: Record<
   HeaderDropdownKey,
@@ -133,65 +133,8 @@ export const mainHeaderDropdownContent: Record<
   services: {
     title: "Our Services",
     description:
-      "Web design, development, apps, and security for businesses across Ghana—from Accra nationwide.",
-    items: [
-      {
-        heading: "All services",
-        description: "Web design, development, mobile apps, commerce, and security consulting.",
-        link: "/services",
-      },
-      ...servicesGeoMegaMenuItems,
-      {
-        heading: "Pricing & packages",
-        description: "Transparent GHS tiers for Startup, Professional, and Enterprise.",
-        link: "/pricing",
-      },
-      {
-        heading: "How we work",
-        description: "Discovery, design, phased delivery, and security-aware launch.",
-        link: "/how-we-work",
-      },
-      {
-        heading: "Web design",
-        description: "Company sites and landing pages from GHS 6,000 — mobile-first and SEO-ready.",
-        link: "/services/web-design",
-      },
-      {
-        heading: "UI/UX & brand design",
-        description: "Research, Figma prototypes, and design systems ready for engineering.",
-        link: "/services/ui-ux-design",
-      },
-      {
-        heading: "Web development",
-        description: "Marketing sites and web apps built for speed, search, and maintenance.",
-        link: "/services/web-development",
-      },
-      {
-        heading: "Software development",
-        description: "Custom tools and platforms from GHS 14,500 for Ghana operations.",
-        link: "/services/software-development",
-      },
-      {
-        heading: "Mobile apps",
-        description: "iOS and Android apps, including converting an existing website.",
-        link: "/services/mobile-apps",
-      },
-      {
-        heading: "Website to app",
-        description: "Scoped quotes to turn your current website into a mobile app.",
-        link: "/services/website-to-mobile-app",
-      },
-      {
-        heading: "E-commerce",
-        description: "Online stores with catalogue, checkout, and local payment flows.",
-        link: "/services/ecommerce",
-      },
-      {
-        heading: "Security consulting",
-        description: "Hardening and reviews for the sites and apps we ship.",
-        link: "/services/cybersecurity",
-      },
-    ],
+      "Web design, development, apps, and security for Ghana businesses — one Accra team.",
+    items: buildServicesDropdownItems(),
   },
   products: {
     title: "Products",

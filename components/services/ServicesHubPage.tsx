@@ -279,7 +279,10 @@ export function ServicesHubPage() {
         </div>
       </section>
 
-      <section className="relative z-10 border-t border-sa-border py-12 md:py-16">
+      <section
+        id="local-guides"
+        className="relative z-10 scroll-mt-28 border-t border-sa-border py-12 md:py-16 md:scroll-mt-32"
+      >
         <div className="sa-container max-w-4xl">
           <h2 className="font-heading text-xl font-semibold text-white md:text-2xl">
             Local guides: Accra &amp; Ghana

@@ -75,10 +75,11 @@ async function seedNavigationConfig() {
 
   const dropdownMenuIds: Record<string, string> = {};
   for (const key of Object.keys(navDefaults.mainHeaderDropdownContent)) {
+    const panel = navDefaults.mainHeaderDropdownContent[key as keyof typeof navDefaults.mainHeaderDropdownContent];
     dropdownMenuIds[key] = await upsertNavigationMenu(
       `main-dropdown-${key}`,
-      `Main dropdown ${key}`,
-      `Dropdown content for ${key}.`,
+      panel.title,
+      panel.description,
     );
   }
 

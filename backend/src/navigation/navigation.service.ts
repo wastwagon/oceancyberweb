@@ -133,140 +133,87 @@ const DEFAULT_CONFIG = {
     services: {
       title: "Our Services",
       description:
-        "Web design, development, apps, and security for businesses across Ghana—from Accra nationwide.",
+        "Web design, development, apps, and security for Ghana businesses — one Accra team.",
       items: [
         {
           heading: "All services",
-          description:
-            "Web design, development, mobile apps, commerce, and cybersecurity.",
+          description: "Hub for web, mobile, commerce, and security in cedis.",
           link: "/services",
         },
         {
-          heading: "Best web design company in Accra",
-          description:
-            "Meet at 47 Nii Kwashiefio Avenue — company sites from GHS 6,000.",
-          link: "/services/web-design-in-accra",
-        },
-        {
-          heading: "Best web design company in Ghana",
-          description: "Nationwide design and build from the Accra office.",
-          link: "/services/web-design-in-ghana",
-        },
-        {
-          heading: "Best web development company in Accra",
-          description:
-            "Website development, Paystack and MoMo — from GHS 6,000.",
-          link: "/services/web-development-in-accra",
-        },
-        {
-          heading: "Best website developers in Ghana",
-          description: "Website development company for teams across Ghana.",
-          link: "/services/web-development-in-ghana",
-        },
-        {
-          heading: "Best software development in Accra",
-          description: "Custom tools and platforms from GHS 14,500.",
-          link: "/services/software-development-in-accra",
-        },
-        {
-          heading: "Software development in Ghana",
-          description:
-            "Internal tools and web apps — Accra engineering, nationwide delivery.",
-          link: "/services/software-development-in-ghana",
-        },
-        {
-          heading: "Best mobile apps in Accra",
-          description: "iOS and Android from GHS 12,000 per platform.",
-          link: "/services/mobile-app-development-in-accra",
-        },
-        {
-          heading: "Mobile app development in Ghana",
-          description: "Apps built for Ghana networks and mid-range Android.",
-          link: "/services/mobile-app-development-in-ghana",
-        },
-        {
-          heading: "E-commerce development in Accra",
-          description: "Online stores with Ghana checkout.",
-          link: "/services/ecommerce-development-in-accra",
-        },
-        {
-          heading: "E-commerce development in Ghana",
-          description: "Catalogue, MoMo, and Paystack from one Accra team.",
-          link: "/services/ecommerce-development-in-ghana",
-        },
-        {
-          heading: "Best web designers in Accra",
-          description: "UI/UX and product design from GHS 3,500.",
-          link: "/services/ui-ux-design-in-accra",
-        },
-        {
-          heading: "Best web designers in Ghana",
-          description: "Brand and interface design — Figma files our developers build from.",
-          link: "/services/ui-ux-design-in-ghana",
-        },
-        {
-          heading: "Security consulting in Accra",
-          description: "Assessments and hardening from GHS 4,500.",
-          link: "/services/cybersecurity-in-accra",
-        },
-        {
-          heading: "Security consulting in Ghana",
-          description: "Security reviews for sites and apps we ship.",
-          link: "/services/cybersecurity-in-ghana",
-        },
-        {
-          heading: "Pricing & packages",
-          description:
-            "Transparent GHS tiers for Startup, Professional, and Enterprise.",
-          link: "/pricing",
-        },
-        {
-          heading: "How we work",
-          description:
-            "Discovery, design, phased delivery, and security-aware launch.",
-          link: "/how-we-work",
+          heading: "Web design",
+          description: "Company sites and landing pages from GHS 6,000.",
+          link: "/services/web-design",
         },
         {
           heading: "UI/UX & brand design",
-          description:
-            "Research, Figma prototypes, and design systems ready for engineering.",
+          description: "Figma screens and brand work from GHS 3,500.",
           link: "/services/ui-ux-design",
         },
         {
           heading: "Web development",
-          description:
-            "Marketing sites and web apps built for speed, search, and maintenance.",
+          description: "Marketing sites and web apps built for Ghana mobile networks.",
           link: "/services/web-development",
         },
         {
           heading: "Software development",
-          description:
-            "Custom tools and platforms from GHS 14,500 for Ghana operations.",
+          description: "Internal tools and platforms from GHS 14,500.",
           link: "/services/software-development",
         },
         {
           heading: "Mobile apps",
-          description:
-            "iOS and Android apps, including converting an existing website.",
+          description: "iOS and Android from GHS 12,000 per platform.",
           link: "/services/mobile-apps",
         },
         {
           heading: "Website to app",
-          description:
-            "Scoped quotes to turn your current website into a mobile app.",
+          description: "Turn an existing site into App Store and Play Store releases.",
           link: "/services/website-to-mobile-app",
         },
         {
           heading: "E-commerce",
-          description:
-            "Online stores with catalogue, checkout, and local payment flows.",
+          description: "Online stores with catalogue, checkout, and MoMo.",
           link: "/services/ecommerce",
         },
         {
           heading: "Security consulting",
-          description:
-            "Hardening and reviews for the sites and apps we ship.",
+          description: "Assessments and hardening from GHS 4,500.",
           link: "/services/cybersecurity",
+        },
+        {
+          heading: "Pricing & packages",
+          description: "Startup, Professional, and Enterprise tiers in GHS.",
+          link: "/pricing",
+        },
+        {
+          heading: "How we work",
+          description: "Discovery, design, build, and launch from Accra.",
+          link: "/how-we-work",
+        },
+        {
+          heading: "Web design in Accra",
+          description: "Company sites from GHS 6,000 — meet us at Nii Kwashiefio Avenue.",
+          link: "/services/web-design-in-accra",
+        },
+        {
+          heading: "Web design in Ghana",
+          description: "Same Accra team for teams outside Greater Accra.",
+          link: "/services/web-design-in-ghana",
+        },
+        {
+          heading: "Web development in Accra",
+          description: "Websites and web apps with Paystack or MoMo when you sell online.",
+          link: "/services/web-development-in-accra",
+        },
+        {
+          heading: "Web development in Ghana",
+          description: "Nationwide delivery from one engineering office.",
+          link: "/services/web-development-in-ghana",
+        },
+        {
+          heading: "More local guides",
+          description: "Apps, ecommerce, UI/UX, and security — Accra and Ghana pages on the hub.",
+          link: "/services#local-guides",
         },
       ],
     },
@@ -769,14 +716,27 @@ export class NavigationService {
       const dropdowns = JSON.parse(
         JSON.stringify(DEFAULT_CONFIG.mainHeaderDropdownContent),
       ) as typeof DEFAULT_CONFIG.mainHeaderDropdownContent;
+      /** Dropdown bodies owned in code — DB seed labels must not replace titles or duplicate SEO rows. */
+      const codeOwnedDropdownKeys = new Set(["services"]);
+
       Object.keys(dropdowns).forEach((key) => {
+        const defaults =
+          DEFAULT_CONFIG.mainHeaderDropdownContent[
+            key as keyof typeof DEFAULT_CONFIG.mainHeaderDropdownContent
+          ];
+        if (!defaults) return;
+
+        if (codeOwnedDropdownKeys.has(key)) {
+          dropdowns[key as keyof typeof dropdowns] = {
+            title: defaults.title,
+            description: defaults.description,
+            items: [...defaults.items],
+          };
+          return;
+        }
+
         const dbItems = byKey.get(`main-dropdown-${key}`);
         if (dbItems && dbItems.length > 0) {
-          const first = dbItems[0];
-          const defaultItems =
-            DEFAULT_CONFIG.mainHeaderDropdownContent[
-              key as keyof typeof DEFAULT_CONFIG.mainHeaderDropdownContent
-            ]?.items ?? [];
           const dbLinks = new Set(dbItems.map((item) => item.href));
           const mergedItems = [
             ...dbItems.map((item) => ({
@@ -784,11 +744,11 @@ export class NavigationService {
               description: item.description ?? "",
               link: item.href,
             })),
-            ...defaultItems.filter((item) => !dbLinks.has(item.link)),
+            ...defaults.items.filter((item) => !dbLinks.has(item.link)),
           ];
           dropdowns[key as keyof typeof dropdowns] = {
-            title: first.menuLabel,
-            description: first.menuDescription ?? "",
+            title: defaults.title,
+            description: defaults.description,
             items: mergedItems,
           };
         }

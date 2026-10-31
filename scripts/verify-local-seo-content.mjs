@@ -43,8 +43,12 @@ if (insights) {
 }
 
 const menu = readFileSync(resolve(root, "lib/navigation/menu.ts"), "utf8");
-if (!menu.includes("servicesGeoMegaMenuItems")) {
-  failures.push("menu.ts: services geo mega-menu import missing");
+if (!menu.includes("buildServicesDropdownItems")) {
+  failures.push("menu.ts: must build services dropdown from services-geo-nav");
+}
+const servicesDropdownBlock = menu.match(/services:\s*\{[\s\S]*?buildServicesDropdownItems\(\)/);
+if (servicesDropdownBlock && /Best web design company/i.test(servicesDropdownBlock[0])) {
+  failures.push("menu.ts: services dropdown must not embed Best … keyword headings");
 }
 if (!menu.includes("Best website developers in Ghana")) {
   failures.push("menu.ts: footer missing Best website developers in Ghana");
@@ -56,14 +60,31 @@ if (!market.includes("buildGbpProfileDescription")) {
 }
 
 const geoNav = readFileSync(resolve(root, "lib/navigation/services-geo-nav.ts"), "utf8");
-const geoLinks = [...geoNav.matchAll(/link: "(\/services\/[^"]+)"/g)].map((m) => m[1]);
+const ownerBlock = geoNav.match(/GEO_SERVICE_OWNER_PATHS = \[([\s\S]*?)\] as const/)?.[1] ?? "";
+const geoLinks = [...ownerBlock.matchAll(/"(\/services\/[^"]+)"/g)].map((m) => m[1]);
+if (geoLinks.length < 10) {
+  failures.push("services-geo-nav.ts: GEO_SERVICE_OWNER_PATHS must list geo owner URLs");
+}
+const hasDynamicGeoRoute = existsSync(resolve(root, "app/services/[slug]/page.tsx"));
+for (const link of geoLinks) {
+  const slug = link.replace(/^\/services\//, "");
+  const staticPage = resolve(root, `app/services/${slug}/page.tsx`);
+  if (!existsSync(staticPage) && !hasDynamicGeoRoute) {
+    failures.push(`missing geo owner page ${link}`);
+  }
+}
 const backendNav = readFileSync(
   resolve(root, "backend/src/navigation/navigation.service.ts"),
   "utf8",
 );
-for (const link of geoLinks) {
+for (const link of [
+  "/services/web-design-in-accra",
+  "/services/web-design-in-ghana",
+  "/services/web-development-in-accra",
+  "/services/web-development-in-ghana",
+]) {
   if (!backendNav.includes(link)) {
-    failures.push(`backend navigation missing geo link ${link}`);
+    failures.push(`backend services dropdown missing local guide ${link}`);
   }
 }
 
