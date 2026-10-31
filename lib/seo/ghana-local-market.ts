@@ -69,18 +69,15 @@ export const gbpSuggestedServiceNames = [
   "SEO and website optimisation",
 ] as const;
 
-/** Visible homepage H1 — matches title/Maps intent without renaming the legal business. */
-export const homeHeroH1 =
+/** Peer-aligned phrase for GBP kit, facts, and structured data — not the live homepage H1. */
+export const mapsSeoHomeHeadline =
   "Best web design & website development company in Accra, Ghana";
-
-export const homeHeroSupportLine =
-  "Professional website developers, online stores, and mobile apps — packages from GHS 6,000.";
 
 /** One description for JSON-LD, GBP alignment, and facts — peers use this density. */
 export function buildMapsAlignedBusinessDescription(stats: GooglePlaceStats): string {
   const reviews = formatReviewsTrustLine(stats);
   return (
-    `${AGENCY_IDENTITY_GHANA} — also listed for local search as a web design company. ` +
+    `${AGENCY_IDENTITY_GHANA} — the same team listed on Google Maps as a web design company. ` +
     `Company sites, online stores, and mobile apps from ${googleBusinessProfile.address.street}. ` +
     `Team of ${googleBusinessProfile.teamSize}, since ${googleBusinessProfile.foundedYear}. ${reviews}.`
   );
@@ -143,7 +140,7 @@ export function geoMarketFaqs(
     return [
       {
         question: `Best web designers in ${place}?`,
-        answer: `UI/UX and web design for Ghana brands — wireframes, visual design, and handoff to our developers. ${reviews}.`,
+        answer: `UI/UX and web design for Ghana brands — wireframes, visuals, then our developers build it in the same office. ${reviews}.`,
       },
     ];
   }

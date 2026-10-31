@@ -20,7 +20,7 @@ export const deliveryPhases: readonly DeliveryPhase[] = [
     step: 2,
     title: "Mobile-first design",
     body: "When design is in scope, we prototype in Figma for phone-sized screens first — so Accra and nationwide users are not an afterthought.",
-    bullets: ["Brand and UX", "Clickable review links", "Engineering handoff"],
+    bullets: ["Brand and UX", "Clickable review links", "Build-ready Figma files"],
   },
   {
     step: 3,

@@ -30,7 +30,7 @@ export function SaTestimonialsSection({ googleStats, googleReviews, featuredCard
           className="mb-12 md:mb-14"
           eyebrow="Social proof"
           title="What clients say on Google"
-          subtitle="Live reviews synced from our Google Business Profile — updated automatically."
+          subtitle="Live reviews from our Google Business Profile — updated from Google."
         />
 
         <SaGoogleReviewsBanner stats={googleStats} />

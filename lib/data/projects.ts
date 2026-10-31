@@ -2,6 +2,7 @@ import {
   CONCEPT_PORTFOLIO_CLIENT_LABEL,
   CONCEPT_PORTFOLIO_DESCRIPTION_LEAD,
 } from "@/lib/marketing/concept-portfolio-copy";
+import { liveDeliveryMetric } from "@/lib/marketing/long-term-trust-policy";
 import { siteImagePaths } from "@/lib/seo/site-image-paths";
 
 export interface Project {
@@ -44,18 +45,18 @@ export const projects: Project[] = [
   {
     title: "EGP Ghana",
     category: "Financial Services",
-    description: "Comprehensive digital transformation for a leading financial institution, implementing secure online banking solutions and customer portal systems.",
+    description: "Secure online banking and customer portal for a financial institution — login, statements, and support flows built for Ghana users.",
     tech: ["Next.js", "TypeScript", "Tailwind", "Node.js", "PostgreSQL"],
     gradient: "from-ocean-500 to-cyan-500",
     image: siteImagePaths.portfolio.egpGhana,
-    metrics: { increase: "200%", metric: "Online Transactions" },
+    metrics: liveDeliveryMetric("Banking portal"),
     year: "2024",
     client: "EGP Ghana",
     rating: 5,
     slug: "egp-ghana",
     services: ["Web Design", "Security", "Database Architecture", "API Development"],
     testimonial: "OceanCyber delivered a robust banking platform that exceeded our security requirements while providing an exceptional user experience for our customers.",
-    results: "Enhanced customer satisfaction and reduced operational costs by 40%"
+    results: "Secure login, statements, and support flows for Ghana banking customers"
   },
   {
     title: "Juelle Hair",
@@ -64,7 +65,7 @@ export const projects: Project[] = [
     tech: ["React", "Next.js", "Stripe", "MongoDB", "Cloudinary"],
     gradient: "from-teal-500 to-cyan-500",
     image: siteImagePaths.portfolio.juelleHair,
-    metrics: { increase: "150%", metric: "Sales Growth" },
+    metrics: liveDeliveryMetric("Online store"),
     year: "2024",
     client: "Juelle Hair",
     rating: 5,
@@ -80,14 +81,14 @@ export const projects: Project[] = [
     tech: ["Next.js", "Prisma", "PostgreSQL", "React Query", "Tailwind"],
     gradient: "from-cyan-500 to-ocean-500",
     image: siteImagePaths.portfolio.tourWorld,
-    metrics: { increase: "300%", metric: "Booking Conversions" },
+    metrics: liveDeliveryMetric("Tour booking"),
     year: "2023",
     client: "Tour World Tourism",
     rating: 5,
     slug: "tour-world-tourism",
     services: ["Booking System", "Real-time Availability", "Payment Processing", "Customer Management"],
-    testimonial: "Our booking system now handles high traffic seamlessly and has improved our customer retention significantly.",
-    results: "Improved customer retention and reduced booking errors by 90%"
+    testimonial: "Our booking system now handles busy days without slowing down, and customers book online more often.",
+    results: "Online booking with availability and payments for tour customers"
   },
   {
     title: "Fitch Advisory",
@@ -96,7 +97,7 @@ export const projects: Project[] = [
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL", "AWS S3"],
     gradient: "from-blue-500 to-indigo-500",
     image: siteImagePaths.portfolio.fitchAdvisory,
-    metrics: { increase: "250%", metric: "Client Engagement" },
+    metrics: liveDeliveryMetric("Portal, booking & documents"),
     year: "2024",
     client: "Fitch Advisory",
     rating: 5,
@@ -104,7 +105,7 @@ export const projects: Project[] = [
     liveUrl: "https://www.fitchadvisory.com/",
     services: ["Web Design", "Security", "Client Portal", "Document Management", "SEO"],
     testimonial: "OceanCyber created a sophisticated platform that perfectly represents our brand and enhances our client service capabilities.",
-    results: "Increased client engagement and streamlined consultation scheduling process"
+    results: "Self-serve booking and document sharing for advisory clients"
   },
   {
     title: "Fitch Attorneys",
@@ -113,7 +114,7 @@ export const projects: Project[] = [
     tech: ["React", "Next.js", "Tailwind CSS", "MongoDB", "Express.js", "Cloudflare"],
     gradient: "from-gray-600 to-blue-600",
     image: siteImagePaths.portfolio.fitchAttorneys,
-    metrics: { increase: "180%", metric: "Case Management Efficiency" },
+    metrics: liveDeliveryMetric("Case & client portal"),
     year: "2024",
     client: "Fitch Attorneys",
     rating: 5,
@@ -121,7 +122,7 @@ export const projects: Project[] = [
     liveUrl: "https://www.fitchattorneys.com/",
     services: ["Web Design", "Security", "Case Management", "Client Portal", "SEO"],
     testimonial: "The new system has revolutionized how we manage cases and communicate with clients, significantly improving our workflow.",
-    results: "Enhanced case management efficiency and improved client communication"
+    results: "Matter workflow and client updates on one platform"
   },
   {
     title: "Africa Governance Centre",
@@ -131,7 +132,7 @@ export const projects: Project[] = [
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL", "Vercel"],
     gradient: "from-emerald-500 to-teal-500",
     image: siteImagePaths.portfolioLive.africaGovernanceCentre,
-    metrics: { increase: "220%", metric: "Programme Visibility" },
+    metrics: liveDeliveryMetric("Programmes & events"),
     year: "2024",
     client: "Africa Governance Centre",
     rating: 5,
@@ -140,7 +141,7 @@ export const projects: Project[] = [
     services: ["Web Design", "Content Architecture", "Event Workflows", "SEO", "Performance"],
     testimonial:
       "OceanCyber delivered a platform that reflects our continental mandate and makes our programmes accessible to partners worldwide.",
-    results: "Unified programme and event presence with stronger stakeholder engagement",
+    results: "One site for programmes and events — partners find schedules and register in one place",
   },
   {
     title: "ThinQ Shopping",
@@ -150,7 +151,7 @@ export const projects: Project[] = [
     tech: ["React Native", "Next.js", "Node.js", "PostgreSQL", "Paystack", "MoMo"],
     gradient: "from-violet-500 to-fuchsia-500",
     image: siteImagePaths.portfolioLive.thinqShopping,
-    metrics: { increase: "165%", metric: "Mobile Conversions" },
+    metrics: liveDeliveryMetric("MoMo & Paystack store"),
     year: "2024",
     client: "ThinQ Shopping",
     rating: 5,
@@ -159,7 +160,7 @@ export const projects: Project[] = [
     services: ["Mobile Apps", "E-commerce", "Payment Integration", "UI/UX Design"],
     testimonial:
       "The app transformed how customers discover products and book services — checkout is fast and the team can manage orders with confidence.",
-    results: "Higher mobile conversion and streamlined order operations",
+    results: "Mobile checkout and order handling for retail and services"
   },
   {
     title: "Africa Trade Awards",
@@ -168,14 +169,14 @@ export const projects: Project[] = [
     tech: ["Next.js", "Prisma", "PostgreSQL", "React Query", "Tailwind CSS", "Vercel"],
     gradient: "from-orange-500 to-red-500",
     image: siteImagePaths.portfolio.africaTradeAwards,
-    metrics: { increase: "400%", metric: "Nomination Submissions" },
+    metrics: liveDeliveryMetric("Nominations & voting"),
     year: "2023",
     client: "Africa Trade Awards",
     rating: 5,
     slug: "africa-trade-awards",
     services: ["Event Management", "Voting System", "Sponsor Management", "Live Streaming", "SEO"],
-    testimonial: "The platform handled thousands of nominations seamlessly and provided an excellent experience for all participants.",
-    results: "Increased nomination submissions and enhanced event participant engagement"
+    testimonial: "The platform handled thousands of nominations without breaking down — voters and admins both had a smooth experience.",
+    results: "Public nominations and voting for a large awards programme"
   },
   {
     title: "African Trade Chamber",
@@ -184,7 +185,7 @@ export const projects: Project[] = [
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL", "Redis"],
     gradient: "from-green-500 to-teal-500",
     image: siteImagePaths.portfolio.africaTradeAwards,
-    metrics: { increase: "350%", metric: "Member Engagement" },
+    metrics: liveDeliveryMetric("Member directory"),
     year: "2024",
     client: "African Trade Chamber",
     rating: 5,

@@ -6,7 +6,7 @@ export const metadata: Metadata = withCanonical(
   {
     title: "Web, mobile, and cybersecurity services in Accra, Ghana",
     description:
-      "Service hub for OceanCyber: best web design and website development company in Accra, Ghana. Mobile apps, ecommerce, cybersecurity, and UI/UX from GHS 6,000. Accra and Ghana local pages linked below.",
+      "Web, mobile, ecommerce, UI/UX, cybersecurity, and hosting from OceanCyber in Accra — fixed GHS packages from GHS 6,000. Accra and Ghana local guides linked on the hub.",
   },
   "/services",
 );

@@ -33,7 +33,7 @@ export function SaServicesSection() {
         />
         <p className="mb-16 text-center text-sm leading-relaxed text-sa-muted">
           <Link href="/services/web-design-in-accra" className="sa-text-link">
-            Hire in Accra
+            Web design in Accra
           </Link>
           <span aria-hidden> · </span>
           <Link href="/services" className="sa-text-link">

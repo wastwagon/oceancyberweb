@@ -14,9 +14,10 @@ describe("getLocalChatReply POS routing", () => {
 });
 
 describe("getLocalChatReply agency positioning", () => {
-  it("rejects studio company framing", () => {
+  it("answers boutique or studio questions with agency identity", () => {
     const reply = getLocalChatReply("Are you a design studio?");
-    expect(reply.toLowerCase()).toContain("not a design studio");
+    expect(reply.toLowerCase()).toContain("website and mobile application development agency");
+    expect(reply.toLowerCase()).not.toMatch(/\bdesign studio\b/);
     expect(reply.toLowerCase()).toContain("development agency");
   });
 });

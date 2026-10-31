@@ -1,4 +1,3 @@
-import { AGENCY_IDENTITY_GHANA } from "@/lib/marketing/agency-positioning";
 import type { GooglePlaceStats } from "@/lib/google-places-stats";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 import { readEnvGbpOverride, staticGbpFallback } from "@/lib/trust/gbp-fallback";
@@ -35,9 +34,9 @@ export function formatCompanyPresenceLine(stats: GooglePlaceStats): string {
 export function buildTrustBlurb(stats: GooglePlaceStats) {
   const reviews = formatReviewsTrustLine(stats);
   return {
-    short: `Websites, mobile apps, and cybersecurity from one Accra team. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}. ${reviews}`,
+    short: `Websites, mobile apps, and cybersecurity from one Accra team. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}, ${reviews.toLowerCase()}.`,
     office: `One office at ${googleBusinessProfile.address.street}, Accra.`,
-    seo: `${AGENCY_IDENTITY_GHANA} — websites, mobile apps, and cybersecurity. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}. ${reviews} Office: ${googleBusinessProfile.address.street}, Accra. Listed on Google Maps as a web design company.`,
+    seo: `OceanCyber is a web and mobile development agency in Accra — design, engineering, hosting, and security in one team. ${googleBusinessProfile.teamSize} people since ${googleBusinessProfile.foundedYear}, ${reviews.toLowerCase()}. Office: ${googleBusinessProfile.address.street}.`,
     reviewsOnly: reviews,
   };
 }
@@ -81,7 +80,7 @@ export function buildHomeFaqItems(stats: GooglePlaceStats): HomeFaqItem[] {
   return [
     {
       q: "Where is OceanCyber based?",
-      a: `Accra — ${googleBusinessProfile.address.street}. A team of ${googleBusinessProfile.teamSize}, founded in ${googleBusinessProfile.foundedYear}. ${reviewsOnly} See best web design company in Accra and Ghana on our Services hub.`,
+      a: `Accra — ${googleBusinessProfile.address.street}. A team of ${googleBusinessProfile.teamSize}, founded in ${googleBusinessProfile.foundedYear}. ${reviewsOnly} We also publish Accra and Ghana web design guides under Services.`,
     },
     {
       q: "How do we start a project?",

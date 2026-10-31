@@ -117,7 +117,7 @@ export const pricingPlans: readonly PricingPlan[] = [
     name: "Enterprise",
     priceGhs: 30000,
     desc: "Security-aware delivery for regulated and complex projects.",
-    idealFor: "Enterprises, fintech, and multi-stakeholder builds",
+    idealFor: "Large companies, fintech, and teams with many approvers",
     timeline: "10–16+ weeks",
     featured: false,
     homepageFeatures: [
@@ -136,7 +136,7 @@ export const pricingPlans: readonly PricingPlan[] = [
       "6 months support with optimisation sprints",
     ],
     comparison: {
-      idealFor: "Enterprises, fintech, and multi-stakeholder builds",
+      idealFor: "Large companies, fintech, and teams with many approvers",
       timeline: "10–16+ weeks",
       scope: "Custom (scoped in discovery)",
       design: "Full design system",

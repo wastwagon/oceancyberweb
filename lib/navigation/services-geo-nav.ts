@@ -63,7 +63,7 @@ export const servicesGeoMegaMenuItems: readonly ServicesGeoNavItem[] = [
   },
   {
     heading: "Best web designers in Ghana",
-    description: "Brand and interface design with developer handoff.",
+    description: "Brand and interface design — Figma files our developers build from.",
     link: "/services/ui-ux-design-in-ghana",
   },
   {

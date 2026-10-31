@@ -1,6 +1,7 @@
 /**
  * Canonical company identity — use for user-facing and SEO copy.
- * Maps/GBP may still say “web design company” for local search; we are not a “studio” brand.
+ * Long-term: honest Accra agency voice on pages; Maps peer phrases on geo URLs + meta only.
+ * See lib/marketing/long-term-trust-policy.ts for proof and metrics rules.
  */
 export const AGENCY_WHAT_WE_ARE = "Website and mobile application development agency";
 
@@ -9,10 +10,13 @@ export const AGENCY_IDENTITY_ACCRA = "Accra website and mobile app development a
 export const AGENCY_IDENTITY_GHANA = `${AGENCY_IDENTITY_ACCRA}, Ghana`;
 
 export const AGENCY_NOT_A_STUDIO_NOTE =
-  "Design, engineering, hosting, and security consulting in one Accra team — not a creative or design studio.";
+  "One Accra team for design, build, hosting, and security — not a separate designer abroad and developer elsewhere.";
 
-/** Visible homepage H1 stays Maps-optimised in ghana-local-market — this is for `<title>` / OG where appropriate. */
+/** Maps/local-search hook — use in `<title>`, meta, JSON-LD, and geo pages — not the visible homepage H1. */
 export const MAPS_SEO_HOME_TITLE_SUFFIX = "Best web design company in Accra, Ghana";
+
+/** Visitor-facing homepage headline — outcome-first, not a keyword list. */
+export const HOME_HERO_H1 = "Websites, apps, and security from Accra";
 
 export const SITE_DEFAULT_TITLE = `${AGENCY_IDENTITY_GHANA} | OceanCyber`;
 
@@ -28,7 +32,7 @@ export type SiteMetaContext = {
 export function buildSiteMetaDescription(ctx: SiteMetaContext): string {
   return (
     `${AGENCY_IDENTITY_GHANA}. Websites from GHS 6,000, mobile apps from GHS 12,000, cybersecurity from GHS 4,500. ` +
-    `Also discoverable as a ${MAPS_SEO_HOME_TITLE_SUFFIX.toLowerCase()} on Google Maps. ` +
+    `On Google Maps people also find us as a ${MAPS_SEO_HOME_TITLE_SUFFIX.toLowerCase()}. ` +
     `${ctx.teamSize} people at ${ctx.street}. ${ctx.reviewsOnly}.`
   );
 }
@@ -53,10 +57,14 @@ export function factsPageMetaDescription(reviewsOnly: string): string {
   return `Verifiable OceanCyber facts: ${AGENCY_WHAT_WE_ARE.toLowerCase()}, Accra office, GHS packages, hosting, domains, ownership. ${reviewsOnly}.`;
 }
 
-export function footerTagline(teamSize: number, foundedYear: number): string {
+export function footerTagline(
+  teamSize: number,
+  foundedYear: number,
+  street = "47 Nii Kwashiefio Avenue",
+): string {
   return (
-    `${AGENCY_IDENTITY_GHANA}. A team of ${teamSize}, in business since ${foundedYear} — ` +
-    `also listed on Google Maps as a web design and website development company.`
+    `Website and mobile app development from Accra since ${foundedYear}. ` +
+    `A team of ${teamSize} at ${street} — design, engineering, hosting, and security in one place.`
   );
 }
 

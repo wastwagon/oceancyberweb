@@ -25,7 +25,7 @@ const CASE_STUDY_NARRATIVES: Record<string, CaseStudyNarrative> = {
     solution:
       "We rebuilt the advisory platform with a refined brand system, secure client portal, structured service and insights pages, and integrated consultation scheduling. Security and performance were treated as product requirements from day one — not post-launch patches.",
     impact:
-      "Client engagement increased 250%. Document sharing and consultation booking became self-serve, reducing admin overhead while presenting a brand experience aligned with the firm's advisory mandate.",
+      "Clients book consultations and share documents through the portal instead of long email threads — the public site matches the firm's advisory mandate.",
   },
   "fitch-attorneys": {
     challenge:
@@ -33,7 +33,7 @@ const CASE_STUDY_NARRATIVES: Record<string, CaseStudyNarrative> = {
     solution:
       "We delivered a unified legal platform: public-facing practice and sector pages, a client communication hub, and case workflow tooling designed for how Ghanaian firms actually operate — with security, access control, and Cloudflare protection built in.",
     impact:
-      "Case management efficiency improved 180%. Clients gained clearer matter visibility while the firm reduced manual follow-up and consolidated communication on one trusted platform.",
+      "Clients see matter updates in one place; the firm spends less time chasing status over email and keeps communication on one trusted platform.",
   },
   "africa-governance-centre": {
     challenge:
@@ -41,7 +41,7 @@ const CASE_STUDY_NARRATIVES: Record<string, CaseStudyNarrative> = {
     solution:
       "We architected a continental governance platform with structured programme content, event workflows, performance-optimised delivery, and a brand experience that reflects the centre's mandate to partners across Africa and beyond.",
     impact:
-      "Programme visibility increased 220%. Stakeholder engagement consolidated on one platform — faster event promotion, clearer research discovery, and a digital presence worthy of international governance work.",
+      "Partners find programmes, events, and research on one site — faster event promotion and a presence that matches continental governance work.",
   },
   "thinq-shopping": {
     challenge:
@@ -49,7 +49,7 @@ const CASE_STUDY_NARRATIVES: Record<string, CaseStudyNarrative> = {
     solution:
       "We built an e-commerce and services app with product discovery, Paystack and MoMo-ready checkout, idempotent payment callbacks, and merchant tooling for order management — designed for conversion on mobile, not desktop afterthoughts.",
     impact:
-      "Mobile conversions increased 165%. Checkout friction dropped, manual order handling reduced, and the merchant team gained operational confidence as transaction volume grew.",
+      "Checkout works on mobile with MoMo and Paystack; the merchant team manages orders in one system as volume grows.",
   },
   "juelle-hair": {
     challenge:

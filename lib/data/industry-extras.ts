@@ -24,16 +24,16 @@ export const industryExtras: Partial<Record<string, IndustryExtrasConfig>> = {
         {
           slug: "fitch-advisory",
           title: "Fitch Advisory",
-          metric: "250%",
-          metricLabel: "Client engagement",
+          metric: "Live",
+          metricLabel: "Portal and booking",
           summary:
             "Secure document sharing and booking — applicable to patient intake and clinician collaboration portals.",
         },
         {
           slug: "fitch-attorneys",
           title: "Fitch Attorneys",
-          metric: "180%",
-          metricLabel: "Case efficiency",
+          metric: "Live",
+          metricLabel: "Case and client portal",
           summary:
             "Role-based matter workspace patterns transferable to clinical case files and confidential records.",
         },
@@ -55,16 +55,16 @@ export const industryExtras: Partial<Record<string, IndustryExtrasConfig>> = {
         {
           slug: "thinq-shopping",
           title: "ThinQ Shopping",
-          metric: "165%",
-          metricLabel: "Mobile conversions",
+          metric: "Live",
+          metricLabel: "MoMo and Paystack checkout",
           summary:
             "E-commerce and services app with Ghana payment rails, mobile-first discovery, and checkout flows built for real retail volume.",
         },
         {
           slug: "juelle-hair",
           title: "Juelle Hair",
-          metric: "150%",
-          metricLabel: "Sales growth",
+          metric: "Live",
+          metricLabel: "Online store",
           summary:
             "Storefront with inventory, accounts, and payments — Accra retail pattern for catalogue-led brands.",
         },
@@ -86,16 +86,16 @@ export const industryExtras: Partial<Record<string, IndustryExtrasConfig>> = {
         {
           slug: "africa-governance-centre",
           title: "Africa Governance Centre",
-          metric: "220%",
-          metricLabel: "Programme visibility",
+          metric: "Live",
+          metricLabel: "Programmes and events",
           summary:
-            "Structured programme content, events, and stakeholder engagement — applicable to institutional learning and certification platforms.",
+            "Structured programme content and events — applicable to institutional learning and certification platforms.",
         },
         {
           slug: "fitch-advisory",
           title: "Fitch Advisory",
-          metric: "250%",
-          metricLabel: "Stakeholder engagement",
+          metric: "Live",
+          metricLabel: "Research and service pages",
           summary:
             "Research, insights, and service discovery patterns useful for executive education and professional training portals.",
         },
@@ -117,8 +117,8 @@ export const industryExtras: Partial<Record<string, IndustryExtrasConfig>> = {
         {
           slug: "thinq-shopping",
           title: "ThinQ Shopping",
-          metric: "165%",
-          metricLabel: "Mobile conversions",
+          metric: "Live",
+          metricLabel: "MoMo and Paystack checkout",
           summary:
             "Commerce platform with order flows, service booking, and payment reconciliation patterns relevant to logistics operators.",
         },
@@ -134,16 +134,16 @@ export const industryExtras: Partial<Record<string, IndustryExtrasConfig>> = {
         {
           slug: "tour-world-tourism",
           title: "Tour World Tourism",
-          metric: "300%",
-          metricLabel: "Booking conversions",
+          metric: "Live",
+          metricLabel: "Tour booking",
           summary:
             "Operator booking platform with real-time availability and payment integration for Ghana tourism.",
         },
         {
           slug: "africa-trade-awards",
           title: "Africa Trade Awards",
-          metric: "400%",
-          metricLabel: "Nomination submissions",
+          metric: "Live",
+          metricLabel: "Nominations and voting",
           summary:
             "Event nomination and audience flows applicable to festivals, conferences, and destination campaigns.",
         },
@@ -152,15 +152,15 @@ export const industryExtras: Partial<Record<string, IndustryExtrasConfig>> = {
   },
   energy: {
     proof: {
-      title: "Institutional and stakeholder platforms",
+      title: "Institutional and partner platforms",
       subtitle:
         "Advisory-grade delivery patterns for regulated operators communicating with partners and the public.",
       items: [
         {
           slug: "fitch-advisory",
           title: "Fitch Advisory",
-          metric: "250%",
-          metricLabel: "Stakeholder engagement",
+          metric: "Live",
+          metricLabel: "Institutional portal",
           summary:
             "Secure institutional site architecture applicable to energy advisory, investor relations, and programme communications.",
         },
@@ -180,8 +180,8 @@ export const industryExtras: Partial<Record<string, IndustryExtrasConfig>> = {
         {
           slug: "thinq-shopping",
           title: "ThinQ Shopping",
-          metric: "165%",
-          metricLabel: "Mobile conversions",
+          metric: "Live",
+          metricLabel: "MoMo and Paystack checkout",
           summary:
             "Mobile commerce experience with local payment acceptance — applicable to farmer marketplaces and rural retail channels.",
         },
@@ -197,8 +197,8 @@ export const industryExtras: Partial<Record<string, IndustryExtrasConfig>> = {
         {
           slug: "fitch-advisory",
           title: "Fitch Advisory",
-          metric: "250%",
-          metricLabel: "Client engagement",
+          metric: "Live",
+          metricLabel: "Portal and booking",
           summary:
             "Sector pages, lead routing, and credibility patterns applicable to property developers and brokerage brands.",
         },
@@ -214,16 +214,16 @@ export const industryExtras: Partial<Record<string, IndustryExtrasConfig>> = {
         {
           slug: "africa-trade-awards",
           title: "Africa Trade Awards",
-          metric: "400%",
-          metricLabel: "Nomination submissions",
+          metric: "Live",
+          metricLabel: "Nominations and voting",
           summary:
             "Nominations and audience journeys for awards and media properties.",
         },
         {
           slug: "africa-governance-centre",
           title: "Africa Governance Centre",
-          metric: "220%",
-          metricLabel: "Programme visibility",
+          metric: "Live",
+          metricLabel: "Programmes and events",
           summary:
             "Research, media, and event publishing architecture for creators and cultural institutions.",
         },

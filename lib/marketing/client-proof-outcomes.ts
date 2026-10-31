@@ -1,9 +1,11 @@
-/** Shared client outcome lines — homepage, services, llms.txt. */
+/** Shared client outcome lines — homepage, services, llms.txt. Verifiable features + URLs only. */
 
 export const CLIENT_PROOF_LINES = {
   fitchAdvisory:
-    "Client engagement increased 250% after a client portal, document sharing, and booking.",
+    "Client portal with secure document sharing and consultation booking — live at fitchadvisory.com.",
   fitchAttorneys:
-    "Case-management efficiency increased 180% after one platform for matters and client updates.",
-  thinqShopping: "Mobile conversions rose 165% with Paystack and MoMo checkout.",
+    "Public site plus client matter updates on one platform — live at fitchattorneys.com.",
+  thinqShopping: "Mobile store with Paystack and MoMo checkout — live at thinqshopping.app.",
+  africaGovernanceCentre:
+    "Programmes, events, and research on one site — live at africagovernancecentre.org.",
 } as const;

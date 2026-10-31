@@ -206,18 +206,18 @@ export const geoServiceTopics: readonly GeoServiceTopic[] = [
     startingPriceGhs: 3500,
     serviceTypes: ["UI/UX design", "Brand design", "Figma prototypes"],
     accraFocus:
-      "UI/UX and brand design for Accra product teams — Figma prototypes and engineering handoff from the same Accra agency team that builds the release.",
+      "UI/UX and brand design for Accra teams — Figma screens and the build from the same office.",
     ghanaFocus:
       "Product and brand design for Ghana startups and SMEs. Research, wireframes, and design systems that Accra engineers can build without rework.",
     deliverables: [
       "Brand UX packages from GHS 3,500",
       "Figma prototypes your team can click before build",
-      "Design-to-engineering handoff in one delivery thread",
+      "Design and build in one delivery thread",
     ],
     whyUs: [
       "Design and build under one Accra contract when you want both",
       "Portfolio brands and portals you can open live",
-      "No offshore handoff gap between mockups and code",
+      "No gap between mockups and code sent to another country",
     ],
     proofKeys: ["fitch-advisory", "fitch-attorneys"],
     secondaryQueries: [

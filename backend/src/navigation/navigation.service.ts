@@ -201,7 +201,7 @@ const DEFAULT_CONFIG = {
         },
         {
           heading: "Best web designers in Ghana",
-          description: "Brand and interface design with developer handoff.",
+          description: "Brand and interface design — Figma files our developers build from.",
           link: "/services/ui-ux-design-in-ghana",
         },
         {
@@ -412,7 +412,7 @@ const DEFAULT_CONFIG = {
         {
           heading: "Design process",
           description:
-            "Research, Figma prototypes, design systems, and engineering handoff.",
+            "Research, Figma screens, and build-ready design files.",
           link: "/how-we-work#design",
         },
         {

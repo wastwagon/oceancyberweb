@@ -5,7 +5,7 @@ export { deliveryPhases } from "@/lib/marketing/delivery-phases";
 export const designPhases = [
   {
     title: "Discover",
-    body: "Stakeholder interviews, user journeys, and success metrics before pixels.",
+    body: "Talk to your team, map how people use the product, and agree what success looks like before design starts.",
   },
   {
     title: "Wireframe",
@@ -13,15 +13,15 @@ export const designPhases = [
   },
   {
     title: "Prototype",
-    body: "Clickable Figma demos for usability tests and stakeholder sign-off.",
+    body: "Clickable Figma screens you can tap through on a phone before we write code.",
   },
   {
     title: "Design system",
-    body: "Tokens, components, and specs your engineering team can implement at scale.",
+    body: "Colours, buttons, and layout rules so build stays consistent page to page.",
   },
   {
-    title: "Handoff and QA",
-    body: "Redlines, assets, and design QA through launch.",
+    title: "Build support and QA",
+    body: "We stay with engineering through launch and check screens match the approved design.",
   },
 ] as const;
 
@@ -69,29 +69,29 @@ export const proofLinks = [
   {
     slug: "fitch-attorneys",
     title: "Fitch Attorneys",
-    metric: "180%",
-    metricLabel: "Case efficiency increased",
+    metric: "Live platform",
+    metricLabel: "Case pages and client updates",
     sector: "Legal",
   },
   {
     slug: "africa-governance-centre",
     title: "Africa Governance Centre",
-    metric: "220%",
-    metricLabel: "Programme visibility increased",
+    metric: "Live site",
+    metricLabel: "Programmes and events in one place",
     sector: "Governance",
   },
   {
     slug: "fitch-advisory",
     title: "Fitch Advisory",
-    metric: "250%",
-    metricLabel: "Client engagement increased",
+    metric: "Live portal",
+    metricLabel: "Booking and file sharing online",
     sector: "Advisory",
   },
   {
     slug: "thinq-shopping",
     title: "ThinQ Shopping",
-    metric: "165%",
-    metricLabel: "Mobile conversions rose",
+    metric: "Live app",
+    metricLabel: "MoMo and Paystack checkout",
     sector: "Commerce",
   },
 ] as const;

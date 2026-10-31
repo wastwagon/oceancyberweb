@@ -40,7 +40,7 @@ export const servicePageSeoEntries: ServicePageSeoEntry[] = [
     path: "/services/ui-ux-design",
     name: "UI/UX & brand design",
     description:
-      "Interfaces and brand systems for Ghana teams — from GHS 3,500 for brand UX to full design-and-build bundles. Figma prototypes and engineering handoff included.",
+      "Interfaces and brand systems for Ghana teams — from GHS 3,500 for brand UX to full design-and-build bundles. Figma screens and build from one Accra team.",
     image: serviceImages.uiUxBrand,
     offerPriceGhs: 3500,
   },

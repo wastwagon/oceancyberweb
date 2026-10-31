@@ -247,19 +247,103 @@ const positioningScanRoots = [
   "app/creative-hub",
   "app/llms.txt",
 ];
-for (const rel of positioningScanRoots) {
+const ghanaSimpleJargon = [
+  "handoff chain",
+  "middleman agency",
+  "multi-stakeholder",
+  "synced automatically",
+  "discoverable as a",
+  "Built for results",
+  "design studio",
+  "creative studio",
+  "not a design studio",
+  "engineering handoff",
+  "offshore handoff",
+  "digital transformation",
+];
+
+/** Legacy URL/query keys only — not visitor copy. */
+const studioWordAllowlist = new Set([
+  "lib/types/portfolio-source.ts",
+  "lib/portfolio/portfolio-source.ts",
+  "lib/portfolio/portfolio-source.test.ts",
+  "components/portfolio/PortfolioTabbedGallery.tsx",
+  "lib/chat-reply.ts",
+]);
+
+const simpleCopyScanRoots = [
+  ...positioningScanRoots,
+  "components/services",
+  "app/about",
+  "app/contact",
+  "app/reviews",
+  "lib/chat-reply.ts",
+  "lib/trust/review-trust.ts",
+  "lib/trust/home-trust.ts",
+];
+
+for (const rel of simpleCopyScanRoots) {
   const abs = resolve(root, rel);
   if (!existsSync(abs)) continue;
-  const files =
-    abs.endsWith(".ts") ? [abs] : collectSourceFiles(abs);
+  const files = abs.endsWith(".ts") || abs.endsWith(".tsx") ? [abs] : collectSourceFiles(abs);
   for (const full of files) {
+    const relPath = full.replace(root + "/", "");
+    if (/\.test\.(tsx?|jsx?)$/.test(relPath)) continue;
     const text = readFileSync(full, "utf8");
     for (const phrase of forbiddenPositioning) {
       if (text.includes(phrase)) {
         failures.push(
-          `${full.replace(root + "/", "")}: company positioning must not use "${phrase}" (use agency / in-house concept)`,
+          `${relPath}: company positioning must not use "${phrase}" (use agency / in-house concept)`,
         );
       }
+    }
+    for (const phrase of ghanaSimpleJargon) {
+      if (text.includes(phrase)) {
+        failures.push(`${relPath}: simplify Ghana-facing copy — remove "${phrase}"`);
+      }
+    }
+    if (!studioWordAllowlist.has(relPath) && /\bstudio\b/i.test(text)) {
+      failures.push(`${relPath}: remove "studio" from visitor-facing copy (legacy keys are allowlisted)`);
+    }
+  }
+}
+
+const longTermTrustRoots = [
+  "lib/marketing/client-proof-outcomes.ts",
+  "lib/data/case-studies.ts",
+  "lib/data/projects.ts",
+  "lib/data/industry-extras.ts",
+  "lib/marketing/how-we-work-content.ts",
+];
+/** Marketing % lifts — not Tailwind widths like w-[100%]. */
+const unverifiablePercent =
+  /(?:increased|decreased|reduced|rose|grew|by|metric:\s*["'])\s*\d{1,3}%|["']\d{2,3}%["']/;
+for (const rel of longTermTrustRoots) {
+  const abs = resolve(root, rel);
+  if (!existsSync(abs)) continue;
+  const files = abs.endsWith(".ts") || abs.endsWith(".tsx") ? [abs] : collectSourceFiles(abs);
+  for (const full of files) {
+    const relPath = full.replace(root + "/", "");
+    if (/\.test\.(tsx?|jsx?)$/.test(relPath)) continue;
+    const text = readFileSync(full, "utf8");
+    if (unverifiablePercent.test(text)) {
+      failures.push(
+        `${relPath}: long-term trust — remove unverifiable % claims; use live URLs and shipped features`,
+      );
+    }
+  }
+}
+
+if (!existsSync(resolve(root, "lib/marketing/long-term-trust-policy.ts"))) {
+  failures.push("Missing long-term-trust-policy.ts");
+}
+
+const servicesPage = resolve(root, "app/services/page.tsx");
+if (existsSync(servicesPage)) {
+  const text = readFileSync(servicesPage, "utf8");
+  for (const phrase of ghanaSimpleJargon) {
+    if (text.includes(phrase)) {
+      failures.push(`app/services/page.tsx: simplify Ghana-facing copy — remove "${phrase}"`);
     }
   }
 }
@@ -276,6 +360,25 @@ function collectSourceFiles(dir) {
     }
   }
   return out;
+}
+
+const heroSectionPath = resolve(root, "components/startup-agency/sections/SaHeroSection.tsx");
+const heroSection = readFileSync(heroSectionPath, "utf8");
+if (!heroSection.includes("HOME_HERO_H1")) {
+  failures.push("SaHeroSection.tsx: homepage H1 must use HOME_HERO_H1 (visitor-first)");
+}
+if (
+  heroSection.includes("Best web design & website development company") ||
+  heroSection.includes("mapsSeoHomeHeadline")
+) {
+  failures.push("SaHeroSection.tsx: Maps keyword headline must not appear in visible hero");
+}
+
+for (const full of collectSourceFiles(resolve(root, "components/startup-agency"))) {
+  const text = readFileSync(full, "utf8");
+  if (text.includes("Hire in Accra")) {
+    failures.push(`${full.replace(root + "/", "")}: use neutral link labels (not "Hire in Accra")`);
+  }
 }
 
 const marketingSourceRoots = [

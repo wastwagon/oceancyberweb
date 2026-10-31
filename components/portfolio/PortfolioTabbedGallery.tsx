@@ -31,7 +31,7 @@ export function PortfolioTabbedGallery({
   const isPortfolioPage = pathname === "/portfolio";
   const tabParam = searchParams.get("tab");
   const initialTab: PortfolioTab =
-    tabParam === "creative" || tabParam === "studio" /* legacy */ ? "creative" : "live";
+    tabParam === "creative" || tabParam === "studio" ? "creative" : "live";
 
   const [activeTab, setActiveTab] = useState<PortfolioTab>(initialTab);
 

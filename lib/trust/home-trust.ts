@@ -4,6 +4,7 @@ import {
   buildHomeFaqItems,
   buildTrustBlurb,
   buildTrustSignals,
+  formatCompanyPresenceLine,
   formatReviewsTrustLine,
   type HomeFaqItem,
   type TrustSignal,
@@ -23,7 +24,7 @@ export async function getHomeTrustContent(): Promise<HomeTrustContent> {
   const blurb = buildTrustBlurb(stats);
   return {
     tagline: blurb.short,
-    companyPresence: blurb.seo,
+    companyPresence: formatCompanyPresenceLine(stats),
     trustSignals: buildTrustSignals(stats),
     faqItems: buildHomeFaqItems(stats),
     reviewStats: stats,

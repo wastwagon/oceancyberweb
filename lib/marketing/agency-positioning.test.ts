@@ -13,9 +13,11 @@ describe("agency-positioning", () => {
     expect(d).not.toMatch(/\bstudio\b/i);
   });
 
-  it("footerTagline avoids studio positioning", () => {
+  it("footerTagline is visitor-first and avoids studio positioning", () => {
     const t = footerTagline(25, 2008);
-    expect(t.toLowerCase()).toContain("development agency");
+    expect(t.toLowerCase()).toContain("accra since 2008");
+    expect(t.toLowerCase()).toContain("design, engineering");
     expect(t).not.toMatch(/\bstudio\b/i);
+    expect(t).not.toMatch(/best web design/i);
   });
 });

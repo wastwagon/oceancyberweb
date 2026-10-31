@@ -220,11 +220,18 @@ for (const { path, checks } of paths) {
   }
 
   if (checks.includes("home-best-hero")) {
-    if (!text.includes("Best web design") || !text.includes("website development company")) {
-      fail("/: homepage missing peer-aligned hero phrasing");
-    } else if (/\bdesign studio\b/i.test(text) || /\bcreative studio\b/i.test(text)) {
-      fail("/: homepage must not position OceanCyber as a studio");
-    } else pass("/: hero local SEO phrasing");
+    if (!text.includes("Websites, apps, and security from Accra")) {
+      fail("/: homepage H1 should be visitor-first, not a keyword headline");
+    }
+    const hasLocalSeoMeta =
+      /web design company/i.test(text) ||
+      (/Best web design/i.test(text) && /website development/i.test(text));
+    if (!hasLocalSeoMeta) {
+      fail("/: homepage missing local SEO in title, meta, or structured data");
+    }
+    if (/\bstudio\b/i.test(text)) {
+      fail("/: homepage HTML must not contain the word studio");
+    } else pass("/: human hero + local SEO layer");
   }
 
   if (checks.includes("facts-maps-kit")) {

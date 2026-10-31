@@ -102,7 +102,7 @@ export default function HowWeWorkPage() {
             <p className="sa-eyebrow">Design</p>
             <h2 className="sa-title mt-3">Design process built for launch</h2>
             <p className="sa-subtitle mx-auto mt-3">
-              We do not stop at mockups. Research, Figma prototypes, and engineering handoff stay in
+              We do not stop at mockups. Research, Figma screens, and the build stay in
               one delivery thread.
             </p>
           </div>

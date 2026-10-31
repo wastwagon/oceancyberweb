@@ -255,7 +255,7 @@ export const mainHeaderDropdownContent: Record<
       },
       {
         heading: "Design process",
-        description: "Research, Figma prototypes, design systems, and engineering handoff.",
+        description: "Research, Figma screens, and build-ready design files.",
         link: "/how-we-work#design",
       },
       {

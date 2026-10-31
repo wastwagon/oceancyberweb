@@ -7,13 +7,15 @@ import {
   buildHomeFaqItems,
   buildTrustSignals,
   fallbackPlaceStats,
+  formatCompanyPresenceLine,
 } from "@/lib/trust/review-trust";
 import { CLIENT_PROOF_LINES } from "@/lib/marketing/client-proof-outcomes";
 import { serviceImages } from "./service-images";
 
 export const heroTagline = trustBlurb.short;
 
-export const companyPresence = `${trustBlurb.seo}`;
+/** About block subtitle when live Places stats are unavailable (SSR fallback). */
+export const companyPresence = formatCompanyPresenceLine(fallbackPlaceStats());
 
 export const heroServiceSlides = [
   {
@@ -203,7 +205,7 @@ export const serviceCards = [
   },
   {
     title: "Web Development",
-    desc: "Fast company websites that rank on Google and take Paystack or MoMo when you sell online.",
+    desc: "Fast company websites that load well on Ghana mobile networks — Paystack or MoMo when you sell online.",
     href: "/services/web-development",
     image: serviceImages.webDevelopment,
   },

@@ -47,10 +47,13 @@ export function getLocalChatReply(userText: string): string {
     return POS_REPLY;
   }
 
-  if (/\b(studio|design studio|creative studio)\b/.test(t)) {
+  if (
+    /\b(boutique|freelance shop)\b/.test(t) ||
+    (/\bdesign\b/.test(t) && /\bstud[\s-]?io\b/.test(t))
+  ) {
     return (
-      `We are not a design studio — we are a ${AGENCY_WHAT_WE_ARE.toLowerCase()} in Accra (${AGENCY_IDENTITY_GHANA}). ` +
-      "We design in Figma and build websites and mobile apps in-house. See /about or /services."
+      `${AGENCY_WHAT_WE_ARE} in Accra (${AGENCY_IDENTITY_GHANA}). ` +
+      "We design in Figma and build websites and mobile apps with our own team — see /about or /services."
     );
   }
 

@@ -48,7 +48,7 @@ const content: ServicePageContent = {
     {
       title: "Design + build",
       description:
-        "One team takes Figma to production — no handoff gaps between designer and engineer.",
+        "One team takes Figma to production — designer and developer sit in the same Accra office.",
     },
   ],
   stackEyebrow: "How we work",
@@ -94,7 +94,7 @@ const content: ServicePageContent = {
   ],
   outcomesEyebrow: "Proof",
   outcomesTitle: "Published Ghana work",
-  outcomesSubtitle: "Live sites you can click through before you hire.",
+  outcomesSubtitle: "Live sites you can click through before you commit.",
   outcomes: [
     {
       title: "Fitch Advisory",

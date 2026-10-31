@@ -219,8 +219,8 @@ export function ServicesHubPage() {
               variants={heroMotion.item}
               className="sa-lead mx-auto mt-3"
             >
-              Fixed GHS packages, clear milestones, and a team you can meet at
-              47 Nii Kwashiefio Avenue — not a middleman agency.
+              Fixed GHS packages, clear milestones, and the same team you can meet at
+              47 Nii Kwashiefio Avenue.
             </motion.p>
             <motion.div
               variants={heroMotion.item}
@@ -282,12 +282,11 @@ export function ServicesHubPage() {
       <section className="relative z-10 border-t border-sa-border py-12 md:py-16">
         <div className="sa-container max-w-4xl">
           <h2 className="font-heading text-xl font-semibold text-white md:text-2xl">
-            Best web &amp; website companies by city
+            Local guides: Accra &amp; Ghana
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-sa-muted/80">
-            Accra and Ghana pages for the same searches you use on Google Maps —
-            best web design, website developers, and development companies — without
-            duplicating every service card above.
+            City-specific pages with packages in cedis and live portfolio links — useful
+            if you found us on Google Maps and want the same detail in one place.
           </p>
           <ul className="mt-6 grid gap-2 sm:grid-cols-2">
             {hireLinks.map((link) => (

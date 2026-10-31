@@ -53,7 +53,7 @@ export function SaReviewsPageContent({ stats, reviews }: Props) {
             What clients say on Google
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-sa-muted">
-            Real reviews from our Google Business Profile — synced automatically.
+            Real reviews from our Google Business Profile — updated from Google.
           </p>
         </div>
 
@@ -128,15 +128,15 @@ export function SaReviewsPageContent({ stats, reviews }: Props) {
           >
             our Google Business Profile
           </Link>
-          . Compare our{" "}
+          . See our{" "}
           <Link href="/services/web-design-in-ghana" className="sa-text-link font-medium">
-            web design company in Ghana
+            Ghana web design
           </Link>{" "}
           and{" "}
           <Link href="/services/web-development-in-ghana" className="sa-text-link font-medium">
-            website developers
+            web development
           </Link>{" "}
-          pages for packages and live work.
+          guides for packages and live work.
         </p>
         </div>
       </section>

@@ -27,9 +27,9 @@ export function SaAboutSection({ presenceSubtitle = companyPresence }: Props) {
                 subtitle={presenceSubtitle}
               />
               <p className="mt-4 max-w-xl text-sm leading-relaxed text-sa-muted md:text-base">
-                We are a web and mobile development agency in Accra — design, engineering, hosting, and
-                security consulting in one team, not a handoff chain. That keeps your site or app
-                consistent as you add features, logins, or payments.
+                We are a web and mobile team in Accra — design, build, hosting, and security under one
+                roof. That keeps your site or app consistent when you add features, logins, or
+                payments.
               </p>
             </SaReveal>
 
