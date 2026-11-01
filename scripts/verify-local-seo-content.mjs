@@ -28,8 +28,26 @@ if (help) {
 }
 
 const chatReply = readFileSync(resolve(root, "lib/chat-reply.ts"), "utf8");
-if (!chatReply.includes("dwumapos-for-ghana-shops")) {
-  failures.push("chat-reply.ts: DwumaPOS guide routing missing");
+if (!chatReply.includes("flagship POS")) {
+  failures.push("chat-reply.ts: DwumaPOS flagship routing missing");
+}
+if (/not OceanCyber-built|editorial guides on DwumaPOS/i.test(chatReply)) {
+  failures.push("chat-reply.ts: remove disowning DwumaPOS copy");
+}
+
+const productsHub = readFileSync(resolve(root, "components/products/ProductsHubPage.tsx"), "utf8");
+for (const banned of ["Not for sale here", "partner editorial", "not OceanCyber software"]) {
+  if (productsHub.includes(banned)) {
+    failures.push(`ProductsHubPage.tsx: remove "${banned}"`);
+  }
+}
+if (!productsHub.includes("Flagship product")) {
+  failures.push("ProductsHubPage.tsx: missing DwumaPOS flagship section");
+}
+
+const nextConfig = readFileSync(resolve(root, "next.config.js"), "utf8");
+if (!nextConfig.includes('source: "/products/pos"') || !nextConfig.includes("https://www.dwumapos.com")) {
+  failures.push("next.config.js: /products/pos must redirect to https://www.dwumapos.com");
 }
 
 const insights = readJson("public/data/insights.json");
@@ -50,16 +68,28 @@ const servicesDropdownBlock = menu.match(/services:\s*\{[\s\S]*?buildServicesDro
 if (servicesDropdownBlock && /Best web design company/i.test(servicesDropdownBlock[0])) {
   failures.push("menu.ts: services dropdown must not embed Best … keyword headings");
 }
-if (!menu.includes("Best website developers in Ghana")) {
-  failures.push("menu.ts: footer missing Best website developers in Ghana");
+const footerNav = readFileSync(resolve(root, "lib/navigation/pages-footer-nav.ts"), "utf8");
+const geoNav = readFileSync(resolve(root, "lib/navigation/services-geo-nav.ts"), "utf8");
+if (!footerNav.includes("buildFooterServiceLinks")) {
+  failures.push("pages-footer-nav.ts: footer services builder missing");
+}
+if (/Best web design company/i.test(footerNav)) {
+  failures.push("pages-footer-nav.ts: footer must not use Best … keyword labels");
+}
+if (!geoNav.includes("Web development in Ghana")) {
+  failures.push("services-geo-nav.ts: local guides must include Web development in Ghana");
+}
+if (!footerNav.includes("servicesLocalGuideMenuItems")) {
+  failures.push("pages-footer-nav.ts: footer must reuse servicesLocalGuideMenuItems");
+}
+if (/Best web design company/i.test(menu)) {
+  failures.push("menu.ts: navigation must not embed Best … keyword labels in menus");
 }
 
 const market = readFileSync(resolve(root, "lib/seo/ghana-local-market.ts"), "utf8");
 if (!market.includes("buildGbpProfileDescription")) {
   failures.push("ghana-local-market.ts: GBP copy helpers missing");
 }
-
-const geoNav = readFileSync(resolve(root, "lib/navigation/services-geo-nav.ts"), "utf8");
 const ownerBlock = geoNav.match(/GEO_SERVICE_OWNER_PATHS = \[([\s\S]*?)\] as const/)?.[1] ?? "";
 const geoLinks = [...ownerBlock.matchAll(/"(\/services\/[^"]+)"/g)].map((m) => m[1]);
 if (geoLinks.length < 10) {
@@ -87,6 +117,22 @@ for (const link of [
     failures.push(`backend services dropdown missing local guide ${link}`);
   }
 }
+for (const key of [
+  "services",
+  "products",
+  "industries",
+  "infrastructure",
+  "resources",
+  "support",
+  "company",
+]) {
+  if (!backendNav.includes(`"${key}"`)) {
+    failures.push(`backend navigation.service.ts: code-owned dropdown "${key}" missing`);
+  }
+}
+if (!backendNav.includes("startupPagesMenu: DEFAULT_CONFIG.startupPagesMenu")) {
+  failures.push("backend: startup pages menu must be code-owned in getConfig");
+}
 
 const requiredFiles = [
   "components/marketing/GbpCopyKit.tsx",
@@ -100,30 +146,38 @@ for (const rel of requiredFiles) {
   if (!existsSync(resolve(root, rel))) failures.push(`Missing file: ${rel}`);
 }
 
-const intentPages = readFileSync(resolve(root, "lib/seo/intent-pages.ts"), "utf8");
+const dwumaOceanGuides = readFileSync(resolve(root, "lib/seo/dwumapos-ocean-guides.ts"), "utf8");
 for (const slug of [
   "dwumapos-for-ghana-shops",
   "dwumapos-restaurant-pos-ghana",
   "dwumapos-pharmacy-pos-ghana",
 ]) {
-  if (!intentPages.includes(`slug: "${slug}"`)) {
-    failures.push(`intent-pages.ts: DwumaPOS guide missing (${slug})`);
+  if (!dwumaOceanGuides.includes(`slug: "${slug}"`)) {
+    failures.push(`dwumapos-ocean-guides.ts: summary guide missing (${slug})`);
   }
+}
+if (!dwumaOceanGuides.includes("canonicalExternal:")) {
+  failures.push("dwumapos-ocean-guides.ts: canonicalExternal missing on Dwuma guides");
+}
+if (!dwumaOceanGuides.includes("30-day free trial")) {
+  failures.push("dwumapos-ocean-guides.ts: trial copy missing");
+}
+const stackGuides = readFileSync(resolve(root, "lib/seo/stack-and-payments-guides.ts"), "utf8");
+if (!stackGuides.includes("nextjs-website-development-ghana")) {
+  failures.push("stack-and-payments-guides.ts: Next.js guide missing");
+}
+if (!stackGuides.includes("paystack-integration-websites-ghana")) {
+  failures.push("stack-and-payments-guides.ts: Paystack project guide missing");
+}
+if (!existsSync(resolve(root, "app/data-protection/page.tsx"))) {
+  failures.push("app/data-protection/page.tsx: data protection page missing");
+}
+const intentPages = readFileSync(resolve(root, "lib/seo/intent-pages.ts"), "utf8");
+if (!intentPages.includes("replaceDwumaPosOceanGuides")) {
+  failures.push("intent-pages.ts: must replace long Dwuma guides with ocean summaries");
 }
 if (intentPages.includes("Up to 50 branches") || intentPages.includes("when you open the shop for sales")) {
-  failures.push("intent-pages.ts: outdated DwumaPOS branch or trial copy");
-}
-for (const metaTitle of [
-  "DwumaPOS Guide for Ghana Shops | OceanCyber",
-  "Restaurant POS on DwumaPOS | OceanCyber",
-  "Pharmacy POS on DwumaPOS | OceanCyber",
-]) {
-  if (!intentPages.includes(`metaTitle: "${metaTitle}"`)) {
-    failures.push(`intent-pages.ts: DwumaPOS meta title missing (${metaTitle})`);
-  }
-}
-if (!intentPages.includes("Your 30-day free trial begins when you sign up")) {
-  failures.push("intent-pages.ts: DwumaPOS trial-on-signup copy missing");
+  failures.push("intent-pages.ts: outdated DwumaPOS branch or trial copy in core pages");
 }
 if (!intentPages.includes('href: "/guides/dwumapos-for-ghana-shops"')) {
   failures.push("intent-pages.ts: internal Dwuma guide cross-links missing");

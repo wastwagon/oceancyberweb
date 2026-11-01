@@ -36,15 +36,17 @@ export function SaHeroSection({ tagline = heroTagline, heroReviewsLine }: Props)
           ))}
         </div>
 
-        <div
-          className={`relative z-10 flex min-h-[calc(100dvh-var(--sa-mobile-tab-bar)-var(--sa-mobile-header))] flex-col items-center justify-center px-4 pb-6 pt-[var(--sa-mobile-header)] pointer-events-none md:absolute md:inset-0 md:min-h-0 md:px-0 md:py-0 md:transition-opacity md:duration-700 ${
-            hoveredIndex !== null ? "md:opacity-0" : "opacity-100"
-          }`}
-        >
+        <div className="pointer-events-none relative z-10 flex min-h-[calc(100dvh-var(--sa-mobile-tab-bar)-var(--sa-mobile-header))] flex-col items-center justify-center px-4 pb-6 pt-[var(--sa-mobile-header)] md:absolute md:inset-0 md:min-h-0 md:px-0 md:py-0">
+          <div
+            className={`flex max-w-3xl flex-col items-center rounded-2xl px-4 py-6 transition-colors duration-700 md:px-8 ${
+              hoveredIndex !== null ? "bg-black/45 backdrop-blur-md" : ""
+            }`}
+          >
           <div className="mb-4 flex items-center gap-3 rounded-full border border-white/20 bg-black/40 px-4 py-2 backdrop-blur-md">
             <span className="h-1.5 w-1.5 rounded-full bg-sa-primary" />
             <span className="text-sm font-medium text-white/80">
-              Accra team · since {googleBusinessProfile.foundedYear}
+              {googleBusinessProfile.teamSize} people · founded{" "}
+              {googleBusinessProfile.foundedYear}
             </span>
           </div>
           <h1 className="sa-title-lg mx-auto max-w-2xl text-balance text-center">
@@ -81,6 +83,7 @@ export function SaHeroSection({ tagline = heroTagline, heroReviewsLine }: Props)
               <Play className="h-3.5 w-3.5 fill-current" aria-hidden />
               Watch showreel
             </button>
+          </div>
           </div>
         </div>
 

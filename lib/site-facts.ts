@@ -103,9 +103,9 @@ export const companyAtAGlanceFacts: readonly SiteFactRow[] = [
   },
   {
     label: "Google reviews",
-    value: "Synced from Google Business Profile",
+    value: "See /reviews for excerpts; count matches Google Business Profile",
     href: "/reviews",
-    note: "Rating and count update when Places API is configured",
+    note: "TODO — owner: confirm canonical review count (55 vs 56) before publishing",
   },
 ];
 

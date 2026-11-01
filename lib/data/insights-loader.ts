@@ -4,22 +4,33 @@ import { unstable_cache } from "next/cache";
 import {
   insightPosts as defaultInsightPosts,
   type InsightPost,
+  DEFAULT_INSIGHT_AUTHOR,
+  insightLastReviewedIso,
+  insightAuthorName,
 } from "@/lib/insights/content";
 
 const INSIGHTS_JSON = path.join(process.cwd(), "public", "data", "insights.json");
 
 export type { InsightPost };
 
+function normalizeInsightPost(post: InsightPost): InsightPost {
+  return {
+    ...post,
+    authorName: insightAuthorName(post),
+    lastReviewed: insightLastReviewedIso(post),
+  };
+}
+
 async function readInsightPostsFromDisk(): Promise<InsightPost[]> {
   try {
     const raw = await readFile(INSIGHTS_JSON, "utf8");
     const parsed = JSON.parse(raw) as InsightPost[];
     if (!Array.isArray(parsed) || parsed.length === 0) {
-      return defaultInsightPosts;
+      return defaultInsightPosts.map(normalizeInsightPost);
     }
-    return parsed;
+    return parsed.map(normalizeInsightPost);
   } catch {
-    return defaultInsightPosts;
+    return defaultInsightPosts.map(normalizeInsightPost);
   }
 }
 

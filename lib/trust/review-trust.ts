@@ -34,7 +34,7 @@ export function formatCompanyPresenceLine(stats: GooglePlaceStats): string {
 export function buildTrustBlurb(stats: GooglePlaceStats) {
   const reviews = formatReviewsTrustLine(stats);
   return {
-    short: `Websites, mobile apps, and cybersecurity from one Accra team. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}, ${reviews.toLowerCase()}.`,
+    short: `Websites, mobile apps, and cybersecurity from one team. ${googleBusinessProfile.teamSize} people, founded in ${googleBusinessProfile.foundedYear}.`,
     office: `One office at ${googleBusinessProfile.address.street}, Accra.`,
     seo: `OceanCyber is a web and mobile development agency in Accra — design, engineering, hosting, and security in one team. ${googleBusinessProfile.teamSize} people since ${googleBusinessProfile.foundedYear}, ${reviews.toLowerCase()}. Office: ${googleBusinessProfile.address.street}.`,
     reviewsOnly: reviews,

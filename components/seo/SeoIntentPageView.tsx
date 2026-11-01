@@ -345,6 +345,25 @@ export function SeoIntentPageView({ page }: { page: IntentPage }) {
             </aside>
           ) : null}
 
+          {page.canonicalExternal ? (
+            <aside
+              className="mb-12 rounded-2xl border border-sa-primary/30 bg-sa-primary/5 p-6 text-sm leading-relaxed text-sa-muted/90"
+              aria-label="Canonical product page"
+            >
+              <p className="font-heading font-semibold text-white">Full guide on DwumaPOS</p>
+              <p className="mt-2">
+                This page is a short summary. The canonical version is maintained on dwumapos.com:
+              </p>
+              <p className="mt-3">
+                <IntentOutboundLink
+                  href={page.canonicalExternal}
+                  label={page.canonicalExternal.replace(/^https?:\/\//, "")}
+                  className="sa-text-link font-medium"
+                />
+              </p>
+            </aside>
+          ) : null}
+
           {page.table ? (
             <section className="mb-12">
               <h2 className="font-heading text-2xl font-semibold text-white">{page.table.caption}</h2>

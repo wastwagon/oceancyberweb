@@ -1,10 +1,18 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Boxes } from "lucide-react";
+import { ArrowRight, Boxes, ExternalLink, Store } from "lucide-react";
 import Link from "next/link";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
+import {
+  DWUMAPOS_ONE_LINE_PITCH,
+  DWUMAPOS_PRICING_URL,
+  DWUMAPOS_RELATIONSHIP_LINE,
+  DWUMAPOS_SIGNUP_URL,
+  DWUMAPOS_SITE_URL,
+  OCEANCYBER_CUSTOM_SITE_PITCH,
+} from "@/lib/marketing/company-identity";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
 import { fadeUpProps, revealViewport, staggerDelay } from "@/lib/scroll-reveal";
 
@@ -32,19 +40,10 @@ const products = [
   },
 ] as const;
 
-const planningGuides = [
-  {
-    href: "/guides/dwumapos-for-ghana-shops",
-    title: "Retail POS planning (Ghana)",
-    body: "Editorial guides on DwumaPOS for shops, restaurants, and pharmacies — not OceanCyber software. Use when staff sell at a counter, not when you need a custom website.",
-    action: "Shop POS guide",
-  },
-  {
-    href: "/guides",
-    title: "All buyer guides",
-    body: "Website cost, MoMo checkout, hosting, and ecommerce timelines in Ghana cedis.",
-    action: "Browse guides",
-  },
+const dwumaPlans = [
+  { name: "Starter", price: "GHS 149/mo", branches: "1 branch · 3 logins" },
+  { name: "Business", price: "GHS 249/mo", branches: "Up to 3 branches · 10 logins" },
+  { name: "Scale", price: "GHS 399/mo", branches: "Up to 10 branches · 25 logins" },
 ] as const;
 
 export function ProductsHubPage() {
@@ -66,17 +65,19 @@ export function ProductsHubPage() {
               Products
             </motion.span>
             <motion.h1 variants={heroMotion.item} className="sa-title-lg mx-auto max-w-4xl">
-              Domains, certificates, and{" "}
-              <span className="text-sa-primary">hosting</span>
+              Domains, hosting, and{" "}
+              <span className="text-sa-primary">DwumaPOS</span>
             </motion.h1>
             <motion.p variants={heroMotion.item} className="sa-lead mx-auto mt-3 max-w-2xl">
-              Register a name, protect it, and host the site. Prices are in Ghana cedis — see the{" "}
-              <Link href="/guides/domains-hosting-and-ssl-ghana" className="sa-text-link">
-                domains, hosting, and SSL guide
-              </Link>
-              . Need a custom website or app?{" "}
-              <Link href="/services" className="sa-text-link font-medium">
-                See our services
+              Buy domains, SSL, and cPanel hosting in Ghana cedis. DwumaPOS — our flagship POS for
+              shops — runs on{" "}
+              <Link
+                href={DWUMAPOS_SITE_URL}
+                className="sa-text-link font-medium"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                dwumapos.com
               </Link>
               .
             </motion.p>
@@ -88,8 +89,74 @@ export function ProductsHubPage() {
         <div className="sa-container">
           <motion.div {...fadeUpProps}>
             <SaSectionHeader
+              eyebrow="Flagship product"
+              title="DwumaPOS (POS software for Ghana)"
+              subtitle={DWUMAPOS_ONE_LINE_PITCH}
+            />
+          </motion.div>
+          <motion.p
+            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={revealViewport}
+            className="mx-auto mt-4 max-w-2xl text-center text-sm leading-relaxed text-sa-muted/85"
+          >
+            {DWUMAPOS_RELATIONSHIP_LINE} {OCEANCYBER_CUSTOM_SITE_PITCH}
+          </motion.p>
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {dwumaPlans.map((plan, index) => (
+              <motion.div
+                key={plan.name}
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                viewport={revealViewport}
+                transition={staggerDelay(index, 0.06)}
+                className="sa-card p-6"
+              >
+                <p className="text-sm font-medium text-sa-primary">{plan.price}</p>
+                <h2 className="mt-2 font-heading text-xl font-bold text-white">{plan.name}</h2>
+                <p className="mt-2 text-sm text-sa-muted/80">{plan.branches}</p>
+              </motion.div>
+            ))}
+          </div>
+          <p className="mx-auto mt-6 max-w-xl text-center text-xs text-sa-muted/70">
+            30-day free trial on Starter, Business, or Scale. Customer MoMo and card payments go to
+            the Paystack or Hubtel account you connect — DwumaPOS never holds buyer money.
+          </p>
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Link
+              href={DWUMAPOS_SIGNUP_URL}
+              className="sa-btn-primary inline-flex min-h-11 items-center gap-2 px-6"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Store className="h-4 w-4" aria-hidden />
+              Start free trial
+            </Link>
+            <Link
+              href={DWUMAPOS_PRICING_URL}
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Pricing on dwumapos.com
+              <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+            </Link>
+            <Link
+              href="/guides/dwumapos-for-ghana-shops"
+              className="text-sm text-white/70 underline-offset-4 hover:text-white hover:underline"
+            >
+              Short summary guide
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="sa-section relative z-10 border-t border-sa-border bg-sa-surface/20">
+        <div className="sa-container">
+          <motion.div {...fadeUpProps}>
+            <SaSectionHeader
               eyebrow="Available now"
-              title="What you can buy today"
+              title="What you can buy on OceanCyber"
               subtitle="Domain registration, SSL, and cPanel hosting. Pay in GHS with Paystack."
             />
           </motion.div>
@@ -111,40 +178,6 @@ export function ProductsHubPage() {
                   className="mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
                 >
                   {product.action}
-                  <ArrowRight className="h-4 w-4" aria-hidden />
-                </Link>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="sa-section relative z-10 border-t border-sa-border bg-sa-surface/20">
-        <div className="sa-container">
-          <motion.div {...fadeUpProps}>
-            <SaSectionHeader
-              eyebrow="Not for sale here"
-              title="Retail POS planning guides"
-              subtitle="Partner editorial content — compare in-store POS with the ecommerce builds we deliver."
-            />
-          </motion.div>
-          <div className="mt-14 grid gap-8 lg:grid-cols-2">
-            {planningGuides.map((item, index) => (
-              <motion.article
-                key={item.href}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={revealViewport}
-                transition={staggerDelay(index, 0.08)}
-                className="sa-card sa-pressable group p-5 md:p-8"
-              >
-                <h2 className="font-heading text-2xl font-bold text-white">{item.title}</h2>
-                <p className="mt-4 text-sm leading-relaxed text-sa-muted/80">{item.body}</p>
-                <Link
-                  href={item.href}
-                  className="mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-sa-primary underline-offset-4 hover:underline"
-                >
-                  {item.action}
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
               </motion.article>

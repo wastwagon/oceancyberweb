@@ -4,7 +4,10 @@ import {
   organizationSameAs,
 } from "@/lib/startup-agency/google-business";
 import { buildMapsAlignedBusinessDescription } from "@/lib/seo/ghana-local-market";
-import { buildAggregateRatingJsonLd } from "@/lib/trust/review-trust";
+import {
+  DWUMAPOS_SITE_URL,
+  LEGAL_COMPANY_NAME,
+} from "@/lib/marketing/company-identity";
 
 const site =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
@@ -18,11 +21,16 @@ export async function OrganizationJsonLd() {
     "@type": "Organization",
     "@id": `${site}/#organization`,
     name: "OceanCyber",
+    legalName: LEGAL_COMPANY_NAME,
     url: site,
+    brand: {
+      "@type": "Brand",
+      name: "DwumaPOS",
+      url: DWUMAPOS_SITE_URL,
+    },
     foundingDate: String(googleBusinessProfile.foundedYear),
     logo: `${site}/images/og-image.jpg`,
     description: buildMapsAlignedBusinessDescription(stats),
-    aggregateRating: buildAggregateRatingJsonLd(stats),
     founder: {
       "@type": "Person",
       name: googleBusinessProfile.founderName,

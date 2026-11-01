@@ -5,6 +5,7 @@ type LegalPage = "privacy" | "terms" | "cookies";
 const legalLinks: { href: string; label: string; page: LegalPage }[] = [
   { href: "/privacy", label: "Privacy Policy", page: "privacy" },
   { href: "/terms", label: "Terms of Service", page: "terms" },
+  { href: "/data-protection", label: "Data protection", page: "privacy" },
   { href: "/cookies", label: "Cookie Policy", page: "cookies" },
 ];
 

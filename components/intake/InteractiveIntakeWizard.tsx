@@ -266,11 +266,11 @@ export function InteractiveIntakeWizard({ initialTopic }: InteractiveIntakeWizar
             </div>
             {showPosGuideLinks ? (
               <aside className="rounded-sa-lg border border-sa-border bg-sa-surface/60 p-4 text-sm leading-relaxed text-sa-muted">
-                <p className="font-medium text-white">In-store POS vs OceanCyber builds</p>
+                <p className="font-medium text-white">DwumaPOS vs custom OceanCyber builds</p>
                 <p className="mt-2">
-                  Counter POS, branches, and inventory tills are covered in our DwumaPOS editorial
-                  guides — we do not sell POS software. For a website or ecommerce store with MoMo,
-                  keep E-commerce store selected too.
+                  DwumaPOS is our flagship POS for Ghana shops — one stock list for in your shop,
+                  online shop, and delivery. For a custom website or ecommerce store with MoMo, keep
+                  E-commerce store selected.
                 </p>
                 <ul className="mt-3 space-y-1.5">
                   <li>

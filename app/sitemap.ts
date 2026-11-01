@@ -28,6 +28,7 @@ const routes = [
   "/reviews",
   "/llms.txt",
   "/privacy",
+  "/data-protection",
   "/security-journey",
   "/services",
   "/services/cybersecurity",
@@ -102,7 +103,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/products",
   ]);
 
-  const legalPaths = new Set(["/privacy", "/terms", "/cookies"]);
+  const legalPaths = new Set(["/privacy", "/terms", "/cookies", "/data-protection"]);
 
   const staticEntries: MetadataRoute.Sitemap = routes.map((path) => ({
     url: `${base}${path}`,

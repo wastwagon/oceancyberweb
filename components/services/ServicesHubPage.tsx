@@ -16,6 +16,7 @@ import { serviceImages } from "@/lib/startup-agency/service-images";
 import { siteImagePaths } from "@/lib/seo/site-image-paths";
 import { SITE_CTA } from "@/lib/marketing/site-cta";
 import { geoServiceHubCards } from "@/lib/seo/geo-service-pages";
+import { stackAndPaymentsGuideLinks } from "@/lib/seo/stack-and-payments-guide-links";
 
 type ServiceCard = {
   title: string;
@@ -244,6 +245,27 @@ export function ServicesHubPage() {
               <ServiceGridCard key={service.title} service={service} index={index} />
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="relative z-10 border-t border-sa-border py-12 md:py-16">
+        <div className="sa-container max-w-4xl">
+          <h2 className="font-heading text-xl font-semibold text-white md:text-2xl">
+            Technologies and payments
+          </h2>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-sa-muted/80">
+            Stack and MoMo guides for custom OceanCyber builds — distinct from DwumaPOS shop
+            checkout on dwumapos.com.
+          </p>
+          <ul className="mt-6 columns-1 gap-x-8 text-sm sm:columns-2">
+            {stackAndPaymentsGuideLinks.map((item) => (
+              <li key={item.href} className="mb-2 break-inside-avoid">
+                <Link href={item.href} className="sa-text-link font-medium">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

@@ -125,11 +125,18 @@ export function ProposalRequestForm({ initialTopic }: ProposalRequestFormProps) 
   }
 
   return (
-    <form onSubmit={onSubmit} className="sa-card space-y-sa-xl p-5 md:p-6">
+    <form
+      onSubmit={onSubmit}
+      className="sa-card space-y-sa-xl p-5 md:p-6"
+      aria-label="Request a formal proposal"
+      noValidate
+    >
       <div className="grid gap-sa-lg sm:grid-cols-2">
         <SaField id="proposal-name" label="Name" required>
           <SaInput
             id="proposal-name"
+            name="name"
+            autoComplete="name"
             density="compact"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -140,6 +147,8 @@ export function ProposalRequestForm({ initialTopic }: ProposalRequestFormProps) 
         <SaField id="proposal-email" label="Work email" required>
           <SaInput
             id="proposal-email"
+            name="email"
+            autoComplete="email"
             density="compact"
             type="email"
             value={email}
@@ -151,6 +160,8 @@ export function ProposalRequestForm({ initialTopic }: ProposalRequestFormProps) 
         <SaField id="proposal-phone" label="Phone" optional>
           <SaInput
             id="proposal-phone"
+            name="phone"
+            autoComplete="tel"
             density="compact"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}

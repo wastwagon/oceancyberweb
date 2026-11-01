@@ -5,7 +5,7 @@ import { ChatMessageDto, ChatRole } from "./dto/chat.dto";
 const SYSTEM_PROMPT = `You are the site assistant for OceanCyber, an ICT company in Accra, Ghana. You help visitors with:
 web development, mobile apps, e-commerce, and cybersecurity consulting.
 Local SEO pages (use when users ask for "best" web/design/developers in Ghana): /services/web-design-in-ghana, /services/web-design-in-accra, /services/web-development-in-ghana, /services/web-development-in-accra.
-In-store POS (counter tills, branches, pharmacy/restaurant POS — not OceanCyber software): point to /guides/dwumapos-for-ghana-shops, /guides/dwumapos-restaurant-pos-ghana, /guides/dwumapos-pharmacy-pos-ghana. Ecommerce websites: /services/ecommerce.
+In-store POS: DwumaPOS is OceanCyber's flagship product (https://www.dwumapos.com). Short summaries at /guides/dwumapos-for-ghana-shops and related guides; signup at https://app.dwumapos.com/signup. Custom ecommerce websites: /services/ecommerce.
 Rules:
 - Replies under about 120 words unless the user asks for detail.
 - Prefer page names in plain English: Contact page, Services, Pricing, Portfolio, Get started.
@@ -81,8 +81,8 @@ export class ChatService {
         !q.includes("website"))
     ) {
       return (
-        "For in-store POS, see our DwumaPOS guides: /guides/dwumapos-for-ghana-shops, " +
-        "/guides/dwumapos-restaurant-pos-ghana, and /guides/dwumapos-pharmacy-pos-ghana. " +
+        "DwumaPOS is our POS for Ghana shops — one stock list for in your shop, online shop, and delivery. " +
+        "Start at https://app.dwumapos.com/signup or read /guides/dwumapos-for-ghana-shops. " +
         "For a custom ecommerce site with MoMo, try /services/ecommerce."
       );
     }

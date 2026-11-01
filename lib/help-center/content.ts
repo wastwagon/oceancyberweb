@@ -120,7 +120,7 @@ export const defaultHelpArticles: HelpArticle[] = [
     actions: [
       { label: "Open company facts & Maps kit", href: "/facts" },
       { label: "Google reviews", href: "/reviews" },
-      { label: "Best web design in Ghana", href: "/services/web-design-in-ghana" },
+      { label: "Web design in Ghana", href: "/services/web-design-in-ghana" },
     ],
   },
   {
@@ -129,7 +129,7 @@ export const defaultHelpArticles: HelpArticle[] = [
     category: "websites",
     audience: "everyone",
     body:
-      "OceanCyber builds marketing sites and ecommerce stores (Paystack, Mobile Money, catalogue checkout). In-store POS — tills, branches, pharmacy or restaurant counters — is different software. We publish DwumaPOS planning guides (editorial, not a product we sell). Pick ecommerce if customers buy on the web; read the POS guides if staff sell at a counter.",
+      "OceanCyber builds marketing sites and ecommerce stores (Paystack, Mobile Money, catalogue checkout). DwumaPOS is our flagship POS — one stock list for in your shop, online shop, and delivery on dwumapos.com. Pick ecommerce for a custom web build; use DwumaPOS when you sell from live stock and MoMo at shop scale.",
     actions: [
       { label: "E-commerce service", href: "/services/ecommerce" },
       { label: "DwumaPOS for shops", href: "/guides/dwumapos-for-ghana-shops" },

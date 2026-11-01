@@ -15,8 +15,8 @@ export const AGENCY_NOT_A_STUDIO_NOTE =
 /** Maps/local-search hook — use in `<title>`, meta, JSON-LD, and geo pages — not the visible homepage H1. */
 export const MAPS_SEO_HOME_TITLE_SUFFIX = "Best web design company in Accra, Ghana";
 
-/** Visitor-facing homepage headline — outcome-first, not a keyword list. */
-export const HOME_HERO_H1 = "Websites, apps, and security from Accra";
+/** Visitor-facing homepage headline — outcome-first, not a keyword list or geo hook. */
+export const HOME_HERO_H1 = "Websites, apps, and security";
 
 export const SITE_DEFAULT_TITLE = `${AGENCY_IDENTITY_GHANA} | OceanCyber`;
 
@@ -28,12 +28,12 @@ export type SiteMetaContext = {
   street: string;
 };
 
-/** Root layout + homepage meta description — agency first, Maps hook second. */
+/** Root layout + homepage meta description — proof and services first; Maps hook stays on geo URLs only. */
 export function buildSiteMetaDescription(ctx: SiteMetaContext): string {
   return (
-    `${AGENCY_IDENTITY_GHANA}. Websites from GHS 6,000, mobile apps from GHS 12,000, cybersecurity from GHS 4,500. ` +
-    `On Google Maps people also find us as a ${MAPS_SEO_HOME_TITLE_SUFFIX.toLowerCase()}. ` +
-    `${ctx.teamSize} people at ${ctx.street}. ${ctx.reviewsOnly}.`
+    `${AGENCY_IDENTITY_GHANA}. ${ctx.reviewsOnly}. ` +
+    `Websites from GHS 6,000, mobile apps from GHS 12,000, cybersecurity from GHS 4,500. ` +
+    `${ctx.teamSize} people at ${ctx.street}. Custom sites and apps; DwumaPOS is our POS for Ghana shops.`
   );
 }
 

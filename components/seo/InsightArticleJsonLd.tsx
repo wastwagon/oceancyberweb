@@ -1,5 +1,6 @@
 import type { InsightPost } from "@/lib/insights/content";
-import { insightArticlePath } from "@/lib/insights/content";
+import { insightArticlePath, insightAuthorName, insightLastReviewedIso } from "@/lib/insights/content";
+import { LEGAL_COMPANY_NAME } from "@/lib/marketing/company-identity";
 import {
   absoluteSiteImageUrl,
   geoTaggedImageObject,
@@ -14,6 +15,8 @@ type Props = { post: InsightPost };
 
 export function InsightArticleJsonLd({ post }: Props) {
   const pageUrl = `${site}${insightArticlePath(post.slug)}`;
+  const author = insightAuthorName(post);
+  const dateModified = insightLastReviewedIso(post);
   const imageObject = geoTaggedImageObject(post.image, {
     name: post.title,
     description: post.excerpt,
@@ -31,9 +34,15 @@ export function InsightArticleJsonLd({ post }: Props) {
       "@type": "WebPage",
       "@id": pageUrl,
     },
+    dateModified,
+    author: {
+      "@type": "Person",
+      name: author,
+    },
     publisher: {
       "@type": "Organization",
       name: "OceanCyber",
+      legalName: LEGAL_COMPANY_NAME,
       url: site,
       logo: {
         "@type": "ImageObject",

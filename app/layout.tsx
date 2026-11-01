@@ -8,6 +8,7 @@ import { StartupAgencyFooter } from "@/components/startup-agency/StartupAgencyFo
 import { ConditionalChrome } from "@/components/layout/ConditionalChrome";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
+import { DwumaPosProductJsonLd } from "@/components/seo/DwumaPosProductJsonLd";
 import { LocalBusinessJsonLd } from "@/components/seo/LocalBusinessJsonLd";
 import { WebSiteJsonLd } from "@/components/seo/WebSiteJsonLd";
 import { WebVitals } from "@/components/analytics/WebVitals";
@@ -143,6 +144,7 @@ export default function RootLayout({
           </Suspense>
           <CreativeEnhancements />
           <OrganizationJsonLd />
+          <DwumaPosProductJsonLd />
           <LocalBusinessJsonLd />
           <WebSiteJsonLd />
           <WebVitals />

@@ -1,8 +1,18 @@
 import { serviceOwnershipBlock } from "@/lib/services/ownership-terms";
+import {
+  projectDepositFaqAnswer,
+  projectMaintenanceFaqAnswer,
+} from "@/lib/marketing/project-delivery";
 import type { ServiceFaqJsonLdItem } from "@/components/seo/ServicePageJsonLd";
 
 const ownershipAnswer =
   `${serviceOwnershipBlock.bullets[0]} ${serviceOwnershipBlock.bullets[3]} Full terms are on our terms page.`;
+
+const depositFaq = { q: "What deposit do you require?", a: projectDepositFaqAnswer() };
+const maintenanceFaq = {
+  q: "What does maintenance cost after the support window?",
+  a: projectMaintenanceFaqAnswer(),
+};
 
 export const serviceHubFaqs: Record<string, readonly ServiceFaqJsonLdItem[]> = {
   "/services/web-design": [
@@ -15,6 +25,8 @@ export const serviceHubFaqs: Record<string, readonly ServiceFaqJsonLdItem[]> = {
       a: "Yes. One Accra team handles UX, visual design, and development — including Paystack or Mobile Money when you sell online.",
     },
     { q: "Who owns the website files?", a: ownershipAnswer },
+    depositFaq,
+    maintenanceFaq,
   ],
   "/services/web-development": [
     {
@@ -22,6 +34,8 @@ export const serviceHubFaqs: Record<string, readonly ServiceFaqJsonLdItem[]> = {
       a: "Startup covers up to five responsive pages, forms, basic SEO, and one Paystack or MoMo flow. Timelines are typically 3–5 weeks once copy is ready.",
     },
     { q: "Who owns the code?", a: ownershipAnswer },
+    depositFaq,
+    maintenanceFaq,
   ],
   "/services/mobile-apps": [
     {
@@ -29,6 +43,8 @@ export const serviceHubFaqs: Record<string, readonly ServiceFaqJsonLdItem[]> = {
       a: "A single iOS or Android platform starts at GHS 12,000. Web plus one mobile platform bundles from GHS 26,500 on Professional. See our app development cost in Ghana guide.",
     },
     { q: "Do you submit to the App Store and Play Store?", a: "Yes — store-ready builds and submission support are part of scoped delivery." },
+    depositFaq,
+    maintenanceFaq,
   ],
   "/services/ecommerce": [
     {
@@ -39,6 +55,8 @@ export const serviceHubFaqs: Record<string, readonly ServiceFaqJsonLdItem[]> = {
       q: "Starting price for an online store?",
       a: "Starter stores from GHS 6,000; growth stores from GHS 14,500. Compare packages on our pricing page.",
     },
+    depositFaq,
+    maintenanceFaq,
   ],
   "/services/cybersecurity": [
     {
@@ -49,12 +67,14 @@ export const serviceHubFaqs: Record<string, readonly ServiceFaqJsonLdItem[]> = {
       q: "Are you a licensed cybersecurity or managed security services provider?",
       a: "No. We provide security consulting — assessments, hardening, and remediation sprints. We do not sell regulated monitoring or managed SOC services.",
     },
+    depositFaq,
   ],
   "/services/ui-ux-design": [
     {
       q: "Can I hire design without a full build?",
       a: "Yes — brand and landing UX from GHS 3,500, product UI/UX from GHS 8,500, or design paired with Professional web delivery from GHS 14,500.",
     },
+    depositFaq,
   ],
   "/services/software-development": [
     {
@@ -62,6 +82,8 @@ export const serviceHubFaqs: Record<string, readonly ServiceFaqJsonLdItem[]> = {
       a: "When off-the-shelf tools cannot match your workflow — internal portals, ops dashboards, or integrations. Professional delivery from GHS 14,500.",
     },
     { q: "Who owns bespoke code?", a: ownershipAnswer },
+    depositFaq,
+    maintenanceFaq,
   ],
   "/hosting": [
     {
@@ -95,6 +117,8 @@ export const serviceHubFaqs: Record<string, readonly ServiceFaqJsonLdItem[]> = {
       a: "We map your existing pages, login, and checkout into mobile flows. Complex web apps may need a scoped rebuild — we say that in the quote.",
     },
     { q: "Who owns the app binaries?", a: ownershipAnswer },
+    depositFaq,
+    maintenanceFaq,
   ],
 };
 

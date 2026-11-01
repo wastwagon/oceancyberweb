@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { InsightArticleJsonLd } from "@/components/seo/InsightArticleJsonLd";
 import { MarketingArticleParagraph } from "@/components/seo/MarketingArticleMedia";
-import { buildInsightsHref, type InsightPost } from "@/lib/insights/content";
+import { buildInsightsHref, insightAuthorName, insightLastReviewedIso, type InsightPost } from "@/lib/insights/content";
 import { SITE_CTA, getStartedHref } from "@/lib/marketing/site-cta";
 
 type Props = {
@@ -53,6 +53,15 @@ export function InsightArticleView({ post }: Props) {
                   <time dateTime={post.date}>{post.date}</time>
                   <span className="text-sa-border">·</span>
                   <span>{post.readTime}</span>
+                  <span className="text-sa-border">·</span>
+                  <span>By {insightAuthorName(post)}</span>
+                  <span className="text-sa-border">·</span>
+                  <span>
+                    Last reviewed{" "}
+                    <time dateTime={insightLastReviewedIso(post)}>
+                      {insightLastReviewedIso(post)}
+                    </time>
+                  </span>
                 </div>
               </div>
             </div>

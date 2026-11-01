@@ -29,6 +29,17 @@ import { AppAlert } from "@/components/ui/AppAlert";
 import { SaButton } from "@/components/ui/SaButton";
 import { SaField } from "@/components/ui/SaField";
 import { SaInput, SaTextarea } from "@/components/ui/SaInput";
+import { SaSelect } from "@/components/ui/SaSelect";
+
+const SERVICE_OPTIONS = [
+  { value: "website", label: "Website" },
+  { value: "mobile_app", label: "Mobile app" },
+  { value: "ecommerce", label: "E-commerce store" },
+  { value: "cybersecurity", label: "Security consulting" },
+  { value: "hosting", label: "Hosting / domains" },
+  { value: "dwumapos", label: "DwumaPOS (POS software)" },
+  { value: "other", label: "Other" },
+] as const;
 
 const contactItems = [
   {
@@ -108,6 +119,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [service, setService] = useState<(typeof SERVICE_OPTIONS)[number]["value"]>("website");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -138,7 +150,7 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
           name: name.trim(),
           email: email.trim(),
           phone: phone.trim(),
-          message: message.trim(),
+          message: `[Service: ${SERVICE_OPTIONS.find((o) => o.value === service)?.label ?? service}]\n\n${message.trim()}`,
           source: "web-contact-form",
         }),
       });
@@ -262,7 +274,12 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
             transition={{ ...fadeFromRight.transition, delay: 0.15 }}
             className="sa-card order-1 p-5 md:p-8 lg:order-2"
           >
-            <form className="space-y-sa-2xl" onSubmit={handleSubmit} noValidate>
+            <form
+              className="space-y-sa-2xl"
+              onSubmit={handleSubmit}
+              noValidate
+              aria-label="Contact OceanCyber"
+            >
               {status === "success" ? (
                 <AppAlert variant="success">
                   Thank you. Your message was sent. We&apos;ll get back to you soon.
@@ -297,6 +314,23 @@ export function Contact({ revealHeaderOnMount = false }: ContactProps) {
                   />
                 </SaField>
               </div>
+              <SaField id="contact-service" label="Service" required>
+                <SaSelect
+                  id="contact-service"
+                  name="service"
+                  value={service}
+                  onChange={(e) =>
+                    setService(e.target.value as (typeof SERVICE_OPTIONS)[number]["value"])
+                  }
+                  required
+                >
+                  {SERVICE_OPTIONS.map((opt) => (
+                    <option key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </option>
+                  ))}
+                </SaSelect>
+              </SaField>
               <SaField id="contact-phone" label="Phone" optional>
                 <SaInput
                   id="contact-phone"

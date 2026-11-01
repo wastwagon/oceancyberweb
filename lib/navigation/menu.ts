@@ -1,4 +1,8 @@
 import { SITE_CTA } from "@/lib/marketing/site-cta";
+import {
+  buildFooterServiceLinks,
+  buildStartupPagesMenu,
+} from "@/lib/navigation/pages-footer-nav";
 
 export type StartupNavLink = { readonly label: string; readonly href: string };
 
@@ -9,34 +13,7 @@ export const startupPrimaryNav: StartupNavLink[] = [
   { label: "Portfolio", href: "/portfolio" },
 ];
 
-export const startupPagesMenu = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Team", href: "/team" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Project cost calculator", href: "/tools/project-cost" },
-  { label: "Contact", href: "/contact" },
-  { label: "Services", href: "/services" },
-  { label: "Best web design company in Ghana", href: "/services/web-design-in-ghana" },
-  { label: "Best web design company in Accra", href: "/services/web-design-in-accra" },
-  { label: "Best web development company in Accra", href: "/services/web-development-in-accra" },
-  { label: "Best website developers in Ghana", href: "/services/web-development-in-ghana" },
-  { label: "Best web development company in Ghana", href: "/services/web-development-in-ghana" },
-  { label: "Best software development company in Accra", href: "/services/software-development-in-accra" },
-  { label: "Best mobile app development company in Accra", href: "/services/mobile-app-development-in-accra" },
-  { label: "Best e-commerce development company in Accra", href: "/services/ecommerce-development-in-accra" },
-  { label: "Best security consulting in Accra", href: "/services/cybersecurity-in-accra" },
-  { label: "Best UI/UX design company in Accra", href: "/services/ui-ux-design-in-accra" },
-  { label: "Company facts", href: "/facts" },
-  { label: "Products", href: "/products" },
-  { label: "Insights", href: "/insights" },
-  { label: "Reviews", href: "/reviews" },
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "Domains", href: "/domains" },
-  { label: "SSL certificates", href: "/ssl" },
-  { label: "Hosting", href: "/hosting" },
-  { label: "Checkout", href: "/checkout/cart" },
-] as const;
+export const startupPagesMenu = buildStartupPagesMenu();
 
 export type HeaderDropdownKey =
   | "services"
@@ -193,7 +170,7 @@ export const mainHeaderDropdownContent: Record<
       },
       {
         heading: "How we work",
-        description: "Discovery, design, phased delivery, and security-aware launch — our full model.",
+        description: "Discovery, design, build, and launch — our full delivery model.",
         link: "/how-we-work",
       },
       {
@@ -252,11 +229,6 @@ export const mainHeaderDropdownContent: Record<
         heading: "Google reviews",
         description: "Verified client ratings and recent feedback from Google.",
         link: "/reviews",
-      },
-      {
-        heading: "Company facts & Maps copy",
-        description: "NAP, pricing, and paste-ready Google Business Profile text.",
-        link: "/facts",
       },
     ],
   },
@@ -338,27 +310,8 @@ export const footerCompanyLinks = [
   { label: "Contact", href: "/contact" },
 ] as const;
 
-/** Footer services column — mirrors primary services mega-menu destinations. */
-export const footerServiceLinks = [
-  { label: "Best web design company in Ghana", href: "/services/web-design-in-ghana" },
-  { label: "Best web design company in Accra", href: "/services/web-design-in-accra" },
-  { label: "Best web development company in Accra", href: "/services/web-development-in-accra" },
-  { label: "Best website developers in Ghana", href: "/services/web-development-in-ghana" },
-  { label: "Best web development company in Ghana", href: "/services/web-development-in-ghana" },
-  { label: "Best software development company in Accra", href: "/services/software-development-in-accra" },
-  { label: "Best mobile app development company in Accra", href: "/services/mobile-app-development-in-accra" },
-  { label: "Best e-commerce development company in Accra", href: "/services/ecommerce-development-in-accra" },
-  { label: "E-commerce development in Ghana", href: "/services/ecommerce-development-in-ghana" },
-  { label: "Best security consulting in Accra", href: "/services/cybersecurity-in-accra" },
-  { label: "Security consulting in Ghana", href: "/services/cybersecurity-in-ghana" },
-  { label: "UI/UX & brand design", href: "/services/ui-ux-design" },
-  { label: "Web development", href: "/services/web-development" },
-  { label: "Mobile apps", href: "/services/mobile-apps" },
-  { label: "Website to app", href: "/services/website-to-mobile-app" },
-  { label: "Security consulting", href: "/services/cybersecurity" },
-  { label: "E-commerce", href: "/services/ecommerce" },
-  { label: "Hosting", href: "/hosting" },
-] as const;
+/** Footer services column — capabilities + local guides (no “Best …” keyword labels). */
+export const footerServiceLinks = buildFooterServiceLinks();
 
 export type NavigationConfig = {
   startupPrimaryNav: StartupNavLink[];

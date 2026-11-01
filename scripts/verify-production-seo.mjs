@@ -164,17 +164,18 @@ for (const { path, checks } of paths) {
   }
 
   if (checks.includes("places-sync")) {
-    if (text.includes("Static GBP fallback")) {
-      fail(`${path}: still on static GBP fallback`);
+    if (text.includes("Static GBP fallback in code")) {
+      fail(`${path}: still on static GBP fallback label`);
     } else if (text.includes("Synced from Google Business Profile via Places API")) {
-      pass(`${path}: Places API sync label`);
+      fail(`${path}: remove Places API sync boilerplate`);
     } else if (
       text.includes("OCEAN_GOOGLE_RATING") ||
-      text.includes("Rating and count from OCEAN_GOOGLE")
+      text.includes("OCEAN_GOOGLE_REVIEW_COUNT") ||
+      text.includes("reviews on Google")
     ) {
-      pass(`${path}: env-config review stats label`);
+      pass(`${path}: clean review source copy`);
     } else {
-      fail(`${path}: missing Places or env-config review source label`);
+      fail(`${path}: missing review source label`);
     }
   }
 
@@ -220,7 +221,7 @@ for (const { path, checks } of paths) {
   }
 
   if (checks.includes("home-best-hero")) {
-    if (!text.includes("Websites, apps, and security from Accra")) {
+    if (!text.includes("Websites, apps, and security")) {
       fail("/: homepage H1 should be visitor-first, not a keyword headline");
     }
     const hasLocalSeoMeta =

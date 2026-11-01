@@ -86,7 +86,7 @@ const nextConfig = {
       },
       {
         source: "/products/pos",
-        destination: "/products",
+        destination: "https://www.dwumapos.com/",
         permanent: true,
       },
       {

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { SITE_CTA } from "@/lib/marketing/site-cta";
 import { withCanonical } from "@/lib/seo/canonical";
 import { extraIntentGuidePages } from "@/lib/seo/intent-guides-extra";
+import { replaceDwumaPosOceanGuides } from "@/lib/seo/dwumapos-ocean-guides";
+import { stackAndPaymentsGuides } from "@/lib/seo/stack-and-payments-guides";
 
 export type IntentKind = "guide" | "compare" | "alternative";
 
@@ -89,6 +91,8 @@ export type IntentPage = {
     siteLabel: string;
     disclosure: string;
   };
+  /** When set, HTML canonical points to DwumaPOS (or other primary URL). */
+  canonicalExternal?: string;
 };
 
 export const intentKindMeta: Record<
@@ -100,7 +104,7 @@ export const intentKindMeta: Record<
     label: "Guides",
     hubTitle: "Guides for building in Ghana",
     hubDescription:
-      "Practical answers on website cost, app development cost, domains, hosting, Mobile Money checkout, ecommerce timelines, the Ghana Data Protection Act, and DwumaPOS for shops, restaurants, and pharmacies.",
+      "Practical answers on website cost, app development cost, domains, hosting, Mobile Money checkout, ecommerce timelines, the Ghana Data Protection Act, and short DwumaPOS summaries (canonical on dwumapos.com).",
   },
   compare: {
     path: "/compare",
@@ -1725,10 +1729,11 @@ const coreIntentPages: readonly IntentPage[] = [
   },
 ];
 
-export const intentPages: readonly IntentPage[] = [
+export const intentPages: readonly IntentPage[] = replaceDwumaPosOceanGuides([
   ...coreIntentPages,
   ...extraIntentGuidePages,
-];
+  ...stackAndPaymentsGuides,
+]);
 
 export function intentPagesByKind(kind: IntentKind): IntentPage[] {
   return intentPages.filter((page) => page.kind === kind);
@@ -1747,21 +1752,35 @@ export function intentArticleMetadata(kind: IntentKind, slug: string): Metadata 
     page.metaTitle != null
       ? { absolute: metaTitle }
       : page.title;
-  return withCanonical(
-    {
-      title,
+  const social = {
+    title: metaTitle,
+    description: page.description,
+    type: "article" as const,
+    locale: page.openGraphLocale,
+    url: page.canonicalExternal ?? `${process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://oceancyber.net"}${path}`,
+    images: [{ url: page.image, alt: page.imageAlt }],
+  };
+
+  const base: Metadata = {
+    title,
+    description: page.description,
+    openGraph: social,
+    twitter: {
+      card: "summary_large_image",
+      title: metaTitle,
       description: page.description,
-      openGraph: {
-        title: metaTitle,
-        description: page.description,
-        type: "article",
-        locale: page.openGraphLocale,
-        url: path,
-        images: [{ url: page.image, alt: page.imageAlt }],
-      },
+      images: [page.image],
     },
-    path,
-  );
+  };
+
+  if (page.canonicalExternal) {
+    return {
+      ...base,
+      alternates: { canonical: page.canonicalExternal },
+    };
+  }
+
+  return withCanonical(base, path);
 }
 
 export function searchIntentPages(query: string): IntentLink[] {

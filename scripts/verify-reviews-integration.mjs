@@ -91,9 +91,9 @@ try {
   if (reviews.status !== 200) fail(`/reviews HTTP ${reviews.status}`);
   else {
     pass("/reviews HTTP 200");
-    if (!reviews.text.includes("Synced from Google Business Profile via Places API")) {
-      fail("/reviews: missing Places sync label");
-    } else pass("/reviews: Places sync label");
+    if (!reviews.text.includes("Google review")) {
+      fail("/reviews: missing Google reviews reference");
+    } else pass("/reviews: Google reviews copy");
     if (!reviews.text.includes("AggregateRating")) fail("/reviews: missing AggregateRating JSON-LD");
     else pass("/reviews: AggregateRating JSON-LD");
     if (reviews.text.includes("/reviews#review-")) {

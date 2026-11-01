@@ -12,6 +12,7 @@ import {
   industryFooterViewAllLink,
 } from "@/lib/data/industries-catalog";
 import { footerTagline } from "@/lib/marketing/agency-positioning";
+import { DWUMAPOS_RELATIONSHIP_LINE } from "@/lib/marketing/company-identity";
 import { googleBusinessProfile, socialProfiles } from "@/lib/startup-agency/google-business";
 
 const socialLinks = [
@@ -45,6 +46,9 @@ export function StartupAgencyFooter() {
                   googleBusinessProfile.teamSize,
                   googleBusinessProfile.foundedYear,
                 )}
+              </p>
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-white/60">
+                {DWUMAPOS_RELATIONSHIP_LINE}
               </p>
 
               <ul className="sa-ios-group mt-8 divide-y divide-white/10">

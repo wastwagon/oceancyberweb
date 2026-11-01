@@ -1,10 +1,16 @@
 import { AGENCY_IDENTITY_GHANA, AGENCY_WHAT_WE_ARE } from "@/lib/marketing/agency-positioning";
 import { googleBusinessProfile } from "@/lib/startup-agency/google-business";
 
+import {
+  DWUMAPOS_SIGNUP_URL,
+  DWUMAPOS_SITE_URL,
+} from "@/lib/marketing/company-identity";
+
 const POS_REPLY =
-  "For in-store POS (counter sales, branches, pharmacy or restaurant tills), we publish editorial guides on DwumaPOS — not OceanCyber-built POS software. " +
-  "Start with /guides/dwumapos-for-ghana-shops, /guides/dwumapos-restaurant-pos-ghana, or /guides/dwumapos-pharmacy-pos-ghana. " +
-  "If you need a custom website or ecommerce store with Paystack or MoMo, say “ecommerce” or open /services/ecommerce.";
+  "DwumaPOS is our flagship POS for Ghana shops — one stock list for in your shop, online shop, and delivery. " +
+  `Start a 30-day trial at ${DWUMAPOS_SIGNUP_URL} or read a short summary at /guides/dwumapos-for-ghana-shops. ` +
+  `Full product details live on ${DWUMAPOS_SITE_URL}. ` +
+  "For a custom website or ecommerce build with Paystack or MoMo, say “ecommerce” or open /services/ecommerce.";
 
 function isPosPlanningIntent(t: string): boolean {
   if (/\b(dwuma|dwumapos)\b/.test(t)) return true;

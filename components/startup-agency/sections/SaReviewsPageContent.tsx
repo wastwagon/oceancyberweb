@@ -8,7 +8,11 @@ import {
 import { getReviewBadges } from "@/lib/startup-agency/reviews";
 import { GoogleReviewsCarousel } from "@/components/startup-agency/sections/GoogleReviewsCarousel";
 import type { GooglePlaceReview, GooglePlaceStats } from "@/lib/google-places-stats";
-import { reviewStatsSourceNote } from "@/lib/trust/review-source-label";
+import {
+  reviewStatsSourceHref,
+  reviewStatsSourceLinkLabel,
+  reviewStatsSourceNote,
+} from "@/lib/trust/review-source-label";
 
 type Props = {
   stats: GooglePlaceStats;
@@ -65,7 +69,17 @@ export function SaReviewsPageContent({ stats, reviews }: Props) {
           <p className="mt-3 text-sa-muted">
             {stats.reviewCount} verified Google reviews · {googleBusinessProfile.name}
           </p>
-          <p className="mt-2 text-xs text-sa-muted/70">{reviewStatsSourceNote(stats)}</p>
+          <p className="mt-2 text-xs text-sa-muted/70">
+            {reviewStatsSourceNote(stats)}{" "}
+            <Link
+              href={reviewStatsSourceHref()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sa-primary underline-offset-2 hover:underline"
+            >
+              {reviewStatsSourceLinkLabel()}
+            </Link>
+          </p>
           <div className="mt-8 flex flex-col items-center gap-3">
             <Link
               href={writeReviewUrl}

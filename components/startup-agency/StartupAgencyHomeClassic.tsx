@@ -7,6 +7,7 @@ import { SaAboutSection } from "@/components/startup-agency/sections/SaAboutSect
 import { SaHeroSection } from "@/components/startup-agency/sections/SaHeroSection";
 import { SaHomeFaqSection } from "@/components/startup-agency/sections/SaHomeFaqSection";
 import { SaInsightsTeaserSection } from "@/components/startup-agency/sections/SaInsightsTeaserSection";
+import { SaDwumaPosFlagshipSection } from "@/components/startup-agency/sections/SaDwumaPosFlagshipSection";
 import { SaMarqueeSection } from "@/components/startup-agency/sections/SaMarqueeSection";
 import { SaPricingSection } from "@/components/startup-agency/sections/SaPricingSection";
 import { SaProcessSection } from "@/components/startup-agency/sections/SaProcessSection";
@@ -41,6 +42,7 @@ export function StartupAgencyHomeClassic({ homeTrust }: Props) {
         <SaAboutSection presenceSubtitle={homeTrust?.companyPresence} />
         <SaMarqueeSection />
         <SaServicesSection />
+        <SaDwumaPosFlagshipSection />
         <SaPortfolioGallerySection />
         <SaProcessSection />
 

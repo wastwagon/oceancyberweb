@@ -1,10 +1,10 @@
 export type RelatedReadingLink = { href: string; label: string };
 
-/** OceanCyber builds custom/Shopify/Woo stores — POS is editorial partner content. */
+/** OceanCyber builds custom stores; DwumaPOS is the flagship POS product (short summaries on /guides/dwumapos-*). */
 export const ecommerceServiceRelatedReading: RelatedReadingLink[] = [
   { href: "/guides/accept-mobile-money-paystack", label: "Accept Mobile Money and Paystack" },
   { href: "/guides/ecommerce-website-timeline-ghana", label: "How long a Ghana ecommerce store takes" },
-  { href: "/guides/dwumapos-for-ghana-shops", label: "DwumaPOS for Ghana shops (in-store POS)" },
+  { href: "/guides/dwumapos-for-ghana-shops", label: "DwumaPOS summary (Ghana shops)" },
   { href: "/guides/dwumapos-restaurant-pos-ghana", label: "Restaurant POS on DwumaPOS" },
   { href: "/guides/dwumapos-pharmacy-pos-ghana", label: "Pharmacy POS on DwumaPOS" },
 ];

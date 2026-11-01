@@ -45,16 +45,11 @@ const DEFAULT_CONFIG = {
     { label: "Project cost calculator", href: "/tools/project-cost" },
     { label: "Contact", href: "/contact" },
     { label: "Services", href: "/services" },
-    { label: "Best web design company in Ghana", href: "/services/web-design-in-ghana" },
-    { label: "Best web design company in Accra", href: "/services/web-design-in-accra" },
-    { label: "Best web development company in Accra", href: "/services/web-development-in-accra" },
-    { label: "Best website developers in Ghana", href: "/services/web-development-in-ghana" },
-    { label: "Best web development company in Ghana", href: "/services/web-development-in-ghana" },
-    { label: "Best software development company in Accra", href: "/services/software-development-in-accra" },
-    { label: "Best mobile app development company in Accra", href: "/services/mobile-app-development-in-accra" },
-    { label: "Best e-commerce development company in Accra", href: "/services/ecommerce-development-in-accra" },
-    { label: "Best security consulting in Accra", href: "/services/cybersecurity-in-accra" },
-    { label: "Best UI/UX design company in Accra", href: "/services/ui-ux-design-in-accra" },
+    { label: "Web design in Accra", href: "/services/web-design-in-accra" },
+    { label: "Web design in Ghana", href: "/services/web-design-in-ghana" },
+    { label: "Web development in Accra", href: "/services/web-development-in-accra" },
+    { label: "Web development in Ghana", href: "/services/web-development-in-ghana" },
+    { label: "Local guides on services hub", href: "/services#local-guides" },
     { label: "Company facts", href: "/facts" },
     { label: "Products", href: "/products" },
     { label: "Insights", href: "/insights" },
@@ -240,7 +235,7 @@ const DEFAULT_CONFIG = {
       ],
     },
     industries: {
-      title: "Industries we serve",
+      title: "Industries We Serve",
       description:
         "Proven delivery patterns for regulated and growth-focused sectors.",
       items: [
@@ -353,7 +348,7 @@ const DEFAULT_CONFIG = {
         {
           heading: "How we work",
           description:
-            "Discovery, design, phased delivery, and security-aware launch — our full model.",
+            "Discovery, design, build, and launch — our full delivery model.",
           link: "/how-we-work",
         },
         {
@@ -372,6 +367,11 @@ const DEFAULT_CONFIG = {
           description:
             "Score your maturity in minutes and download a PDF report.",
           link: "/tools/security-assessment",
+        },
+        {
+          heading: "Company facts",
+          description: "Canonical NAP, GHS pricing, and Google Maps copy kit.",
+          link: "/facts",
         },
       ],
     },
@@ -412,11 +412,6 @@ const DEFAULT_CONFIG = {
           description:
             "Verified client ratings and recent feedback from Google.",
           link: "/reviews",
-        },
-        {
-          heading: "Company facts & Maps copy",
-          description: "NAP, pricing, and paste-ready Google Business Profile text.",
-          link: "/facts",
         },
       ],
     },
@@ -535,8 +530,8 @@ export class NavigationService {
       return {
         startupPrimaryNav:
           dbConfig.startupPrimaryNav ?? DEFAULT_CONFIG.startupPrimaryNav,
-        startupPagesMenu:
-          dbConfig.startupPagesMenu ?? DEFAULT_CONFIG.startupPagesMenu,
+        /** Pages menu is code-owned — avoid stale “Best …” rows from old DB seeds. */
+        startupPagesMenu: DEFAULT_CONFIG.startupPagesMenu,
         mainHeaderNav: dbConfig.mainHeaderNav ?? DEFAULT_CONFIG.mainHeaderNav,
         mainHeaderDropdownContent:
           dbConfig.mainHeaderDropdownContent ??
@@ -716,8 +711,16 @@ export class NavigationService {
       const dropdowns = JSON.parse(
         JSON.stringify(DEFAULT_CONFIG.mainHeaderDropdownContent),
       ) as typeof DEFAULT_CONFIG.mainHeaderDropdownContent;
-      /** Dropdown bodies owned in code — DB seed labels must not replace titles or duplicate SEO rows. */
-      const codeOwnedDropdownKeys = new Set(["services"]);
+      /** Dropdown bodies owned in code — DB must not replace titles or resurrect stale SEO rows. */
+      const codeOwnedDropdownKeys = new Set([
+        "services",
+        "products",
+        "industries",
+        "infrastructure",
+        "resources",
+        "support",
+        "company",
+      ]);
 
       Object.keys(dropdowns).forEach((key) => {
         const defaults =

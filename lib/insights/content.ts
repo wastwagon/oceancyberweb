@@ -25,7 +25,21 @@ export type InsightPost = {
   category: string;
   date: string;
   readTime: string;
+  /** Named author for E-E-A-T — defaults applied in loader when omitted. */
+  authorName?: string;
+  /** ISO date when facts were last reviewed. */
+  lastReviewed?: string;
 };
+
+export const DEFAULT_INSIGHT_AUTHOR = "Gilbert Kwabena Amidu";
+
+export function insightAuthorName(post: InsightPost): string {
+  return post.authorName?.trim() || DEFAULT_INSIGHT_AUTHOR;
+}
+
+export function insightLastReviewedIso(post: InsightPost): string {
+  return post.lastReviewed || "2026-11-01";
+}
 
 export const insightCategories = [
   "All",
@@ -181,6 +195,8 @@ export const insightPosts: InsightPost[] = [
     category: "Compliance",
     date: "February 15, 2024",
     readTime: "7 min read",
+    authorName: DEFAULT_INSIGHT_AUTHOR,
+    lastReviewed: "2026-11-01",
   },
   {
     slug: "pos-vs-ecommerce-ghana-2026",
@@ -190,7 +206,7 @@ export const insightPosts: InsightPost[] = [
     paragraphs: [
       "Retail teams in Ghana often ask for “a system to sell” when they mean two different things: staff ringing up walk-in customers at a branch, or customers paying on a website or app. Mixing the two in one brief leads to wrong budgets and the wrong vendor.",
       "OceanCyber designs and builds marketing sites and ecommerce stores — catalogue, checkout, Paystack and Mobile Money, delivery notes — from GHS 6,000 upward. That is custom or platform-led web commerce, not counter POS software.",
-      "In-store POS — tills, stock by branch, kitchen or pharmacy workflows — is a separate product category. We publish editorial DwumaPOS guides (shops, restaurants, pharmacies) so you can compare plans and payment setup without confusing them with a website quote.",
+      "In-store POS — live stock, branches, kitchen or pharmacy workflows — is DwumaPOS, our flagship product on dwumapos.com. OceanCyber builds custom websites and ecommerce stores separately when you need a bespoke build rather than shop-scale POS software.",
     ],
     sections: [
       {
@@ -208,7 +224,7 @@ export const insightPosts: InsightPost[] = [
       },
       {
         heading: "Read POS guides when",
-        paragraphs: ["Use our DwumaPOS editorial guides to compare POS plans — we do not sell POS software."],
+        paragraphs: ["Use DwumaPOS (from GHS 149/month with a 30-day trial) or our short summary guides — then open dwumapos.com for full pricing and setup."],
         bullets: [
           "Staff sell at a physical counter or multiple branches.",
           "You need inventory, receipts, and branch reporting at the till.",
@@ -229,6 +245,8 @@ export const insightPosts: InsightPost[] = [
     category: "Business",
     date: "October 28, 2026",
     readTime: "4 min read",
+    authorName: DEFAULT_INSIGHT_AUTHOR,
+    lastReviewed: "2026-11-01",
   },
   {
     slug: "google-maps-web-design-ghana-2026",

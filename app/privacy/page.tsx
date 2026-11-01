@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { withCanonical } from "@/lib/seo/canonical";
 import { LegalPageFooter } from "@/components/legal/LegalPageFooter";
+import { LegalPublisherNotice } from "@/components/legal/LegalPublisherNotice";
 
 export const metadata: Metadata = withCanonical(
   {
@@ -54,12 +55,19 @@ export default function PrivacyPage() {
           </h1>
           <p className="sa-subtitle !text-left mt-6 max-w-2xl">
             This policy explains what personal information we collect, why we
-            use it, who may process it, and the choices available to you.
+            use it, who may process it, and the choices available to you. See
+            also our{" "}
+            <a href="/data-protection" className="sa-text-link">
+              data protection summary
+            </a>
+            .
           </p>
           <p className="mt-4 text-sm text-sa-muted">
-            Last updated: 12 July 2026
+            Last updated: 1 November 2026
           </p>
         </header>
+
+        <LegalPublisherNotice />
 
         <div className="space-y-6">
           {policies.map((policy) => (

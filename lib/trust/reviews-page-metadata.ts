@@ -8,7 +8,7 @@ export function buildReviewsPageMetadata(stats: GooglePlaceStats): Metadata {
 
   return {
     title: "Google reviews · Accra website & mobile app agency",
-    description: `${googleBusinessProfile.shortName} — ${ratingLine} for ${AGENCY_IDENTITY_GHANA.toLowerCase()}. Verified feedback synced from Google Business Profile.`,
+    description: `${googleBusinessProfile.shortName} — ${ratingLine} for ${AGENCY_IDENTITY_GHANA.toLowerCase()}. Read verified feedback on our reviews page or on Google.`,
     openGraph: {
       title: `${ratingLine} on Google · OceanCyber`,
       description:

@@ -2,9 +2,9 @@ import { describe, expect, it } from "vitest";
 import { getLocalChatReply } from "@/lib/chat-reply";
 
 describe("getLocalChatReply POS routing", () => {
-  it("routes pharmacy counter questions to Dwuma guides", () => {
+  it("routes pharmacy counter questions to DwumaPOS", () => {
     const reply = getLocalChatReply("We need pharmacy POS for two branches");
-    expect(reply).toMatch(/dwumapos-pharmacy-pos-ghana/);
+    expect(reply).toMatch(/dwumapos\.com|app\.dwumapos\.com/);
   });
 
   it("does not hijack online shop requests", () => {

@@ -9,6 +9,13 @@ import { serviceImages } from "@/lib/startup-agency/service-images";
 import { CLIENT_PROOF_LINES } from "@/lib/marketing/client-proof-outcomes";
 import { servicePricingHints } from "@/lib/startup-agency/pricing";
 
+const relatedReading = [
+  { href: "/guides/nextjs-website-development-ghana", label: "Next.js development guide" },
+  { href: "/guides/paystack-integration-websites-ghana", label: "Paystack on custom sites" },
+  { href: "/guides/mobile-money-checkout-ghana", label: "MoMo checkout guide" },
+  { href: "/guides/website-cost-in-ghana", label: "Website cost in Ghana" },
+] as const;
+
 const content: ServicePageContent = {
   heroEyebrow: "Engineering",
   heroPrefix: "",
@@ -111,6 +118,7 @@ const content: ServicePageContent = {
   ctaDescription:
     "Share your goals, budget range, and timeline — we will reply with the right package or a scoped proposal.",
   pricing: servicePricingHints.webDevelopment,
+  relatedReading: [...relatedReading],
 };
 
 export default function WebDevelopmentPage() {

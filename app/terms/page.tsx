@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { withCanonical } from "@/lib/seo/canonical";
 import { LegalPageFooter } from "@/components/legal/LegalPageFooter";
+import { LegalPublisherNotice } from "@/components/legal/LegalPublisherNotice";
 
 export const metadata: Metadata = withCanonical(
   {
@@ -78,9 +79,11 @@ export default function TermsPage() {
             service agreement may contain additional terms.
           </p>
           <p className="mt-4 text-sm text-sa-muted">
-            Last updated: 12 July 2026
+            Last updated: 1 November 2026
           </p>
         </header>
+
+        <LegalPublisherNotice />
 
         <div className="grid gap-12 md:grid-cols-2">
           {sections.map((section) => (

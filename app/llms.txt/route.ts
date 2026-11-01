@@ -17,6 +17,7 @@ import { getGooglePlaceProfile } from "@/lib/google-places-stats";
 import { formatLlmsGoogleReviewExcerpts } from "@/lib/trust/reviews-llm-excerpts";
 import { buildTrustBlurb } from "@/lib/trust/review-trust";
 import { getGoogleBusinessProfileUrl } from "@/lib/startup-agency/google-business";
+import { stackAndPaymentsGuideLinks } from "@/lib/seo/stack-and-payments-guide-links";
 
 const site =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://oceancyber.net";
@@ -124,11 +125,19 @@ ${gbpSuggestedServiceNames.map((s) => `- ${s}`).join("\n")}
 - [Domains, hosting, and SSL](${site}/guides/domains-hosting-and-ssl-ghana)
 - [Hosting cost in Ghana](${site}/guides/web-hosting-cost-in-ghana)
 
-## DwumaPOS (Ghana POS — editorial guides)
+## Technology and payment guides (OceanCyber custom builds)
 
-- [DwumaPOS for Ghana shops](${site}/guides/dwumapos-for-ghana-shops)
-- [Restaurant POS on DwumaPOS](${site}/guides/dwumapos-restaurant-pos-ghana)
-- [Pharmacy POS on DwumaPOS](${site}/guides/dwumapos-pharmacy-pos-ghana)
+${stackAndPaymentsGuideLinks.map((l) => `- [${l.label}](${site}${l.href})`).join("\n")}
+
+## DwumaPOS (flagship product — canonical on dwumapos.com)
+
+- Product home: https://www.dwumapos.com/
+- Sign up: https://app.dwumapos.com/signup
+- Pricing, /ai, /llms.txt: on dwumapos.com
+- Short summaries on OceanCyber (canonical → dwumapos.com):
+  - [DwumaPOS for Ghana shops](${site}/guides/dwumapos-for-ghana-shops)
+  - [Restaurant POS summary](${site}/guides/dwumapos-restaurant-pos-ghana)
+  - [Pharmacy POS summary](${site}/guides/dwumapos-pharmacy-pos-ghana)
 
 ## Portfolio (live clients vs in-house concepts)
 
