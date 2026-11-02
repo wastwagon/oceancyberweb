@@ -1,8 +1,9 @@
 import { buildTrustBlurb, fallbackPlaceStats } from "@/lib/trust/review-trust";
+import { LEGAL_COMPANY_NAME } from "@/lib/marketing/company-identity";
 
 /** Public Google Business Profile facts — keep in sync with Google Search / Maps listing. */
 export const googleBusinessProfile = {
-  name: "OceanCyber - Website & Mobile App Development",
+  name: LEGAL_COMPANY_NAME,
   shortName: "OceanCyber",
   category: "Website designer",
   rating: 4.9,

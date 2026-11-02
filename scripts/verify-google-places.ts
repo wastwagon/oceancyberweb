@@ -7,6 +7,7 @@ import { readFileSync, existsSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { getPlaceDetails, searchPlaceByText } from "../lib/google-places/new-api";
+import { LEGAL_COMPANY_NAME } from "../lib/marketing/company-identity";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const envPath = resolve(root, ".env");
@@ -34,7 +35,7 @@ const placeId =
   process.env.GOOGLE_PLACE_ID?.trim() ||
   process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID?.trim();
 
-const businessName = "OceanCyber - Website & Mobile App Development";
+const businessName = LEGAL_COMPANY_NAME;
 const query = `${businessName}, Accra, Ghana`;
 const lat = 5.6173486;
 const lng = -0.2252809;

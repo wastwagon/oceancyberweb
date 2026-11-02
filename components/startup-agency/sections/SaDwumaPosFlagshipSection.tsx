@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Store } from "lucide-react";
 import Link from "next/link";
 import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
+import { DwumaPosSeoLinkSentence } from "@/components/marketing/DwumaPosSeoLinkSentence";
 import {
   DWUMAPOS_ONE_LINE_PITCH,
   DWUMAPOS_PRICING_URL,
@@ -37,11 +38,19 @@ export function SaDwumaPosFlagshipSection() {
           />
         </motion.div>
 
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={revealViewport}
+        >
+          <DwumaPosSeoLinkSentence className="mx-auto mt-6 max-w-2xl text-center text-sm leading-relaxed text-sa-muted/90" />
+        </motion.div>
+
         <motion.p
           initial={reduceMotion ? false : { opacity: 0, y: 12 }}
           whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
           viewport={revealViewport}
-          className="mx-auto mt-6 max-w-2xl text-center text-sm leading-relaxed text-sa-muted/85"
+          className="mx-auto mt-4 max-w-2xl text-center text-sm leading-relaxed text-sa-muted/85"
         >
           {DWUMAPOS_RELATIONSHIP_LINE} {OCEANCYBER_CUSTOM_SITE_PITCH}
         </motion.p>
@@ -84,7 +93,7 @@ export function SaDwumaPosFlagshipSection() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            dwumapos.com
+            DwumaPOS
             <ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
           <Link

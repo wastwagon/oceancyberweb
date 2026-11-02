@@ -44,6 +44,43 @@ for (const banned of ["Not for sale here", "partner editorial", "not OceanCyber 
 if (!productsHub.includes("Flagship product")) {
   failures.push("ProductsHubPage.tsx: missing DwumaPOS flagship section");
 }
+if (!productsHub.includes("DwumaPosSeoLinkSentence")) {
+  failures.push("ProductsHubPage.tsx: missing DwumaPosSeoLinkSentence");
+}
+const companyIdentity = readFileSync(resolve(root, "lib/marketing/company-identity.ts"), "utf8");
+if (!companyIdentity.includes("built by OceanCyber.")) {
+  failures.push("company-identity.ts: missing DWUMAPOS_SEO_LINK_SENTENCE_SUFFIX");
+}
+
+const flagshipSection = readFileSync(
+  resolve(root, "components/startup-agency/sections/SaDwumaPosFlagshipSection.tsx"),
+  "utf8",
+);
+if (!flagshipSection.includes("DwumaPosSeoLinkSentence")) {
+  failures.push("SaDwumaPosFlagshipSection.tsx: missing DwumaPosSeoLinkSentence");
+}
+
+const googleBusiness = readFileSync(resolve(root, "lib/startup-agency/google-business.ts"), "utf8");
+if (!googleBusiness.includes("LEGAL_COMPANY_NAME") || !googleBusiness.includes("name: LEGAL_COMPANY_NAME")) {
+  failures.push("google-business.ts: GBP name must use LEGAL_COMPANY_NAME");
+}
+
+const companyBrandMjs = readFileSync(resolve(root, "scripts/lib/company-brand.mjs"), "utf8");
+const legalNameMatch = companyIdentity.match(
+  /export const LEGAL_COMPANY_NAME =[\s\S]*?"([^"]+)"/,
+);
+const legalName = legalNameMatch?.[1];
+if (!legalName || !companyBrandMjs.includes(legalName)) {
+  failures.push("scripts/lib/company-brand.mjs: LEGAL_COMPANY_NAME out of sync with company-identity.ts");
+}
+
+const orgJsonLd = readFileSync(resolve(root, "components/seo/OrganizationJsonLd.tsx"), "utf8");
+if (!orgJsonLd.includes('name: "DwumaPOS"') || !orgJsonLd.includes("DWUMAPOS_SITE_URL")) {
+  failures.push("OrganizationJsonLd.tsx: DwumaPOS brand block missing");
+}
+if (!orgJsonLd.includes("legalName: LEGAL_COMPANY_NAME")) {
+  failures.push("OrganizationJsonLd.tsx: legalName must use LEGAL_COMPANY_NAME");
+}
 
 const nextConfig = readFileSync(resolve(root, "next.config.js"), "utf8");
 if (!nextConfig.includes('source: "/products/pos"') || !nextConfig.includes("https://www.dwumapos.com")) {
@@ -252,6 +289,9 @@ if (!rootLayout.includes('href="/llms.txt"')) {
 const sitemapTs = readFileSync(resolve(root, "app/sitemap.ts"), "utf8");
 if (!sitemapTs.includes('"/llms.txt"')) {
   failures.push("app/sitemap.ts: must list /llms.txt for crawlers and agents");
+}
+if (sitemapTs.includes('"/products/pos"') || sitemapTs.includes("'/products/pos'")) {
+  failures.push("app/sitemap.ts: must not list /products/pos (redirect only)");
 }
 const homePage = readFileSync(resolve(root, "app/page.tsx"), "utf8");
 if (!homePage.includes("buildSiteMetaDescription")) {
@@ -467,11 +507,16 @@ const marketingSourceRoots = [
   "lib/data",
   "lib/startup-agency",
   "lib/seo",
+  "lib/marketing",
   "components/portfolio",
+  "components/products",
+  "components/marketing",
   "components/seo",
   "components/startup-agency",
+  "public/data",
 ];
 const spacedImagePathRe = /\/images\/[^"'`\n]*\s[^"'`\n]*/g;
+const bannedProductNamesRe = /OceanCyber POS|\/products\/pos|I\.T Solutions Provider|ICT Solutions Provider/;
 for (const relRoot of marketingSourceRoots) {
   const absRoot = resolve(root, relRoot);
   if (!existsSync(absRoot)) continue;
@@ -486,6 +531,9 @@ for (const relRoot of marketingSourceRoots) {
         const hit = text.match(spacedImagePathRe);
         if (hit) {
           failures.push(`${full.replace(root + "/", "")}: legacy image path with spaces (${hit[0]})`);
+        }
+        if (bannedProductNamesRe.test(text)) {
+          failures.push(`${full.replace(root + "/", "")}: retire OceanCyber POS or /products/pos URL`);
         }
       }
     }

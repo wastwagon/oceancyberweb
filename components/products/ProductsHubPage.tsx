@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Boxes, ExternalLink, Store } from "lucide-react";
 import Link from "next/link";
+import { DwumaPosSeoLinkSentence } from "@/components/marketing/DwumaPosSeoLinkSentence";
 import { SaPageAmbient } from "@/components/startup-agency/SaPageAmbient";
 import { SaSectionHeader } from "@/components/startup-agency/SaSectionHeader";
 import {
@@ -10,7 +11,6 @@ import {
   DWUMAPOS_PRICING_URL,
   DWUMAPOS_RELATIONSHIP_LINE,
   DWUMAPOS_SIGNUP_URL,
-  DWUMAPOS_SITE_URL,
   OCEANCYBER_CUSTOM_SITE_PITCH,
 } from "@/lib/marketing/company-identity";
 import { getPageHeroMotionVariants } from "@/lib/page-hero-motion";
@@ -68,19 +68,12 @@ export function ProductsHubPage() {
               Domains, hosting, and{" "}
               <span className="text-sa-primary">DwumaPOS</span>
             </motion.h1>
-            <motion.p variants={heroMotion.item} className="sa-lead mx-auto mt-3 max-w-2xl">
-              Buy domains, SSL, and cPanel hosting in Ghana cedis. DwumaPOS — our flagship POS for
-              shops — runs on{" "}
-              <Link
-                href={DWUMAPOS_SITE_URL}
-                className="sa-text-link font-medium"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                dwumapos.com
-              </Link>
-              .
-            </motion.p>
+            <motion.div variants={heroMotion.item} className="mx-auto mt-3 max-w-2xl">
+              <DwumaPosSeoLinkSentence className="sa-lead text-center" />
+              <p className="mt-3 text-center text-sm text-sa-muted/85">
+                Buy domains, SSL, and cPanel hosting in Ghana cedis on OceanCyber.
+              </p>
+            </motion.div>
           </motion.div>
         </div>
       </section>

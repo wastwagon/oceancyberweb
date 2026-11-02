@@ -3,12 +3,12 @@ import { withCanonical } from "@/lib/seo/canonical";
 import { LegalPageFooter } from "@/components/legal/LegalPageFooter";
 import { LegalPublisherNotice } from "@/components/legal/LegalPublisherNotice";
 import { readDpcRegistrationNumber } from "@/lib/marketing/data-protection-registration";
+import { LEGAL_COMPANY_NAME } from "@/lib/marketing/company-identity";
 
 export const metadata: Metadata = withCanonical(
   {
     title: "Data protection",
-    description:
-      "How OceanCyber I.T Solutions Provider handles personal data under Ghana law — registration status and contact.",
+    description: `How ${LEGAL_COMPANY_NAME} handles personal data under Ghana law — registration status and contact.`,
   },
   "/data-protection",
 );

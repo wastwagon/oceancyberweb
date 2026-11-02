@@ -35,7 +35,7 @@ const base = (
 ).replace(/\/$/, "");
 
 const paths = [
-  { path: "/", checks: ["places-sync", "no-template-reviews", "jsonld", "home-aggregate-rating", "home-best-hero"] },
+  { path: "/", checks: ["places-sync", "no-template-reviews", "jsonld", "home-aggregate-rating", "home-best-hero", "dwumapos-seo-line"] },
   { path: "/facts", checks: ["places-sync", "jsonld", "facts-maps-kit"] },
   { path: "/help-center", checks: ["help-maps-article", "help-pos-article"] },
   {
@@ -60,12 +60,13 @@ const paths = [
   { path: "/domains", checks: ["faq-jsonld"] },
   { path: "/hosting", checks: ["faq-jsonld"] },
   { path: "/ssl", checks: ["faq-jsonld"] },
-  { path: "/sitemap.xml", checks: ["sitemap", "sitemap-no-concept-portfolio", "sitemap-llms"] },
+  { path: "/sitemap.xml", checks: ["sitemap", "sitemap-no-concept-portfolio", "sitemap-llms", "sitemap-no-products-pos"] },
   {
     path: "/portfolio/creative-hub-template",
     checks: ["concept-portfolio-noindex"],
   },
   { path: "/robots.txt", checks: ["robots"] },
+  { path: "/products", checks: ["jsonld", "dwumapos-seo-line"] },
 ];
 
 const failures = [];
@@ -136,6 +137,11 @@ for (const { path, checks } of paths) {
       if (!text.includes("/llms.txt")) {
         fail("sitemap.xml: /llms.txt missing (AI discovery)");
       } else pass("sitemap.xml: llms.txt listed");
+    }
+    if (checks.includes("sitemap-no-products-pos")) {
+      if (text.includes("/products/pos")) {
+        fail("sitemap.xml: /products/pos must not be indexed (use redirect only)");
+      } else pass("sitemap.xml: no /products/pos URL");
     }
     continue;
   }
@@ -259,6 +265,16 @@ for (const { path, checks } of paths) {
     } else pass(`${path}: developers phrasing`);
   }
 
+  if (checks.includes("dwumapos-seo-line")) {
+    if (!text.includes("built by OceanCyber.")) {
+      fail(`${path}: missing DwumaPOS SEO link sentence (deploy latest web)`);
+    } else if (!text.includes(">DwumaPOS</a>") && !text.includes(">DwumaPOS</")) {
+      fail(`${path}: missing DwumaPOS link anchor text`);
+    } else {
+      pass(`${path}: DwumaPOS SEO link sentence`);
+    }
+  }
+
   if (checks.includes("dwumapos-restaurant-guide")) {
     if (!text.includes("Restaurant POS on DwumaPOS | OceanCyber")) {
       fail(`${path}: missing updated meta title in HTML`);
@@ -322,6 +338,20 @@ for (const { path, checks } of paths) {
       pass(`${path}: concept portfolio hygiene`);
     }
   }
+}
+
+try {
+  const posRes = await fetch(`${base}/products/pos`, { redirect: "manual" });
+  const loc = posRes.headers.get("location")?.replace(/\/$/, "") ?? "";
+  if (posRes.status !== 301 && posRes.status !== 308) {
+    fail(`/products/pos: expected 301 or 308, got ${posRes.status}`);
+  } else if (loc !== "https://www.dwumapos.com") {
+    fail(`/products/pos: location must be https://www.dwumapos.com/ (got ${loc || "none"})`);
+  } else {
+    pass(`/products/pos: permanent redirect (${posRes.status}) → dwumapos.com`);
+  }
+} catch (e) {
+  fail(`/products/pos: redirect check failed (${e.message})`);
 }
 
 console.log(`Production SEO smoke — ${base}\n`);

@@ -8,13 +8,14 @@ import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable/es";
+import { LEGAL_COMPANY_NAME, TRADING_NAME } from "./lib/company-brand.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 
 const COMPANY = {
-  name: "Ocean Cyber",
-  tagline: "ICT Solutions Provider",
+  name: TRADING_NAME,
+  tagline: LEGAL_COMPANY_NAME,
   addressLines: ["47 Nii Kwashiefio Avenue", "Accra", "Ghana"],
   email: "info@oceancyber.net",
   phone: "+233 242 565 695",
