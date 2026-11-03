@@ -16,8 +16,8 @@
 #
 # Local-only stacks live under docker/ (`docker-compose.dev.yml`, `docker-compose.hotreload.yml`).
 # Deploy / Coolify: point only at this file (`docker-compose.yml`).
-# If builds OOM (exit 255 during npm install), set Coolify env COMPOSE_PARALLEL_LIMIT=1
-# or rely on web → backend `service_built` ordering below.
+# If builds OOM (exit 255 during npm install / npm ci), set Coolify env COMPOSE_PARALLEL_LIMIT=1
+# (Compose still builds `web` and `backend` in parallel unless that is set; `service_healthy` is runtime-only).
 # =============================================================================
 
 name: oceancyber
